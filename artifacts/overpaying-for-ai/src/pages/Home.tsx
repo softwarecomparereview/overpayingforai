@@ -1,137 +1,268 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
 import faqsData from "@/data/faqs.json";
-import modelsData from "@/data/models.json";
-import type { AIModel } from "@/engine/types";
 
-const models = modelsData as AIModel[];
 const comparisons = comparisonsData.slice(0, 6);
 const bestOf = bestOfData.slice(0, 4);
 const guides = guidesData.slice(0, 4);
 const faqs = faqsData.slice(0, 6);
 
-const topModels = models
-  .filter((m) => m.planType === "api")
-  .sort((a, b) => b.costScore - a.costScore)
-  .slice(0, 5);
+const SAVINGS_EXAMPLES = [
+  {
+    scenario: "GPT-4o → GPT-4o mini",
+    usage: "2M output tokens/month",
+    before: "$30.00",
+    after: "$1.20",
+    save: "$28.80",
+    savePercent: "96%",
+  },
+  {
+    scenario: "ChatGPT Plus → API (light use)",
+    usage: "300K tokens/month",
+    before: "$20.00",
+    after: "$2.40",
+    save: "$17.60",
+    savePercent: "88%",
+  },
+  {
+    scenario: "Claude Sonnet → DeepSeek V3",
+    usage: "1M output tokens/month",
+    before: "$15.00",
+    after: "$1.10",
+    save: "$13.90",
+    savePercent: "93%",
+  },
+  {
+    scenario: "Gemini Pro → Gemini Flash",
+    usage: "5M input tokens/month",
+    before: "$6.25",
+    after: "$0.38",
+    save: "$5.87",
+    savePercent: "94%",
+  },
+];
+
+const OVERPAY_PATTERNS = [
+  {
+    id: "subscription",
+    label: "01",
+    title: "The subscription trap",
+    problem: "You pay $20/month for ChatGPT Plus but use it lightly. At your actual usage, the API costs $2.",
+    fix: "Switch to API + GPT-4o mini. Same quality, 90% less.",
+    metric: "$216/year",
+    metricLabel: "average wasted on unused subscription capacity",
+    before: { label: "ChatGPT Plus", cost: "$20/mo", type: "subscription" },
+    after: { label: "GPT-4o mini API", cost: "$2/mo", type: "api" },
+  },
+  {
+    id: "model",
+    label: "02",
+    title: "Using GPT-4o for everything",
+    problem: "GPT-4o costs 33× more per token than GPT-4o mini. Summaries, classification, and Q&A don't need it.",
+    fix: "Route simple tasks to mini. Reserve GPT-4o for complex reasoning only.",
+    metric: "80%",
+    metricLabel: "of API spending eliminated by model routing, zero quality change",
+    before: { label: "GPT-4o", cost: "$15/1M out", type: "premium" },
+    after: { label: "GPT-4o mini", cost: "$0.60/1M out", type: "budget" },
+  },
+  {
+    id: "routing",
+    label: "03",
+    title: "No routing strategy",
+    problem: "One model for every task means paying premium prices for tasks that don't need premium intelligence.",
+    fix: "Classify tasks first. Use Gemini Flash or mini for bulk, escalate to Sonnet only when needed.",
+    metric: "60–80%",
+    metricLabel: "cost reduction with a two-tier routing strategy, reported by production teams",
+    before: { label: "Flat: Claude Sonnet", cost: "$15/1M out", type: "premium" },
+    after: { label: "Routed: Flash → Sonnet", cost: "$1.50/1M avg", type: "budget" },
+  },
+];
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-border last:border-0" data-testid={`faq-${q.slice(0, 20)}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-start justify-between gap-4 py-5 text-left group"
+      >
+        <span className="font-medium text-foreground text-sm sm:text-base leading-snug">{q}</span>
+        <span className={`flex-shrink-0 mt-0.5 text-muted-foreground transition-transform ${open ? "rotate-45" : ""}`}>+</span>
+      </button>
+      {open && (
+        <p className="text-sm text-muted-foreground leading-relaxed pb-5">{a}</p>
+      )}
+    </div>
+  );
+}
 
 export function Home() {
   return (
-    <div>
-      {/* Hero */}
-      <section className="bg-background border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
-          <div className="inline-flex items-center gap-2 bg-muted text-muted-foreground text-xs font-medium px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 bg-green-500 rounded-full inline-block"></span>
-            Updated April 2025 · 20 models tracked
+    <div className="bg-background">
+
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section className="border-b border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
+          {/* Badge */}
+          <div className="flex items-center gap-2 mb-8">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+              20 models tracked · Updated April 2025
+            </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 leading-tight">
-            Stop Overpaying for AI.
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            Find the cheapest viable AI stack for coding, writing, research, and automation. No hype, just numbers.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/calculator"
-              className="w-full sm:w-auto bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors"
-              data-testid="hero-calculator-cta"
-            >
-              Calculate My Cost
-            </Link>
-            <Link
-              href="/decision-engine"
-              className="w-full sm:w-auto border border-border bg-background text-foreground px-6 py-3 rounded-lg font-semibold text-sm hover:bg-muted transition-colors"
-              data-testid="hero-engine-cta"
-            >
-              Find My AI Stack
-            </Link>
+
+          <div className="max-w-3xl">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-6">
+              Stop overpaying<br />for AI.
+            </h1>
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+              A decision engine for developers and teams who want the cheapest viable AI stack — not a roundup of the flashiest models.
+            </p>
+
+            {/* CTA Cards */}
+            <div className="grid sm:grid-cols-3 gap-3">
+              <Link href="/calculator" data-testid="hero-cta-calculator">
+                <div className="group bg-primary text-primary-foreground rounded-xl p-5 hover:bg-primary/90 transition-colors cursor-pointer h-full">
+                  <div className="text-2xl font-bold mb-1 font-mono">$</div>
+                  <p className="font-semibold text-sm mb-1">Calculate your AI cost</p>
+                  <p className="text-xs text-primary-foreground/70 leading-relaxed">Enter your token usage. See exact monthly cost and cheaper alternatives.</p>
+                </div>
+              </Link>
+              <Link href="/decision-engine" data-testid="hero-cta-engine">
+                <div className="group border border-border bg-card rounded-xl p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
+                  <div className="text-2xl font-bold mb-1 text-primary">→</div>
+                  <p className="font-semibold text-sm mb-1 text-foreground">Find the cheapest stack</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">5 questions. Get three ranked recommendations matched to your budget.</p>
+                </div>
+              </Link>
+              <Link href="/compare/claude-vs-gpt-cost" data-testid="hero-cta-compare">
+                <div className="group border border-border bg-card rounded-xl p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
+                  <div className="text-2xl font-bold mb-1 text-foreground">≈</div>
+                  <p className="font-semibold text-sm mb-1 text-foreground">Compare tools and plans</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">Side-by-side pricing for Claude, GPT-4o, Cursor, subscriptions vs API.</p>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Most People Overpay */}
-      <section className="bg-muted/30 border-b border-border py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl font-bold text-center mb-10">Why Most People Overpay for AI</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Default to expensive models",
-                desc: "GPT-4o costs 33× more than GPT-4o mini per token. Most tasks don't need the difference.",
-              },
-              {
-                title: "Wrong plan type",
-                desc: "A $20 subscription covers ~1.3M tokens. Above that, the API is often cheaper with a budget model.",
-              },
-              {
-                title: "No routing strategy",
-                desc: "Routing simple tasks to cheap models, complex ones to premium, cuts costs 60-80% with no quality loss.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="bg-background border border-border rounded-lg p-5">
-                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+      {/* ── SAVINGS STRIP ────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20 py-8 overflow-x-auto">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Real savings examples</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 min-w-[600px] sm:min-w-0">
+            {SAVINGS_EXAMPLES.map((ex) => (
+              <div key={ex.scenario} className="bg-background border border-border rounded-lg p-4">
+                <p className="text-xs text-muted-foreground mb-1 leading-tight">{ex.scenario}</p>
+                <p className="text-xs text-muted-foreground/60 mb-3">{ex.usage}</p>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-xl font-bold text-foreground font-mono">{ex.save}</span>
+                  <span className="text-xs font-semibold text-green-600 dark:text-green-400">/mo</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="line-through text-muted-foreground/60 font-mono">{ex.before}</span>
+                  <span className="text-muted-foreground">→</span>
+                  <span className="font-mono text-foreground">{ex.after}</span>
+                  <span className="ml-auto bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded font-semibold text-xs">
+                    -{ex.savePercent}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Best Under Budget */}
-      <section className="py-16 border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold">Cheapest Capable Models</h2>
-            <Link href="/calculator" className="text-sm text-primary hover:underline">Compare all →</Link>
+      {/* ── THREE OVERPAYING PATTERNS ────────────────────────── */}
+      <section className="border-b border-border py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Where the waste happens</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
+              Three ways teams<br />overpay for AI.
+            </h2>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm" data-testid="models-table">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-3 pr-4 font-medium text-muted-foreground">Model</th>
-                  <th className="text-left py-3 pr-4 font-medium text-muted-foreground">Provider</th>
-                  <th className="text-right py-3 pr-4 font-medium text-muted-foreground">Input /1M</th>
-                  <th className="text-right py-3 font-medium text-muted-foreground">Output /1M</th>
-                </tr>
-              </thead>
-              <tbody>
-                {topModels.map((m) => (
-                  <tr key={m.id} className="border-b border-border/50 hover:bg-muted/20 transition-colors" data-testid={`model-row-${m.id}`}>
-                    <td className="py-3 pr-4">
-                      <p className="font-medium text-foreground">{m.name}</p>
-                      {m.hasFreeTier && <span className="text-xs text-green-600 dark:text-green-400">free tier</span>}
-                    </td>
-                    <td className="py-3 pr-4 text-muted-foreground">{m.provider}</td>
-                    <td className="py-3 pr-4 text-right text-foreground font-mono">
-                      ${(m.inputCostPer1k * 1000).toFixed(3)}
-                    </td>
-                    <td className="py-3 text-right text-foreground font-mono">
-                      ${(m.outputCostPer1k * 1000).toFixed(3)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+
+          <div className="space-y-4">
+            {OVERPAY_PATTERNS.map((p) => (
+              <div key={p.id} className="border border-border rounded-xl p-6 sm:p-8 bg-card" data-testid={`pattern-${p.id}`}>
+                <div className="grid sm:grid-cols-[1fr_auto] gap-6 sm:gap-10 items-start">
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xs font-mono font-bold text-muted-foreground/50">{p.label}</span>
+                      <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed max-w-lg">
+                      <span className="text-foreground font-medium">The problem: </span>{p.problem}
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+                      <span className="text-primary font-medium">The fix: </span>{p.fix}
+                    </p>
+                  </div>
+
+                  <div className="flex-shrink-0 sm:min-w-[220px]">
+                    {/* Before / After */}
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between gap-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40 rounded-lg px-3 py-2.5">
+                        <div>
+                          <p className="text-xs text-red-600 dark:text-red-400 font-medium mb-0.5">Before</p>
+                          <p className="text-xs text-muted-foreground">{p.before.label}</p>
+                        </div>
+                        <p className="font-mono font-bold text-red-600 dark:text-red-400 text-sm">{p.before.cost}</p>
+                      </div>
+                      <div className="flex items-center justify-between gap-3 bg-green-50 dark:bg-green-950/20 border border-green-100 dark:border-green-900/40 rounded-lg px-3 py-2.5">
+                        <div>
+                          <p className="text-xs text-green-700 dark:text-green-400 font-medium mb-0.5">After</p>
+                          <p className="text-xs text-muted-foreground">{p.after.label}</p>
+                        </div>
+                        <p className="font-mono font-bold text-green-700 dark:text-green-400 text-sm">{p.after.cost}</p>
+                      </div>
+                    </div>
+                    {/* Stat */}
+                    <div className="bg-muted/50 rounded-lg px-3 py-3 text-center">
+                      <p className="text-2xl font-bold text-foreground font-mono">{p.metric}</p>
+                      <p className="text-xs text-muted-foreground mt-1 leading-tight">{p.metricLabel}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Popular Comparisons */}
-      <section className="py-16 border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold">Popular Comparisons</h2>
-            <Link href="/compare/claude-vs-gpt-cost" className="text-sm text-primary hover:underline">See all →</Link>
+      {/* ── POPULAR COMPARISONS ──────────────────────────────── */}
+      <section className="border-b border-border py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Comparisons</p>
+              <h2 className="text-3xl font-bold text-foreground">Popular comparisons</h2>
+            </div>
+            <Link href="/compare/claude-vs-gpt-cost" className="text-sm text-primary hover:underline hidden sm:block">
+              View all →
+            </Link>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {comparisons.map((c) => (
               <Link key={c.slug} href={`/compare/${c.slug}`}>
-                <div className="border border-border rounded-lg p-4 hover:border-primary/40 hover:bg-muted/30 transition-colors h-full" data-testid={`compare-card-${c.slug}`}>
-                  <h3 className="font-semibold text-foreground text-sm mb-2 leading-snug">{c.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{c.summary.slice(0, 80)}…</p>
+                <div
+                  className="group border border-border rounded-xl p-5 hover:border-primary/30 hover:bg-muted/20 transition-all h-full cursor-pointer"
+                  data-testid={`compare-card-${c.slug}`}
+                >
+                  <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">
+                    {c.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                    {c.summary}
+                  </p>
+                  <div className="mt-3 pt-3 border-t border-border/60 flex items-center text-xs text-primary font-medium">
+                    Read comparison <span className="ml-auto">→</span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -139,21 +270,32 @@ export function Home() {
         </div>
       </section>
 
-      {/* Best Lists */}
-      <section className="py-16 border-b border-border bg-muted/20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold">Best AI Lists</h2>
-            <Link href="/best/best-ai-under-20-per-month" className="text-sm text-primary hover:underline">See all →</Link>
+      {/* ── BEST UNDER BUDGET ────────────────────────────────── */}
+      <section className="border-b border-border py-20 bg-muted/10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Best lists</p>
+              <h2 className="text-3xl font-bold text-foreground">Best AI under budget</h2>
+            </div>
+            <Link href="/best/best-ai-under-20-per-month" className="text-sm text-primary hover:underline hidden sm:block">
+              View all →
+            </Link>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-3">
             {bestOf.map((b) => (
               <Link key={b.slug} href={`/best/${b.slug}`}>
-                <div className="border border-border bg-background rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors h-full" data-testid={`best-card-${b.slug}`}>
-                  <span className="text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-2 py-0.5 rounded mb-3 inline-block">
-                    {b.category}
-                  </span>
-                  <h3 className="font-semibold text-foreground mb-2">{b.title}</h3>
+                <div
+                  className="group border border-border bg-background rounded-xl p-6 hover:border-primary/30 hover:bg-muted/20 transition-all h-full cursor-pointer"
+                  data-testid={`best-card-${b.slug}`}
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-primary bg-primary/8 px-2.5 py-1 rounded-md">
+                      {b.category}
+                    </span>
+                    <span className="text-muted-foreground text-sm opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                  </div>
+                  <h3 className="font-bold text-foreground mb-2 leading-snug">{b.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{b.description}</p>
                 </div>
               </Link>
@@ -162,20 +304,37 @@ export function Home() {
         </div>
       </section>
 
-      {/* Latest Guides */}
-      <section className="py-16 border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold">Latest Guides</h2>
-            <Link href="/guides/how-to-reduce-ai-cost" className="text-sm text-primary hover:underline">See all →</Link>
+      {/* ── LATEST GUIDES ────────────────────────────────────── */}
+      <section className="border-b border-border py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Guides</p>
+              <h2 className="text-3xl font-bold text-foreground">Learn to spend less</h2>
+            </div>
+            <Link href="/guides/how-to-reduce-ai-cost" className="text-sm text-primary hover:underline hidden sm:block">
+              View all →
+            </Link>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {guides.map((g) => (
+          <div className="grid sm:grid-cols-2 gap-3">
+            {guides.map((g, i) => (
               <Link key={g.slug} href={`/guides/${g.slug}`}>
-                <div className="border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors h-full" data-testid={`guide-card-${g.slug}`}>
-                  <p className="text-xs text-muted-foreground mb-2">{g.readTime}</p>
-                  <h3 className="font-semibold text-foreground mb-2">{g.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{g.description}</p>
+                <div
+                  className={`group border border-border rounded-xl p-6 hover:border-primary/30 hover:bg-muted/20 transition-all h-full cursor-pointer ${i === 0 ? "sm:col-span-2 sm:grid sm:grid-cols-2 sm:gap-6" : ""}`}
+                  data-testid={`guide-card-${g.slug}`}
+                >
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-xs text-muted-foreground font-medium bg-muted px-2 py-1 rounded">{g.readTime}</span>
+                    </div>
+                    <h3 className="font-bold text-foreground mb-2 leading-snug text-base group-hover:text-primary transition-colors">
+                      {g.title}
+                    </h3>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{g.description}</p>
+                    <p className="mt-4 text-sm text-primary font-medium">Read guide →</p>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -183,54 +342,53 @@ export function Home() {
         </div>
       </section>
 
-      {/* Tools CTA */}
-      <section className="py-16 border-b border-border bg-primary/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-background border border-border rounded-xl p-6">
-              <h2 className="text-xl font-bold mb-2">Cost Calculator</h2>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                Enter your token usage and model. See the exact monthly cost and cheaper alternatives side by side.
-              </p>
+      {/* ── BOTTOM CTA ───────────────────────────────────────── */}
+      <section className="border-b border-border py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="bg-foreground rounded-2xl p-8 sm:p-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-background mb-4 leading-tight">
+              Find out what you're actually paying.
+            </h2>
+            <p className="text-background/60 mb-8 max-w-lg mx-auto leading-relaxed">
+              Enter your monthly token usage and see the real cost — and exactly how much you'd save by switching models.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/calculator"
-                className="inline-block bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
-                data-testid="calculator-cta"
+                className="bg-background text-foreground px-7 py-3 rounded-lg font-semibold text-sm hover:bg-background/90 transition-colors"
+                data-testid="bottom-cta-calculator"
               >
-                Calculate Now →
+                Open Calculator →
               </Link>
-            </div>
-            <div className="bg-background border border-border rounded-xl p-6">
-              <h2 className="text-xl font-bold mb-2">Decision Engine</h2>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                Answer 5 questions about your use case, budget, and quality needs. Get three ranked recommendations.
-              </p>
               <Link
                 href="/decision-engine"
-                className="inline-block border border-border text-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-muted transition-colors"
-                data-testid="engine-cta"
+                className="border border-background/20 text-background px-7 py-3 rounded-lg font-semibold text-sm hover:bg-background/10 transition-colors"
+                data-testid="bottom-cta-engine"
               >
-                Find My Stack →
+                Find My Stack
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16">
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl font-bold mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {faqs.map((item, i) => (
-              <div key={i} className="border border-border rounded-lg p-5" data-testid={`faq-${i}`}>
-                <h3 className="font-semibold text-foreground mb-2">{item.q}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.a}</p>
-              </div>
-            ))}
+          <div className="mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">FAQ</p>
+            <h2 className="text-3xl font-bold text-foreground">Common questions</h2>
+          </div>
+          <div className="border border-border rounded-xl overflow-hidden bg-card">
+            <div className="divide-y divide-border px-6">
+              {faqs.map((item) => (
+                <FaqItem key={item.q} q={item.q} a={item.a} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 }
