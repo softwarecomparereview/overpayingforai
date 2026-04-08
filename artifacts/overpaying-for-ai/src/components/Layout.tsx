@@ -86,6 +86,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <p>© 2025 OverpayingForAI. Pricing data updated regularly. Always verify with provider.</p>
             <p>Stop overpaying for AI.</p>
           </div>
+          <div className="mt-4 text-xs text-muted-foreground/70 leading-relaxed">
+            <p>© 2026 Assetize Consultancy Pty Ltd</p>
+            <p>Overpaying for AI — Cost Decision Engine</p>
+          </div>
         </div>
       </footer>
     </div>
