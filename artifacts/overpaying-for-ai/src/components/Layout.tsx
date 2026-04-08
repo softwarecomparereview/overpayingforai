@@ -82,13 +82,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground flex flex-col sm:flex-row justify-between gap-2">
-            <p>© 2025 OverpayingForAI. Pricing data updated regularly. Always verify with provider.</p>
-            <p>Stop overpaying for AI.</p>
-          </div>
-          <div className="mt-4 text-xs text-muted-foreground/70 leading-relaxed">
-            <p>© 2026 Assetize Consultancy Pty Ltd</p>
-            <p>Overpaying for AI — Cost Decision Engine</p>
+          <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground/75 leading-relaxed text-center sm:text-left">
+            <p>© 2026 OverpayingForAI · A product by Assetize Consultancy Pty Ltd</p>
+            <p>Built by Aniruddh · Pricing data may change — verify with providers</p>
           </div>
         </div>
       </footer>
