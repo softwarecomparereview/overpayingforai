@@ -1,0 +1,180 @@
+Build a production-ready web app called "Overpaying for AI".
+
+Primary goal:
+Create a passive-income, SEO-first decision engine that helps users choose the cheapest viable AI model, plan, or workflow for their use case. This is not just a calculator. It should feel like a smart recommendation system.
+
+Business framing:
+Tagline: "Stop overpaying for AI."
+Subheading: "Find the cheapest viable AI stack for coding, writing, research, and automation."
+
+Constraints:
+- Lowest possible operating cost
+- Must be easy to develop on Replit Starter
+- Must be static-first so it can later be deployed to GitHub and Cloudflare Pages
+- No database for v1
+- No paid APIs for runtime intelligence
+- No authentication
+- No server dependency for core features
+- Use static JSON content and a rules/scoring engine
+
+Tech stack:
+- Next.js latest stable with App Router
+- TypeScript
+- Tailwind CSS
+- Static JSON content/data
+- Modern, premium, credible UI
+- Fast and mobile responsive
+
+Pages required:
+
+1) Home page
+- Premium hero section
+- CTA to Calculator
+- CTA to Decision Engine
+- Sections:
+  - Popular comparisons
+  - Best under budget
+  - Latest guides
+  - Why most people overpay for AI
+  - FAQ
+- Strong internal linking
+- Monetization placeholders for affiliate/product CTAs
+
+2) /calculator
+Inputs:
+- model
+- monthly input tokens
+- monthly output tokens
+- subscription vs API toggle
+Outputs:
+- estimated monthly cost
+- cheaper alternatives
+- savings estimate
+- recommendation card
+
+3) /decision-engine
+Guided selector with questions:
+- primary use case (coding, writing, research, automation, chat)
+- budget (free, under 20, under 50, premium)
+- usage frequency (light, medium, heavy)
+- quality preference (cheap, balanced, best)
+- free-tier required (yes/no)
+Outputs:
+- cheapest viable option
+- balanced option
+- premium option
+- reasoning for each
+- estimated monthly spend
+- suggested routing strategy
+
+4) /compare/[slug]
+Create SEO comparison pages such as:
+- chatgpt-vs-cursor-cost
+- claude-vs-gpt-cost
+- subscription-vs-api-ai-cost
+Each page should include:
+- summary
+- pricing comparison
+- best for
+- cheapest option
+- recommendation
+- FAQ
+- internal links
+
+5) /best/[slug]
+Examples:
+- best-ai-for-coding-on-a-budget
+- best-ai-under-20-per-month
+- best-free-ai-tools-for-builders
+
+6) /guides/[slug]
+Examples:
+- how-to-reduce-ai-cost
+- token-cost-explained
+- when-to-use-api-vs-subscription
+
+Data model:
+Create static JSON files for:
+- models
+- pricing
+- use cases
+- budget tiers
+- comparison pages
+- best-of pages
+- guide pages
+- FAQs
+
+Each model should support:
+- id
+- name
+- provider
+- planType
+- inputCostPer1k
+- outputCostPer1k
+- monthlySubscriptionCostIfAny
+- hasFreeTier
+- bestFor (array)
+- qualityScore
+- costScore
+- latencyScore
+- notes
+
+Recommendation engine:
+Implement a deterministic rules + scoring engine.
+No live AI calls.
+Score options based on:
+- budget fit
+- free-tier requirement
+- use-case fit
+- quality preference
+- usage intensity
+Return:
+- cheapest viable
+- balanced option
+- premium option
+
+Content seeding:
+Generate:
+- 10 comparison pages
+- 10 best-of pages
+- 10 guide pages
+Use concise, credible, non-fluffy copy.
+
+SEO requirements:
+- metadata for every page
+- Open Graph tags
+- schema markup where appropriate
+- sitemap generation
+- robots.txt
+- canonical-friendly structure
+- internal linking blocks
+- title and description generation
+- buying/savings intent copy, not generic AI hype
+
+Design requirements:
+- dark-on-light or premium neutral palette
+- polished cards
+- strong typography
+- professional spacing
+- no generic template feel
+- homepage should look investor-demo ready
+
+Engineering requirements:
+- separate data, logic, and UI cleanly
+- reusable components
+- easy to export to GitHub
+- include README with local run steps
+- include deployment notes for static hosting
+
+Nice-to-have:
+- local search across guides and comparisons
+- shareable URL params for calculator/decision engine
+- savings badges
+- featured recommendations on homepage
+
+Deliver:
+- complete working app
+- realistic seed data
+- clean file structure
+- no placeholder lorem ipsum
+- ready for GitHub push

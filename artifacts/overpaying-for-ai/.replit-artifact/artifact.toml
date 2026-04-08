@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Overpaying for AI"
+version = "1.0.0"
+id = "artifacts/overpaying-for-ai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18972
+
+[services.development]
+run = "pnpm --filter @workspace/overpaying-for-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/overpaying-for-ai", "run", "build" ]
+publicDir = "artifacts/overpaying-for-ai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18972"
+BASE_PATH = "/"

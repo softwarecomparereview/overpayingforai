@@ -1,0 +1,602 @@
+[
+  {
+    "slug": "best-ai-for-coding-on-a-budget",
+    "title": "Best AI for Coding on a Budget (2025)",
+    "description": "Top AI coding tools ranked by cost-effectiveness. From free tiers to $20/month subscriptions.",
+    "metaDescription": "Best AI coding tools on a budget in 2025. Compare Cursor, GitHub Copilot, Claude, and GPT-4o for developers who don't want to overpay.",
+    "category": "coding",
+    "updatedAt": "2025-04-01",
+    "intro": "Most developers overpay for AI coding tools by defaulting to the most marketed option. The right pick depends on your workflow: are you in an IDE all day, or do you mostly generate code in a chat interface? Here are the best options ranked by value.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "cursor-free",
+        "title": "Cursor Free",
+        "why": "2000 completions/month and 50 chat messages at zero cost. Best-in-class IDE integration with codebase awareness. Start here before paying for anything.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free"
+      },
+      {
+        "rank": 2,
+        "modelId": "cursor-pro",
+        "title": "Cursor Pro",
+        "why": "Flat $20/month for unlimited access to Claude 3.5 Sonnet and GPT-4o in your editor. If you code professionally, the productivity gain pays for itself in under a day.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best Value Subscription"
+      },
+      {
+        "rank": 3,
+        "modelId": "claude-3-5-haiku",
+        "title": "Claude 3.5 Haiku via API",
+        "why": "Strong coding ability at $0.80/1M input tokens. If you're building a product that generates code or does code review at scale, Haiku is the budget API choice.",
+        "monthlyEstimate": "$2–10/month typical",
+        "badge": "Best Budget API"
+      },
+      {
+        "rank": 4,
+        "modelId": "copilot-free",
+        "title": "GitHub Copilot Free",
+        "why": "2000 completions/month free for VS Code users. Not as powerful as Cursor, but zero cost and tight GitHub integration.",
+        "monthlyEstimate": "$0",
+        "badge": "Best for VS Code"
+      },
+      {
+        "rank": 5,
+        "modelId": "deepseek-v3",
+        "title": "DeepSeek V3 via API",
+        "why": "Near-frontier coding quality at $0.27/1M input tokens. 95% cheaper than GPT-4o with competitive benchmark scores. Best cost-performance ratio for API-based code generation.",
+        "monthlyEstimate": "$0.50–5/month typical",
+        "badge": "Best Quality/Cost Ratio"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What's the cheapest AI coding tool with no limits?",
+        "a": "Cursor Pro at $20/month gives effectively unlimited access to frontier models for coding. For API-based unlimited access, DeepSeek V3 at $0.27/1M input comes closest to 'unlimited for almost nothing'."
+      },
+      {
+        "q": "Is GitHub Copilot worth paying for?",
+        "a": "Copilot Pro is $10/month. If you're already on Cursor Free and hitting limits, Cursor Pro ($20) is a better upgrade. If you're VS Code-loyal, Copilot Pro is reasonable."
+      },
+      {
+        "q": "Can free AI coding tools handle real projects?",
+        "a": "Yes, for solo developers and small projects. Cursor Free and Copilot Free handle most day-to-day coding tasks. The paid tiers unlock longer context and more complex refactoring."
+      }
+    ],
+    "internalLinks": [
+      { "text": "ChatGPT vs Cursor Cost", "href": "/compare/chatgpt-vs-cursor-cost" },
+      { "text": "Claude vs Cursor for Coding", "href": "/compare/claude-vs-cursor-for-coding" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ]
+  },
+  {
+    "slug": "best-ai-under-20-per-month",
+    "title": "Best AI Tools Under $20/Month (2025)",
+    "description": "The best AI assistants you can get for $20 or less per month, ranked by real-world value.",
+    "metaDescription": "Best AI tools under $20/month in 2025. Ranked by quality, features, and actual value. Find the right AI subscription without overpaying.",
+    "category": "budget",
+    "updatedAt": "2025-04-01",
+    "intro": "At $20/month, you have access to the best consumer AI tools available. The question is which one fits your workflow. Here's how the top options stack up.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "cursor-pro",
+        "title": "Cursor Pro — $20/month",
+        "why": "The best $20 you can spend on AI if you write code. Unlimited Claude 3.5 Sonnet and GPT-4o in an IDE built for AI-native development.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best for Developers"
+      },
+      {
+        "rank": 2,
+        "modelId": "claude-pro",
+        "title": "Claude Pro — $20/month",
+        "why": "Best for writing, research, and complex reasoning. Claude Pro includes access to Claude 3.5 Sonnet and Opus with generous usage limits and project organization features.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best for Writers & Researchers"
+      },
+      {
+        "rank": 3,
+        "modelId": "chatgpt-plus",
+        "title": "ChatGPT Plus — $20/month",
+        "why": "The most versatile option. GPT-4o with browsing, image generation (DALL-E), code execution, and plugins. Best if you need a single tool that does everything.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Most Versatile"
+      },
+      {
+        "rank": 4,
+        "modelId": "perplexity-pro",
+        "title": "Perplexity Pro — $20/month",
+        "why": "Best for research with citations. If your primary need is finding accurate, sourced information, Perplexity Pro is the most purpose-built tool for that.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best for Research"
+      },
+      {
+        "rank": 5,
+        "modelId": "gemini-advanced",
+        "title": "Google One AI Premium — $20/month",
+        "why": "Includes Gemini Advanced and 2TB Google Drive storage. Best value if you're in the Google ecosystem — you're not just paying for AI.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best Bundle Value"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which $20/month AI subscription is best overall?",
+        "a": "For most users: ChatGPT Plus (versatility) or Claude Pro (quality of reasoning and writing). For developers: Cursor Pro. There's no universal winner — match to your primary use case."
+      },
+      {
+        "q": "Can I use the API instead and spend less than $20/month?",
+        "a": "Yes, easily. GPT-4o mini via API costs ~$0.60 per 1M output tokens. At typical usage, you'd spend $2–5/month instead of $20. Trade-off: no chat interface, requires API access."
+      },
+      {
+        "q": "Is there a free option that's almost as good?",
+        "a": "ChatGPT Free and Gemini Free both provide access to capable models with rate limits. For light daily use, they're sufficient. Heavy users will hit limits within days."
+      }
+    ],
+    "internalLinks": [
+      { "text": "ChatGPT vs Claude Cost", "href": "/compare/claude-vs-gpt-cost" },
+      { "text": "Subscription vs API Cost", "href": "/compare/subscription-vs-api-ai-cost" },
+      { "text": "Decision Engine", "href": "/decision-engine" }
+    ]
+  },
+  {
+    "slug": "best-free-ai-tools-for-builders",
+    "title": "Best Free AI Tools for Builders and Developers (2025)",
+    "description": "Free-tier AI tools that are actually useful for developers, indie hackers, and technical users.",
+    "metaDescription": "Best free AI tools for developers and builders in 2025. Real free tiers with meaningful limits — no bait-and-switch.",
+    "category": "free",
+    "updatedAt": "2025-04-01",
+    "intro": "Not all free AI tiers are created equal. Some are generous enough to run real projects; others are marketing traps. Here are the ones that actually deliver value at zero cost.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "groq-llama",
+        "title": "Groq (Llama 3.1 70B) — Free Tier",
+        "why": "World's fastest inference with a generous free tier. Llama 3.1 70B quality at near-zero latency. Ideal for prototyping and low-volume production apps.",
+        "monthlyEstimate": "$0 (within free limits)",
+        "badge": "Fastest Free Option"
+      },
+      {
+        "rank": 2,
+        "modelId": "cursor-free",
+        "title": "Cursor Free",
+        "why": "2000 completions/month with frontier model access. The best free coding tool available — no other tool at $0 comes close for developers.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free Coding Tool"
+      },
+      {
+        "rank": 3,
+        "modelId": "gemini-free",
+        "title": "Gemini Free",
+        "why": "Free access to Gemini 1.5 Flash via gemini.google.com and the API. Generous limits for builders prototyping AI features. Also has a free API tier.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free API Access"
+      },
+      {
+        "rank": 4,
+        "modelId": "copilot-free",
+        "title": "GitHub Copilot Free",
+        "why": "2000 completions and 50 chat messages/month at zero cost. Tight VS Code and GitHub integration makes it the default starting point for GitHub users.",
+        "monthlyEstimate": "$0",
+        "badge": "Best for GitHub Users"
+      },
+      {
+        "rank": 5,
+        "modelId": "chatgpt-free",
+        "title": "ChatGPT Free",
+        "why": "Rate-limited access to GPT-4o. Still the most capable free chat interface for general problem solving, debugging explanations, and code review.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free General Assistant"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Can I build a real product using only free AI tiers?",
+        "a": "Yes, for MVPs and low-traffic apps. Groq's free tier is the best starting point — fast, capable, and generous. Expect to hit limits at production scale and need to upgrade."
+      },
+      {
+        "q": "Which free AI has the most generous limits?",
+        "a": "Groq offers the most generous free API tier for inference. Cursor Free is most generous for coding assistance. Gemini also has a notably large free API quota."
+      },
+      {
+        "q": "What's the catch with free AI tiers?",
+        "a": "Rate limits (requests per minute/day), lower-quality models, slower responses, and data usage policies. Always read the terms — some free tiers train on your prompts."
+      }
+    ],
+    "internalLinks": [
+      { "text": "Best AI for Coding on a Budget", "href": "/best/best-ai-for-coding-on-a-budget" },
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "When to Use API vs Subscription", "href": "/guides/when-to-use-api-vs-subscription" }
+    ]
+  },
+  {
+    "slug": "best-ai-for-writing-on-a-budget",
+    "title": "Best AI for Writing on a Budget (2025)",
+    "description": "The best AI writing assistants for content creators, copywriters, and marketers who want to keep costs low.",
+    "metaDescription": "Best AI writing tools on a budget in 2025. Compare Claude, ChatGPT, and alternatives for content creators who don't want to overpay.",
+    "category": "writing",
+    "updatedAt": "2025-04-01",
+    "intro": "Writing is one of the most cost-effective AI use cases — you don't need frontier model quality for most content tasks. Here's how to get great results without a premium subscription.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "claude-pro",
+        "title": "Claude Pro — $20/month",
+        "why": "Best prose quality of any AI subscription. Anthropic's Claude writes in a more natural, less robotic style than GPT-4o for most content types. First choice for professional writers.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best Writing Quality"
+      },
+      {
+        "rank": 2,
+        "modelId": "gpt-4o-mini",
+        "title": "GPT-4o mini via API",
+        "why": "At $0.60/1M output tokens, you can generate thousands of articles for pennies. Quality is solid for SEO content, product descriptions, and summaries at scale.",
+        "monthlyEstimate": "$1–5/month typical",
+        "badge": "Best for Scale"
+      },
+      {
+        "rank": 3,
+        "modelId": "chatgpt-free",
+        "title": "ChatGPT Free",
+        "why": "For occasional writing assistance, the free tier is sufficient. Rate limits only affect heavy daily users.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free Option"
+      },
+      {
+        "rank": 4,
+        "modelId": "mistral-large",
+        "title": "Mistral Large via API",
+        "why": "60% cheaper than GPT-4o with comparable writing quality. GDPR-friendly for European content teams.",
+        "monthlyEstimate": "$3–8/month typical",
+        "badge": "Best EU Option"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Is Claude or ChatGPT better for writing?",
+        "a": "Claude generally produces more natural, less formulaic prose. ChatGPT is more consistent and has better plugin/tool integration. For pure writing quality, most writers prefer Claude."
+      },
+      {
+        "q": "Can I use budget models for blog writing?",
+        "a": "Yes. GPT-4o mini and Claude Haiku handle blog posts, product descriptions, and email copy well. Save the premium models for complex persuasive content and brand voice work."
+      }
+    ],
+    "internalLinks": [
+      { "text": "Claude vs ChatGPT Cost", "href": "/compare/claude-vs-gpt-cost" },
+      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ]
+  },
+  {
+    "slug": "best-ai-for-research-on-a-budget",
+    "title": "Best AI for Research on a Budget (2025)",
+    "description": "AI tools that actually help with research — with citations, accuracy, and long-context support — without premium pricing.",
+    "metaDescription": "Best AI research tools on a budget in 2025. Compare Perplexity, Claude, Gemini for researchers who need accuracy and citations without overpaying.",
+    "category": "research",
+    "updatedAt": "2025-04-01",
+    "intro": "Research is where AI tools diverge most in quality. Hallucination rates, citation quality, and context length matter enormously. Here's what actually works.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "perplexity-pro",
+        "title": "Perplexity Pro — $20/month",
+        "why": "Purpose-built for research. Real-time web access, source citations, and follow-up questions. If research is your primary use case, this is the most purpose-built tool.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best Research Tool"
+      },
+      {
+        "rank": 2,
+        "modelId": "gemini-1-5-pro",
+        "title": "Gemini 1.5 Pro via API",
+        "why": "2M token context window enables analysis of entire books, codebases, or document sets in a single prompt. Unique capability at $1.25/1M input tokens.",
+        "monthlyEstimate": "$5–15/month typical",
+        "badge": "Best Long-Context"
+      },
+      {
+        "rank": 3,
+        "modelId": "claude-3-5-sonnet",
+        "title": "Claude 3.5 Sonnet via API",
+        "why": "Strong at synthesizing complex information and following multi-part research instructions. Lower hallucination rate than GPT-4o on factual tasks.",
+        "monthlyEstimate": "$5–20/month typical",
+        "badge": "Best Reasoning Quality"
+      },
+      {
+        "rank": 4,
+        "modelId": "gemini-free",
+        "title": "Gemini Free",
+        "why": "Free tier includes web access and solid research capabilities. Good starting point for researchers before committing to a paid plan.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free Research Tool"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which AI is most accurate for research?",
+        "a": "Perplexity with live search is most accurate for current events. Claude 3.5 Sonnet is most accurate for complex synthesis from provided sources. Gemini 1.5 Pro is best for processing large documents."
+      },
+      {
+        "q": "Can I trust AI for academic research?",
+        "a": "Always verify AI outputs against primary sources. AI is excellent for literature discovery, summarization, and hypothesis generation — not as a citation source itself."
+      }
+    ],
+    "internalLinks": [
+      { "text": "Perplexity vs ChatGPT Cost", "href": "/compare/perplexity-vs-chatgpt-cost" },
+      { "text": "Gemini vs GPT-4o Cost", "href": "/compare/gemini-vs-gpt4o-cost" },
+      { "text": "Decision Engine", "href": "/decision-engine" }
+    ]
+  },
+  {
+    "slug": "best-ai-for-automation",
+    "title": "Best AI for Automation and Pipelines (2025)",
+    "description": "The cheapest capable models for building AI automation workflows, agents, and production pipelines.",
+    "metaDescription": "Best AI models for automation and AI pipelines in 2025. Find the cheapest capable models for production workloads.",
+    "category": "automation",
+    "updatedAt": "2025-04-01",
+    "intro": "Automation is where cost compounds fast. A model that costs $15/1M output tokens running thousands of tasks daily becomes expensive immediately. Here are the best options by cost-performance.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "gemini-1-5-flash",
+        "title": "Gemini 1.5 Flash",
+        "why": "At $0.075/1M input tokens, it's one of the cheapest capable models available. Fast, high-throughput, and accurate enough for most classification, extraction, and routing tasks.",
+        "monthlyEstimate": "$1–10/month at scale",
+        "badge": "Cheapest Capable Model"
+      },
+      {
+        "rank": 2,
+        "modelId": "gpt-4o-mini",
+        "title": "GPT-4o mini",
+        "why": "Reliable, well-documented, and cheap at $0.15/1M input. Best if you're already in the OpenAI ecosystem and need predictable, production-grade inference.",
+        "monthlyEstimate": "$2–15/month at scale",
+        "badge": "Most Reliable Budget API"
+      },
+      {
+        "rank": 3,
+        "modelId": "deepseek-v3",
+        "title": "DeepSeek V3",
+        "why": "Near-frontier reasoning at 95% less than GPT-4o. Use for complex automation steps that require actual reasoning — the cost savings versus GPT-4o are dramatic.",
+        "monthlyEstimate": "$1–8/month typical",
+        "badge": "Best Quality at Low Cost"
+      },
+      {
+        "rank": 4,
+        "modelId": "mistral-small",
+        "title": "Mistral Small",
+        "why": "Solid quality at $0.20/1M input. EU data residency makes it the go-to for GDPR-compliant automation workflows.",
+        "monthlyEstimate": "$1–8/month typical",
+        "badge": "Best EU Automation Model"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which model should I use for high-volume AI pipelines?",
+        "a": "Start with Gemini 1.5 Flash or GPT-4o mini. Profile your quality requirements — if budget models meet the quality bar, the cost savings versus GPT-4o are 95%+."
+      },
+      {
+        "q": "How do I estimate automation costs?",
+        "a": "Use our calculator. Input your average prompt length, expected output length, and monthly request volume. Then compare models side by side."
+      }
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
+    ]
+  },
+  {
+    "slug": "best-ai-api-for-startups",
+    "title": "Best AI APIs for Startups (2025)",
+    "description": "Which AI APIs offer the best quality, reliability, and cost for early-stage startups building AI products?",
+    "metaDescription": "Best AI APIs for startups in 2025. Compare OpenAI, Anthropic, Google, and open-source options for building AI products without burning runway.",
+    "category": "coding",
+    "updatedAt": "2025-04-01",
+    "intro": "Startups building AI products face a real dilemma: frontier model quality versus runway preservation. Here's how to pick an API strategy that scales without burning cash.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "gpt-4o-mini",
+        "title": "GPT-4o mini — Default Workhorse",
+        "why": "Best starting point for most startups. Cheap, reliable, well-documented, and capable enough for 80% of use cases. Start here, upgrade selectively.",
+        "monthlyEstimate": "$5–50/month typical",
+        "badge": "Best Default Choice"
+      },
+      {
+        "rank": 2,
+        "modelId": "deepseek-v3",
+        "title": "DeepSeek V3 — Quality on a Budget",
+        "why": "When you need near-GPT-4o quality at 95% lower cost. Compelling for startups doing complex reasoning, coding, or analysis at volume.",
+        "monthlyEstimate": "$2–20/month typical",
+        "badge": "Best Quality/Cost"
+      },
+      {
+        "rank": 3,
+        "modelId": "llama-3-1-70b",
+        "title": "Llama 3.1 70B via Groq/Together",
+        "why": "Open-source with no per-token licensing concern. Self-hostable for zero marginal cost at scale. Groq's API makes it accessible without infra overhead.",
+        "monthlyEstimate": "$3–20/month typical",
+        "badge": "Best Open-Source Option"
+      },
+      {
+        "rank": 4,
+        "modelId": "claude-3-5-haiku",
+        "title": "Claude 3.5 Haiku — Premium Budget Option",
+        "why": "Better coding and instruction-following than GPT-4o mini for slightly higher cost. Worth the premium if you're building coding or technical products.",
+        "monthlyEstimate": "$5–30/month typical",
+        "badge": "Best Coding API Budget"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Should a startup use OpenAI or Anthropic?",
+        "a": "Start with OpenAI for its ecosystem and documentation depth. Evaluate Anthropic if you're building coding tools or need better instruction adherence. Use both via an abstraction layer."
+      },
+      {
+        "q": "How much should a startup budget for AI API costs?",
+        "a": "For MVPs: $50–200/month. For early traction: $200–1000/month. At scale, AI costs should be a known, optimized line item — use our calculator to project."
+      }
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "DeepSeek vs GPT-4o", "href": "/compare/deepseek-vs-gpt4o-cost" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
+    ]
+  },
+  {
+    "slug": "best-ai-for-chat-on-a-budget",
+    "title": "Best AI Chatbots on a Budget (2025)",
+    "description": "Free and cheap AI chat assistants compared for everyday use — without paying $20/month unnecessarily.",
+    "metaDescription": "Best AI chatbots on a budget in 2025. Find the best free and cheap AI chat assistants for everyday use.",
+    "category": "chat",
+    "updatedAt": "2025-04-01",
+    "intro": "Most people don't need a $20/month AI subscription for casual chat use. The free tiers from major providers handle light-to-moderate use well. Here's how they compare.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "chatgpt-free",
+        "title": "ChatGPT Free",
+        "why": "Rate-limited access to GPT-4o, the world's most capable general assistant. The free tier is sufficient for light daily use.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free Option"
+      },
+      {
+        "rank": 2,
+        "modelId": "gemini-free",
+        "title": "Gemini Free",
+        "why": "Free access to Gemini 1.5 Flash. Better web integration (Google Search, Docs, Gmail) than ChatGPT for users in the Google ecosystem.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Google Integration"
+      },
+      {
+        "rank": 3,
+        "modelId": "gpt-4o-mini",
+        "title": "GPT-4o mini via API",
+        "why": "Build your own chat interface at essentially zero cost. $0.15/1M input tokens means a month of heavy chat usage costs pennies.",
+        "monthlyEstimate": "$0.50–2/month",
+        "badge": "Cheapest Custom Option"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Do I actually need to pay $20/month for AI chat?",
+        "a": "Probably not. Free tiers from ChatGPT and Gemini handle most casual use cases. Pay only if you consistently hit rate limits or need specific premium features."
+      },
+      {
+        "q": "What's the best free AI chatbot in 2025?",
+        "a": "ChatGPT Free for general use. Gemini Free for Google ecosystem users. Both are meaningfully capable at zero cost."
+      }
+    ],
+    "internalLinks": [
+      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
+      { "text": "Decision Engine", "href": "/decision-engine" },
+      { "text": "Perplexity vs ChatGPT", "href": "/compare/perplexity-vs-chatgpt-cost" }
+    ]
+  },
+  {
+    "slug": "best-open-source-ai-models",
+    "title": "Best Open-Source AI Models to Self-Host (2025)",
+    "description": "The best open-weight AI models you can run yourself for zero per-token cost.",
+    "metaDescription": "Best open-source AI models to self-host in 2025. Llama, Mistral, DeepSeek and more — free inference for developers with the right hardware.",
+    "category": "automation",
+    "updatedAt": "2025-04-01",
+    "intro": "If you have GPU access, self-hosting open-weight models eliminates per-token costs entirely. Here are the top models worth running yourself in 2025.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "llama-3-1-70b",
+        "title": "Llama 3.1 70B",
+        "why": "Meta's flagship open-weight model. Near-frontier quality on most tasks. Runs on 2x A100 GPUs or equivalent. Available via Groq, Together, and others for cheap inference without self-hosting.",
+        "monthlyEstimate": "$0 self-hosted / $0.59/1M via Groq",
+        "badge": "Best General Open-Source"
+      },
+      {
+        "rank": 2,
+        "modelId": "deepseek-v3",
+        "title": "DeepSeek V3",
+        "why": "Frontier-competitive coding and reasoning at open-weight. Significant GPU requirements but zero licensing cost. Via API it's already among the cheapest capable models.",
+        "monthlyEstimate": "$0 self-hosted / $0.27/1M via API",
+        "badge": "Best Open-Source for Coding"
+      },
+      {
+        "rank": 3,
+        "modelId": "mistral-large",
+        "title": "Mistral Large",
+        "why": "Open-weight, EU-based, GDPR-friendly. Good balance of quality and size. Runs on single-node setups with sufficient VRAM.",
+        "monthlyEstimate": "$0 self-hosted / $2/1M via API",
+        "badge": "Best EU Open-Source"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What hardware do I need to self-host LLMs?",
+        "a": "For 70B parameter models: 2x A100 (80GB) or equivalent. For smaller models (7B-13B): a single RTX 4090 or A10G. Cloud options (Lambda Labs, RunPod) are often cheaper than owned hardware for intermittent use."
+      },
+      {
+        "q": "Is self-hosting actually cheaper?",
+        "a": "For consistent high-volume usage: yes, dramatically. For intermittent or low-volume use: usually no — managed APIs win on cost when amortizing GPU rental over light usage."
+      }
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
+      { "text": "Best AI API for Startups", "href": "/best/best-ai-api-for-startups" }
+    ]
+  },
+  {
+    "slug": "best-ai-for-solopreneurs",
+    "title": "Best AI Stack for Solopreneurs (2025)",
+    "description": "A practical AI toolkit for solopreneurs who need writing, coding, and research without spending hundreds per month.",
+    "metaDescription": "Best AI tools for solopreneurs in 2025. Build an effective AI stack under $30/month for writing, coding, and research.",
+    "category": "budget",
+    "updatedAt": "2025-04-01",
+    "intro": "Solopreneurs don't need an enterprise AI budget. With smart tool selection, you can cover writing, coding, research, and automation for $20–40/month total. Here's a practical stack.",
+    "picks": [
+      {
+        "rank": 1,
+        "modelId": "cursor-pro",
+        "title": "Cursor Pro — $20/month (if you code)",
+        "why": "Single tool that covers all coding needs. If coding is core to your work, this is the highest-ROI tool in any solopreneur stack.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best for Tech Solopreneurs"
+      },
+      {
+        "rank": 2,
+        "modelId": "claude-pro",
+        "title": "Claude Pro — $20/month (if you write)",
+        "why": "Best writing and research quality in a subscription. For content-focused solopreneurs, Claude Pro covers most daily AI needs.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best for Content Solopreneurs"
+      },
+      {
+        "rank": 3,
+        "modelId": "perplexity-pro",
+        "title": "Perplexity Pro — $20/month (for research)",
+        "why": "Replaces hours of search-based research. If you do a lot of market research or competitive analysis, Perplexity Pro pays for itself quickly.",
+        "monthlyEstimate": "$20/month",
+        "badge": "Best Research Upgrade"
+      },
+      {
+        "rank": 4,
+        "modelId": "chatgpt-free",
+        "title": "ChatGPT Free — $0",
+        "why": "Keep this in your toolkit as a free fallback for one-off tasks. No reason to pay for ChatGPT Plus if you already have Claude or Cursor.",
+        "monthlyEstimate": "$0",
+        "badge": "Best Free Fallback"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What's the minimum AI spend for a productive solopreneur?",
+        "a": "One $20/month subscription matched to your primary use case (writing → Claude, coding → Cursor, research → Perplexity). Free tiers cover the rest."
+      },
+      {
+        "q": "Should I use ChatGPT Plus if I already have Claude Pro?",
+        "a": "Probably not. The use cases heavily overlap. Keep ChatGPT Free as a fallback. Only upgrade if you specifically need GPT-4o's image analysis or OpenAI's plugin ecosystem."
+      }
+    ],
+    "internalLinks": [
+      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
+      { "text": "Decision Engine", "href": "/decision-engine" },
+      { "text": "Subscription vs API Cost", "href": "/compare/subscription-vs-api-ai-cost" }
+    ]
+  }
+]

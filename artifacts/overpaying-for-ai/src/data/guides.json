@@ -1,0 +1,414 @@
+[
+  {
+    "slug": "how-to-reduce-ai-cost",
+    "title": "How to Reduce Your AI Costs by 80% Without Losing Quality",
+    "description": "A practical guide to cutting AI spending through smart model routing, prompt optimization, and caching strategies.",
+    "metaDescription": "How to reduce AI costs in 2025. Practical strategies for cutting ChatGPT, Claude, and API spending by 60-80% without sacrificing quality.",
+    "updatedAt": "2025-04-01",
+    "readTime": "8 min read",
+    "sections": [
+      {
+        "heading": "The Problem: Most People Use Expensive Models for Everything",
+        "content": "The single biggest mistake in AI cost management is using GPT-4o or Claude 3.5 Sonnet for tasks that a cheaper model handles just as well. Developers default to the best model because it's easier — and pay 10-20x more than necessary.\n\nThe fix isn't accepting lower quality. It's routing the right task to the right model."
+      },
+      {
+        "heading": "Strategy 1: Model Routing (Save 60-80%)",
+        "content": "Most workloads are a mix of simple and complex tasks. Simple tasks — classification, summarization, extraction, short Q&A — don't need GPT-4o. They work fine with GPT-4o mini at 97% lower cost.\n\nImplement a two-tier routing strategy:\n- Tier 1: GPT-4o mini / Claude Haiku / Gemini Flash for all tasks\n- Tier 2: GPT-4o / Claude Sonnet only when Tier 1 fails a quality threshold\n\nFor most teams, 80-90% of requests stay in Tier 1. Cost reduction is immediate."
+      },
+      {
+        "heading": "Strategy 2: Prompt Compression (Save 20-40%)",
+        "content": "Every token costs money. Long system prompts, verbose examples, and repeated context inflate token counts — and costs.\n\nAudit your prompts for:\n- Redundant instructions (\"Please make sure to...\", \"It is important that...\")\n- Oversized few-shot examples (3 good examples beat 10 mediocre ones)\n- Context you re-send every request instead of using context windows efficiently\n\nPrompt compression tools like LLMLingua can reduce prompt token count by 50% with minimal quality loss on structured tasks."
+      },
+      {
+        "heading": "Strategy 3: Response Caching (Save 30-90% on Repeat Queries)",
+        "content": "If users ask similar questions repeatedly, you're paying to generate the same response over and over. Semantic caching stores responses and serves them when a new query is similar enough.\n\nTools like GPTCache, Redis with embedding similarity, or built-in provider caching (Anthropic, OpenAI both offer prompt caching) can eliminate 30-90% of token usage for common queries."
+      },
+      {
+        "heading": "Strategy 4: Subscription vs API Audit",
+        "content": "If you're using a $20/month subscription and hitting limits regularly, you might be better served by the API — or vice versa. Run the numbers:\n\n- Light user (< 500K tokens/month): API is cheaper\n- Moderate user (500K-1.5M/month): roughly equivalent\n- Heavy user (> 1.5M/month): subscription is cheaper if it's truly unlimited\n\nUse our calculator to find your actual break-even point."
+      },
+      {
+        "heading": "Strategy 5: Open-Source Models for Internal Tools",
+        "content": "Customer-facing AI needs reliability and quality. Internal tools — document summarization, code linting, data extraction — have more flexibility.\n\nFor internal workloads, consider:\n- Llama 3.1 70B via Groq (cheap, fast, good quality)\n- DeepSeek V3 via API (near-frontier quality at fraction of the cost)\n- Self-hosted Llama/Mistral if your volume justifies the GPU cost\n\nMany teams reduce AI costs by 50-70% by moving internal tooling to open-source models."
+      }
+    ],
+    "keyTakeaways": [
+      "Route simple tasks to cheap models — most workloads are 80% simple tasks",
+      "Compress prompts aggressively — redundant tokens are direct waste",
+      "Cache repeated responses — especially for FAQ-style or templated use cases",
+      "Audit your subscription vs API spend quarterly — usage patterns shift",
+      "Use open-source models for internal tools where quality tolerance is higher"
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" },
+      { "text": "GPT-4o vs GPT-4o mini", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" }
+    ]
+  },
+  {
+    "slug": "token-cost-explained",
+    "title": "Token Cost Explained: What You're Actually Paying For",
+    "description": "A plain-English guide to AI tokens, how they're counted, and exactly how to calculate your real costs.",
+    "metaDescription": "What are AI tokens and how much do they cost? Plain-English guide to token pricing for ChatGPT, Claude, Gemini, and other AI APIs.",
+    "updatedAt": "2025-04-01",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "What Is a Token?",
+        "content": "A token is roughly 0.75 words — or about 4 characters of English text. Tokenization is how AI models process text: they convert words into numerical tokens before processing.\n\nExamples:\n- \"The quick brown fox\" = ~4 tokens\n- \"Hello, world!\" = 3 tokens\n- A typical short email = 100-200 tokens\n- A 1000-word blog post = ~750 tokens\n\nToken counts vary by model. GPT models use the tiktoken library; Claude uses a similar approach. Non-English text, code, and symbols often tokenize less efficiently."
+      },
+      {
+        "heading": "Input vs Output Tokens",
+        "content": "AI APIs charge separately for input (what you send) and output (what the model returns).\n\nInput tokens: your system prompt + conversation history + user message\nOutput tokens: the model's response\n\nOutput tokens almost always cost more — typically 3-5x more per token than input. This is why long, verbose AI responses cost significantly more than short ones.\n\nGPT-4o example:\n- Input: $5 per 1M tokens\n- Output: $15 per 1M tokens\n- A 1000-token response costs $0.015 — less than 2 cents"
+      },
+      {
+        "heading": "How to Calculate Monthly Cost",
+        "content": "Monthly cost = (Input tokens × input price) + (Output tokens × output price)\n\nExample calculation:\n- You send 500 requests/day, each with 500 input tokens and 200 output tokens\n- Monthly input: 500 × 500 × 30 = 7.5M tokens × $0.005/1K = $37.50\n- Monthly output: 500 × 200 × 30 = 3M tokens × $0.015/1K = $45\n- Total: $82.50/month with GPT-4o\n\nSame workload with GPT-4o mini:\n- Monthly input: 7.5M × $0.00015/1K = $1.13\n- Monthly output: 3M × $0.0006/1K = $1.80\n- Total: $2.93/month — 97% cheaper"
+      },
+      {
+        "heading": "Context Window and Why It Matters for Cost",
+        "content": "Every AI model has a context window — the maximum number of tokens it can process at once. Models like Gemini 1.5 Pro support 2M tokens; GPT-4o supports 128K.\n\nFor cost: longer context windows mean you can send more history per request — which increases input token count and cost. If you're sending full conversation history with every request, costs compound quickly.\n\nOptimization: Only send the last N messages of history, not the full conversation. Summarize older context instead of including raw text."
+      },
+      {
+        "heading": "Cached Tokens and Discounts",
+        "content": "Anthropic and OpenAI both offer prompt caching — re-using expensive prompt processing for identical prefixes. Cached input tokens cost significantly less:\n\n- OpenAI cached tokens: ~50% discount on input\n- Anthropic cached tokens: up to 90% discount on input\n\nIf you have a large system prompt that doesn't change between requests, caching it can dramatically cut costs. Most production applications should enable caching by default."
+      }
+    ],
+    "keyTakeaways": [
+      "1 token ≈ 0.75 words ≈ 4 characters of English text",
+      "Output tokens cost 3-5x more than input tokens on most models",
+      "Monthly cost = (input tokens × input price) + (output tokens × output price)",
+      "Reduce costs by shortening prompts, truncating history, and caching repeated prefixes",
+      "Use our calculator for a precise estimate based on your actual usage patterns"
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "GPT-4o vs GPT-4o mini Cost", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
+    ]
+  },
+  {
+    "slug": "when-to-use-api-vs-subscription",
+    "title": "API vs Subscription: How to Choose the Right AI Pricing Model",
+    "description": "A decision framework for choosing between AI subscriptions and pay-per-use API access based on your actual usage.",
+    "metaDescription": "API vs subscription AI pricing: when to use each and how to calculate which is cheaper for your use case. Practical decision framework for 2025.",
+    "updatedAt": "2025-04-01",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "The Core Trade-Off",
+        "content": "Subscriptions offer simplicity: flat monthly fee, chat interface, no usage tracking. APIs offer flexibility: programmatic access, model selection, cost control.\n\nThe right choice depends on three factors:\n1. How you use AI (interactive vs automated)\n2. How much you use it (light vs heavy)\n3. What you're building (chat interface vs product)"
+      },
+      {
+        "heading": "Choose a Subscription If...",
+        "content": "- You primarily use AI interactively through a chat interface\n- Your usage is moderate (under 1.5M tokens/month)\n- You don't need programmatic access or API integration\n- You want predictable monthly billing without tracking usage\n- You use specific subscription-only features (DALL-E, advanced data analysis, Artifacts)\n\nBest subscription picks: ChatGPT Plus, Claude Pro, Cursor Pro, Perplexity Pro"
+      },
+      {
+        "heading": "Choose the API If...",
+        "content": "- You're building a product or automated workflow\n- You need to integrate AI into your own tools or codebase\n- Your usage is high-volume (routine API calls at scale)\n- You want to optimize model selection per task (routing cheap vs expensive models)\n- You need usage tracking and spending controls\n\nKey API advantage: you can use cheaper models. GPT-4o mini via API costs 97% less than GPT-4o — the subscription gives you one model tier."
+      },
+      {
+        "heading": "The Break-Even Calculation",
+        "content": "For a $20/month subscription vs the equivalent API cost:\n\nGPT-4o break-even: ~1.3M total tokens/month\n- Below that: API is cheaper (even with GPT-4o pricing)\n- Above that: subscription is cheaper (unlimited use)\n\nBut the real comparison should be API with cheaper models:\n- GPT-4o mini at 1.3M tokens: ~$1.50/month — 93% below the subscription\n\nFor most users, the API with a budget model is the cheapest option. Subscriptions win on convenience, not cost."
+      },
+      {
+        "heading": "Hybrid Approach",
+        "content": "Many power users run both:\n- Subscription for interactive daily use (chat, writing, research)\n- API for their own tools and automated workflows\n\nIf you're a developer, this is usually optimal: pay $20/month for Cursor Pro or Claude Pro for daily work, and a few dollars on the API for your projects. Total cost is well under $30/month."
+      }
+    ],
+    "keyTakeaways": [
+      "Subscription: best for interactive use, moderate volume, no programming required",
+      "API: best for automation, products, and high-volume workloads where model routing matters",
+      "API with budget models (GPT-4o mini, Claude Haiku) beats subscriptions on cost at almost any volume",
+      "Break-even for GPT-4o API vs ChatGPT Plus: ~1.3M tokens/month",
+      "Most developers should use both: subscription for daily work, API for their projects"
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "Subscription vs API Cost Comparison", "href": "/compare/subscription-vs-api-ai-cost" },
+      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" }
+    ]
+  },
+  {
+    "slug": "ai-routing-strategies",
+    "title": "AI Model Routing: How to Cut Costs Without Losing Quality",
+    "description": "How to route AI requests to cheaper models intelligently — the technique used by companies spending millions on AI to stay profitable.",
+    "metaDescription": "AI model routing strategies for 2025. How to reduce AI API costs 60-80% by routing tasks to cheaper models without sacrificing quality.",
+    "updatedAt": "2025-04-01",
+    "readTime": "7 min read",
+    "sections": [
+      {
+        "heading": "What Is Model Routing?",
+        "content": "Model routing means sending different AI requests to different models based on their complexity and requirements. Simple tasks go to cheap, fast models. Complex tasks go to expensive, capable ones.\n\nDone well, routing cuts AI costs by 60-80% with no visible quality degradation to end users."
+      },
+      {
+        "heading": "Rule-Based Routing",
+        "content": "The simplest approach: classify requests by type before sending.\n\nExamples:\n- Short Q&A under 100 tokens → GPT-4o mini ($0.0001/request)\n- Code generation → Claude 3.5 Haiku or Sonnet\n- Long document analysis → Gemini 1.5 Pro (for its 2M context)\n- Classification tasks → Gemini Flash (cheapest capable model)\n- Complex reasoning → GPT-4o or Claude 3.5 Sonnet only\n\nImplement as a switch statement in your API layer. No ML required."
+      },
+      {
+        "heading": "LLM-Based Routing",
+        "content": "Use a cheap, fast model to classify whether a request needs a premium model. The router itself becomes the optimization:\n\n1. Send request to GPT-4o mini with a classification prompt\n2. If it returns 'complex': route to GPT-4o (costs $0.015 more)\n3. If it returns 'simple': answer in mini (saves $0.015)\n\nThe classification overhead is tiny. At scale, this pays for itself many times over."
+      },
+      {
+        "heading": "Fallback Routing",
+        "content": "Start cheap, escalate on failure:\n\n1. Send request to Tier 1 model (cheap)\n2. Evaluate response quality against your criteria\n3. If quality threshold not met → retry with Tier 2 model\n\nThis works well when you have evaluatable success criteria (code that compiles, JSON that parses, classification with confidence score)."
+      },
+      {
+        "heading": "Tools for Routing",
+        "content": "Several frameworks handle routing out of the box:\n\n- LiteLLM: Unified API wrapper with fallbacks and load balancing\n- RouteLLM: Open-source router from Berkeley, optimized for cost-quality trade-offs\n- Martian: Managed routing service that learns from your quality feedback\n- OpenRouter: Marketplace with built-in routing capabilities\n\nFor most applications, LiteLLM or a simple custom router is sufficient."
+      }
+    ],
+    "keyTakeaways": [
+      "Model routing routes different task types to different models based on complexity",
+      "Rule-based routing is the simplest starting point — no ML required",
+      "Typical savings: 60-80% with properly tuned routing",
+      "Start with a two-tier system: cheap default, expensive escalation",
+      "LiteLLM and RouteLLM are the most popular open-source tools for this"
+    ],
+    "internalLinks": [
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
+      { "text": "GPT-4o vs GPT-4o mini", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ]
+  },
+  {
+    "slug": "hidden-ai-costs",
+    "title": "Hidden AI Costs Nobody Warns You About",
+    "description": "The non-obvious costs of running AI in production: embedding models, retries, evaluation pipelines, and tool calls.",
+    "metaDescription": "Hidden AI costs in production nobody warns you about. Retries, embeddings, evaluation, and tool calls all add up. Here's what to budget for.",
+    "updatedAt": "2025-04-01",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "1. Embedding Costs (Often Overlooked)",
+        "content": "If you're building RAG (retrieval-augmented generation) applications, you'll pay for embeddings — converting text to vector representations for semantic search.\n\nOpenAI text-embedding-3-small: $0.02/1M tokens (very cheap)\nOpenAI text-embedding-3-large: $0.13/1M tokens\n\nFor large document collections, re-embedding on updates adds up. Mitigation: only embed new/changed content; cache embeddings in a vector database."
+      },
+      {
+        "heading": "2. Retry and Error Costs",
+        "content": "Production AI apps experience failures: rate limits, timeouts, malformed outputs. Retry logic — while necessary — means you're sometimes paying twice for the same request.\n\nTypically 5-15% overhead on token costs in production systems. Mitigation: implement exponential backoff, validate outputs before retrying, and track retry rates as a cost metric."
+      },
+      {
+        "heading": "3. Tool Calls and Function Calling",
+        "content": "When AI models call functions (search, code execution, API calls), each call generates additional tokens. Multi-step agents with tool use can generate 3-5x the tokens of a single prompt.\n\nMitigation: Limit tool call chains, use structured outputs instead of iterative tool use where possible, and track per-agent token usage separately."
+      },
+      {
+        "heading": "4. Evaluation and Monitoring",
+        "content": "Checking whether AI outputs are good — using LLM-based evaluation — costs tokens too. If you're running automated quality checks on every response, you're doubling or tripling your token usage.\n\nMitigation: Sample evaluation (evaluate 10% of responses, not 100%), use cheaper models for evaluation, and rely on deterministic checks where possible."
+      },
+      {
+        "heading": "5. Context Window Padding",
+        "content": "Many frameworks automatically pad context to window limits, or include unnecessarily large system prompts in every request. These 'invisible' tokens show up on your bill.\n\nMitigation: Audit your system prompt length, truncate conversation history aggressively, and instrument token counts per request in your logging."
+      }
+    ],
+    "keyTakeaways": [
+      "Budget 15-25% above your base model costs for production overhead",
+      "Embedding costs are small individually but compound with large document sets",
+      "Retry rates of 5-15% are normal — track and minimize them",
+      "Tool-calling agents can generate 3-5x the tokens of simple prompts",
+      "Instrument token counts per request from day one — you can't optimize what you don't measure"
+    ],
+    "internalLinks": [
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
+      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ]
+  },
+  {
+    "slug": "gpt-4o-mini-vs-full-when-to-upgrade",
+    "title": "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide",
+    "description": "When does upgrading from GPT-4o mini to GPT-4o actually change your results? A task-by-task comparison.",
+    "metaDescription": "GPT-4o mini vs GPT-4o — when to upgrade and when to stay cheap. Task-by-task comparison with real quality differences.",
+    "updatedAt": "2025-04-01",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "Default to mini, Upgrade Intentionally",
+        "content": "GPT-4o mini costs 97% less than GPT-4o. The quality difference is real — but for the majority of tasks, it doesn't matter. The discipline is upgrading only when you observe quality problems, not preemptively."
+      },
+      {
+        "heading": "Tasks Where mini Is Sufficient",
+        "content": "- Customer support Q&A and FAQ responses\n- Content summarization and bullet-point extraction\n- Sentiment classification and intent detection\n- Simple code generation and boilerplate\n- Data extraction from structured documents\n- Email drafting and editing\n- Short-form content writing\n\nFor all of these, blind tests show mini at 90-95% quality equivalence with GPT-4o."
+      },
+      {
+        "heading": "Tasks Where You Should Upgrade",
+        "content": "- Complex multi-step reasoning (math, logic, planning)\n- Long document analysis requiring synthesis across sections\n- Code generation for non-trivial features or architectural decisions\n- Nuanced persuasive writing and brand voice work\n- Multi-turn conversations requiring memory and context-tracking\n- Tasks where hallucination rate matters significantly\n\nFor these, GPT-4o's quality advantage is meaningful."
+      },
+      {
+        "heading": "How to Test Before Committing",
+        "content": "Run your actual prompts through both models. Score outputs on your quality criteria. Don't rely on benchmark scores — test on your specific task type.\n\nIf mini scores 85%+ on your criteria, you don't need GPT-4o for that task. That decision alone could cut your AI costs by 70%."
+      }
+    ],
+    "keyTakeaways": [
+      "GPT-4o mini is sufficient for 70-80% of production use cases",
+      "Upgrade for: complex reasoning, long documents, nuanced writing, coding architecture",
+      "Stay on mini for: classification, summarization, Q&A, simple code, content writing",
+      "Always test your specific tasks — benchmarks are not your benchmark",
+      "A routing strategy using both models captures 95% of the quality at 30% of the cost"
+    ],
+    "internalLinks": [
+      { "text": "GPT-4o vs GPT-4o mini Comparison", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
+      { "text": "AI Routing Strategies", "href": "/guides/ai-routing-strategies" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ]
+  },
+  {
+    "slug": "ai-cost-for-saas-founders",
+    "title": "AI Cost Planning for SaaS Founders: A Realistic Budget Guide",
+    "description": "How to project, control, and optimize AI API costs as you scale a SaaS product from zero to revenue.",
+    "metaDescription": "AI cost planning for SaaS founders. How to project AI API spending, set per-user cost budgets, and avoid runaway bills as you scale.",
+    "updatedAt": "2025-04-01",
+    "readTime": "7 min read",
+    "sections": [
+      {
+        "heading": "The Core Metric: Cost Per User Per Month",
+        "content": "The number you need to know is your AI cost per active user per month. This is what determines whether your unit economics work.\n\nTarget ranges by pricing tier:\n- Free tier users: < $0.10/month AI cost\n- $9-19/month paying users: < $1.00/month AI cost\n- $29-49/month paying users: < $3.00/month AI cost\n- Enterprise: price AI costs into the contract explicitly\n\nIf your AI cost per user approaches 20% of their subscription price, you have a margin problem."
+      },
+      {
+        "heading": "Projecting Costs at Scale",
+        "content": "Start with your average session:\n- How many AI requests per session?\n- Average input + output tokens per request?\n- Sessions per active user per month?\n\nThen: (requests/session × tokens/request × sessions/month) × token price = cost/user/month\n\nFor 1000 MAU at $1/user/month AI cost = $1000/month. Budget grows linearly with users unless you optimize."
+      },
+      {
+        "heading": "Setting Usage Limits",
+        "content": "Protect your margin with user-level quotas:\n- Free users: 20 AI requests/day maximum\n- Pro users: 200 requests/day maximum\n- Enterprise: negotiated or metered\n\nTrack actual vs projected usage. Users who consume 10x the average exist and will blow your cost model without guardrails."
+      },
+      {
+        "heading": "Model Selection Strategy for SaaS",
+        "content": "Layer your model usage by feature:\n\n- Auto-complete / suggestions: Gemini Flash or GPT-4o mini (cheapest options)\n- Core product feature: GPT-4o mini or Claude Haiku\n- Premium feature or power user path: Claude Sonnet or GPT-4o\n- Background processing: DeepSeek V3 or Llama 70B for best value\n\nNever use GPT-4o as your default unless you've tested that cheaper models genuinely can't meet your quality bar."
+      },
+      {
+        "heading": "Watching for Cost Spikes",
+        "content": "Production AI costs can spike suddenly:\n- A viral feature drives unexpected traffic\n- A bug causes infinite retry loops\n- A user crafts adversarial prompts that generate huge outputs\n\nSet billing alerts at 50%, 80%, and 100% of your monthly budget. Cap at 100% — don't let costs run unbounded."
+      }
+    ],
+    "keyTakeaways": [
+      "Track AI cost per active user per month as your core unit economics metric",
+      "Target: AI cost < 10-20% of user's subscription revenue",
+      "Set per-user request quotas — without them, a few power users will dominate your costs",
+      "Never use frontier models as defaults — start cheap, upgrade only when necessary",
+      "Set billing alerts and spending caps before launch, not after your first surprise bill"
+    ],
+    "internalLinks": [
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
+      { "text": "Best AI API for Startups", "href": "/best/best-ai-api-for-startups" }
+    ]
+  },
+  {
+    "slug": "compare-ai-models-for-your-use-case",
+    "title": "How to Compare AI Models for Your Specific Use Case",
+    "description": "A systematic framework for evaluating which AI model is actually right for your task — beyond benchmark scores.",
+    "metaDescription": "How to compare AI models for your specific use case. A practical framework for evaluation beyond benchmark scores.",
+    "updatedAt": "2025-04-01",
+    "readTime": "5 min read",
+    "sections": [
+      {
+        "heading": "Why Benchmarks Don't Tell You Enough",
+        "content": "MMLU, HumanEval, and GPQA are designed to compare models on standardized tasks. Your task isn't standardized. A model that tops a benchmark may perform worse than a cheaper model on your specific prompts.\n\nThe only valid benchmark is your benchmark."
+      },
+      {
+        "heading": "Step 1: Define Your Success Criteria",
+        "content": "Before testing, write down what 'good' looks like for your specific task:\n- For coding: does the code run? does it pass tests? is it readable?\n- For writing: does it match brand voice? is it factually accurate? would an editor approve it?\n- For classification: what's your accuracy threshold? what's your acceptable false positive rate?\n\nWithout explicit criteria, you'll default to vibes — and expensive models always feel better even when the difference doesn't matter."
+      },
+      {
+        "heading": "Step 2: Create a Test Set",
+        "content": "Collect 20-50 real examples of the task you're evaluating. Include edge cases and typical cases. Grade expected outputs for each.\n\nThis test set is your north star for all model comparisons. When you switch models, re-run the set. When you change prompts, re-run the set."
+      },
+      {
+        "heading": "Step 3: Run Blind Evaluations",
+        "content": "For qualitative tasks (writing, summaries, explanations), use blind evaluation:\n- Generate responses from 3 models with identical prompts\n- Remove model labels\n- Have stakeholders rank responses\n- Reveal model identities after scoring\n\nYou'll often find the cheap model winning blind tests on tasks where people assumed they needed the expensive one."
+      },
+      {
+        "heading": "Step 4: Cost-Quality Trade-off Analysis",
+        "content": "After evaluation, plot each model on a cost vs quality matrix:\n- X axis: relative monthly cost at your expected usage\n- Y axis: quality score from your evaluation\n\nThe 'efficient frontier' models offer the best quality-per-dollar. Anything below the frontier is either too expensive for its quality or too low-quality to justify its cost."
+      }
+    ],
+    "keyTakeaways": [
+      "Benchmark scores don't predict performance on your specific task",
+      "Define explicit, measurable quality criteria before testing",
+      "Test at least 20-50 real examples from your actual workload",
+      "Use blind evaluation for qualitative tasks to eliminate bias toward expensive models",
+      "Plot cost vs quality and find the efficient frontier for your use case"
+    ],
+    "internalLinks": [
+      { "text": "Decision Engine", "href": "/decision-engine" },
+      { "text": "AI Cost Calculator", "href": "/calculator" },
+      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
+    ]
+  },
+  {
+    "slug": "free-ai-tools-that-are-actually-good",
+    "title": "Free AI Tools That Are Actually Good (2025)",
+    "description": "Honest guide to AI tools with real free tiers — not bait-and-switch trials masquerading as free.",
+    "metaDescription": "Free AI tools that are genuinely useful in 2025. No bait-and-switch — real free tiers with meaningful limits for everyday use.",
+    "updatedAt": "2025-04-01",
+    "readTime": "4 min read",
+    "sections": [
+      {
+        "heading": "What 'Free' Actually Means",
+        "content": "Free AI tools come in three flavors:\n1. Genuinely free with useful limits (ChatGPT Free, Gemini Free, Groq)\n2. Free trial that expires (most paid tools' 'free' tiers)\n3. Free with aggressive data collection or ads\n\nThis guide covers only category 1 — tools with sustainable, ongoing free access."
+      },
+      {
+        "heading": "Best Free Tools by Category",
+        "content": "General Chat: ChatGPT Free (GPT-4o with limits), Gemini Free (Flash model), Claude.ai Free (limited Sonnet access)\n\nCoding: Cursor Free (2000 completions), GitHub Copilot Free (2000 completions), Codeium (unlimited on smaller models)\n\nResearch: Perplexity Free (limited searches), Consensus (academic papers), Elicit (research papers)\n\nAPI Access: Groq (Llama 3.1 70B free tier), Google AI Studio (Gemini free tier), Mistral (limited free tier)"
+      },
+      {
+        "heading": "The Catch With Free Tiers",
+        "content": "Free tiers have trade-offs:\n- Rate limits: requests per minute/hour/day\n- Model quality: often a smaller or older model\n- Data usage: some providers use free-tier data for training\n- No SLA: free users deprioritized during peak load\n\nFor personal use, these trade-offs are usually acceptable. For professional or production use, read the terms carefully — especially around data usage policies."
+      }
+    ],
+    "keyTakeaways": [
+      "ChatGPT Free and Gemini Free are genuinely capable for light daily use",
+      "Cursor Free and Copilot Free give developers meaningful coding assistance at zero cost",
+      "Groq's free API tier is the best starting point for developers building AI features",
+      "Always check data usage policies before using free tiers for sensitive prompts",
+      "Most users don't need to pay for AI — start free, upgrade only when you consistently hit limits"
+    ],
+    "internalLinks": [
+      { "text": "Best Free AI Tools for Builders", "href": "/best/best-free-ai-tools-for-builders" },
+      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
+      { "text": "Decision Engine", "href": "/decision-engine" }
+    ]
+  },
+  {
+    "slug": "claude-vs-chatgpt-for-business",
+    "title": "Claude vs ChatGPT for Business: A Practical Comparison",
+    "description": "Which AI assistant is better for business teams — Claude or ChatGPT? A no-BS comparison for 2025.",
+    "metaDescription": "Claude vs ChatGPT for business use in 2025. Which AI assistant is better for teams, writing, research, and productivity? Honest comparison.",
+    "updatedAt": "2025-04-01",
+    "readTime": "6 min read",
+    "sections": [
+      {
+        "heading": "The Bottom Line",
+        "content": "Claude and ChatGPT are the two dominant AI assistants for business users. Both cost $20/month for individual subscriptions. Both are capable of most business tasks.\n\nThe differences matter for specific workflows — here's an honest breakdown."
+      },
+      {
+        "heading": "Where Claude Wins",
+        "content": "- Writing quality: Claude produces more natural, less formulaic prose\n- Long document processing: Claude handles long contexts more reliably\n- Instruction following: Claude is more literal and precise with complex instructions\n- Coding quality: Claude 3.5 Sonnet leads on most coding benchmarks\n- Safety/compliance: More conservative outputs, fewer jailbreaks — useful for regulated industries"
+      },
+      {
+        "heading": "Where ChatGPT Wins",
+        "content": "- Tool ecosystem: DALL-E image generation, code execution, plugins, GPT Store\n- Real-time browsing: More reliable and cited web access\n- Multimodal: Better at image analysis and understanding\n- Familiarity: Most teams already use it — less retraining needed\n- OpenAI ecosystem: Tight integration with API, Assistants, fine-tuning"
+      },
+      {
+        "heading": "For Teams",
+        "content": "Business plans: ChatGPT Team ($25-30/user), Claude Team ($25-30/user), similar pricing.\n\nDifference: ChatGPT Team has no training on your data by default; Claude Team has similar data protection. Both appropriate for most business data.\n\nRecommendation: Try both for 30 days. Let your team vote after real usage — preference varies significantly by role and task type."
+      },
+      {
+        "heading": "Enterprise Considerations",
+        "content": "For enterprise:\n- Data residency requirements → check regional availability\n- Compliance (HIPAA, SOC2) → both offer enterprise compliance, evaluate specifics\n- API reliability and SLA → OpenAI's uptime track record is longer\n- Fine-tuning → OpenAI has more mature fine-tuning offering\n\nFor most businesses, either works. The decision often comes down to existing tool integration and team preference."
+      }
+    ],
+    "keyTakeaways": [
+      "Claude edges ahead on writing quality, instruction following, and coding",
+      "ChatGPT wins on tool ecosystem, multimodal, and familiarity",
+      "Both cost ~$20/month individual, $25-30/user for teams",
+      "Run a real 30-day trial with your team before committing — preferences vary by role",
+      "For the API, use both via an abstraction layer and route by task type"
+    ],
+    "internalLinks": [
+      { "text": "Claude vs ChatGPT Cost Comparison", "href": "/compare/claude-vs-gpt-cost" },
+      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
+      { "text": "Decision Engine", "href": "/decision-engine" }
+    ]
+  }
+]
