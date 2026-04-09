@@ -12,7 +12,9 @@
     "qualityScore": 95,
     "costScore": 40,
     "latencyScore": 80,
-    "notes": "OpenAI's flagship multimodal model. Excellent across all tasks but expensive at scale."
+    "notes": "OpenAI's flagship multimodal model. Excellent across all tasks but expensive at scale.",
+    "last_updated": "2025-04-01",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "gpt-4o-mini",
@@ -27,7 +29,9 @@
     "qualityScore": 75,
     "costScore": 92,
     "latencyScore": 90,
-    "notes": "Dramatically cheaper than GPT-4o. Great for high-volume, lower-stakes tasks."
+    "notes": "Dramatically cheaper than GPT-4o. Great for high-volume, lower-stakes tasks.",
+    "last_updated": "2025-04-01",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "chatgpt-plus",
@@ -42,7 +46,9 @@
     "qualityScore": 92,
     "costScore": 55,
     "latencyScore": 75,
-    "notes": "Flat $20/month for access to GPT-4o. Good value for moderate usage; bad value for heavy API usage."
+    "notes": "Flat $20/month for access to GPT-4o. Good value for moderate usage; bad value for heavy API usage.",
+    "last_updated": "2025-04-01",
+    "source": "https://openai.com/chatgpt/pricing/"
   },
   {
     "id": "chatgpt-free",
@@ -57,7 +63,9 @@
     "qualityScore": 70,
     "costScore": 100,
     "latencyScore": 65,
-    "notes": "Limited access to GPT-4o with rate limits. Fine for light, occasional use."
+    "notes": "Limited access to GPT-4o with rate limits. Fine for light, occasional use.",
+    "last_updated": "2025-04-01",
+    "source": "https://openai.com/chatgpt/pricing/"
   },
   {
     "id": "claude-3-5-sonnet",
@@ -72,7 +80,9 @@
     "qualityScore": 96,
     "costScore": 42,
     "latencyScore": 78,
-    "notes": "Top-tier for coding and complex reasoning. Input is cheaper than GPT-4o but output parity."
+    "notes": "Top-tier for coding and complex reasoning. Input is cheaper than GPT-4o but output parity.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "claude-3-5-haiku",
@@ -87,7 +97,9 @@
     "qualityScore": 78,
     "costScore": 85,
     "latencyScore": 92,
-    "notes": "Anthropic's fast, affordable model. Strong coding ability relative to cost."
+    "notes": "Anthropic's fast, affordable model. Strong coding ability relative to cost.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "claude-pro",
@@ -102,7 +114,9 @@
     "qualityScore": 94,
     "costScore": 55,
     "latencyScore": 74,
-    "notes": "Access to Claude 3.5 Sonnet + Opus. Good deal if you use it heavily for writing and research."
+    "notes": "Access to Claude 3.5 Sonnet + Opus. Good deal if you use it heavily for writing and research.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "gemini-1-5-pro",
@@ -117,7 +131,9 @@
     "qualityScore": 88,
     "costScore": 65,
     "latencyScore": 70,
-    "notes": "2M context window is unique. Best for long-document analysis and research tasks."
+    "notes": "2M context window is unique. Best for long-document analysis and research tasks.",
+    "last_updated": "2025-04-01",
+    "source": "https://ai.google.dev/pricing"
   },
   {
     "id": "gemini-1-5-flash",
@@ -132,7 +148,9 @@
     "qualityScore": 72,
     "costScore": 97,
     "latencyScore": 95,
-    "notes": "One of the cheapest models available. Excellent for high-volume automation pipelines."
+    "notes": "One of the cheapest models available. Excellent for high-volume automation pipelines.",
+    "last_updated": "2025-04-01",
+    "source": "https://ai.google.dev/pricing"
   },
   {
     "id": "gemini-advanced",
@@ -147,7 +165,9 @@
     "qualityScore": 86,
     "costScore": 55,
     "latencyScore": 72,
-    "notes": "Gemini Advanced via Google One. Includes 2TB storage — value depends on whether you use Google ecosystem."
+    "notes": "Gemini Advanced via Google One. Includes 2TB storage — value depends on whether you use Google ecosystem.",
+    "last_updated": "2025-04-01",
+    "source": "https://one.google.com/about/plans"
   },
   {
     "id": "gemini-free",
@@ -162,7 +182,9 @@
     "qualityScore": 68,
     "costScore": 100,
     "latencyScore": 70,
-    "notes": "Free access to Gemini 1.5 Flash with rate limits. Good fallback option."
+    "notes": "Free access to Gemini 1.5 Flash with rate limits. Good fallback option.",
+    "last_updated": "2025-04-01",
+    "source": "https://gemini.google.com/"
   },
   {
     "id": "cursor-pro",
@@ -177,7 +199,9 @@
     "qualityScore": 93,
     "costScore": 60,
     "latencyScore": 85,
-    "notes": "Best-in-class coding IDE with AI embedded. Worth every dollar for professional developers."
+    "notes": "Best-in-class coding IDE with AI embedded. Worth every dollar for professional developers.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.cursor.com/pricing"
   },
   {
     "id": "cursor-free",
@@ -192,7 +216,9 @@
     "qualityScore": 80,
     "costScore": 90,
     "latencyScore": 82,
-    "notes": "Free tier with limited premium model uses per month. Good starting point."
+    "notes": "Free tier with limited premium model uses per month. Good starting point.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.cursor.com/pricing"
   },
   {
     "id": "mistral-large",
@@ -207,7 +233,9 @@
     "qualityScore": 85,
     "costScore": 70,
     "latencyScore": 80,
-    "notes": "Strong European alternative to GPT-4o at lower cost. GDPR-friendly."
+    "notes": "Strong European alternative to GPT-4o at lower cost. GDPR-friendly.",
+    "last_updated": "2025-04-01",
+    "source": "https://mistral.ai/pricing/"
   },
   {
     "id": "mistral-small",
@@ -222,7 +250,9 @@
     "qualityScore": 70,
     "costScore": 90,
     "latencyScore": 88,
-    "notes": "Very affordable with solid quality. Underrated for automation tasks."
+    "notes": "Very affordable with solid quality. Underrated for automation tasks.",
+    "last_updated": "2025-04-01",
+    "source": "https://mistral.ai/pricing/"
   },
   {
     "id": "llama-3-1-70b",
@@ -237,7 +267,9 @@
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 75,
-    "notes": "Open-source powerhouse via Groq/Together/etc. Near-frontier quality at a fraction of the cost."
+    "notes": "Open-source powerhouse via Groq/Together/etc. Near-frontier quality at a fraction of the cost.",
+    "last_updated": "2025-04-01",
+    "source": "https://groq.com/pricing/"
   },
   {
     "id": "deepseek-v3",
@@ -252,7 +284,9 @@
     "qualityScore": 90,
     "costScore": 95,
     "latencyScore": 72,
-    "notes": "Exceptional quality-to-cost ratio. Frontier-level coding at 20x cheaper than GPT-4o."
+    "notes": "Exceptional quality-to-cost ratio. Frontier-level coding at 20x cheaper than GPT-4o.",
+    "last_updated": "2025-04-01",
+    "source": "https://api-docs.deepseek.com/quick_start/pricing"
   },
   {
     "id": "perplexity-pro",
@@ -267,7 +301,9 @@
     "qualityScore": 85,
     "costScore": 58,
     "latencyScore": 82,
-    "notes": "Best for real-time web research with citations. Not a general-purpose assistant."
+    "notes": "Best for real-time web research with citations. Not a general-purpose assistant.",
+    "last_updated": "2025-04-01",
+    "source": "https://www.perplexity.ai/pro"
   },
   {
     "id": "groq-llama",
@@ -282,7 +318,9 @@
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 99,
-    "notes": "World's fastest inference. Free tier available. Perfect for latency-sensitive apps."
+    "notes": "World's fastest inference. Free tier available. Perfect for latency-sensitive apps.",
+    "last_updated": "2025-04-01",
+    "source": "https://groq.com/pricing/"
   },
   {
     "id": "copilot-free",
@@ -297,6 +335,8 @@
     "qualityScore": 75,
     "costScore": 100,
     "latencyScore": 85,
-    "notes": "2000 completions/month and 50 chat messages free. Decent starting point for VS Code users."
+    "notes": "2000 completions/month and 50 chat messages free. Decent starting point for VS Code users.",
+    "last_updated": "2025-04-01",
+    "source": "https://github.com/features/copilot"
   }
 ]
