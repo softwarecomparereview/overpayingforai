@@ -1,0 +1,46 @@
+[
+  {
+    "id": "solo-founder",
+    "name": "Solo Founder",
+    "description": "Lean daily usage for shipping, support, and planning.",
+    "inputs": {
+      "modelId": "gpt-4o-mini",
+      "monthlyInputTokens": 250000,
+      "monthlyOutputTokens": 120000
+    },
+    "tags": ["lean", "startup"]
+  },
+  {
+    "id": "startup-support-bot",
+    "name": "Startup Support Bot",
+    "description": "High-volume support and FAQ automation.",
+    "inputs": {
+      "modelId": "gemini-1-5-flash",
+      "monthlyInputTokens": 1500000,
+      "monthlyOutputTokens": 600000
+    },
+    "tags": ["automation", "support"]
+  },
+  {
+    "id": "developer-coding-workflow",
+    "name": "Developer Coding Workflow",
+    "description": "Coding, refactoring, and debugging with balanced quality.",
+    "inputs": {
+      "modelId": "claude-3-5-sonnet",
+      "monthlyInputTokens": 800000,
+      "monthlyOutputTokens": 300000
+    },
+    "tags": ["coding", "daily"]
+  },
+  {
+    "id": "content-team",
+    "name": "Content Team",
+    "description": "Writing-heavy workflow for briefs, drafts, and edits.",
+    "inputs": {
+      "modelId": "chatgpt-plus",
+      "monthlyInputTokens": 1000000,
+      "monthlyOutputTokens": 500000
+    },
+    "tags": ["writing", "team"]
+  }
+]

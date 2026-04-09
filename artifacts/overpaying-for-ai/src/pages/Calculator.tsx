@@ -3,12 +3,17 @@ import { Link, useLocation } from "wouter";
 import {
   runCalculator,
   getAllModels,
+  getModelById,
   formatCost,
   formatTokenCount,
 } from "@/engine/calculator";
 import type { CalculatorResult } from "@/engine/types";
+import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
+import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
+import scenarios from "@/data/scenarios.json";
 
 const models = getAllModels();
+const SCENARIOS = scenarios as ScenarioPreset[];
 
 const PRESET_USAGES = [
   { label: "Light (chat, occasional)", inputTokens: 100_000, outputTokens: 50_000 },
@@ -23,7 +28,7 @@ function buildShareUrl(modelId: string, input: number, output: number): string {
 }
 
 export function Calculator() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const params = typeof window !== "undefined"
     ? new URLSearchParams(window.location.search)
@@ -50,11 +55,26 @@ export function Calculator() {
     setResult(null);
   };
 
+  const applyScenario = (scenario: ScenarioPreset) => {
+    setModelId(scenario.inputs.modelId);
+    setInputTokens(scenario.inputs.monthlyInputTokens);
+    setOutputTokens(scenario.inputs.monthlyOutputTokens);
+    setResult(null);
+    if (typeof window !== "undefined") {
+      const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
+      analytics?.track?.("scenario_selected", { scenarioId: scenario.id, scenarioName: scenario.name });
+    }
+  };
+
   const copyShareLink = () => {
     navigator.clipboard.writeText(buildShareUrl(modelId, inputTokens, outputTokens));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const selectedModel = getModelById(modelId);
+  const dateStr = selectedModel?.last_updated;
+  const stale = dateStr ? isPricingStale(dateStr) : false;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -64,6 +84,8 @@ export function Calculator() {
       </div>
 
       <div className="border border-border rounded-xl bg-card p-6 mb-8">
+        <ScenarioSelector scenarios={SCENARIOS} onSelect={applyScenario} />
+
         {/* Presets */}
         <div className="mb-6">
           <label className="text-sm font-medium text-foreground block mb-2">Usage Preset</label>
@@ -112,6 +134,15 @@ export function Calculator() {
               ))}
             </optgroup>
           </select>
+          {dateStr && (
+            <div className={`mt-2 flex items-center gap-2 text-xs ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
+              <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
+              <span>{freshnessLabel(dateStr)}</span>
+              {stale && (
+                <span className="ml-1">· Pricing may have changed. <a href={selectedModel?.source ?? "#"} target="_blank" rel="noreferrer" className="underline hover:no-underline">Verify with provider.</a></span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5 mb-6">

@@ -1,0 +1,98 @@
+Enhance the EXISTING codebase by adding scenario presets to the current calculator flow.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the current calculator
+* Reuse existing state, hooks, utilities, and UI patterns
+* Keep everything static-first and client-side only
+* Do NOT introduce backend, auth, or database
+
+## Goal
+
+Add selectable scenario presets that prefill the existing calculator inputs and run through the current recommendation/cost logic.
+
+## Tasks
+
+### 1. Add scenario data
+
+Create a new data structure for presets, preferably under the existing data area.
+
+Suggested location:
+
+* `/src/data/scenarios/`
+
+Create initial presets:
+
+* Solo Founder
+* Startup Support Bot
+* Developer Coding Workflow
+* Content Team
+
+Each scenario should include:
+
+* `id`
+* `name`
+* `description`
+* `default inputs` matching the existing calculator input shape as closely as possible
+* optional `tags`
+
+Do not hardcode presets inside components if avoidable.
+
+### 2. Build scenario selector UI
+
+Add a reusable UI component for scenario cards or preset buttons.
+
+Requirements:
+
+* clear title
+* short descriptive copy
+* visually consistent with current design
+* easy to scan and click
+
+### 3. Integrate with the existing calculator
+
+When a user selects a scenario:
+
+* prefill the current calculator inputs
+* preserve existing calculation and recommendation flow
+* do NOT duplicate pricing or scoring logic
+* do NOT create a second calculation path
+
+If the current calculator uses hooks or a form state object, reuse those.
+
+### 4. Analytics hook
+
+If the analytics wrapper already exists, fire:
+
+* `scenario_selected`
+
+If analytics is not yet available, add a minimal safe placeholder call pattern without blocking the feature.
+
+### 5. UX details
+
+Add a short heading/subheading above the preset section, something like:
+
+* “Start with a common usage scenario”
+* “Pick a preset to prefill the calculator”
+
+Keep wording professional and concise.
+
+## Constraints
+
+* No broad refactor
+* No unrelated file cleanup
+* No changes to recommendation logic except wiring the preset inputs into the existing flow
+* Keep the implementation incremental and low risk
+
+## Validate
+
+After implementation:
+
+* verify each scenario prepopulates the calculator correctly
+* verify the calculator still works manually after selecting a preset
+* verify build passes
+
+## Deliverable
+
+A working enhancement where users can click a scenario preset and immediately use the existing calculator with those prefilled values.
