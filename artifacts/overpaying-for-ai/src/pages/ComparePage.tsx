@@ -24,6 +24,8 @@ export function ComparePage() {
   const modelA = models.find((m) => m.id === page.modelA);
   const modelB = models.find((m) => m.id === page.modelB);
   const cheapest = models.find((m) => m.id === page.cheapestOption);
+  const freshestDate = [modelA?.last_updated, modelB?.last_updated].filter(Boolean)[0];
+  const stale = freshestDate ? isPricingStale(freshestDate) : false;
 
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -57,17 +59,13 @@ export function ComparePage() {
         <div className="mt-4 p-4 bg-muted/30 rounded-lg border border-border text-sm text-muted-foreground">
           {page.pricingComparison}
         </div>
-        {/* Pricing freshness note */}
-        {[modelA, modelB].filter(Boolean).map((m) => m!.last_updated).filter(Boolean).slice(0, 1).map((dateStr) => {
-          const stale = isPricingStale(dateStr!);
-          return (
-            <p key={dateStr} className={`mt-3 text-xs flex items-center gap-1.5 ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
-              <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
-              Pricing data: {freshnessLabel(dateStr!)}
-              {stale && " · Verify current rates with each provider before making decisions."}
-            </p>
-          );
-        })}
+        {freshestDate && (
+          <p className={`mt-3 text-xs flex items-center gap-1.5 ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
+            <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
+            {freshnessLabel(freshestDate)}
+            {stale && " · Pricing may have changed. Verify with provider."}
+          </p>
+        )}
       </section>
 
       {/* Cheapest Option */}

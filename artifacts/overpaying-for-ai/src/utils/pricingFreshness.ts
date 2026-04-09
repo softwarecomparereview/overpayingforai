@@ -11,10 +11,10 @@ export function isPricingStale(dateStr: string, thresholdDays = 30): boolean {
 
 export function freshnessLabel(dateStr: string): string {
   const days = getDaysSinceUpdate(dateStr);
-  if (days === 0) return "Updated today";
-  if (days === 1) return "Updated yesterday";
-  if (days < 7) return `Updated ${days} days ago`;
-  if (days < 30) return `Updated ${Math.floor(days / 7)} week${Math.floor(days / 7) > 1 ? "s" : ""} ago`;
+  if (days === 0) return "Pricing data last reviewed today";
+  if (days === 1) return "Pricing data last reviewed yesterday";
+  if (days < 7) return `Pricing data last reviewed ${days} days ago`;
+  if (days < 30) return `Pricing data last reviewed ${Math.floor(days / 7)} week${Math.floor(days / 7) > 1 ? "s" : ""} ago`;
   const months = Math.floor(days / 30);
-  return `Updated ${months} month${months > 1 ? "s" : ""} ago`;
+  return `Pricing data last reviewed ${months} month${months > 1 ? "s" : ""} ago`;
 }

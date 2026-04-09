@@ -125,7 +125,7 @@ export function Calculator() {
                 <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
                 <span>{freshnessLabel(dateStr)}</span>
                 {stale && (
-                  <span className="ml-1">· Pricing may have changed — <a href={selectedModel?.source ?? "#"} target="_blank" rel="noreferrer" className="underline hover:no-underline">verify with provider</a></span>
+                  <span className="ml-1">· Pricing may have changed. <a href={selectedModel?.source ?? "#"} target="_blank" rel="noreferrer" className="underline hover:no-underline">Verify with provider.</a></span>
                 )}
               </div>
             );
