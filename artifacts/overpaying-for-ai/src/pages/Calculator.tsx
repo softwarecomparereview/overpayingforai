@@ -3,10 +3,12 @@ import { Link, useLocation } from "wouter";
 import {
   runCalculator,
   getAllModels,
+  getModelById,
   formatCost,
   formatTokenCount,
 } from "@/engine/calculator";
 import type { CalculatorResult } from "@/engine/types";
+import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 
 const models = getAllModels();
 
@@ -112,6 +114,22 @@ export function Calculator() {
               ))}
             </optgroup>
           </select>
+          {/* Pricing freshness */}
+          {(() => {
+            const selectedModel = getModelById(modelId);
+            const dateStr = selectedModel?.last_updated;
+            if (!dateStr) return null;
+            const stale = isPricingStale(dateStr);
+            return (
+              <div className={`mt-2 flex items-center gap-2 text-xs ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
+                <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
+                <span>{freshnessLabel(dateStr)}</span>
+                {stale && (
+                  <span className="ml-1">· Pricing may have changed — <a href={selectedModel?.source ?? "#"} target="_blank" rel="noreferrer" className="underline hover:no-underline">verify with provider</a></span>
+                )}
+              </div>
+            );
+          })()}
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5 mb-6">

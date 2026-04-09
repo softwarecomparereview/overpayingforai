@@ -2,6 +2,7 @@ import { useParams, Link } from "wouter";
 import comparisonsData from "@/data/comparisons.json";
 import modelsData from "@/data/models.json";
 import type { AIModel } from "@/engine/types";
+import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 
 const comparisons = comparisonsData as typeof comparisonsData;
 const models = modelsData as AIModel[];
@@ -56,6 +57,17 @@ export function ComparePage() {
         <div className="mt-4 p-4 bg-muted/30 rounded-lg border border-border text-sm text-muted-foreground">
           {page.pricingComparison}
         </div>
+        {/* Pricing freshness note */}
+        {[modelA, modelB].filter(Boolean).map((m) => m!.last_updated).filter(Boolean).slice(0, 1).map((dateStr) => {
+          const stale = isPricingStale(dateStr!);
+          return (
+            <p key={dateStr} className={`mt-3 text-xs flex items-center gap-1.5 ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
+              <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
+              Pricing data: {freshnessLabel(dateStr!)}
+              {stale && " · Verify current rates with each provider before making decisions."}
+            </p>
+          );
+        })}
       </section>
 
       {/* Cheapest Option */}

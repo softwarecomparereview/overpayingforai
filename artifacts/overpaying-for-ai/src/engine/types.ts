@@ -12,6 +12,8 @@ export interface AIModel {
   costScore: number;
   latencyScore: number;
   notes: string;
+  last_updated?: string;
+  source?: string;
 }
 
 export interface CalculatorInputs {
