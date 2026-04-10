@@ -1,0 +1,13 @@
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-report {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #111827 !important;
+    page-break-inside: avoid;
+  }
+}

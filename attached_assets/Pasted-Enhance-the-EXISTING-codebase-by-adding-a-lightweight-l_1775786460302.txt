@@ -1,0 +1,123 @@
+Enhance the EXISTING codebase by adding a lightweight lead-capture step to the savings-report workflow.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace existing calculator or report functionality
+* Reuse current components, state, hooks, and styling patterns
+* Keep everything static-first and client-side only
+* Do NOT introduce backend, database, or auth
+* Keep implementation minimal and low-risk
+
+## Goal
+
+Add a lead-capture UI that connects to the existing savings-report flow without forcing backend adoption yet.
+
+This should create a clean seam for future email/report delivery, while remaining lightweight for now.
+
+## Tasks
+
+### 1. Add a reusable lead capture component
+
+Create a component for collecting an email address.
+
+Suggested location:
+
+* `/src/components/LeadCapture/`
+
+If a better existing structure exists, use that instead.
+
+### 2. Integrate with the report workflow
+
+Place the lead capture in one of these low-friction positions, depending on the current UX:
+
+* below the generated report
+* in a side panel near the report CTA
+* in a modal triggered by “Email me this report”
+
+Choose the option that best fits the existing app.
+
+### 3. Fields and actions
+
+Minimum fields:
+
+* email address
+
+Optional:
+
+* consent checkbox only if the existing design already supports such patterns cleanly
+
+CTAs:
+
+* “Email me this report”
+* or “Get pricing updates”
+
+You may support both if it fits naturally.
+
+### 4. Validation and UX
+
+Requirements:
+
+* basic email format validation
+* clear success state
+* no blocking behavior that prevents users from viewing the report
+* keep it optional, not hard-gated
+
+### 5. Placeholder integration seam
+
+Because there is no backend yet:
+
+* create a clean placeholder handler such as:
+
+  * `handleLeadSubmit(email)`
+* structure it so it can later connect to an email provider or form endpoint
+* current implementation can:
+
+  * log to console
+  * or store in temporary in-memory/local state
+  * or show a simulated success state
+    but keep the code clean and upgradeable
+
+### 6. Analytics hook
+
+If the analytics wrapper exists, trigger:
+
+* `lead_capture_clicked`
+* `lead_capture_submitted`
+
+If analytics is not fully available, use a safe optional call pattern.
+
+### 7. Copy / messaging
+
+Use professional, low-hype copy.
+
+Examples:
+
+* “Email this report to yourself”
+* “Get notified when pricing changes”
+* “We’ll use this to send your report and occasional pricing updates”
+
+Do not overpromise anything that does not exist yet.
+
+### 8. Keep changes incremental
+
+Avoid:
+
+* broad refactors
+* introducing external services now
+* changing unrelated report logic
+* creating a full marketing system
+
+## Validation
+
+After implementation:
+
+* verify lead capture appears correctly in the report flow
+* verify invalid email is handled properly
+* verify success state works
+* verify existing report flow still works
+* verify build passes
+
+## Deliverable
+
+A working, optional lead-capture enhancement attached to the existing report workflow, with clean UI, validation, success state, and a future-ready integration seam.
