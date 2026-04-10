@@ -1,6 +1,8 @@
 import { Link } from "wouter";
+import { useState } from "react";
 import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
+import { LeadCapture } from "@/components/LeadCapture/LeadCapture";
 
 export function SavingsReport({
   result,
@@ -13,12 +15,22 @@ export function SavingsReport({
   outputTokens: number;
   onClose: () => void;
 }) {
+  const [leadEmail, setLeadEmail] = useState("");
   const freshnessDate = result.model.last_updated;
   const stale = freshnessDate ? isPricingStale(freshnessDate) : false;
   const cheapest = result.cheaperAlternatives[0];
   const savingsPercent = result.estimatedMonthlyCost > 0 && result.savingsEstimate !== null
     ? (result.savingsEstimate / result.estimatedMonthlyCost) * 100
     : 0;
+
+  const handleLeadSubmit = (email: string) => {
+    setLeadEmail(email);
+    if (typeof window !== "undefined") {
+      const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
+      analytics?.track?.("lead_capture_submitted", { email });
+    }
+    console.log("lead_capture_submitted", email);
+  };
 
   return (
     <section className="mt-8 border border-border rounded-2xl bg-card p-6 sm:p-8 print-report" data-testid="savings-report">
@@ -177,6 +189,26 @@ export function SavingsReport({
       <div className="mt-8 flex items-center gap-3 no-print">
         <button onClick={() => window.print()} className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">Print / Save PDF</button>
         <Link href="/calculator" className="text-sm text-primary hover:underline">Back to calculator</Link>
+      </div>
+
+      <div className="mt-6">
+        <div className="mb-3 flex items-center justify-between gap-3 no-print">
+          <p className="text-sm font-medium text-foreground">Want this report sent to you?</p>
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
+                analytics?.track?.("lead_capture_clicked", { context: "savings_report" });
+              }
+            }}
+            className="text-sm text-primary hover:underline"
+          >
+            Get pricing updates
+          </button>
+        </div>
+        <LeadCapture onSubmit={handleLeadSubmit} />
+        {leadEmail && <p className="mt-3 text-xs text-muted-foreground no-print">Report queued for {leadEmail}.</p>}
       </div>
     </section>
   );
