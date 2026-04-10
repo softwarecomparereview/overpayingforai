@@ -32,9 +32,24 @@ const router: IRouter = Router();
 
 // ── Artificial Analysis API config ──────────────────────────────────────────
 
-const AA_API_BASE = "https://artificialanalysis.ai/api";
-const AA_MODELS_ENDPOINT = `${AA_API_BASE}/v1/models`;
-const AA_SOURCE_URL = "https://artificialanalysis.ai/leaderboards/llm";
+const AA_SOURCE_URL = "https://artificialanalysis.ai/models";
+
+/**
+ * Candidate endpoints to try in order.
+ * Artificial Analysis does not publish a stable public REST API URL as of 2026-04.
+ * Their API key feature appears to be for a private enterprise data product.
+ * We try several plausible patterns; if all return 404/401 the route returns a
+ * helpful error with manual instructions.
+ */
+const AA_ENDPOINT_CANDIDATES = [
+  "https://artificialanalysis.ai/api/v1/models",
+  "https://artificialanalysis.ai/api/v2/models",
+  "https://artificialanalysis.ai/api/models",
+  "https://api.artificialanalysis.ai/v1/models",
+  "https://api.artificialanalysis.ai/models",
+  "https://artificialanalysis.ai/api/v1/llm",
+  "https://artificialanalysis.ai/api/llm",
+];
 
 // ── Model ID mapping: AA model names → our models.json IDs ──────────────────
 // Keep in sync with src/data/models.json in the frontend.
@@ -344,25 +359,36 @@ router.get("/admin/artificial-analysis-pricing", async (_req, res) => {
     return;
   }
 
-  // 2. Attempt fetch
-  let rawData: unknown;
-  try {
-    const response = await fetch(AA_MODELS_ENDPOINT, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        Accept: "application/json",
-        "User-Agent": "OverpayingForAI-Admin/1.0",
-      },
-      signal: AbortSignal.timeout(15000), // 15s timeout
-    });
+  // 2. Try each known endpoint candidate in order until one succeeds
+  let rawData: unknown = null;
+  let successEndpoint: string | null = null;
+  const attemptLog: string[] = [];
+
+  for (const endpoint of AA_ENDPOINT_CANDIDATES) {
+    let response: Response;
+    try {
+      response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: "application/json",
+          "User-Agent": "OverpayingForAI-Admin/1.0",
+        },
+        signal: AbortSignal.timeout(8000),
+      });
+    } catch (err: unknown) {
+      attemptLog.push(`${endpoint} → fetch error: ${err instanceof Error ? err.message : String(err)}`);
+      continue;
+    }
 
     if (response.status === 401 || response.status === 403) {
+      // Key is wrong/expired — no point trying other endpoints
       res.status(401).json({
         error: "invalid_api_key",
         message:
-          `Artificial Analysis API returned ${response.status}. ` +
+          `Artificial Analysis returned HTTP ${response.status} (unauthorized). ` +
           "Check that your ARTIFICIAL_ANALYSIS_API_KEY is correct and has not expired.",
+        triedEndpoint: endpoint,
       });
       return;
     }
@@ -378,23 +404,41 @@ router.get("/admin/artificial-analysis-pricing", async (_req, res) => {
     }
 
     if (!response.ok) {
-      res.status(502).json({
-        error: "upstream_error",
-        message: `Artificial Analysis API returned HTTP ${response.status}: ${response.statusText}`,
-        statusCode: response.status,
-      });
-      return;
+      attemptLog.push(`${endpoint} → HTTP ${response.status}`);
+      continue;
     }
 
-    rawData = await response.json();
-  } catch (err: unknown) {
-    const isTimeout =
-      err instanceof Error && (err.name === "TimeoutError" || err.name === "AbortError");
+    // Check content-type — if it's HTML we got a Next.js 404 page not JSON
+    const ct = response.headers.get("content-type") ?? "";
+    if (ct.includes("text/html")) {
+      attemptLog.push(`${endpoint} → HTML response (not a REST endpoint)`);
+      continue;
+    }
+
+    try {
+      rawData = await response.json();
+      successEndpoint = endpoint;
+      break;
+    } catch {
+      attemptLog.push(`${endpoint} → JSON parse failed`);
+      continue;
+    }
+  }
+
+  // None of the endpoints worked — AA does not expose a public REST API
+  if (rawData === null || successEndpoint === null) {
     res.status(502).json({
-      error: isTimeout ? "timeout" : "fetch_failed",
-      message: isTimeout
-        ? "Request to Artificial Analysis timed out after 15 seconds."
-        : `Failed to fetch from Artificial Analysis: ${err instanceof Error ? err.message : String(err)}`,
+      error: "no_api_endpoint",
+      message:
+        "Artificial Analysis does not currently expose a public REST API. " +
+        "Their data is rendered server-side and is not available via a standard HTTP endpoint. " +
+        "To get pricing data from Artificial Analysis, visit https://artificialanalysis.ai/models " +
+        "manually and paste the data into the manual paste box below.",
+      triedEndpoints: AA_ENDPOINT_CANDIDATES,
+      attemptLog,
+      hint:
+        "If Artificial Analysis activates their data API, update AA_ENDPOINT_CANDIDATES " +
+        "in artifacts/api-server/src/routes/artificialAnalysis.ts with the correct URL.",
     });
     return;
   }

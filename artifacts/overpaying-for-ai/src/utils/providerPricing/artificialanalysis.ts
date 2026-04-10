@@ -122,14 +122,19 @@ export async function fetchArtificialAnalysisCandidates(): Promise<ProviderFetch
     let msg = errBody.message ?? `API server error HTTP ${response.status}.`;
 
     if (response.status === 401) {
-      // Missing or invalid API key
       msg = errBody.message ?? "API key missing or invalid. See the admin setup guide.";
     } else if (response.status === 429) {
       msg = `Rate limited. ${errBody.message ?? ""}${errBody.retryAfter ? ` Retry in ${errBody.retryAfter}s.` : ""}`;
     } else if (response.status === 422) {
       msg = `Schema mismatch — the Artificial Analysis API response format may have changed. ${errBody.message ?? ""}`;
     } else if (response.status === 502) {
-      msg = `Upstream fetch failed: ${errBody.message ?? ""}`;
+      if (errBody.error === "no_api_endpoint") {
+        msg =
+          "Artificial Analysis does not currently expose a public REST API — their data is only available via their website. " +
+          "Visit artificialanalysis.ai/models, copy the pricing table data, and paste it into the manual text box below.";
+      } else {
+        msg = `Upstream fetch failed: ${errBody.message ?? ""}`;
+      }
     }
 
     return {
