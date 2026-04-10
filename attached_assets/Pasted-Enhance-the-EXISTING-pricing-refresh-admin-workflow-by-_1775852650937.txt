@@ -1,0 +1,108 @@
+Enhance the EXISTING pricing refresh admin workflow by adding Artificial Analysis as a programmatic candidate pricing source.
+
+Important:
+
+* Preserve the static-first public architecture
+* Keep this admin-only
+* Do NOT expose any API key in the client bundle
+* Do NOT auto-publish fetched pricing
+* Reuse the current pricing refresh page, diff logic, pricing schema, freshness messaging, and changelog workflow
+* Keep implementation incremental and safe
+
+## Goal
+
+Use the Artificial Analysis LLM models API endpoint as a candidate pricing feed for the admin pricing refresh workflow.
+
+Flow:
+Fetch from Artificial Analysis → normalize → diff against current pricing → review → approve → update dataset, freshness metadata, and changelog
+
+## Tasks
+
+### 1. Add Artificial Analysis fetch source
+
+Add support for the Artificial Analysis LLM models endpoint.
+
+The endpoint returns:
+
+* model identifiers
+* creator metadata
+* pricing
+* speed / latency
+* evaluation metadata
+
+Only use the fields relevant to this site for now.
+
+### 2. Keep API key secure
+
+Do NOT hardcode the Artificial Analysis API key.
+Use an environment variable / secret.
+Do NOT expose it in client-side code.
+
+If a serverless/admin-only fetch layer is needed, implement the lightest safe option compatible with the current stack.
+
+### 3. Normalize into existing candidate schema
+
+Map the Artificial Analysis response into the current pricing candidate structure already used by the admin diff review flow.
+
+Only normalize providers/models currently supported by the site.
+
+### 4. Add admin action
+
+On the existing pricing refresh admin page, add:
+
+* Fetch from Artificial Analysis
+
+This should:
+
+* fetch the API data securely
+* extract relevant models/providers
+* create candidate pricing records
+* load them into the current diff review flow
+
+### 5. Preserve approval workflow
+
+Critical:
+
+* fetched data must NOT overwrite live pricing automatically
+* admin must still approve changes before updating/exporting
+
+### 6. Update metadata on approval
+
+When approved:
+
+* update pricing freshness metadata
+* update public freshness messaging
+* append changelog entry
+
+### 7. Optional future-ready mapping
+
+If practical, preserve additional normalized fields for later use such as:
+
+* speed
+* latency
+* evaluation summary
+  But do not make these required for the current pricing refresh to work.
+
+### 8. Error handling
+
+Handle clearly:
+
+* missing/invalid API key
+* rate limits
+* fetch failure
+* schema mismatch
+* partial model coverage
+
+### 9. Validation
+
+After implementation:
+
+* verify Artificial Analysis fetch works
+* verify normalized candidates diff correctly
+* verify approved changes update dataset/metadata/changelog
+* verify public calculator logic is unaffected
+* verify build passes
+
+## Deliverable
+
+A working admin-side Artificial Analysis pricing ingestion path that securely fetches candidate pricing data, plugs into the current review-before-publish workflow, and updates pricing freshness + changelog on approval.
