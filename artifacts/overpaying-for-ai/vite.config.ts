@@ -53,6 +53,16 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    proxy: {
+      // Routes /admin-api/* → API server at localhost:8080 server-side.
+      // This means the browser never needs to reach localhost:8080 directly —
+      // the Vite dev server proxies the request, which works through Replit's proxy.
+      "/admin-api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/admin-api/, ""),
+      },
+    },
   },
   preview: {
     port,

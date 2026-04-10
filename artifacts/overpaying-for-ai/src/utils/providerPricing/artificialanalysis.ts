@@ -23,19 +23,15 @@ import type { ProviderFetchResult } from "./types";
 // ── Configuration ─────────────────────────────────────────────────────────────
 
 /**
- * Base URL for the API server proxy.
- * In the Replit dev environment, the API server runs on port 8080.
- * Override via VITE_API_SERVER_ORIGIN environment variable.
+ * Calls the Vite dev-server proxy at /admin-api, which forwards to the API
+ * server at localhost:8080 server-side. This avoids CORS issues and means the
+ * browser never has to reach localhost:8080 directly (which would fail in the
+ * Replit preview environment).
  *
- * Note: this is the base URL only — not a secret. The actual API key
- * is held server-side and is never included in this bundle.
+ * Proxy config: vite.config.ts → server.proxy["/admin-api"]
  */
-const API_SERVER_ORIGIN =
-  (import.meta.env.VITE_API_SERVER_ORIGIN as string | undefined) ??
-  "http://localhost:8080";
-
-const PROXY_ENDPOINT = `${API_SERVER_ORIGIN}/api/admin/artificial-analysis-pricing`;
-const AA_SOURCE_URL = "https://artificialanalysis.ai/leaderboards/llm";
+const PROXY_ENDPOINT = "/admin-api/api/admin/artificial-analysis-pricing";
+const AA_SOURCE_URL = "https://artificialanalysis.ai/models";
 
 // ── Fetch ──────────────────────────────────────────────────────────────────────
 
@@ -83,7 +79,7 @@ export async function fetchArtificialAnalysisCandidates(): Promise<ProviderFetch
       msg = "Request to the API server timed out after 20 seconds.";
     } else if (isConnRefused) {
       msg =
-        "Could not connect to the API server (localhost:8080). " +
+        "Could not connect to the API server. " +
         "Make sure the 'API Server' workflow is running in Replit.";
     } else if (err instanceof Error) {
       msg = `API server fetch error: ${err.message}`;
