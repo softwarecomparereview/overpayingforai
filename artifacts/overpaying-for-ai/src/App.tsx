@@ -11,6 +11,8 @@ import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
 import { Design1 } from "@/pages/Design1";
 import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
+import { ResourcesHub } from "@/pages/ResourcesHub";
+import { ChangelogPage } from "@/pages/ChangelogPage";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ function Router() {
               <Route path="/design1" component={Design1} />
               <Route path="/design2" component={Design2} />
               <Route path="/design3" component={Design3} />
+              <Route path="/resources" component={ResourcesHub} />
+              <Route path="/changelog" component={ChangelogPage} />
               <Route path="/calculator" component={Calculator} />
               <Route path="/decision-engine" component={DecisionEngine} />
               <Route path="/compare" component={CompareIndex} />
