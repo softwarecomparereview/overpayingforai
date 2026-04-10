@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
+import heroPreview from "@assets/image_1775834703776.png";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
@@ -149,47 +150,59 @@ export function Home() {
             </span>
           </div>
 
-          <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-6">
-              Stop overpaying<br />for AI.
-            </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
-              A decision engine for developers and teams who want the cheapest viable AI stack — not a roundup of the flashiest models.
-            </p>
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
+            <div className="max-w-3xl">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-6">
+                Stop overpaying<br />for AI.
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+                A decision engine for developers and teams who want the cheapest viable AI stack — not a roundup of the flashiest models.
+              </p>
 
-            {/* CTA Cards */}
-            <div className="grid sm:grid-cols-3 gap-3">
-              <Link href="/calculator" data-testid="hero-cta-calculator">
-                <div className="group bg-primary text-primary-foreground rounded-xl p-5 h-full">
-                  <div className="text-2xl font-bold mb-1 font-mono">$</div>
-                  <p className="font-semibold text-sm mb-1">Calculate your AI cost</p>
-                  <p className="text-xs text-primary-foreground/70 leading-relaxed">Enter your token usage. See exact monthly cost and cheaper alternatives.</p>
+              {/* CTA Cards */}
+              <div className="grid sm:grid-cols-3 gap-3">
+                <Link href="/calculator" data-testid="hero-cta-calculator">
+                  <div className="group bg-primary text-primary-foreground rounded-xl p-5 h-full">
+                    <div className="text-2xl font-bold mb-1 font-mono">$</div>
+                    <p className="font-semibold text-sm mb-1">Calculate your AI cost</p>
+                    <p className="text-xs text-primary-foreground/70 leading-relaxed">Enter your token usage. See exact monthly cost and cheaper alternatives.</p>
+                  </div>
+                </Link>
+                <Link href="/decision-engine" data-testid="hero-cta-engine">
+                  <div className="group border border-border bg-card rounded-xl p-5 h-full">
+                    <div className="text-2xl font-bold mb-1 text-primary">→</div>
+                    <p className="font-semibold text-sm mb-1 text-foreground">Find the cheapest stack</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">5 questions. Get three ranked recommendations matched to your budget.</p>
+                  </div>
+                </Link>
+                <Link href="/compare/claude-vs-gpt-cost" data-testid="hero-cta-compare">
+                  <div className="group border border-border bg-card rounded-xl p-5 h-full">
+                    <div className="text-2xl font-bold mb-1 text-foreground">≈</div>
+                    <p className="font-semibold text-sm mb-1 text-foreground">Compare tools and plans</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">Side-by-side pricing for Claude, GPT-4o, Cursor, subscriptions vs API.</p>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
+                <div className="inline-flex items-center gap-2 text-muted-foreground bg-muted/60 px-3 py-2 rounded-full w-fit">
+                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                  Pricing freshness is visible throughout the site
                 </div>
-              </Link>
-              <Link href="/decision-engine" data-testid="hero-cta-engine">
-                <div className="group border border-border bg-card rounded-xl p-5 h-full">
-                  <div className="text-2xl font-bold mb-1 text-primary">→</div>
-                  <p className="font-semibold text-sm mb-1 text-foreground">Find the cheapest stack</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">5 questions. Get three ranked recommendations matched to your budget.</p>
-                </div>
-              </Link>
-              <Link href="/compare/claude-vs-gpt-cost" data-testid="hero-cta-compare">
-                <div className="group border border-border bg-card rounded-xl p-5 h-full">
-                  <div className="text-2xl font-bold mb-1 text-foreground">≈</div>
-                  <p className="font-semibold text-sm mb-1 text-foreground">Compare tools and plans</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">Side-by-side pricing for Claude, GPT-4o, Cursor, subscriptions vs API.</p>
-                </div>
-              </Link>
+                <a href="#what-youll-find" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                  See real savings examples ↓
+                </a>
+              </div>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
-              <div className="inline-flex items-center gap-2 text-muted-foreground bg-muted/60 px-3 py-2 rounded-full w-fit">
-                <span className="w-2 h-2 rounded-full bg-green-500" />
-                Pricing freshness is visible throughout the site
+            <div className="hidden lg:block">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
+                <img
+                  src={heroPreview}
+                  alt="Preview of the OverpayingForAI homepage"
+                  className="w-full h-auto object-cover"
+                />
               </div>
-              <a href="#what-youll-find" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                See real savings examples ↓
-              </a>
             </div>
           </div>
         </div>
