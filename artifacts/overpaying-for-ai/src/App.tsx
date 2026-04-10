@@ -23,7 +23,8 @@ function Router() {
         {() => (
           <Layout>
             <Switch>
-              <Route path="/" component={Home} />
+              <Route path="/" component={Design2} />
+              <Route path="/home-v1" component={Home} />
               <Route path="/design1" component={Design1} />
               <Route path="/design2" component={Design2} />
               <Route path="/design3" component={Design3} />
