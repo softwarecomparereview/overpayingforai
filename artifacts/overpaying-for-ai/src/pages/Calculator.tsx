@@ -11,6 +11,7 @@ import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
+import { SavingsReport } from "@/components/Report/SavingsReport";
 
 const models = getAllModels();
 const SCENARIOS = scenarios as ScenarioPreset[];
@@ -39,11 +40,13 @@ export function Calculator() {
   const [outputTokens, setOutputTokens] = useState(Number(params.get("o")) || 200_000);
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   const calculate = useCallback(() => {
     try {
       const r = runCalculator({ modelId, monthlyInputTokens: inputTokens, monthlyOutputTokens: outputTokens, mode: "api" });
       setResult(r);
+      setShowReport(false);
     } catch (e) {
       console.error(e);
     }
@@ -53,6 +56,7 @@ export function Calculator() {
     setInputTokens(preset.inputTokens);
     setOutputTokens(preset.outputTokens);
     setResult(null);
+    setShowReport(false);
   };
 
   const applyScenario = (scenario: ScenarioPreset) => {
@@ -60,6 +64,7 @@ export function Calculator() {
     setInputTokens(scenario.inputs.monthlyInputTokens);
     setOutputTokens(scenario.inputs.monthlyOutputTokens);
     setResult(null);
+    setShowReport(false);
     if (typeof window !== "undefined") {
       const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
       analytics?.track?.("scenario_selected", { scenarioId: scenario.id, scenarioName: scenario.name });
@@ -115,7 +120,7 @@ export function Calculator() {
           <select
             id="model-select"
             value={modelId}
-            onChange={(e) => { setModelId(e.target.value); setResult(null); }}
+            onChange={(e) => { setModelId(e.target.value); setResult(null); setShowReport(false); }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             data-testid="model-select"
           >
@@ -157,7 +162,7 @@ export function Calculator() {
               value={inputTokens}
               min={0}
               step={100000}
-              onChange={(e) => { setInputTokens(Number(e.target.value)); setResult(null); }}
+              onChange={(e) => { setInputTokens(Number(e.target.value)); setResult(null); setShowReport(false); }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="input-tokens"
             />
@@ -175,7 +180,7 @@ export function Calculator() {
               value={outputTokens}
               min={0}
               step={50000}
-              onChange={(e) => { setOutputTokens(Number(e.target.value)); setResult(null); }}
+              onChange={(e) => { setOutputTokens(Number(e.target.value)); setResult(null); setShowReport(false); }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="output-tokens"
             />
@@ -224,6 +229,23 @@ export function Calculator() {
             <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{result.recommendation}</p>
           </div>
 
+          <button
+            onClick={() => setShowReport(true)}
+            className="w-full border border-border rounded-lg py-3 font-semibold text-sm text-foreground hover:bg-muted transition-colors"
+            data-testid="generate-report-btn"
+          >
+            Generate Report
+          </button>
+
+          {showReport && (
+            <SavingsReport
+              result={result}
+              inputTokens={inputTokens}
+              outputTokens={outputTokens}
+              onClose={() => setShowReport(false)}
+            />
+          )}
+
           {/* Cheaper Alternatives */}
           {result.cheaperAlternatives.length > 0 && (
             <div>
@@ -251,7 +273,7 @@ export function Calculator() {
           )}
 
           {/* Share */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 no-print">
             <button
               onClick={copyShareLink}
               className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -270,7 +292,7 @@ export function Calculator() {
       )}
 
       {/* Info section */}
-      <div className="mt-10 border-t border-border pt-8">
+      <div className="mt-10 border-t border-border pt-8 no-print">
         <h2 className="font-semibold text-foreground mb-3">How are costs calculated?</h2>
         <p className="text-sm text-muted-foreground leading-relaxed mb-3">
           API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage.
