@@ -1,0 +1,261 @@
+Enhance the EXISTING codebase by adding two revenue-focused conversion features to the current calculator/report flow:
+
+1. an “You’re overpaying” result banner
+2. a 3-option affiliate recommendation block
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the existing calculator, report, affiliate, or analytics systems
+* Reuse current recommendation outputs, affiliate config data, analytics wrapper, and visual styling patterns
+* Keep everything static-first and client-side only
+* Do NOT introduce backend, auth, or database
+* Keep changes incremental and low-risk
+
+## Goal
+
+Increase affiliate click-through rate and conversion by making savings more obvious and by offering structured next-step choices.
+
+This feature is about monetization optimization, not architecture expansion.
+
+---
+
+## Current assumptions
+
+The existing codebase already has:
+
+* calculator results
+* cheaper alternatives
+* a savings estimate
+* affiliate CTA support
+* analytics tracking wrapper
+* report workflow
+
+Build on top of these, do NOT duplicate logic.
+
+---
+
+# Feature 1: “You’re overpaying” banner
+
+## Objective
+
+Turn the existing savings estimate into a strong, obvious conversion trigger.
+
+## Behavior
+
+When the current result shows meaningful possible savings, display a prominent banner near the top of the result section.
+
+## Show the banner only if:
+
+* `result.savingsEstimate` exists
+* and it is materially positive
+
+Use a simple threshold such as:
+
+* savingsEstimate >= 10
+  OR
+* savings percent >= 20
+
+Choose the cleanest threshold based on the available existing result fields.
+
+## Banner content
+
+Display copy like:
+
+* Headline: `You’re overpaying by $X/month`
+* Supporting text: `Switch to [best cheaper option] and save around Y%`
+* Primary CTA: `Switch & Save`
+* Secondary CTA: `See Full Report`
+
+If a clean savings percentage is not already available, compute the smallest safe derived value using existing result data only.
+
+## Data source
+
+Use:
+
+* existing `result.savingsEstimate`
+* existing `result.cheaperAlternatives`
+* existing selected/recommended model data
+
+Do NOT create a second recommendation engine.
+
+## Placement
+
+Place this banner high in the result area, above the cost summary or immediately after it, whichever fits the current UI best.
+
+## UX requirements
+
+* visually prominent but consistent with current design
+* use savings-oriented copy, not hype
+* clean CTA hierarchy
+* no flashing or aggressive banner styling
+
+## Analytics
+
+Track:
+
+* `overpaying_banner_shown`
+* `overpaying_cta_clicked`
+
+Payload should include, where available:
+
+* currentModelId
+* recommendedAlternativeId
+* savingsEstimate
+* savingsPercent
+* sourceSurface (`calculator`)
+
+---
+
+# Feature 2: 3-option affiliate recommendation block
+
+## Objective
+
+Replace or enhance the current single affiliate CTA with a structured set of actionable recommendation choices.
+
+## Options to show
+
+Present up to 3 recommendation choices:
+
+1. **Best overall**
+2. **Cheapest**
+3. **Best quality**
+
+If all three cannot be derived cleanly from the current data model, implement the best safe version using the affiliate/config and recommendation data already available.
+
+## Recommendation logic
+
+Use existing outputs and light mapping only.
+
+Suggested behavior:
+
+* **Best overall** = current recommended provider/tool
+* **Cheapest** = lowest-cost valid alternative from existing alternatives/config
+* **Best quality** = current selected premium / highest-capability mapped option, if available
+
+If the codebase does not have an explicit “quality” field, implement the cleanest practical fallback and label carefully.
+
+Examples:
+
+* if only two good options are safely derivable, show 2 cards instead of faking 3
+* do not invent unsupported claims
+
+## Each recommendation card should show
+
+* label (`Best overall`, `Cheapest`, `Best quality`)
+* provider/model name
+* estimated monthly cost where available
+* savings vs current selection where available
+* one CTA button
+
+CTA examples:
+
+* `Start with [provider]`
+* `Save $X/mo`
+* `Best for quality`
+
+## Placement
+
+Show this block:
+
+* in the calculator result area
+* and, if it fits naturally, near the recommendation area in the savings report
+
+If report integration becomes too invasive for this branch, prioritize the calculator result area first.
+
+## Data/config
+
+Reuse:
+
+* existing affiliate links config
+* existing result/recommendation data
+* existing model/provider metadata
+
+Do NOT hardcode all values directly inside JSX if avoidable.
+
+## Analytics
+
+Track:
+
+* `affiliate_impression`
+* existing `affiliate_clicked` should continue to fire
+* include additional payload where helpful:
+
+  * optionType (`best_overall`, `cheapest`, `best_quality`)
+  * sourceSurface (`calculator` or `report`)
+  * affiliateId
+  * provider
+  * currentModelId
+
+Avoid duplicate click firing.
+Avoid impression spam on rerenders.
+
+---
+
+# Implementation guidance
+
+## Keep logic incremental
+
+Do NOT:
+
+* redesign the calculator page completely
+* replace the result model
+* create a second savings engine
+* add new backend services
+* add external tracking SDKs beyond the existing wrapper
+
+## Suggested additions
+
+If useful, add small utilities such as:
+
+* `/src/utils/recommendationCards.ts`
+* `/src/components/Revenue/OverpayingBanner.tsx`
+* `/src/components/Revenue/AffiliateOptions.tsx`
+
+But adapt to the actual project structure.
+
+## Copy style
+
+Use clean, credible copy.
+
+Preferred tone:
+
+* direct
+* useful
+* savings-focused
+* not spammy
+
+Examples:
+
+* `You’re overpaying by $34/month`
+* `Save about 42% by switching`
+* `Best fit for your current usage`
+
+Avoid:
+
+* fake urgency
+* exaggerated claims
+* cluttered ad-style language
+
+---
+
+# Validation
+
+After implementation:
+
+1. verify the banner appears only when savings are meaningful
+2. verify CTA clicks still route correctly through existing affiliate links
+3. verify the 3-option block shows cleanly and does not duplicate obviously identical options
+4. verify analytics events fire once at the intended times
+5. verify calculator/report flows still work
+6. verify build passes
+
+---
+
+# Deliverable
+
+A revenue-focused enhancement to the existing app that:
+
+* highlights overpayment clearly
+* gives users 2–3 structured monetizable next-step choices
+* improves affiliate conversion without adding backend complexity

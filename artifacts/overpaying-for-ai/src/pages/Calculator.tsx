@@ -12,6 +12,7 @@ import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
 import { SavingsReport } from "@/components/Report/SavingsReport";
+import { track } from "@/utils/analytics";
 
 const models = getAllModels();
 const SCENARIOS = scenarios as ScenarioPreset[];
@@ -92,6 +93,11 @@ export function Calculator() {
   const selectedModel = getModelById(modelId);
   const dateStr = selectedModel?.last_updated;
   const stale = dateStr ? isPricingStale(dateStr) : false;
+  const bestCheaper = result?.cheaperAlternatives[0] ?? null;
+  const savingsPercent = result && result.savingsEstimate !== null && result.estimatedMonthlyCost > 0
+    ? (result.savingsEstimate / result.estimatedMonthlyCost) * 100
+    : null;
+  const showOverpayingBanner = !!result && result.savingsEstimate !== null && result.savingsEstimate >= 10 && (savingsPercent === null || savingsPercent >= 20);
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -271,6 +277,54 @@ export function Calculator() {
               </div>
             )}
 
+            {showOverpayingBanner && bestCheaper && (
+              <div className="mt-4 border border-primary/20 bg-primary/5 rounded-xl p-4 sm:p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      You’re overpaying by {formatCost(result.savingsEstimate ?? 0)}/month
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Switch to {bestCheaper.model.name} and save around {savingsPercent?.toFixed(0) ?? 0}%.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        track("overpaying_cta_clicked", {
+                          currentModelId: result.model.id,
+                          recommendedAlternativeId: bestCheaper.model.id,
+                          savingsEstimate: result.savingsEstimate,
+                          savingsPercent,
+                          sourceSurface: "calculator",
+                        });
+                        setModelId(bestCheaper.model.id);
+                        setResult(null);
+                      }}
+                      className="text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2 font-semibold hover:bg-primary/90 transition-colors"
+                    >
+                      Switch & Save
+                    </button>
+                    <button
+                      onClick={() => {
+                        track("overpaying_cta_clicked", {
+                          currentModelId: result.model.id,
+                          recommendedAlternativeId: bestCheaper.model.id,
+                          savingsEstimate: result.savingsEstimate,
+                          savingsPercent,
+                          sourceSurface: "calculator",
+                        });
+                        setShowReport(true);
+                      }}
+                      className="text-sm border border-border rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
+                    >
+                      See Full Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
               {result.recommendation}
             </p>
@@ -295,35 +349,61 @@ export function Calculator() {
 
           {result.cheaperAlternatives.length > 0 && (
             <div>
-              <h2 className="text-lg font-bold mb-4">Cheaper Alternatives</h2>
-              <div className="space-y-3">
-                {result.cheaperAlternatives.map((alt) => (
-                  <div
-                    key={alt.model.id}
-                    className="border border-border rounded-lg p-4 flex items-center justify-between gap-4"
-                    data-testid={`alt-${alt.model.id}`}
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <p className="font-semibold text-foreground text-sm">{alt.model.name}</p>
-                        <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-1.5 py-0.5 rounded font-medium">
-                          Save {alt.savingsPercent.toFixed(0)}%
+              <h2 className="text-lg font-bold mb-4">Recommendation options</h2>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[
+                  {
+                    optionType: "best_overall",
+                    label: "Best overall",
+                    alt: result.cheaperAlternatives[0] ?? null,
+                    tone: "border-primary/30 bg-primary/5",
+                    cta: "Start with this",
+                  },
+                  {
+                    optionType: "cheapest",
+                    label: "Cheapest",
+                    alt: result.cheaperAlternatives[result.cheaperAlternatives.length - 1] ?? null,
+                    tone: "border-border bg-card",
+                    cta: "Save most",
+                  },
+                  {
+                    optionType: "best_quality",
+                    label: "Best quality",
+                    alt: result.cheaperAlternatives[0] ?? null,
+                    tone: "border-border bg-card",
+                    cta: "Best for quality",
+                  },
+                ].filter((item, index, arr) => item.alt && arr.findIndex((x) => x.alt?.model.id === item.alt?.model.id) === index)
+                  .map((item) => (
+                    <div key={item.optionType} className={`border rounded-xl p-4 ${item.tone}`} data-testid={`affiliate-${item.optionType}`}>
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{item.label}</p>
+                        <span className="text-xs text-green-600 dark:text-green-400 font-medium">
+                          Save {item.alt!.savingsPercent.toFixed(0)}%
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        {alt.model.provider} · {alt.tradeOff}
-                      </p>
+                      <p className="font-semibold text-foreground">{item.alt!.model.name}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{item.alt!.model.provider}</p>
+                      <div className="mt-3 flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{formatCost(item.alt!.estimatedCost)}/mo</p>
+                          <p className="text-xs text-muted-foreground">−{formatCost(item.alt!.savings)}</p>
+                        </div>
+                        <button
+                          onClick={() => track("affiliate_clicked", {
+                            optionType: item.optionType,
+                            sourceSurface: "calculator",
+                            affiliateId: item.alt!.model.id,
+                            provider: item.alt!.model.provider,
+                            currentModelId: result.model.id,
+                          })}
+                          className="text-sm border border-border rounded-lg px-3 py-2 hover:bg-muted transition-colors"
+                        >
+                          {item.cta}
+                        </button>
+                      </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="font-bold text-foreground text-sm">
-                        {formatCost(alt.estimatedCost)}/mo
-                      </p>
-                      <p className="text-xs text-green-600 dark:text-green-400">
-                        −{formatCost(alt.savings)}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           )}
