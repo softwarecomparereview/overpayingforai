@@ -198,25 +198,6 @@ export function Home() {
         </div>
       </section>
 
-      <section id="scenarios" className="border-b border-border bg-muted/15 py-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid sm:grid-cols-3 gap-3">
-            <div className="border border-border rounded-xl bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">What you’ll find below</p>
-              <p className="text-sm text-foreground leading-relaxed">Real savings examples, comparison snapshots, and guides that explain when cheaper models are enough.</p>
-            </div>
-            <div className="border border-border rounded-xl bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Latest pricing comparisons</p>
-              <p className="text-sm text-foreground leading-relaxed">Side-by-side breakdowns for the models and subscriptions people actually use.</p>
-            </div>
-            <div className="border border-border rounded-xl bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Best AI by use case</p>
-              <p className="text-sm text-foreground leading-relaxed">Shortlists for coding, budget planning, and lighter daily workflows.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="border-b border-border bg-background/95 backdrop-blur">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
@@ -230,38 +211,18 @@ export function Home() {
         </div>
       </section>
 
-      <section className="border-b border-border py-8">
+      <section className="border-b border-border py-10 bg-muted/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <SectionCard
-              href="#savings"
-              title="Real savings examples"
-              description="See how much teams save by switching to cheaper models or better routing."
-              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "savings" })}
-            />
-            <SectionCard
-              href="#comparison"
-              title="Compare AI models"
-              description="Browse side-by-side comparisons for the tools and plans people actually use."
-              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "comparison" })}
-            />
-            <SectionCard
-              href="#pricing"
-              title="Pricing data"
-              description="Review the current pricing patterns and where the biggest overpayment happens."
-              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })}
-            />
-            <SectionCard
-              href="#pricing"
-              title="Best AI by use case"
-              description="Use the pricing patterns and comparison data to narrow to the best fit."
-              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })}
-            />
+            <SectionCard href="#savings" title="Real savings examples" description="See how much teams save by switching to cheaper models or better routing." onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "savings" })} />
+            <SectionCard href="#comparison" title="Compare AI models" description="Browse side-by-side comparisons for the tools and plans people actually use." onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "comparison" })} />
+            <SectionCard href="#pricing" title="Pricing data" description="Review the current pricing patterns and where the biggest overpayment happens." onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })} />
+            <SectionCard href="#pricing" title="Best AI by use case" description="Use the pricing patterns and comparison data to narrow to the best fit." onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })} />
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border py-10">
+      <section className="border-b border-border py-10 bg-blue-50/40">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">What this tool does</p>
@@ -273,6 +234,11 @@ export function Home() {
               <li className="flex gap-2"><span className="text-primary">•</span><span>Compare models side-by-side</span></li>
               <li className="flex gap-2"><span className="text-primary">•</span><span>Find cheaper alternatives</span></li>
             </ul>
+            <div className="mt-5">
+              <Link href="/calculator" className="text-sm text-primary font-medium hover:underline">
+                Calculate your cost →
+              </Link>
+            </div>
           </div>
           <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Why people overpay</p>
@@ -282,6 +248,11 @@ export function Home() {
               <li className="flex gap-2"><span className="text-primary">•</span><span>Not comparing alternatives</span></li>
               <li className="flex gap-2"><span className="text-primary">•</span><span>Lack of visibility into usage</span></li>
             </ul>
+            <div className="mt-5">
+              <Link href="/calculator" className="text-sm text-primary font-medium hover:underline">
+                Fix this now →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -332,6 +303,24 @@ export function Home() {
               </button>
             ))}
           </div>
+          <div className="mt-6 rounded-2xl border border-border bg-background p-4 sm:p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Most users switch to</p>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {[
+                { label: "Claude", benefit: "Cheapest for many coding and writing workflows", href: "/compare/claude-vs-gpt-cost" },
+                { label: "Gemini", benefit: "Balanced pricing and broad capability", href: "/compare/gemini-vs-gpt-cost" },
+                { label: "ChatGPT", benefit: "Default choice when you want the familiar stack", href: "/compare/chatgpt-vs-cursor-cost" },
+              ].map((option) => (
+                <div key={option.label} className="rounded-xl border border-border p-4">
+                  <p className="font-semibold text-foreground text-sm mb-1">{option.label}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">{option.benefit}</p>
+                  <Link href={option.href} className="text-sm text-primary font-medium hover:underline">
+                    Try this option →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="mt-4 flex justify-end">
             <Link href="/calculator" className="text-sm text-primary font-medium hover:underline">
               Calculate your savings →
@@ -341,7 +330,7 @@ export function Home() {
       </section>
 
       {/* ── THREE OVERPAYING PATTERNS ────────────────────────── */}
-      <section id="pricing" className="border-b border-border py-20">
+      <section id="pricing" className="border-b border-border py-20 bg-muted/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Where the waste happens</p>
@@ -399,7 +388,7 @@ export function Home() {
       </section>
 
       {/* ── POPULAR COMPARISONS ──────────────────────────────── */}
-      <section id="comparison" className="border-b border-border py-20">
+      <section id="comparison" className="border-b border-border py-20 bg-blue-50/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-10">
             <div>
@@ -429,6 +418,20 @@ export function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-6 rounded-2xl border border-border bg-background p-4">
+            <p className="text-sm text-muted-foreground mb-3">Try a recommendation:</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: "Claude", href: "/compare/claude-vs-gpt-cost" },
+                { label: "Gemini", href: "/compare/gemini-vs-gpt-cost" },
+                { label: "ChatGPT", href: "/compare/chatgpt-vs-cursor-cost" },
+              ].map((option) => (
+                <Link key={option.label} href={option.href} className="text-sm rounded-full border border-border px-3 py-2 hover:bg-muted/60 transition-colors">
+                  Try this option
+                </Link>
+              ))}
+            </div>
           </div>
           <div className="mt-6">
             <Link href="/decision-engine" className="text-sm text-primary font-medium hover:underline">
@@ -541,7 +544,7 @@ export function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section id="faq" className="py-20">
+      <section id="faq" className="py-20 bg-muted/10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="mb-10">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">FAQ</p>
