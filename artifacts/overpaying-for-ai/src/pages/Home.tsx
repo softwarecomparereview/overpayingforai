@@ -105,7 +105,7 @@ function NavPill({ href, label }: { href: string; label: string }) {
     <a
       href={href}
       onClick={() => track("section_nav_clicked", { section: href.replace("#", ""), sourceSurface: "home" })}
-      className="block rounded-full border border-border bg-background px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+      className="inline-flex items-center rounded-full border border-border bg-background px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
     >
       {label}
     </a>
@@ -115,29 +115,6 @@ function NavPill({ href, label }: { href: string; label: string }) {
 export function Home() {
   return (
     <div className="bg-background">
-      <aside className="hidden xl:flex fixed left-5 top-24 z-40">
-        <div className="w-52 rounded-2xl border border-border bg-background/95 backdrop-blur p-3 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2 px-1">Explore</p>
-          <div className="space-y-1">
-            <NavPill href="#calculator" label="Calculator" />
-            <NavPill href="#scenarios" label="Usage Scenarios" />
-            <NavPill href="#comparison" label="Compare Models" />
-            <NavPill href="#savings" label="Savings Examples" />
-            <NavPill href="#pricing" label="Pricing Data" />
-            <NavPill href="#faq" label="FAQs" />
-          </div>
-        </div>
-      </aside>
-      <div className="xl:hidden sticky top-14 z-40 border-b border-border bg-background/95 backdrop-blur">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto">
-          <NavPill href="#calculator" label="Calculator" />
-          <NavPill href="#scenarios" label="Scenarios" />
-          <NavPill href="#comparison" label="Compare" />
-          <NavPill href="#savings" label="Savings" />
-          <NavPill href="#faq" label="FAQs" />
-        </div>
-      </div>
-
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="border-b border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
@@ -210,6 +187,19 @@ export function Home() {
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Best AI by use case</p>
               <p className="text-sm text-foreground leading-relaxed">Shortlists for coding, budget planning, and lighter daily workflows.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-background/95 backdrop-blur">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+          <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
+            <NavPill href="#calculator" label="Calculator" />
+            <NavPill href="#scenarios" label="Usage Scenarios" />
+            <NavPill href="#comparison" label="Compare Models" />
+            <NavPill href="#savings" label="Savings Examples" />
+            <NavPill href="#pricing" label="Pricing Data" />
+            <NavPill href="#faq" label="FAQs" />
           </div>
         </div>
       </section>
