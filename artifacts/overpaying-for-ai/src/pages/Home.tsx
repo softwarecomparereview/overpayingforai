@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { track } from "@/utils/analytics";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
@@ -99,9 +100,43 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function NavPill({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      onClick={() => track("section_nav_clicked", { section: href.replace("#", ""), sourceSurface: "home" })}
+      className="block rounded-full border border-border bg-background px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+    >
+      {label}
+    </a>
+  );
+}
+
 export function Home() {
   return (
     <div className="bg-background">
+      <aside className="hidden xl:flex fixed left-5 top-24 z-40">
+        <div className="w-52 rounded-2xl border border-border bg-background/95 backdrop-blur p-3 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2 px-1">Explore</p>
+          <div className="space-y-1">
+            <NavPill href="#calculator" label="Calculator" />
+            <NavPill href="#scenarios" label="Usage Scenarios" />
+            <NavPill href="#comparison" label="Compare Models" />
+            <NavPill href="#savings" label="Savings Examples" />
+            <NavPill href="#pricing" label="Pricing Data" />
+            <NavPill href="#faq" label="FAQs" />
+          </div>
+        </div>
+      </aside>
+      <div className="xl:hidden sticky top-14 z-40 border-b border-border bg-background/95 backdrop-blur">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto">
+          <NavPill href="#calculator" label="Calculator" />
+          <NavPill href="#scenarios" label="Scenarios" />
+          <NavPill href="#comparison" label="Compare" />
+          <NavPill href="#savings" label="Savings" />
+          <NavPill href="#faq" label="FAQs" />
+        </div>
+      </div>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="border-b border-border">
@@ -125,21 +160,21 @@ export function Home() {
             {/* CTA Cards */}
             <div className="grid sm:grid-cols-3 gap-3">
               <Link href="/calculator" data-testid="hero-cta-calculator">
-                <div className="group bg-primary text-primary-foreground rounded-xl p-5 hover:bg-primary/90 transition-colors cursor-pointer h-full">
+                <div className="group bg-primary text-primary-foreground rounded-xl p-5 h-full">
                   <div className="text-2xl font-bold mb-1 font-mono">$</div>
                   <p className="font-semibold text-sm mb-1">Calculate your AI cost</p>
                   <p className="text-xs text-primary-foreground/70 leading-relaxed">Enter your token usage. See exact monthly cost and cheaper alternatives.</p>
                 </div>
               </Link>
               <Link href="/decision-engine" data-testid="hero-cta-engine">
-                <div className="group border border-border bg-card rounded-xl p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
+                <div className="group border border-border bg-card rounded-xl p-5 h-full">
                   <div className="text-2xl font-bold mb-1 text-primary">→</div>
                   <p className="font-semibold text-sm mb-1 text-foreground">Find the cheapest stack</p>
                   <p className="text-xs text-muted-foreground leading-relaxed">5 questions. Get three ranked recommendations matched to your budget.</p>
                 </div>
               </Link>
               <Link href="/compare/claude-vs-gpt-cost" data-testid="hero-cta-compare">
-                <div className="group border border-border bg-card rounded-xl p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
+                <div className="group border border-border bg-card rounded-xl p-5 h-full">
                   <div className="text-2xl font-bold mb-1 text-foreground">≈</div>
                   <p className="font-semibold text-sm mb-1 text-foreground">Compare tools and plans</p>
                   <p className="text-xs text-muted-foreground leading-relaxed">Side-by-side pricing for Claude, GPT-4o, Cursor, subscriptions vs API.</p>
@@ -160,7 +195,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="what-youll-find" className="border-b border-border bg-muted/15 py-8">
+      <section id="scenarios" className="border-b border-border bg-muted/15 py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-3 gap-3">
             <div className="border border-border rounded-xl bg-background p-4">
@@ -179,13 +214,35 @@ export function Home() {
         </div>
       </section>
 
+      <section id="calculator" className="border-b border-border py-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between gap-4 mb-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Calculator</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground">Check your monthly spend</h2>
+            </div>
+            <Link href="/calculator" className="text-sm text-primary font-medium hover:underline">
+              Calculate your savings →
+            </Link>
+          </div>
+          <div className="border border-border rounded-xl bg-background p-4 text-sm text-muted-foreground leading-relaxed">
+            Enter token usage to see the cheapest viable model for your workload.
+          </div>
+        </div>
+      </section>
+
       {/* ── SAVINGS STRIP ────────────────────────────────────── */}
-      <section className="border-b border-border bg-muted/20 py-8 overflow-x-auto">
+      <section id="savings" className="border-b border-border bg-muted/20 py-8 overflow-x-auto">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Real savings examples</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 min-w-[600px] sm:min-w-0">
             {SAVINGS_EXAMPLES.map((ex) => (
-              <div key={ex.scenario} className="bg-background border border-border rounded-lg p-4">
+              <button
+                key={ex.scenario}
+                type="button"
+                onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "savings_example", label: ex.scenario })}
+                className="text-left bg-background border border-border rounded-lg p-4 hover:border-primary/30 hover:bg-muted/20 transition-colors"
+              >
                 <p className="text-xs text-muted-foreground mb-1 leading-tight">{ex.scenario}</p>
                 <p className="text-xs text-muted-foreground/60 mb-3">{ex.usage}</p>
                 <div className="flex items-baseline gap-2 mb-1">
@@ -200,14 +257,19 @@ export function Home() {
                     -{ex.savePercent}
                   </span>
                 </div>
-              </div>
+              </button>
             ))}
+          </div>
+          <div className="mt-4 flex justify-end">
+            <Link href="/calculator" className="text-sm text-primary font-medium hover:underline">
+              Calculate your savings →
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── THREE OVERPAYING PATTERNS ────────────────────────── */}
-      <section className="border-b border-border py-20">
+      <section id="pricing" className="border-b border-border py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Where the waste happens</p>
@@ -218,7 +280,7 @@ export function Home() {
 
           <div className="space-y-4">
             {OVERPAY_PATTERNS.map((p) => (
-              <div key={p.id} className="border border-border rounded-xl p-6 sm:p-8 bg-card" data-testid={`pattern-${p.id}`}>
+              <button key={p.id} type="button" onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "pricing_pattern", patternId: p.id })} className="w-full text-left border border-border rounded-xl p-6 sm:p-8 bg-card hover:border-primary/30 hover:bg-muted/20 transition-colors" data-testid={`pattern-${p.id}`}>
                 <div className="grid sm:grid-cols-[1fr_auto] gap-6 sm:gap-10 items-start">
                   <div>
                     <div className="flex items-center gap-3 mb-4">
@@ -258,14 +320,14 @@ export function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── POPULAR COMPARISONS ──────────────────────────────── */}
-      <section className="border-b border-border py-20">
+      <section id="comparison" className="border-b border-border py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-10">
             <div>
@@ -280,7 +342,7 @@ export function Home() {
             {comparisons.map((c) => (
               <Link key={c.slug} href={`/compare/${c.slug}`}>
                 <div
-                  className="group border border-border rounded-xl p-5 hover:border-primary/30 hover:bg-muted/20 transition-all h-full cursor-pointer"
+                  className="group border border-border rounded-xl p-5 hover:border-primary/30 hover:bg-muted/20 transition-all h-full"
                   data-testid={`compare-card-${c.slug}`}
                 >
                   <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">
@@ -295,6 +357,11 @@ export function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-6">
+            <Link href="/decision-engine" className="text-sm text-primary font-medium hover:underline">
+              Compare your usage →
+            </Link>
           </div>
         </div>
       </section>
@@ -402,7 +469,7 @@ export function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section className="py-20">
+      <section id="faq" className="py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="mb-10">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">FAQ</p>
