@@ -1,0 +1,107 @@
+Enhance the EXISTING codebase by fixing the mobile responsiveness of the current UI, especially the calculator page and top navigation/header.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the existing app structure
+* Reuse the current components and styling system
+* Keep changes incremental and low-risk
+* Focus on responsive behavior only
+* Do NOT alter business logic
+
+## Goal
+
+Make the mobile experience clean, usable, and visually balanced on narrow screens.
+
+## Problems to fix
+
+The current mobile UI has these issues:
+
+* top header/nav is crowded
+* primary CTA button is too large on mobile
+* brand/title and CTA compete for space
+* scenario cards are too dense
+* tags/pills crowd the right side of the cards
+* spacing and typography feel desktop-first rather than mobile-first
+
+## Tasks
+
+### 1. Fix header / nav responsiveness
+
+Inspect the top navigation/header and make it mobile-safe.
+
+Requirements:
+
+* on small screens, prevent overlap/crowding between logo, title, and CTA
+* reduce CTA size on mobile
+* if needed, stack the CTA under the title row on mobile
+* ensure the header feels balanced and not cramped
+
+Preferred outcome:
+
+* brand remains readable
+* CTA remains visible
+* no horizontal crowding
+
+### 2. Improve calculator hero section on mobile
+
+For the calculator page:
+
+* tighten spacing above the fold
+* reduce headline size slightly on very small screens
+* reduce subtitle line length and spacing
+* ensure users reach interactive content faster
+
+### 3. Fix scenario card layout on mobile
+
+For scenario cards:
+
+* switch to a clean single-column mobile layout
+* move tags/pills below the description on small screens
+* reduce padding and gaps on mobile
+* ensure text does not feel cramped
+* avoid right-side tag crowding
+
+### 4. Improve mobile spacing and typography
+
+Across the calculator page:
+
+* reduce oversized padding on small screens
+* use mobile-friendly text sizes
+* improve vertical spacing consistency
+* avoid desktop-sized whitespace blocks on narrow screens
+
+### 5. Keep desktop behavior strong
+
+Do NOT degrade tablet/desktop layout.
+Use responsive utility classes so the improvements mainly affect mobile breakpoints.
+
+### 6. Validate key screens
+
+Check at minimum:
+
+* top header/nav
+* calculator hero
+* scenario selector
+* model selector section
+* result card area
+
+### 7. No business logic changes
+
+Do NOT modify:
+
+* calculator logic
+* report logic
+* analytics logic
+* pricing logic
+
+Only adjust UI/responsiveness.
+
+## Deliverable
+
+A cleaner mobile experience where:
+
+* header is not crowded
+* CTA is properly sized
+* scenario cards read well on mobile
+* page feels intentionally designed for phones rather than desktop squeezed into mobile

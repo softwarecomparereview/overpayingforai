@@ -100,15 +100,15 @@ export function Calculator() {
   const showOverpayingBanner = !!result && result.savingsEstimate !== null && result.savingsEstimate >= 10 && (savingsPercent === null || savingsPercent >= 20);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">AI Cost Calculator</h1>
-        <p className="text-muted-foreground">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+      <div className="mb-5 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">AI Cost Calculator</h1>
+        <p className="text-sm sm:text-base text-muted-foreground max-w-prose">
           Estimate your monthly AI spend and discover cheaper alternatives.
         </p>
       </div>
 
-      <div className="border border-border rounded-xl bg-card p-6 mb-8">
+      <div className="border border-border rounded-xl bg-card p-4 sm:p-6 mb-6 sm:mb-8">
         <ScenarioSelector scenarios={SCENARIOS} onSelect={applyScenario} />
 
         <div className="mb-6">
