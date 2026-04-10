@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { LeadCapture } from "@/components/LeadCapture/LeadCapture";
+import { track } from "@/utils/analytics";
 
 export function SavingsReport({
   result,
@@ -25,10 +26,6 @@ export function SavingsReport({
 
   const handleLeadSubmit = (email: string) => {
     setLeadEmail(email);
-    if (typeof window !== "undefined") {
-      const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
-      analytics?.track?.("lead_capture_submitted", { email });
-    }
     console.log("lead_capture_submitted", email);
   };
 
@@ -187,7 +184,7 @@ export function SavingsReport({
       </div>
 
       <div className="mt-8 flex items-center gap-3 no-print">
-        <button onClick={() => window.print()} className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">Print / Save PDF</button>
+        <button onClick={() => { track("report_generated", { source: "savings_report" }); window.print(); }} className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">Print / Save PDF</button>
         <Link href="/calculator" className="text-sm text-primary hover:underline">Back to calculator</Link>
       </div>
 
@@ -196,12 +193,6 @@ export function SavingsReport({
           <p className="text-sm font-medium text-foreground">Want this report sent to you?</p>
           <button
             type="button"
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
-                analytics?.track?.("lead_capture_clicked", { context: "savings_report" });
-              }
-            }}
             className="text-sm text-primary hover:underline"
           >
             Get pricing updates

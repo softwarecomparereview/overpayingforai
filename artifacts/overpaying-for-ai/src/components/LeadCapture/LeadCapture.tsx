@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { track } from "@/utils/analytics";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -19,6 +20,7 @@ export function LeadCapture({ onSubmit }: { onSubmit: (email: string) => void })
     setError("");
     onSubmit(email);
     setSuccess(true);
+    track("lead_capture_submitted", { source: "savings_report", emailDomain: email.split("@")[1] ?? "" });
   };
 
   return (
@@ -40,6 +42,7 @@ export function LeadCapture({ onSubmit }: { onSubmit: (email: string) => void })
         </div>
         <button
           type="submit"
+          onClick={() => track("lead_capture_clicked", { source: "savings_report" })}
           className="w-full bg-primary text-primary-foreground rounded-lg py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
           data-testid="lead-submit-btn"
         >

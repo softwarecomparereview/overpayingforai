@@ -1,0 +1,111 @@
+Enhance the EXISTING codebase by adding a lightweight analytics event wrapper and wiring it into the current calculator/report flow.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT introduce backend, database, or external analytics providers yet
+* Keep everything static-first and client-side only
+* Reuse the current code patterns and structure
+* Keep the implementation incremental and low-risk
+
+## Goal
+
+Create a small, reusable analytics abstraction so key user actions can be tracked consistently now, and easily connected to a real analytics provider later.
+
+## Tasks
+
+### 1. Create analytics utility
+
+Create a reusable analytics helper.
+
+Suggested location:
+
+* `/src/utils/analytics.ts`
+
+If a better utility location already exists, use that instead.
+
+Implement a function like:
+
+* `track(eventName: string, payload?: Record<string, unknown>)`
+
+Current implementation should be lightweight:
+
+* console-based logging is acceptable
+* optionally also structure it so it can later forward to a real analytics provider
+* do NOT add external SDKs now
+
+### 2. Standardize event names
+
+Support these events:
+
+* `calculator_started`
+* `scenario_selected`
+* `calculator_completed`
+* `report_generated`
+* `lead_capture_clicked`
+* `lead_capture_submitted`
+* `affiliate_clicked`
+
+If some related UI does not exist yet, wire only what is present and leave the wrapper ready for later use.
+
+### 3. Add event payload shape
+
+Include useful, minimal metadata where easily available, for example:
+
+* selected scenario id
+* selected model/provider
+* estimated cost range
+* report generated flag
+* source page/component
+
+Do NOT over-collect data.
+Do NOT create complicated schemas.
+Use only data already available in the existing UI flow.
+
+### 4. Wire into existing flows
+
+Add tracking to the relevant user actions in the existing app:
+
+* when calculator use begins → `calculator_started`
+* when scenario is chosen → `scenario_selected`
+* when calculation completes / result is shown → `calculator_completed`
+* when report is generated/opened → `report_generated`
+* when lead capture CTA is clicked → `lead_capture_clicked`
+* when lead form is submitted successfully → `lead_capture_submitted`
+* when affiliate CTA/link is clicked → `affiliate_clicked`
+
+Use the smallest safe integration points.
+Do NOT duplicate event firing.
+Avoid noisy repeat firing on every rerender.
+
+### 5. Keep implementation clean
+
+Requirements:
+
+* no performance impact
+* no excessive logging spam
+* no breaking changes
+* optional-safe usage if some flows are not yet present
+
+### 6. Future-ready design
+
+The analytics wrapper should be easy to upgrade later to:
+
+* Cloudflare analytics-compatible event forwarding
+* third-party analytics provider
+* server endpoint
+
+But do NOT implement those now.
+
+## Validation
+
+After implementation:
+
+* verify events log only at the intended user action points
+* verify calculator/report flow still works
+* verify no duplicate event spam on rerenders
+* verify build passes
+
+## Deliverable
+
+A lightweight, reusable analytics utility wired into the existing product flows so the app can consistently track key user actions without adding infrastructure complexity.
