@@ -5,6 +5,13 @@
   <url><loc>https://overpayingforai.com/decision-engine</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://overpayingforai.com/resources</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://overpayingforai.com/changelog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/general-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/coding-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/writing-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/research-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/customer-support-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://overpayingforai.com/ai-types/productivity-ai</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://overpayingforai.com/compare/claude-vs-gpt-cost</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://overpayingforai.com/compare/chatgpt-vs-cursor-cost</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://overpayingforai.com/compare/subscription-vs-api-ai-cost</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -18,7 +25,21 @@
   <url><loc>https://overpayingforai.com/best/best-ai-under-20-per-month</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://overpayingforai.com/best/best-ai-for-coding-on-a-budget</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://overpayingforai.com/best/best-free-ai-tools-for-builders</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-for-writing-on-a-budget</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-for-research-on-a-budget</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-for-automation</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-api-for-startups</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-for-chat-on-a-budget</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-open-source-ai-models</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/best/best-ai-for-solopreneurs</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://overpayingforai.com/guides/how-to-reduce-ai-cost</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://overpayingforai.com/guides/token-cost-explained</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://overpayingforai.com/guides/when-to-use-api-vs-subscription</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/ai-routing-strategies</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/hidden-ai-costs</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/gpt-4o-mini-vs-full-when-to-upgrade</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/ai-cost-for-saas-founders</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/compare-ai-models-for-your-use-case</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/free-ai-tools-that-are-actually-good</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://overpayingforai.com/guides/claude-vs-chatgpt-for-business</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
