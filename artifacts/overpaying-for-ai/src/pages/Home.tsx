@@ -146,6 +146,35 @@ export function Home() {
                 </div>
               </Link>
             </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
+              <div className="inline-flex items-center gap-2 text-muted-foreground bg-muted/60 px-3 py-2 rounded-full w-fit">
+                <span className="w-2 h-2 rounded-full bg-green-500" />
+                Pricing freshness is visible throughout the site
+              </div>
+              <a href="#what-youll-find" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                See real savings examples ↓
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="what-youll-find" className="border-b border-border bg-muted/15 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid sm:grid-cols-3 gap-3">
+            <div className="border border-border rounded-xl bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">What you’ll find below</p>
+              <p className="text-sm text-foreground leading-relaxed">Real savings examples, comparison snapshots, and guides that explain when cheaper models are enough.</p>
+            </div>
+            <div className="border border-border rounded-xl bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Latest pricing comparisons</p>
+              <p className="text-sm text-foreground leading-relaxed">Side-by-side breakdowns for the models and subscriptions people actually use.</p>
+            </div>
+            <div className="border border-border rounded-xl bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Best AI by use case</p>
+              <p className="text-sm text-foreground leading-relaxed">Shortlists for coding, budget planning, and lighter daily workflows.</p>
+            </div>
           </div>
         </div>
       </section>

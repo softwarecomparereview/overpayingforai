@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import {
   runCalculator,
@@ -31,6 +31,7 @@ function buildShareUrl(modelId: string, input: number, output: number): string {
 
 export function Calculator() {
   const [, setLocation] = useLocation();
+  const inputsRef = useRef<HTMLDivElement | null>(null);
 
   const params = typeof window !== "undefined"
     ? new URLSearchParams(window.location.search)
@@ -42,6 +43,7 @@ export function Calculator() {
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [copied, setCopied] = useState(false);
   const [showReport, setShowReport] = useState(false);
+  const [selectedScenario, setSelectedScenario] = useState<ScenarioPreset | null>(null);
 
   const calculate = useCallback(() => {
     try {
@@ -66,6 +68,7 @@ export function Calculator() {
   };
 
   const applyScenario = (scenario: ScenarioPreset) => {
+    setSelectedScenario(scenario);
     setModelId(scenario.inputs.modelId);
     setInputTokens(scenario.inputs.monthlyInputTokens);
     setOutputTokens(scenario.inputs.monthlyOutputTokens);
@@ -83,6 +86,11 @@ export function Calculator() {
       });
     }
   };
+
+  useEffect(() => {
+    if (!selectedScenario) return;
+    inputsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [selectedScenario]);
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(buildShareUrl(modelId, inputTokens, outputTokens));
@@ -109,9 +117,18 @@ export function Calculator() {
       </div>
 
       <div className="border border-border rounded-xl bg-card p-4 sm:p-6 mb-6 sm:mb-8">
-        <ScenarioSelector scenarios={SCENARIOS} onSelect={applyScenario} />
+        <ScenarioSelector scenarios={SCENARIOS} onSelect={applyScenario} selectedId={selectedScenario?.id ?? null} />
 
-        <div className="mb-6">
+        {selectedScenario && (
+          <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
+            <p className="text-sm font-semibold text-foreground">Selected: {selectedScenario.name}</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              Preset applied · {formatTokenCount(selectedScenario.inputs.monthlyInputTokens)} input · {formatTokenCount(selectedScenario.inputs.monthlyOutputTokens)} output
+            </p>
+          </div>
+        )}
+
+        <div className="mb-6" ref={inputsRef}>
           <label className="text-sm font-medium text-foreground block mb-2">Usage Preset</label>
           <div className="flex flex-wrap gap-2">
             {PRESET_USAGES.map((p) => (
