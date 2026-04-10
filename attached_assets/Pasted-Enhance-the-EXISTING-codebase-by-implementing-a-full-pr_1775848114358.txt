@@ -1,0 +1,375 @@
+Enhance the EXISTING codebase by implementing a full production upgrade that combines:
+
+1. Design 2 homepage as final production homepage
+2. Complete UX + navigation + monetization polish
+3. Live pricing fetch + diff + approval engine (admin)
+4. Automatic freshness messaging + changelog generation
+5. SEO + internal linking + content hub improvements
+
+Important:
+
+* This is NOT a rebuild
+* Preserve static-first architecture
+* Do NOT introduce full backend, database, or auth
+* Admin-only logic is allowed for pricing refresh
+* Reuse existing calculator, decision engine, affiliateLinks.json, analytics, pricing system, and routing
+* Focus on revenue, clarity, SEO, and reliability
+
+---
+
+# PART 1: Make Design 2 the production homepage
+
+* Set `/` → Design 2
+* Keep `/design1` and `/design3` as reference routes
+
+## Fix sticky jump navigation (CRITICAL)
+
+Current issue: sticky nav disappears or behaves incorrectly.
+
+Fix:
+
+* make it truly sticky (`position: sticky`)
+* ensure correct top offset below main nav
+* apply proper `z-index`
+* ensure visible background + border
+* ensure it remains visible while scrolling
+* ensure anchors still scroll correctly
+* support desktop + mobile
+
+---
+
+# PART 2: Final homepage structure (Design 2 polish)
+
+Use this exact order:
+
+1. Hero
+2. Sticky jump nav (immediately visible)
+3. Trust / freshness strip
+4. What this tool does
+5. Why people overpay
+6. Calculator entry / scenarios
+7. Savings examples
+8. Affiliate recommendations (CRITICAL)
+9. Compare models
+10. Pricing data + changelog teaser
+11. Guides / SEO hub preview
+12. FAQ
+13. Footer
+
+---
+
+# PART 3: CTA hierarchy
+
+Primary:
+
+* Calculate your AI cost
+
+Secondary:
+
+* Compare models
+* Find the cheapest stack
+
+Remove conflicting CTA variations.
+
+---
+
+# PART 4: Affiliate monetization integration
+
+Add dedicated affiliate recommendation section after savings.
+
+Cards:
+
+## Best overall
+
+Balanced cost, strong capability, safest default.
+CTA: Start with this option
+
+## Cheapest
+
+Lower cost for simple workloads.
+CTA: Save with this option
+
+## Startup option
+
+Good enough without overspending early.
+CTA: Use this for lean teams
+
+Optional:
+
+## Coding
+
+Better for dev workflows
+CTA: Try for coding
+
+Requirements:
+
+* must use affiliateLinks.json
+* must be clickable
+* must trigger analytics
+* must NOT look like ads
+
+---
+
+# PART 5: Visual improvements
+
+Fix “white white white” issue:
+
+* alternate section backgrounds
+* use subtle tinted sections (e.g., blue/gray)
+* improve contrast and hierarchy
+* maintain premium feel
+
+---
+
+# PART 6: Logo update
+
+Use attached logo assets.
+
+Requirements:
+
+* clean, non-distorted
+* responsive (desktop/mobile)
+* update navbar + favicon if safe
+
+---
+
+# PART 7: SEO improvements
+
+Implement highest-impact items:
+
+## Freshness
+
+* dynamic freshness messaging from pricing metadata
+* avoid hardcoded dates
+* add “Pricing Changelog” page
+
+## Comparison pages
+
+* add break-even tables (light / medium / heavy usage)
+* highlight break-even points
+
+## Keyword targeting
+
+* include high-intent phrases naturally in first section
+
+## Programmatic SEO
+
+* improve SEO page coverage
+* ensure internal linking
+
+## Technical SEO
+
+* sitemap.xml
+* robots.txt
+* canonical tags
+* FAQ schema
+
+---
+
+# PART 8: SEO Hub / Blog page
+
+Add a static SEO hub page listing:
+
+* comparisons
+* guides
+* best lists
+* cost pages
+
+Requirements:
+
+* grouped sections
+* internal linking
+* linked from homepage/nav
+* no CMS
+
+---
+
+# PART 9: Live pricing fetch + diff engine (ADMIN)
+
+Extend existing pricing refresh system.
+
+## Add provider fetch adapters
+
+* OpenAI
+* Anthropic
+* Google
+
+Functions:
+
+* fetchOpenAIPricingCandidates()
+* fetchAnthropicPricingCandidates()
+* fetchGooglePricingCandidates()
+
+If blocked:
+
+* fail gracefully
+* allow paste fallback
+
+---
+
+## Normalize data
+
+Convert fetched data into existing candidate schema.
+
+---
+
+## Admin UI updates
+
+Enhance pricing refresh page:
+
+Add:
+
+* Fetch OpenAI
+* Fetch Anthropic
+* Fetch Google
+* Fetch all
+
+Keep:
+
+* sample load
+* paste JSON
+
+---
+
+## Diff UI
+
+Show:
+
+* old vs new values
+* changed fields
+* source URL
+* provider/model
+* approve/reject controls
+
+---
+
+## Approval flow (CRITICAL)
+
+Flow:
+Fetch → Diff → Approve → Update
+
+NOT:
+Fetch → auto overwrite
+
+---
+
+# PART 10: Metadata + freshness automation
+
+On approval:
+
+* update last_updated / last_reviewed
+* update source
+* update notes
+
+Public UI must show:
+
+* “Pricing last reviewed today”
+* “Pricing last reviewed X days ago”
+* stale warning if needed
+
+---
+
+# PART 11: Changelog generation
+
+On approval, create entry:
+
+* date
+* providers
+* models
+* old vs new values
+* source URLs
+
+Store or export as JSON.
+
+---
+
+# PART 12: Export updated dataset
+
+Provide:
+
+* downloadable JSON
+* copyable JSON
+* ready-to-publish dataset
+
+---
+
+# PART 13: Interaction audit (VERY IMPORTANT)
+
+Check ALL interactive elements:
+
+* buttons
+* cards
+* nav
+* anchors
+* CTAs
+* text-field-like UI
+
+Rules:
+
+* must work OR
+* must not look interactive
+
+Fix:
+
+* dead links
+* fake inputs
+* broken anchors
+
+---
+
+# PART 14: Analytics (optional)
+
+Track:
+
+* pricing_refresh_started
+* pricing_fetch_success
+* pricing_approved
+* affiliate_clicked
+
+---
+
+# PART 15: Validation checklist
+
+Ensure:
+
+1. `/` = Design 2
+2. sticky nav works
+3. anchor links work
+4. affiliate section visible + clickable
+5. SEO hub exists
+6. changelog exists
+7. freshness updates dynamically
+8. pricing engine works
+9. no broken links
+10. build passes
+
+---
+
+# OUTPUT REQUIRED
+
+Report:
+
+1. homepage file path
+2. sticky nav fix approach
+3. logo used
+4. affiliate section implementation
+5. changelog location
+6. SEO hub location
+7. providers supported for live fetch
+8. fallback behavior
+9. freshness logic source
+10. confirmation all clickable elements tested
+
+---
+
+# FINAL DELIVERABLE
+
+A production-ready system that includes:
+
+* conversion-optimized homepage
+* working navigation and UX
+* integrated affiliate monetization
+* SEO-optimized structure
+* admin pricing refresh engine
+* automated freshness + changelog
+* zero broken interactions
