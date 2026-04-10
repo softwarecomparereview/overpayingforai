@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
-import heroPreview from "@assets/image_1775834703776.png";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
@@ -150,8 +149,7 @@ export function Home() {
             </span>
           </div>
 
-          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
-            <div className="max-w-3xl">
+          <div className="max-w-3xl">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-6">
                 Stop overpaying<br />for AI.
               </h1>
@@ -193,17 +191,6 @@ export function Home() {
                   See real savings examples ↓
                 </a>
               </div>
-            </div>
-
-            <div className="hidden lg:block">
-              <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
-                <img
-                  src={heroPreview}
-                  alt="Preview of the OverpayingForAI homepage"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
