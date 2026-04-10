@@ -47,6 +47,13 @@ Static-first React + Vite web app. No backend dependency.
 - `analytics.ts` — Allowlisted event tracker; events: `calculator_*`, `affiliate_clicked`, `seo_page_viewed`, `seo_cta_clicked`, `pricing_refresh_*`
 - `pricingFreshness.ts` — Freshness helpers: `getDaysSinceUpdate`, `isPricingStale`, `freshnessLabel`
 - `pricingDiff.ts` — Diff engine: `computePricingDiff`, `applyApprovedDiffs`, `generateChangelogEntry`, `generateSampleCandidates`
+- `providerPricing/` — Provider adapter layer (admin-only; never imported on public pages)
+  - `types.ts` — `ProviderFetchResult`, `FetchDataQuality` types
+  - `openai.ts` — `fetchOpenAIPricingCandidates()` — source: openai.com/api/pricing
+  - `anthropic.ts` — `fetchAnthropicPricingCandidates()` — source: anthropic.com/pricing
+  - `google.ts` — `fetchGooglePricingCandidates()` — source: ai.google.dev/pricing
+  - `index.ts` — barrel export
+  - **CORS note**: Provider pricing pages are JS-rendered SPAs; direct browser fetch returns HTML shells without data. Each adapter returns `status: "known-good"` reference data. To enable live fetch, implement a serverless layer (e.g. Cloudflare Worker) per the in-code upgrade instructions and update `tryLiveFetch()` in each adapter.
 
 **Admin** (`src/pages/admin/`):
 - `PricingRefreshPage.tsx` — Maintainer-only pricing refresh workflow at `/admin/pricing-refresh`

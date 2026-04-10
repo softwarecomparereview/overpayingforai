@@ -10,6 +10,13 @@ import {
   type ModelDiffRow,
   type DiffStatus,
 } from "@/utils/pricingDiff";
+import {
+  fetchOpenAIPricingCandidates,
+  fetchAnthropicPricingCandidates,
+  fetchGooglePricingCandidates,
+  type ProviderFetchResult,
+  type FetchDataQuality,
+} from "@/utils/providerPricing";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { track } from "@/utils/analytics";
 
@@ -19,6 +26,28 @@ const TODAY = new Date().toISOString().split("T")[0];
 
 type Decision = "approved" | "rejected" | "reviewed";
 type Filter = "all" | "changed" | "stale" | "added" | "removed";
+type ProviderKey = "openai" | "anthropic" | "google";
+
+interface ProviderStatus {
+  status: "idle" | "loading" | "success" | "error";
+  message: string;
+  modelCount: number;
+  dataQuality: FetchDataQuality | null;
+  fetchedAt: string | null;
+  sourceUrl: string | null;
+}
+
+const PROVIDER_DEFAULTS: Record<ProviderKey, ProviderStatus> = {
+  openai: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
+  anthropic: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
+  google: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
+};
+
+const PROVIDER_META: { key: ProviderKey; name: string; fetcher: () => Promise<ProviderFetchResult> }[] = [
+  { key: "openai", name: "OpenAI", fetcher: fetchOpenAIPricingCandidates },
+  { key: "anthropic", name: "Anthropic", fetcher: fetchAnthropicPricingCandidates },
+  { key: "google", name: "Google", fetcher: fetchGooglePricingCandidates },
+];
 
 function fmt(v: string | number | null | undefined): string {
   if (v === null || v === undefined || v === "") return "—";
@@ -43,6 +72,13 @@ function StatusBadge({ status }: { status: DiffStatus | "stale" }) {
       {status}
     </span>
   );
+}
+
+function QualityPill({ quality }: { quality: FetchDataQuality | null }) {
+  if (!quality) return null;
+  if (quality === "live") return <span className="text-xs font-medium text-green-700 dark:text-green-400">✓ Live</span>;
+  if (quality === "known-good") return <span className="text-xs font-medium text-amber-600 dark:text-amber-400">⚠ Reference data</span>;
+  return <span className="text-xs font-medium text-red-500">✕ Error</span>;
 }
 
 function GuardScreen({ onUnlock }: { onUnlock: () => void }) {
@@ -220,6 +256,9 @@ export function PricingRefreshPage() {
   const [copiedJson, setCopiedJson] = useState(false);
   const [copiedLog, setCopiedLog] = useState(false);
 
+  const [providerStatus, setProviderStatus] = useState<Record<ProviderKey, ProviderStatus>>(PROVIDER_DEFAULTS);
+  const [isFetchingAll, setIsFetchingAll] = useState(false);
+
   const decisionsRef = useRef(decisions);
   const diffRowsRef = useRef(diffRows);
   useEffect(() => { decisionsRef.current = decisions; }, [decisions]);
@@ -230,6 +269,110 @@ export function PricingRefreshPage() {
     localStorage.removeItem(ADMIN_KEY);
     setUnlocked(false);
   }, []);
+
+  const loadCandidatesFromResult = useCallback((result: ProviderFetchResult) => {
+    const fetchedById = new Map(result.candidates.map((m) => [m.id, m]));
+    const currentIds = new Set(CURRENT_MODELS.map((m) => m.id));
+    const merged = CURRENT_MODELS.map((m) => fetchedById.has(m.id) ? fetchedById.get(m.id)! : m);
+    const newModels = result.candidates.filter((m) => !currentIds.has(m.id));
+    const all = [...merged, ...newModels];
+    const rows = computePricingDiff(CURRENT_MODELS, all);
+    setCandidates(all);
+    setDiffRows(rows);
+    setDecisions({});
+    setExported(null);
+    setPasteValue(JSON.stringify(result.candidates, null, 2));
+    track("pricing_refresh_started", {
+      source: `provider:${result.providerId}`,
+      dataQuality: result.status,
+      modelCount: result.candidates.length,
+    });
+  }, []);
+
+  const loadCandidatesFromMultipleResults = useCallback((results: ProviderFetchResult[]) => {
+    const allFetchedModels: AIModel[] = results.flatMap((r) => r.candidates);
+    const fetchedById = new Map(allFetchedModels.map((m) => [m.id, m]));
+    const currentIds = new Set(CURRENT_MODELS.map((m) => m.id));
+    const merged = CURRENT_MODELS.map((m) => fetchedById.has(m.id) ? fetchedById.get(m.id)! : m);
+    const newModels = allFetchedModels.filter((m) => !currentIds.has(m.id));
+    const all = [...merged, ...newModels];
+    const rows = computePricingDiff(CURRENT_MODELS, all);
+    setCandidates(all);
+    setDiffRows(rows);
+    setDecisions({});
+    setExported(null);
+    setPasteValue(JSON.stringify(allFetchedModels, null, 2));
+    track("pricing_refresh_started", {
+      source: "provider:all",
+      modelCount: allFetchedModels.length,
+    });
+  }, []);
+
+  const handleFetchProvider = useCallback(async (key: ProviderKey) => {
+    const meta = PROVIDER_META.find((p) => p.key === key)!;
+    setProviderStatus((prev) => ({
+      ...prev,
+      [key]: { ...PROVIDER_DEFAULTS[key], status: "loading", message: "Fetching…" },
+    }));
+    try {
+      const result = await meta.fetcher();
+      setProviderStatus((prev) => ({
+        ...prev,
+        [key]: {
+          status: "success",
+          message: result.statusMessage,
+          modelCount: result.candidates.length,
+          dataQuality: result.status,
+          fetchedAt: result.fetchedAt,
+          sourceUrl: result.sourceUrl,
+        },
+      }));
+      loadCandidatesFromResult(result);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Unknown error";
+      setProviderStatus((prev) => ({
+        ...prev,
+        [key]: { status: "error", message, modelCount: 0, dataQuality: "error", fetchedAt: null, sourceUrl: null },
+      }));
+    }
+  }, [loadCandidatesFromResult]);
+
+  const handleFetchAll = useCallback(async () => {
+    setIsFetchingAll(true);
+    setProviderStatus({
+      openai: { ...PROVIDER_DEFAULTS.openai, status: "loading", message: "Fetching…" },
+      anthropic: { ...PROVIDER_DEFAULTS.anthropic, status: "loading", message: "Fetching…" },
+      google: { ...PROVIDER_DEFAULTS.google, status: "loading", message: "Fetching…" },
+    });
+    try {
+      const settled = await Promise.allSettled(PROVIDER_META.map((p) => p.fetcher()));
+      const newStatus = { ...PROVIDER_DEFAULTS };
+      const successes: ProviderFetchResult[] = [];
+
+      settled.forEach((s, i) => {
+        const key = PROVIDER_META[i].key;
+        if (s.status === "fulfilled") {
+          newStatus[key] = {
+            status: "success",
+            message: s.value.statusMessage,
+            modelCount: s.value.candidates.length,
+            dataQuality: s.value.status,
+            fetchedAt: s.value.fetchedAt,
+            sourceUrl: s.value.sourceUrl,
+          };
+          successes.push(s.value);
+        } else {
+          const message = s.reason instanceof Error ? s.reason.message : "Unknown error";
+          newStatus[key] = { status: "error", message, modelCount: 0, dataQuality: "error", fetchedAt: null, sourceUrl: null };
+        }
+      });
+
+      setProviderStatus(newStatus);
+      if (successes.length > 0) loadCandidatesFromMultipleResults(successes);
+    } finally {
+      setIsFetchingAll(false);
+    }
+  }, [loadCandidatesFromMultipleResults]);
 
   const handleLoadSample = useCallback(() => {
     const sample = generateSampleCandidates(CURRENT_MODELS);
@@ -347,6 +490,8 @@ export function PricingRefreshPage() {
     return { changed, added, removed, stale, approvedCount, reviewedCount };
   }, [diffRows, decisions]);
 
+  const anyProviderLoading = isFetchingAll || Object.values(providerStatus).some((p) => p.status === "loading");
+
   if (!unlocked) return <GuardScreen onUnlock={handleUnlock} />;
 
   return (
@@ -382,12 +527,98 @@ export function PricingRefreshPage() {
         <section>
           <h2 className="text-base font-bold mb-1">1. Load Candidate Pricing</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Paste a refreshed <code className="bg-muted px-1 rounded text-xs">models.json</code>-compatible array, or load a generated sample to test the workflow.
+            Fetch reference pricing from official provider sources, or paste your own candidates manually.
           </p>
+
+          {/* Provider fetch panel */}
+          <div className="border border-border rounded-lg p-4 bg-card mb-5" data-testid="provider-fetch-panel">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">Provider quick-fetch</p>
+
+            <div className="flex flex-wrap gap-2 mb-4">
+              {PROVIDER_META.map(({ key, name }) => (
+                <button
+                  key={key}
+                  onClick={() => handleFetchProvider(key)}
+                  disabled={anyProviderLoading}
+                  data-testid={`fetch-${key}-btn`}
+                  className={`text-sm border px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 ${
+                    providerStatus[key].status === "success"
+                      ? "border-green-400 text-green-700 dark:text-green-400 bg-green-50/50 dark:bg-green-950/20"
+                      : providerStatus[key].status === "error"
+                      ? "border-red-400 text-red-600"
+                      : "border-border text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  {providerStatus[key].status === "loading" ? (
+                    <span className="flex items-center gap-1.5"><span className="animate-spin">⟳</span> Fetching…</span>
+                  ) : (
+                    `Fetch ${name}`
+                  )}
+                </button>
+              ))}
+              <button
+                onClick={handleFetchAll}
+                disabled={anyProviderLoading}
+                data-testid="fetch-all-btn"
+                className="text-sm border border-primary text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/5 transition-colors disabled:opacity-50"
+              >
+                {isFetchingAll ? (
+                  <span className="flex items-center gap-1.5"><span className="animate-spin">⟳</span> Fetching all…</span>
+                ) : (
+                  "Fetch all providers"
+                )}
+              </button>
+            </div>
+
+            {/* Per-provider status rows */}
+            {PROVIDER_META.some(({ key }) => providerStatus[key].status !== "idle") && (
+              <div className="space-y-2 mb-3">
+                {PROVIDER_META.map(({ key, name }) => {
+                  const ps = providerStatus[key];
+                  if (ps.status === "idle") return null;
+                  return (
+                    <div key={key} className="text-xs flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold text-foreground">{name}</span>
+                        {ps.status === "loading" && <span className="text-muted-foreground">Fetching…</span>}
+                        {ps.status === "success" && (
+                          <>
+                            <QualityPill quality={ps.dataQuality} />
+                            <span className="text-muted-foreground">— {ps.modelCount} models loaded</span>
+                            {ps.sourceUrl && (
+                              <a href={ps.sourceUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline truncate max-w-xs">
+                                {ps.sourceUrl}
+                              </a>
+                            )}
+                          </>
+                        )}
+                        {ps.status === "error" && <span className="text-red-500">✕ {ps.message}</span>}
+                      </div>
+                      {ps.status === "success" && ps.dataQuality === "known-good" && (
+                        <p className="text-muted-foreground pl-0 leading-relaxed">
+                          Reference data loaded — provider pricing pages are JS-rendered SPAs and cannot be fetched directly in the browser.
+                          Verify current prices at the source URL before approving.
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <p className="text-xs text-muted-foreground border-t border-border pt-3 leading-relaxed">
+              ℹ️ Fetched prices do not update automatically — they load into the diff review below for manual approval first.
+              To enable live pricing fetch in the future, implement a serverless fetch layer (e.g. Cloudflare Worker) and wire it into{" "}
+              <code className="bg-muted px-1 rounded">src/utils/providerPricing/</code>.
+            </p>
+          </div>
+
+          {/* Manual / sample path */}
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Or load manually</p>
           <div className="flex gap-2 mb-3">
             <button
               onClick={handleLoadSample}
-              className="text-sm border border-primary text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/5 transition-colors"
+              className="text-sm border border-border text-muted-foreground px-4 py-2 rounded-lg font-medium hover:bg-muted/50 transition-colors"
               data-testid="load-sample-btn"
             >
               Load sample candidates
@@ -395,7 +626,7 @@ export function PricingRefreshPage() {
           </div>
           <textarea
             className={`w-full h-40 border ${parseError ? "border-red-400" : "border-border"} rounded-lg px-3 py-2 text-xs font-mono bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-y`}
-            placeholder='Paste a JSON array of model records here — same schema as models.json...'
+            placeholder="Paste a JSON array of model records here — same schema as models.json..."
             value={pasteValue}
             onChange={(e) => { setPasteValue(e.target.value); setParseError(null); }}
             data-testid="candidate-paste"
