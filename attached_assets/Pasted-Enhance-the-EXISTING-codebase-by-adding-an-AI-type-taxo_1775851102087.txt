@@ -1,0 +1,226 @@
+Enhance the EXISTING codebase by adding an AI type taxonomy layer, category pages, and a homepage “Explore by AI type” section.
+
+Important:
+
+* This is NOT a rebuild
+* Reuse the existing routing, SEO page system, affiliateLinks.json, comparison pages, best lists, guides, and homepage structure where practical
+* Keep everything static-first
+* Do NOT add backend, database, or auth
+* Keep implementation incremental and production-minded
+
+## Goal
+
+Expand the site structure by AI type so users and search engines can navigate the site by category, not only by comparison or pricing intent.
+
+This should improve:
+
+* SEO structure
+* internal linking
+* conversion relevance
+* affiliate relevance
+* homepage discoverability
+
+---
+
+# Part 1: Add AI type taxonomy
+
+Create a category/taxonomy structure for these AI types:
+
+1. General AI
+2. Coding AI
+3. Writing AI
+4. Research AI
+5. Customer Support AI
+6. Productivity AI
+7. Design AI
+8. Video and Audio AI
+9. Automation and Agents
+
+Use user-friendly labels in the UI.
+
+---
+
+# Part 2: Add AI type category pages
+
+Create category pages for at least the first 6 categories:
+
+* `/ai-types/general-ai`
+* `/ai-types/coding-ai`
+* `/ai-types/writing-ai`
+* `/ai-types/research-ai`
+* `/ai-types/customer-support-ai`
+* `/ai-types/productivity-ai`
+
+If the route structure differs, adapt cleanly, but keep the slugs clear.
+
+Each category page should include:
+
+## 1. Intro section
+
+* what the category is
+* what users use it for
+* why cost matters in this category
+
+## 2. Best options section
+
+Show 2–3 options such as:
+
+* best overall
+* cheapest viable
+* best for a specific use case
+
+Use existing affiliate/config/recommendation data where possible.
+
+## 3. Pricing pattern section
+
+Explain key pricing considerations for this category.
+
+Examples:
+
+* coding AI may justify premium spend for debugging
+* writing AI often has cheaper viable options
+* support AI benefits from lower-cost high-volume choices
+
+## 4. Related comparisons
+
+Link to existing comparison pages relevant to that category.
+
+## 5. Related best lists
+
+Link to existing best-list pages if available.
+
+## 6. Calculator CTA
+
+Include a clear CTA into the calculator or decision engine.
+
+## 7. FAQ
+
+Include category-specific FAQs if your existing page system supports it.
+
+---
+
+# Part 3: Homepage “Explore by AI type” section
+
+Add a homepage section near the top called:
+
+* “Explore by AI type”
+  or
+* “Browse by AI use case”
+
+Place it high enough to be useful, but below the hero / primary CTA area.
+
+Show category cards for:
+
+* General AI
+* Coding AI
+* Writing AI
+* Research AI
+* Customer Support AI
+* Productivity AI
+
+Each card should include:
+
+* category title
+* one-line description
+* clear link/CTA
+* optional short “best for” phrase
+
+These cards must be clickable and route to the category pages.
+
+---
+
+# Part 4: Internal linking improvements
+
+Use the new category pages as hubs.
+
+Ensure:
+
+* homepage links to category pages
+* category pages link to comparisons, guides, and best lists
+* comparisons and best lists can link back to relevant category pages where appropriate
+
+This should improve crawlability and content cluster structure.
+
+---
+
+# Part 5: Navigation updates
+
+Update navigation or discovery patterns so AI types are visible.
+
+Acceptable approaches:
+
+* add “AI Types” to top navigation
+* add dropdown or grouped nav if the codebase supports it cleanly
+* add a section link from homepage and/or footer
+
+Do not clutter the main nav excessively.
+
+---
+
+# Part 6: Affiliate integration by category
+
+Use category-relevant affiliate framing.
+
+Examples:
+
+* Coding AI page → “Best for coding workflows”
+* Writing AI page → “Best for content and writing”
+* Productivity AI page → “Best for docs and planning”
+* General AI page → “Best overall for most teams”
+
+Use existing affiliate config and tracking where possible.
+Do not invent unsupported recommendations.
+
+---
+
+# Part 7: SEO considerations
+
+Ensure category pages are SEO-friendly.
+
+For each category page:
+
+* set title/meta description where supported
+* include descriptive intro text
+* include useful internal links
+* avoid thin pages
+
+Do NOT create placeholder fluff pages.
+If content support is weak for some lower-priority categories, create only the strongest first.
+
+---
+
+# Part 8: Visual design
+
+Keep category pages visually consistent with the homepage and current design system.
+
+Requirements:
+
+* more visual depth than flat white
+* clear section separation
+* clean cards
+* obvious CTAs
+* premium but practical feel
+
+---
+
+# Part 9: Validation
+
+After implementation:
+
+1. homepage has a working “Explore by AI type” section
+2. category cards are clickable
+3. category routes exist and render correctly
+4. category pages include related links and CTAs
+5. internal linking is improved
+6. build passes
+
+---
+
+# Deliverable
+
+A category/taxonomy expansion where:
+
+* the site can be explored by AI type
+* homepage includes an “Explore by AI type” section
+* category pages act as SEO and conversion hubs
+* affiliate recommendations are more context-aware

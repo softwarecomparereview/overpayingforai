@@ -5,8 +5,8 @@ const navLinks = [
   { href: "/calculator", label: "Calculator" },
   { href: "/decision-engine", label: "Decision Engine" },
   { href: "/compare/claude-vs-gpt-cost", label: "Comparisons" },
+  { href: "/ai-types", label: "AI Types" },
   { href: "/resources", label: "Resources" },
-  { href: "/changelog", label: "Pricing" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -126,6 +126,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li><Link href="/guides/when-to-use-api-vs-subscription" className="hover:text-foreground transition-colors">API vs Subscription</Link></li>
                 <li><Link href="/resources" className="hover:text-foreground transition-colors">All Resources</Link></li>
                 <li><Link href="/changelog" className="hover:text-foreground transition-colors">Pricing Changelog</Link></li>
+                <li><Link href="/ai-types" className="hover:text-foreground transition-colors">Browse AI Types</Link></li>
               </ul>
             </div>
           </div>

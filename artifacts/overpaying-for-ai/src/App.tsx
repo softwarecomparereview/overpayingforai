@@ -13,6 +13,8 @@ import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
 import { ResourcesHub } from "@/pages/ResourcesHub";
 import { ChangelogPage } from "@/pages/ChangelogPage";
+import { AiTypeIndex } from "@/pages/AiTypeIndex";
+import { AiTypePage } from "@/pages/AiTypePage";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ function Router() {
               <Route path="/design3" component={Design3} />
               <Route path="/resources" component={ResourcesHub} />
               <Route path="/changelog" component={ChangelogPage} />
+              <Route path="/ai-types" component={AiTypeIndex} />
+              <Route path="/ai-types/:slug" component={AiTypePage} />
               <Route path="/calculator" component={Calculator} />
               <Route path="/decision-engine" component={DecisionEngine} />
               <Route path="/compare" component={CompareIndex} />

@@ -112,7 +112,17 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+const AI_TYPE_CARDS = [
+  { slug: "general-ai", icon: "🧠", title: "General AI", tagline: "Best all-purpose assistants by cost", bestFor: "Everyday tasks & writing" },
+  { slug: "coding-ai", icon: "💻", title: "Coding AI", tagline: "IDE tools and APIs for developers", bestFor: "Code generation & debugging" },
+  { slug: "writing-ai", icon: "✍️", title: "Writing AI", tagline: "Cheapest models for content work", bestFor: "Blogs, copy & emails" },
+  { slug: "research-ai", icon: "🔍", title: "Research AI", tagline: "Search & document analysis tools", bestFor: "Analysis & synthesis" },
+  { slug: "customer-support-ai", icon: "💬", title: "Customer Support AI", tagline: "High-volume, low-cost chat models", bestFor: "Chat, tickets & bots" },
+  { slug: "productivity-ai", icon: "⚡", title: "Productivity AI", tagline: "AI for docs, meetings & workflows", bestFor: "Teams & solopreneurs" },
+];
+
 const NAV_ITEMS = [
+  { href: "#section-ai-types", label: "AI Types" },
   { href: "#section-calculator", label: "Calculator" },
   { href: "#section-savings", label: "Savings" },
   { href: "#section-affiliate", label: "Recommendations" },
@@ -243,6 +253,55 @@ export function Design2() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── EXPLORE BY AI TYPE ───────────────────────────────── */}
+      <section id="section-ai-types" className="border-b border-border bg-white py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-7">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Browse by AI type</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Find the cheapest model for your use case</h2>
+              <p className="text-sm text-muted-foreground mt-2 max-w-xl">
+                Pricing strategy varies by category. Pick your use case to see relevant model options, cost benchmarks, and recommendations.
+              </p>
+            </div>
+            <Link
+              href="/ai-types"
+              onClick={() => track("section_nav_clicked", { section: "ai_types", sourceSurface: "homepage" })}
+              className="text-sm text-primary hover:underline hidden sm:block font-medium shrink-0"
+            >
+              View all →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+            {AI_TYPE_CARDS.map((cat) => (
+              <Link key={cat.slug} href={`/ai-types/${cat.slug}`}>
+                <div
+                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "ai_type", slug: cat.slug })}
+                  className="group border border-border rounded-xl p-4 sm:p-5 bg-white hover:border-primary/30 hover:shadow-sm transition-all h-full cursor-pointer"
+                >
+                  <div className="flex items-start gap-3 mb-2.5">
+                    <span className="text-xl leading-none mt-0.5">{cat.icon}</span>
+                    <h3 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors">{cat.title}</h3>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-2 line-clamp-2">{cat.tagline}</p>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">{cat.bestFor}</span>
+                  </div>
+                  <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Explore →</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/ai-types"
+            onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "ai_types_all" })}
+            className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground hover:border-slate-400 font-medium px-5 py-2.5 rounded-lg text-sm transition-colors"
+          >
+            View all AI type categories →
+          </Link>
         </div>
       </section>
 
