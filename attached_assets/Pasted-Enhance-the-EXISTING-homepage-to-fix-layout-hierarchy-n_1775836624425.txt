@@ -1,0 +1,165 @@
+Enhance the EXISTING homepage to fix layout hierarchy, navigation placement, visual monotony, and integrate affiliate sections into the content flow.
+
+Important:
+
+* This is NOT a redesign
+* Do NOT remove existing sections
+* Reorganize and improve placement
+* Keep implementation clean and minimal
+* Focus on conversion + clarity
+
+---
+
+## Part 1: Move anchor navigation
+
+Move the anchor navigation row (Calculator, Scenarios, Compare Models, etc.) so that it appears:
+
+* immediately below the hero section and primary CTAs
+* NOT below content blocks
+
+Ensure:
+
+* it is clearly visible without scrolling
+* it feels like part of the page structure
+
+---
+
+## Part 2: Fix CTA duplication
+
+Ensure clear CTA hierarchy:
+
+Primary CTA:
+
+* “Calculate your AI cost”
+
+Secondary CTA:
+
+* “Compare models”
+
+Remove redundant or conflicting CTA variations.
+
+Ensure:
+
+* hero CTA remains dominant
+* anchor nav supports navigation, not competition
+
+---
+
+## Part 3: Add visual section separation
+
+Introduce alternating background colors for sections:
+
+* white
+* light gray (bg-gray-50)
+* light tinted (bg-blue-50 for key sections)
+
+Apply to:
+
+* What this tool does
+* Why people overpay
+* Savings examples
+* Comparison
+* Pricing
+
+Goal:
+
+* break visual monotony
+* improve scanability
+
+---
+
+## Part 4: Improve content flow order
+
+Ensure homepage follows this order:
+
+1. Hero
+2. Anchor navigation
+3. What this tool does
+4. Why people overpay
+5. Savings examples (important)
+6. Compare models
+7. Pricing data
+8. FAQs
+
+---
+
+## Part 5: Add affiliate integration (CRITICAL)
+
+Embed affiliate recommendations inside content sections.
+
+### In “Savings examples” section:
+
+Add a block:
+
+“Most users switch to:”
+
+Show 2–3 options:
+
+* Claude (cheapest)
+* Gemini (balanced)
+* ChatGPT (default)
+
+Each with:
+
+* short benefit
+* CTA button
+
+### In comparison section:
+
+Add CTA per option:
+
+* “Try this option”
+
+### Ensure:
+
+* uses existing affiliateLinks.json
+* uses existing tracking
+
+---
+
+## Part 6: Improve section intent
+
+Each section must end with a CTA:
+
+Examples:
+
+* What this tool does → “Calculate your cost”
+* Why people overpay → “Fix this now”
+* Savings → “See your savings”
+* Comparison → “Compare your usage”
+
+---
+
+## Part 7: Keep UI clean
+
+Ensure:
+
+* no clutter
+* consistent spacing
+* typography unchanged
+* premium feel maintained
+
+---
+
+## Validation
+
+After implementation:
+
+* anchor navigation is visible above the fold
+* sections are visually distinct
+* CTA hierarchy is clear
+* affiliate content is integrated naturally
+* page no longer feels empty or flat
+* build passes
+
+---
+
+## Deliverable
+
+A homepage that:
+
+* has strong structure
+* clear navigation
+* better visual hierarchy
+* embedded monetization
+* improved conversion flow
