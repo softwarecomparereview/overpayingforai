@@ -1,0 +1,368 @@
+[
+  {
+    "slug": "general-ai",
+    "title": "General AI",
+    "icon": "🧠",
+    "color": "slate",
+    "tagline": "All-purpose AI assistants for everyday tasks",
+    "description": "General-purpose AI models handle a wide range of tasks — writing, summarising, Q&A, analysis, and coding — without specialisation. They are the starting point for most individuals and teams exploring AI.",
+    "use_cases": ["Writing and editing", "Document summarisation", "Q&A and research", "Email drafting", "Data analysis", "General coding tasks"],
+    "why_cost_matters": "General AI tools are often used across a whole team at high volume. Pricing compounds quickly — a $20/month ChatGPT Plus subscription sounds cheap until you multiply it by 10 team members, or realise the API gives you 10× the usage for the same price.",
+    "pricing_pattern": {
+      "headline": "Subscription vs API — the core decision",
+      "body": "Most general AI users start with a flat $20/month subscription. That is fine for light use. At moderate or high volume — anything above ~150K tokens per month — switching to pay-per-token API access (GPT-4o mini, Claude Haiku, or Gemini Flash) cuts cost by 80–95% with minimal quality loss.",
+      "key_points": [
+        "ChatGPT Plus is poor value above ~200K tokens/month",
+        "GPT-4o mini costs 33× less than GPT-4o for most tasks",
+        "Claude Haiku and Gemini Flash are the cheapest capable options for high-volume general use",
+        "DeepSeek V3 offers near-GPT-4o quality at 95% less cost"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best overall",
+        "badge": "bg-slate-900 text-white",
+        "model": "Claude 3.5 Sonnet",
+        "provider": "Anthropic",
+        "cost": "$3 / 1M out tokens",
+        "pitch": "Near-GPT-4o quality at a fraction of the API cost. The safest default for teams that need reliable, general-purpose output.",
+        "cta": "Start with this option",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "label": "Cheapest viable",
+        "badge": "bg-emerald-700 text-white",
+        "model": "GPT-4o mini",
+        "provider": "OpenAI",
+        "cost": "$0.60 / 1M out tokens",
+        "pitch": "33× cheaper than GPT-4o. Handles Q&A, summarisation, and drafting without meaningful quality drop.",
+        "cta": "Save with this option",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "label": "Best budget API",
+        "badge": "bg-violet-700 text-white",
+        "model": "DeepSeek V3",
+        "provider": "DeepSeek",
+        "cost": "~$0.28 / 1M out tokens",
+        "pitch": "The lowest-cost model with near-frontier quality. Ideal for cost-sensitive pipelines handling general tasks at scale.",
+        "cta": "Compare costs",
+        "href": "/compare/deepseek-vs-gpt4o-cost"
+      }
+    ],
+    "related_comparisons": ["claude-vs-gpt-cost", "gpt-4o-vs-gpt-4o-mini-cost", "subscription-vs-api-ai-cost", "deepseek-vs-gpt4o-cost"],
+    "related_best_lists": ["best-ai-under-20-per-month", "best-free-ai-tools-for-builders"],
+    "related_guides": ["how-to-reduce-ai-cost", "when-to-use-api-vs-subscription", "token-cost-explained"],
+    "faqs": [
+      { "q": "Is ChatGPT Plus worth $20/month?", "a": "Only if you use it heavily. At light usage (under 100K tokens/month), it is reasonable. Above that, the API with GPT-4o mini is 80–90% cheaper for the same or better quality." },
+      { "q": "What is the cheapest capable general-purpose AI?", "a": "DeepSeek V3 is currently the cheapest near-frontier model. GPT-4o mini is slightly pricier but has a stronger track record. Gemini Flash is the lowest-cost Google option." },
+      { "q": "Can I switch from subscription to API without losing quality?", "a": "Yes, for most tasks. The main trade-off is that API access requires technical setup. For writing, Q&A, and summarisation, GPT-4o mini or Claude Haiku matches subscription quality at a fraction of the price." },
+      { "q": "How do I estimate my token usage?", "a": "A useful rule of thumb: 1,000 tokens ≈ 750 words. A typical back-and-forth conversation of 10 turns uses roughly 3,000–8,000 tokens. Use our calculator to estimate your monthly cost." }
+    ]
+  },
+  {
+    "slug": "coding-ai",
+    "title": "Coding AI",
+    "icon": "💻",
+    "color": "blue",
+    "tagline": "AI for writing, reviewing, and debugging code",
+    "description": "Coding AI tools assist with code generation, refactoring, debugging, explaining logic, and reviewing pull requests. They range from IDE-integrated assistants like Cursor to direct API access via Claude or GPT-4o.",
+    "use_cases": ["Code generation and autocomplete", "Debugging and error fixing", "Code review and refactoring", "Documentation writing", "Test generation", "Architecture Q&A"],
+    "why_cost_matters": "Coding AI sessions can be token-heavy — complex debugging prompts and large codebases make output cost spike fast. Teams on flat subscriptions (Cursor Pro at $20/month, GitHub Copilot at $10/month) may be overpaying if usage is low, or underpaying if usage is high with expensive models.",
+    "pricing_pattern": {
+      "headline": "IDE subscription vs direct API access",
+      "body": "Most developers use Cursor Pro ($20/mo) or GitHub Copilot ($10/mo) as a flat subscription. These are often good value for daily developers. However, teams doing heavy agentic workflows or large-context refactors may find the Claude API directly — with a capable model like Claude 3.5 Sonnet — offers better control and sometimes lower total cost.",
+      "key_points": [
+        "Cursor Pro is strong value for daily developers — $20/mo with GPT-4o and Claude access included",
+        "Claude 3.5 Sonnet outperforms GPT-4o on complex coding tasks at lower cost",
+        "GPT-4o mini is too weak for complex debugging — don't route coding to cheap models",
+        "For solo builders doing light coding, GitHub Copilot Free or Cursor Free may be enough"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best for coding",
+        "badge": "bg-blue-900 text-white",
+        "model": "Claude 3.5 Sonnet",
+        "provider": "Anthropic",
+        "cost": "$3 / 1M out tokens",
+        "pitch": "Best-in-class code quality. Handles complex refactors, large context windows, and nuanced debugging better than GPT-4o at lower output cost.",
+        "cta": "Best for complex code",
+        "href": "/compare/claude-vs-cursor-for-coding"
+      },
+      {
+        "label": "Best IDE tool",
+        "badge": "bg-slate-800 text-white",
+        "model": "Cursor Pro",
+        "provider": "Cursor",
+        "cost": "$20 / month flat",
+        "pitch": "Best-in-class IDE assistant. Bundles GPT-4o and Claude access into a single flat fee — strong value for full-time developers.",
+        "cta": "Try for daily dev",
+        "href": "/compare/chatgpt-vs-cursor-cost"
+      },
+      {
+        "label": "Best free option",
+        "badge": "bg-emerald-700 text-white",
+        "model": "GitHub Copilot Free",
+        "provider": "GitHub/Microsoft",
+        "cost": "Free",
+        "pitch": "2,000 completions and 50 chat messages per month. Enough to get started without paying anything.",
+        "cta": "Start for free",
+        "href": "/best/best-free-ai-tools-for-builders"
+      }
+    ],
+    "related_comparisons": ["chatgpt-vs-cursor-cost", "claude-vs-cursor-for-coding", "claude-vs-gpt-cost", "claude-haiku-vs-gpt4o-mini"],
+    "related_best_lists": ["best-ai-for-coding-on-a-budget", "best-free-ai-tools-for-builders", "best-ai-api-for-startups"],
+    "related_guides": ["compare-ai-models-for-your-use-case", "gpt-4o-mini-vs-full-when-to-upgrade", "ai-routing-strategies"],
+    "faqs": [
+      { "q": "Is Cursor Pro worth $20/month for developers?", "a": "For full-time developers it almost always is. You get bundled GPT-4o and Claude access at a flat rate, which works out cheaper than paying API costs directly at moderate-to-high coding volume." },
+      { "q": "Is Claude better than GPT-4o for coding?", "a": "On most benchmarks, Claude 3.5 Sonnet performs comparably or slightly better than GPT-4o on coding tasks — and at lower output cost. It handles large context windows particularly well, which matters for refactors and codebase Q&A." },
+      { "q": "Can GPT-4o mini handle coding tasks?", "a": "For simple scripts and boilerplate, yes. For complex debugging, architecture decisions, or multi-file refactors, it falls short. Do not route complex coding tasks to mini-tier models to save cost — it will cost more in debugging time." },
+      { "q": "What free coding AI tools are actually useful?", "a": "GitHub Copilot Free (2,000 completions/month), Cursor Free (50 slow requests/day), and Gemini Free in Google IDEs are the strongest free-tier options. All have meaningful limits." }
+    ]
+  },
+  {
+    "slug": "writing-ai",
+    "title": "Writing AI",
+    "icon": "✍️",
+    "color": "violet",
+    "tagline": "AI for content, copy, and long-form writing",
+    "description": "Writing AI helps with blog posts, marketing copy, emails, social content, scripts, and documentation. It is one of the highest-volume use cases for AI — which makes pricing especially important to get right.",
+    "use_cases": ["Blog posts and articles", "Marketing copy and ads", "Email campaigns", "Social media content", "SEO content at scale", "Technical documentation"],
+    "why_cost_matters": "Writing is often the highest-volume AI use case in an organisation. Content teams generating tens of thousands of words per week can spend hundreds of dollars per month on AI — or they can get the same output for $10–30/month by choosing the right model for their output volume.",
+    "pricing_pattern": {
+      "headline": "Writing AI is where cheap models shine",
+      "body": "Unlike coding or complex reasoning tasks, most writing work does not require frontier-tier models. Claude Haiku, GPT-4o mini, and Gemini Flash all produce publishable content quality at 80–95% less cost than GPT-4o or Claude Sonnet. For SEO-scale content generation, this makes a huge difference.",
+      "key_points": [
+        "GPT-4o mini produces high-quality writing at 33× less cost than GPT-4o",
+        "Claude Haiku is Anthropic's cheapest option and well-suited to writing tasks",
+        "For high-volume SEO or social content, DeepSeek V3 offers near-frontier quality at lowest cost",
+        "Subscription tools like Jasper or Copy.ai often have poorer cost-per-word than direct API access"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best for writing quality",
+        "badge": "bg-violet-900 text-white",
+        "model": "Claude 3.5 Sonnet",
+        "provider": "Anthropic",
+        "cost": "$3 / 1M out tokens",
+        "pitch": "Best natural language quality available. Tone, style, and coherence are consistently better for long-form writing than GPT-4o.",
+        "cta": "Best for quality writing",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "label": "Cheapest viable",
+        "badge": "bg-emerald-700 text-white",
+        "model": "GPT-4o mini",
+        "provider": "OpenAI",
+        "cost": "$0.60 / 1M out tokens",
+        "pitch": "Produces clean, publishable writing at 33× less cost than GPT-4o. The right default for most content teams on a budget.",
+        "cta": "Save with this option",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "label": "Best for scale",
+        "badge": "bg-slate-700 text-white",
+        "model": "Claude 3.5 Haiku",
+        "provider": "Anthropic",
+        "cost": "$1.25 / 1M out tokens",
+        "pitch": "Fast, cheap, and capable enough for high-volume content pipelines. Pairs well with a human editor for quality control.",
+        "cta": "Scale content cheaply",
+        "href": "/compare/claude-haiku-vs-gpt4o-mini"
+      }
+    ],
+    "related_comparisons": ["claude-vs-gpt-cost", "gpt-4o-vs-gpt-4o-mini-cost", "subscription-vs-api-ai-cost", "claude-haiku-vs-gpt4o-mini"],
+    "related_best_lists": ["best-ai-for-writing-on-a-budget", "best-ai-under-20-per-month", "best-ai-for-solopreneurs"],
+    "related_guides": ["how-to-reduce-ai-cost", "claude-vs-chatgpt-for-business", "ai-routing-strategies"],
+    "faqs": [
+      { "q": "Do I need GPT-4o for writing tasks?", "a": "No. GPT-4o mini and Claude Haiku produce publishing-quality writing for most content types at a fraction of the cost. Reserve GPT-4o or Claude Sonnet for nuanced long-form pieces that require stronger reasoning." },
+      { "q": "What is the cheapest AI for blog and SEO content?", "a": "DeepSeek V3 or GPT-4o mini are the cheapest options with sufficient quality. For high-volume SEO content, DeepSeek V3 offers near-frontier quality at the lowest price per word." },
+      { "q": "Are writing-specific AI tools like Jasper worth the price?", "a": "Usually not. Jasper and Copy.ai are built on the same underlying models (GPT-4o, Claude) with a mark-up and workflow layer on top. You can get the same output quality by prompting directly via API at significantly lower cost." },
+      { "q": "How much does it cost to generate 10,000 words of AI content?", "a": "At GPT-4o pricing (~$0.015 per 1K output tokens), 10,000 words costs roughly $0.20. At GPT-4o mini pricing, that drops to under $0.01. At scale, this difference compounds significantly." }
+    ]
+  },
+  {
+    "slug": "research-ai",
+    "title": "Research AI",
+    "icon": "🔍",
+    "color": "amber",
+    "tagline": "AI for search, synthesis, and deep analysis",
+    "description": "Research AI tools help users find, synthesise, and analyse information — from web search with citations (Perplexity) to deep document analysis (Claude with long context). They are valuable for analysts, academics, and knowledge workers.",
+    "use_cases": ["Literature and web research", "Document and report analysis", "Competitive intelligence", "Academic research assistance", "Due diligence summaries", "Market research synthesis"],
+    "why_cost_matters": "Research tasks often involve long context windows and high output volumes — both of which spike token costs fast. Choosing the right model for the task (web-search capable vs pure reasoning) can prevent overpaying for capabilities you do not need.",
+    "pricing_pattern": {
+      "headline": "Match the tool to the research task",
+      "body": "Not all research tasks are the same. Real-time web research needs a search-enabled tool like Perplexity Pro or ChatGPT with Browse. Document analysis needs a model with large context windows like Claude or Gemini. Using a premium model for tasks that only need web retrieval is a common overspend.",
+      "key_points": [
+        "Perplexity Pro ($20/mo) beats ChatGPT Plus for web research — it is purpose-built for retrieval",
+        "Claude 3.5 Sonnet handles 200K token context — ideal for long document analysis",
+        "Gemini 1.5 Pro supports 1M token context for very large document sets",
+        "For most research tasks, you do not need GPT-4o — use Perplexity or Claude Haiku instead"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best for web research",
+        "badge": "bg-amber-800 text-white",
+        "model": "Perplexity Pro",
+        "provider": "Perplexity",
+        "cost": "$20 / month",
+        "pitch": "Best tool for web-sourced research. Real-time search with citations, cleaner output than ChatGPT Browse, and purpose-built for research workflows.",
+        "cta": "Best for web research",
+        "href": "/compare/perplexity-vs-chatgpt-cost"
+      },
+      {
+        "label": "Best for documents",
+        "badge": "bg-slate-800 text-white",
+        "model": "Claude 3.5 Sonnet",
+        "provider": "Anthropic",
+        "cost": "$3 / 1M out tokens",
+        "pitch": "200K token context window. Ideal for analysing long reports, contracts, research papers, or codebases in a single prompt.",
+        "cta": "Best for document analysis",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "label": "Best for large files",
+        "badge": "bg-emerald-700 text-white",
+        "model": "Gemini 1.5 Pro",
+        "provider": "Google",
+        "cost": "$3.50 / 1M out tokens",
+        "pitch": "1M token context window. Best option for analysing very large datasets, transcripts, or document sets in a single pass.",
+        "cta": "Compare costs",
+        "href": "/compare/gemini-vs-gpt4o-cost"
+      }
+    ],
+    "related_comparisons": ["perplexity-vs-chatgpt-cost", "gemini-vs-gpt4o-cost", "claude-vs-gpt-cost", "subscription-vs-api-ai-cost"],
+    "related_best_lists": ["best-ai-for-research-on-a-budget", "best-ai-under-20-per-month", "best-ai-for-solopreneurs"],
+    "related_guides": ["compare-ai-models-for-your-use-case", "how-to-reduce-ai-cost", "claude-vs-chatgpt-for-business"],
+    "faqs": [
+      { "q": "Is Perplexity Pro better than ChatGPT for research?", "a": "For web research, yes. Perplexity is purpose-built for retrieval, provides cleaner citations, and uses less of its context window on browsing overhead than ChatGPT. At the same $20/month price, Perplexity is usually the better research tool." },
+      { "q": "Which AI handles the longest documents?", "a": "Gemini 1.5 Pro supports a 1M token context window, making it the best option for very large document sets. Claude 3.5 Sonnet supports 200K tokens and is often better at following complex instructions over that context." },
+      { "q": "Do I need a subscription or API for research tasks?", "a": "It depends on your workflow. For one-off document analysis or ad-hoc research, a subscription is often simpler. For regular, automated research pipelines, API access gives better control and lower cost at scale." },
+      { "q": "Is GPT-4o worth it for research?", "a": "For web research, Perplexity is usually better. For document analysis, Claude's context window is more useful. GPT-4o is a strong all-rounder but rarely the best choice for specifically research-focused tasks." }
+    ]
+  },
+  {
+    "slug": "customer-support-ai",
+    "title": "Customer Support AI",
+    "icon": "💬",
+    "color": "teal",
+    "tagline": "AI for chat, tickets, and automated support",
+    "description": "Customer support AI handles chatbots, ticket routing, automated replies, and support agent assistance. It is typically one of the highest-volume AI use cases — making model cost-per-token selection critically important for any team operating at scale.",
+    "use_cases": ["Automated chatbot responses", "Ticket triage and classification", "Support agent drafting assistance", "FAQ answer generation", "Escalation routing", "Sentiment analysis"],
+    "why_cost_matters": "Support AI runs at high volume with short, repetitive prompts — which means even small cost-per-token differences translate to large monthly bills. A team handling 100,000 support interactions per month at GPT-4o pricing could cut their AI spend by 80–95% by switching to GPT-4o mini or Claude Haiku with no meaningful quality drop for most support tasks.",
+    "pricing_pattern": {
+      "headline": "High volume demands a low-cost model",
+      "body": "Support AI is volume-sensitive. For classification, FAQ matching, and short replies, cheap models like GPT-4o mini, Claude Haiku, or Gemini Flash are more than sufficient. Reserve expensive frontier models only for edge cases that require complex reasoning or nuanced tone.",
+      "key_points": [
+        "GPT-4o mini handles classification, FAQ, and short replies at 33× less cost than GPT-4o",
+        "Claude Haiku is the best Anthropic option for high-volume support tasks",
+        "DeepSeek V3 offers the lowest cost-per-token for capable support AI",
+        "A two-tier routing strategy — cheap model first, escalate to premium only when needed — can cut costs by 60–80%"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best for volume",
+        "badge": "bg-teal-800 text-white",
+        "model": "GPT-4o mini",
+        "provider": "OpenAI",
+        "cost": "$0.60 / 1M out tokens",
+        "pitch": "The default choice for high-volume support. 33× cheaper than GPT-4o, handles FAQ and classification without quality loss.",
+        "cta": "Best for high volume",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "label": "Best Anthropic option",
+        "badge": "bg-slate-800 text-white",
+        "model": "Claude 3.5 Haiku",
+        "provider": "Anthropic",
+        "cost": "$1.25 / 1M out tokens",
+        "pitch": "Fast, cheap, and capable. Claude Haiku is strong on tone-sensitive support tasks and pairs well with a Claude Sonnet escalation tier.",
+        "cta": "Try for support",
+        "href": "/compare/claude-haiku-vs-gpt4o-mini"
+      },
+      {
+        "label": "Lowest cost",
+        "badge": "bg-emerald-700 text-white",
+        "model": "DeepSeek V3",
+        "provider": "DeepSeek",
+        "cost": "~$0.28 / 1M out tokens",
+        "pitch": "Lowest cost at near-frontier quality. Ideal for price-sensitive teams handling extremely high support volumes.",
+        "cta": "Compare costs",
+        "href": "/compare/deepseek-vs-gpt4o-cost"
+      }
+    ],
+    "related_comparisons": ["claude-haiku-vs-gpt4o-mini", "deepseek-vs-gpt4o-cost", "gemini-vs-gpt4o-cost", "gpt-4o-vs-gpt-4o-mini-cost"],
+    "related_best_lists": ["best-ai-for-chat-on-a-budget", "best-ai-api-for-startups", "best-ai-for-automation"],
+    "related_guides": ["ai-routing-strategies", "ai-cost-for-saas-founders", "when-to-use-api-vs-subscription"],
+    "faqs": [
+      { "q": "Does customer support AI need a frontier model like GPT-4o?", "a": "No. For the vast majority of support tasks — FAQ matching, short replies, ticket classification — GPT-4o mini or Claude Haiku is more than sufficient. Using GPT-4o for support is one of the most common overspends we see." },
+      { "q": "What model routing strategy works for support AI?", "a": "A two-tier approach: use GPT-4o mini or Claude Haiku for the majority of queries, and escalate to Claude Sonnet or GPT-4o only for complex or sensitive cases. This cuts cost by 60–80% without reducing quality." },
+      { "q": "How much does support AI cost at scale?", "a": "At 100,000 short interactions per month (~50 tokens output each), GPT-4o costs ~$75. GPT-4o mini costs ~$2.25. That is a 33× difference. At volume, this adds up to tens of thousands of dollars per year." },
+      { "q": "Is a support-specific AI platform worth it vs direct API?", "a": "Support platforms add workflow, escalation rules, and integrations — which have genuine value. But they often mark up underlying model costs significantly. It is worth modelling cost-per-conversation both ways before committing." }
+    ]
+  },
+  {
+    "slug": "productivity-ai",
+    "title": "Productivity AI",
+    "icon": "⚡",
+    "color": "orange",
+    "tagline": "AI for planning, docs, meetings, and workflows",
+    "description": "Productivity AI helps with meeting summaries, document drafting, task planning, workflow automation, and email management. It is used heavily by solopreneurs, small teams, and enterprise knowledge workers.",
+    "use_cases": ["Meeting summaries and action items", "Document drafting and editing", "Task and project planning", "Email drafting and management", "Workflow automation", "Scheduling and prioritisation"],
+    "why_cost_matters": "Productivity AI is often used via subscription tools (Notion AI, Microsoft Copilot, Google Duet) that charge a flat monthly fee per user. These are sometimes good value — but for individuals or teams with low-to-moderate usage, a direct subscription (ChatGPT Plus or Claude Pro) often covers the same needs for less.",
+    "pricing_pattern": {
+      "headline": "Flat subscription vs per-seat productivity tools",
+      "body": "Productivity AI tools typically charge $10–30 per user per month on top of your existing tool costs. Before adding Notion AI or Copilot for Microsoft 365 to your stack, compare what ChatGPT Plus or Claude Pro would give you at the same or lower price with a more capable underlying model.",
+      "key_points": [
+        "Notion AI ($10/user/month) is built on GPT-4o mini — you can replicate most tasks with ChatGPT Plus directly",
+        "Microsoft Copilot 365 ($30/user/month) adds significant cost per seat with uneven return on investment",
+        "For solopreneurs, Claude Pro or ChatGPT Plus ($20/month flat) covers most productivity needs",
+        "API-based setups are only worth it for teams building custom productivity automations"
+      ]
+    },
+    "affiliate_picks": [
+      {
+        "label": "Best for individuals",
+        "badge": "bg-orange-800 text-white",
+        "model": "Claude Pro",
+        "provider": "Anthropic",
+        "cost": "$20 / month",
+        "pitch": "Best subscription value for solo knowledge workers. Claude 3.5 Sonnet quality, long context for documents, and strong instruction-following.",
+        "cta": "Best for individuals",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "label": "Best overall",
+        "badge": "bg-slate-800 text-white",
+        "model": "ChatGPT Plus",
+        "provider": "OpenAI",
+        "cost": "$20 / month",
+        "pitch": "Access to GPT-4o, GPT-4o mini, and DALL-E in a single plan. Best breadth of capabilities for general productivity workflows.",
+        "cta": "Good all-round choice",
+        "href": "/compare/subscription-vs-api-ai-cost"
+      },
+      {
+        "label": "Best free option",
+        "badge": "bg-emerald-700 text-white",
+        "model": "ChatGPT Free",
+        "provider": "OpenAI",
+        "cost": "Free",
+        "pitch": "GPT-4o mini access for free. Covers basic email drafting, planning, and summarisation without a subscription.",
+        "cta": "Start free",
+        "href": "/best/best-free-ai-tools-for-builders"
+      }
+    ],
+    "related_comparisons": ["subscription-vs-api-ai-cost", "claude-vs-gpt-cost", "mistral-vs-openai-cost", "perplexity-vs-chatgpt-cost"],
+    "related_best_lists": ["best-ai-for-solopreneurs", "best-ai-under-20-per-month", "best-free-ai-tools-for-builders"],
+    "related_guides": ["how-to-reduce-ai-cost", "hidden-ai-costs", "when-to-use-api-vs-subscription"],
+    "faqs": [
+      { "q": "Is Notion AI worth $10/month per user?", "a": "It depends on your Notion usage. Notion AI runs on GPT-4o mini, so for teams already paying for Notion, the add-on can be cost-effective. For teams not in Notion, ChatGPT Plus gives you better model access for the same price." },
+      { "q": "Is Microsoft Copilot worth $30/month per seat?", "a": "For most users, no. The return on investment varies widely and $30/seat/month across a team adds up fast. Before deploying at scale, run a pilot and track actual usage — many seats go underutilised." },
+      { "q": "What is the best AI subscription for a solopreneur?", "a": "Claude Pro ($20/month) or ChatGPT Plus ($20/month) cover most individual productivity needs. Claude is stronger for long document work; ChatGPT is more versatile. Use our decision engine to get a personalised recommendation." },
+      { "q": "Can I use AI for meeting summaries without a paid tool?", "a": "Yes. Free tools like Otter.ai (free tier), Fireflies.ai, or simply feeding a transcript to ChatGPT Free can cover basic meeting summaries. Paid plans are only needed for high-volume or automated workflows." }
+    ]
+  }
+]
