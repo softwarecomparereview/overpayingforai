@@ -39,9 +39,23 @@ Static-first React + Vite web app. No backend dependency.
 - `faqs.json` — 12 global FAQs
 
 **Engine** (`src/engine/`):
-- `types.ts` — Shared TypeScript types
+- `types.ts` — Shared TypeScript types (`AIModel` includes optional `source?` and `last_updated?` fields)
 - `calculator.ts` — Token-based cost calculation + alternative model comparison
 - `recommender.ts` — Deterministic scoring engine (budget fit, use-case match, quality preference)
+
+**Utils** (`src/utils/`):
+- `analytics.ts` — Allowlisted event tracker; events: `calculator_*`, `affiliate_clicked`, `seo_page_viewed`, `seo_cta_clicked`, `pricing_refresh_*`
+- `pricingFreshness.ts` — Freshness helpers: `getDaysSinceUpdate`, `isPricingStale`, `freshnessLabel`
+- `pricingDiff.ts` — Diff engine: `computePricingDiff`, `applyApprovedDiffs`, `generateChangelogEntry`, `generateSampleCandidates`
+
+**Admin** (`src/pages/admin/`):
+- `PricingRefreshPage.tsx` — Maintainer-only pricing refresh workflow at `/admin/pricing-refresh`
+  - Guard: `localStorage.getItem("overpaying_admin") === "1"`; unlock key is `"refresh"`
+  - Lock button clears the localStorage key
+  - 3-step flow: (1) Load/paste candidate JSON → (2) Review diff per model with approve/reject/mark-reviewed → (3) Export updated models.json + changelog
+  - Bulk actions: "Approve all changed", "Mark all unchanged reviewed", "Clear all"
+  - Filters: All / Changed / Stale / Added / Removed
+  - Rendered outside the public `<Layout>` wrapper (no nav bar)
 
 ## Key Commands
 

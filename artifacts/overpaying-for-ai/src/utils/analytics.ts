@@ -8,6 +8,11 @@ const ALLOWED_EVENTS = new Set([
   "lead_capture_clicked",
   "lead_capture_submitted",
   "affiliate_clicked",
+  "seo_page_viewed",
+  "seo_cta_clicked",
+  "pricing_refresh_started",
+  "pricing_diff_reviewed",
+  "pricing_refresh_approved",
 ]);
 
 export function track(eventName: string, payload: AnalyticsPayload = {}): void {
