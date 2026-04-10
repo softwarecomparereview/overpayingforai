@@ -14,6 +14,7 @@ import {
   fetchOpenAIPricingCandidates,
   fetchAnthropicPricingCandidates,
   fetchGooglePricingCandidates,
+  fetchArtificialAnalysisCandidates,
   type ProviderFetchResult,
   type FetchDataQuality,
 } from "@/utils/providerPricing";
@@ -26,7 +27,7 @@ const TODAY = new Date().toISOString().split("T")[0];
 
 type Decision = "approved" | "rejected" | "reviewed";
 type Filter = "all" | "changed" | "stale" | "added" | "removed";
-type ProviderKey = "openai" | "anthropic" | "google";
+type ProviderKey = "openai" | "anthropic" | "google" | "artificialAnalysis";
 
 interface ProviderStatus {
   status: "idle" | "loading" | "success" | "error";
@@ -41,12 +42,14 @@ const PROVIDER_DEFAULTS: Record<ProviderKey, ProviderStatus> = {
   openai: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
   anthropic: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
   google: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
+  artificialAnalysis: { status: "idle", message: "", modelCount: 0, dataQuality: null, fetchedAt: null, sourceUrl: null },
 };
 
 const PROVIDER_META: { key: ProviderKey; name: string; fetcher: () => Promise<ProviderFetchResult> }[] = [
   { key: "openai", name: "OpenAI", fetcher: fetchOpenAIPricingCandidates },
   { key: "anthropic", name: "Anthropic", fetcher: fetchAnthropicPricingCandidates },
   { key: "google", name: "Google", fetcher: fetchGooglePricingCandidates },
+  { key: "artificialAnalysis", name: "Artificial Analysis", fetcher: fetchArtificialAnalysisCandidates },
 ];
 
 function fmt(v: string | number | null | undefined): string {
@@ -343,6 +346,7 @@ export function PricingRefreshPage() {
       openai: { ...PROVIDER_DEFAULTS.openai, status: "loading", message: "Fetching…" },
       anthropic: { ...PROVIDER_DEFAULTS.anthropic, status: "loading", message: "Fetching…" },
       google: { ...PROVIDER_DEFAULTS.google, status: "loading", message: "Fetching…" },
+      artificialAnalysis: { ...PROVIDER_DEFAULTS.artificialAnalysis, status: "loading", message: "Fetching…" },
     });
     try {
       const settled = await Promise.allSettled(PROVIDER_META.map((p) => p.fetcher()));
