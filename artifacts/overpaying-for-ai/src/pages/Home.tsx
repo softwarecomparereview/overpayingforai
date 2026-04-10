@@ -112,6 +112,29 @@ function NavPill({ href, label }: { href: string; label: string }) {
   );
 }
 
+function SectionCard({
+  href,
+  title,
+  description,
+  onClick,
+}: {
+  href: string;
+  title: string;
+  description: string;
+  onClick?: () => void;
+}) {
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      className="group block rounded-xl border border-border bg-background p-4 hover:border-primary/30 hover:bg-muted/20 transition-colors"
+    >
+      <p className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{title}</p>
+      <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+    </a>
+  );
+}
+
 export function Home() {
   return (
     <div className="bg-background">
@@ -132,6 +155,9 @@ export function Home() {
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
                 A decision engine for developers and teams who want the cheapest viable AI stack — not a roundup of the flashiest models.
+              </p>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl mb-6">
+                Compare AI model pricing, calculate token-based costs, and find cheaper alternatives across ChatGPT, Claude, Gemini, and more.
               </p>
 
               {/* CTA Cards */}
@@ -200,6 +226,62 @@ export function Home() {
             <NavPill href="#savings" label="Savings Examples" />
             <NavPill href="#pricing" label="Pricing Data" />
             <NavPill href="#faq" label="FAQs" />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <SectionCard
+              href="#savings"
+              title="Real savings examples"
+              description="See how much teams save by switching to cheaper models or better routing."
+              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "savings" })}
+            />
+            <SectionCard
+              href="#comparison"
+              title="Compare AI models"
+              description="Browse side-by-side comparisons for the tools and plans people actually use."
+              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "comparison" })}
+            />
+            <SectionCard
+              href="#pricing"
+              title="Pricing data"
+              description="Review the current pricing patterns and where the biggest overpayment happens."
+              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })}
+            />
+            <SectionCard
+              href="#pricing"
+              title="Best AI by use case"
+              description="Use the pricing patterns and comparison data to narrow to the best fit."
+              onClick={() => track("card_clicked", { sourceSurface: "home", cardType: "section_preview", target: "pricing" })}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">What this tool does</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              This site helps you calculate AI usage costs, compare models side-by-side, and find cheaper alternatives without losing clarity.
+            </p>
+            <ul className="space-y-2 text-sm text-foreground">
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Estimate monthly AI cost</span></li>
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Compare models side-by-side</span></li>
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Find cheaper alternatives</span></li>
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Why people overpay</p>
+            <ul className="space-y-2 text-sm text-foreground">
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Using premium models unnecessarily</span></li>
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Ignoring token output costs</span></li>
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Not comparing alternatives</span></li>
+              <li className="flex gap-2"><span className="text-primary">•</span><span>Lack of visibility into usage</span></li>
+            </ul>
           </div>
         </div>
       </section>
