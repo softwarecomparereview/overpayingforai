@@ -1,0 +1,313 @@
+Enhance the EXISTING codebase by redesigning the homepage properly instead of making small patch fixes.
+
+Important:
+
+* This is NOT a rebuild of the whole site
+* Reuse the existing codebase, routes, calculator/report/affiliate logic, and analytics where practical
+* But for the homepage, you may substantially redesign layout and section hierarchy
+* Prioritize revenue, clarity, SEO, and user experience
+* Use more color and stronger visual hierarchy than the current mostly-white version
+* All interactive-looking elements must actually be interactive
+* Do NOT leave dead links, dead cards, fake buttons, fake text fields, or buried navigation
+
+## Critical instruction
+
+The current homepage implementation is not acceptable.
+
+Problems to solve:
+
+* homepage is too bare
+* top navigation and section navigation are not working well
+* anchor navigation is buried too far down
+* some elements look interactive but do nothing
+* example: "Enter token usage..." currently looks like an input/text field but is just dead text
+* links do not work consistently
+* page lacks color, energy, and strong conversion flow
+* page does not feel optimized for revenue
+
+Do NOT apply another minor patch.
+Instead, create 3 distinct homepage design variants inside the existing app so they can be reviewed side by side.
+
+---
+
+# Deliver 3 homepage variants
+
+Create 3 separate routes/pages:
+
+* `/routes/design1`
+* `/routes/design2`
+* `/routes/design3`
+
+If the project’s route structure differs, use the equivalent valid paths, but keep the URL names clearly identifiable as:
+
+* design1
+* design2
+* design3
+
+Each design should be fully working and visually distinct.
+
+---
+
+# Shared requirements for all 3 designs
+
+Each design must:
+
+1. Be highly optimized for revenue and conversion
+2. Be visually stronger than the current version
+3. Use more color and clearer section separation
+4. Have obvious navigation above the fold
+5. Include working clickable CTAs
+6. Include working internal anchor links where applicable
+7. Integrate affiliate sections naturally where relevant
+8. Be responsive on desktop and mobile
+9. Reuse existing calculator/report/affiliate logic where possible
+10. Make every interactive-looking element actually interactive
+
+---
+
+# Mandatory homepage goals
+
+Every design must make it immediately clear:
+
+* what the site does
+* why the user should care
+* what action to take next
+* what value exists further down the page
+
+Each design must clearly support this funnel:
+
+Hero
+→ calculator / decision entry
+→ savings / comparison / trust
+→ affiliate recommendation
+→ deeper sections / internal navigation
+
+---
+
+# Design direction for the 3 variants
+
+## Design 1 — Conversion-first SaaS landing page
+
+Characteristics:
+
+* strong hero
+* bold CTA hierarchy
+* visible anchor navigation immediately under hero
+* colorful but professional
+* sections with alternating backgrounds
+* prominent savings / affiliate blocks
+* feels like a polished SaaS funnel
+
+## Design 2 — Content + SEO + trust hybrid
+
+Characteristics:
+
+* hero still strong
+* more informational density above the fold
+* better preview of sections below
+* stronger internal navigation
+* more text structure for SEO
+* trust blocks and pricing freshness surfaced clearly
+* still conversion-focused
+
+## Design 3 — Product-first interactive landing page
+
+Characteristics:
+
+* calculator or calculator-entry behavior brought much closer to the top
+* more immediate product interaction
+* quick scenario/start options
+* savings logic preview
+* stronger visual interaction model
+* still includes trust/content sections
+
+Each design must be genuinely different, not superficial variations of the same layout.
+
+---
+
+# Navigation requirements
+
+## Top navigation
+
+* keep top nav clean and functional
+* ensure it does not feel disconnected from the page
+
+## Section navigation
+
+* add visible section navigation near the top, not buried far below
+* this can be:
+
+  * anchor pills
+  * tab-like row
+  * sticky subnav
+* but it must be above the fold or immediately below hero CTA area
+
+Section navigation should include:
+
+* Calculator
+* Usage Scenarios
+* Compare Models
+* Savings Examples
+* Pricing Data
+* FAQs
+
+These must scroll correctly to valid sections where applicable.
+
+---
+
+# Interactivity verification requirements (very important)
+
+Before considering the task done, inspect the homepage and verify every clickable-looking element.
+
+This includes:
+
+* buttons
+* cards
+* pills
+* anchor items
+* CTA links
+* text fields or field-like boxes
+* nav items
+* section preview cards
+
+For each such element:
+
+* either make it actually interactive
+* or restyle it so it clearly looks passive
+
+Example:
+If "Enter token usage..." looks like an input field, it must either:
+
+* become a real text field / calculator entry
+* or be redesigned so it is clearly not an input
+
+No dead affordances allowed.
+
+---
+
+# Required QA task inside this implementation
+
+Add a homepage interaction audit pass.
+
+You must:
+
+1. identify every interactive-looking element on homepage
+2. click/test each internal link or anchor
+3. verify destination exists
+4. verify there are no broken internal links
+5. verify no dead text-field-looking blocks remain
+6. verify all hero and section CTAs work
+
+Do this for each of:
+
+* design1
+* design2
+* design3
+
+If any element looks interactive but is not functional, fix it.
+
+---
+
+# Affiliate integration requirements
+
+Each design must include affiliate-related sections where naturally appropriate.
+
+Use existing affiliateLinks.json and current affiliate/recommendation logic where possible.
+
+Include:
+
+* a natural affiliate recommendation area
+* recommendation framing like:
+
+  * Best overall
+  * Cheapest
+  * Best for coding / writing / startup
+* working CTA buttons
+* analytics-safe click behavior
+
+Do NOT make affiliate sections look like spammy ad blocks.
+They should feel like decision support.
+
+---
+
+# Copy requirements
+
+Use stronger, more conversion-oriented homepage copy.
+
+Examples of tone:
+
+* direct
+* useful
+* savings-focused
+* trustworthy
+* not hypey
+
+Examples:
+
+* “Stop overpaying for AI.”
+* “Check your monthly spend.”
+* “See the cheapest viable model for your workload.”
+* “Compare plans before you commit.”
+
+---
+
+# Color and visual design requirements
+
+The current version is too white and visually flat.
+
+Fix this by:
+
+* using alternating section backgrounds
+* using tinted sections for high-value areas
+* using stronger accent color usage
+* creating clearer separation between sections
+* preserving a premium feel
+
+Use a restrained palette, but definitely more color than the current version.
+
+---
+
+# Component quality requirements
+
+* no fake inputs
+* no dead cards
+* no buried navigation
+* no duplicated confusing CTA hierarchy
+* no random spacing gaps
+* no weak selected states
+* no hover/click styles without actions
+
+---
+
+# Implementation approach
+
+1. Inspect current homepage code and routes
+2. Create 3 working design variants
+3. Wire all sections and links properly
+4. Verify internal navigation
+5. Verify clickable elements
+6. Ensure mobile and desktop both look intentional
+7. Ensure build passes
+
+---
+
+# Deliverable
+
+Produce 3 reviewable homepage variants:
+
+* design1 = conversion-first SaaS landing page
+* design2 = content + SEO + trust hybrid
+* design3 = product-first interactive landing page
+
+Each must:
+
+* be fully working
+* have functioning links and anchors
+* have no dead interactive-looking elements
+* be more colorful and more conversion-oriented than the current version
+
+At the end, provide:
+
+1. exact route/URL for each design
+2. summary of the design philosophy of each
+3. confirmation that all clickable-looking homepage elements were tested and fixed
