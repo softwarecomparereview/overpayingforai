@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 
 const navLinks = [
@@ -10,15 +11,20 @@ const navLinks = [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold text-base text-foreground hover:text-primary transition-colors">
-            <span className="text-primary font-mono text-sm bg-primary/10 px-2 py-0.5 rounded">$</span>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 font-bold text-sm sm:text-base text-foreground hover:text-primary transition-colors flex-shrink-0"
+          >
+            <span className="text-primary font-mono text-xs sm:text-sm bg-primary/10 px-1.5 sm:px-2 py-0.5 rounded">$</span>
             OverpayingForAI
           </Link>
+
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -34,14 +40,53 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </nav>
-          <Link
-            href="/calculator"
-            className="text-sm bg-primary text-primary-foreground px-4 py-1.5 rounded font-medium hover:bg-primary/90 transition-colors"
-            data-testid="nav-cta"
-          >
-            Calculate Cost
-          </Link>
+
+          <div className="flex items-center gap-2 ml-auto">
+            <Link
+              href="/calculator"
+              className="text-xs sm:text-sm bg-primary text-primary-foreground px-3 sm:px-4 py-1 sm:py-1.5 rounded font-medium hover:bg-primary/90 transition-colors"
+              data-testid="nav-cta"
+            >
+              <span className="hidden sm:inline">Calculate Cost</span>
+              <span className="sm:hidden">Calculate</span>
+            </Link>
+
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Toggle navigation menu"
+              className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 rounded hover:bg-muted transition-colors"
+            >
+              <span
+                className={`block w-5 h-0.5 bg-foreground transition-transform origin-center ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+              />
+              <span
+                className={`block w-5 h-0.5 bg-foreground transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block w-5 h-0.5 bg-foreground transition-transform origin-center ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+              />
+            </button>
+          </div>
         </div>
+
+        {menuOpen && (
+          <div className="md:hidden border-t border-border bg-background px-4 py-3 flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`px-3 py-2 rounded text-sm transition-colors ${
+                  location.startsWith(link.href)
+                    ? "bg-muted text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </header>
 
       <main className="flex-1">{children}</main>
