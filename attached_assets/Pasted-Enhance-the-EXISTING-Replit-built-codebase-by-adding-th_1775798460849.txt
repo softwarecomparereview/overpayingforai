@@ -1,0 +1,232 @@
+Enhance the EXISTING Replit-built codebase by adding the first batch of static SEO landing pages for AI cost comparison and AI pricing intent.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the current app
+* Reuse the existing SEO page generator/template/routing if it already exists
+* If an SEO data file already exists, extend it rather than replacing it
+* Keep everything static-first and compatible with the current React + Vite architecture
+* Do NOT add backend, CMS, auth, or database
+* Keep changes incremental and low-risk
+
+## Goal
+
+Add 5 high-intent SEO landing pages that drive users into the existing calculator, savings report, and affiliate CTA flow.
+
+These pages should be data-driven if that pattern already exists in the codebase.
+
+## First task: inspect the current SEO implementation
+
+Before editing, inspect the codebase and determine:
+
+1. where SEO page content currently lives
+2. how SEO routes are currently generated
+3. what fields already exist in the SEO page schema
+4. how existing CTAs link into calculator/report pages
+
+Then extend that structure instead of inventing a parallel one.
+
+## Add these 5 SEO pages
+
+### 1. chatgpt-vs-claude-cost
+
+Use:
+
+* slug: `chatgpt-vs-claude-cost`
+* title/headline: `ChatGPT vs Claude Cost Comparison (2026)`
+* metaTitle: `ChatGPT vs Claude Cost Comparison (2026)`
+* metaDescription: `Compare ChatGPT vs Claude pricing and see which AI model is cheaper for your usage.`
+
+Suggested body content:
+
+* Quick Answer:
+  ChatGPT and Claude are both strong general-purpose AI options, but their cost differs significantly depending on input and output token usage. Claude is often more cost-efficient for long-form and long-context use cases.
+* Cost Breakdown:
+  AI pricing is driven by token usage, and output tokens can materially increase total cost. For heavy-response workloads, one model can become several times more expensive than another.
+* Which Should You Use:
+  If your workflow involves longer outputs, document analysis, or long conversations, Claude may be the cheaper option. For more balanced general-purpose usage, ChatGPT may still be the better fit depending on quality and workflow needs.
+* CTA intent:
+  Link users into the existing calculator with copy like:
+
+  * `Try your usage in the calculator`
+  * `Generate a savings report`
+
+### 2. cheapest-ai-model-for-startups
+
+Use:
+
+* slug: `cheapest-ai-model-for-startups`
+* title/headline: `Cheapest AI Model for Startups (Full Cost Breakdown)`
+* metaTitle: `Cheapest AI Model for Startups (Full Cost Breakdown)`
+* metaDescription: `Find the cheapest AI model for startups and compare cost-efficient options before you overspend.`
+
+Suggested body content:
+
+* Why Startups Overpay:
+  Startups often choose the most powerful model too early, which increases burn without always improving outcomes.
+* What Matters Most:
+  Early-stage teams should optimize for predictable cost, acceptable quality, and the ability to scale gradually rather than paying premium rates by default.
+* Practical Recommendation:
+  Start with lower-cost models for general tasks and reserve premium models for complex reasoning, high-value outputs, or customer-critical flows.
+* CTA intent:
+
+  * `Calculate your startup AI cost`
+  * `See cheaper alternatives`
+
+### 3. gpt-4o-vs-gemini-pricing
+
+Use:
+
+* slug: `gpt-4o-vs-gemini-pricing`
+* title/headline: `GPT-4o vs Gemini Pricing: Which Is Cheaper?`
+* metaTitle: `GPT-4o vs Gemini Pricing: Which Is Cheaper?`
+* metaDescription: `Compare GPT-4o vs Gemini pricing and understand which model is cheaper for your use case.`
+
+Suggested body content:
+
+* Overview:
+  GPT-4o and Gemini are both widely used for general AI workloads, but their cost profile can differ meaningfully depending on prompt size and response volume.
+* What Changes Cost:
+  The real driver is not only the nominal model price, but the ratio of input to output tokens and how often the model is used in production.
+* Which Is Better for Cost:
+  One model may look cheaper on paper, but actual usage patterns determine the true monthly bill. Cost calculators are more reliable than assumptions.
+* CTA intent:
+
+  * `Compare your actual usage`
+  * `Check your monthly AI cost`
+
+### 4. ai-cost-calculator-for-small-business
+
+Use:
+
+* slug: `ai-cost-calculator-for-small-business`
+* title/headline: `AI Cost Calculator for Small Business (Free Tool)`
+* metaTitle: `AI Cost Calculator for Small Business (Free Tool)`
+* metaDescription: `Use a free AI cost calculator for small business to estimate spend and identify cheaper AI options.`
+
+Suggested body content:
+
+* Why Small Businesses Need This:
+  Small businesses often underestimate how quickly AI subscription and API costs can stack up across daily use.
+* Common Cost Mistakes:
+  Overestimating required model power, ignoring output token costs, and using premium models for simple repetitive tasks all increase spend unnecessarily.
+* Better Approach:
+  Estimate cost before committing, compare alternatives, and choose the model that matches the business task instead of defaulting to the most expensive option.
+* CTA intent:
+
+  * `Use the free calculator`
+  * `Generate your savings report`
+
+### 5. best-ai-model-for-coding-cost
+
+Use:
+
+* slug: `best-ai-model-for-coding-cost`
+* title/headline: `Best AI Model for Coding Based on Cost`
+* metaTitle: `Best AI Model for Coding Based on Cost`
+* metaDescription: `Compare the best AI models for coding based on cost and decide when premium coding models are worth it.`
+
+Suggested body content:
+
+* Coding Cost Reality:
+  AI coding assistance can become expensive quickly when used throughout the day for chat, generation, refactoring, and explanation.
+* Where Premium Is Worth It:
+  Premium models can justify their cost for complex debugging, architectural reasoning, and difficult generation tasks.
+* Where Lower Cost Models Work:
+  Boilerplate, repetitive tasks, and lightweight explanation often do not require the most expensive model.
+* CTA intent:
+
+  * `Find the cheapest model for your coding workflow`
+  * `Compare coding AI costs`
+
+## Implementation requirements
+
+### 1. Reuse existing schema
+
+If the current SEO page data already uses fields like:
+
+* `slug`
+* `title`
+* `metaTitle`
+* `metaDescription`
+* `headline`
+* `subheadline`
+* `bodySections`
+* `faq`
+
+then extend those fields only.
+
+If the current schema differs, adapt the above content into the existing structure instead of redesigning the whole system.
+
+### 2. Keep content structured
+
+Each page should render cleanly with:
+
+* headline
+* subheadline if supported
+* 3 body sections
+* CTA into the existing calculator
+* optional CTA into the report flow
+* optional affiliate/recommended provider block if the current template supports it
+
+### 3. Do not duplicate product logic
+
+Do NOT:
+
+* recreate the calculator inside these pages
+* duplicate recommendation logic
+* add a second savings engine
+
+These pages should feed into the existing product flows.
+
+### 4. Routing
+
+Ensure these pages are reachable through the existing SEO routing system.
+Do not invent an entirely new router structure unless the current implementation is missing one.
+
+### 5. Metadata
+
+Set page-level metadata where the current architecture supports it:
+
+* page title
+* meta description
+
+### 6. Internal linking
+
+Where appropriate, add links from the page into:
+
+* the existing calculator
+* the existing report flow
+* existing relevant comparison pages
+
+Keep this modest and clean.
+
+### 7. Analytics
+
+If the current analytics wrapper exists, fire:
+
+* `seo_page_viewed`
+* `seo_cta_clicked`
+
+Use minimal payloads like:
+
+* slug
+* cta target
+* page type
+
+If analytics is not already wired for SEO pages, add a safe minimal call pattern only.
+
+## Validation
+
+After implementation:
+
+1. confirm all 5 pages exist in the data source
+2. confirm routes render correctly
+3. confirm page titles/meta descriptions are set where supported
+4. confirm CTA links go to the existing calculator/report flow
+5. confirm build passes
+
+## Deliverable
+
+A clean incremental enhancement to the existing codebase that adds 5 static SEO landing pages designed to drive traffic into the existing monetization funnel.
