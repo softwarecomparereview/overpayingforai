@@ -12,6 +12,7 @@ export interface AIModel {
   costScore: number;
   latencyScore: number;
   notes: string;
+  source?: string;
   last_updated?: string;
   source?: string;
 }

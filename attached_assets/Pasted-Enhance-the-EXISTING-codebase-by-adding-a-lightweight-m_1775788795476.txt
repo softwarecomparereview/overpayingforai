@@ -1,0 +1,266 @@
+Enhance the EXISTING codebase by adding a lightweight maintainer-only pricing refresh workflow under a new branch: `feature/pricing-refresh-admin`.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the existing app
+* Preserve the current static-first architecture
+* Do NOT introduce a full backend, database, or auth system
+* Reuse the existing pricing data model, pricing freshness utilities, analytics wrapper, and UI patterns
+* Keep implementation incremental and low-risk
+* This feature is for internal/admin maintenance, not public users
+
+## Goal
+
+Create a hidden maintainer/admin workflow that lets us:
+
+1. fetch or load refreshed provider pricing data
+2. compare it against the current pricing dataset
+3. show a clear before-vs-after diff
+4. approve or reject changes
+5. update the in-app pricing dataset representation safely
+6. prepare a publishable/exportable updated JSON dataset and changelog entry
+
+This should reduce the need for manual raw JSON editing and eliminate public trust issues caused by stale pricing data.
+
+## Core product behavior
+
+The workflow must support this model:
+
+* User clicks: **Refresh prices**
+* System loads refreshed provider pricing candidates
+* System computes diffs against current pricing records
+* UI shows:
+
+  * old value
+  * new value
+  * changed fields
+  * source URL
+  * whether the row changed or not
+* User can:
+
+  * approve all
+  * approve selected rows
+  * reject selected rows
+  * mark reviewed without changing values
+* Once approved, the updated dataset is available in a clean export/output form suitable for replacing the current static pricing JSON
+
+Do NOT auto-publish blindly.
+
+## Scope and implementation constraints
+
+### 1. Add a hidden maintainer page
+
+Create a hidden route/page such as:
+
+* `/admin/pricing-refresh`
+
+Do NOT add it to public navigation.
+
+Use a simple in-app guard only if needed, such as:
+
+* a local “maintainer mode” toggle
+* or a hardcoded dev-only visibility guard
+  But do NOT build full auth.
+
+### 2. Load current pricing dataset
+
+Reuse the EXISTING pricing dataset currently used by the app.
+
+Display current pricing records in a maintainable internal UI.
+
+For each record, show:
+
+* provider
+* model
+* relevant price fields
+* source
+* last reviewed / last updated
+* stale/fresh status using the existing freshness utility
+
+### 3. Add a refreshed pricing candidate input layer
+
+Implement one of these lightweight approaches, chosen based on the existing codebase structure:
+
+Preferred:
+
+* a local JSON input/import area for “refreshed provider pricing candidates”
+
+Acceptable options:
+
+* text area for pasted JSON
+* file upload for JSON
+* mock refresh loader from a local fixture file
+* placeholder fetch layer that loads from a predefined local candidate dataset
+
+Do NOT build a real external scraping backend yet unless the current codebase already has an obvious safe seam for it.
+
+### 4. Add diff engine
+
+Create a utility that compares:
+
+* current pricing dataset
+  vs
+* refreshed candidate dataset
+
+Suggested location:
+
+* `/src/utils/pricingDiff.ts`
+
+For each model/provider record, compute:
+
+* unchanged
+* changed
+* missing in new data
+* new in refreshed data
+
+For changed rows, show field-by-field comparisons.
+
+At minimum compare:
+
+* relevant price fields already used in the app
+* source
+* last_updated / review date
+* optional notes
+
+### 5. Build review UI
+
+On the admin page, show a structured review table or card list.
+
+For each row:
+
+* provider/model name
+* current values
+* proposed new values
+* changed fields highlighted
+* source URL
+* approve toggle
+* reject toggle
+* “mark reviewed today” action even if no price changed
+
+Allow filters:
+
+* all
+* changed only
+* stale only
+* provider-specific if practical
+
+### 6. Add approval workflow
+
+Implement approval state in local React state.
+
+Support:
+
+* approve selected
+* approve all changed
+* reject selected
+* clear review selection
+
+Do NOT auto-overwrite the live pricing data used by the whole app globally until the user confirms.
+
+### 7. Add export / publish-prep output
+
+After approval, generate a clean updated pricing dataset output.
+
+Acceptable outputs:
+
+* downloadable JSON file
+* copyable JSON block
+* in-app generated updated dataset object
+* optional changelog-ready output block
+
+This output should be suitable for replacing the current static pricing dataset in Git/GitHub.
+
+Do NOT implement full Git commit automation unless the codebase already has a safe existing pattern.
+
+### 8. Add changelog support
+
+Create or extend a changelog structure, such as:
+
+* `/src/data/changelog/pricing-updates.json`
+
+When approved changes exist, generate a structured changelog entry containing:
+
+* review date
+* provider(s) affected
+* model(s) changed
+* summary of changed fields
+* optional source references
+
+This can be generated in-memory or prepared as exportable JSON.
+
+### 9. Reuse existing wording and freshness patterns
+
+Public-facing stale messaging should remain cautious and trust-preserving.
+
+If the admin workflow touches any public wording, use this style:
+
+* “Pricing data may be outdated. Verify with provider.”
+* “Pricing data last reviewed X days ago”
+
+Do NOT reintroduce discouraging or over-precise language.
+
+### 10. Analytics
+
+If suitable, use the existing analytics wrapper to track internal events such as:
+
+* `pricing_refresh_started`
+* `pricing_diff_reviewed`
+* `pricing_refresh_approved`
+
+Keep this minimal and safe.
+If analytics is public-user oriented only, this can be omitted or wrapped in a non-blocking way.
+
+## Technical guidance
+
+### Prefer small new files like:
+
+* `/src/pages/admin/PricingRefreshPage.tsx`
+* `/src/components/admin/PricingDiffTable.tsx`
+* `/src/components/admin/PricingCandidateImport.tsx`
+* `/src/utils/pricingDiff.ts`
+
+But adapt to the existing project structure instead of forcing a new one.
+
+### Data safety rules
+
+* Do NOT break the current calculator
+* Do NOT change the pricing schema in a way that invalidates existing consumers
+* Keep all new fields backward-compatible
+* Avoid broad refactors
+
+### UX expectations
+
+The admin screen should feel:
+
+* practical
+* structured
+* easy to review
+* clearly separated from public UI
+
+It does NOT need to be beautiful like the public site, but it must be clear and safe.
+
+## Validation requirements
+
+After implementation:
+
+* verify current pricing data still loads correctly
+* verify candidate pricing import/load works
+* verify diff computation is correct
+* verify changed fields are visible
+* verify approvals produce the expected updated output
+* verify “mark reviewed today” works
+* verify no public calculator/report flow is broken
+* verify build passes
+
+## Deliverable
+
+A hidden maintainer-only pricing refresh workflow that enables:
+
+* loading refreshed pricing candidates
+* diffing against the current dataset
+* reviewing before/after changes
+* approving selected updates
+* generating an updated JSON dataset and changelog output
+
+This must work as an incremental enhancement to the existing Replit-built static product, without introducing a heavy backend.

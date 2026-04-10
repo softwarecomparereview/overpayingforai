@@ -1,0 +1,144 @@
+Enhance the EXISTING codebase by adding a polished savings-report workflow on top of the current calculator and recommendation flow.
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT replace the existing calculator
+* Reuse existing state, hooks, utilities, engine outputs, and UI patterns
+* Keep everything static-first and client-side only
+* Do NOT introduce backend, auth, or database
+* Do NOT duplicate cost/recommendation logic
+
+## Goal
+
+Add a report workflow that turns the current calculator output into a professional, user-facing savings report.
+
+The report must be derived from the EXISTING calculator/recommendation results.
+
+## Tasks
+
+### 1. Add report UI
+
+Create a reusable report component and wire it into the existing flow.
+
+Suggested structure:
+
+* `/src/components/Report/`
+
+If the current codebase already has a better location, use that instead.
+
+### 2. Add a “Generate Report” action
+
+From the existing calculator result area, add a CTA:
+
+* “Generate Report”
+
+This should open either:
+
+* a dedicated report section/page
+* or a modal/panel
+  depending on the current app structure
+
+Choose the option that best fits the existing codebase.
+
+### 3. Report contents
+
+The report should include:
+
+* **Input summary**
+
+  * selected model or provider inputs
+  * usage assumptions
+  * any budget/volume inputs already in the calculator
+
+* **Estimated cost summary**
+
+  * projected monthly cost
+  * any current comparison numbers already produced by the calculator
+
+* **Recommended option**
+
+  * best-fit model/plan from the existing engine
+  * short explanatory text if already available, otherwise concise generated summary from existing result fields only
+
+* **Comparison table**
+
+  * top recommended option vs alternatives already available in the current output
+  * do not invent new recommendation logic
+
+* **Savings section**
+
+  * estimated savings amount
+  * estimated savings percentage
+  * if an obvious baseline exists in current outputs, use it
+  * if no clean baseline exists, implement the smallest safe derivation and keep wording cautious
+
+* **Assumptions**
+
+  * clearly show that results are based on pricing data and user inputs
+
+* **Pricing freshness**
+
+  * reuse the existing pricing freshness metadata/UI style
+  * show “Pricing data last reviewed …”
+  * show stale warning if applicable
+
+### 4. Print / PDF-friendly layout
+
+Make the report view print-friendly.
+
+Requirements:
+
+* clean spacing
+* readable headings
+* avoid interactive clutter in print mode
+* browser print should produce a presentable PDF
+
+You do NOT need to implement server-side PDF generation.
+
+### 5. Reuse existing logic only
+
+Critical:
+
+* do NOT create a parallel calculator
+* do NOT duplicate pricing logic
+* do NOT reimplement recommendation logic
+* derive report values from existing calculator state and outputs
+
+### 6. Keep changes incremental
+
+Only add the files and wiring required for this feature.
+
+Avoid:
+
+* broad refactors
+* renaming unrelated things
+* moving major folders unless absolutely required
+
+## UX guidance
+
+The report should feel professional and useful enough to become the basis for:
+
+* sharing
+* exporting
+* later lead capture
+
+Tone:
+
+* concise
+* credible
+* structured
+
+## Validation
+
+After implementation:
+
+* verify report reflects the current calculator state correctly
+* verify savings values are internally consistent
+* verify pricing freshness note appears correctly
+* verify print view is usable
+* verify build passes
+
+## Deliverable
+
+A working report workflow where a user can run the existing calculator, click “Generate Report,” and see a polished savings report based on the current results.
