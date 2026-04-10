@@ -1,0 +1,158 @@
+Enhance the EXISTING codebase by upgrading the admin pricing refresh workflow to support live provider pricing retrieval.
+
+Important:
+
+* This is NOT a rebuild
+* Preserve the existing static-first public architecture
+* Do NOT change public calculator/report flows
+* This live fetch capability is for the admin pricing refresh workflow only
+* Reuse the current admin pricing refresh page, pricing diff utility, and pricing data model
+* Keep implementation incremental and safe
+* Do NOT auto-publish fetched prices
+
+## Current state
+
+The current admin pricing refresh flow only supports:
+
+* sample candidate generation
+* pasted JSON candidate import
+* diff review and approval
+
+There is currently NO live provider fetch logic.
+
+## Goal
+
+Add live pricing retrieval for selected providers so the admin workflow can:
+
+1. fetch latest provider pricing from official sources
+2. normalize it into the existing pricing candidate format
+3. compare current vs fetched candidate values
+4. show before-vs-after diffs in the existing admin review UI
+5. still require manual approval before updating/exporting
+
+## Tasks
+
+### 1. Add provider fetch adapter layer
+
+Create a small provider adapter structure, for example under:
+
+* `/src/utils/providerPricing/`
+  or equivalent existing utility location
+
+Add initial adapters for:
+
+* OpenAI
+* Anthropic
+* Google
+
+Each adapter should expose a function like:
+
+* `fetchOpenAIPricingCandidates()`
+* `fetchAnthropicPricingCandidates()`
+* `fetchGooglePricingCandidates()`
+
+### 2. Source only official provider pricing pages/docs
+
+Use official pricing sources only.
+
+For each adapter:
+
+* clearly define the source URL
+* keep parsing logic isolated per provider
+* normalize only the pricing fields you already support in your app
+
+### 3. Normalize into existing candidate schema
+
+The fetched results must be converted into the same candidate structure already used by:
+
+* `computePricingDiff(current, candidates)`
+
+Do NOT redesign the full data schema unless necessary.
+Keep backward compatibility.
+
+### 4. Integrate into existing admin page
+
+Enhance:
+
+* `artifacts/overpaying-for-ai/src/pages/admin/PricingRefreshPage.tsx`
+
+Add:
+
+* “Fetch OpenAI pricing”
+* “Fetch Anthropic pricing”
+* “Fetch Google pricing”
+* optional “Fetch all supported providers”
+
+These actions should:
+
+* fetch
+* normalize
+* load candidates into the existing diff review flow
+
+### 5. Error handling
+
+Handle:
+
+* fetch failure
+* parse failure
+* no matching models found
+* partial provider success
+
+Show clear admin-facing status messages.
+
+### 6. Preserve manual approval model
+
+Critical:
+
+* fetched prices must NOT overwrite current pricing automatically
+* fetched candidates must still go through the existing diff review UI
+* admin must approve before exporting/updating
+
+### 7. Mark source and review timing
+
+For fetched candidates, preserve:
+
+* source URL
+* fetched timestamp
+* last reviewed timestamp where appropriate
+
+### 8. Keep public app unaffected
+
+Do NOT:
+
+* fetch provider pricing on public pages
+* introduce runtime dependency for normal users
+* slow down the calculator or report flow
+
+This is admin-only functionality.
+
+### 9. Implementation strategy
+
+If direct client-side fetch from provider sites is blocked by CORS or unsuitable for the browser:
+
+* implement the cleanest lightweight fallback possible for the current codebase
+* for example, a provider fetch seam with clearly isolated placeholder behavior and explicit notes
+* do not fake “live” functionality if it is not actually live
+
+If browser-only live fetch is not technically viable, state that clearly in code comments and structure the code so it can later move to a small serverless admin fetch layer.
+
+### 10. Validation
+
+After implementation:
+
+* verify each provider fetch path works or fails clearly
+* verify normalized candidates load into the current diff UI
+* verify diffs are accurate
+* verify no public flows break
+* verify build passes
+
+## Deliverable
+
+A real admin-only live pricing retrieval enhancement that plugs into the existing pricing refresh workflow and supports:
+
+* official provider source fetch
+* normalization
+* diff review
+* manual approval before update/export
+
+Do not remove the existing sample and pasted JSON paths — keep them as fallbacks.
