@@ -44,7 +44,12 @@ export function Calculator() {
 
   const calculate = useCallback(() => {
     try {
-      const r = runCalculator({ modelId, monthlyInputTokens: inputTokens, monthlyOutputTokens: outputTokens, mode: "api" });
+      const r = runCalculator({
+        modelId,
+        monthlyInputTokens: inputTokens,
+        monthlyOutputTokens: outputTokens,
+        mode: "api",
+      });
       setResult(r);
       setShowReport(false);
     } catch (e) {
@@ -66,8 +71,15 @@ export function Calculator() {
     setResult(null);
     setShowReport(false);
     if (typeof window !== "undefined") {
-      const analytics = (window as typeof window & { analytics?: { track?: (event: string, props?: Record<string, unknown>) => void } }).analytics;
-      analytics?.track?.("scenario_selected", { scenarioId: scenario.id, scenarioName: scenario.name });
+      const analytics = (
+        window as typeof window & {
+          analytics?: { track?: (event: string, props?: Record<string, unknown>) => void };
+        }
+      ).analytics;
+      analytics?.track?.("scenario_selected", {
+        scenarioId: scenario.id,
+        scenarioName: scenario.name,
+      });
     }
   };
 
@@ -85,13 +97,14 @@ export function Calculator() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">AI Cost Calculator</h1>
-        <p className="text-muted-foreground">Estimate your monthly AI spend and discover cheaper alternatives.</p>
+        <p className="text-muted-foreground">
+          Estimate your monthly AI spend and discover cheaper alternatives.
+        </p>
       </div>
 
       <div className="border border-border rounded-xl bg-card p-6 mb-8">
         <ScenarioSelector scenarios={SCENARIOS} onSelect={applyScenario} />
 
-        {/* Presets */}
         <div className="mb-6">
           <label className="text-sm font-medium text-foreground block mb-2">Usage Preset</label>
           <div className="flex flex-wrap gap-2">
@@ -112,7 +125,6 @@ export function Calculator() {
           </div>
         </div>
 
-        {/* Model Selector */}
         <div className="mb-5">
           <label className="text-sm font-medium text-foreground block mb-2" htmlFor="model-select">
             AI Model
@@ -120,7 +132,11 @@ export function Calculator() {
           <select
             id="model-select"
             value={modelId}
-            onChange={(e) => { setModelId(e.target.value); setResult(null); setShowReport(false); }}
+            onChange={(e) => {
+              setModelId(e.target.value);
+              setResult(null);
+              setShowReport(false);
+            }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             data-testid="model-select"
           >
@@ -139,19 +155,37 @@ export function Calculator() {
               ))}
             </optgroup>
           </select>
+
           {dateStr && (
-            <div className={`mt-2 flex items-center gap-2 text-xs ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
-              <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
+            <div
+              className={`mt-2 flex items-center gap-2 text-xs ${
+                stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"
+              }`}
+            >
+              <span
+                className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                  stale ? "bg-amber-500" : "bg-green-500"
+                }`}
+              />
               <span>{freshnessLabel(dateStr)}</span>
               {stale && (
-                <span className="ml-1">· Pricing may have changed. <a href={selectedModel?.source ?? "#"} target="_blank" rel="noreferrer" className="underline hover:no-underline">Verify with provider.</a></span>
+                <span className="ml-1">
+                  · Pricing may have changed.{" "}
+                  <a
+                    href={selectedModel?.source ?? "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline hover:no-underline"
+                  >
+                    Verify with provider.
+                  </a>
+                </span>
               )}
             </div>
           )}
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5 mb-6">
-          {/* Input Tokens */}
           <div>
             <label className="text-sm font-medium text-foreground block mb-2" htmlFor="input-tokens">
               Monthly Input Tokens
@@ -162,14 +196,19 @@ export function Calculator() {
               value={inputTokens}
               min={0}
               step={100000}
-              onChange={(e) => { setInputTokens(Number(e.target.value)); setResult(null); setShowReport(false); }}
+              onChange={(e) => {
+                setInputTokens(Number(e.target.value));
+                setResult(null);
+                setShowReport(false);
+              }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="input-tokens"
             />
-            <p className="text-xs text-muted-foreground mt-1">{formatTokenCount(inputTokens)} tokens · ~{Math.round(inputTokens * 0.75).toLocaleString()} words</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {formatTokenCount(inputTokens)} tokens · ~{Math.round(inputTokens * 0.75).toLocaleString()} words
+            </p>
           </div>
 
-          {/* Output Tokens */}
           <div>
             <label className="text-sm font-medium text-foreground block mb-2" htmlFor="output-tokens">
               Monthly Output Tokens
@@ -180,11 +219,17 @@ export function Calculator() {
               value={outputTokens}
               min={0}
               step={50000}
-              onChange={(e) => { setOutputTokens(Number(e.target.value)); setResult(null); setShowReport(false); }}
+              onChange={(e) => {
+                setOutputTokens(Number(e.target.value));
+                setResult(null);
+                setShowReport(false);
+              }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="output-tokens"
             />
-            <p className="text-xs text-muted-foreground mt-1">{formatTokenCount(outputTokens)} tokens · ~{Math.round(outputTokens * 0.75).toLocaleString()} words</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {formatTokenCount(outputTokens)} tokens · ~{Math.round(outputTokens * 0.75).toLocaleString()} words
+            </p>
           </div>
         </div>
 
@@ -197,15 +242,15 @@ export function Calculator() {
         </button>
       </div>
 
-      {/* Results */}
       {result && (
         <div className="space-y-6" data-testid="results">
-          {/* Cost Summary */}
           <div className="border border-border rounded-xl bg-card p-6">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Estimated Monthly Cost</p>
-                <p className="text-4xl font-bold text-foreground" data-testid="total-cost">{formatCost(result.estimatedMonthlyCost)}</p>
+                <p className="text-4xl font-bold text-foreground" data-testid="total-cost">
+                  {formatCost(result.estimatedMonthlyCost)}
+                </p>
                 {result.model.planType === "api" && (
                   <p className="text-xs text-muted-foreground mt-1">
                     Input: {formatCost(result.inputCost)} · Output: {formatCost(result.outputCost)}
@@ -226,7 +271,9 @@ export function Calculator() {
               </div>
             )}
 
-            <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{result.recommendation}</p>
+            <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
+              {result.recommendation}
+            </p>
           </div>
 
           <button
@@ -246,13 +293,16 @@ export function Calculator() {
             />
           )}
 
-          {/* Cheaper Alternatives */}
           {result.cheaperAlternatives.length > 0 && (
             <div>
               <h2 className="text-lg font-bold mb-4">Cheaper Alternatives</h2>
               <div className="space-y-3">
                 {result.cheaperAlternatives.map((alt) => (
-                  <div key={alt.model.id} className="border border-border rounded-lg p-4 flex items-center justify-between gap-4" data-testid={`alt-${alt.model.id}`}>
+                  <div
+                    key={alt.model.id}
+                    className="border border-border rounded-lg p-4 flex items-center justify-between gap-4"
+                    data-testid={`alt-${alt.model.id}`}
+                  >
                     <div>
                       <div className="flex items-center gap-2 mb-0.5">
                         <p className="font-semibold text-foreground text-sm">{alt.model.name}</p>
@@ -260,11 +310,17 @@ export function Calculator() {
                           Save {alt.savingsPercent.toFixed(0)}%
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground">{alt.model.provider} · {alt.tradeOff}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {alt.model.provider} · {alt.tradeOff}
+                      </p>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <p className="font-bold text-foreground text-sm">{formatCost(alt.estimatedCost)}/mo</p>
-                      <p className="text-xs text-green-600 dark:text-green-400">−{formatCost(alt.savings)}</p>
+                      <p className="font-bold text-foreground text-sm">
+                        {formatCost(alt.estimatedCost)}/mo
+                      </p>
+                      <p className="text-xs text-green-600 dark:text-green-400">
+                        −{formatCost(alt.savings)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -272,7 +328,6 @@ export function Calculator() {
             </div>
           )}
 
-          {/* Share */}
           <div className="flex items-center gap-3 no-print">
             <button
               onClick={copyShareLink}
@@ -281,24 +336,25 @@ export function Calculator() {
             >
               {copied ? "Copied!" : "Copy Share Link"}
             </button>
-            <Link
-              href="/decision-engine"
-              className="text-sm text-primary hover:underline"
-            >
+            <Link href="/decision-engine" className="text-sm text-primary hover:underline">
               Try the Decision Engine instead →
             </Link>
           </div>
         </div>
       )}
 
-      {/* Info section */}
       <div className="mt-10 border-t border-border pt-8 no-print">
         <h2 className="font-semibold text-foreground mb-3">How are costs calculated?</h2>
         <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-          API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage.
+          API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output
+          tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees
+          regardless of usage.
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          1 token ≈ 0.75 words ≈ 4 characters of English text. <Link href="/guides/token-cost-explained" className="text-primary hover:underline">Learn more about tokens →</Link>
+          1 token ≈ 0.75 words ≈ 4 characters of English text.{" "}
+          <Link href="/guides/token-cost-explained" className="text-primary hover:underline">
+            Learn more about tokens →
+          </Link>
         </p>
       </div>
     </div>

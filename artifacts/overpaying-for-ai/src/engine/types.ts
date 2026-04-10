@@ -14,6 +14,7 @@ export interface AIModel {
   notes: string;
   source?: string;
   last_updated?: string;
+  source?: string;
 }
 
 export interface CalculatorInputs {
