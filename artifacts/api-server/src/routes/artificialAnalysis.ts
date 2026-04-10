@@ -6,54 +6,64 @@
  * is NEVER exposed to the browser bundle.
  *
  * Endpoint: GET /api/admin/artificial-analysis-pricing
+ * Auth:     x-api-key header
  *
- * Returns:
- *   {
- *     source: "artificialanalysis",
- *     fetchedAt: ISO string,
- *     sourceUrl: string,
- *     status: "live" | "error",
- *     statusMessage: string,
- *     candidates: AIModel[],          // normalized, matches models.json schema
- *     unmappedModels: string[],        // AA models we don't yet track
- *     meta: { totalFromApi, mapped }   // coverage stats
- *   }
+ * AA response schema (verified 2026-04-10):
+ *   { status, prompt_options, data: AAModel[] }
  *
- * Error responses:
- *   401 – API key missing or invalid
- *   502 – upstream fetch failed
- *   422 – response schema did not match expectations
- *   429 – rate limited by Artificial Analysis
+ * Each AAModel has:
+ *   id, name, slug, release_date, model_creator { name, slug },
+ *   evaluations { artificial_analysis_intelligence_index, … },
+ *   pricing { price_1m_input_tokens, price_1m_output_tokens, price_1m_blended_3_to_1 },
+ *   median_output_tokens_per_second, median_time_to_first_token_seconds
+ *
+ * Prices from AA are per million tokens.
+ * Our models.json schema uses per 1k tokens → divide AA price by 1000.
  */
 
 import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
 
-// ── Artificial Analysis API config ──────────────────────────────────────────
+// ── Config ────────────────────────────────────────────────────────────────────
 
+const AA_MODELS_ENDPOINT = "https://artificialanalysis.ai/api/v2/data/llms/models";
 const AA_SOURCE_URL = "https://artificialanalysis.ai/models";
 
-/**
- * Candidate endpoints to try in order.
- * Artificial Analysis does not publish a stable public REST API URL as of 2026-04.
- * Their API key feature appears to be for a private enterprise data product.
- * We try several plausible patterns; if all return 404/401 the route returns a
- * helpful error with manual instructions.
- */
-const AA_ENDPOINT_CANDIDATES = [
-  "https://artificialanalysis.ai/api/v1/models",
-  "https://artificialanalysis.ai/api/v2/models",
-  "https://artificialanalysis.ai/api/models",
-  "https://api.artificialanalysis.ai/v1/models",
-  "https://api.artificialanalysis.ai/models",
-  "https://artificialanalysis.ai/api/v1/llm",
-  "https://artificialanalysis.ai/api/llm",
-];
+// ── Actual AA response shape ──────────────────────────────────────────────────
 
-// ── Model ID mapping: AA model names → our models.json IDs ──────────────────
-// Keep in sync with src/data/models.json in the frontend.
-// Only include models we actually track; others go to unmappedModels[].
+interface AAPricing {
+  price_1m_blended_3_to_1?: number | null;
+  price_1m_input_tokens?: number | null;
+  price_1m_output_tokens?: number | null;
+}
+
+interface AAModel {
+  id: string;
+  name: string;
+  slug: string;
+  release_date?: string;
+  model_creator?: { id?: string; name?: string; slug?: string };
+  evaluations?: { artificial_analysis_intelligence_index?: number | null; [k: string]: number | null | undefined };
+  pricing?: AAPricing;
+  median_output_tokens_per_second?: number | null;
+  median_time_to_first_token_seconds?: number | null;
+  median_time_to_first_answer_token?: number | null;
+}
+
+interface AAResponse {
+  status?: unknown;
+  prompt_options?: unknown;
+  data: AAModel[];
+}
+
+// ── Model mapping: AA slug → our models.json ID ──────────────────────────────
+// Keys are the exact `slug` values from the AA API.
+// Multiple AA slugs can map to the same ourId (e.g. different vintage snapshots).
+// We prefer the slug that is most current / has valid pricing.
+//
+// When multiple slugs map to the same ourId, the FIRST one with non-zero
+// pricing wins (iterator order = order declared here).
 
 interface ModelMapping {
   ourId: string;
@@ -68,8 +78,17 @@ interface ModelMapping {
   notes: string;
 }
 
-const AA_NAME_TO_MODEL: Record<string, ModelMapping> = {
+const AA_SLUG_TO_MODEL: Record<string, ModelMapping> = {
+  // ── OpenAI ──────────────────────────────────────────────────────────────────
   "gpt-4o": {
+    ourId: "gpt-4o", ourName: "GPT-4o", provider: "OpenAI",
+    planType: "api", hasFreeTier: false,
+    bestFor: ["coding", "writing", "research", "automation", "chat"],
+    qualityScore: 95, costScore: 40, latencyScore: 80,
+    notes: "OpenAI's flagship multimodal model. Excellent across all tasks but expensive at scale.",
+  },
+  // Aug '24 vintage is the current canonical gpt-4o API model
+  "gpt-4o-2024-08-06": {
     ourId: "gpt-4o", ourName: "GPT-4o", provider: "OpenAI",
     planType: "api", hasFreeTier: false,
     bestFor: ["coding", "writing", "research", "automation", "chat"],
@@ -83,26 +102,23 @@ const AA_NAME_TO_MODEL: Record<string, ModelMapping> = {
     qualityScore: 75, costScore: 92, latencyScore: 90,
     notes: "Dramatically cheaper than GPT-4o. Great for high-volume, lower-stakes tasks.",
   },
-  "claude-3-5-sonnet-20241022": {
+
+  // ── Anthropic ───────────────────────────────────────────────────────────────
+  // claude-35-sonnet = Claude 3.5 Sonnet Oct '24 — the canonical claude-3-5-sonnet
+  "claude-35-sonnet": {
+    ourId: "claude-3-5-sonnet", ourName: "Claude 3.5 Sonnet", provider: "Anthropic",
+    planType: "api", hasFreeTier: false,
+    bestFor: ["coding", "writing", "research", "chat"],
+    qualityScore: 90, costScore: 55, latencyScore: 72,
+    notes: "Anthropic's best model. Strong at coding, reasoning, and long-form writing.",
+  },
+  // claude-3-7-sonnet is the newer non-reasoning variant — maps to same ourId for now
+  "claude-3-7-sonnet": {
     ourId: "claude-3-5-sonnet", ourName: "Claude 3.5 Sonnet", provider: "Anthropic",
     planType: "api", hasFreeTier: false,
     bestFor: ["coding", "writing", "research", "chat"],
     qualityScore: 93, costScore: 55, latencyScore: 72,
     notes: "Anthropic's best model. Strong at coding, reasoning, and long-form writing.",
-  },
-  "claude-3-5-sonnet": {
-    ourId: "claude-3-5-sonnet", ourName: "Claude 3.5 Sonnet", provider: "Anthropic",
-    planType: "api", hasFreeTier: false,
-    bestFor: ["coding", "writing", "research", "chat"],
-    qualityScore: 93, costScore: 55, latencyScore: 72,
-    notes: "Anthropic's best model. Strong at coding, reasoning, and long-form writing.",
-  },
-  "claude-3-5-haiku-20241022": {
-    ourId: "claude-3-5-haiku", ourName: "Claude 3.5 Haiku", provider: "Anthropic",
-    planType: "api", hasFreeTier: false,
-    bestFor: ["chat", "writing", "automation"],
-    qualityScore: 72, costScore: 84, latencyScore: 88,
-    notes: "Anthropic's fastest and cheapest model. Good for high-volume tasks.",
   },
   "claude-3-5-haiku": {
     ourId: "claude-3-5-haiku", ourName: "Claude 3.5 Haiku", provider: "Anthropic",
@@ -111,55 +127,64 @@ const AA_NAME_TO_MODEL: Record<string, ModelMapping> = {
     qualityScore: 72, costScore: 84, latencyScore: 88,
     notes: "Anthropic's fastest and cheapest model. Good for high-volume tasks.",
   },
-  "gemini-1.5-pro": {
+
+  // ── Google ──────────────────────────────────────────────────────────────────
+  "gemini-1-5-pro": {
     ourId: "gemini-1-5-pro", ourName: "Gemini 1.5 Pro", provider: "Google",
     planType: "api", hasFreeTier: false,
     bestFor: ["research", "coding", "writing"],
     qualityScore: 88, costScore: 50, latencyScore: 70,
-    notes: "Google's most capable model with 1M token context window.",
+    notes: "Google's highly capable model with 1M token context window.",
   },
-  "gemini-1.5-pro-002": {
-    ourId: "gemini-1-5-pro", ourName: "Gemini 1.5 Pro", provider: "Google",
-    planType: "api", hasFreeTier: false,
-    bestFor: ["research", "coding", "writing"],
-    qualityScore: 88, costScore: 50, latencyScore: 70,
-    notes: "Google's most capable model with 1M token context window.",
-  },
-  "gemini-1.5-flash": {
+  "gemini-1-5-flash": {
     ourId: "gemini-1-5-flash", ourName: "Gemini 1.5 Flash", provider: "Google",
     planType: "api", hasFreeTier: false,
     bestFor: ["chat", "writing", "automation"],
     qualityScore: 74, costScore: 95, latencyScore: 92,
     notes: "Extremely fast and cheap. Best Google option for high-volume tasks.",
   },
-  "gemini-1.5-flash-002": {
-    ourId: "gemini-1-5-flash", ourName: "Gemini 1.5 Flash", provider: "Google",
+
+  // ── Mistral ─────────────────────────────────────────────────────────────────
+  // mistral-large-3 is the current flagship ($0.5/$1.5 per million)
+  "mistral-large-3": {
+    ourId: "mistral-large", ourName: "Mistral Large", provider: "Mistral",
     planType: "api", hasFreeTier: false,
-    bestFor: ["chat", "writing", "automation"],
-    qualityScore: 74, costScore: 95, latencyScore: 92,
-    notes: "Extremely fast and cheap. Best Google option for high-volume tasks.",
+    bestFor: ["coding", "writing", "research"],
+    qualityScore: 85, costScore: 72, latencyScore: 82,
+    notes: "Mistral's top model. Strong on coding and multilingual tasks at competitive prices.",
   },
-  "mistral-large": {
+  // Fall back to Large 2 Nov '24 if Large 3 has no pricing
+  "mistral-large-2": {
     ourId: "mistral-large", ourName: "Mistral Large", provider: "Mistral",
     planType: "api", hasFreeTier: false,
     bestFor: ["coding", "writing", "research"],
     qualityScore: 82, costScore: 68, latencyScore: 78,
     notes: "Mistral's top model. Strong on coding and multilingual tasks.",
   },
-  "mistral-large-2411": {
-    ourId: "mistral-large", ourName: "Mistral Large", provider: "Mistral",
-    planType: "api", hasFreeTier: false,
-    bestFor: ["coding", "writing", "research"],
-    qualityScore: 82, costScore: 68, latencyScore: 78,
-    notes: "Mistral's top model. Strong on coding and multilingual tasks.",
-  },
-  "mistral-small": {
+  // mistral-small-3-2 is the current small model ($0.1/$0.3 per million)
+  "mistral-small-3-2": {
     ourId: "mistral-small", ourName: "Mistral Small", provider: "Mistral",
     planType: "api", hasFreeTier: false,
     bestFor: ["chat", "writing", "automation"],
-    qualityScore: 65, costScore: 85, latencyScore: 85,
-    notes: "Mistral's budget option. Good value for European data-residency requirements.",
+    qualityScore: 67, costScore: 88, latencyScore: 88,
+    notes: "Mistral's budget option. Good value for lightweight tasks and European data-residency.",
   },
+  "mistral-small-3-1": {
+    ourId: "mistral-small", ourName: "Mistral Small", provider: "Mistral",
+    planType: "api", hasFreeTier: false,
+    bestFor: ["chat", "writing", "automation"],
+    qualityScore: 67, costScore: 88, latencyScore: 88,
+    notes: "Mistral's budget option. Good value for lightweight tasks and European data-residency.",
+  },
+  "mistral-small-3": {
+    ourId: "mistral-small", ourName: "Mistral Small", provider: "Mistral",
+    planType: "api", hasFreeTier: false,
+    bestFor: ["chat", "writing", "automation"],
+    qualityScore: 65, costScore: 87, latencyScore: 86,
+    notes: "Mistral's budget option. Good value for lightweight tasks and European data-residency.",
+  },
+
+  // ── DeepSeek ─────────────────────────────────────────────────────────────────
   "deepseek-v3": {
     ourId: "deepseek-v3", ourName: "DeepSeek V3", provider: "DeepSeek",
     planType: "api", hasFreeTier: false,
@@ -167,160 +192,68 @@ const AA_NAME_TO_MODEL: Record<string, ModelMapping> = {
     qualityScore: 88, costScore: 97, latencyScore: 65,
     notes: "Near-frontier quality at fraction of GPT-4o cost. Strong for coding and reasoning.",
   },
-  "llama-3.1-70b-instruct": {
+
+  // ── Meta / Llama ────────────────────────────────────────────────────────────
+  "llama-3-1-instruct-70b": {
     ourId: "llama-3-1-70b", ourName: "Llama 3.1 70B", provider: "Meta (self-hosted)",
     planType: "api", hasFreeTier: true,
     bestFor: ["coding", "writing", "research"],
     qualityScore: 80, costScore: 90, latencyScore: 70,
     notes: "Open-source. Self-hosted cost depends on infrastructure. Strongest open model at this size.",
   },
+  // Llama 3.3 70B is backward-compatible drop-in — map to same ourId
+  "llama-3-3-instruct-70b": {
+    ourId: "llama-3-1-70b", ourName: "Llama 3.1 70B", provider: "Meta (self-hosted)",
+    planType: "api", hasFreeTier: true,
+    bestFor: ["coding", "writing", "research"],
+    qualityScore: 82, costScore: 90, latencyScore: 72,
+    notes: "Open-source. Self-hosted cost depends on infrastructure. Strongest open model at this size.",
+  },
 };
 
-// ── Normalize AA response into our AIModel schema ────────────────────────────
-
-interface AAModel {
-  // Potential field names from AA API — we try multiple paths
-  model?: string;
-  model_name?: string;
-  name?: string;
-  id?: string;
-
-  creator?: string;
-  provider?: string;
-  organization?: string;
-
-  // Pricing — per million tokens (most common in AA)
-  input_price?: number;
-  output_price?: number;
-  input_cost_per_million?: number;
-  output_cost_per_million?: number;
-
-  // Pricing — per 1k tokens (alternative)
-  input_cost_per_1k?: number;
-  output_cost_per_1k?: number;
-
-  // Speed / latency
-  tokens_per_second?: number;
-  output_tokens_per_second?: number;
-  latency_p50_seconds?: number;
-
-  // Nested pricing object
-  pricing?: {
-    input?: number;
-    output?: number;
-    input_cost_per_million?: number;
-    output_cost_per_million?: number;
-    input_price_per_million_tokens?: number;
-    output_price_per_million_tokens?: number;
-  };
-
-  // Nested performance object
-  performance?: {
-    tokens_per_second?: number;
-    output_tokens_per_second?: number;
-    latency?: number;
-  };
-
-  // Context
-  context_window?: number;
-  context_length?: number;
-}
-
-function extractModelName(m: AAModel): string {
-  return (m.model ?? m.model_name ?? m.name ?? m.id ?? "").trim().toLowerCase();
-}
-
-function extractInputCostPerMillion(m: AAModel): number | null {
-  // Try flat fields first
-  const flat =
-    m.input_price ??
-    m.input_cost_per_million ??
-    m.input_cost_per_1k != null ? (m.input_cost_per_1k! * 1000) : null;
-  if (flat != null) return flat;
-
-  // Try nested pricing
-  if (m.pricing) {
-    return (
-      m.pricing.input ??
-      m.pricing.input_cost_per_million ??
-      m.pricing.input_price_per_million_tokens ??
-      null
-    );
-  }
-  return null;
-}
-
-function extractOutputCostPerMillion(m: AAModel): number | null {
-  const flat =
-    m.output_price ??
-    m.output_cost_per_million ??
-    m.output_cost_per_1k != null ? (m.output_cost_per_1k! * 1000) : null;
-  if (flat != null) return flat;
-
-  if (m.pricing) {
-    return (
-      m.pricing.output ??
-      m.pricing.output_cost_per_million ??
-      m.pricing.output_price_per_million_tokens ??
-      null
-    );
-  }
-  return null;
-}
-
-function extractSpeedTps(m: AAModel): number | null {
-  return (
-    m.tokens_per_second ??
-    m.output_tokens_per_second ??
-    m.performance?.tokens_per_second ??
-    m.performance?.output_tokens_per_second ??
-    null
-  );
-}
+// ── Normalise AA models into our AIModel schema ───────────────────────────────
 
 function normalizeModels(rawModels: AAModel[], today: string): {
   candidates: ReturnType<typeof buildCandidate>[];
-  unmappedModels: string[];
+  unmappedSlugs: string[];
 } {
   const candidates: ReturnType<typeof buildCandidate>[] = [];
-  const unmappedModels: string[] = [];
+  const unmappedSlugs: string[] = [];
   const seenOurIds = new Set<string>();
 
   for (const raw of rawModels) {
-    const rawName = extractModelName(raw);
-    const mapping = AA_NAME_TO_MODEL[rawName];
+    const slug = (raw.slug ?? "").trim().toLowerCase();
+    const mapping = AA_SLUG_TO_MODEL[slug];
 
     if (!mapping) {
-      unmappedModels.push(raw.model ?? raw.model_name ?? raw.name ?? raw.id ?? rawName);
+      unmappedSlugs.push(raw.slug ?? raw.name ?? slug);
       continue;
     }
 
-    // Skip duplicates (e.g. both "claude-3-5-sonnet" and "claude-3-5-sonnet-20241022" map to same ourId)
+    // If we already have a candidate for this ourId (from a higher-priority slug),
+    // skip unless the earlier one had $0 pricing and this one has real pricing.
     if (seenOurIds.has(mapping.ourId)) continue;
+
+    const inp = raw.pricing?.price_1m_input_tokens;
+    const out = raw.pricing?.price_1m_output_tokens;
+
+    // AA prices are per million tokens; convert to per 1k for our schema
+    const inputCostPer1k = inp != null && inp > 0 ? +(inp / 1000).toFixed(8) : 0;
+    const outputCostPer1k = out != null && out > 0 ? +(out / 1000).toFixed(8) : 0;
+
     seenOurIds.add(mapping.ourId);
-
-    const inputPerMillion = extractInputCostPerMillion(raw);
-    const outputPerMillion = extractOutputCostPerMillion(raw);
-
-    // AA prices are per million tokens; our schema uses per 1k tokens
-    const inputPer1k = inputPerMillion != null ? +(inputPerMillion / 1000).toFixed(8) : 0;
-    const outputPer1k = outputPerMillion != null ? +(outputPerMillion / 1000).toFixed(8) : 0;
-
-    // Optional enrichment fields (future-ready)
-    const speedTps = extractSpeedTps(raw);
-
-    candidates.push(buildCandidate(mapping, inputPer1k, outputPer1k, speedTps, today));
+    candidates.push(buildCandidate(mapping, inputCostPer1k, outputCostPer1k, raw, today));
   }
 
-  return { candidates, unmappedModels };
+  return { candidates, unmappedSlugs };
 }
 
 function buildCandidate(
   mapping: ModelMapping,
   inputCostPer1k: number,
   outputCostPer1k: number,
-  _speedTps: number | null,
-  today: string
+  raw: AAModel,
+  today: string,
 ) {
   return {
     id: mapping.ourId,
@@ -338,57 +271,51 @@ function buildCandidate(
     notes: mapping.notes,
     source: AA_SOURCE_URL,
     last_updated: today,
+    // Extra context (not in schema, stripped by diff tool, kept for admin debugging)
+    _aa_slug: raw.slug,
+    _aa_name: raw.name,
+    _aa_release_date: raw.release_date,
+    _aa_intelligence_index: raw.evaluations?.artificial_analysis_intelligence_index,
+    _aa_output_tps: raw.median_output_tokens_per_second,
   };
 }
 
-// ── Route handler ────────────────────────────────────────────────────────────
+// ── Route handler ─────────────────────────────────────────────────────────────
 
 router.get("/admin/artificial-analysis-pricing", async (_req, res) => {
   const apiKey = process.env.ARTIFICIAL_ANALYSIS_API_KEY;
   const today = new Date().toISOString().split("T")[0];
   const fetchedAt = new Date().toISOString();
 
-  // 1. API key check
   if (!apiKey) {
     res.status(401).json({
       error: "missing_api_key",
       message:
         "ARTIFICIAL_ANALYSIS_API_KEY environment variable is not set. " +
-        "Add it to your Replit Secrets and restart the API server workflow.",
+        "Add it to Replit Secrets and restart the API Server workflow.",
     });
     return;
   }
 
-  // 2. Try each known endpoint candidate in order until one succeeds
-  let rawData: unknown = null;
-  let successEndpoint: string | null = null;
-  const attemptLog: string[] = [];
-
-  for (const endpoint of AA_ENDPOINT_CANDIDATES) {
-    let response: Response;
-    try {
-      response = await fetch(endpoint, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          Accept: "application/json",
-          "User-Agent": "OverpayingForAI-Admin/1.0",
-        },
-        signal: AbortSignal.timeout(8000),
-      });
-    } catch (err: unknown) {
-      attemptLog.push(`${endpoint} → fetch error: ${err instanceof Error ? err.message : String(err)}`);
-      continue;
-    }
+  // Fetch from AA
+  let rawData: unknown;
+  try {
+    const response = await fetch(AA_MODELS_ENDPOINT, {
+      method: "GET",
+      headers: {
+        "x-api-key": apiKey,
+        Accept: "application/json",
+        "User-Agent": "OverpayingForAI-Admin/1.0",
+      },
+      signal: AbortSignal.timeout(15000),
+    });
 
     if (response.status === 401 || response.status === 403) {
-      // Key is wrong/expired — no point trying other endpoints
       res.status(401).json({
         error: "invalid_api_key",
         message:
           `Artificial Analysis returned HTTP ${response.status} (unauthorized). ` +
           "Check that your ARTIFICIAL_ANALYSIS_API_KEY is correct and has not expired.",
-        triedEndpoint: endpoint,
       });
       return;
     }
@@ -404,107 +331,74 @@ router.get("/admin/artificial-analysis-pricing", async (_req, res) => {
     }
 
     if (!response.ok) {
-      attemptLog.push(`${endpoint} → HTTP ${response.status}`);
-      continue;
+      res.status(502).json({
+        error: "upstream_error",
+        message: `Artificial Analysis API returned HTTP ${response.status}: ${response.statusText}`,
+        endpoint: AA_MODELS_ENDPOINT,
+      });
+      return;
     }
 
-    // Check content-type — if it's HTML we got a Next.js 404 page not JSON
-    const ct = response.headers.get("content-type") ?? "";
-    if (ct.includes("text/html")) {
-      attemptLog.push(`${endpoint} → HTML response (not a REST endpoint)`);
-      continue;
-    }
-
-    try {
-      rawData = await response.json();
-      successEndpoint = endpoint;
-      break;
-    } catch {
-      attemptLog.push(`${endpoint} → JSON parse failed`);
-      continue;
-    }
-  }
-
-  // None of the endpoints worked — AA does not expose a public REST API
-  if (rawData === null || successEndpoint === null) {
+    rawData = await response.json();
+  } catch (err: unknown) {
+    const isTimeout =
+      err instanceof Error && (err.name === "TimeoutError" || err.name === "AbortError");
     res.status(502).json({
-      error: "no_api_endpoint",
-      message:
-        "Artificial Analysis does not currently expose a public REST API. " +
-        "Their data is rendered server-side and is not available via a standard HTTP endpoint. " +
-        "To get pricing data from Artificial Analysis, visit https://artificialanalysis.ai/models " +
-        "manually and paste the data into the manual paste box below.",
-      triedEndpoints: AA_ENDPOINT_CANDIDATES,
-      attemptLog,
-      hint:
-        "If Artificial Analysis activates their data API, update AA_ENDPOINT_CANDIDATES " +
-        "in artifacts/api-server/src/routes/artificialAnalysis.ts with the correct URL.",
+      error: isTimeout ? "timeout" : "fetch_failed",
+      message: isTimeout
+        ? "Request to Artificial Analysis timed out after 15 seconds."
+        : `Failed to fetch from Artificial Analysis: ${err instanceof Error ? err.message : String(err)}`,
     });
     return;
   }
 
-  // 3. Parse response — handle multiple envelope shapes
+  // Extract the model array from the { status, prompt_options, data: AAModel[] } envelope
   let rawModels: AAModel[];
   try {
-    if (Array.isArray(rawData)) {
-      rawModels = rawData as AAModel[];
-    } else if (
-      rawData &&
-      typeof rawData === "object" &&
-      "models" in rawData &&
-      Array.isArray((rawData as { models: unknown }).models)
-    ) {
-      rawModels = (rawData as { models: AAModel[] }).models;
-    } else if (
-      rawData &&
-      typeof rawData === "object" &&
-      "data" in rawData &&
-      Array.isArray((rawData as { data: unknown }).data)
-    ) {
-      rawModels = (rawData as { data: AAModel[] }).data;
-    } else if (
-      rawData &&
-      typeof rawData === "object" &&
-      "results" in rawData &&
-      Array.isArray((rawData as { results: unknown }).results)
-    ) {
-      rawModels = (rawData as { results: AAModel[] }).results;
+    const body = rawData as AAResponse;
+    if (Array.isArray(body)) {
+      rawModels = body;
+    } else if (body.data && Array.isArray(body.data)) {
+      rawModels = body.data;
     } else {
       res.status(422).json({
         error: "schema_mismatch",
         message:
-          "Artificial Analysis API response did not match expected format. " +
-          "Expected an array or an object with a 'models', 'data', or 'results' array. " +
-          `Got: ${JSON.stringify(rawData).slice(0, 300)}`,
-        rawSample: JSON.stringify(rawData).slice(0, 500),
+          "AA API response did not contain a 'data' array. The schema may have changed.",
+        receivedKeys: Object.keys(rawData as object),
+        rawSample: JSON.stringify(rawData).slice(0, 400),
       });
       return;
     }
   } catch (parseErr: unknown) {
     res.status(422).json({
       error: "parse_failed",
-      message: `Failed to parse Artificial Analysis response: ${parseErr instanceof Error ? parseErr.message : String(parseErr)}`,
+      message: `Failed to parse AA response: ${parseErr instanceof Error ? parseErr.message : String(parseErr)}`,
     });
     return;
   }
 
-  // 4. Normalize into our schema
-  const { candidates, unmappedModels } = normalizeModels(rawModels, today);
+  const { candidates, unmappedSlugs } = normalizeModels(rawModels, today);
 
-  // 5. Return result
+  const unmappedNote = unmappedSlugs.length > 0
+    ? ` — ${unmappedSlugs.length} AA slugs have no mapping in our schema`
+    : "";
+
   res.json({
     source: "artificialanalysis",
     fetchedAt,
     sourceUrl: AA_SOURCE_URL,
     apiEndpoint: AA_MODELS_ENDPOINT,
     status: "live",
-    statusMessage: `Fetched ${rawModels.length} models from Artificial Analysis. Mapped ${candidates.length} to site schema. ${unmappedModels.length} unmapped.`,
+    statusMessage:
+      `Live data from Artificial Analysis — ${rawModels.length} models in API, ` +
+      `${candidates.length} mapped to site schema.` + unmappedNote,
     candidates,
-    unmappedModels,
+    unmappedCount: unmappedSlugs.length,
     meta: {
       totalFromApi: rawModels.length,
       mapped: candidates.length,
-      unmapped: unmappedModels.length,
+      unmapped: unmappedSlugs.length,
     },
   });
 });

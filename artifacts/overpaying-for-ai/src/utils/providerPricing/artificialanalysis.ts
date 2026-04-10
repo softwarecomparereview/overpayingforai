@@ -128,13 +128,7 @@ export async function fetchArtificialAnalysisCandidates(): Promise<ProviderFetch
     } else if (response.status === 422) {
       msg = `Schema mismatch — the Artificial Analysis API response format may have changed. ${errBody.message ?? ""}`;
     } else if (response.status === 502) {
-      if (errBody.error === "no_api_endpoint") {
-        msg =
-          "Artificial Analysis does not currently expose a public REST API — their data is only available via their website. " +
-          "Visit artificialanalysis.ai/models, copy the pricing table data, and paste it into the manual text box below.";
-      } else {
-        msg = `Upstream fetch failed: ${errBody.message ?? ""}`;
-      }
+      msg = `Upstream fetch failed: ${errBody.message ?? ""}`;
     }
 
     return {
