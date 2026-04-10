@@ -1,0 +1,143 @@
+Enhance the EXISTING homepage to improve SEO, navigation clarity, and information density while maintaining a clean design.
+
+Important:
+
+* This is NOT a redesign
+* Do NOT remove existing hero or cards
+* Add structured content and navigation
+* Keep layout clean but more informative
+* No backend changes
+
+## Goal
+
+Make the homepage:
+
+* more informative above the fold
+* easier to navigate
+* better for SEO
+* more conversion-driven
+
+---
+
+## Part 1: Add horizontal section navigation
+
+Below hero cards, add anchor navigation:
+
+* Calculator
+* Usage Scenarios
+* Compare Models
+* Savings Examples
+* Pricing Data
+* FAQs
+
+Each:
+
+* scrolls to section
+* styled as clean horizontal pills or links
+* does NOT dominate the UI
+
+---
+
+## Part 2: Add content blocks under hero
+
+Add two compact sections:
+
+### Section: What this tool does
+
+* short paragraph describing:
+
+  * AI cost calculator
+  * model comparison
+  * savings optimization
+
+* 3 bullet points:
+
+  * estimate monthly AI cost
+  * compare models side-by-side
+  * find cheaper alternatives
+
+### Section: Why people overpay
+
+* 3–4 bullet points:
+
+  * using premium models unnecessarily
+  * ignoring token output costs
+  * not comparing alternatives
+  * lack of visibility into usage
+
+Keep concise and readable.
+
+---
+
+## Part 3: Add section preview cards
+
+Add a row of clickable cards linking to sections:
+
+* Real savings examples
+* Compare AI models
+* Pricing data
+* Best AI by use case
+
+Each card:
+
+* must be clickable
+* scrolls or navigates
+* no dead UI
+
+---
+
+## Part 4: Improve hero context
+
+Below headline, add a short SEO-friendly sentence:
+
+Example:
+“Compare AI model pricing, calculate token-based costs, and find cheaper alternatives across ChatGPT, Claude, Gemini, and more.”
+
+---
+
+## Part 5: Expand pricing freshness indicator
+
+Enhance:
+
+“20 models tracked · Updated April 2025”
+
+Into:
+
+* clearer trust block
+* optionally include:
+
+  * number of providers
+  * data source reference
+
+---
+
+## Part 6: Maintain visual balance
+
+Ensure:
+
+* page does not feel empty
+* but also not cluttered
+* spacing remains clean
+* typography consistent
+
+---
+
+## Part 7: Validation
+
+After implementation:
+
+* above-the-fold area is informative
+* users understand what the tool does immediately
+* navigation is visible and usable
+* no dead clickable-looking elements
+* page feels richer and more useful
+* build passes
+
+## Deliverable
+
+A homepage that:
+
+* is SEO-friendly
+* has clear internal navigation
+* provides immediate value context
+* drives users toward calculator and deeper sections

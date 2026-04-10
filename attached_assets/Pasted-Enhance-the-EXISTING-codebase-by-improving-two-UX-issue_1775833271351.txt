@@ -1,0 +1,161 @@
+Enhance the EXISTING codebase by improving two UX issues:
+
+1. scenario selection feedback and visibility, especially on mobile
+2. homepage information density and scroll motivation above the fold
+
+Important:
+
+* This is NOT a rebuild
+* Do NOT alter business logic
+* Reuse existing components and styling patterns
+* Keep implementation incremental and low-risk
+* Focus on UX clarity, responsiveness, and conversion
+
+## Goal
+
+Make it obvious when a usage scenario is selected, and make the homepage feel richer and more scroll-worthy so users understand there is valuable content below the fold.
+
+---
+
+## Part 1: Fix scenario selection UX
+
+### Problem
+
+The currently selected usage scenario is too subtle visually, especially on mobile. Users may not realize which scenario is selected. Also, selecting a scenario updates calculator data further down the page, but those changes are not visible without scrolling, so users may think nothing happened.
+
+### Tasks
+
+#### 1. Strengthen selected state
+
+Update the selected scenario card so it is unmistakable.
+
+Requirements:
+
+* stronger border in primary color
+* tinted selected background
+* visible ring/shadow or other strong selected treatment
+* add a clear “Selected” badge or checkmark
+* ensure contrast is strong enough on mobile
+
+Do NOT rely on a subtle tone shift alone.
+
+#### 2. Improve mobile layout of scenario cards
+
+On mobile:
+
+* keep scenario cards easy to scan
+* ensure selected state remains obvious
+* tags should not overpower the selected state
+
+#### 3. Auto-scroll after selection
+
+When a user selects a scenario:
+
+* smoothly scroll to the calculator input section OR the first changed section below
+* choose the cleanest target in the current page structure
+
+This should help users immediately see what changed.
+
+#### 4. Add a selected scenario summary bar
+
+After selecting a scenario, show a compact summary element near the calculator section, especially useful on mobile.
+
+Example content:
+
+* “Selected: Solo Founder”
+* “Preset applied”
+* optional compact summary of model/tokens if already available
+
+This should reinforce that the interaction worked.
+
+#### 5. Keep analytics intact
+
+Do not break existing scenario selection analytics.
+
+---
+
+## Part 2: Make homepage less bare and improve scroll motivation
+
+### Problem
+
+The homepage hero area is too sparse, so users may not realize there is a lot of useful content below. It does not create enough incentive to scroll.
+
+### Tasks
+
+#### 1. Add an information scent / section preview below hero
+
+Below the hero and primary cards, add a compact section that previews what is further down the page.
+
+Examples:
+
+* “What you’ll find below”
+* “Real savings examples”
+* “Best AI by use case”
+* “Latest pricing comparisons”
+* “Pricing data freshness”
+
+Use actual existing page sections where possible.
+
+#### 2. Add a scroll cue
+
+Add a subtle but visible cue that encourages scrolling.
+
+Examples:
+
+* “See real savings examples ↓”
+* small down-arrow indicator
+* partial visual preview of next section
+
+Keep it tasteful and consistent with the current design.
+
+#### 3. Pull proof/value slightly higher
+
+If possible without major redesign, bring one high-value proof block closer to the hero area.
+
+Good candidates:
+
+* savings examples
+* trust/freshness block
+* comparison snapshot
+* model coverage summary
+
+The first screen should communicate that the site is deeper than a single CTA.
+
+#### 4. Improve above-the-fold usefulness
+
+Make the hero area feel more informative without cluttering it.
+
+Possible improvements:
+
+* one extra line of useful context
+* better visual hierarchy between hero text and action cards
+* more obvious transition into the next content section
+
+Do NOT turn the hero into a wall of text.
+
+---
+
+## Constraints
+
+* No broad redesign
+* No business logic changes
+* No backend changes
+* Keep desktop strong while improving mobile significantly
+* Maintain a clean, premium feel
+
+---
+
+## Validation
+
+After implementation:
+
+1. selected scenario is clearly visible on desktop and mobile
+2. selecting a scenario gives obvious feedback
+3. users are guided to the changed calculator area
+4. homepage no longer feels empty above the fold
+5. users can tell there is valuable content below
+6. build passes
+
+## Deliverable
+
+A cleaner, higher-conviction UX where scenario selection is obvious and the homepage encourages deeper scrolling and exploration.

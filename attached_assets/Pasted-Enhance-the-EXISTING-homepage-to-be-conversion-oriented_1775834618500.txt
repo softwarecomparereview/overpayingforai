@@ -1,0 +1,193 @@
+Enhance the EXISTING homepage to be conversion-oriented instead of informational.
+
+Important:
+
+* This is NOT a redesign from scratch
+* Do NOT remove existing sections
+* Transform existing UI into a guided conversion funnel
+* Keep it lightweight and static-first
+* Do NOT introduce backend
+
+## Goal
+
+Convert the homepage into a structured, navigable, action-driven experience that:
+
+* guides users through sections
+* removes dead/non-clickable elements
+* increases calculator usage and affiliate clicks
+
+---
+
+## Part 1: Add navigation spine
+
+### 1. Add section anchors
+
+Assign IDs to major sections:
+
+* calculator
+* scenarios
+* comparison
+* savings
+* pricing
+* faq
+
+### 2. Add sticky navigation (desktop)
+
+Create a left or floating sidebar with links:
+
+* Calculator
+* Usage Scenarios
+* Compare Models
+* Savings Examples
+* Pricing Data
+* FAQs
+
+Each item:
+
+* scrolls smoothly to section
+
+### 3. Mobile version
+
+Instead of sidebar:
+
+* add floating “Explore” button OR
+* compact sticky nav bar
+
+---
+
+## Part 2: Remove fake affordances
+
+### Problem
+
+Some UI elements look clickable but do nothing.
+
+### Fix
+
+Audit all:
+
+* cards
+* highlighted sections
+* feature boxes
+
+For each:
+
+* either make clickable (anchor scroll or link)
+* OR remove clickable styling (cursor, hover, shadow)
+
+No element should feel interactive without action.
+
+---
+
+## Part 3: Make sections actionable
+
+Each section must include at least one CTA.
+
+### Examples:
+
+Savings section:
+
+* “Calculate your savings →” (scroll to calculator)
+
+Comparison section:
+
+* “Compare your usage →”
+
+Pricing section:
+
+* “View latest pricing →” (or scroll)
+
+Do NOT leave sections as passive information.
+
+---
+
+## Part 4: Add click behavior to info cards
+
+For info blocks like:
+
+* feature cards
+* highlight panels
+
+Implement one of:
+
+Option A:
+
+* entire card scrolls to relevant section
+
+Option B:
+
+* add “Learn more →” link
+
+Option C:
+
+* expand/collapse interaction
+
+Choose simplest consistent approach.
+
+---
+
+## Part 5: Improve flow structure
+
+Ensure sections appear in logical funnel order:
+
+1. Hero
+2. Usage scenarios
+3. Calculator
+4. Savings / results
+5. Alternatives (affiliate)
+6. Proof / examples
+7. Comparison
+8. FAQ
+
+Do NOT leave sections in random order.
+
+---
+
+## Part 6: Add repeated CTAs
+
+Ensure CTAs appear:
+
+* after hero
+* after scenarios
+* after savings
+* after comparison
+
+Primary CTA:
+
+* go to calculator
+* generate report
+
+---
+
+## Part 7: Analytics
+
+Track:
+
+* section_nav_clicked
+* anchor_navigation_used
+* card_clicked
+
+Reuse existing tracking system.
+
+---
+
+## Validation
+
+After implementation:
+
+* every clickable-looking element performs an action
+* users can navigate page via sidebar/nav
+* sections guide user toward calculator
+* no dead UI blocks remain
+* mobile navigation is usable
+* build passes
+
+---
+
+## Deliverable
+
+A homepage that:
+
+* feels interactive and guided
+* has clear navigation
+* eliminates dead UI
+* drives users toward calculator and monetization actions

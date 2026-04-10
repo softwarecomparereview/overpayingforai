@@ -8,6 +8,9 @@ import { ComparePage, CompareIndex } from "@/pages/ComparePage";
 import { BestPage, BestIndex } from "@/pages/BestPage";
 import { GuidePage, GuideIndex } from "@/pages/GuidePage";
 import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
+import { Design1 } from "@/pages/Design1";
+import { Design2 } from "@/pages/Design2";
+import { Design3 } from "@/pages/Design3";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -20,7 +23,11 @@ function Router() {
         {() => (
           <Layout>
             <Switch>
-              <Route path="/" component={Home} />
+              <Route path="/" component={Design2} />
+              <Route path="/home-v1" component={Home} />
+              <Route path="/design1" component={Design1} />
+              <Route path="/design2" component={Design2} />
+              <Route path="/design3" component={Design3} />
               <Route path="/calculator" component={Calculator} />
               <Route path="/decision-engine" component={DecisionEngine} />
               <Route path="/compare" component={CompareIndex} />
