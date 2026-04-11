@@ -1,0 +1,350 @@
+Enhance the EXISTING overpayingforai.com codebase to add Google Analytics 4 (GA4), centralized event tracking, and conversion tracking fully wired to affiliate/direct/fallback CTA clicks.
+
+Do NOT rewrite the app.
+Do NOT redesign branding.
+Do NOT replace existing systems:
+- affiliate resolver
+- StandardCtaGroup
+- WinnerBlock
+- savings engine
+- admin affiliate UI
+- affiliate audit dashboard
+- affiliate performance dashboard / CTA tracking if already present
+- pricing refresh engine
+- calculator
+- decision engine
+
+This work must EXTEND the current architecture only.
+
+==================================================
+GOAL
+==================================================
+
+Add production-safe analytics so the site can measure:
+1) page views in GA4 for the SPA
+2) outbound CTA clicks
+3) conversion-style affiliate click events
+4) alignment between existing CTA tracking and GA4
+
+The implementation must:
+- work with React Router SPA navigation
+- avoid double-counting page views
+- avoid duplicating CTA logic
+- preserve current affiliate resolver flow
+- keep GA4 and existing CTA tracking aligned
+
+Use this GA4 Measurement ID:
+G-4C87X50KDZ
+
+==================================================
+PHASE A — GA4 BASE INSTALL
+==================================================
+
+Install GA4 in the correct place for the current stack.
+
+Assume the app is a React/Vite-style SPA unless the codebase clearly indicates otherwise.
+
+If Vite/React:
+- add the gtag.js script to index.html inside <head>
+
+Use this exact setup pattern:
+- load gtag.js asynchronously
+- initialize dataLayer
+- call gtag('js', new Date())
+- configure GA4 with:
+  send_page_view: false
+
+Reason:
+This is an SPA, so page views must be tracked manually on route changes.
+Do NOT enable automatic page_view tracking.
+
+==================================================
+PHASE B — CENTRALIZED GA4 UTILITY
+==================================================
+
+Create a reusable GA4 tracking utility.
+
+Suggested file:
+- src/utils/ga4.ts
+
+Implement:
+1) page view tracking
+2) generic event tracking
+3) CTA click tracking wrapper for GA4
+4) safe guards if gtag is unavailable
+
+Suggested exports:
+- trackPageView(path: string)
+- trackGaEvent(eventName: string, params?: Record<string, any>)
+- trackAffiliateClickGa(params)
+
+trackPageView should send:
+- page_path
+- page_title
+
+trackGaEvent should safely no-op if window.gtag is unavailable.
+
+==================================================
+PHASE C — SPA PAGE VIEW TRACKING
+==================================================
+
+Hook GA4 page view tracking into the router.
+
+Use the existing React Router setup.
+Track page views on every route change.
+
+Requirements:
+- page view fires on initial page load
+- page view fires on client-side route changes
+- no duplicate page views per route change
+
+Use:
+- useLocation()
+- useEffect()
+
+Prefer to place this near the top-level routing component, likely App.tsx or equivalent.
+
+==================================================
+PHASE D — CENTRALIZED EVENT TRACKING LAYER
+==================================================
+
+If the codebase already has CTA tracking (for affiliate performance dashboard), reuse and extend it.
+
+Do NOT create parallel tracking systems.
+
+Unify tracking so one CTA click can:
+1) run existing internal click tracking
+2) fire GA4 event
+3) preserve navigation behavior
+
+Suggested architecture:
+- existing src/utils/ctaTracking.ts remains source of truth for internal tracking
+- GA4 tracking is called from inside that centralized tracking path
+- CTA components should not each invent their own analytics payloads
+
+If ctaTracking.ts already exists:
+- enhance it
+- do not duplicate it
+
+==================================================
+PHASE E — CTA / AFFILIATE CLICK EVENT TRACKING
+==================================================
+
+Track all monetization CTAs with GA4 events.
+
+Every CTA that resolves through the affiliate resolver should fire:
+- existing internal tracking event
+- GA4 event
+
+Track these CTA states:
+- affiliate
+- direct
+- fallback
+
+Track these CTA types:
+- primary
+- secondary
+- tertiary
+
+Track page types where possible:
+- compare
+- best
+- ai-type
+- home
+- guide
+- resource
+- admin (if needed, but low priority)
+
+Suggested GA4 event name:
+- affiliate_click
+
+Use one clean event name for all outbound monetization clicks.
+
+Suggested GA4 params:
+- provider_id
+- provider_name
+- cta_label
+- cta_type
+- cta_state
+- page_type
+- page_path
+- source_component
+- destination_url
+- is_external
+
+If provider_name is not readily available, provider_id is sufficient.
+
+==================================================
+PHASE F — CONVERSION TRACKING MODEL
+==================================================
+
+Treat outbound monetization clicks as the primary conversion event for now.
+
+Create a higher-level conversion helper if useful.
+
+Suggested event strategy:
+- GA4 event: affiliate_click
+- Optional secondary generic event: conversion_click
+
+If adding both creates noise, use only affiliate_click.
+
+Mark outbound monetization intent clearly and consistently.
+
+Do NOT attempt purchase/revenue attribution that the site cannot verify.
+This phase is click conversion tracking only.
+
+==================================================
+PHASE G — INJECT TRACKING INTO EXISTING COMPONENTS
+==================================================
+
+Modify existing CTA-rendering components so they use centralized tracking.
+
+Likely targets:
+- src/components/conversion/StandardCtaGroup.tsx
+- src/components/monetization/AffiliateCta.tsx (if present)
+- src/components/conversion/WinnerBlock.tsx
+- any CTA button/link component using affiliate resolver
+
+Requirements:
+- tracking fires before navigation
+- no duplicate events
+- navigation remains fast
+- both internal and external links are handled safely
+
+If there is already a reusable CTA link abstraction, prefer instrumenting that single abstraction.
+
+==================================================
+PHASE H — OPTIONAL CUSTOM EVENT TRACKING
+==================================================
+
+If it fits naturally and safely, also add GA4 events for:
+- decision engine opened
+- calculator opened
+- pricing changelog opened
+
+Suggested event names:
+- decision_engine_open
+- calculator_open
+- pricing_changelog_open
+
+Only add these if they are easy to wire without clutter.
+Priority is affiliate/direct/fallback CTA tracking.
+
+==================================================
+PHASE I — DEBUG / VALIDATION SUPPORT
+==================================================
+
+Add a small debug-friendly implementation approach.
+
+Requirements:
+- GA4 tracking safely no-ops if script unavailable
+- no runtime crashes in local/dev
+- concise console logging in development is acceptable if already consistent with project style
+- do not spam logs in production
+
+If appropriate, add a small comment explaining:
+- send_page_view is disabled intentionally
+- page views are manually tracked for SPA correctness
+
+==================================================
+PHASE J — ADMIN / PERFORMANCE DASHBOARD INTEGRATION
+==================================================
+
+If an internal CTA performance dashboard already exists:
+- preserve it
+- keep its event model aligned with GA4 event metadata where practical
+
+Do NOT remove internal analytics in favor of GA4.
+GA4 is an additional external measurement layer, not a replacement.
+
+If useful, ensure ctaTracking payload shape and GA4 payload shape are closely aligned so future reconciliation is easier.
+
+==================================================
+IMPLEMENTATION DETAILS
+==================================================
+
+Use this GA4 Measurement ID:
+G-4C87X50KDZ
+
+If environment variables are already used for public config, optionally support:
+- VITE_GA_MEASUREMENT_ID
+
+But default to the provided ID if no env setup exists.
+
+If you add env support:
+- do not break current deployment
+- fall back safely to the provided ID
+
+==================================================
+TECHNICAL CONSTRAINTS
+==================================================
+
+- no heavy analytics libraries
+- use native gtag.js only
+- TypeScript-safe
+- no route breakage
+- no duplicate pageview tracking
+- no duplicate CTA tracking
+- no blocking navigation
+- preserve affiliate resolver logic
+- preserve existing internal CTA tracking logic
+- preserve build stability
+
+==================================================
+SUGGESTED FILES TO CREATE
+==================================================
+
+Create if missing:
+- src/utils/ga4.ts
+
+Optionally update:
+- src/utils/ctaTracking.ts
+
+==================================================
+SUGGESTED FILES TO MODIFY
+==================================================
+
+Likely:
+- index.html
+- src/App.tsx
+- src/utils/ctaTracking.ts
+- src/components/conversion/StandardCtaGroup.tsx
+- src/components/conversion/WinnerBlock.tsx
+- any shared CTA component using affiliate resolver
+
+Adjust based on actual project structure.
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+Functional:
+- GA4 script is installed correctly
+- SPA page views are tracked on route changes
+- outbound monetization CTAs fire GA4 affiliate_click events
+- CTA clicks continue to be tracked internally if internal tracking already exists
+- no duplicate page views
+- no duplicate CTA click events
+
+Quality:
+- no runtime errors if gtag is unavailable
+- no broken navigation
+- clean, centralized implementation
+- build passes successfully
+
+Validation:
+- GA4 Realtime should show active users and page views after deployment
+- clicking affiliate/direct/fallback CTAs should produce affiliate_click events in GA4
+- existing admin performance tracking should still work
+
+==================================================
+OUTPUT
+==================================================
+
+After implementation, provide:
+1) summary of what was added
+2) files created/modified
+3) where page view tracking was wired
+4) where CTA click tracking was wired
+5) whether internal CTA tracking was reused or extended
+6) any limitations or follow-up recommendations

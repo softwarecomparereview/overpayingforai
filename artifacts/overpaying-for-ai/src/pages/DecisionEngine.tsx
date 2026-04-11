@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { trackFeatureOpen } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
@@ -103,6 +104,8 @@ export function DecisionEngine() {
   const [step, setStep] = useState<Step>(0);
   const [inputs, setInputs] = useState<Partial<DecisionInputs>>({});
   const [result, setResult] = useState<RecommendationResult | null>(null);
+
+  useEffect(() => { trackFeatureOpen("decision_engine"); }, []);
 
   const set = <K extends keyof DecisionInputs>(key: K, value: DecisionInputs[K]) => {
     const updated = { ...inputs, [key]: value };

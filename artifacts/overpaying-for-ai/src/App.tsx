@@ -1,4 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { useEffect } from "react";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Layout } from "@/components/Layout";
 import { Home } from "@/pages/Home";
@@ -21,45 +22,62 @@ import { AiTypePage } from "@/pages/AiTypePage";
 import { Terms } from "@/pages/Terms";
 import { MediaKit } from "@/pages/MediaKit";
 import NotFound from "@/pages/not-found";
+import { trackPageView } from "@/utils/ga4";
 
 const queryClient = new QueryClient();
 
+/**
+ * SPA page view tracker — fires a GA4 page_view on every wouter route change.
+ * Lives inside WouterRouter so useLocation() has access to the router context.
+ * send_page_view is disabled in index.html to prevent double-counting.
+ */
+function PageViewTracker() {
+  const [location] = useLocation();
+  useEffect(() => {
+    trackPageView(location);
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/admin/pricing-refresh" component={PricingRefreshPage} />
-      <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
-      <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
-      <Route>
-        {() => (
-          <Layout>
-            <Switch>
-              <Route path="/" component={Design2} />
-              <Route path="/home-v1" component={Home} />
-              <Route path="/design1" component={Design1} />
-              <Route path="/design2" component={Design2} />
-              <Route path="/design3" component={Design3} />
-              <Route path="/resources" component={ResourcesHub} />
-              <Route path="/changelog" component={ChangelogPage} />
-              <Route path="/pricing-changelog" component={PricingChangelogPage} />
-              <Route path="/ai-types" component={AiTypeIndex} />
-              <Route path="/ai-types/:slug" component={AiTypePage} />
-              <Route path="/calculator" component={Calculator} />
-              <Route path="/decision-engine" component={DecisionEngine} />
-              <Route path="/compare" component={CompareIndex} />
-              <Route path="/compare/:slug" component={ComparePage} />
-              <Route path="/best" component={BestIndex} />
-              <Route path="/best/:slug" component={BestPage} />
-              <Route path="/guides" component={GuideIndex} />
-              <Route path="/guides/:slug" component={GuidePage} />
-              <Route path="/terms" component={Terms} />
-              <Route path="/media-kit" component={MediaKit} />
-              <Route component={NotFound} />
-            </Switch>
-          </Layout>
-        )}
-      </Route>
-    </Switch>
+    <>
+      <PageViewTracker />
+      <Switch>
+        <Route path="/admin/pricing-refresh" component={PricingRefreshPage} />
+        <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
+        <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
+        <Route>
+          {() => (
+            <Layout>
+              <Switch>
+                <Route path="/" component={Design2} />
+                <Route path="/home-v1" component={Home} />
+                <Route path="/design1" component={Design1} />
+                <Route path="/design2" component={Design2} />
+                <Route path="/design3" component={Design3} />
+                <Route path="/resources" component={ResourcesHub} />
+                <Route path="/changelog" component={ChangelogPage} />
+                <Route path="/pricing-changelog" component={PricingChangelogPage} />
+                <Route path="/ai-types" component={AiTypeIndex} />
+                <Route path="/ai-types/:slug" component={AiTypePage} />
+                <Route path="/calculator" component={Calculator} />
+                <Route path="/decision-engine" component={DecisionEngine} />
+                <Route path="/compare" component={CompareIndex} />
+                <Route path="/compare/:slug" component={ComparePage} />
+                <Route path="/best" component={BestIndex} />
+                <Route path="/best/:slug" component={BestPage} />
+                <Route path="/guides" component={GuideIndex} />
+                <Route path="/guides/:slug" component={GuidePage} />
+                <Route path="/terms" component={Terms} />
+                <Route path="/media-kit" component={MediaKit} />
+                <Route component={NotFound} />
+              </Switch>
+            </Layout>
+          )}
+        </Route>
+      </Switch>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
 import { SavingsReport } from "@/components/Report/SavingsReport";
-import { track } from "@/utils/analytics";
+import { track, trackFeatureOpen } from "@/utils/analytics";
 
 const models = getAllModels();
 const SCENARIOS = scenarios as ScenarioPreset[];
@@ -86,6 +86,8 @@ export function Calculator() {
       });
     }
   };
+
+  useEffect(() => { trackFeatureOpen("calculator"); }, []);
 
   useEffect(() => {
     if (!selectedScenario) return;

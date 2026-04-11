@@ -68,6 +68,7 @@ export function ComparePage() {
             }
             secondaryCta={{ ...secondary, href: "/decision-engine", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable", label: "Use decision engine" }}
             className="mb-10"
+            trackingContext={{ providerId: modelIdToProviderId(cheapest.id), pageType: "compare", sourceComponent: "ComparePage/WinnerBlock" }}
           />
         );
       })()}

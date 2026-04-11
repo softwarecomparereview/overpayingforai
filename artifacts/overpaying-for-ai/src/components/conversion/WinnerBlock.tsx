@@ -1,5 +1,6 @@
 import { AffiliateTarget } from "@/utils/affiliateResolver";
 import { StandardCtaGroup } from "./StandardCtaGroup";
+import type { CtaTrackingContext } from "@/components/monetization/AffiliateCta";
 
 type BadgeVariant = "cheapest" | "winner" | "best-value" | "recommended" | "budget";
 
@@ -11,6 +12,8 @@ interface WinnerBlockProps {
   primaryCta: AffiliateTarget;
   secondaryCta?: AffiliateTarget;
   className?: string;
+  /** Forwarded to StandardCtaGroup → AffiliateCta → trackCta(). Enriches GA4 events. */
+  trackingContext?: Omit<CtaTrackingContext, "ctaType">;
 }
 
 const BADGE_STYLES: Record<string, string> = {
@@ -46,6 +49,7 @@ function normalizeBadge(badge: string): string {
  * WinnerBlock — compact, high-signal recommendation block.
  * Used on compare, best, and AI type pages to surface a clear answer.
  * All CTAs go through the affiliate resolver. Savings shown only when reliable.
+ * trackingContext is forwarded to StandardCtaGroup so GA4 events carry page/component info.
  */
 export function WinnerBlock({
   badge,
@@ -55,6 +59,7 @@ export function WinnerBlock({
   primaryCta,
   secondaryCta,
   className = "",
+  trackingContext,
 }: WinnerBlockProps) {
   const variant = normalizeBadge(badge);
   const badgeStyle = BADGE_STYLES[variant] ?? BADGE_STYLES["recommended"];
@@ -78,6 +83,7 @@ export function WinnerBlock({
         primary={primaryCta}
         secondary={secondaryCta}
         size="sm"
+        trackingContext={{ sourceComponent: "WinnerBlock", ...trackingContext }}
       />
     </div>
   );
