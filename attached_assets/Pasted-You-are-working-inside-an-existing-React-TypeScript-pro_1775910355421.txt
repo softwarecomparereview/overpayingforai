@@ -1,0 +1,214 @@
+You are working inside an existing React + TypeScript project for overpayingforai.com.
+
+Goal:
+Implement a sitewide monetization + SEO upgrade layer WITHOUT breaking existing logic.
+
+Do NOT rewrite pages. Extend using reusable components + utilities.
+
+-----------------------------------
+PART 1 — CREATE AFFILIATE RESOLVER
+-----------------------------------
+
+Create file:
+/src/utils/affiliateResolver.ts
+
+Requirements:
+
+- Input: tool name (string)
+- Output: affiliate link (string)
+
+Logic:
+- Load from static config (for now)
+- Fallback to "#"
+
+Example:
+
+export const AFFILIATE_MAP: Record<string, string> = {
+  "gpt-4o": "https://platform.openai.com/signup",
+  "claude": "https://www.anthropic.com/partners",
+  "perplexity": "https://www.perplexity.ai",
+  "cursor": "https://cursor.sh",
+  "notion": "https://www.notion.so/affiliates"
+};
+
+export function getAffiliateLink(tool: string): string {
+  const key = tool.toLowerCase();
+  return AFFILIATE_MAP[key] || "#";
+}
+
+-----------------------------------
+PART 2 — CTA COMPONENT (SITEWIDE)
+-----------------------------------
+
+Create:
+/src/components/monetization/CTABlock.tsx
+
+Requirements:
+
+Props:
+- toolName
+- savingsText (optional)
+- variant ("primary" | "secondary")
+
+Render:
+
+- Headline:
+  "Save money with {toolName}"
+- Optional savings line
+- Button:
+  "Try {toolName}"
+
+- Button uses affiliate resolver
+
+Design:
+- Clean card
+- Prominent button
+
+-----------------------------------
+PART 3 — WINNER BLOCK (HIGH CONVERSION)
+-----------------------------------
+
+Create:
+/src/components/monetization/WinnerBlock.tsx
+
+Props:
+- title
+- winnerTool
+- reason
+- savings
+
+Render:
+
+- Badge: "Best Value"
+- Tool name
+- Reason
+- Savings highlight
+- CTA button (uses resolver)
+
+-----------------------------------
+PART 4 — INTERNAL LINKING ENGINE
+-----------------------------------
+
+Create:
+/src/components/seo/InternalLinks.tsx
+
+Props:
+- currentSlug
+
+Logic:
+
+Define static map:
+
+const RELATED_LINKS = {
+  "calculator": [
+    "/best/best-ai-under-20-per-month",
+    "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+  ],
+  "ai-types": [
+    "/calculator",
+    "/best/best-ai-for-chat-on-a-budget"
+  ]
+};
+
+Render:
+
+- Section: "Related"
+- 3–5 links max
+
+-----------------------------------
+PART 5 — SEO UTILITY (CRITICAL)
+-----------------------------------
+
+Create:
+/src/utils/seo.ts
+
+Functions:
+
+generateTitle(pageType, keyword)
+
+generateH1(pageType, keyword)
+
+generateMetaDescription(keyword)
+
+Rules:
+
+- Title must include keyword + year (2026)
+- H1 must match intent
+- Meta must include savings language
+
+Example:
+
+"GPT-4o vs Claude Cost (2026) – Which is Cheaper?"
+
+-----------------------------------
+PART 6 — SCHEMA (AGGREGATE RATING)
+-----------------------------------
+
+Create:
+/src/components/seo/Schema.tsx
+
+Inject JSON-LD:
+
+{
+ "@context": "https://schema.org",
+ "@type": "Product",
+ "name": toolName,
+ "aggregateRating": {
+   "@type": "AggregateRating",
+   "ratingValue": "4.5",
+   "reviewCount": "120"
+ }
+}
+
+-----------------------------------
+PART 7 — APPLY SITEWIDE (NON-DESTRUCTIVE)
+-----------------------------------
+
+Modify key pages:
+
+- Calculator page
+- AI Types pages
+- Comparison pages
+- Best pages
+
+For EACH page:
+
+1. Add CTABlock below main content
+2. Add WinnerBlock near top
+3. Add InternalLinks at bottom
+4. Replace title + meta using seo utils
+5. Add Schema component
+
+DO NOT remove existing UI
+
+-----------------------------------
+PART 8 — GLOBAL LAYOUT INJECTION
+-----------------------------------
+
+Update Layout.tsx:
+
+- Add CTABlock after main content (fallback CTA)
+- Ensure all pages have at least 1 monetized CTA
+
+-----------------------------------
+PART 9 — SAFETY RULES
+-----------------------------------
+
+- Do NOT break routing
+- Do NOT remove existing components
+- Do NOT change pricing logic
+- Keep everything additive
+
+-----------------------------------
+PART 10 — OUTPUT
+-----------------------------------
+
+After implementation:
+
+- List all modified files
+- Confirm:
+  ✔ CTA injection active
+  ✔ affiliate links resolving
+  ✔ internal links rendering
+  ✔ SEO tags updated
+  ✔ schema injected

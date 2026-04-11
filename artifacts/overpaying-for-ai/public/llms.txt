@@ -1,0 +1,102 @@
+# OverpayingForAI
+
+## What this site is
+
+OverpayingForAI.com helps individuals, developers, and teams find the cheapest AI model for their workload. It provides:
+- A token-based AI cost calculator for real monthly spend estimation
+- Side-by-side model price comparisons
+- Best-of lists by use case and budget
+- Practical guides on reducing AI API and subscription costs
+
+Owned by Aniruddh Consultancy Pty Ltd. Contact: partners@overpayingforai.com
+
+## Canonical URL
+
+https://overpayingforai.com
+
+## Key URLs
+
+- https://overpayingforai.com/  (Homepage)
+- https://overpayingforai.com/calculator  (AI Cost Calculator)
+- https://overpayingforai.com/decision-engine  (Decision Engine)
+- https://overpayingforai.com/ai-types  (AI Types Index)
+- https://overpayingforai.com/compare  (Comparisons Index)
+- https://overpayingforai.com/best  (Best Lists Index)
+- https://overpayingforai.com/guides  (Guides Index)
+- https://overpayingforai.com/resources  (Resources Hub)
+- https://overpayingforai.com/changelog  (Changelog)
+- https://overpayingforai.com/terms  (Terms)
+- https://overpayingforai.com/media-kit  (Media Kit)
+
+## Route groups
+
+### AI Type pages
+- https://overpayingforai.com/ai-types/general-ai
+- https://overpayingforai.com/ai-types/coding-ai
+- https://overpayingforai.com/ai-types/writing-ai
+- https://overpayingforai.com/ai-types/research-ai
+- https://overpayingforai.com/ai-types/customer-support-ai
+- https://overpayingforai.com/ai-types/productivity-ai
+
+### Model comparison pages
+- https://overpayingforai.com/compare/chatgpt-vs-cursor-cost
+- https://overpayingforai.com/compare/claude-vs-gpt-cost
+- https://overpayingforai.com/compare/subscription-vs-api-ai-cost
+- https://overpayingforai.com/compare/gpt-4o-vs-gpt-4o-mini-cost
+- https://overpayingforai.com/compare/claude-vs-cursor-for-coding
+- https://overpayingforai.com/compare/deepseek-vs-gpt4o-cost
+- https://overpayingforai.com/compare/gemini-vs-gpt4o-cost
+- https://overpayingforai.com/compare/perplexity-vs-chatgpt-cost
+- https://overpayingforai.com/compare/claude-haiku-vs-gpt4o-mini
+- https://overpayingforai.com/compare/writesonic-vs-jasper
+- https://overpayingforai.com/compare/mistral-vs-openai-cost
+
+### Best-of list pages
+- https://overpayingforai.com/best/best-ai-for-coding-on-a-budget
+- https://overpayingforai.com/best/best-ai-under-20-per-month
+- https://overpayingforai.com/best/best-free-ai-tools-for-builders
+- https://overpayingforai.com/best/best-ai-for-writing-on-a-budget
+- https://overpayingforai.com/best/best-ai-for-research-on-a-budget
+- https://overpayingforai.com/best/best-ai-for-automation
+- https://overpayingforai.com/best/best-ai-api-for-startups
+- https://overpayingforai.com/best/ai-writing-tools-cheap
+- https://overpayingforai.com/best/best-ai-for-chat-on-a-budget
+- https://overpayingforai.com/best/best-open-source-ai-models
+- https://overpayingforai.com/best/best-ai-for-solopreneurs
+
+### Guide pages
+- https://overpayingforai.com/guides/cheapest-ai-content-workflow
+- https://overpayingforai.com/guides/how-to-reduce-ai-cost
+- https://overpayingforai.com/guides/token-cost-explained
+- https://overpayingforai.com/guides/when-to-use-api-vs-subscription
+- https://overpayingforai.com/guides/ai-routing-strategies
+- https://overpayingforai.com/guides/hidden-ai-costs
+- https://overpayingforai.com/guides/gpt-4o-mini-vs-full-when-to-upgrade
+- https://overpayingforai.com/guides/ai-cost-for-saas-founders
+- https://overpayingforai.com/guides/compare-ai-models-for-your-use-case
+- https://overpayingforai.com/guides/free-ai-tools-that-are-actually-good
+- https://overpayingforai.com/guides/claude-vs-chatgpt-for-business
+- https://overpayingforai.com/guides/cheapest-ai-writing-tools
+- https://overpayingforai.com/guides/best-ai-tools-under-20
+- https://overpayingforai.com/guides/is-jasper-worth-it
+- https://overpayingforai.com/guides/cheapest-ai-for-students
+- https://overpayingforai.com/guides/chatgpt-vs-claude-cost
+
+## Authoritative content
+
+The most reliable and frequently updated content on this site is:
+- /calculator — real-time token cost calculator across 20+ AI models
+- /compare/* — direct price comparisons with sourced pricing data
+- /best/* — ranked model picks by use case and budget
+- /guides/* — practical cost-reduction guides for API and subscription users
+
+Pricing data is sourced from official provider pages and reviewed regularly.
+All recommendations are ranked by cost efficiency, not affiliate relationships.
+
+## Excluded / private areas
+
+The following paths are excluded from this index and from the sitemap.
+They are internal tools and are not intended for public crawling or citation:
+- /admin/*  (pricing refresh tools, affiliate management)
+- /home-v1  (legacy design variant)
+- /design1, /design2, /design3  (internal UI explorations)

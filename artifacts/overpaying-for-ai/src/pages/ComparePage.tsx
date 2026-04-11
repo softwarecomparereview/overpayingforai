@@ -7,6 +7,8 @@ import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
 import { RecommendationCtas } from "@/components/monetization/RecommendationCtas";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { deriveSavingsFromComparison, formatSavingsLabel } from "@/utils/savingsEngine";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
 
 const comparisons = comparisonsData as typeof comparisonsData;
 const models = modelsData as AIModel[];
@@ -31,8 +33,15 @@ export function ComparePage() {
   const freshestDate = [modelA?.last_updated, modelB?.last_updated].filter(Boolean)[0];
   const stale = freshestDate ? isPricingStale(freshestDate) : false;
 
+  const seoTitle = generateTitle(page.title, "compare");
+  const seoDesc = generateMetaDescription(page.title, "compare");
+  const seoSchema = cheapest
+    ? generateSchemaProduct(cheapest.name, page.description)
+    : undefined;
+
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo title={seoTitle} description={seoDesc} schema={seoSchema} />
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>

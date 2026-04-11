@@ -1,4 +1,29 @@
+# robots.txt — OverpayingForAI.com
+# Last updated: 2026-04-11
+#
+# Policy: allow all public content for search engines and AI crawlers.
+# Admin/internal pages are disallowed.
+
 User-agent: *
+Allow: /
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://overpayingforai.com/sitemap.xml

@@ -7,6 +7,8 @@ import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { StandardCtaGroup } from "@/components/conversion/StandardCtaGroup";
 import { getSavingsSummary, formatSavingsLabel } from "@/utils/savingsEngine";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
 
 const bestOf = bestOfData as typeof bestOfData;
 const models = modelsData as AIModel[];
@@ -25,8 +27,16 @@ export function BestPage() {
     );
   }
 
+  const seoTitle = generateTitle(page.title, "best");
+  const seoDesc = generateMetaDescription(page.title, "best");
+  const rank1Model = models.find((m) => m.id === page.picks[0]?.modelId);
+  const seoSchema = rank1Model
+    ? generateSchemaProduct(rank1Model.name, page.description)
+    : undefined;
+
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo title={seoTitle} description={seoDesc} schema={seoSchema} />
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>

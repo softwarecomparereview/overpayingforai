@@ -7,6 +7,8 @@ import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
 import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { generateTitle, generateMetaDescription, generateSchemaFAQ } from "@/utils/seo";
 
 interface AiTypeCategory {
   slug: string;
@@ -71,8 +73,13 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
   const relatedGuides = guidesData.filter((g) => category.related_guides.includes(g.slug));
   const relatedBestLists = bestOfData.filter((b) => category.related_best_lists.includes(b.slug));
 
+  const seoTitle = generateTitle(category.title, "ai-type");
+  const seoDesc = generateMetaDescription(category.title, "ai-type");
+  const seoSchema = category.faqs?.length ? generateSchemaFAQ(category.faqs.map((f) => ({ q: f.q, a: f.a }))) : undefined;
+
   return (
     <div className="bg-white">
+      <PageSeo title={seoTitle} description={seoDesc} schema={seoSchema} />
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className={`border-b border-border ${colors.hero} text-white py-14 sm:py-18`}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
