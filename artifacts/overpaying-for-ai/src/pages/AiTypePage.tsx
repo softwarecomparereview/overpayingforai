@@ -8,7 +8,17 @@ import bestOfData from "@/data/best-of.json";
 import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
+import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
+import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
+import modelsData from "@/data/models.json";
 import { generateTitle, generateMetaDescription, generateSchemaFAQ } from "@/utils/seo";
+
+const latestModelDate = (modelsData as { last_updated?: string }[])
+  .map((m) => m.last_updated)
+  .filter(Boolean)
+  .sort()
+  .reverse()[0] ?? "";
 
 interface AiTypeCategory {
   slug: string;
@@ -251,7 +261,7 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Pricing pattern</p>
               <h2 className="text-2xl font-bold text-foreground mb-4">{category.pricing_pattern.headline}</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">{category.pricing_pattern.body}</p>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
                   href="/calculator"
                   onClick={() => track("overpaying_cta_clicked", { sourceSurface: "ai_type_page", category: category.slug, variant: "pricing_cta" })}
@@ -259,6 +269,11 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                 >
                   Check your cost →
                 </Link>
+                {latestModelDate && (
+                  <span className={`text-xs px-2.5 py-1.5 rounded-lg border ${isPricingStale(latestModelDate) ? "border-amber-300 bg-amber-50 text-amber-800" : "border-border bg-muted/30 text-muted-foreground"}`}>
+                    {isPricingStale(latestModelDate) ? "⚠️ Pricing may be outdated" : freshnessLabel(latestModelDate)}
+                  </span>
+                )}
               </div>
             </div>
             <div className="space-y-3">
@@ -397,6 +412,22 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
             </Link>
           </div>
         </div>
+      </section>
+
+      <SeoContentBlock />
+
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
+        <InternalLinks
+          links={[
+            { href: "/best", text: "Best AI Tools" },
+            { href: "/calculator", text: "AI Cost Calculator" },
+            { href: "/ai-types", text: "Browse All AI Types" },
+            { href: "/decision-engine", text: "Decision Engine" },
+            { href: "/compare", text: "Compare Models" },
+            { href: "/guides", text: "Cost Reduction Guides" },
+          ]}
+          heading="Explore more"
+        />
       </section>
     </div>
   );

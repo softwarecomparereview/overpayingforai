@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
 import aiTypesData from "@/data/aiTypes.json";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
 
 const ALL_CATEGORIES = [
   ...aiTypesData,
@@ -24,6 +26,11 @@ const COLOR_MAP: Record<string, string> = {
 export function AiTypeIndex() {
   return (
     <div className="bg-white">
+      <PageSeo
+        title="Browse AI Types & Categories | OverpayingForAI"
+        description="Find the cheapest AI tool for your specific use case — coding, writing, research, data, and more. Compare pricing by category."
+        canonicalUrl="/ai-types"
+      />
       <section className="border-b border-border bg-slate-900 text-white py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">AI Types</p>
@@ -94,6 +101,20 @@ export function AiTypeIndex() {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-2 pb-12">
+        <InternalLinks
+          links={[
+            { href: "/best", text: "Best AI Tools" },
+            { href: "/calculator", text: "AI Cost Calculator" },
+            { href: "/decision-engine", text: "Decision Engine" },
+            { href: "/compare", text: "Compare Models" },
+            { href: "/guides", text: "Cost Guides" },
+            { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
+          ]}
+          heading="Explore more"
+        />
       </section>
     </div>
   );

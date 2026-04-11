@@ -55,6 +55,20 @@ Static-first React + Vite web app. No backend dependency.
   - `index.ts` — barrel export
   - **CORS note**: Provider pricing pages are JS-rendered SPAs; direct browser fetch returns HTML shells without data. Each adapter returns `status: "known-good"` reference data. To enable live fetch, implement a serverless layer (e.g. Cloudflare Worker) per the in-code upgrade instructions and update `tryLiveFetch()` in each adapter.
 
+**SEO components** (`src/components/seo/`):
+- `PageSeo.tsx` — Sets title, meta description, JSON-LD schema, and canonical `<link>` tag. Props: `title?`, `description?`, `schema?`, `canonicalUrl?`. All optional with fallbacks.
+- `InternalLinks.tsx` — Renders a "Related" link strip. `links` prop is optional; falls back to site-wide FALLBACK_LINKS if omitted. `maxLinks` defaults to 8.
+- `SeoContentBlock.tsx` — Reusable editorial content block (audience, not-for, pricing insights, alternatives, final verdict). All props optional with defaults.
+
+**SEO pages**:
+- `/best` — `BestAiTools.tsx` pillar page (1500+ words, category grid, cheapest models, how-to guide, subscription vs API comparison). Replaced the old `BestIndex`.
+- Canonical tags injected on all pages via `PageSeo`
+- Pricing freshness badge (`freshnessLabel`/`isPricingStale`) on AI Type pages' pricing section
+- `InternalLinks` and `SeoContentBlock` injected on: AiTypePage, AiTypeIndex, GuidePage, ComparePage, BestPage, BestIndex
+
+**Sitemap** (`src/utils/generateSitemap.ts`):
+- Filters out low-quality pages: slugs containing `coming-soon`/`draft`, empty descriptions, empty guide sections
+
 **Admin** (`src/pages/admin/`):
 - `PricingRefreshPage.tsx` — Maintainer-only pricing refresh workflow at `/admin/pricing-refresh`
   - Guard: `localStorage.getItem("overpaying_admin") === "1"`; unlock key is `"refresh"`
