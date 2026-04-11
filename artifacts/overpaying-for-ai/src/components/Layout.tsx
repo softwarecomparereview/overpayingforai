@@ -125,7 +125,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li><Link href="/guides/token-cost-explained" className="hover:text-foreground transition-colors">Token Cost Explained</Link></li>
                 <li><Link href="/guides/when-to-use-api-vs-subscription" className="hover:text-foreground transition-colors">API vs Subscription</Link></li>
                 <li><Link href="/resources" className="hover:text-foreground transition-colors">All Resources</Link></li>
-                <li><Link href="/changelog" className="hover:text-foreground transition-colors">Pricing Changelog</Link></li>
+                <li><Link href="/changelog" className="hover:text-foreground transition-colors">Pricing Data</Link></li>
+                <li><Link href="/pricing-changelog" className="hover:text-foreground transition-colors">Pricing Changelog</Link></li>
                 <li><Link href="/ai-types" className="hover:text-foreground transition-colors">Browse AI Types</Link></li>
               </ul>
             </div>
