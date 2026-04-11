@@ -12,6 +12,7 @@ import { GuidePage, GuideIndex } from "@/pages/GuidePage";
 import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
 import { AffiliatesAdminPage } from "@/pages/admin/AffiliatesAdminPage";
 import { AffiliateAuditPage } from "@/pages/admin/AffiliateAuditPage";
+import { SitemapPreviewPage } from "@/pages/admin/SitemapPreviewPage";
 import { Design1 } from "@/pages/Design1";
 import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
@@ -48,6 +49,7 @@ function Router() {
         <Route path="/admin/pricing-refresh" component={PricingRefreshPage} />
         <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
         <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
+        <Route path="/admin/sitemap-preview" component={SitemapPreviewPage} />
         <Route>
           {() => (
             <Layout>
