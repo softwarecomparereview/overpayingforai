@@ -13,6 +13,22 @@ import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSele
 import scenarios from "@/data/scenarios.json";
 import { SavingsReport } from "@/components/Report/SavingsReport";
 import { track, trackFeatureOpen } from "@/utils/analytics";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
+import { CTABlock } from "@/components/monetization/CTABlock";
+import { generateTitle, generateMetaDescription, generateSchemaSoftwareApp } from "@/utils/seo";
+
+const CALCULATOR_SEO_TITLE = generateTitle("", "calculator");
+const CALCULATOR_SEO_DESC = generateMetaDescription("", "calculator");
+const CALCULATOR_SCHEMA = generateSchemaSoftwareApp();
+
+const CALCULATOR_RELATED_LINKS = [
+  { href: "/compare/gpt-4o-vs-gpt-4o-mini-cost", text: "GPT-4o vs GPT-4o mini" },
+  { href: "/compare/claude-vs-gpt-cost", text: "Claude vs GPT-4o" },
+  { href: "/compare/deepseek-vs-gpt4o-cost", text: "DeepSeek vs GPT-4o" },
+  { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
+  { href: "/guides/how-to-reduce-ai-cost", text: "How to Reduce AI Cost" },
+];
 
 const models = getAllModels();
 const SCENARIOS = scenarios as ScenarioPreset[];
@@ -111,6 +127,7 @@ export function Calculator() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+      <PageSeo title={CALCULATOR_SEO_TITLE} description={CALCULATOR_SEO_DESC} schema={CALCULATOR_SCHEMA} />
       <div className="mb-5 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">AI Cost Calculator</h1>
         <p className="text-sm sm:text-base text-muted-foreground max-w-prose">
@@ -455,6 +472,21 @@ export function Calculator() {
             Learn more about tokens →
           </Link>
         </p>
+      </div>
+
+      <div className="mt-8 no-print">
+        <CTABlock
+          toolId="deepseek"
+          toolName="DeepSeek V3"
+          headline="Often 10× cheaper than GPT-4o for the same output"
+          savingsText="Most content and coding tasks cost under $1/month with DeepSeek V3 via API."
+          variant="secondary"
+          trackingContext={{ pageType: "calculator", sourceComponent: "Calculator/CTABlock" }}
+        />
+      </div>
+
+      <div className="no-print">
+        <InternalLinks links={CALCULATOR_RELATED_LINKS} heading="Compare models" />
       </div>
     </div>
   );

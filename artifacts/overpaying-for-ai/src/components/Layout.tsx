@@ -91,7 +91,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-border bg-muted/30 mt-20">
+      {/* Sitewide fallback CTA — ensures every page has at least one monetised touchpoint */}
+      <div className="border-t border-border bg-muted/40 py-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+          <p className="text-muted-foreground text-center sm:text-left">
+            <span className="font-semibold text-foreground">Not sure which AI is cheapest for your use case?</span>{" "}
+            Find out in 30 seconds — no signup required.
+          </p>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <a href="/calculator" className="bg-primary text-primary-foreground font-medium px-4 py-1.5 rounded-lg hover:bg-primary/90 transition-colors text-sm">
+              Calculate Cost
+            </a>
+            <a href="/decision-engine" className="text-muted-foreground hover:text-foreground transition-colors">
+              Decision Engine →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <footer className="border-t border-border bg-muted/30 mt-0">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <div>
