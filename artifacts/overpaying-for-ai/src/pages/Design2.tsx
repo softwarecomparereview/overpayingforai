@@ -277,21 +277,21 @@ export function Design2() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
             {AI_TYPE_CARDS.map((cat) => (
-              <Link key={cat.slug} href={`/ai-types/${cat.slug}`}>
-                <div
-                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "ai_type", slug: cat.slug })}
-                  className="group border border-border rounded-xl p-4 sm:p-5 bg-white hover:border-primary/30 hover:shadow-sm transition-all h-full cursor-pointer"
-                >
-                  <div className="flex items-start gap-3 mb-2.5">
-                    <span className="text-xl leading-none mt-0.5">{cat.icon}</span>
-                    <h3 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors">{cat.title}</h3>
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-2 line-clamp-2">{cat.tagline}</p>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">{cat.bestFor}</span>
-                  </div>
-                  <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Explore →</p>
+              <Link
+                key={cat.slug}
+                href={`/ai-types/${cat.slug}`}
+                onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "ai_type", slug: cat.slug })}
+                className="group block border border-border rounded-xl p-4 sm:p-5 bg-white hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <div className="flex items-start gap-3 mb-2.5">
+                  <span className="text-xl leading-none mt-0.5">{cat.icon}</span>
+                  <h3 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors">{cat.title}</h3>
                 </div>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-2 line-clamp-2">{cat.tagline}</p>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">{cat.bestFor}</span>
+                </div>
+                <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Explore →</p>
               </Link>
             ))}
           </div>
@@ -438,27 +438,27 @@ export function Design2() {
           </div>
           <div className="space-y-3 mb-6">
             {SAVINGS.map((ex) => (
-              <Link key={ex.from} href={`/compare/${ex.slug}`}>
-                <div
-                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "savings_example", label: ex.from })}
-                  className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-emerald-200 bg-white rounded-xl px-5 py-4 hover:border-emerald-400 hover:shadow-sm transition-all cursor-pointer"
-                >
-                  <div className="flex-1">
-                    <p className="text-xs text-muted-foreground mb-1">{ex.usage}</p>
-                    <p className="text-sm font-semibold text-foreground">
-                      <span className="line-through text-muted-foreground/60">{ex.from}</span>
-                      <span className="mx-2 text-muted-foreground">→</span>
-                      <span className="text-emerald-700">{ex.to}</span>
-                    </p>
+              <Link
+                key={ex.from}
+                href={`/compare/${ex.slug}`}
+                onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "savings_example", label: ex.from })}
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-emerald-200 bg-white rounded-xl px-5 py-4 hover:border-emerald-400 hover:shadow-sm transition-all"
+              >
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-1">{ex.usage}</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    <span className="line-through text-muted-foreground/60">{ex.from}</span>
+                    <span className="mx-2 text-muted-foreground">→</span>
+                    <span className="text-emerald-700">{ex.to}</span>
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-emerald-700 font-mono">{ex.save}/mo</p>
+                    <p className="text-xs text-muted-foreground">{ex.savePerYear}/yr saved</p>
                   </div>
-                  <div className="flex items-center gap-4 sm:gap-6 shrink-0">
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-emerald-700 font-mono">{ex.save}/mo</p>
-                      <p className="text-xs text-muted-foreground">{ex.savePerYear}/yr saved</p>
-                    </div>
-                    <span className="bg-emerald-100 text-emerald-700 text-sm font-bold px-3 py-1.5 rounded-lg">-{ex.pct}</span>
-                    <span className="text-xs text-emerald-700 font-medium group-hover:underline hidden sm:block">See comparison →</span>
-                  </div>
+                  <span className="bg-emerald-100 text-emerald-700 text-sm font-bold px-3 py-1.5 rounded-lg">-{ex.pct}</span>
+                  <span className="text-xs text-emerald-700 font-medium group-hover:underline hidden sm:block">See comparison →</span>
                 </div>
               </Link>
             ))}
@@ -492,9 +492,11 @@ export function Design2() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {AFFILIATE_PICKS.map((pick) => (
-              <div
+              <Link
                 key={pick.label}
-                className="bg-white border border-border rounded-xl p-5 flex flex-col hover:border-slate-400 hover:shadow-sm transition-all"
+                href={pick.href}
+                onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
+                className="group flex flex-col bg-white border border-border rounded-xl p-5 hover:border-slate-400 hover:shadow-sm transition-all"
               >
                 <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-md mb-3 ${pick.badge}`}>
                   {pick.label}
@@ -505,14 +507,10 @@ export function Design2() {
                   <span className="text-emerald-700 font-mono font-semibold">{pick.cost}</span>
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
-                <Link
-                  href={pick.href}
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
-                  className="block w-full text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 py-2 rounded-lg transition-colors"
-                >
+                <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
                   {pick.cta}
-                </Link>
-              </div>
+                </span>
+              </Link>
             ))}
           </div>
           <Link
@@ -539,16 +537,16 @@ export function Design2() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
             {comparisons.map((c) => (
-              <Link key={c.slug} href={`/compare/${c.slug}`}>
-                <div
-                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "comparison", slug: c.slug })}
-                  className="group border border-border rounded-xl p-5 hover:border-primary/40 hover:bg-muted/10 transition-all h-full cursor-pointer"
-                >
-                  <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">{c.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{c.summary}</p>
-                  <div className="mt-3 pt-3 border-t border-border/60 text-xs text-primary font-medium flex justify-between items-center">
-                    <span>Read comparison</span><span>→</span>
-                  </div>
+              <Link
+                key={c.slug}
+                href={`/compare/${c.slug}`}
+                onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "comparison", slug: c.slug })}
+                className="group block border border-border rounded-xl p-5 hover:border-primary/40 hover:bg-muted/10 transition-all"
+              >
+                <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">{c.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{c.summary}</p>
+                <div className="mt-3 pt-3 border-t border-border/60 text-xs text-primary font-medium flex justify-between items-center">
+                  <span>Read comparison</span><span>→</span>
                 </div>
               </Link>
             ))}
@@ -627,29 +625,29 @@ export function Design2() {
           </div>
           <div className="grid sm:grid-cols-2 gap-3 mb-6">
             {guides.map((g) => (
-              <Link key={g.slug} href={`/guides/${g.slug}`}>
-                <div
-                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "guide", slug: g.slug })}
-                  className="group border border-border rounded-xl p-5 bg-white hover:border-primary/40 hover:shadow-sm transition-all h-full cursor-pointer"
-                >
-                  <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">{g.readTime}</span>
-                  <h3 className="font-semibold text-foreground text-sm mt-3 mb-2 group-hover:text-primary transition-colors leading-snug">{g.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{g.description}</p>
-                  <p className="text-xs text-primary font-medium mt-3">Read guide →</p>
-                </div>
+              <Link
+                key={g.slug}
+                href={`/guides/${g.slug}`}
+                onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "guide", slug: g.slug })}
+                className="group block border border-border rounded-xl p-5 bg-white hover:border-primary/40 hover:shadow-sm transition-all"
+              >
+                <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">{g.readTime}</span>
+                <h3 className="font-semibold text-foreground text-sm mt-3 mb-2 group-hover:text-primary transition-colors leading-snug">{g.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{g.description}</p>
+                <p className="text-xs text-primary font-medium mt-3">Read guide →</p>
               </Link>
             ))}
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {bestOf.map((b) => (
-              <Link key={b.slug} href={`/best/${b.slug}`}>
-                <div
-                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "best_of", slug: b.slug })}
-                  className="group border border-border rounded-xl p-4 bg-slate-50 hover:border-primary/40 hover:bg-muted/10 transition-all h-full cursor-pointer"
-                >
-                  <span className="text-xs font-semibold text-primary bg-primary/8 px-2 py-1 rounded">{b.category}</span>
-                  <h3 className="font-semibold text-foreground text-xs mt-3 leading-snug group-hover:text-primary transition-colors">{b.title}</h3>
-                </div>
+              <Link
+                key={b.slug}
+                href={`/best/${b.slug}`}
+                onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "best_of", slug: b.slug })}
+                className="group block border border-border rounded-xl p-4 bg-slate-50 hover:border-primary/40 hover:bg-muted/10 transition-all"
+              >
+                <span className="text-xs font-semibold text-primary bg-primary/8 px-2 py-1 rounded">{b.category}</span>
+                <h3 className="font-semibold text-foreground text-xs mt-3 leading-snug group-hover:text-primary transition-colors">{b.title}</h3>
               </Link>
             ))}
           </div>

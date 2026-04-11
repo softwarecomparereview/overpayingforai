@@ -68,7 +68,13 @@ export function BestPage() {
                     <p className="text-xs text-muted-foreground mb-2">{model.provider}</p>
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed mb-2">{pick.why}</p>
-                  <p className="text-sm font-semibold text-foreground">{pick.monthlyEstimate}</p>
+                  <p className="text-sm font-semibold text-foreground mb-3">{pick.monthlyEstimate}</p>
+                  <Link
+                    href="/calculator"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    Calculate your cost with {pick.title} →
+                  </Link>
                 </div>
               </div>
             );
@@ -117,14 +123,16 @@ export function BestIndex() {
       <p className="text-muted-foreground mb-8">Ranked picks for every use case and budget — updated regularly.</p>
       <div className="grid sm:grid-cols-2 gap-4">
         {bestOf.map((b) => (
-          <Link key={b.slug} href={`/best/${b.slug}`}>
-            <div className="border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
-              <span className="text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-2 py-0.5 rounded mb-3 inline-block">
-                {b.category}
-              </span>
-              <h2 className="font-semibold text-foreground mb-2 text-base">{b.title}</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{b.description}</p>
-            </div>
+          <Link
+            key={b.slug}
+            href={`/best/${b.slug}`}
+            className="block border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors"
+          >
+            <span className="text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-2 py-0.5 rounded mb-3 inline-block">
+              {b.category}
+            </span>
+            <h2 className="font-semibold text-foreground mb-2 text-base">{b.title}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">{b.description}</p>
           </Link>
         ))}
       </div>
