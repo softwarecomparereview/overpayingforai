@@ -1,0 +1,228 @@
+Enhance the EXISTING overpayingforai.com codebase to add a lightweight affiliate system, centralized affiliate resolver, and reusable CTA injection across the site.
+
+Do NOT rewrite the app.
+Do NOT change branding.
+Do NOT remove existing calculator, decision engine, pricing refresh, AI types, comparison pages, guides, or best pages.
+Extend current architecture only.
+
+GOAL
+Create robust monetization plumbing so recommendation sections, winner sections, best-pick sections, and affiliate cards can all resolve to:
+1) affiliate URL when available
+2) internal fallback URL when affiliate is missing
+3) optional disabled/non-primary state when neither is available
+
+This system must support the real-world admin workflow where affiliate programs are still being registered and some providers are pending.
+
+==================================================
+CORE REQUIREMENTS
+==================================================
+
+Build a centralized affiliate config and resolution layer.
+
+Create or update these pieces:
+
+1) Central affiliate data source
+Suggested file:
+- src/data/affiliates.json
+or
+- src/data/affiliates.ts
+
+Each provider/tool entry should support:
+- id
+- name
+- affiliateUrl (nullable)
+- directUrl (optional canonical product URL if used in your current system)
+- fallbackUrl (internal route like /compare/... or /decision-engine)
+- status: active | pending | unavailable
+- ctaLabelPrimary (optional)
+- ctaLabelSecondary (optional)
+- notes (optional)
+- updatedAt (optional)
+
+Example shape:
+{
+  "cursor": {
+    "id": "cursor",
+    "name": "Cursor",
+    "affiliateUrl": null,
+    "fallbackUrl": "/compare/cursor-vs-copilot",
+    "status": "pending",
+    "ctaLabelPrimary": "Start with Cursor",
+    "ctaLabelSecondary": "Compare alternatives"
+  }
+}
+
+2) Affiliate resolver utility
+Suggested file:
+- src/utils/affiliateResolver.ts
+
+Implement reusable logic that:
+- resolves the best outbound/internal target for a given tool/provider
+- prefers affiliateUrl when present
+- otherwise falls back to fallbackUrl
+- returns metadata needed for rendering CTA state
+
+Suggested exported functions:
+- getAffiliateTarget(toolId)
+- hasAffiliateLink(toolId)
+- getPrimaryCta(toolId, context?)
+- getSecondaryCta(toolId, context?)
+
+Return object should support:
+- href
+- isExternal
+- isAffiliate
+- status
+- label
+- fallbackUsed
+- rel/noreferrer rules when external
+
+3) Reusable CTA component(s)
+Suggested files:
+- src/components/monetization/AffiliateCta.tsx
+- src/components/monetization/RecommendationCtas.tsx
+
+Build components that:
+- render primary CTA
+- optionally render secondary CTA
+- handle external vs internal links cleanly
+- preserve design system
+- support context-specific labels
+- degrade gracefully if affiliate link is missing
+
+4) CTA injection across site
+Patch recommendation-heavy pages/components so they use the centralized resolver rather than page-specific ad hoc links.
+
+Targets likely include:
+- compare pages
+- best pages
+- AI type detail pages
+- recommendation cards
+- winner sections
+- cheapest sections
+- top-pick modules
+- end-of-page CTA sections
+- any “Start with X” / “Try X” / “Use X” buttons
+
+==================================================
+CTA BEHAVIOR RULES
+==================================================
+
+Primary logic:
+- If affiliate exists:
+  use affiliate link as primary CTA
+- Else if fallback exists:
+  use fallback as primary CTA
+- Else:
+  use a safe internal default such as decision engine or calculator
+
+Secondary logic:
+- If affiliate is primary:
+  secondary CTA should go to internal comparison/details page when available
+- If fallback is primary:
+  secondary CTA can go to pricing/calculator/decision engine
+
+Default CTA label behavior:
+- affiliate active:
+  “Start with {Tool}”
+- pending affiliate:
+  “Compare {Tool}”
+  or
+  “See cheaper alternatives”
+- cheapest/winner contexts can override label:
+  “Try the cheapest option”
+  “See pricing breakdown”
+  “Compare alternatives”
+
+Do NOT leave dead buttons.
+Do NOT leave empty hrefs.
+Do NOT hardcode random URLs throughout pages.
+
+==================================================
+ADMIN OPERABILITY
+==================================================
+
+The system must be easy for admin to update manually while affiliate approvals are still coming in.
+
+Admin requirements:
+- one central data file for affiliate URLs/statuses
+- clear provider IDs
+- safe defaults for pending providers
+- comments or concise docs explaining how to add/update affiliate links
+
+Add a concise developer/admin note in code comments or README section:
+- how to add a new provider
+- how to activate affiliate URL later
+- how fallback works
+
+==================================================
+SITEWIDE USAGE
+==================================================
+
+Refactor existing recommendation modules to use the new system where practical.
+
+Do NOT duplicate per-page CTA logic if shared components can solve it.
+
+Use current project structure and style conventions.
+
+Apply to:
+1) comparison templates/pages
+2) best-list templates/pages
+3) AI type templates/pages
+4) homepage recommendation areas if they recommend tools
+5) resources/recommendation cards where monetization intent exists
+
+==================================================
+IMPLEMENTATION DETAILS
+==================================================
+
+Technical constraints:
+- preserve existing routes
+- preserve current styling patterns
+- no heavy new dependencies
+- TypeScript-safe
+- no runtime regressions
+- no calculator breakage
+- no pricing refresh breakage
+
+Accessibility:
+- semantic links/buttons
+- proper external link rel/target handling
+- visible focus states
+- no div-onClick anti-patterns unless already strongly required
+
+==================================================
+OPTIONAL BUT PREFERRED
+==================================================
+
+If current code has recommendation data/models, connect provider IDs cleanly so CTA rendering can be data-driven.
+
+If practical, add helper mapping from recommendation/tool/model objects to affiliate provider IDs.
+
+Example:
+- recommendation.toolId
+- recommendation.providerId
+- model.providerSlug
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+Functional:
+- affiliate links are centrally managed
+- missing affiliate links no longer create monetization gaps
+- recommendation pages/components render valid CTAs
+- affiliate pending state still converts users into internal comparison/decision paths
+
+Quality:
+- no dead CTA buttons
+- no empty href values
+- no obvious duplicated CTA logic across multiple page templates
+- build passes successfully
+
+Output after implementation:
+1) concise summary of what was built
+2) files changed
+3) where CTA injection was applied
+4) any provider mappings that still need manual review
+5) any pages/components that could not be safely auto-wired

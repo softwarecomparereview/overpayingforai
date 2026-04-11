@@ -3,6 +3,8 @@ import comparisonsData from "@/data/comparisons.json";
 import modelsData from "@/data/models.json";
 import type { AIModel } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
+import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
+import { RecommendationCtas } from "@/components/monetization/RecommendationCtas";
 
 const comparisons = comparisonsData as typeof comparisonsData;
 const models = modelsData as AIModel[];
@@ -69,27 +71,43 @@ export function ComparePage() {
       </section>
 
       {/* Cheapest Option */}
-      {cheapest && (
-        <section className="mb-10">
-          <h2 className="text-xl font-bold mb-4">Cheapest Option</h2>
-          <div className="border border-green-200 bg-green-50 dark:bg-green-950/20 dark:border-green-900 rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold px-2 py-0.5 rounded">Cheapest</span>
-              <span className="font-semibold text-foreground">{cheapest.name}</span>
-              <span className="text-sm text-muted-foreground">by {cheapest.provider}</span>
+      {cheapest && (() => {
+        const cheapestProviderId = modelIdToProviderId(cheapest.id);
+        const cheapestPrimary = getPrimaryCta(cheapestProviderId, "cheapest", "/calculator");
+        const cheapestSecondary = getPrimaryCta("", "default", "/calculator");
+        return (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold mb-4">Cheapest Option</h2>
+            <div className="border border-green-200 bg-green-50 dark:bg-green-950/20 dark:border-green-900 rounded-lg p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold px-2 py-0.5 rounded">Cheapest</span>
+                <span className="font-semibold text-foreground">{cheapest.name}</span>
+                <span className="text-sm text-muted-foreground">by {cheapest.provider}</span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-4">{page.cheapestOptionNote}</p>
+              <div className="pt-3 border-t border-green-100 dark:border-green-900">
+                <RecommendationCtas
+                  primary={cheapestPrimary.isAffiliate
+                    ? { ...cheapestPrimary, label: `Try ${cheapest.name}` }
+                    : { ...cheapestPrimary, label: `Calculate your savings with ${cheapest.name}` }
+                  }
+                  secondary={cheapestPrimary.isAffiliate ? {
+                    ...cheapestSecondary,
+                    href: "/calculator",
+                    label: "Calculate your cost",
+                    isExternal: false,
+                    isAffiliate: false,
+                    fallbackUsed: true,
+                    status: "unavailable",
+                  } : undefined}
+                  primaryClassName="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 dark:text-green-400 hover:underline"
+                  secondaryClassName="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:underline"
+                />
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">{page.cheapestOptionNote}</p>
-            <div className="pt-3 border-t border-green-100 dark:border-green-900 flex flex-wrap gap-3">
-              <Link
-                href="/calculator"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 dark:text-green-400 hover:underline"
-              >
-                Calculate your savings with {cheapest.name} →
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* Recommendation */}
       <section className="mb-10">

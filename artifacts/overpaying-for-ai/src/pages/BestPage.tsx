@@ -2,6 +2,8 @@ import { useParams, Link } from "wouter";
 import bestOfData from "@/data/best-of.json";
 import modelsData from "@/data/models.json";
 import type { AIModel } from "@/engine/types";
+import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
+import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 
 const bestOf = bestOfData as typeof bestOfData;
 const models = modelsData as AIModel[];
@@ -69,12 +71,19 @@ export function BestPage() {
                   )}
                   <p className="text-sm text-muted-foreground leading-relaxed mb-2">{pick.why}</p>
                   <p className="text-sm font-semibold text-foreground mb-3">{pick.monthlyEstimate}</p>
-                  <Link
-                    href="/calculator"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-                  >
-                    Calculate your cost with {pick.title} →
-                  </Link>
+                  {(() => {
+                    const providerId = modelIdToProviderId(pick.modelId);
+                    const primary = getPrimaryCta(providerId, "default", "/calculator");
+                    const label = primary.isAffiliate
+                      ? `Try ${pick.title}`
+                      : `Calculate your cost with ${pick.title}`;
+                    return (
+                      <AffiliateCta
+                        target={{ ...primary, label: `${label} →` }}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                      />
+                    );
+                  })()}
                 </div>
               </div>
             );
