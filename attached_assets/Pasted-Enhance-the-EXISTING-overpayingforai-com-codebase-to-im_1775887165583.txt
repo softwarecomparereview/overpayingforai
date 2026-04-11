@@ -1,0 +1,293 @@
+Enhance the EXISTING overpayingforai.com codebase to implement sitewide winner blocks, a lightweight savings engine, and standardized CTA patterns across key monetization pages.
+
+Do NOT rewrite the app.
+Do NOT redesign branding.
+Do NOT remove or replace existing systems:
+- pricing refresh engine (Artificial Analysis integration, proxy, models.json)
+- affiliate system + resolver
+- calculator
+- decision engine
+- AI types
+- comparison pages
+- best pages
+- guides/resources
+- pricing changelog
+
+This work must EXTEND the current architecture only.
+
+==================================================
+GOAL
+==================================================
+
+Upgrade the site from informational to decision-driven by:
+
+1) Adding clear winner / cheapest / best-for-use-case blocks
+2) Showing estimated savings using real pricing data where possible
+3) Standardizing CTA structure across all monetization pages
+4) Increasing conversion without introducing false data or breaking trust
+
+==================================================
+CRITICAL SYSTEM INTEGRATION RULES (MANDATORY)
+==================================================
+
+1) Pricing Data Source
+Use ONLY the existing live pricing system:
+- Artificial Analysis integration
+- proxy fetch layer
+- models.json or current pricing store
+
+Do NOT introduce a parallel pricing system.
+Do NOT hardcode pricing.
+
+2) Affiliate System
+ALL CTAs MUST use the centralized affiliate resolver.
+
+Do NOT:
+- hardcode outbound URLs
+- bypass resolver logic
+- duplicate CTA logic
+
+3) Data Safety
+If pricing comparison confidence is low:
+- DO NOT show numeric savings
+- fall back to qualitative messaging:
+  “Lower-cost option”
+  “Typically cheaper”
+
+4) Winner Logic
+Where possible:
+- derive winners from existing comparison/page data or pricing data
+- DO NOT hardcode winners unless absolutely necessary
+
+==================================================
+PHASE A — WINNER BLOCKS
+==================================================
+
+Create reusable winner/recommendation components.
+
+Suggested files:
+- src/components/conversion/WinnerBlock.tsx
+- src/components/conversion/RecommendationSummary.tsx
+
+Apply to:
+- /compare/*
+- /best/*
+- /ai-types/*
+- optionally high-intent guide pages
+
+Winner block must include:
+- badge:
+  Winner / Cheapest / Best Value / Best for [use case]
+- tool name
+- 1-line rationale
+- optional savings line
+- standardized CTA group (via resolver)
+
+Example structure:
+- Badge
+- Title: “Best for coding: Cursor”
+- Rationale: short, factual
+- Savings (if valid)
+- Primary CTA
+- Secondary CTA
+
+Keep compact, high-signal, and non-marketing-heavy.
+
+==================================================
+PHASE B — SAVINGS ENGINE
+==================================================
+
+Create lightweight savings utility.
+
+Suggested file:
+- src/utils/savingsEngine.ts
+
+Functions:
+- calculateSavingsPercent(base, cheaper)
+- calculateSavingsAmount(base, cheaper)
+- getSavingsSummary(...)
+- formatSavingsLabel(...)
+
+Data must come from existing pricing system.
+
+Savings display rules:
+- show % savings where reliable
+- optionally show $ savings
+- round values (no false precision)
+
+If data is weak:
+- use:
+  “Lower-cost option”
+  “Typically cheaper based on current pricing”
+
+DO NOT fabricate savings.
+
+==================================================
+PHASE C — CTA STANDARDIZATION
+==================================================
+
+Create consistent CTA system.
+
+Suggested file:
+- src/components/conversion/StandardCtaGroup.tsx
+
+Rules:
+
+Primary CTA:
+- tied to winner/recommendation
+- uses affiliate resolver
+- action-oriented:
+  “Start with {Tool}”
+  “Try the cheapest option”
+
+Secondary CTA:
+- internal navigation:
+  “Compare alternatives”
+  “See pricing breakdown”
+  “Use decision engine”
+
+Optional tertiary:
+- calculator
+- pricing changelog
+
+Apply across:
+- compare pages
+- best pages
+- AI type pages
+- recommendation modules
+- end-of-page CTA sections
+
+Avoid vague labels like “Learn more” unless necessary.
+
+==================================================
+PHASE D — PAGE TEMPLATE INTEGRATION
+==================================================
+
+1) Comparison Pages (/compare/*)
+- add winner block above the fold or near top
+- identify recommended tool
+- show rationale
+- show savings if valid
+- include CTA group
+
+2) Best Pages (/best/*)
+- include:
+  Best overall
+  Best budget (if applicable)
+- each item uses standardized CTA
+- add end-of-page CTA block
+
+3) AI Type Pages (/ai-types/*)
+- add “Best starting option” block near top
+- include CTA group
+- include savings messaging where valid
+- add end-of-page CTA
+
+4) Guides / Resources
+- only add recommendation CTA blocks where appropriate
+- do not clutter informational content
+
+==================================================
+PHASE E — SAVINGS MESSAGING STYLE
+==================================================
+
+Use:
+- “Save up to X%”
+- “Lower-cost option”
+- “Typically cheaper”
+- “Based on current pricing”
+
+Avoid:
+- exaggerated claims
+- fake precision
+- misleading guarantees
+
+==================================================
+PHASE F — FALLBACK BEHAVIOR
+==================================================
+
+Handle missing data gracefully:
+
+If:
+- no affiliate → resolver fallback
+- no savings → omit or use qualitative messaging
+- no clear winner → use:
+  “Recommended starting point”
+
+Never leave:
+- empty CTAs
+- broken sections
+- misleading placeholders
+
+==================================================
+PHASE G — UX & DESIGN CONSTRAINTS
+==================================================
+
+- preserve existing design system
+- keep blocks compact
+- ensure mobile readability
+- avoid layout clutter
+- maintain accessibility:
+  - semantic links/buttons
+  - focus states
+
+Winner blocks must feel:
+- useful
+- trustworthy
+- concise
+
+==================================================
+TECHNICAL CONSTRAINTS
+==================================================
+
+- no heavy new dependencies
+- TypeScript-safe
+- no breaking existing pricing logic
+- no breaking affiliate resolver
+- no breaking calculator or decision engine
+- no route changes
+- reuse components/utilities where possible
+
+==================================================
+FILES TO CREATE / MODIFY
+==================================================
+
+Create:
+- src/utils/savingsEngine.ts
+- src/components/conversion/WinnerBlock.tsx
+- src/components/conversion/StandardCtaGroup.tsx
+
+Modify:
+- compare page templates
+- best page templates
+- AI type templates
+- recommendation components where present
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+Functional:
+- all comparison pages show a clear winner/recommendation
+- best pages show best overall and/or budget pick
+- AI type pages include recommendation block
+- savings messaging appears only where valid
+- all CTAs use affiliate resolver
+
+Quality:
+- no fake or misleading savings
+- no broken CTAs
+- no UI regressions
+- mobile remains clean
+- build passes
+
+==================================================
+OUTPUT
+==================================================
+
+Provide:
+1) summary of implementation
+2) files created/modified
+3) where winner blocks were added
+4) where savings shown vs omitted
+5) any areas needing manual review

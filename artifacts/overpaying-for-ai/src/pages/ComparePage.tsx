@@ -5,6 +5,8 @@ import type { AIModel } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
 import { RecommendationCtas } from "@/components/monetization/RecommendationCtas";
+import { WinnerBlock } from "@/components/conversion/WinnerBlock";
+import { deriveSavingsFromComparison, formatSavingsLabel } from "@/utils/savingsEngine";
 
 const comparisons = comparisonsData as typeof comparisonsData;
 const models = modelsData as AIModel[];
@@ -42,10 +44,33 @@ export function ComparePage() {
       </div>
 
       {/* Summary Card */}
-      <div className="bg-muted/50 border border-border rounded-lg p-5 mb-10">
+      <div className="bg-muted/50 border border-border rounded-lg p-5 mb-6">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-2">Summary</h2>
         <p className="text-foreground leading-relaxed">{page.summary}</p>
       </div>
+
+      {/* Winner Block — derived from cheapestOption in comparison data */}
+      {cheapest && (() => {
+        const savings = deriveSavingsFromComparison(page.cheapestOption, page.modelA, page.modelB);
+        const savingsLabel = formatSavingsLabel(savings);
+        const providerId = modelIdToProviderId(cheapest.id);
+        const primary = getPrimaryCta(providerId, "cheapest", "/calculator");
+        const secondary = getPrimaryCta("", "default", "/decision-engine");
+        return (
+          <WinnerBlock
+            badge="Cheapest"
+            title={`Cheapest option: ${cheapest.name}`}
+            rationale={page.cheapestOptionNote}
+            savingsLabel={savingsLabel}
+            primaryCta={primary.isAffiliate
+              ? { ...primary, label: `Try ${cheapest.name}` }
+              : { ...primary, label: `Calculate your savings` }
+            }
+            secondaryCta={{ ...secondary, href: "/decision-engine", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable", label: "Use decision engine" }}
+            className="mb-10"
+          />
+        );
+      })()}
 
       {/* Pricing Table */}
       <section className="mb-10">

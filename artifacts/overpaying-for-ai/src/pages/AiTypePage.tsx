@@ -5,7 +5,8 @@ import aiTypesData from "@/data/aiTypes.json";
 import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
-import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
+import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
+import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 
 interface AiTypeCategory {
   slug: string;
@@ -135,6 +136,31 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
             <h2 className="text-2xl font-bold text-foreground">Best options for {category.title.toLowerCase()}</h2>
             <p className="text-sm text-muted-foreground mt-2">Ranked by cost-efficiency. Not affiliate-driven — just the data.</p>
           </div>
+
+          {/* Best starting option — derived from first affiliate pick */}
+          {category.affiliate_picks[0] && (() => {
+            const top = category.affiliate_picks[0];
+            const providerId = providerNameToId(top.provider);
+            const primary = getPrimaryCta(providerId, "default", top.href);
+            const secondary = getSecondaryCta(providerId);
+            const secondarySafe = secondary.fallbackUsed
+              ? { ...secondary, href: "/decision-engine", label: "Use decision engine" }
+              : secondary;
+            return (
+              <WinnerBlock
+                badge="Recommended"
+                title={`Best starting option: ${top.model}`}
+                rationale={top.pitch}
+                primaryCta={primary.isAffiliate
+                  ? { ...primary, label: `Start with ${top.model}` }
+                  : { ...primary, label: `Compare ${top.model}` }
+                }
+                secondaryCta={secondarySafe}
+                className="mb-8"
+              />
+            );
+          })()}
+
           <div className="grid sm:grid-cols-3 gap-4 mb-6">
             {category.affiliate_picks.map((pick) => {
               const target = getPrimaryCta(providerNameToId(pick.provider), "default", pick.href);
