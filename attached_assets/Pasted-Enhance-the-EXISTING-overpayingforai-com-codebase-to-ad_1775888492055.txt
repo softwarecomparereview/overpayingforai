@@ -1,0 +1,233 @@
+Enhance the EXISTING overpayingforai.com codebase to add an admin affiliate management UI and an affiliate audit dashboard.
+
+Do NOT rewrite the app.
+Do NOT redesign branding.
+Do NOT replace existing systems:
+- affiliate resolver
+- winner blocks
+- savings engine
+- pricing refresh engine
+- calculator
+- decision engine
+- AI types / compare / best pages
+
+This work must extend the current architecture only.
+
+==================================================
+GOAL
+==================================================
+
+Create an internal admin control layer so affiliate monetization can be managed and audited without searching through code.
+
+Build:
+1) an affiliate management UI
+2) an affiliate audit dashboard
+3) monetization coverage visibility
+4) pending/fallback gap tracking
+
+==================================================
+ROUTES TO ADD
+==================================================
+
+Add:
+- /admin/affiliates
+- /admin/affiliate-audit
+
+Use the app’s existing admin routing/layout patterns if present.
+
+==================================================
+PHASE A — AFFILIATE MANAGEMENT UI
+==================================================
+
+Build an admin page for managing affiliate records from the centralized affiliate config.
+
+Suggested page:
+- /admin/affiliates
+
+The page must show a table or clean card list with:
+
+- provider id
+- provider name
+- category (if available)
+- status: active | pending | unavailable
+- affiliateUrl
+- fallbackUrl
+- optional directUrl
+- last updated
+- whether affiliate link is currently present
+- whether currently used in recommendation/winner/CTA modules
+
+Features:
+- search/filter by provider name
+- filter by status
+- filter “missing affiliate URL”
+- quick visual distinction for pending providers
+- inline or form-based edit capability if current architecture supports it
+- if persistence layer is not yet available, build this as a read-only management view backed by current config with clear upgrade path
+
+If safe and easy in current architecture:
+- allow editing/saving affiliate records
+Otherwise:
+- render a clear structured admin view of current data and prepare code for later persistence
+
+==================================================
+PHASE B — AFFILIATE AUDIT DASHBOARD
+==================================================
+
+Build:
+- /admin/affiliate-audit
+
+This dashboard must surface monetization gaps and fallback usage.
+
+Show at minimum:
+
+1) Summary metrics
+- total providers
+- active affiliates
+- pending affiliates
+- unavailable affiliates
+- providers missing affiliateUrl
+- providers using fallback only
+
+2) Coverage metrics
+- % providers monetized
+- % providers pending
+- % recommendation-capable providers with active affiliate link
+
+3) Gap sections
+- providers with null affiliateUrl
+- providers referenced in recommendation/winner/CTA modules but still pending
+- providers with fallbackUrl only
+- providers missing fallbackUrl
+- any tools/providers found in recommendation data but missing affiliate mapping entirely
+
+==================================================
+PHASE C — FALLBACK CTA USAGE REPORT
+==================================================
+
+Add visibility into where fallback CTAs are still being used.
+
+At minimum, provide one of these approaches:
+
+Preferred:
+- scan structured recommendation/page data and report which page templates or recommendation modules resolve to fallback instead of affiliate
+
+Acceptable:
+- produce a provider-level report showing which providers are currently fallback-only, with likely page/template usage notes
+
+If current architecture makes page-level tracing feasible, show:
+- page/template name
+- provider/tool
+- CTA state: affiliate or fallback
+
+Examples:
+- compare pages using fallback CTA
+- best pages using fallback CTA
+- AI type pages using fallback CTA
+
+==================================================
+PHASE D — MISSING MAPPING DETECTION
+==================================================
+
+Add an audit for recommendation/provider mapping integrity.
+
+Detect and report:
+- recommendation items without provider id
+- provider ids used in content but not found in affiliate config
+- affiliate config entries never used anywhere
+- winner blocks pointing to providers without affiliate mapping
+
+This is important so monetization coverage can become systematic.
+
+==================================================
+PHASE E — DATA SOURCES / INTEGRATION RULES
+==================================================
+
+Use the existing centralized affiliate config and existing recommendation/page data.
+
+Do NOT create a second affiliate system.
+Do NOT bypass resolver logic.
+
+Where possible, derive audit data from:
+- affiliate config
+- recommendation data
+- winner block inputs
+- CTA resolver outputs
+- compare / best / AI type data models
+
+==================================================
+PHASE F — UX / DESIGN
+==================================================
+
+Requirements:
+- preserve current design language
+- keep admin pages clean and functional
+- emphasize clarity over decoration
+- clear status badges for active/pending/unavailable
+- mobile usable, desktop efficient
+- no bloated dashboard visuals
+
+==================================================
+PHASE G — OPTIONAL BUT HIGH VALUE
+==================================================
+
+If practical, add:
+- “copy missing-provider list”
+- “show only highest-priority pending providers”
+- sortable columns
+- exportable JSON or CSV audit snapshot
+
+Only do this if it fits naturally.
+
+==================================================
+TECHNICAL CONSTRAINTS
+==================================================
+
+- no heavy new dependencies
+- TypeScript-safe
+- no breaking existing public pages
+- no breaking affiliate resolver
+- reuse shared utilities/components where possible
+- if write-back editing is risky, prefer read-only audit UI first
+
+==================================================
+SUGGESTED FILES
+==================================================
+
+Possible files:
+- src/pages/admin/AffiliatesAdminPage.tsx
+- src/pages/admin/AffiliateAuditPage.tsx
+- src/utils/affiliateAudit.ts
+- src/components/admin/AffiliateStatusBadge.tsx
+- src/components/admin/AffiliateTable.tsx
+- src/components/admin/AffiliateAuditSummary.tsx
+
+Adjust to current routing/file conventions.
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+Functional:
+- admin can see all affiliate records in one place
+- admin can identify missing affiliate URLs quickly
+- dashboard shows pending/active/unavailable counts
+- dashboard surfaces fallback-only usage
+- dashboard surfaces missing affiliate mappings
+
+Quality:
+- no public-site regressions
+- clean admin UX
+- no duplicated affiliate logic
+- build passes successfully
+
+==================================================
+OUTPUT
+==================================================
+
+After implementation, provide:
+1) summary of what was built
+2) files created/modified
+3) whether admin editing is read-only or writable
+4) what fallback usage visibility was achieved
+5) what mapping gaps were found automatically
