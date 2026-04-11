@@ -78,7 +78,15 @@ export function ComparePage() {
               <span className="font-semibold text-foreground">{cheapest.name}</span>
               <span className="text-sm text-muted-foreground">by {cheapest.provider}</span>
             </div>
-            <p className="text-sm text-muted-foreground">{page.cheapestOptionNote}</p>
+            <p className="text-sm text-muted-foreground mb-4">{page.cheapestOptionNote}</p>
+            <div className="pt-3 border-t border-green-100 dark:border-green-900 flex flex-wrap gap-3">
+              <Link
+                href="/calculator"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 dark:text-green-400 hover:underline"
+              >
+                Calculate your savings with {cheapest.name} →
+              </Link>
+            </div>
           </div>
         </section>
       )}
@@ -87,7 +95,21 @@ export function ComparePage() {
       <section className="mb-10">
         <h2 className="text-xl font-bold mb-4">Our Recommendation</h2>
         <div className="border border-primary/20 bg-primary/5 rounded-lg p-5">
-          <p className="text-foreground leading-relaxed">{page.recommendation}</p>
+          <p className="text-foreground leading-relaxed mb-4">{page.recommendation}</p>
+          <div className="pt-3 border-t border-primary/10 flex flex-wrap gap-3">
+            <Link
+              href="/calculator"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            >
+              Calculate your cost →
+            </Link>
+            <Link
+              href="/decision-engine"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground hover:underline"
+            >
+              Take the decision quiz →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -170,11 +192,13 @@ export function CompareIndex() {
       <p className="text-muted-foreground mb-8">Side-by-side pricing breakdowns for the most common AI tool decisions.</p>
       <div className="grid sm:grid-cols-2 gap-4">
         {comparisons.map((c) => (
-          <Link key={c.slug} href={`/compare/${c.slug}`}>
-            <div className="border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
-              <h2 className="font-semibold text-foreground mb-2 text-base">{c.title}</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
-            </div>
+          <Link
+            key={c.slug}
+            href={`/compare/${c.slug}`}
+            className="block border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors"
+          >
+            <h2 className="font-semibold text-foreground mb-2 text-base">{c.title}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
           </Link>
         ))}
       </div>

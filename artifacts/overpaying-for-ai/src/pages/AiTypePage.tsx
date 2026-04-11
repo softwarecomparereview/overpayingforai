@@ -136,7 +136,12 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
           </div>
           <div className="grid sm:grid-cols-3 gap-4 mb-6">
             {category.affiliate_picks.map((pick) => (
-              <div key={pick.label} className="bg-white border border-border rounded-xl p-5 flex flex-col hover:border-slate-400 hover:shadow-sm transition-all">
+              <Link
+                key={pick.label}
+                href={pick.href}
+                onClick={() => track("affiliate_clicked", { sourceSurface: "ai_type_page", category: category.slug, model: pick.model })}
+                className="group flex flex-col bg-white border border-border rounded-xl p-5 hover:border-slate-400 hover:shadow-sm transition-all"
+              >
                 <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-md mb-3 ${pick.badge}`}>
                   {pick.label}
                 </span>
@@ -145,14 +150,10 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                   {pick.provider} · <span className="text-emerald-700 font-mono font-semibold">{pick.cost}</span>
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
-                <Link
-                  href={pick.href}
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "ai_type_page", category: category.slug, model: pick.model })}
-                  className="block w-full text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 py-2 rounded-lg transition-colors"
-                >
+                <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
                   {pick.cta}
-                </Link>
-              </div>
+                </span>
+              </Link>
             ))}
           </div>
           <Link
@@ -209,16 +210,16 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               {relatedComparisons.map((c) => (
-                <Link key={c.slug} href={`/compare/${c.slug}`}>
-                  <div
-                    onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "comparison", slug: c.slug })}
-                    className="group border border-border rounded-xl p-5 hover:border-primary/40 hover:bg-muted/10 transition-all h-full cursor-pointer"
-                  >
-                    <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">{c.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{c.summary}</p>
-                    <div className="mt-3 pt-3 border-t border-border/60 text-xs text-primary font-medium flex justify-between items-center">
-                      <span>Read comparison</span><span>→</span>
-                    </div>
+                <Link
+                  key={c.slug}
+                  href={`/compare/${c.slug}`}
+                  onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "comparison", slug: c.slug })}
+                  className="group block border border-border rounded-xl p-5 hover:border-primary/40 hover:bg-muted/10 transition-all"
+                >
+                  <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">{c.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{c.summary}</p>
+                  <div className="mt-3 pt-3 border-t border-border/60 text-xs text-primary font-medium flex justify-between items-center">
+                    <span>Read comparison</span><span>→</span>
                   </div>
                 </Link>
               ))}
@@ -237,17 +238,17 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Guides</p>
                   <div className="space-y-3">
                     {relatedGuides.map((g) => (
-                      <Link key={g.slug} href={`/guides/${g.slug}`}>
-                        <div
-                          onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "guide", slug: g.slug })}
-                          className="group border border-border rounded-xl p-4 bg-white hover:border-primary/40 hover:shadow-sm transition-all cursor-pointer"
-                        >
-                          <div className="flex items-start justify-between gap-2">
-                            <h3 className="font-semibold text-foreground text-sm leading-snug group-hover:text-primary transition-colors flex-1">{g.title}</h3>
-                            <span className="text-xs text-muted-foreground shrink-0">{g.readTime}</span>
-                          </div>
-                          <p className="text-xs text-primary font-medium mt-2">Read guide →</p>
+                      <Link
+                        key={g.slug}
+                        href={`/guides/${g.slug}`}
+                        onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "guide", slug: g.slug })}
+                        className="group block border border-border rounded-xl p-4 bg-white hover:border-primary/40 hover:shadow-sm transition-all"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="font-semibold text-foreground text-sm leading-snug group-hover:text-primary transition-colors flex-1">{g.title}</h3>
+                          <span className="text-xs text-muted-foreground shrink-0">{g.readTime}</span>
                         </div>
+                        <p className="text-xs text-primary font-medium mt-2">Read guide →</p>
                       </Link>
                     ))}
                   </div>
@@ -258,15 +259,15 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Best lists</p>
                   <div className="space-y-3">
                     {relatedBestLists.map((b) => (
-                      <Link key={b.slug} href={`/best/${b.slug}`}>
-                        <div
-                          onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "best_of", slug: b.slug })}
-                          className="group border border-border rounded-xl p-4 bg-white hover:border-primary/40 hover:shadow-sm transition-all cursor-pointer"
-                        >
-                          <span className="text-xs font-semibold text-primary bg-primary/8 px-2 py-1 rounded">{b.category}</span>
-                          <h3 className="font-semibold text-foreground text-sm mt-2 leading-snug group-hover:text-primary transition-colors">{b.title}</h3>
-                          <p className="text-xs text-primary font-medium mt-2">See list →</p>
-                        </div>
+                      <Link
+                        key={b.slug}
+                        href={`/best/${b.slug}`}
+                        onClick={() => track("card_clicked", { sourceSurface: "ai_type_page", category: category.slug, cardType: "best_of", slug: b.slug })}
+                        className="group block border border-border rounded-xl p-4 bg-white hover:border-primary/40 hover:shadow-sm transition-all"
+                      >
+                        <span className="text-xs font-semibold text-primary bg-primary/8 px-2 py-1 rounded">{b.category}</span>
+                        <h3 className="font-semibold text-foreground text-sm mt-2 leading-snug group-hover:text-primary transition-colors">{b.title}</h3>
+                        <p className="text-xs text-primary font-medium mt-2">See list →</p>
                       </Link>
                     ))}
                   </div>
