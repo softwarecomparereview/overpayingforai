@@ -1,0 +1,248 @@
+Implement a lean sitemap system in the EXISTING codebase.
+
+Goal:
+Replace the current broad sitemap behavior with a high-trust lean sitemap strategy for initial Google indexing.
+
+Requirements:
+- Do NOT rewrite unrelated app logic
+- Keep changes additive and safe
+- Use ONLY the canonical domain: https://overpayingforai.com
+- Output valid XML sitemap
+- Keep robots.txt pointing to /sitemap.xml
+- No www URLs anywhere in generated sitemap
+
+--------------------------------------------------
+1. CREATE A LEAN SITEMAP CONFIG
+--------------------------------------------------
+
+Create:
+src/seo/leanSitemap.ts
+
+Add:
+
+export type SitemapEntry = {
+  path: string;
+  priority?: string;
+  changefreq?: string;
+};
+
+export const LEAN_SITEMAP_ROUTES: SitemapEntry[] = [
+  { path: "/", priority: "1.0", changefreq: "weekly" },
+  { path: "/best", priority: "0.9", changefreq: "weekly" },
+  { path: "/calculator", priority: "0.9", changefreq: "weekly" },
+  { path: "/ai-types", priority: "0.8", changefreq: "weekly" },
+
+  { path: "/ai-types/general-ai", priority: "0.8", changefreq: "weekly" },
+  { path: "/ai-types/coding-ai", priority: "0.8", changefreq: "weekly" },
+  { path: "/ai-types/writing-ai", priority: "0.8", changefreq: "weekly" },
+  { path: "/ai-types/research-ai", priority: "0.8", changefreq: "weekly" },
+  { path: "/ai-types/customer-support-ai", priority: "0.8", changefreq: "weekly" },
+  { path: "/ai-types/productivity-ai", priority: "0.8", changefreq: "weekly" },
+
+  { path: "/compare/claude-vs-gpt-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/chatgpt-vs-cursor-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/subscription-vs-api-ai-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/gpt-4o-vs-gpt-4o-mini-cost", priority: "0.8", changefreq: "weekly" },
+
+  { path: "/guides/cheapest-ai-content-workflow", priority: "0.7", changefreq: "weekly" },
+  { path: "/guides/cheapest-ai-writing-tools", priority: "0.7", changefreq: "weekly" },
+  { path: "/guides/best-ai-tools-under-20", priority: "0.7", changefreq: "weekly" },
+  { path: "/guides/is-jasper-worth-it", priority: "0.7", changefreq: "weekly" }
+];
+
+export const CANONICAL_SITE_URL = "https://overpayingforai.com";
+
+--------------------------------------------------
+2. CREATE SITEMAP XML GENERATOR
+--------------------------------------------------
+
+Create:
+src/seo/generateLeanSitemapXml.ts
+
+Implementation requirements:
+- Import LEAN_SITEMAP_ROUTES and CANONICAL_SITE_URL
+- Generate XML string using today's date for all lastmod values
+- Escape XML safely
+- Ensure URLs are absolute and canonical
+- Return XML with:
+  - <?xml version="1.0" encoding="UTF-8"?>
+  - <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+Code:
+
+import { CANONICAL_SITE_URL, LEAN_SITEMAP_ROUTES } from "./leanSitemap";
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+export function generateLeanSitemapXml(): string {
+  const today = new Date().toISOString().split("T")[0];
+
+  const urls = LEAN_SITEMAP_ROUTES.map(({ path, priority = "0.7", changefreq = "weekly" }) => {
+    const loc = `${CANONICAL_SITE_URL}${path}`;
+    return `
+  <url>
+    <loc>${escapeXml(loc)}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+  }).join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+</urlset>`;
+}
+
+--------------------------------------------------
+3. HOOK INTO EXISTING SITEMAP ROUTE
+--------------------------------------------------
+
+Find wherever /sitemap.xml is currently generated.
+
+Replace ONLY the generation logic so that:
+- /sitemap.xml now returns generateLeanSitemapXml()
+- content-type is application/xml; charset=utf-8
+- existing route path remains /sitemap.xml
+
+If there is no dedicated route yet, create one matching the project’s current router/server pattern.
+
+Examples depending on stack:
+- Vite dev server middleware
+- Express handler
+- static generation endpoint
+Use the codebase’s existing conventions.
+
+--------------------------------------------------
+4. ADD OPTIONAL EXPANSION SUPPORT
+--------------------------------------------------
+
+Also create:
+src/seo/fullSitemapCandidates.ts
+
+Purpose:
+- hold future non-lean pages for later expansion
+- not used by current /sitemap.xml route yet
+
+Export arrays grouped by type:
+- bestPages
+- guidePages
+- comparePages
+
+Populate from current known routes if easy from existing data.
+This is for future growth only.
+
+--------------------------------------------------
+5. ADD VALIDATION GUARD
+--------------------------------------------------
+
+Create:
+src/seo/validateSitemapEntries.ts
+
+Behavior:
+- verify every path starts with /
+- verify no duplicate paths
+- verify no path contains "www."
+- verify no path includes full URL
+- throw helpful error in development if invalid
+
+Run validation inside generateLeanSitemapXml() before building XML.
+
+Suggested implementation:
+
+import { SitemapEntry } from "./leanSitemap";
+
+export function validateSitemapEntries(entries: SitemapEntry[]): void {
+  const seen = new Set<string>();
+
+  for (const entry of entries) {
+    const path = entry.path;
+
+    if (!path.startsWith("/")) {
+      throw new Error(`Invalid sitemap path: "${path}" must start with "/"`);
+    }
+
+    if (path.includes("www.")) {
+      throw new Error(`Invalid sitemap path: "${path}" must not include www`);
+    }
+
+    if (path.startsWith("http://") || path.startsWith("https://")) {
+      throw new Error(`Invalid sitemap path: "${path}" must be a relative path`);
+    }
+
+    if (seen.has(path)) {
+      throw new Error(`Duplicate sitemap path detected: "${path}"`);
+    }
+
+    seen.add(path);
+  }
+}
+
+--------------------------------------------------
+6. KEEP ROBOTS.TXT CONSISTENT
+--------------------------------------------------
+
+Verify robots.txt contains exactly one sitemap line:
+
+Sitemap: https://overpayingforai.com/sitemap.xml
+
+Do not add www version.
+Do not add duplicate sitemap lines.
+
+If robots.txt is generated dynamically, update generator.
+If static, update file safely.
+
+--------------------------------------------------
+7. DO NOT INCLUDE LOW-TRUST PAGES
+--------------------------------------------------
+
+Explicitly exclude from active sitemap for now:
+- /resources
+- /changelog
+- /media-kit
+- /terms
+- broad /best/* pages not in the lean list
+- broad /guides/* pages not in the lean list
+- broad /compare/* pages not in the lean list
+- any draft, coming-soon, placeholder, empty, or thin routes
+
+--------------------------------------------------
+8. OPTIONAL DEBUG PAGE
+--------------------------------------------------
+
+If the project already has an admin/dev utility area, add a small non-public debug view:
+- route: /admin/sitemap-preview
+- shows the current lean sitemap routes in a simple table
+- shows generated XML in a readonly textarea
+- do NOT link publicly in nav
+Skip this if it would add unnecessary complexity.
+
+--------------------------------------------------
+9. TESTING
+--------------------------------------------------
+
+After implementation, verify:
+- /sitemap.xml loads valid XML
+- every URL is https://overpayingforai.com/...
+- no www URLs
+- no duplicate URLs
+- only the lean route set appears
+- robots.txt points to the canonical sitemap
+- app builds cleanly with zero TypeScript/runtime errors
+
+--------------------------------------------------
+10. OUTPUT
+--------------------------------------------------
+
+At the end, provide:
+- files created
+- files modified
+- exact active sitemap URLs included
+- confirmation that only lean routes are in /sitemap.xml
+- confirmation robots.txt uses canonical sitemap

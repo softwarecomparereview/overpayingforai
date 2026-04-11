@@ -66,8 +66,17 @@ Static-first React + Vite web app. No backend dependency.
 - Pricing freshness badge (`freshnessLabel`/`isPricingStale`) on AI Type pages' pricing section
 - `InternalLinks` and `SeoContentBlock` injected on: AiTypePage, AiTypeIndex, GuidePage, ComparePage, BestPage, BestIndex
 
-**Sitemap** (`src/utils/generateSitemap.ts`):
-- Filters out low-quality pages: slugs containing `coming-soon`/`draft`, empty descriptions, empty guide sections
+**Lean Sitemap system** (`src/seo/`):
+- `leanSitemap.ts` — `LEAN_SITEMAP_ROUTES` (18 high-trust URLs) + `CANONICAL_SITE_URL`
+- `generateLeanSitemapXml.ts` — XML generator (runs validation before building)
+- `validateSitemapEntries.ts` — Guards: paths start with `/`, no `www.`, no full URLs, no duplicates
+- `fullSitemapCandidates.ts` — Non-active expansion candidates grouped by bestPages/guidePages/comparePages
+- `generateLeanSitemap.ts` — Runner script: `npx tsx src/seo/generateLeanSitemap.ts` → writes `public/sitemap.xml`
+- `public/sitemap.xml` — Static file served by Vite; currently contains 18 lean URLs only
+- Admin preview: `/admin/sitemap-preview` — Shows route table, validation checks, generated XML
+
+**Legacy sitemap** (`src/utils/generateSitemap.ts`):
+- Kept for reference; filters out low-quality pages (coming-soon/draft/empty). Not used for active sitemap.
 
 **Admin** (`src/pages/admin/`):
 - `PricingRefreshPage.tsx` — Maintainer-only pricing refresh workflow at `/admin/pricing-refresh`
