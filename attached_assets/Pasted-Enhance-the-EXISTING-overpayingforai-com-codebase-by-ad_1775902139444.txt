@@ -1,0 +1,256 @@
+Enhance the EXISTING overpayingforai.com codebase by adding high-conversion SEO pages for Writesonic, fully integrated with:
+
+- affiliate resolver
+- WinnerBlock
+- StandardCtaGroup
+- savings engine
+- existing routing system
+
+Do NOT rewrite the app.
+Do NOT break existing pages.
+Follow current design + component patterns.
+
+==================================================
+GOAL
+==================================================
+
+Add 3 high-intent pages:
+
+1) Best page (budget writing tools)
+2) Comparison page (Writesonic vs Jasper)
+3) Guide page (cheapest AI content workflow)
+
+These pages must:
+- drive affiliate clicks
+- use WinnerBlock
+- use standardized CTAs
+- integrate with existing data structures
+
+==================================================
+PHASE A — CREATE DATA ENTRIES
+==================================================
+
+Update or create entries so Writesonic is usable across pages.
+
+Ensure Writesonic exists in:
+- affiliates config
+- AI types (writing)
+- recommendation data
+
+Example provider id:
+"writesonic"
+
+==================================================
+PHASE B — PAGE 1 (BEST PAGE)
+==================================================
+
+Create:
+
+/best/ai-writing-tools-cheap
+
+Content structure:
+
+Title:
+"Best AI Writing Tools on a Budget (2026)"
+
+Top section:
+- short intro (cost-focused)
+
+WinnerBlock:
+- badge: "Best Budget"
+- tool: Writesonic
+- rationale:
+  "Lower cost than most premium AI writing tools while maintaining good quality for common use cases"
+- savings:
+  use savings engine (vs Jasper / Copy.ai if data available)
+
+CTA:
+- Primary: "Try Writesonic"
+- Secondary: "Compare alternatives"
+
+Below:
+- list 3–5 tools:
+  - Writesonic (rank 1)
+  - Jasper
+  - Copy.ai
+  - Rytr
+
+Each:
+- short description
+- cost positioning
+- CTA using resolver
+
+End-of-page CTA:
+- "Find the cheapest AI for your use case"
+
+==================================================
+PHASE C — PAGE 2 (COMPARISON PAGE)
+==================================================
+
+Create:
+
+/compare/writesonic-vs-jasper
+
+Structure:
+
+Title:
+"Writesonic vs Jasper: Cost Comparison (2026)"
+
+Top WinnerBlock:
+- badge: "Cheapest"
+- tool: Writesonic
+- rationale:
+  "Significantly lower pricing for most content workflows"
+- savings:
+  calculate if pricing exists
+  else: "Typically cheaper than Jasper"
+
+CTA:
+- "Start with Writesonic"
+- "See pricing breakdown"
+
+Sections:
+
+1) Pricing comparison
+- simple table
+- highlight Writesonic cheaper
+
+2) Use case comparison
+- Writesonic → budget, scaling content
+- Jasper → premium workflows
+
+3) Verdict
+- recommend Writesonic for most users
+
+End CTA:
+- same standardized CTA group
+
+==================================================
+PHASE D — PAGE 3 (GUIDE PAGE)
+==================================================
+
+Create:
+
+/guides/cheapest-ai-content-workflow
+
+Structure:
+
+Title:
+"Cheapest Way to Generate Blog Content with AI"
+
+Sections:
+
+1) Problem:
+- content is expensive
+
+2) Solution:
+- use budget tools
+
+3) Recommendation block:
+- Writesonic as primary tool
+
+WinnerBlock:
+- badge: "Best Value"
+- tool: Writesonic
+- rationale:
+  "Cost-efficient content generation for most use cases"
+
+CTA:
+- "Use Writesonic"
+
+4) Workflow steps:
+- generate outline
+- generate draft
+- edit
+
+5) Alternatives:
+- Jasper
+- Copy.ai
+
+End CTA:
+- "Compare writing tools"
+
+==================================================
+PHASE E — ROUTING
+==================================================
+
+Add routes in App.tsx:
+
+- /best/ai-writing-tools-cheap
+- /compare/writesonic-vs-jasper
+- /guides/cheapest-ai-content-workflow
+
+Follow existing routing patterns.
+
+==================================================
+PHASE F — INTERNAL LINKING
+==================================================
+
+Add links between:
+
+- AI type page (/ai-types/writing-ai)
+- best page
+- comparison page
+- guide page
+
+Ensure:
+- no orphan pages
+- strong SEO linking
+
+==================================================
+PHASE G — CTA INTEGRATION
+==================================================
+
+ALL CTAs must:
+- use affiliate resolver
+- track clicks (existing tracking system)
+- pass providerId = "writesonic"
+
+No hardcoded URLs.
+
+==================================================
+PHASE H — SEO BASICS
+==================================================
+
+Add:
+
+- proper <title>
+- meta description
+- headings (H1, H2, H3)
+- keyword focus:
+  - "cheap AI writing tools"
+  - "Writesonic vs Jasper"
+  - "AI content cost"
+
+==================================================
+CONSTRAINTS
+==================================================
+
+- reuse existing components
+- do not duplicate logic
+- no fake pricing
+- no broken links
+- mobile friendly
+- TypeScript-safe
+
+==================================================
+ACCEPTANCE CRITERIA
+==================================================
+
+- 3 pages created and accessible
+- Writesonic appears as winner in relevant contexts
+- CTAs work via resolver
+- click tracking fires
+- pages are internally linked
+- no build errors
+
+==================================================
+OUTPUT
+==================================================
+
+Provide:
+1) files created
+2) routes added
+3) where WinnerBlock used
+4) how CTAs were wired
+5) any missing data assumptions

@@ -740,5 +740,89 @@
     "notes": "Represents Qwen family for broader provider coverage in V1.",
     "last_updated": "2026-04-11",
     "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "writesonic-basic",
+    "name": "Writesonic",
+    "provider": "Writesonic",
+    "planType": "subscription",
+    "inputCostPer1k": 0,
+    "outputCostPer1k": 0,
+    "monthlySubscriptionCostIfAny": 20,
+    "hasFreeTier": true,
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
+    "qualityScore": 68,
+    "costScore": 72,
+    "latencyScore": 50,
+    "notes": "Budget-friendly AI writing tool. Good for blog posts, ads, and marketing copy at lower cost than Jasper.",
+    "last_updated": "2026-04-11",
+    "source": "https://writesonic.com/pricing"
+  },
+  {
+    "id": "jasper-creator",
+    "name": "Jasper",
+    "provider": "Jasper AI",
+    "planType": "subscription",
+    "inputCostPer1k": 0,
+    "outputCostPer1k": 0,
+    "monthlySubscriptionCostIfAny": 49,
+    "hasFreeTier": false,
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
+    "qualityScore": 72,
+    "costScore": 40,
+    "latencyScore": 50,
+    "notes": "Premium AI writing platform. Strong brand-voice and team collaboration features, but higher cost than alternatives.",
+    "last_updated": "2026-04-11",
+    "source": "https://jasper.ai/pricing"
+  },
+  {
+    "id": "copyai-free",
+    "name": "Copy.ai",
+    "provider": "Copy.ai",
+    "planType": "subscription",
+    "inputCostPer1k": 0,
+    "outputCostPer1k": 0,
+    "monthlySubscriptionCostIfAny": 36,
+    "hasFreeTier": true,
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
+    "qualityScore": 65,
+    "costScore": 55,
+    "latencyScore": 50,
+    "notes": "AI writing tool with workflow automation features. Mid-tier cost positioning between Writesonic and Jasper.",
+    "last_updated": "2026-04-11",
+    "source": "https://copy.ai/pricing"
+  },
+  {
+    "id": "rytr-saver",
+    "name": "Rytr",
+    "provider": "Rytr",
+    "planType": "subscription",
+    "inputCostPer1k": 0,
+    "outputCostPer1k": 0,
+    "monthlySubscriptionCostIfAny": 9,
+    "hasFreeTier": true,
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
+    "qualityScore": 58,
+    "costScore": 80,
+    "latencyScore": 60,
+    "notes": "Lowest-cost AI writing subscription. Quality is below Writesonic or Jasper but usable for simple content tasks.",
+    "last_updated": "2026-04-11",
+    "source": "https://rytr.me/pricing"
   }
 ]

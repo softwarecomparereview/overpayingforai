@@ -1,5 +1,17 @@
+import { Fragment } from "react";
 import { useParams, Link } from "wouter";
 import guidesData from "@/data/guides.json";
+import { WinnerBlock } from "@/components/conversion/WinnerBlock";
+import { getPrimaryCta } from "@/utils/affiliateResolver";
+
+interface GuideWinnerBlock {
+  badge: string;
+  providerId: string;
+  title: string;
+  rationale: string;
+  primaryCtaLabel?: string;
+  afterSectionIndex: number;
+}
 
 const guides = guidesData as typeof guidesData;
 
@@ -16,6 +28,8 @@ export function GuidePage() {
       </div>
     );
   }
+
+  const winnerBlockConfig: GuideWinnerBlock | undefined = (guide as Record<string, unknown>).winnerBlock as GuideWinnerBlock | undefined;
 
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
@@ -34,29 +48,48 @@ export function GuidePage() {
         <p className="text-lg text-muted-foreground leading-relaxed">{guide.description}</p>
       </div>
 
-      {/* Content */}
+      {/* Content — with optional WinnerBlock injected after a specified section */}
       <div className="prose-like space-y-8 mb-10">
         {guide.sections.map((section, i) => (
-          <section key={i}>
-            <h2 className="text-xl font-bold text-foreground mb-3">{section.heading}</h2>
-            <div className="text-muted-foreground leading-relaxed space-y-3">
-              {section.content.split("\n\n").map((para, j) => {
-                if (para.startsWith("-")) {
-                  const items = para.split("\n").filter((l) => l.startsWith("-"));
-                  return (
-                    <ul key={j} className="list-disc list-inside space-y-1.5 ml-2">
-                      {items.map((item, k) => (
-                        <li key={k} className="text-muted-foreground text-sm">
-                          {item.replace(/^-\s*/, "")}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                }
-                return <p key={j} className="text-sm sm:text-base">{para}</p>;
-              })}
-            </div>
-          </section>
+          <Fragment key={i}>
+            <section>
+              <h2 className="text-xl font-bold text-foreground mb-3">{section.heading}</h2>
+              <div className="text-muted-foreground leading-relaxed space-y-3">
+                {section.content.split("\n\n").map((para, j) => {
+                  if (para.startsWith("-")) {
+                    const items = para.split("\n").filter((l) => l.startsWith("-"));
+                    return (
+                      <ul key={j} className="list-disc list-inside space-y-1.5 ml-2">
+                        {items.map((item, k) => (
+                          <li key={k} className="text-muted-foreground text-sm">
+                            {item.replace(/^-\s*/, "")}
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  }
+                  return <p key={j} className="text-sm sm:text-base">{para}</p>;
+                })}
+              </div>
+            </section>
+            {winnerBlockConfig && i === winnerBlockConfig.afterSectionIndex && (() => {
+              const primary = getPrimaryCta(winnerBlockConfig.providerId, "winner", "/calculator");
+              const secondary = { href: "/compare/writesonic-vs-jasper", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable" as const, label: "Compare alternatives" };
+              return (
+                <WinnerBlock
+                  badge={winnerBlockConfig.badge}
+                  title={winnerBlockConfig.title}
+                  rationale={winnerBlockConfig.rationale}
+                  primaryCta={primary.isAffiliate
+                    ? { ...primary, label: winnerBlockConfig.primaryCtaLabel ?? `Try ${winnerBlockConfig.title}` }
+                    : { ...primary, label: winnerBlockConfig.primaryCtaLabel ?? `See options` }
+                  }
+                  secondaryCta={secondary}
+                  trackingContext={{ providerId: winnerBlockConfig.providerId, pageType: "guide", sourceComponent: "GuidePage/WinnerBlock" }}
+                />
+              );
+            })()}
+          </Fragment>
         ))}
       </div>
 
