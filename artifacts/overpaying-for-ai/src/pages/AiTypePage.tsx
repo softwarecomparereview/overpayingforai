@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { track } from "@/utils/analytics";
+import { trackCta } from "@/utils/analytics";
 import aiTypesData from "@/data/aiTypes.json";
 import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
@@ -157,6 +157,7 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                 }
                 secondaryCta={secondarySafe}
                 className="mb-8"
+                trackingContext={{ providerId, pageType: "ai-type", sourceComponent: "AiTypePage/WinnerBlock" }}
               />
             );
           })()}
@@ -180,13 +181,26 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                   </span>
                 </>
               );
+              const handlePickClick = () => {
+                trackCta({
+                  providerId: providerNameToId(pick.provider),
+                  providerName: pick.provider,
+                  ctaLabel: pick.cta,
+                  ctaType: "primary",
+                  ctaState: target.isAffiliate ? "affiliate" : target.status === "unavailable" ? "unmapped" : "fallback",
+                  pageType: "ai-type",
+                  sourceComponent: "AiTypePage/PickCard",
+                  destinationUrl: target.href,
+                  isExternal: target.isExternal,
+                });
+              };
               return target.isExternal ? (
                 <a
                   key={pick.label}
                   href={target.href}
                   rel={target.rel ?? "noopener noreferrer sponsored"}
                   target="_blank"
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "ai_type_page", category: category.slug, model: pick.model })}
+                  onClick={handlePickClick}
                   className={cardClass}
                 >
                   {cardInner}
@@ -195,7 +209,7 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                 <Link
                   key={pick.label}
                   href={target.href}
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "ai_type_page", category: category.slug, model: pick.model })}
+                  onClick={handlePickClick}
                   className={cardClass}
                 >
                   {cardInner}
@@ -205,7 +219,16 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
           </div>
           <Link
             href="/decision-engine"
-            onClick={() => track("overpaying_cta_clicked", { sourceSurface: "ai_type_page", category: category.slug, variant: "decision_engine_after_picks" })}
+            onClick={() => trackCta({
+              providerId: "",
+              ctaLabel: "Take the 5-question quiz",
+              ctaType: "secondary",
+              ctaState: "fallback",
+              pageType: "ai-type",
+              sourceComponent: "AiTypePage/AfterPicks",
+              destinationUrl: "/decision-engine",
+              isExternal: false,
+            })}
             className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors"
           >
             Take the 5-question quiz to get a personalised recommendation →
