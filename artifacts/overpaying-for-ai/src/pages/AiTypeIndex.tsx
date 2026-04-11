@@ -41,23 +41,22 @@ export function AiTypeIndex() {
               const colorClass = COLOR_MAP[cat.color ?? "slate"] ?? COLOR_MAP["slate"];
               const isLive = aiTypesData.some((d) => d.slug === cat.slug);
               return (
-                <div key={cat.slug} className="relative">
+                <div key={cat.slug}>
                   {isLive ? (
-                    <Link href={`/ai-types/${cat.slug}`}>
-                      <div
-                        onClick={() => track("card_clicked", { sourceSurface: "ai_types_index", slug: cat.slug })}
-                        className="group border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-sm transition-all h-full cursor-pointer bg-white"
-                      >
-                        <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl text-xl border mb-4 ${colorClass}`}>
-                          {cat.icon}
-                        </div>
-                        <h2 className="font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors">{cat.title}</h2>
-                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{cat.tagline}</p>
-                        <span className="text-xs text-primary font-medium">Explore category →</span>
+                    <Link
+                      href={`/ai-types/${cat.slug}`}
+                      onClick={() => track("card_clicked", { sourceSurface: "ai_types_index", slug: cat.slug })}
+                      className="group block border border-border rounded-2xl p-6 hover:border-primary/30 hover:shadow-sm transition-all bg-white"
+                    >
+                      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl text-xl border mb-4 ${colorClass}`}>
+                        {cat.icon}
                       </div>
+                      <h2 className="font-bold text-foreground mb-1.5 group-hover:text-primary transition-colors">{cat.title}</h2>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{cat.tagline}</p>
+                      <span className="text-xs text-primary font-medium">Explore category →</span>
                     </Link>
                   ) : (
-                    <div className="border border-border/50 rounded-2xl p-6 h-full bg-muted/20 opacity-60">
+                    <div className="border border-border/50 rounded-2xl p-6 bg-muted/20 opacity-60">
                       <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl text-xl border mb-4 ${colorClass}`}>
                         {cat.icon}
                       </div>

@@ -101,14 +101,16 @@ export function GuideIndex() {
       <p className="text-muted-foreground mb-8">Practical guides for reducing AI spend and making smarter model choices.</p>
       <div className="grid sm:grid-cols-2 gap-4">
         {guides.map((g) => (
-          <Link key={g.slug} href={`/guides/${g.slug}`}>
-            <div className="border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors cursor-pointer h-full">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs text-muted-foreground">{g.readTime}</span>
-              </div>
-              <h2 className="font-semibold text-foreground mb-2 text-base">{g.title}</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{g.description}</p>
+          <Link
+            key={g.slug}
+            href={`/guides/${g.slug}`}
+            className="block border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs text-muted-foreground">{g.readTime}</span>
             </div>
+            <h2 className="font-semibold text-foreground mb-2 text-base">{g.title}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">{g.description}</p>
           </Link>
         ))}
       </div>

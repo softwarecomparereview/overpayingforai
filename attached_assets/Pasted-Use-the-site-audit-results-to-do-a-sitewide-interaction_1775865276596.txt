@@ -1,0 +1,115 @@
+Use the site audit results to do a sitewide interaction hardening pass.
+
+This is now the top priority.
+
+Audit summary:
+
+* 96 pages scanned
+* 3225 elements tested
+* 298 issues total
+* 176 fake_affordance
+* 68 fake_input
+* 54 missing_affiliate_link
+
+Goal:
+Eliminate misleading interactivity and close monetization gaps.
+
+## Priority 1: Homepage fixes
+
+Fix the homepage first.
+
+Problems detected on `/`:
+
+* multiple field-like UI blocks that are not real inputs
+* AI type cards look clickable but are not
+* savings cards look interactive but are not fully wired
+* recommendation/affiliate areas are inconsistent
+* sticky jump nav must remain visible while scrolling
+
+Requirements:
+
+* any input-looking area must be a real input or be redesigned as passive content
+* AI type cards must be fully clickable
+* savings cards must be clickable or clearly passive
+* recommendation cards must have working CTA links
+* sticky jump nav must remain visible and usable
+
+## Priority 2: Sitewide fake affordances
+
+Across all pages:
+
+* remove pointer/hover/click styling from passive elements
+  OR
+* make the element actually clickable
+
+Applies to:
+
+* cards
+* pills
+* feature boxes
+* savings examples
+* best-list items
+* recommendations
+* section previews
+
+## Priority 3: Missing affiliate links
+
+Fix all recommendation sections with missing affiliate links.
+
+Examples:
+
+* Best overall
+* Cheapest
+* Best for coding
+* Best for writing
+* Best for startups
+* Best LLM
+
+Each must include:
+
+* visible CTA
+* working destination
+* analytics-compatible click behavior
+
+Use existing affiliateLinks.json where possible.
+
+## Priority 4: Standardize card interaction model
+
+Choose a consistent rule:
+
+* whole card clickable
+  OR
+* only CTA/button clickable
+
+Apply consistently across:
+
+* homepage cards
+* AI type pages
+* best pages
+* guide cards
+* comparison summaries
+
+## Priority 5: Preserve SEO and layout
+
+Do not remove useful content.
+Do not reduce internal linking.
+Do not break existing routes.
+
+## Validation
+
+After fixes:
+
+1. rerun the Playwright audit
+2. provide updated counts
+3. target:
+
+   * fake_input = 0
+   * missing_affiliate_link = 0
+   * fake_affordance significantly reduced
+4. confirm build passes
+
+At the end, tell me:
+
+* what interaction pattern you standardized on
+* homepage issues fixed
+* remaining issue count after rerun
