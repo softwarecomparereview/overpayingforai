@@ -13,6 +13,7 @@ import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
 import { ResourcesHub } from "@/pages/ResourcesHub";
 import { ChangelogPage } from "@/pages/ChangelogPage";
+import { PricingChangelogPage } from "@/pages/PricingChangelogPage";
 import { AiTypeIndex } from "@/pages/AiTypeIndex";
 import { AiTypePage } from "@/pages/AiTypePage";
 import NotFound from "@/pages/not-found";
@@ -34,6 +35,7 @@ function Router() {
               <Route path="/design3" component={Design3} />
               <Route path="/resources" component={ResourcesHub} />
               <Route path="/changelog" component={ChangelogPage} />
+              <Route path="/pricing-changelog" component={PricingChangelogPage} />
               <Route path="/ai-types" component={AiTypeIndex} />
               <Route path="/ai-types/:slug" component={AiTypePage} />
               <Route path="/calculator" component={Calculator} />

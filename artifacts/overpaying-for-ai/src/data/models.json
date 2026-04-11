@@ -4,34 +4,44 @@
     "name": "GPT-4o",
     "provider": "OpenAI",
     "planType": "api",
-    "inputCostPer1k": 0.005,
-    "outputCostPer1k": 0.015,
+    "inputCostPer1k": 0.0025,
+    "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "writing", "research", "automation", "chat"],
-    "qualityScore": 95,
-    "costScore": 40,
-    "latencyScore": 80,
-    "notes": "OpenAI's flagship multimodal model. Excellent across all tasks but expensive at scale.",
-    "last_updated": "2025-04-01",
-    "source": "https://openai.com/api/pricing/"
+    "bestFor": [
+      "general",
+      "chat",
+      "writing",
+      "multimodal"
+    ],
+    "qualityScore": 88,
+    "costScore": 43,
+    "latencyScore": 42,
+    "notes": "Strong general-purpose flagship. Good default for mixed workloads.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "gpt-4o-mini",
-    "name": "GPT-4o mini",
+    "name": "GPT-4o Mini",
     "provider": "OpenAI",
     "planType": "api",
     "inputCostPer1k": 0.00015,
     "outputCostPer1k": 0.0006,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["chat", "writing", "automation"],
-    "qualityScore": 75,
-    "costScore": 92,
-    "latencyScore": 90,
-    "notes": "Dramatically cheaper than GPT-4o. Great for high-volume, lower-stakes tasks.",
-    "last_updated": "2025-04-01",
-    "source": "https://openai.com/api/pricing/"
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
+    "qualityScore": 70,
+    "costScore": 73,
+    "latencyScore": 29,
+    "notes": "Cheap and practical for high-volume everyday tasks.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "chatgpt-plus",
@@ -42,7 +52,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["chat", "writing", "research"],
+    "bestFor": [
+      "chat",
+      "writing",
+      "research"
+    ],
     "qualityScore": 92,
     "costScore": 55,
     "latencyScore": 75,
@@ -59,7 +73,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 70,
     "costScore": 100,
     "latencyScore": 65,
@@ -76,13 +93,18 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "writing", "research", "automation"],
-    "qualityScore": 96,
-    "costScore": 42,
-    "latencyScore": 78,
-    "notes": "Top-tier for coding and complex reasoning. Input is cheaper than GPT-4o but output parity.",
-    "last_updated": "2025-04-01",
-    "source": "https://www.anthropic.com/pricing"
+    "bestFor": [
+      "coding",
+      "writing",
+      "research",
+      "general"
+    ],
+    "qualityScore": 90,
+    "costScore": 40,
+    "latencyScore": 30,
+    "notes": "One of the strongest all-round models for coding and writing.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "claude-3-5-haiku",
@@ -93,13 +115,17 @@
     "outputCostPer1k": 0.004,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "automation", "chat"],
-    "qualityScore": 78,
-    "costScore": 85,
-    "latencyScore": 92,
-    "notes": "Anthropic's fast, affordable model. Strong coding ability relative to cost.",
-    "last_updated": "2025-04-01",
-    "source": "https://www.anthropic.com/pricing"
+    "bestFor": [
+      "budget",
+      "chat",
+      "automation"
+    ],
+    "qualityScore": 72,
+    "costScore": 54,
+    "latencyScore": 45,
+    "notes": "Fast and cheaper Anthropic option for lighter workloads.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "claude-pro",
@@ -110,7 +136,12 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["writing", "research", "coding", "chat"],
+    "bestFor": [
+      "writing",
+      "research",
+      "coding",
+      "chat"
+    ],
     "qualityScore": 94,
     "costScore": 55,
     "latencyScore": 74,
@@ -127,13 +158,17 @@
     "outputCostPer1k": 0.005,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["research", "automation", "writing"],
-    "qualityScore": 88,
-    "costScore": 65,
-    "latencyScore": 70,
-    "notes": "2M context window is unique. Best for long-document analysis and research tasks.",
-    "last_updated": "2025-04-01",
-    "source": "https://ai.google.dev/pricing"
+    "bestFor": [
+      "research",
+      "long-context",
+      "general"
+    ],
+    "qualityScore": 82,
+    "costScore": 58,
+    "latencyScore": 45,
+    "notes": "Strong long-context model. Good fit for research and large-document workflows.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "gemini-1-5-flash",
@@ -144,13 +179,18 @@
     "outputCostPer1k": 0.0003,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["automation", "chat", "writing"],
-    "qualityScore": 72,
-    "costScore": 97,
-    "latencyScore": 95,
-    "notes": "One of the cheapest models available. Excellent for high-volume automation pipelines.",
-    "last_updated": "2025-04-01",
-    "source": "https://ai.google.dev/pricing"
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
+    "qualityScore": 68,
+    "costScore": 90,
+    "latencyScore": 80,
+    "notes": "One of the strongest value options for high-volume lightweight tasks.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "gemini-advanced",
@@ -161,7 +201,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research", "chat", "writing"],
+    "bestFor": [
+      "research",
+      "chat",
+      "writing"
+    ],
     "qualityScore": 86,
     "costScore": 55,
     "latencyScore": 72,
@@ -178,7 +222,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 68,
     "costScore": 100,
     "latencyScore": 70,
@@ -195,7 +242,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 93,
     "costScore": 60,
     "latencyScore": 85,
@@ -212,7 +261,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 80,
     "costScore": 90,
     "latencyScore": 82,
@@ -225,17 +276,21 @@
     "name": "Mistral Large",
     "provider": "Mistral",
     "planType": "api",
-    "inputCostPer1k": 0.002,
-    "outputCostPer1k": 0.006,
+    "inputCostPer1k": 0.004,
+    "outputCostPer1k": 0.012,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "writing", "research"],
-    "qualityScore": 85,
-    "costScore": 70,
-    "latencyScore": 80,
-    "notes": "Strong European alternative to GPT-4o at lower cost. GDPR-friendly.",
-    "last_updated": "2025-04-01",
-    "source": "https://mistral.ai/pricing/"
+    "bestFor": [
+      "general",
+      "europe",
+      "writing"
+    ],
+    "qualityScore": 75,
+    "costScore": 40,
+    "latencyScore": 20,
+    "notes": "Recognizable premium Mistral entry. Useful for provider diversity.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "mistral-small",
@@ -246,13 +301,17 @@
     "outputCostPer1k": 0.0006,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["automation", "chat", "writing"],
-    "qualityScore": 70,
-    "costScore": 90,
-    "latencyScore": 88,
-    "notes": "Very affordable with solid quality. Underrated for automation tasks.",
-    "last_updated": "2025-04-01",
-    "source": "https://mistral.ai/pricing/"
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat"
+    ],
+    "qualityScore": 64,
+    "costScore": 71,
+    "latencyScore": 53,
+    "notes": "Affordable Mistral option for budget-sensitive workloads.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "llama-3-1-70b",
@@ -263,7 +322,11 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "automation", "research"],
+    "bestFor": [
+      "coding",
+      "automation",
+      "research"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 75,
@@ -276,17 +339,21 @@
     "name": "DeepSeek V3",
     "provider": "DeepSeek",
     "planType": "api",
-    "inputCostPer1k": 0.00027,
-    "outputCostPer1k": 0.0011,
+    "inputCostPer1k": 0.0004,
+    "outputCostPer1k": 0.00089,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "research", "automation"],
-    "qualityScore": 90,
-    "costScore": 95,
-    "latencyScore": 72,
-    "notes": "Exceptional quality-to-cost ratio. Frontier-level coding at 20x cheaper than GPT-4o.",
-    "last_updated": "2025-04-01",
-    "source": "https://api-docs.deepseek.com/quick_start/pricing"
+    "bestFor": [
+      "general",
+      "budget",
+      "coding"
+    ],
+    "qualityScore": 80,
+    "costScore": 64,
+    "latencyScore": 35,
+    "notes": "Excellent cost-to-performance profile. Strong differentiator in value comparisons.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   },
   {
     "id": "perplexity-pro",
@@ -297,7 +364,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research"],
+    "bestFor": [
+      "research"
+    ],
     "qualityScore": 85,
     "costScore": 58,
     "latencyScore": 82,
@@ -314,7 +383,10 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": true,
-    "bestFor": ["automation", "coding"],
+    "bestFor": [
+      "automation",
+      "coding"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 99,
@@ -331,12 +403,342 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 75,
     "costScore": 100,
     "latencyScore": 85,
     "notes": "2000 completions/month and 50 chat messages free. Decent starting point for VS Code users.",
     "last_updated": "2025-04-01",
     "source": "https://github.com/features/copilot"
+  },
+  {
+    "id": "gpt-4-turbo",
+    "name": "GPT-4 Turbo",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.01,
+    "outputCostPer1k": 0.03,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "legacy",
+      "general"
+    ],
+    "qualityScore": 72,
+    "costScore": 30,
+    "latencyScore": 4,
+    "notes": "Legacy premium OpenAI option. Keep only for comparison continuity.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "o3",
+    "name": "o3",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.002,
+    "outputCostPer1k": 0.008,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "reasoning",
+      "coding"
+    ],
+    "qualityScore": 86,
+    "costScore": 46,
+    "latencyScore": 38,
+    "notes": "Reasoning-oriented OpenAI model for harder tasks.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "o3-mini",
+    "name": "o3-mini",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.0011,
+    "outputCostPer1k": 0.0044,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "reasoning",
+      "budget"
+    ],
+    "qualityScore": 74,
+    "costScore": 52,
+    "latencyScore": 54,
+    "notes": "Lower-cost reasoning option within the OpenAI family.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "claude-3-opus",
+    "name": "Claude 3 Opus",
+    "provider": "Anthropic",
+    "planType": "api",
+    "inputCostPer1k": 0.015,
+    "outputCostPer1k": 0.075,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "premium",
+      "writing",
+      "research"
+    ],
+    "qualityScore": 84,
+    "costScore": 23,
+    "latencyScore": 15,
+    "notes": "Premium high-quality Anthropic model. Expensive, but useful as a top-tier comparison anchor.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "claude-3-haiku",
+    "name": "Claude 3 Haiku",
+    "provider": "Anthropic",
+    "planType": "api",
+    "inputCostPer1k": 0.00025,
+    "outputCostPer1k": 0.00125,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "budget",
+      "support",
+      "chat"
+    ],
+    "qualityScore": 65,
+    "costScore": 66,
+    "latencyScore": 50,
+    "notes": "Cheap Anthropic option suitable for support and light automation.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "gemini-2-5-pro",
+    "name": "Gemini 2.5 Pro",
+    "provider": "Google",
+    "planType": "api",
+    "inputCostPer1k": 0.00125,
+    "outputCostPer1k": 0.01,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "reasoning",
+      "general"
+    ],
+    "qualityScore": 84,
+    "costScore": 46,
+    "latencyScore": 48,
+    "notes": "Higher-end Google model suitable for coding and deeper analysis.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "gemini-2-5-flash",
+    "name": "Gemini 2.5 Flash",
+    "provider": "Google",
+    "planType": "api",
+    "inputCostPer1k": 0.0003,
+    "outputCostPer1k": 0.0025,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "reasoning",
+      "high-volume",
+      "automation"
+    ],
+    "qualityScore": 74,
+    "costScore": 61,
+    "latencyScore": 60,
+    "notes": "Good balance between budget and stronger capability in the Google family.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "codestral",
+    "name": "Codestral",
+    "provider": "Mistral",
+    "planType": "api",
+    "inputCostPer1k": 0.0003,
+    "outputCostPer1k": 0.0009,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding"
+    ],
+    "qualityScore": 78,
+    "costScore": 74,
+    "latencyScore": 55,
+    "notes": "Coding-focused Mistral option. Keep as a dedicated coding candidate.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "deepseek-r1",
+    "name": "DeepSeek R1",
+    "provider": "DeepSeek",
+    "planType": "api",
+    "inputCostPer1k": 0.00135,
+    "outputCostPer1k": 0.004,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "reasoning",
+      "research",
+      "coding"
+    ],
+    "qualityScore": 83,
+    "costScore": 50,
+    "latencyScore": 28,
+    "notes": "Reasoning-oriented DeepSeek model. Strong for analytical workloads.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "deepseek-coder-v2",
+    "name": "DeepSeek Coder V2",
+    "provider": "DeepSeek",
+    "planType": "api",
+    "inputCostPer1k": 0.0005,
+    "outputCostPer1k": 0.0015,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
+    "qualityScore": 81,
+    "costScore": 70,
+    "latencyScore": 45,
+    "notes": "High-value coding-focused model candidate for V1.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "grok-4",
+    "name": "Grok 4",
+    "provider": "xAI",
+    "planType": "api",
+    "inputCostPer1k": 0.003,
+    "outputCostPer1k": 0.015,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "general",
+      "reasoning",
+      "coding"
+    ],
+    "qualityScore": 82,
+    "costScore": 40,
+    "latencyScore": 28,
+    "notes": "Recognizable xAI flagship for high-interest comparison traffic.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "grok-4-fast",
+    "name": "Grok 4 Fast",
+    "provider": "xAI",
+    "planType": "api",
+    "inputCostPer1k": 0.0002,
+    "outputCostPer1k": 0.0005,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "budget",
+      "reasoning",
+      "high-volume"
+    ],
+    "qualityScore": 72,
+    "costScore": 72,
+    "latencyScore": 59,
+    "notes": "Budget-friendly xAI candidate for cheaper alternative recommendations.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "command-r-plus",
+    "name": "Command R+",
+    "provider": "Cohere",
+    "planType": "api",
+    "inputCostPer1k": 0.003,
+    "outputCostPer1k": 0.015,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "research",
+      "rag",
+      "enterprise"
+    ],
+    "qualityScore": 76,
+    "costScore": 40,
+    "latencyScore": 30,
+    "notes": "Good enterprise/retrieval-oriented model to represent Cohere.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "llama-3-1-instruct-70b",
+    "name": "Llama 3.1 Instruct 70B",
+    "provider": "Meta",
+    "planType": "api",
+    "inputCostPer1k": 0.00056,
+    "outputCostPer1k": 0.00056,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "open-weight",
+      "budget",
+      "general"
+    ],
+    "qualityScore": 70,
+    "costScore": 65,
+    "latencyScore": 15,
+    "notes": "Represents mainstream open-weight served alternatives.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "qwen-coder",
+    "name": "Qwen Coder",
+    "provider": "Alibaba",
+    "planType": "api",
+    "inputCostPer1k": 0.00035,
+    "outputCostPer1k": 0.0012,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
+    "qualityScore": 77,
+    "costScore": 64,
+    "latencyScore": 53,
+    "notes": "Strong coding-focused Alibaba entry for comparison breadth.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
+  },
+  {
+    "id": "qwen-general",
+    "name": "Qwen General",
+    "provider": "Alibaba",
+    "planType": "api",
+    "inputCostPer1k": 0.0006,
+    "outputCostPer1k": 0.0036,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "general",
+      "reasoning"
+    ],
+    "qualityScore": 78,
+    "costScore": 56,
+    "latencyScore": 30,
+    "notes": "Represents Qwen family for broader provider coverage in V1.",
+    "last_updated": "2026-04-11",
+    "source": "https://artificialanalysis.ai/models"
   }
 ]

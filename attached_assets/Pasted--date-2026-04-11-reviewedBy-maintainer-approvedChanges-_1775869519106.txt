@@ -1,0 +1,447 @@
+{
+  "date": "2026-04-11",
+  "reviewedBy": "maintainer",
+  "approvedChanges": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "provider": "OpenAI",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Input $/1k tokens",
+          "from": 0.005,
+          "to": 0.0025
+        },
+        {
+          "field": "Output $/1k tokens",
+          "from": 0.015,
+          "to": 0.01
+        },
+        {
+          "field": "Source URL",
+          "from": "https://openai.com/api/pricing/",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "OpenAI's flagship multimodal model. Excellent across all tasks but expensive at scale.",
+          "to": "Strong general-purpose flagship. Good default for mixed workloads."
+        },
+        {
+          "field": "Quality score",
+          "from": 95,
+          "to": 88
+        },
+        {
+          "field": "Cost score",
+          "from": 40,
+          "to": 43
+        }
+      ]
+    },
+    {
+      "id": "gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "provider": "OpenAI",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://openai.com/api/pricing/",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Dramatically cheaper than GPT-4o. Great for high-volume, lower-stakes tasks.",
+          "to": "Cheap and practical for high-volume everyday tasks."
+        },
+        {
+          "field": "Quality score",
+          "from": 75,
+          "to": 70
+        },
+        {
+          "field": "Cost score",
+          "from": 92,
+          "to": 73
+        }
+      ]
+    },
+    {
+      "id": "claude-3-5-sonnet",
+      "name": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://www.anthropic.com/pricing",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Top-tier for coding and complex reasoning. Input is cheaper than GPT-4o but output parity.",
+          "to": "One of the strongest all-round models for coding and writing."
+        },
+        {
+          "field": "Quality score",
+          "from": 96,
+          "to": 90
+        },
+        {
+          "field": "Cost score",
+          "from": 42,
+          "to": 40
+        }
+      ]
+    },
+    {
+      "id": "claude-3-5-haiku",
+      "name": "Claude 3.5 Haiku",
+      "provider": "Anthropic",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://www.anthropic.com/pricing",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Anthropic's fast, affordable model. Strong coding ability relative to cost.",
+          "to": "Fast and cheaper Anthropic option for lighter workloads."
+        },
+        {
+          "field": "Quality score",
+          "from": 78,
+          "to": 72
+        },
+        {
+          "field": "Cost score",
+          "from": 85,
+          "to": 54
+        }
+      ]
+    },
+    {
+      "id": "gemini-1-5-pro",
+      "name": "Gemini 1.5 Pro",
+      "provider": "Google",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://ai.google.dev/pricing",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "2M context window is unique. Best for long-document analysis and research tasks.",
+          "to": "Strong long-context model. Good fit for research and large-document workflows."
+        },
+        {
+          "field": "Quality score",
+          "from": 88,
+          "to": 82
+        },
+        {
+          "field": "Cost score",
+          "from": 65,
+          "to": 58
+        }
+      ]
+    },
+    {
+      "id": "gemini-1-5-flash",
+      "name": "Gemini 1.5 Flash",
+      "provider": "Google",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://ai.google.dev/pricing",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "One of the cheapest models available. Excellent for high-volume automation pipelines.",
+          "to": "One of the strongest value options for high-volume lightweight tasks."
+        },
+        {
+          "field": "Quality score",
+          "from": 72,
+          "to": 68
+        },
+        {
+          "field": "Cost score",
+          "from": 97,
+          "to": 90
+        }
+      ]
+    },
+    {
+      "id": "mistral-large",
+      "name": "Mistral Large",
+      "provider": "Mistral",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Input $/1k tokens",
+          "from": 0.002,
+          "to": 0.004
+        },
+        {
+          "field": "Output $/1k tokens",
+          "from": 0.006,
+          "to": 0.012
+        },
+        {
+          "field": "Source URL",
+          "from": "https://mistral.ai/pricing/",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Strong European alternative to GPT-4o at lower cost. GDPR-friendly.",
+          "to": "Recognizable premium Mistral entry. Useful for provider diversity."
+        },
+        {
+          "field": "Quality score",
+          "from": 85,
+          "to": 75
+        },
+        {
+          "field": "Cost score",
+          "from": 70,
+          "to": 40
+        }
+      ]
+    },
+    {
+      "id": "mistral-small",
+      "name": "Mistral Small",
+      "provider": "Mistral",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Source URL",
+          "from": "https://mistral.ai/pricing/",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Very affordable with solid quality. Underrated for automation tasks.",
+          "to": "Affordable Mistral option for budget-sensitive workloads."
+        },
+        {
+          "field": "Quality score",
+          "from": 70,
+          "to": 64
+        },
+        {
+          "field": "Cost score",
+          "from": 90,
+          "to": 71
+        }
+      ]
+    },
+    {
+      "id": "deepseek-v3",
+      "name": "DeepSeek V3",
+      "provider": "DeepSeek",
+      "status": "changed",
+      "changedFields": [
+        {
+          "field": "Input $/1k tokens",
+          "from": 0.00027,
+          "to": 0.0004
+        },
+        {
+          "field": "Output $/1k tokens",
+          "from": 0.0011,
+          "to": 0.00089
+        },
+        {
+          "field": "Source URL",
+          "from": "https://api-docs.deepseek.com/quick_start/pricing",
+          "to": "https://artificialanalysis.ai/models"
+        },
+        {
+          "field": "Last updated",
+          "from": "2025-04-01",
+          "to": "2026-04-11"
+        },
+        {
+          "field": "Notes",
+          "from": "Exceptional quality-to-cost ratio. Frontier-level coding at 20x cheaper than GPT-4o.",
+          "to": "Excellent cost-to-performance profile. Strong differentiator in value comparisons."
+        },
+        {
+          "field": "Quality score",
+          "from": 90,
+          "to": 80
+        },
+        {
+          "field": "Cost score",
+          "from": 95,
+          "to": 64
+        }
+      ]
+    },
+    {
+      "id": "gpt-4-turbo",
+      "name": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "o3",
+      "name": "o3",
+      "provider": "OpenAI",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "o3-mini",
+      "name": "o3-mini",
+      "provider": "OpenAI",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "claude-3-opus",
+      "name": "Claude 3 Opus",
+      "provider": "Anthropic",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "claude-3-haiku",
+      "name": "Claude 3 Haiku",
+      "provider": "Anthropic",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "gemini-2-5-pro",
+      "name": "Gemini 2.5 Pro",
+      "provider": "Google",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "gemini-2-5-flash",
+      "name": "Gemini 2.5 Flash",
+      "provider": "Google",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "codestral",
+      "name": "Codestral",
+      "provider": "Mistral",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "deepseek-r1",
+      "name": "DeepSeek R1",
+      "provider": "DeepSeek",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "deepseek-coder-v2",
+      "name": "DeepSeek Coder V2",
+      "provider": "DeepSeek",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "grok-4",
+      "name": "Grok 4",
+      "provider": "xAI",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "grok-4-fast",
+      "name": "Grok 4 Fast",
+      "provider": "xAI",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "command-r-plus",
+      "name": "Command R+",
+      "provider": "Cohere",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "llama-3-1-instruct-70b",
+      "name": "Llama 3.1 Instruct 70B",
+      "provider": "Meta",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "qwen-coder",
+      "name": "Qwen Coder",
+      "provider": "Alibaba",
+      "status": "added",
+      "changedFields": []
+    },
+    {
+      "id": "qwen-general",
+      "name": "Qwen General",
+      "provider": "Alibaba",
+      "status": "added",
+      "changedFields": []
+    }
+  ],
+  "reviewedUnchanged": [],
+  "summary": "9 existing model(s) updated, 16 model(s) added, 0 model(s) confirmed current."
+}

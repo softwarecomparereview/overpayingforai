@@ -597,13 +597,20 @@ export function Design2() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 pt-4 border-t border-border">
+              <div className="mt-4 pt-4 border-t border-border flex flex-wrap gap-4">
                 <Link
                   href="/changelog"
                   onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "changelog_link" })}
                   className="text-sm text-primary font-medium hover:underline"
                 >
-                  View pricing changelog →
+                  View all pricing data →
+                </Link>
+                <Link
+                  href="/pricing-changelog"
+                  onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "pricing_changelog_link" })}
+                  className="text-sm text-muted-foreground hover:text-foreground hover:underline"
+                >
+                  What changed in our last review →
                 </Link>
               </div>
             </div>
