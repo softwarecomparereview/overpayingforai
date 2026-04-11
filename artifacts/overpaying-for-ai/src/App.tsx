@@ -8,6 +8,8 @@ import { ComparePage, CompareIndex } from "@/pages/ComparePage";
 import { BestPage, BestIndex } from "@/pages/BestPage";
 import { GuidePage, GuideIndex } from "@/pages/GuidePage";
 import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
+import { AffiliatesAdminPage } from "@/pages/admin/AffiliatesAdminPage";
+import { AffiliateAuditPage } from "@/pages/admin/AffiliateAuditPage";
 import { Design1 } from "@/pages/Design1";
 import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
@@ -26,6 +28,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/admin/pricing-refresh" component={PricingRefreshPage} />
+      <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
+      <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
       <Route>
         {() => (
           <Layout>

@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { Link } from "wouter";
+import { AdminNav } from "@/components/admin/AdminNav";
 import modelsData from "@/data/models.json";
 import type { AIModel } from "@/engine/types";
 import {
@@ -500,17 +501,7 @@ export function PricingRefreshPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="border-b border-border bg-card px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">Admin</span>
-          <h1 className="font-bold text-foreground text-sm sm:text-base">Pricing Refresh Workflow</h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-muted-foreground hidden sm:block">{TODAY}</span>
-          <Link href="/" className="text-xs text-muted-foreground hover:text-foreground">← Public site</Link>
-          <button onClick={handleLock} className="text-xs text-muted-foreground hover:text-foreground border border-border rounded px-2 py-1">Lock</button>
-        </div>
-      </div>
+      <AdminNav title="Pricing Refresh Workflow" />
 
       <div className="max-w-5xl mx-auto px-4 py-8 space-y-10">
 

@@ -4,6 +4,9 @@ import modelsData from "@/data/models.json";
 import type { AIModel } from "@/engine/types";
 import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
+import { WinnerBlock } from "@/components/conversion/WinnerBlock";
+import { StandardCtaGroup } from "@/components/conversion/StandardCtaGroup";
+import { getSavingsSummary, formatSavingsLabel } from "@/utils/savingsEngine";
 
 const bestOf = bestOfData as typeof bestOfData;
 const models = modelsData as AIModel[];
@@ -43,6 +46,40 @@ export function BestPage() {
       <div className="bg-muted/50 border border-border rounded-lg p-5 mb-10 text-sm text-foreground leading-relaxed">
         {page.intro}
       </div>
+
+      {/* Winner Block — rank 1 pick as best overall */}
+      {(() => {
+        const winner = page.picks.find((p) => p.rank === 1);
+        const budgetPick = page.picks.find((p) =>
+          p.badge.toLowerCase().includes("budget") || p.badge.toLowerCase().includes("free"),
+        );
+        if (!winner) return null;
+
+        const winnerProviderId = modelIdToProviderId(winner.modelId);
+        const winnerPrimary = getPrimaryCta(winnerProviderId, "default", "/calculator");
+        const winnerSecondary = { href: "/decision-engine", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable" as const, label: "Use decision engine" };
+
+        const winnerSavings = budgetPick && budgetPick.modelId !== winner.modelId
+          ? getSavingsSummary(winner.modelId, budgetPick.modelId)
+          : null;
+        const savingsLabel = winnerSavings ? formatSavingsLabel(winnerSavings) : null;
+
+        return (
+          <div className="mb-10">
+            <WinnerBlock
+              badge="Best Overall"
+              title={winner.title}
+              rationale={winner.why}
+              savingsLabel={savingsLabel || undefined}
+              primaryCta={winnerPrimary.isAffiliate
+                ? { ...winnerPrimary, label: `Try ${winner.title}` }
+                : { ...winnerPrimary, label: `Calculate your cost` }
+              }
+              secondaryCta={winnerSecondary}
+            />
+          </div>
+        );
+      })()}
 
       {/* Picks */}
       <section className="mb-10">
@@ -105,6 +142,25 @@ export function BestPage() {
           </div>
         </section>
       )}
+
+      {/* End-of-page CTA */}
+      {(() => {
+        const winner = page.picks.find((p) => p.rank === 1);
+        if (!winner) return null;
+        const providerId = modelIdToProviderId(winner.modelId);
+        const primary = getPrimaryCta(providerId, "default", "/calculator");
+        const secondary = { href: "/decision-engine", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable" as const, label: "Use decision engine" };
+        return (
+          <section className="bg-muted/40 border border-border rounded-xl p-6 mb-8 text-center">
+            <p className="font-semibold text-foreground mb-1">Not sure which is right for you?</p>
+            <p className="text-sm text-muted-foreground mb-4">Use the calculator to estimate your real cost, or take the decision quiz.</p>
+            <StandardCtaGroup
+              primary={primary.isAffiliate ? { ...primary, label: `Try ${winner.title}` } : { ...primary, label: "Calculate your cost" }}
+              secondary={secondary}
+            />
+          </section>
+        );
+      })()}
 
       {/* Internal Links */}
       <section className="border-t border-border pt-8">
