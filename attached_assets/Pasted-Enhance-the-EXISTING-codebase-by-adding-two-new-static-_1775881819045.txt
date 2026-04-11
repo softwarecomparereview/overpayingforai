@@ -1,0 +1,146 @@
+Enhance the EXISTING codebase by adding two new static pages:
+1) Terms of Service
+2) Media Kit
+
+Do NOT break existing routes, layout, or styling.
+Follow current project structure (React + routing already exists).
+
+-----------------------------------
+TASK 1 — Create Terms Page
+-----------------------------------
+
+Create file:
+/src/pages/Terms.tsx
+
+Content:
+
+- Title: "Terms of Service"
+- Clean readable layout (same styling as other pages)
+
+Sections:
+1. Intro
+2. Disclaimer
+3. Affiliate Disclosure
+4. Limitation of Liability
+5. Contact
+
+Use this exact content:
+
+"By using OverpayingForAI.com, you agree that all information is provided for educational and informational purposes only. We do not guarantee accuracy of pricing, tool performance, or outcomes.
+
+Affiliate Disclosure:
+Some links on this site are affiliate links. We may earn a commission at no additional cost to you.
+
+Users are responsible for their own decisions when selecting AI tools.
+
+Contact: partners@overpayingforai.com"
+
+-----------------------------------
+TASK 2 — Create Media Kit Page
+-----------------------------------
+
+Create file:
+/src/pages/MediaKit.tsx
+
+Sections:
+
+1. Title: "Media Kit"
+2. About
+3. Audience
+4. Traffic Intent
+5. What We Offer
+6. Partnership Model
+7. Contact
+
+Use this content:
+
+About:
+"OverpayingForAI.com helps individuals and businesses reduce AI costs by comparing tools, pricing, and usage strategies."
+
+Audience:
+- Developers using AI tools
+- Startups and SMBs
+- Professionals using ChatGPT, Claude, Gemini
+
+Traffic Intent:
+- cheapest AI tools
+- AI pricing comparisons
+- cost optimization
+
+What We Offer:
+- Featured placements in comparisons
+- Inclusion in best AI tools pages
+- Exposure via decision engine
+- SEO-driven traffic
+
+Partnership Model:
+- Revenue share (preferred)
+- CPA / CPL
+- Long-term content partnerships
+
+Contact:
+partners@overpayingforai.com
+
+-----------------------------------
+TASK 3 — Add Routes
+-----------------------------------
+
+Update routing (App.tsx or equivalent):
+
+Add:
+<Route path="/terms" element={<Terms />} />
+<Route path="/media-kit" element={<MediaKit />} />
+
+-----------------------------------
+TASK 4 — Add Footer Links
+-----------------------------------
+
+Update Layout/Footer component:
+
+Add links:
+- Terms → /terms
+- Media Kit → /media-kit
+
+Place in footer navigation alongside existing links.
+
+-----------------------------------
+TASK 5 — SEO Enhancements
+-----------------------------------
+
+For BOTH pages:
+
+- Add <title> tags:
+  Terms: "Terms of Service | OverpayingForAI"
+  Media Kit: "Media Kit | OverpayingForAI"
+
+- Add meta description:
+  Terms: "Terms and affiliate disclosure for OverpayingForAI."
+  Media Kit: "Partnership and media information for OverpayingForAI."
+
+-----------------------------------
+TASK 6 — Styling
+-----------------------------------
+
+- Match existing typography and spacing
+- Keep layout clean and minimal
+- Max width container (~800px)
+- Proper heading hierarchy (h1, h2, lists)
+
+-----------------------------------
+CONSTRAINTS
+-----------------------------------
+
+- Do NOT modify existing business logic
+- Do NOT break navigation
+- Keep components simple and reusable
+- No external dependencies required
+
+-----------------------------------
+OUTPUT
+-----------------------------------
+
+Return:
+- New files created
+- Files updated
+- Any routing changes
+- Confirmation both pages render correctly
