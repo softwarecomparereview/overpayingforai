@@ -172,9 +172,9 @@
         "href": "/compare/claude-haiku-vs-gpt4o-mini"
       }
     ],
-    "related_comparisons": ["claude-vs-gpt-cost", "gpt-4o-vs-gpt-4o-mini-cost", "subscription-vs-api-ai-cost", "claude-haiku-vs-gpt4o-mini"],
-    "related_best_lists": ["best-ai-for-writing-on-a-budget", "best-ai-under-20-per-month", "best-ai-for-solopreneurs"],
-    "related_guides": ["how-to-reduce-ai-cost", "claude-vs-chatgpt-for-business", "ai-routing-strategies"],
+    "related_comparisons": ["writesonic-vs-jasper", "claude-vs-gpt-cost", "gpt-4o-vs-gpt-4o-mini-cost", "subscription-vs-api-ai-cost", "claude-haiku-vs-gpt4o-mini"],
+    "related_best_lists": ["ai-writing-tools-cheap", "best-ai-for-writing-on-a-budget", "best-ai-under-20-per-month", "best-ai-for-solopreneurs"],
+    "related_guides": ["cheapest-ai-content-workflow", "how-to-reduce-ai-cost", "claude-vs-chatgpt-for-business", "ai-routing-strategies"],
     "faqs": [
       { "q": "Do I need GPT-4o for writing tasks?", "a": "No. GPT-4o mini and Claude Haiku produce publishing-quality writing for most content types at a fraction of the cost. Reserve GPT-4o or Claude Sonnet for nuanced long-form pieces that require stronger reasoning." },
       { "q": "What is the cheapest AI for blog and SEO content?", "a": "DeepSeek V3 or GPT-4o mini are the cheapest options with sufficient quality. For high-volume SEO content, DeepSeek V3 offers near-frontier quality at the lowest price per word." },

@@ -36,6 +36,10 @@ export function modelIdToProviderId(modelId: string): string {
   if (id.startsWith("copilot") || id.startsWith("github")) return "github";
   if (id.startsWith("perplexity")) return "perplexity";
   if (id.startsWith("mistral")) return "mistral";
+  if (id.startsWith("writesonic")) return "writesonic";
+  if (id.startsWith("jasper")) return "jasper";
+  if (id.startsWith("copyai") || id.startsWith("copy.ai") || id.startsWith("copy-ai")) return "copyai";
+  if (id.startsWith("rytr")) return "rytr";
   return id;
 }
 
