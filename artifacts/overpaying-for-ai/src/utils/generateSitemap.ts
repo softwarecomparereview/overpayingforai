@@ -88,10 +88,19 @@ const STATIC_PAGES: SitemapEntry[] = [
 
 // ─── Dynamic entry builders ───────────────────────────────────────────────────
 
-interface AiType  { slug: string; label?: string }
-interface Comparison { slug: string }
-interface BestOf  { slug: string; updatedAt?: string }
-interface Guide   { slug: string; updatedAt?: string }
+interface AiType  { slug: string; label?: string; description?: string }
+interface Comparison { slug: string; title?: string; description?: string }
+interface BestOf  { slug: string; updatedAt?: string; title?: string; description?: string }
+interface Guide   { slug: string; updatedAt?: string; title?: string; description?: string; sections?: unknown[] }
+
+/** Returns true if the slug or content looks like a draft/placeholder */
+function isLowQuality(slug: string, description?: string): boolean {
+  const slugLower = slug.toLowerCase();
+  if (slugLower.includes("coming-soon") || slugLower.includes("draft")) return true;
+  if (!description || description.trim() === "") return true;
+  if (description.toLowerCase().includes("coming soon")) return true;
+  return false;
+}
 
 function buildEntries(): { sitemap: SitemapEntry[]; sections: LlmsSection[] } {
   const aiTypes    = readJson<AiType[]>("aiTypes.json");
@@ -99,37 +108,49 @@ function buildEntries(): { sitemap: SitemapEntry[]; sections: LlmsSection[] } {
   const bestOf     = readJson<BestOf[]>("best-of.json");
   const guides     = readJson<Guide[]>("guides.json");
 
-  const aiTypeEntries: SitemapEntry[] = aiTypes.map((t) => ({
-    loc: url(`/ai-types/${t.slug}`),
-    priority: 0.8,
-    changefreq: "monthly",
-    lastmod: TODAY,
-    label: t.slug,
-  }));
+  const aiTypeEntries: SitemapEntry[] = aiTypes
+    .filter((t) => !isLowQuality(t.slug, t.description))
+    .map((t) => ({
+      loc: url(`/ai-types/${t.slug}`),
+      priority: 0.8,
+      changefreq: "monthly",
+      lastmod: TODAY,
+      label: t.slug,
+    }));
 
-  const comparisonEntries: SitemapEntry[] = comparisons.map((c) => ({
-    loc: url(`/compare/${c.slug}`),
-    priority: 0.8,
-    changefreq: "monthly",
-    lastmod: TODAY,
-    label: c.slug,
-  }));
+  const comparisonEntries: SitemapEntry[] = comparisons
+    .filter((c) => !isLowQuality(c.slug, c.description))
+    .map((c) => ({
+      loc: url(`/compare/${c.slug}`),
+      priority: 0.8,
+      changefreq: "monthly",
+      lastmod: TODAY,
+      label: c.slug,
+    }));
 
-  const bestEntries: SitemapEntry[] = bestOf.map((b) => ({
-    loc: url(`/best/${b.slug}`),
-    priority: 0.7,
-    changefreq: "monthly",
-    lastmod: b.updatedAt ?? TODAY,
-    label: b.slug,
-  }));
+  const bestEntries: SitemapEntry[] = bestOf
+    .filter((b) => !isLowQuality(b.slug, b.description))
+    .map((b) => ({
+      loc: url(`/best/${b.slug}`),
+      priority: 0.7,
+      changefreq: "monthly",
+      lastmod: b.updatedAt ?? TODAY,
+      label: b.slug,
+    }));
 
-  const guideEntries: SitemapEntry[] = guides.map((g) => ({
-    loc: url(`/guides/${g.slug}`),
-    priority: 0.7,
-    changefreq: "monthly",
-    lastmod: g.updatedAt ?? TODAY,
-    label: g.slug,
-  }));
+  const guideEntries: SitemapEntry[] = guides
+    .filter((g) => {
+      if (isLowQuality(g.slug, g.description)) return false;
+      if (!g.sections || (g.sections as unknown[]).length === 0) return false;
+      return true;
+    })
+    .map((g) => ({
+      loc: url(`/guides/${g.slug}`),
+      priority: 0.7,
+      changefreq: "monthly",
+      lastmod: g.updatedAt ?? TODAY,
+      label: g.slug,
+    }));
 
   const sections: LlmsSection[] = [
     {

@@ -8,6 +8,7 @@ import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { StandardCtaGroup } from "@/components/conversion/StandardCtaGroup";
 import { getSavingsSummary, formatSavingsLabel } from "@/utils/savingsEngine";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
 
 const bestOf = bestOfData as typeof bestOfData;
@@ -173,21 +174,7 @@ export function BestPage() {
         );
       })()}
 
-      {/* Internal Links */}
-      <section className="border-t border-border pt-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Related</h2>
-        <div className="flex flex-wrap gap-3">
-          {page.internalLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm px-3 py-1.5 rounded border border-border bg-muted/30 hover:bg-muted transition-colors text-foreground"
-            >
-              {link.text}
-            </Link>
-          ))}
-        </div>
-      </section>
+      <InternalLinks links={page.internalLinks} />
     </article>
   );
 }
@@ -195,6 +182,11 @@ export function BestPage() {
 export function BestIndex() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo
+        title="Best AI Lists — Ranked by Cost Efficiency | OverpayingForAI"
+        description="Curated best-of lists for every AI use case and budget. Find the cheapest AI tool for coding, writing, research, and more."
+        canonicalUrl="/best"
+      />
       <h1 className="text-3xl font-bold mb-2">Best AI Lists</h1>
       <p className="text-muted-foreground mb-8">Ranked picks for every use case and budget — updated regularly.</p>
       <div className="grid sm:grid-cols-2 gap-4">
@@ -212,6 +204,17 @@ export function BestIndex() {
           </Link>
         ))}
       </div>
+      <InternalLinks
+        links={[
+          { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
+          { href: "/best/best-ai-for-coding-on-a-budget", text: "Best for Coding" },
+          { href: "/best/best-ai-for-writing-on-a-budget", text: "Best for Writing" },
+          { href: "/calculator", text: "AI Cost Calculator" },
+          { href: "/ai-types", text: "Browse AI Types" },
+          { href: "/compare", text: "Compare Models" },
+        ]}
+        heading="Explore more"
+      />
     </div>
   );
 }

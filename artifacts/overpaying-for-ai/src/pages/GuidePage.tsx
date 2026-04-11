@@ -3,6 +3,9 @@ import { useParams, Link } from "wouter";
 import guidesData from "@/data/guides.json";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { getPrimaryCta } from "@/utils/affiliateResolver";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
+import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 
 interface GuideWinnerBlock {
   badge: string;
@@ -33,6 +36,7 @@ export function GuidePage() {
 
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo title={`${guide.title} | OverpayingForAI`} description={guide.description} />
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
@@ -108,21 +112,8 @@ export function GuidePage() {
         </div>
       )}
 
-      {/* Internal Links */}
-      <section className="border-t border-border pt-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Related</h2>
-        <div className="flex flex-wrap gap-3">
-          {guide.internalLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm px-3 py-1.5 rounded border border-border bg-muted/30 hover:bg-muted transition-colors text-foreground"
-            >
-              {link.text}
-            </Link>
-          ))}
-        </div>
-      </section>
+      <SeoContentBlock />
+      <InternalLinks links={guide.internalLinks} />
     </article>
   );
 }

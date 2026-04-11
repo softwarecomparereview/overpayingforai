@@ -8,6 +8,8 @@ import { RecommendationCtas } from "@/components/monetization/RecommendationCtas
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { deriveSavingsFromComparison, formatSavingsLabel } from "@/utils/savingsEngine";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { InternalLinks } from "@/components/seo/InternalLinks";
+import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
 
 const comparisons = comparisonsData as typeof comparisonsData;
@@ -181,21 +183,8 @@ export function ComparePage() {
         </section>
       )}
 
-      {/* Internal Links */}
-      <section className="border-t border-border pt-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Related</h2>
-        <div className="flex flex-wrap gap-3">
-          {page.internalLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm px-3 py-1.5 rounded border border-border bg-muted/30 hover:bg-muted transition-colors text-foreground"
-            >
-              {link.text}
-            </Link>
-          ))}
-        </div>
-      </section>
+      <SeoContentBlock />
+      <InternalLinks links={page.internalLinks} />
     </article>
   );
 }

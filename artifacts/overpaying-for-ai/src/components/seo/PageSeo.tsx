@@ -1,21 +1,25 @@
 import { useEffect, useRef } from "react";
 
+const DEFAULT_TITLE = "Best AI Tools & Cost Comparison | OverpayingForAI";
+const DEFAULT_DESCRIPTION = "Compare AI tools, pricing, and alternatives to avoid overpaying.";
+
 interface PageSeoProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   schema?: object | object[];
+  canonicalUrl?: string;
 }
 
 /**
  * PageSeo — headless component that updates document.title, meta description,
- * and injects JSON-LD schema script tags on mount. Cleans up schemas on unmount.
- * Safe to place anywhere in the render tree; renders nothing visible.
+ * injects a canonical link tag, and injects JSON-LD schema script tags on mount.
+ * Cleans up schemas on unmount. Safe to place anywhere in the render tree.
  */
-export function PageSeo({ title, description, schema }: PageSeoProps) {
+export function PageSeo({ title, description, schema, canonicalUrl }: PageSeoProps) {
   const scriptIds = useRef<string[]>([]);
 
   useEffect(() => {
-    document.title = title;
+    document.title = title || DEFAULT_TITLE;
 
     let metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!metaDesc) {
@@ -23,8 +27,27 @@ export function PageSeo({ title, description, schema }: PageSeoProps) {
       metaDesc.setAttribute("name", "description");
       document.head.appendChild(metaDesc);
     }
-    metaDesc.setAttribute("content", description);
+    metaDesc.setAttribute("content", description || DEFAULT_DESCRIPTION);
   }, [title, description]);
+
+  useEffect(() => {
+    const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+    const href = canonicalUrl
+      ? `https://overpayingforai.com${canonicalUrl}`
+      : `https://overpayingforai.com${pathname}`;
+
+    const existing = document.querySelectorAll('link[rel="canonical"]');
+    existing.forEach((el) => el.remove());
+
+    const link = document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    link.setAttribute("href", href);
+    document.head.appendChild(link);
+
+    return () => {
+      link.remove();
+    };
+  }, [canonicalUrl]);
 
   useEffect(() => {
     if (!schema) return;

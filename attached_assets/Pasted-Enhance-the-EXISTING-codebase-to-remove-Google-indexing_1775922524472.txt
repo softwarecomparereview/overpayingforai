@@ -1,0 +1,173 @@
+Enhance the EXISTING codebase to remove Google indexing bottlenecks across ALL pages.
+
+DO NOT rewrite existing logic. Extend safely.
+
+-----------------------------------
+1. GLOBAL CANONICAL TAG (CRITICAL)
+-----------------------------------
+
+File: src/components/seo/PageSeo.tsx
+
+Add canonical support:
+
+- Accept new prop: canonicalUrl?: string
+- If not provided, auto-generate using window.location.pathname
+
+Inject into <head>:
+
+<link rel="canonical" href={`https://overpayingforai.com${pathname}`} />
+
+Ensure:
+- Only ONE canonical tag exists (remove duplicates before inserting)
+
+-----------------------------------
+2. INTERNAL LINKING INJECTION (SITE-WIDE)
+-----------------------------------
+
+File: src/components/seo/InternalLinks.tsx (already exists)
+
+Enhance:
+
+- Ensure max 5–8 links
+- Accept dynamic fallback links if none provided
+
+Add fallback links:
+
+[
+  "/best",
+  "/ai-types",
+  "/calculator",
+  "/comparisons",
+  "/ai-types/writing",
+  "/ai-types/coding"
+]
+
+-----------------------------------
+3. AUTO-INJECT INTERNAL LINKS INTO ALL PAGES
+-----------------------------------
+
+Files to update:
+
+- AiTypePage.tsx
+- AiTypeIndex.tsx
+- GuidePage.tsx
+- Calculator page
+- Any comparison pages
+
+At bottom of each page:
+
+<InternalLinks />
+
+Ensure:
+- Always renders
+- Never crashes if props missing
+
+-----------------------------------
+4. ADD SEO CONTENT BLOCK (INDEXING BOOST)
+-----------------------------------
+
+Create new component:
+
+File: src/components/seo/SeoContentBlock.tsx
+
+Content:
+
+- "Who is this for"
+- "When NOT to use this"
+- "Pricing insights"
+- "Alternatives"
+- "Final verdict"
+
+Make it reusable and lightweight.
+
+Then inject into ALL pages above footer.
+
+-----------------------------------
+5. PRICING FRESHNESS DISPLAY (TRUST SIGNAL)
+-----------------------------------
+
+Use existing pricingFreshness.ts
+
+On ALL pages where pricing appears:
+
+Add:
+
+"Last updated: X days ago"
+
+If >30 days:
+Show warning: "Pricing may be outdated"
+
+-----------------------------------
+6. SITEMAP FILTER (REMOVE LOW-QUALITY PAGES)
+-----------------------------------
+
+File: wherever sitemap is generated
+
+Modify logic:
+
+ONLY include pages where:
+
+- hasContent === true
+- AND wordCount > 500
+
+If no word count available:
+- exclude routes with "coming-soon", "draft", or empty data
+
+-----------------------------------
+7. ADD PILLAR PAGE (AUTHORITY BOOST)
+-----------------------------------
+
+Create new page:
+
+src/pages/BestAiTools.tsx
+Route: /best
+
+Content structure:
+
+- 1500+ words
+- Sections:
+  - Best AI tools overview
+  - Cheapest AI tools
+  - By category (coding, writing, etc.)
+  - Internal links to 10+ pages
+
+Use existing components:
+- CTABlock
+- InternalLinks
+- PageSeo
+
+-----------------------------------
+8. ENSURE META + DESCRIPTION EXISTS
+-----------------------------------
+
+In PageSeo.tsx:
+
+- Always set:
+  document.title
+  meta description
+
+Fallback:
+
+Title: "Best AI Tools & Cost Comparison | OverpayingForAI"
+Description: "Compare AI tools, pricing, and alternatives to avoid overpaying."
+
+-----------------------------------
+9. SAFE GUARDS
+-----------------------------------
+
+- DO NOT break calculator logic
+- DO NOT remove existing components
+- DO NOT change routes
+- Keep changes additive
+
+-----------------------------------
+EXPECTED RESULT
+-----------------------------------
+
+- Strong internal linking graph
+- Canonical consistency
+- Higher content depth
+- Clean sitemap
+- Improved crawl priority
+
+-----------------------------------
