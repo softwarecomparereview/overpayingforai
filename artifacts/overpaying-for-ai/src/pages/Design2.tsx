@@ -7,6 +7,7 @@ import faqsData from "@/data/faqs.json";
 import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
 import modelsData from "@/data/models.json";
+import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
 
 const comparisons = comparisonsData.slice(0, 6);
 const faqs = faqsData.slice(0, 6);
@@ -491,27 +492,47 @@ export function Design2() {
             <p className="text-sm text-muted-foreground mt-2">Decision support, not ads. Ranked by cost efficiency from real pricing data.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {AFFILIATE_PICKS.map((pick) => (
-              <Link
-                key={pick.label}
-                href={pick.href}
-                onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
-                className="group flex flex-col bg-white border border-border rounded-xl p-5 hover:border-slate-400 hover:shadow-sm transition-all"
-              >
-                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-md mb-3 ${pick.badge}`}>
-                  {pick.label}
-                </span>
-                <h3 className="font-bold text-foreground mb-0.5 text-sm">{pick.model}</h3>
-                <p className="text-xs text-muted-foreground mb-1">
-                  {pick.provider} ·{" "}
-                  <span className="text-emerald-700 font-mono font-semibold">{pick.cost}</span>
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
-                <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
-                  {pick.cta}
-                </span>
-              </Link>
-            ))}
+            {AFFILIATE_PICKS.map((pick) => {
+              const target = getPrimaryCta(providerNameToId(pick.provider), "default", pick.href);
+              const cardClass = "group flex flex-col bg-white border border-border rounded-xl p-5 hover:border-slate-400 hover:shadow-sm transition-all";
+              const cardInner = (
+                <>
+                  <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-md mb-3 ${pick.badge}`}>
+                    {pick.label}
+                  </span>
+                  <h3 className="font-bold text-foreground mb-0.5 text-sm">{pick.model}</h3>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    {pick.provider} ·{" "}
+                    <span className="text-emerald-700 font-mono font-semibold">{pick.cost}</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
+                  <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
+                    {target.isAffiliate ? target.label : pick.cta}
+                  </span>
+                </>
+              );
+              return target.isExternal ? (
+                <a
+                  key={pick.label}
+                  href={target.href}
+                  rel={target.rel ?? "noopener noreferrer sponsored"}
+                  target="_blank"
+                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
+                  className={cardClass}
+                >
+                  {cardInner}
+                </a>
+              ) : (
+                <Link
+                  key={pick.label}
+                  href={target.href}
+                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
+                  className={cardClass}
+                >
+                  {cardInner}
+                </Link>
+              );
+            })}
           </div>
           <Link
             href="/decision-engine"
