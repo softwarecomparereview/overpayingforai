@@ -1,0 +1,232 @@
+Do NOT modify any files yet.
+
+I need a full-site diagnostic pack for navigation, route resolution, link generation, slug usage, and comparison-page wiring so fixes can be done coherently in one pass.
+
+Critical constraints:
+- Do NOT change any files
+- Do NOT change any URLs
+- Do NOT change any slugs
+- Do NOT change sitemap.xml
+- Do NOT change sitemap generation logic
+- Do NOT change robots.txt
+- Do NOT change canonicals
+- Do NOT change any indexing configuration
+- Do NOT commit anything
+- Read/analyze only
+
+Goal:
+Produce a single structured report covering the entire site’s route map, page generators, link generators, slug sources, and any hardcoded destinations, especially around comparison pages. I want enough exact code and paths to instruct a clean one-pass fix afterward.
+
+Repository:
+softwarecomparereview/overpayingforai
+
+Return the results in the sections below exactly.
+
+==================================================
+A. ROUTE MAP
+==================================================
+
+Find the app/router entry points and return the exact code for:
+- route registration files
+- compare route
+- guide route
+- best route
+- ai-types route
+- calculator route
+- homepage route
+- any catch-all / fallback route
+
+Include full file paths and enough surrounding code.
+
+Search likely files such as:
+- App.tsx
+- main router files
+- Layout/router config files
+
+I need:
+1. file path
+2. exact route declarations
+3. any fallback/default redirect logic
+4. any slug parsing logic
+
+==================================================
+B. PAGE TEMPLATES
+==================================================
+
+Return the main page/template files for:
+- homepage
+- compare pages
+- guide pages
+- best pages
+- AI type pages
+- any reusable card/list component used to render page links
+
+For each:
+1. file path
+2. exact component export
+3. props/data source used
+4. code where links are rendered
+5. code where slug-based pages are looked up
+
+==================================================
+C. DATA SOURCES
+==================================================
+
+Return the exact paths and representative code/JSON blocks for all content/data sources that drive:
+- comparisons
+- guides
+- best pages
+- AI types
+- models/pricing/tool definitions
+- internal links / related links / featured links
+
+For each source:
+1. file path
+2. structure/schema
+3. slug fields
+4. title/name fields
+5. related link fields
+6. any route target fields
+
+==================================================
+D. ALL HARDCODED URLS / HARDCODED SLUGS
+==================================================
+
+Search the entire repo for:
+- "/compare/"
+- "/guides/"
+- "/best/"
+- "/ai-types/"
+- "claude-vs-gpt-cost"
+- "chatgpt-vs-cursor-cost"
+- "deepseek-vs-gpt4o-cost"
+- href=
+- to=
+- navigate(
+- router.push
+- window.location
+
+Return every match that appears to be a hardcoded internal destination.
+
+For each result include:
+1. file path
+2. matching line(s)
+3. 20–40 lines of surrounding context
+4. whether it looks correct, suspicious, or definitely wrong
+
+==================================================
+E. COMPARISON LINK GENERATION TRACE
+==================================================
+
+Trace all ways a user can reach comparison pages from anywhere on the site.
+
+I need every component or page that renders:
+- comparison cards
+- comparison lists
+- comparison CTAs
+- related comparisons
+- featured comparisons
+- homepage comparison links
+- footer comparison links
+- nav comparison links
+
+For each path into a comparison page:
+1. file path
+2. exact JSX/code
+3. where the slug comes from
+4. whether it is dynamic or hardcoded
+5. whether it can accidentally fall back to a single slug
+
+==================================================
+F. LOOKUP / FALLBACK LOGIC
+==================================================
+
+Find all places where a slug-based page is looked up from data.
+
+Search patterns like:
+- find(...)
+- slug ===
+- useParams
+- params.slug
+- fallback
+- || comparisons[0]
+- ?? comparisons[0]
+- default page
+- first entry
+- notFound / 404 behavior
+
+I need:
+1. compare-page lookup logic
+2. guide-page lookup logic
+3. best-page lookup logic
+4. ai-type-page lookup logic
+5. any fallback-to-first-item behavior
+6. any redirect-to-default behavior
+
+Return exact code and paths.
+
+==================================================
+G. NAVIGATION / INTERNAL LINK COMPONENTS
+==================================================
+
+Find reusable components that generate internal links, especially:
+- InternalLinks
+- related links
+- CTA blocks
+- homepage card grids
+- footer navigation
+- content section cards
+- any generic link-list component
+
+For each:
+1. file path
+2. exact code
+3. input props
+4. destination generation logic
+5. whether destinations are derived from slug or hardcoded strings
+
+==================================================
+H. COMPARISON DATA INTEGRITY SNAPSHOT
+==================================================
+
+Return a compact table for all comparison entries with:
+- slug
+- modelA
+- modelB
+- title if present
+- whether related links exist
+- whether any slug duplicates exist
+- whether any entry appears to be unreachable from the site
+- whether any entry is linked by homepage or internal components
+
+==================================================
+I. SUSPECT ISSUES LIST
+==================================================
+
+Based on the above, identify all likely site-wide issues, including:
+- hardcoded comparison URLs
+- cards pointing to one slug
+- incorrect fallback behavior
+- dead links
+- pages present in data but not linked anywhere
+- links rendered from wrong property
+- potential broken route/slug mismatches
+- components using example/demo data instead of live data
+
+For each suspected issue provide:
+1. issue name
+2. file path(s)
+3. evidence
+4. likely impact scope
+5. confidence level
+
+==================================================
+J. OUTPUT FORMAT
+==================================================
+
+Use this exact structure:
+
+A. Route map
+[file path]
+```tsx
+...code...
