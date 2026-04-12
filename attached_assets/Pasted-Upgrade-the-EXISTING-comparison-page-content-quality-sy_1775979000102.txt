@@ -1,0 +1,184 @@
+Upgrade the EXISTING comparison-page content quality system in this codebase.
+
+Critical constraints:
+- DO NOT change any URLs
+- DO NOT change any route paths
+- DO NOT rename slugs
+- DO NOT add, remove, or rewrite sitemap.xml entries
+- DO NOT modify sitemap generation logic
+- DO NOT modify robots.txt unless absolutely required for an unrelated compile fix
+- DO NOT change canonical URL behavior except to preserve existing canonical output
+- DO NOT break existing internal links
+- DO NOT remove any existing affiliate links or CTA destinations
+- DO NOT change page discoverability or indexing-related paths in any way
+
+Goal:
+Improve content quality, uniqueness, trust, and conversion performance of EXISTING comparison pages only, while preserving current indexing footprint.
+
+Scope:
+- Only extend and improve the current comparison page template/components/data rendering
+- Keep current page URLs exactly as they are
+- Keep current sitemap.xml exactly as it is
+- Keep all existing link destinations intact
+- Safe additive edits only
+
+Tasks:
+
+1. Audit current comparison page implementation
+- Find the existing comparison page component(s), template(s), and JSON/data source(s)
+- Identify where headings, intro copy, verdicts, tables, CTA blocks, internal links, and FAQ sections are rendered
+- Reuse existing architecture wherever possible
+
+2. Add new optional content fields to comparison page data schema
+Extend the schema with backward-compatible optional fields only. Do not require all pages to have all fields.
+
+Suggested additive fields:
+- quickVerdict
+- bestForA
+- bestForB
+- avoidA
+- avoidB
+- costBreakdown
+- qualityNotesA
+- qualityNotesB
+- cheapestStack
+- finalVerdict
+- editorialInsight
+- pricingLastUpdated
+- pricingSource
+- pricingNotes
+
+Requirements:
+- Backward compatible
+- Existing pages must still render if these fields are missing
+- No breaking changes to current JSON/data loading
+
+3. Upgrade comparison page rendering with higher-quality sections
+Without changing URLs or link targets, improve the page body by rendering these sections when data exists, and falling back to sensible defaults when it does not:
+
+A. Stronger intro
+- Replace weak/generic intro text with more specific, decision-oriented copy
+- Focus on cost, use case, tradeoffs, and avoiding overpayment
+
+B. Quick decision block near the top
+Render a compact decision section:
+- Choose Tool A if...
+- Choose Tool B if...
+- Quick verdict
+
+C. Side-by-side comparison table
+Ensure the page has a clearly structured comparison table for:
+- pricing
+- ideal user
+- strengths
+- weaknesses
+- free plan / trial if already available in data
+Do not invent fake pricing. If pricing data is unavailable, omit or use current existing values only.
+
+D. Real-world cost framing
+Add a section that explains likely monthly cost implications and when a user may be overpaying.
+Only use trustworthy existing data or clearly labeled estimated logic already supported by the codebase.
+Do not fabricate precise numbers.
+
+E. Output quality / workflow tradeoff section
+Add a section that compares:
+- quality consistency
+- editing effort
+- speed
+- best use case
+This should be useful, specific, and not generic fluff.
+
+F. When NOT to use each tool
+Add trust-building sections:
+- Avoid Tool A if...
+- Avoid Tool B if...
+
+G. Cheapest viable stack / alternative path
+Add a section that recommends a lower-cost setup when appropriate.
+This section must be framed carefully and should not break existing monetization blocks.
+
+H. Stronger final verdict
+End with a concise recommendation:
+- best for quality
+- best for budget
+- best hybrid option
+
+4. Preserve all existing links
+This is non-negotiable:
+- Keep all existing affiliate links exactly as they are
+- Keep all existing internal link href targets exactly as they are
+- Keep existing CTA destination URLs unchanged
+- You may improve surrounding copy, labels, hierarchy, or presentation, but do not alter the actual destinations
+
+5. Improve content uniqueness safely
+Reduce “templated / scaled content” signals without changing URLs:
+- Vary section phrasing based on page data
+- Use tool-specific wording where possible
+- Avoid repeating the same exact stock paragraph across every comparison page
+- Use helper functions for variation if needed
+- Keep tone editorial, useful, and grounded
+
+6. Preserve and improve existing internal links
+- Do not remove existing internal links
+- Do not change their destinations
+- If there is an existing related-links section, keep it
+- You may improve anchor text only if the target URL remains exactly the same
+- Prefer additive contextual internal links within the page body if safe
+
+7. Add pricing freshness display only if already supported safely
+If there is already a freshness utility or pricing metadata available, show:
+- Last updated X days ago
+- Optional source / note text
+But:
+- do not invent update dates
+- do not create fake freshness labels
+- do not break existing pricing UI
+- do not alter calculator logic
+
+8. FAQ quality upgrade
+Improve comparison page FAQs so they are more specific and useful.
+Keep existing FAQ schema support if present.
+Do not remove existing schema wiring.
+Focus FAQs on:
+- which tool is cheaper
+- which tool is better for a specific use case
+- whether the premium option is worth it
+- when a cheaper alternative is enough
+
+9. SEO safety constraints
+- Do not change slug structure
+- Do not change route registration paths
+- Do not change sitemap.xml
+- Do not add new comparison URLs in this task
+- Do not remove any indexed pages
+- Do not modify canonical rules except to preserve current output
+- Do not touch robots/indexing logic unless required for a compile fix unrelated to SEO behavior
+
+10. Quality bar
+Every upgraded comparison page should feel:
+- more specific
+- more decision-oriented
+- more useful for a buyer
+- more trustworthy
+- less generic / less AI-templated
+
+11. Implementation style
+- Prefer additive, minimal-risk edits
+- Reuse existing components where possible
+- Create small helper components if needed
+- Keep styling consistent with the current design system
+- Do not introduce heavy dependencies
+- Do not refactor unrelated parts of the app
+
+12. Deliverable
+After implementation, provide:
+- exact files changed
+- schema fields added
+- fallback behavior when new fields are missing
+- confirmation that URLs were not changed
+- confirmation that sitemap.xml was not changed
+- confirmation that all existing link destinations were preserved
+- examples of 2–3 comparison pages upgraded by the new rendering logic
+
+Important:
+This task is a content-quality upgrade only. Indexation surface must remain frozen.
