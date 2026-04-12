@@ -1,0 +1,105 @@
+Do a live-site audit of the top 10 money pages and produce screenshots in a ZIP.
+
+Critical constraints:
+- Do NOT modify any files
+- Do NOT change any URLs or slugs
+- Do NOT change sitemap.xml
+- Do NOT change sitemap generation logic
+- Do NOT change robots.txt
+- Do NOT change canonicals
+- Do NOT change indexing configuration
+- Do NOT commit anything
+- Audit only
+
+Goal:
+Audit the top 10 live revenue-focused pages for:
+- weak CTA copy
+- weak decision framing
+- misleading or low-intent labels
+- wrong internal link labels
+- obvious layout/content trust issues visible on the page
+
+Also take screenshots of each audited page and package them into a single ZIP for download.
+
+Important scope:
+Audit only LIVE routes and current production surfaces.
+Do not include dormant/secondary variants unless they are one of the URLs below.
+
+Top 10 pages to audit:
+1. /
+2. /compare
+3. /compare/claude-vs-gpt-cost
+4. /compare/deepseek-vs-gpt4o-cost
+5. /compare/gpt-4o-vs-gpt-4o-mini-cost
+6. /compare/writesonic-vs-jasper
+7. /best
+8. /best/best-ai-under-20-per-month
+9. /best/best-ai-for-coding-on-a-budget
+10. /guides/how-to-reduce-ai-cost
+
+What to evaluate on each page:
+1. CTA quality
+- Is the CTA specific?
+- Is the CTA visible high enough?
+- Does the label match the destination?
+- Is the CTA too generic like “Learn more” or “View all”?
+
+2. Decision framing
+- Does the page clearly tell the user what to choose?
+- Is there a clear “best for budget / best overall / avoid if” style framing?
+- Does the page feel generic or indecisive?
+
+3. Link-label truthfulness
+- Does the label imply one thing but go somewhere broader/narrower?
+- Does “Compare”, “View all”, “Best”, “Cheapest”, etc. match the actual destination?
+
+4. Trust / UX issues visible in screenshots
+- mismatched headings
+- confusing cards
+- weak hierarchy
+- obvious clutter
+- low-confidence wording
+- broken or awkward section titles
+- duplicated-looking blocks
+
+Screenshot requirements:
+- For each page, capture:
+  A. full-page screenshot
+  B. one focused screenshot of the first screen / above-the-fold section
+- Name files clearly using page slug and view type
+  Example:
+  - home-full.png
+  - home-above-fold.png
+  - compare-index-full.png
+  - compare-index-above-fold.png
+
+ZIP output requirements:
+- Put all screenshots into one ZIP file
+- Include a plain text or markdown audit report in the ZIP
+- The report should summarize issues page by page
+- The report should also include a prioritized “fix first” list
+
+Audit output format:
+Return:
+1. exact URLs audited
+2. screenshot filenames created
+3. ZIP filename/path
+4. a concise on-screen summary with:
+   - top 5 highest-priority issues
+   - which pages are strongest
+   - which pages need immediate improvement
+
+In the report inside the ZIP, use this structure per page:
+- URL
+- primary goal of page
+- CTA issues
+- messaging/decision issues
+- link-label issues
+- trust/UX issues
+- recommended fixes (copy/structure only; no URL/indexing changes)
+
+Important:
+- Do not change anything
+- Do not propose sitemap or indexing changes
+- Focus on revenue and conversion quality
+- Package screenshots + report into one ZIP

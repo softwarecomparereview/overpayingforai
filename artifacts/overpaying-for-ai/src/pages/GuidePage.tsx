@@ -52,6 +52,14 @@ export function GuidePage() {
         <p className="text-lg text-muted-foreground leading-relaxed">{guide.description}</p>
       </div>
 
+      {/* Early callout — fastest win or key recommendation, shown immediately after intro */}
+      {(guide as Record<string, unknown>).earlyCallout && (
+        <div className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 mb-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">Fastest win</p>
+          <p className="text-sm text-foreground font-medium leading-relaxed">{String((guide as Record<string, unknown>).earlyCallout)}</p>
+        </div>
+      )}
+
       {/* Content — with optional WinnerBlock injected after a specified section */}
       <div className="prose-like space-y-8 mb-10">
         {guide.sections.map((section, i) => (
@@ -112,7 +120,12 @@ export function GuidePage() {
         </div>
       )}
 
-      <SeoContentBlock />
+      {(() => {
+        const seoBlock = (guide as Record<string, unknown>).seoBlock as {
+          audience?: string; notFor?: string; pricingInsight?: string; alternatives?: string; verdict?: string;
+        } | undefined;
+        return <SeoContentBlock {...(seoBlock ?? {})} />;
+      })()}
       <InternalLinks links={guide.internalLinks} />
     </article>
   );

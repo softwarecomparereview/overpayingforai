@@ -169,7 +169,7 @@ export function Design2() {
                   onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "secondary" })}
                   className="inline-flex items-center justify-center border border-border hover:bg-muted text-foreground font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  Compare models
+                  See cheaper alternatives
                 </Link>
               </div>
             </div>
