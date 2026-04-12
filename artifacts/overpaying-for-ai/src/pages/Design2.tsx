@@ -552,7 +552,7 @@ export function Design2() {
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Compare models</p>
               <h2 className="text-3xl font-bold text-foreground">Popular comparisons</h2>
             </div>
-            <Link href="/compare/claude-vs-gpt-cost" className="text-sm text-primary hover:underline hidden sm:block font-medium">
+            <Link href="/compare" className="text-sm text-primary hover:underline hidden sm:block font-medium">
               View all →
             </Link>
           </div>

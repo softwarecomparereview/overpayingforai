@@ -78,7 +78,7 @@ export function GuidePage() {
             </section>
             {winnerBlockConfig && i === winnerBlockConfig.afterSectionIndex && (() => {
               const primary = getPrimaryCta(winnerBlockConfig.providerId, "winner", "/calculator");
-              const secondary = { href: "/compare/writesonic-vs-jasper", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable" as const, label: "Compare alternatives" };
+              const secondary = { href: "/compare", isExternal: false, isAffiliate: false, fallbackUsed: true, status: "unavailable" as const, label: "Compare alternatives" };
               return (
                 <WinnerBlock
                   badge={winnerBlockConfig.badge}

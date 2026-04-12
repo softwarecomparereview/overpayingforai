@@ -4,7 +4,7 @@ import { Link, useLocation } from "wouter";
 const navLinks = [
   { href: "/calculator", label: "Calculator" },
   { href: "/decision-engine", label: "Decision Engine" },
-  { href: "/compare/claude-vs-gpt-cost", label: "Comparisons" },
+  { href: "/compare", label: "Comparisons" },
   { href: "/ai-types", label: "AI Types" },
   { href: "/resources", label: "Resources" },
 ];

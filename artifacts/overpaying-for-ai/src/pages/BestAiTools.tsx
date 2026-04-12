@@ -44,7 +44,7 @@ const CHEAPEST_MODELS = [
     cost: "~$0.25/1M input tokens",
     bestFor: "Structured output, customer support",
     badge: "Best for structure",
-    href: "/compare/claude-vs-gpt-cost",
+    href: "/compare/claude-haiku-vs-gpt4o-mini",
   },
   {
     name: "GPT-4o mini",
