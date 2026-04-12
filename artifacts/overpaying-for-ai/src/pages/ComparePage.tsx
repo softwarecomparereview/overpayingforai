@@ -302,10 +302,12 @@ const FEATURED_SLUGS = [
 ];
 
 export function CompareIndex() {
+  const featuredSlugs = new Set(FEATURED_SLUGS.map((f) => f.slug));
   const featuredComparisons = FEATURED_SLUGS.map(({ slug, label }) => ({
     ...comparisons.find((c) => c.slug === slug),
     label,
   })).filter((c) => c.slug);
+  const remainingComparisons = comparisons.filter((c) => !featuredSlugs.has(c.slug));
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -342,9 +344,9 @@ export function CompareIndex() {
       </div>
 
       {/* Full list */}
-      <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">All comparisons</p>
+      <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">More comparisons</p>
       <div className="grid sm:grid-cols-2 gap-4">
-        {comparisons.map((c) => (
+        {remainingComparisons.map((c) => (
           <Link
             key={c.slug}
             href={`/compare/${c.slug}`}
