@@ -354,34 +354,34 @@
     "summary": "DeepSeek V3 benchmarks competitively with GPT-4o on coding and reasoning tasks while costing ~95% less per token. The main tradeoffs are latency, data privacy concerns, and occasional availability issues.",
     "pricingComparison": "GPT-4o: $5/1M input, $15/1M output. DeepSeek V3: $0.27/1M input, $1.10/1M output. At 1M output tokens: GPT-4o = $15, DeepSeek = $1.10.",
     "bestFor": {
-      "modelA": "Teams requiring enterprise reliability, US data residency, multimodal support, and tight OpenAI ecosystem integration.",
-      "modelB": "Cost-sensitive developers, startups, researchers, and projects where quality is more important than data locality."
+      "modelA": "Cost-sensitive developers, startups, researchers, and projects where quality is more important than data locality.",
+      "modelB": "Teams requiring enterprise reliability, US data residency, multimodal support, and tight OpenAI ecosystem integration."
     },
     "cheapestOption": "deepseek-v3",
     "cheapestOptionNote": "DeepSeek V3 is one of the best quality-per-dollar models available in 2025.",
     "recommendation": "If data privacy and US residency aren't constraints, DeepSeek V3 is a compelling alternative to GPT-4o for coding and analysis. Run your own quality benchmarks on your specific task before committing.",
     "quickVerdict": "DeepSeek V3 matches GPT-4o quality on many tasks at ~95% lower cost. The blocker is data privacy — not performance.",
     "bestForA": [
-      "Teams with strict data privacy requirements, US data residency needs, or compliance obligations",
-      "Multimodal workflows requiring image analysis, vision, or DALL-E generation",
-      "Organizations needing guaranteed SLAs, uptime commitments, and enterprise support"
-    ],
-    "bestForB": [
       "Cost-sensitive developers and startups where token costs are a real constraint",
       "Projects involving open-source work, public data, or non-sensitive information",
       "Researchers who want to self-host the open-weight model on their own infrastructure"
     ],
-    "avoidA": [
-      "Avoid GPT-4o if your primary concern is cost and your data isn't sensitive — you're paying a 14x premium for reliability and ecosystem benefits",
-      "Avoid it for high-volume batch processing where cost is the dominant factor"
+    "bestForB": [
+      "Teams with strict data privacy requirements, US data residency needs, or compliance obligations",
+      "Multimodal workflows requiring image analysis, vision, or DALL-E generation",
+      "Organizations needing guaranteed SLAs, uptime commitments, and enterprise support"
     ],
-    "avoidB": [
+    "avoidA": [
       "Avoid DeepSeek for any sensitive, proprietary, or regulated data — the company is China-based and subject to different legal frameworks",
       "Avoid it for production systems requiring guaranteed uptime — availability has been inconsistent compared to OpenAI"
     ],
+    "avoidB": [
+      "Avoid GPT-4o if your primary concern is cost and your data isn't sensitive — you're paying a 14x premium for reliability and ecosystem benefits",
+      "Avoid it for high-volume batch processing where cost is the dominant factor"
+    ],
     "costBreakdown": "At 10M output tokens/month: GPT-4o costs $150. DeepSeek V3 costs $11. For a startup running a coding assistant or research pipeline at scale, that's a $1,676/year difference per 10M monthly tokens. The savings are real — but only matter if your use case doesn't have data sensitivity requirements.",
-    "qualityNotesA": "GPT-4o leads on multimodal tasks, has broader API tooling, and consistently higher availability. On pure text reasoning and coding, the quality gap vs DeepSeek V3 is narrower than the price gap suggests. Enterprise features — audit logs, SLAs, compliance certifications — are exclusively GPT-4o territory.",
-    "qualityNotesB": "DeepSeek V3 benchmarks near GPT-4o on coding and math tasks. For non-sensitive workloads, it's a credible substitute. Weaknesses: higher latency, occasional rate limiting, and no multimodal support. Self-hosting solves the privacy issue but requires substantial GPU infrastructure.",
+    "qualityNotesA": "DeepSeek V3 benchmarks near GPT-4o on coding and math tasks. For non-sensitive workloads, it's a credible substitute. Weaknesses: higher latency, occasional rate limiting, and no multimodal support. Self-hosting solves the privacy issue but requires substantial GPU infrastructure.",
+    "qualityNotesB": "GPT-4o leads on multimodal tasks, has broader API tooling, and consistently higher availability. On pure text reasoning and coding, the quality gap vs DeepSeek V3 is narrower than the price gap suggests. Enterprise features — audit logs, SLAs, compliance certifications — are exclusively GPT-4o territory.",
     "cheapestStack": "For non-sensitive, high-volume use cases: DeepSeek V3 API. For anything requiring data privacy: GPT-4o mini at $0.15/1M input — still 97% cheaper than GPT-4o with a US data residency guarantee.",
     "finalVerdict": {
       "quality": "GPT-4o for reliability, multimodal, and compliance needs — DeepSeek V3 for pure text/code quality at low cost",

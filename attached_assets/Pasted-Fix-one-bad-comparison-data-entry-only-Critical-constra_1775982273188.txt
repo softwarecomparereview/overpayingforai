@@ -1,0 +1,68 @@
+Fix one bad comparison data entry only.
+
+Critical constraints:
+- Do NOT change any URLs
+- Do NOT change any slugs
+- Do NOT change any routes
+- Do NOT change sitemap.xml
+- Do NOT change sitemap generation
+- Do NOT change robots.txt
+- Do NOT change canonical logic
+- Do NOT change any components unless absolutely required for a syntax fix
+- Do NOT change ComparisonSections.tsx
+- Do NOT change ComparePage.tsx
+- Do NOT change any affiliate links or internal link destinations
+
+Goal:
+Fix the single bad comparisons.json entry:
+`deepseek-vs-gpt4o-cost`
+
+Context:
+Audit confirmed that this one entry has a complete A/B semantic swap across:
+- bestFor.modelA / bestFor.modelB
+- bestForA / bestForB
+- avoidA / avoidB
+- qualityNotesA / qualityNotesB
+
+Current intended model mapping:
+- modelA = deepseek-v3
+- modelB = gpt-4o
+
+Required outcome:
+All A-side content must describe DeepSeek V3.
+All B-side content must describe GPT-4o.
+
+Tasks:
+1. Open:
+`artifacts/overpaying-for-ai/src/data/comparisons.json`
+
+2. Locate the object with:
+`"slug": "deepseek-vs-gpt4o-cost"`
+
+3. Correct this entry only:
+- `bestFor.modelA` should describe DeepSeek V3
+- `bestFor.modelB` should describe GPT-4o
+- `bestForA` should list valid “choose DeepSeek V3 if…” use cases
+- `bestForB` should list valid “choose GPT-4o if…” use cases
+- `avoidA` should list valid “avoid DeepSeek V3 if…” reasons
+- `avoidB` should list valid “avoid GPT-4o if…” reasons
+- `qualityNotesA` should describe DeepSeek V3 quality/limitations
+- `qualityNotesB` should describe GPT-4o quality/strengths
+
+4. Preserve all other fields in that object unless they are also clearly reversed.
+Do not rewrite unrelated entries.
+
+5. After editing, validate semantically:
+- left column / A = DeepSeek V3
+- right column / B = GPT-4o
+- no bullet under DeepSeek mentions “Avoid GPT-4o…”
+- no bullet under GPT-4o mentions “Avoid DeepSeek…”
+
+6. Return:
+- exact file changed
+- confirmation that only one entry was edited
+- confirmation that no URLs/slugs/sitemap/routes/components were changed
+- the final corrected JSON block for `deepseek-vs-gpt4o-cost`
+
+Quality standard:
+Be precise and minimal. This is a surgical data correction, not a content rewrite project.
