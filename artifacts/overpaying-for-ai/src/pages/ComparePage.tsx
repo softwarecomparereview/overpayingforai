@@ -11,8 +11,33 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
+import {
+  QuickDecisionBlock,
+  CostBreakdownSection,
+  QualityTradeoffSection,
+  AvoidSection,
+  CheapestStackSection,
+  FinalVerdictSection,
+  EditorialInsight,
+} from "@/components/comparison/ComparisonSections";
 
-const comparisons = comparisonsData as typeof comparisonsData;
+type ComparisonEntry = typeof comparisonsData[number] & {
+  quickVerdict?: string;
+  bestForA?: string[];
+  bestForB?: string[];
+  avoidA?: string[];
+  avoidB?: string[];
+  costBreakdown?: string;
+  qualityNotesA?: string;
+  qualityNotesB?: string;
+  cheapestStack?: string;
+  finalVerdict?: { quality?: string; budget?: string; hybrid?: string };
+  editorialInsight?: string;
+  pricingSource?: string;
+  pricingNotes?: string;
+};
+
+const comparisons = comparisonsData as ComparisonEntry[];
 const models = modelsData as AIModel[];
 
 export function ComparePage() {
@@ -34,6 +59,9 @@ export function ComparePage() {
   const cheapest = models.find((m) => m.id === page.cheapestOption);
   const freshestDate = [modelA?.last_updated, modelB?.last_updated].filter(Boolean)[0];
   const stale = freshestDate ? isPricingStale(freshestDate) : false;
+
+  const nameA = modelA?.name ?? page.modelA;
+  const nameB = modelB?.name ?? page.modelB;
 
   const seoTitle = generateTitle(page.title, "compare");
   const seoDesc = generateMetaDescription(page.title, "compare");
@@ -59,6 +87,15 @@ export function ComparePage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-2">Summary</h2>
         <p className="text-foreground leading-relaxed">{page.summary}</p>
       </div>
+
+      {/* Quick Decision Block — high up, high conversion value */}
+      <QuickDecisionBlock
+        quickVerdict={page.quickVerdict}
+        nameA={nameA}
+        nameB={nameB}
+        bestForA={page.bestForA}
+        bestForB={page.bestForB}
+      />
 
       {/* Winner Block — derived from cheapestOption in comparison data */}
       {cheapest && (() => {
@@ -107,6 +144,9 @@ export function ComparePage() {
         )}
       </section>
 
+      {/* Real-World Cost Breakdown */}
+      <CostBreakdownSection costBreakdown={page.costBreakdown} />
+
       {/* Cheapest Option */}
       {cheapest && (() => {
         const cheapestProviderId = modelIdToProviderId(cheapest.id);
@@ -146,6 +186,25 @@ export function ComparePage() {
         );
       })()}
 
+      {/* Output Quality & Workflow Tradeoffs */}
+      <QualityTradeoffSection
+        nameA={nameA}
+        nameB={nameB}
+        qualityNotesA={page.qualityNotesA}
+        qualityNotesB={page.qualityNotesB}
+      />
+
+      {/* When NOT to use each tool */}
+      <AvoidSection
+        nameA={nameA}
+        nameB={nameB}
+        avoidA={page.avoidA}
+        avoidB={page.avoidB}
+      />
+
+      {/* Cheapest Viable Alternative */}
+      <CheapestStackSection cheapestStack={page.cheapestStack} />
+
       {/* Recommendation */}
       <section className="mb-10">
         <h2 className="text-xl font-bold mb-4">Our Recommendation</h2>
@@ -168,6 +227,9 @@ export function ComparePage() {
         </div>
       </section>
 
+      {/* Final Verdict */}
+      <FinalVerdictSection finalVerdict={page.finalVerdict} />
+
       {/* FAQ */}
       {page.faq && page.faq.length > 0 && (
         <section className="mb-10">
@@ -182,6 +244,12 @@ export function ComparePage() {
           </div>
         </section>
       )}
+
+      {/* Editorial Insight — unique per page, last content before SEO blocks */}
+      <EditorialInsight
+        editorialInsight={page.editorialInsight}
+        pricingNotes={page.pricingNotes}
+      />
 
       <SeoContentBlock />
       <InternalLinks links={page.internalLinks} />
