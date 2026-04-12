@@ -308,7 +308,7 @@ export function Home() {
             <div className="grid sm:grid-cols-3 gap-3">
               {[
                 { label: "Claude", benefit: "Cheapest for many coding and writing workflows", href: "/compare/claude-vs-gpt-cost" },
-                { label: "Gemini", benefit: "Balanced pricing and broad capability", href: "/compare/gemini-vs-gpt-cost" },
+                { label: "Gemini", benefit: "Balanced pricing and broad capability", href: "/compare/gemini-vs-gpt4o-cost" },
                 { label: "ChatGPT", benefit: "Default choice when you want the familiar stack", href: "/compare/chatgpt-vs-cursor-cost" },
               ].map((option) => (
                 <div key={option.label} className="rounded-xl border border-border p-4">
@@ -424,7 +424,7 @@ export function Home() {
             <div className="flex flex-wrap gap-2">
               {[
                 { label: "Claude", href: "/compare/claude-vs-gpt-cost" },
-                { label: "Gemini", href: "/compare/gemini-vs-gpt-cost" },
+                { label: "Gemini", href: "/compare/gemini-vs-gpt4o-cost" },
                 { label: "ChatGPT", href: "/compare/chatgpt-vs-cursor-cost" },
               ].map((option) => (
                 <Link key={option.label} href={option.href} className="text-sm rounded-full border border-border px-3 py-2 hover:bg-muted/60 transition-colors">

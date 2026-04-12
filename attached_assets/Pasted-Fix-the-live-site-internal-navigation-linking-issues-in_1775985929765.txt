@@ -1,0 +1,62 @@
+Fix the live-site internal navigation/linking issues in one pass.
+
+Critical constraints:
+- Do NOT change any URLs or slugs that already exist
+- Do NOT change sitemap.xml
+- Do NOT change sitemap generation logic
+- Do NOT change robots.txt
+- Do NOT change canonicals
+- Do NOT change indexing configuration
+- Do NOT add or remove routes
+- Do NOT change affiliate destinations unless the current destination is clearly the wrong internal page for the label
+- Do NOT touch dormant/secondary design variants unless explicitly listed below
+
+Scope:
+Fix LIVE user-facing link generation issues only in:
+- src/components/Layout.tsx
+- src/pages/Design2.tsx
+- src/pages/BestAiTools.tsx
+- src/pages/GuidePage.tsx
+
+Do not edit Design1.tsx, Design3.tsx, or Home.tsx in this pass.
+
+Required fixes:
+
+1. Layout.tsx
+- Change the nav item labeled "Comparisons" so it links to `/compare` instead of `/compare/claude-vs-gpt-cost`
+- Fix its active-state logic so it highlights for:
+  - `/compare`
+  - `/compare/:slug`
+- Do not change other nav items
+
+2. Design2.tsx
+- In the "Popular comparisons" section, change the header-level "View all →" link to `/compare`
+- Keep the individual comparison cards dynamic by slug
+- Do not change valid individual comparison card destinations
+- Review the homepage comparison-related CTAs and only change ones whose label implies “all comparisons” but currently points to one specific comparison
+
+3. BestAiTools.tsx
+- Fix the Claude Haiku card/link mismatch:
+  - if the card is labeled for Claude Haiku, it should link to the correct existing comparison slug `/compare/claude-haiku-vs-gpt4o-mini`
+- Do not alter unrelated cards that already point correctly
+
+4. GuidePage.tsx
+- Inspect the WinnerBlock secondary CTA currently hardcoded to `/compare/writesonic-vs-jasper`
+- Replace this with a safer generic internal comparison destination only if the current hardcoded destination is unrelated to the guide topic
+- Preferred fallback: `/compare`
+- Keep behavior minimal and safe; do not invent new slugs
+
+5. Validation
+After edits, confirm:
+- "Comparisons" nav goes to `/compare`
+- "Comparisons" nav is highlighted on `/compare` and all `/compare/:slug` pages
+- "View all →" on homepage comparisons goes to `/compare`
+- Claude Haiku card points to `/compare/claude-haiku-vs-gpt4o-mini`
+- No sitemap/indexing config changed
+- No existing slugs changed
+- No components outside the listed live files changed unless required for a compile fix
+
+Return:
+- exact files changed
+- before/after snippets for each fix
+- confirmation that sitemap/indexing config was untouched
