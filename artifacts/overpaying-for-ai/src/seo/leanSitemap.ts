@@ -26,6 +26,8 @@ export const LEAN_SITEMAP_ROUTES: SitemapEntry[] = [
   { path: "/guides/cheapest-ai-writing-tools", priority: "0.7", changefreq: "weekly" },
   { path: "/guides/best-ai-tools-under-20", priority: "0.7", changefreq: "weekly" },
   { path: "/guides/is-jasper-worth-it", priority: "0.7", changefreq: "weekly" },
+  { path: "/models", priority: "0.9", changefreq: "weekly" },
+  { path: "/decision-engine", priority: "0.8", changefreq: "weekly" },
 ];
 
 export const CANONICAL_SITE_URL = "https://overpayingforai.com";

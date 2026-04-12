@@ -3,6 +3,10 @@ import { trackFeatureOpen } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
+import { PricingFreshnessBadge } from "@/components/pricing/PricingFreshnessBadge";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generatePricingInsights } from "@/utils/insights";
 
 type Step = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -96,6 +100,20 @@ function ResultCard({
           Free tier available
         </div>
       )}
+    </div>
+  );
+}
+
+function DecisionInsightsFooter() {
+  const snapshot = getLivePricingSnapshot();
+  const insights = generatePricingInsights(snapshot);
+  return (
+    <div className="border-t border-border pt-8 space-y-6">
+      <PricingFreshnessBadge lastUpdated={snapshot.lastUpdated} />
+      <LatestCostInsights insights={insights.slice(0, 3)} title="AI Cost Insights" />
+      <p className="text-xs text-muted-foreground">
+        Prices are estimates based on the latest available provider data. Savings are directional estimates, not provider quotes.
+      </p>
     </div>
   );
 }
@@ -232,7 +250,7 @@ export function DecisionEngine() {
             <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mb-8">
             <button
               onClick={reset}
               className="text-sm border border-border rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
@@ -247,6 +265,8 @@ export function DecisionEngine() {
               Calculate exact cost →
             </Link>
           </div>
+
+          <DecisionInsightsFooter />
         </div>
       )}
     </div>

@@ -23,6 +23,7 @@ import { AiTypeIndex } from "@/pages/AiTypeIndex";
 import { AiTypePage } from "@/pages/AiTypePage";
 import { Terms } from "@/pages/Terms";
 import { MediaKit } from "@/pages/MediaKit";
+import { ModelsPage } from "@/pages/ModelsPage";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -72,6 +73,7 @@ function Router() {
                 <Route path="/best/:slug" component={BestPage} />
                 <Route path="/guides" component={GuideIndex} />
                 <Route path="/guides/:slug" component={GuidePage} />
+                <Route path="/models" component={ModelsPage} />
                 <Route path="/terms" component={Terms} />
                 <Route path="/media-kit" component={MediaKit} />
                 <Route component={NotFound} />

@@ -10,9 +10,61 @@ import { getSavingsSummary, formatSavingsLabel } from "@/utils/savingsEngine";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
+import { PricingFreshnessBadge } from "@/components/pricing/PricingFreshnessBadge";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generatePricingInsights, generateCategoryInsights } from "@/utils/insights";
+import { getCheapestModel } from "@/utils/pricingEngine";
+import type { ModelCategory } from "@/types/pricing";
 
 const bestOf = bestOfData as typeof bestOfData;
 const models = modelsData as AIModel[];
+
+function BestPageFreshness() {
+  const snapshot = getLivePricingSnapshot();
+  return <PricingFreshnessBadge lastUpdated={snapshot.lastUpdated} />;
+}
+
+const CATEGORY_MAP: Record<string, import("@/types/pricing").ModelCategory> = {
+  coding: "coding",
+  writing: "writing",
+  research: "research",
+  general: "general",
+  productivity: "productivity",
+  "customer-support": "customer-support",
+};
+
+function BestPageInsights({ category }: { category: string }) {
+  const snapshot = getLivePricingSnapshot();
+  const normalizedCat = CATEGORY_MAP[category.toLowerCase()];
+  const catKey: import("@/types/pricing").ModelCategory = normalizedCat ?? "general";
+  const insights = generateCategoryInsights(snapshot);
+  const catInsights = insights[catKey] ?? [];
+  const cheapest = getCheapestModel({ category: catKey, snapshot });
+  const globalInsights = generatePricingInsights(snapshot);
+
+  const combined = [
+    ...(cheapest ? [`Cheapest ${catKey} model right now: ${cheapest.displayName} at $${(cheapest.outputCostPer1k * 1000).toFixed(4)}/1M output tokens.`] : []),
+    ...catInsights,
+    ...globalInsights,
+  ].slice(0, 4);
+
+  if (combined.length === 0) return null;
+
+  return (
+    <div className="mt-8 mb-6">
+      <LatestCostInsights insights={combined} title="Latest Cost Data" />
+      <div className="mt-3 flex flex-wrap gap-3">
+        <a href="/models" className="text-sm text-primary font-medium hover:underline">
+          See full model pricing table →
+        </a>
+        <a href="/calculator" className="text-sm text-muted-foreground hover:underline">
+          Calculate your cost
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export function BestPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -50,6 +102,7 @@ export function BestPage() {
           </span>
           <span className="text-xs text-muted-foreground">Updated {page.updatedAt}</span>
         </div>
+        <BestPageFreshness />
         <h1 className="text-3xl font-bold tracking-tight mb-3">{page.title}</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
       </div>
@@ -59,7 +112,7 @@ export function BestPage() {
       </div>
 
       {/* Default recommendation callout — decisive one-liner for the top pick */}
-      {(page as Record<string, unknown>).defaultRecommendation && (
+      {!!(page as Record<string, unknown>).defaultRecommendation && (
         <div className="border border-emerald-200 bg-emerald-50 rounded-lg px-5 py-4 mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-1.5">Default recommendation</p>
           <p className="text-sm text-foreground font-medium leading-relaxed">{String((page as Record<string, unknown>).defaultRecommendation)}</p>
@@ -71,7 +124,7 @@ export function BestPage() {
         <div className="mb-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Pick by use case</p>
           <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
-            {(page as Record<string, unknown[]>).chooser.map((row, i) => {
+            {(page as unknown as Record<string, unknown[]>).chooser.map((row, i) => {
               const item = row as { persona: string; pick: string; reason: string };
               return (
                 <div key={i} className="flex items-start gap-4 px-5 py-4 bg-white hover:bg-muted/30 transition-colors">
@@ -205,6 +258,8 @@ export function BestPage() {
         );
       })()}
 
+      <BestPageInsights category={page.category} />
+
       <InternalLinks links={page.internalLinks} />
     </article>
   );
@@ -235,12 +290,14 @@ export function BestIndex() {
           </Link>
         ))}
       </div>
+
       <InternalLinks
         links={[
           { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
           { href: "/best/best-ai-for-coding-on-a-budget", text: "Best for Coding" },
           { href: "/best/best-ai-for-writing-on-a-budget", text: "Best for Writing" },
           { href: "/calculator", text: "AI Cost Calculator" },
+          { href: "/models", text: "All model pricing" },
           { href: "/ai-types", text: "Browse AI Types" },
           { href: "/compare", text: "Compare Models" },
         ]}
