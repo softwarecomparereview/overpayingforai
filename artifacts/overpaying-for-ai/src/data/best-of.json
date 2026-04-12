@@ -6,6 +6,7 @@
     "metaDescription": "Best AI coding tools on a budget in 2025. Compare Cursor, GitHub Copilot, Claude, and GPT-4o for developers who don't want to overpay.",
     "category": "coding",
     "updatedAt": "2025-04-01",
+    "defaultRecommendation": "Most developers should start with Cursor Free and only upgrade when they hit real workflow limits. If you code professionally and want unlimited frontier access, Cursor Pro at $20/month pays for itself in under a day.",
     "intro": "Most developers overpay for AI coding tools by defaulting to the most marketed option. The right pick depends on your workflow: are you in an IDE all day, or do you mostly generate code in a chat interface? Here are the best options ranked by value.",
     "picks": [
       {
@@ -76,7 +77,14 @@
     "metaDescription": "Best AI tools under $20/month in 2025. Ranked by quality, features, and actual value. Find the right AI subscription without overpaying.",
     "category": "budget",
     "updatedAt": "2025-04-01",
-    "intro": "At $20/month, you have access to the best consumer AI tools available. The question is which one fits your workflow. Here's how the top options stack up.",
+    "intro": "There is no universal winner at $20/month — the right pick depends entirely on what you use AI for. At this price point, five genuinely excellent options exist. The goal is to match one to your primary use case, not to find the \"best\" tool in isolation.",
+    "chooser": [
+      { "persona": "You write code", "pick": "Cursor Pro", "reason": "Unlimited Claude 3.5 Sonnet and GPT-4o in an IDE built for coding" },
+      { "persona": "You write content or do complex research", "pick": "Claude Pro", "reason": "Best reasoning and prose quality of any $20 subscription" },
+      { "persona": "You need a general-purpose assistant", "pick": "ChatGPT Plus", "reason": "Most versatile — handles browsing, images (DALL-E), and plugins" },
+      { "persona": "Your primary need is sourced, accurate information", "pick": "Perplexity Pro", "reason": "Purpose-built for research with real-time citations" },
+      { "persona": "You're in the Google ecosystem", "pick": "Google One AI Premium", "reason": "Bundles Gemini Advanced with 2TB Drive — not just AI" }
+    ],
     "picks": [
       {
         "rank": 1,

@@ -60,6 +60,22 @@
     "metaDescription": "How to reduce AI costs in 2025. Practical strategies for cutting ChatGPT, Claude, and API spending by 60-80% without sacrificing quality.",
     "updatedAt": "2025-04-01",
     "readTime": "8 min read",
+    "earlyCallout": "Route simple tasks to GPT-4o mini, Claude Haiku, or Gemini Flash before changing prompts or infrastructure. For most workloads, model routing alone cuts costs 60–80% with no noticeable quality drop — and you can implement a basic two-tier system in a day.",
+    "winnerBlock": {
+      "badge": "Next step",
+      "providerId": "",
+      "title": "See your real savings",
+      "rationale": "Run your usage numbers through the calculator to see exactly how much you'd save by switching models. Most teams find the answer in under two minutes.",
+      "primaryCtaLabel": "Calculate my savings",
+      "afterSectionIndex": 1
+    },
+    "seoBlock": {
+      "audience": "Developers and teams spending $50+/month on AI APIs or subscriptions who want to cut costs without switching to lower-quality models. Most useful if you're defaulting to GPT-4o or Claude 3.5 Sonnet for all tasks, regardless of complexity.",
+      "notFor": "Teams with strict data residency, enterprise SLAs, or compliance requirements that constrain model choice. Routing infrastructure also requires engineering effort — if you have no bandwidth for that, start with the subscription-vs-API audit (Strategy 4) first.",
+      "pricingInsight": "The gap between premium and budget models has widened. GPT-4o costs $15/1M output tokens; GPT-4o mini costs $0.60. For tasks where quality is equivalent — classification, summarization, short Q&A — routing to mini is a direct cost cut with zero quality trade-off.",
+      "alternatives": "If full routing infrastructure is too complex, start smaller: audit your subscription vs API cost (Strategy 4) or compress prompts (Strategy 2). Both require no engineering and can deliver measurable savings within a week.",
+      "verdict": "Model routing is the single highest-leverage cost reduction for most teams. Start with a two-tier system — route all requests to a cheap model first, escalate when quality falls short. Use the calculator to estimate savings before building anything."
+    },
     "sections": [
       {
         "heading": "The Problem: Most People Use Expensive Models for Everything",

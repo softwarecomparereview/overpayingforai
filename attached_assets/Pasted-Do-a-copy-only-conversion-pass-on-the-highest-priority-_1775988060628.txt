@@ -1,0 +1,202 @@
+Do a copy-only conversion pass on the highest-priority live pages.
+
+Critical constraints:
+- Do NOT change any URLs
+- Do NOT change any slugs
+- Do NOT change sitemap.xml
+- Do NOT change sitemap generation logic
+- Do NOT change robots.txt
+- Do NOT change canonical logic
+- Do NOT change indexing configuration
+- Do NOT add or remove routes
+- Do NOT change affiliate destinations
+- Do NOT change data models unless absolutely required for copy fields already supported
+- Do NOT redesign the site visually
+- Keep styling and layout system consistent
+- Focus on copy, hierarchy, headings, CTA wording, and section framing only
+
+Goal:
+Improve conversion clarity and decision framing on the top live money pages using the screenshot audit findings.
+
+Pages in scope:
+1. `/` → primary homepage (`Design2`)
+2. `/compare` → comparison index
+3. `/guides/how-to-reduce-ai-cost`
+4. `/best/best-ai-for-coding-on-a-budget`
+5. `/best/best-ai-under-20-per-month`
+
+Out of scope:
+- Do not touch Design1, Design3, or /home-v1
+- Do not change comparison detail page templates in this pass
+- Do not touch sitemap/indexing infrastructure
+
+What to improve by page:
+
+==================================================
+1. Homepage (`/`)
+==================================================
+
+Problems to solve:
+- Secondary CTA “Compare models” is too vague
+- Hero is strong but can be more decision-oriented
+- Top-of-page copy should make the user’s next action more obvious
+
+Required changes:
+- Change the secondary CTA from “Compare models” to a clearer lower-cost outcome-oriented label such as:
+  - “See cheaper alternatives”
+  or equivalent wording that is more specific than “Compare models”
+- Tighten the hero support copy so it emphasizes:
+  - compare pricing
+  - estimate monthly spend
+  - find cheaper alternatives before overpaying
+- Keep the primary CTA calculator-first
+- Do not alter the page’s core structure, sections, or destinations
+
+Quality target:
+The homepage hero should make the user immediately understand:
+- what this site helps them do
+- what action to take first
+- that this site is about saving money, not browsing tools generically
+
+==================================================
+2. Compare index (`/compare`)
+==================================================
+
+Problems to solve:
+- The page is clean but passive
+- It does not guide the user on where to start
+- It lacks prioritization / “start here” framing
+
+Required changes:
+- Add a short intro block above the comparison grid that explains:
+  - this page helps users choose the cheapest model/plan for common AI decisions
+  - where to start if they want the fastest answer
+- Add lightweight prioritization copy above or near the grid, such as:
+  - most popular comparisons
+  - best starting points
+  - best for API cost cuts
+Do this with copy and simple existing layout patterns only; do not introduce a large new component system
+
+- If possible within current structure, lightly feature 3 recommended starting comparisons:
+  - subscription vs API
+  - GPT-4o vs GPT-4o mini
+  - DeepSeek vs GPT-4o
+But do not change URLs or invent new slugs
+
+Quality target:
+The page should feel like a guided entry point, not just a neutral grid.
+
+==================================================
+3. Guide page: `/guides/how-to-reduce-ai-cost`
+==================================================
+
+Problems to solve:
+- Too article-like
+- Too text-heavy before action
+- Weak conversion path
+- Editorial block is low-energy and generic
+
+Required changes:
+- Add a strong early callout near the top, before or immediately after the intro, with a practical immediate takeaway like:
+  - “Fastest win: route simple tasks to GPT-4o mini, Claude Haiku, or Gemini Flash before changing prompts or infrastructure.”
+- Add one stronger in-content CTA block after an early strategy section (for example after strategy 2 or 3), pointing users toward:
+  - calculator
+  - compare index
+  - decision engine
+Use existing CTA/block patterns if available
+
+- Rewrite / tighten the editorial context block so it is more decision-focused and less generic.
+Replace weak generic framing with more specific scenario guidance:
+  - who this is for
+  - when this works best
+  - when not to do this first
+  - what to do next
+
+Quality target:
+The guide should still read like a useful article, but it must drive users toward action much earlier.
+
+==================================================
+4. Best page: `/best/best-ai-for-coding-on-a-budget`
+==================================================
+
+Problems to solve:
+- Strong page, but the top recommendation framing is not decisive enough
+- “Best overall” block could work harder
+- CTAs are functional but not persuasive enough
+
+Required changes:
+- Add a sharper one-line recommendation near the top under the title or intro, along the lines of:
+  - “Most developers should start with Cursor Free and only upgrade when they hit real workflow limits.”
+Use equivalent wording if needed, but keep it clear and recommendation-oriented
+
+- Strengthen CTA wording where reasonable while preserving destinations:
+  examples of improved intent:
+  - “Check my real monthly cost”
+  - “See cheapest setup”
+  - “Compare alternatives”
+Do not force these exact phrases everywhere; improve only where the current wording is vague or generic
+
+- Make the “Best overall” block feel more like a decision shortcut, not just a featured card
+
+Quality target:
+A user should understand the default recommended choice within seconds.
+
+==================================================
+5. Best page: `/best/best-ai-under-20-per-month`
+==================================================
+
+Problems to solve:
+- Good page, but it needs stronger segmentation by user type
+- It reads as a ranked list more than a decision page
+
+Required changes:
+- Add a short chooser-style recommendation block near the top, helping users self-select by use case, for example:
+  - Developers → Cursor Pro
+  - Writing/research → Claude Pro
+  - General use → ChatGPT Plus
+  - Research → Perplexity Pro
+Use current page style and existing content; do not add complex UI
+
+- Tighten intro copy so users understand there is no single universal winner under $20/month
+- Preserve the ranked list, but make the page feel more like a guided chooser
+
+Quality target:
+Users should quickly identify which option fits their use case, not just see a ranking.
+
+==================================================
+General writing rules
+==================================================
+
+- Be more decisive
+- Use plain language
+- Prefer recommendation language over neutral catalog language
+- Reduce generic filler
+- Preserve factual accuracy
+- Do not fabricate pricing or claims
+- Do not introduce unverified performance claims
+- Keep changes minimal-risk and high-signal
+
+==================================================
+Implementation guidance
+==================================================
+
+- Reuse existing page structure/components wherever possible
+- Make additive or light editorial edits only
+- Keep visual style consistent
+- Avoid heavy refactors
+- Avoid touching unrelated files
+- If any page content is driven by JSON/content files, edit the relevant content source rather than hacking around it in the component, provided this remains low risk
+
+==================================================
+Deliverable
+==================================================
+
+After changes, return:
+1. exact files changed
+2. what copy/CTA/hierarchy was changed on each page
+3. confirmation that:
+   - no URLs changed
+   - no slugs changed
+   - no sitemap/indexing/canonical/robots changes were made
+   - no routes changed
+4. any areas you intentionally left untouched for safety

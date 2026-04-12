@@ -54,9 +54,40 @@ export function BestPage() {
         <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
       </div>
 
-      <div className="bg-muted/50 border border-border rounded-lg p-5 mb-10 text-sm text-foreground leading-relaxed">
+      <div className="bg-muted/50 border border-border rounded-lg p-5 mb-6 text-sm text-foreground leading-relaxed">
         {page.intro}
       </div>
+
+      {/* Default recommendation callout — decisive one-liner for the top pick */}
+      {(page as Record<string, unknown>).defaultRecommendation && (
+        <div className="border border-emerald-200 bg-emerald-50 rounded-lg px-5 py-4 mb-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-1.5">Default recommendation</p>
+          <p className="text-sm text-foreground font-medium leading-relaxed">{String((page as Record<string, unknown>).defaultRecommendation)}</p>
+        </div>
+      )}
+
+      {/* Chooser — self-select by use case (e.g. under-$20 page) */}
+      {Array.isArray((page as Record<string, unknown>).chooser) && (
+        <div className="mb-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Pick by use case</p>
+          <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+            {(page as Record<string, unknown[]>).chooser.map((row, i) => {
+              const item = row as { persona: string; pick: string; reason: string };
+              return (
+                <div key={i} className="flex items-start gap-4 px-5 py-4 bg-white hover:bg-muted/30 transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs text-muted-foreground">{item.persona}</span>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-sm font-semibold text-foreground">{item.pick}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{item.reason}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Winner Block — rank 1 pick as best overall */}
       {(() => {
@@ -84,7 +115,7 @@ export function BestPage() {
               savingsLabel={savingsLabel || undefined}
               primaryCta={winnerPrimary.isAffiliate
                 ? { ...winnerPrimary, label: `Try ${winner.title}` }
-                : { ...winnerPrimary, label: `Calculate your cost` }
+                : { ...winnerPrimary, label: `Check my real monthly cost` }
               }
               secondaryCta={winnerSecondary}
               trackingContext={{ providerId: winnerProviderId, pageType: "best", sourceComponent: "BestPage/WinnerBlock" }}

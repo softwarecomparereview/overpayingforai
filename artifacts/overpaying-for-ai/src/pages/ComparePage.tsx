@@ -295,11 +295,54 @@ function ModelCard({
   );
 }
 
+const FEATURED_SLUGS = [
+  { slug: "subscription-vs-api-ai-cost", label: "Most common question" },
+  { slug: "gpt-4o-vs-gpt-4o-mini-cost", label: "Biggest API cost win" },
+  { slug: "deepseek-vs-gpt4o-cost", label: "Most dramatic price gap" },
+];
+
 export function CompareIndex() {
+  const featuredComparisons = FEATURED_SLUGS.map(({ slug, label }) => ({
+    ...comparisons.find((c) => c.slug === slug),
+    label,
+  })).filter((c) => c.slug);
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
       <h1 className="text-3xl font-bold mb-2">AI Cost Comparisons</h1>
-      <p className="text-muted-foreground mb-8">Side-by-side pricing breakdowns for the most common AI tool decisions.</p>
+      <p className="text-muted-foreground mb-3">
+        Each comparison helps you answer one question: which model or plan is cheaper for your actual use case?
+        If you're not sure where to start, the three picks below answer the questions we see most often.
+      </p>
+      <p className="text-sm text-muted-foreground mb-8">
+        Not sure which applies to you? <Link href="/decision-engine" className="text-primary font-medium hover:underline">Use the decision engine →</Link>
+      </p>
+
+      {/* Start here — 3 featured comparisons */}
+      <div className="mb-10">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Start here</p>
+        <div className="space-y-3">
+          {featuredComparisons.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/compare/${c.slug}`}
+              className="flex items-start gap-4 border border-primary/20 bg-primary/5 rounded-lg p-5 hover:border-primary/50 hover:bg-primary/10 transition-colors"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded">{c.label}</span>
+                </div>
+                <h2 className="font-semibold text-foreground mb-1 text-base">{c.title}</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
+              </div>
+              <span className="text-primary text-lg mt-1 shrink-0">→</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Full list */}
+      <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">All comparisons</p>
       <div className="grid sm:grid-cols-2 gap-4">
         {comparisons.map((c) => (
           <Link
