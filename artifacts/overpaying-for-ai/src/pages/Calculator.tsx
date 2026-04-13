@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import {
   runCalculator,
   getAllModels,
@@ -11,23 +11,23 @@ import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
-import { SavingsReport } from "@/components/Report/SavingsReport";
-import { track, trackFeatureOpen } from "@/utils/analytics";
+import { trackFeatureOpen } from "@/utils/analytics";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { CTABlock } from "@/components/monetization/CTABlock";
 import { generateTitle, generateMetaDescription, generateSchemaSoftwareApp } from "@/utils/seo";
+import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
+import { trackGaEvent } from "@/utils/ga4";
 
 const CALCULATOR_SEO_TITLE = generateTitle("", "calculator");
 const CALCULATOR_SEO_DESC = generateMetaDescription("", "calculator");
 const CALCULATOR_SCHEMA = generateSchemaSoftwareApp();
 
 const CALCULATOR_RELATED_LINKS = [
+  { href: "/best", text: "Best AI Tools by Value" },
   { href: "/compare/gpt-4o-vs-gpt-4o-mini-cost", text: "GPT-4o vs GPT-4o mini" },
   { href: "/compare/claude-vs-gpt-cost", text: "Claude vs GPT-4o" },
   { href: "/compare/deepseek-vs-gpt4o-cost", text: "DeepSeek vs GPT-4o" },
-  { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
-  { href: "/guides/how-to-reduce-ai-cost", text: "How to Reduce AI Cost" },
 ];
 
 const models = getAllModels();
@@ -46,7 +46,6 @@ function buildShareUrl(modelId: string, input: number, output: number): string {
 }
 
 export function Calculator() {
-  const [, setLocation] = useLocation();
   const inputsRef = useRef<HTMLDivElement | null>(null);
 
   const params = typeof window !== "undefined"
@@ -58,7 +57,6 @@ export function Calculator() {
   const [outputTokens, setOutputTokens] = useState(Number(params.get("o")) || 200_000);
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [copied, setCopied] = useState(false);
-  const [showReport, setShowReport] = useState(false);
   const [selectedScenario, setSelectedScenario] = useState<ScenarioPreset | null>(null);
 
   const calculate = useCallback(() => {
@@ -70,7 +68,6 @@ export function Calculator() {
         mode: "api",
       });
       setResult(r);
-      setShowReport(false);
     } catch (e) {
       console.error(e);
     }
@@ -80,7 +77,6 @@ export function Calculator() {
     setInputTokens(preset.inputTokens);
     setOutputTokens(preset.outputTokens);
     setResult(null);
-    setShowReport(false);
   };
 
   const applyScenario = (scenario: ScenarioPreset) => {
@@ -89,7 +85,6 @@ export function Calculator() {
     setInputTokens(scenario.inputs.monthlyInputTokens);
     setOutputTokens(scenario.inputs.monthlyOutputTokens);
     setResult(null);
-    setShowReport(false);
     if (typeof window !== "undefined") {
       const analytics = (
         window as typeof window & {
@@ -119,11 +114,11 @@ export function Calculator() {
   const selectedModel = getModelById(modelId);
   const dateStr = selectedModel?.last_updated;
   const stale = dateStr ? isPricingStale(dateStr) : false;
-  const bestCheaper = result?.cheaperAlternatives[0] ?? null;
-  const savingsPercent = result && result.savingsEstimate !== null && result.estimatedMonthlyCost > 0
-    ? (result.savingsEstimate / result.estimatedMonthlyCost) * 100
+  const bestSetup = result?.cheaperAlternatives[0] ?? null;
+  const bestSetupProviderId = bestSetup ? providerNameToId(bestSetup.model.provider) : "";
+  const primaryTarget = bestSetup
+    ? getPrimaryCta(bestSetupProviderId, "cheapest", "/best")
     : null;
-  const showOverpayingBanner = !!result && result.savingsEstimate !== null && result.savingsEstimate >= 10 && (savingsPercent === null || savingsPercent >= 20);
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
@@ -132,6 +127,9 @@ export function Calculator() {
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">AI Cost Calculator</h1>
         <p className="text-sm sm:text-base text-muted-foreground max-w-prose">
           Estimate your monthly AI spend and discover cheaper alternatives.
+        </p>
+        <p className="text-xs text-muted-foreground mt-2">
+          Recommendations are based on use case, usage level, and cost sensitivity.
         </p>
       </div>
 
@@ -174,11 +172,10 @@ export function Calculator() {
           <select
             id="model-select"
             value={modelId}
-            onChange={(e) => {
-              setModelId(e.target.value);
-              setResult(null);
-              setShowReport(false);
-            }}
+              onChange={(e) => {
+                setModelId(e.target.value);
+                setResult(null);
+              }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             data-testid="model-select"
           >
@@ -241,7 +238,6 @@ export function Calculator() {
               onChange={(e) => {
                 setInputTokens(Number(e.target.value));
                 setResult(null);
-                setShowReport(false);
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="input-tokens"
@@ -264,7 +260,6 @@ export function Calculator() {
               onChange={(e) => {
                 setOutputTokens(Number(e.target.value));
                 setResult(null);
-                setShowReport(false);
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="output-tokens"
@@ -308,55 +303,36 @@ export function Calculator() {
             {result.savingsEstimate !== null && result.savingsEstimate > 0 && (
               <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg px-4 py-3">
                 <p className="text-sm text-amber-800 dark:text-amber-200 font-medium">
-                  💡 Switch to a cheaper model and save up to {formatCost(result.savingsEstimate)}/month
+                  You are overpaying by {formatCost(result.savingsEstimate)}/month.
                 </p>
               </div>
             )}
 
-            {showOverpayingBanner && bestCheaper && (
-              <div className="mt-4 border border-primary/20 bg-primary/5 rounded-xl p-4 sm:p-5">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      You’re overpaying by {formatCost(result.savingsEstimate ?? 0)}/month
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Switch to {bestCheaper.model.name} and save around {savingsPercent?.toFixed(0) ?? 0}%.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => {
-                        track("overpaying_cta_clicked", {
-                          currentModelId: result.model.id,
-                          recommendedAlternativeId: bestCheaper.model.id,
-                          savingsEstimate: result.savingsEstimate,
-                          savingsPercent,
-                          sourceSurface: "calculator",
-                        });
-                        setModelId(bestCheaper.model.id);
-                        setResult(null);
-                      }}
-                      className="text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2 font-semibold hover:bg-primary/90 transition-colors"
-                    >
-                      Switch & Save
-                    </button>
-                    <button
-                      onClick={() => {
-                        track("overpaying_cta_clicked", {
-                          currentModelId: result.model.id,
-                          recommendedAlternativeId: bestCheaper.model.id,
-                          savingsEstimate: result.savingsEstimate,
-                          savingsPercent,
-                          sourceSurface: "calculator",
-                        });
-                        setShowReport(true);
-                      }}
-                      className="text-sm border border-border rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
-                    >
-                      See Full Report
-                    </button>
-                  </div>
+            {bestSetup && primaryTarget && (
+              <div className="mt-4 border border-primary/20 bg-primary/5 rounded-xl p-4 sm:p-5 space-y-3">
+                <p className="text-sm font-semibold text-foreground">Best setup for you: {bestSetup.model.name}</p>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>Estimated monthly cost: {formatCost(bestSetup.estimatedCost)}</li>
+                  <li>Typical current spend: {formatCost(result.estimatedMonthlyCost)}</li>
+                  <li>Potential savings: {formatCost(bestSetup.savings)}/month ({bestSetup.savingsPercent.toFixed(0)}%)</li>
+                </ul>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                  <a
+                    href={primaryTarget.href}
+                    target={primaryTarget.isExternal ? "_blank" : undefined}
+                    rel={primaryTarget.isExternal ? "noopener noreferrer sponsored" : undefined}
+                    onClick={() => trackGaEvent("calculator_result_primary_cta_click", { destination: primaryTarget.href })}
+                    className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-4 py-2 font-semibold text-sm hover:bg-primary/90 transition-colors"
+                  >
+                    {primaryTarget.isAffiliate ? "Switch to the cheaper setup" : "See the lower-cost option"}
+                  </a>
+                  <Link
+                    href="/best"
+                    onClick={() => trackGaEvent("calculator_result_secondary_cta_click")}
+                    className="text-sm text-muted-foreground hover:text-foreground hover:underline"
+                  >
+                    Compare other best-value tools →
+                  </Link>
                 </div>
               </div>
             )}
@@ -366,84 +342,6 @@ export function Calculator() {
             </p>
           </div>
 
-          <button
-            onClick={() => setShowReport(true)}
-            className="w-full border border-border rounded-lg py-3 font-semibold text-sm text-foreground hover:bg-muted transition-colors"
-            data-testid="generate-report-btn"
-          >
-            Generate Report
-          </button>
-
-          {showReport && (
-            <SavingsReport
-              result={result}
-              inputTokens={inputTokens}
-              outputTokens={outputTokens}
-              onClose={() => setShowReport(false)}
-            />
-          )}
-
-          {result.cheaperAlternatives.length > 0 && (
-            <div>
-              <h2 className="text-lg font-bold mb-4">Recommendation options</h2>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {[
-                  {
-                    optionType: "best_overall",
-                    label: "Best overall",
-                    alt: result.cheaperAlternatives[0] ?? null,
-                    tone: "border-primary/30 bg-primary/5",
-                    cta: "Start with this",
-                  },
-                  {
-                    optionType: "cheapest",
-                    label: "Cheapest",
-                    alt: result.cheaperAlternatives[result.cheaperAlternatives.length - 1] ?? null,
-                    tone: "border-border bg-card",
-                    cta: "Save most",
-                  },
-                  {
-                    optionType: "best_quality",
-                    label: "Best quality",
-                    alt: result.cheaperAlternatives[0] ?? null,
-                    tone: "border-border bg-card",
-                    cta: "Best for quality",
-                  },
-                ].filter((item, index, arr) => item.alt && arr.findIndex((x) => x.alt?.model.id === item.alt?.model.id) === index)
-                  .map((item) => (
-                    <div key={item.optionType} className={`border rounded-xl p-4 ${item.tone}`} data-testid={`affiliate-${item.optionType}`}>
-                      <div className="flex items-center justify-between gap-3 mb-3">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{item.label}</p>
-                        <span className="text-xs text-green-600 dark:text-green-400 font-medium">
-                          Save {item.alt!.savingsPercent.toFixed(0)}%
-                        </span>
-                      </div>
-                      <p className="font-semibold text-foreground">{item.alt!.model.name}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{item.alt!.model.provider}</p>
-                      <div className="mt-3 flex items-center justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-semibold text-foreground">{formatCost(item.alt!.estimatedCost)}/mo</p>
-                          <p className="text-xs text-muted-foreground">−{formatCost(item.alt!.savings)}</p>
-                        </div>
-                        <button
-                          onClick={() => track("affiliate_clicked", {
-                            optionType: item.optionType,
-                            sourceSurface: "calculator",
-                            affiliateId: item.alt!.model.id,
-                            provider: item.alt!.model.provider,
-                            currentModelId: result.model.id,
-                          })}
-                          className="text-sm border border-border rounded-lg px-3 py-2 hover:bg-muted transition-colors"
-                        >
-                          {item.cta}
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-
           <div className="flex items-center gap-3 no-print">
             <button
               onClick={copyShareLink}
@@ -452,9 +350,7 @@ export function Calculator() {
             >
               {copied ? "Copied!" : "Copy Share Link"}
             </button>
-            <Link href="/decision-engine" className="text-sm text-primary hover:underline">
-              Try the Decision Engine instead →
-            </Link>
+            <Link href="/best" className="text-sm text-primary hover:underline">See best-value tool picks →</Link>
           </div>
         </div>
       )}

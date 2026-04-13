@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { trackCta } from "@/utils/analytics";
+import { track, trackCta } from "@/utils/analytics";
 import aiTypesData from "@/data/aiTypes.json";
 import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
