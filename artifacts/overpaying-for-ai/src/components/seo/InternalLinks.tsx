@@ -6,12 +6,12 @@ export interface InternalLink {
 }
 
 const FALLBACK_LINKS: InternalLink[] = [
+  { href: "/calculator", text: "AI Cost Calculator" },
   { href: "/best", text: "Best AI Tools" },
   { href: "/ai-types", text: "Browse AI Types" },
-  { href: "/calculator", text: "AI Cost Calculator" },
   { href: "/compare", text: "Compare Models" },
+  { href: "/best/best-ai-under-20-per-month", text: "Best AI Under $20/month" },
   { href: "/ai-types/writing-ai", text: "Best AI for Writing" },
-  { href: "/ai-types/coding-ai", text: "Best AI for Coding" },
 ];
 
 interface InternalLinksProps {
