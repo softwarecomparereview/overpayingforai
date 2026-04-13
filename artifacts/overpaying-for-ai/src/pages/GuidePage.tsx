@@ -6,6 +6,20 @@ import { getPrimaryCta } from "@/utils/affiliateResolver";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generatePricingInsights } from "@/utils/insights";
+
+function GuideCostInsights() {
+  const snapshot = getLivePricingSnapshot();
+  const insights = generatePricingInsights(snapshot);
+  if (insights.length === 0) return null;
+  return (
+    <div className="my-8">
+      <LatestCostInsights insights={insights.slice(0, 3)} title="Current AI Pricing Context" />
+    </div>
+  );
+}
 
 interface GuideWinnerBlock {
   badge: string;
@@ -67,7 +81,11 @@ export function GuidePage() {
       </div>
 
       {/* Early callout — fastest win or key recommendation, shown immediately after intro */}
+<<<<<<< develop
+      {!!(guide as Record<string, unknown>).earlyCallout && (
+=======
       {guide.earlyCallout && (
+>>>>>>> codexbranch
         <div className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">Fastest win</p>
           <p className="text-sm text-foreground font-medium leading-relaxed">{guide.earlyCallout}</p>
@@ -138,7 +156,10 @@ export function GuidePage() {
         const seoBlock = guide.seoBlock;
         return <SeoContentBlock {...(seoBlock ?? {})} />;
       })()}
-      <InternalLinks links={guide.internalLinks} />
+
+      <GuideCostInsights />
+
+      <InternalLinks links={[...guide.internalLinks, { href: "/models", text: "Full model pricing table" }]} />
     </article>
   );
 }

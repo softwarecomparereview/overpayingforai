@@ -21,6 +21,10 @@ import {
   FinalVerdictSection,
   EditorialInsight,
 } from "@/components/comparison/ComparisonSections";
+import { PricingFreshnessBadge } from "@/components/pricing/PricingFreshnessBadge";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generatePricingInsights } from "@/utils/insights";
 
 type ComparisonEntry = typeof comparisonsData[number] & {
   quickVerdict?: string;
@@ -254,7 +258,8 @@ export function ComparePage() {
       />
 
       <SeoContentBlock />
-      <InternalLinks links={page.internalLinks} />
+      <ComparePricingStrip />
+      <InternalLinks links={[...page.internalLinks, { href: "/models", text: "Full model pricing table" }]} />
     </article>
   );
 }
@@ -297,6 +302,25 @@ function ModelCard({
   );
 }
 
+function ComparePricingStrip() {
+  const snapshot = getLivePricingSnapshot();
+  const insights = generatePricingInsights(snapshot);
+  if (insights.length === 0) return null;
+  return (
+    <div className="mt-10 border-t border-border pt-8">
+      <PricingFreshnessBadge lastUpdated={snapshot.lastUpdated} />
+      <div className="mt-4">
+        <LatestCostInsights insights={insights.slice(0, 3)} title="Latest AI Cost Data" />
+      </div>
+      <div className="mt-3">
+        <Link href="/models" className="text-sm text-primary font-medium hover:underline">
+          See full model pricing table →
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 const FEATURED_SLUGS = [
   { slug: "subscription-vs-api-ai-cost", label: "Most common question" },
   { slug: "gpt-4o-vs-gpt-4o-mini-cost", label: "Biggest API cost win" },
@@ -305,10 +329,19 @@ const FEATURED_SLUGS = [
 
 export function CompareIndex() {
   const featuredSlugs = new Set(FEATURED_SLUGS.map((f) => f.slug));
+<<<<<<< develop
+  type FeaturedComparison = typeof comparisons[number] & { label: string };
+  const featuredComparisons = (FEATURED_SLUGS.map(({ slug, label }) => {
+    const found = comparisons.find((c) => c.slug === slug);
+    if (!found) return null;
+    return { ...found, label };
+  }).filter(Boolean)) as FeaturedComparison[];
+=======
   const featuredComparisons = FEATURED_SLUGS.map(({ slug, label }) => {
     const match = comparisons.find((c) => c.slug === slug);
     return match ? { ...match, label } : null;
   }).filter((c): c is ComparisonEntry & { label: string } => Boolean(c));
+>>>>>>> codexbranch
   const remainingComparisons = comparisons.filter((c) => !featuredSlugs.has(c.slug));
 
   return (
@@ -344,6 +377,8 @@ export function CompareIndex() {
           ))}
         </div>
       </div>
+
+      <ComparePricingStrip />
 
       {/* Full list */}
       <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">More comparisons</p>

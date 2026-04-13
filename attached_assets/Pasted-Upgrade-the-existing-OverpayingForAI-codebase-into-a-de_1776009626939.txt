@@ -1,0 +1,674 @@
+Upgrade the existing OverpayingForAI codebase into a defensible AI pricing intelligence platform with a DATA LAYER + DECISION ENGINE + LIVE PRICING SYSTEM + SEO-SAFE DYNAMIC CONTENT + MONETIZATION MAPPING.
+
+This must be implemented from start to finish in one pass, without missing earlier moat items.
+
+IMPORTANT OPERATING RULES
+- Extend existing code safely. Do NOT rewrite the app from scratch.
+- Do NOT remove existing canonical tags, sitemap logic, PageSeo, InternalLinks, SeoContentBlock, or any current indexing improvements.
+- Keep all changes additive and production-safe.
+- Do NOT convert pages into thin JS-only shells.
+- All important pricing, recommendation, and insight text must render in normal visible DOM text.
+- Preserve existing routes unless new routes are explicitly requested below.
+- Use TypeScript types throughout.
+- Prefer centralized config and utility files over duplicated inline logic.
+- If an exact implementation detail is unclear, choose the safer additive option.
+
+GOAL
+Transform the site from a static affiliate/content site into a hard-to-copy AI cost optimization platform with:
+1) centralized model pricing data
+2) a live-refresh-capable pricing system
+3) dynamic insight generation
+4) a rules-based decision engine
+5) conversion-focused recommendation output
+6) a /models authority page
+7) pricing freshness and change detection everywhere
+8) affiliate mapping and intelligent CTA fallbacks
+9) SEO-safe rendering and crawlability preservation
+
+===================================
+PHASE 1 — CENTRAL DATA LAYER
+===================================
+
+1. CREATE CENTRAL MODEL PRICING TYPES
+
+Create:
+src/types/pricing.ts
+
+Add types:
+
+export type ModelCategory =
+  | "general"
+  | "coding"
+  | "writing"
+  | "research"
+  | "productivity"
+  | "customer-support";
+
+export type ModelPricing = {
+  id: string;
+  provider: string;
+  model: string;
+  displayName: string;
+  category: ModelCategory[];
+  inputCostPer1k: number;
+  outputCostPer1k: number;
+  contextWindow?: string;
+  notes?: string;
+  lastUpdated: string;
+  sourceType: "static" | "live";
+};
+
+export type PricingSnapshot = {
+  models: ModelPricing[];
+  lastUpdated: string;
+};
+
+export type PriceChange = {
+  modelId: string;
+  displayName: string;
+  previousInputCostPer1k: number;
+  previousOutputCostPer1k: number;
+  newInputCostPer1k: number;
+  newOutputCostPer1k: number;
+  inputChangePercent: number;
+  outputChangePercent: number;
+  direction: "increase" | "decrease" | "unchanged";
+};
+
+2. CREATE STATIC BASELINE DATASET
+
+Create:
+src/data/modelsPricing.ts
+
+Add an initial, realistic baseline dataset for at least:
+- GPT-4o Mini
+- GPT-4o
+- Claude Haiku
+- Claude Sonnet
+- Gemini 1.5 Flash
+- Gemini 1.5 Pro
+- DeepSeek V3 (if your current content references it)
+- any additional currently referenced models already used elsewhere in the codebase
+
+Use realistic placeholder values if exact source syncing is not already wired. Structure must be correct and easy to refresh later.
+
+Export:
+- CURRENT_MODELS: ModelPricing[]
+- getModelById(id)
+- getModelsByCategory(category)
+
+3. CREATE LIVE PRICING STORE
+
+Create:
+src/data/livePricingStore.ts
+
+Implement a simple in-app store module with:
+- current snapshot
+- previous snapshot
+- last refresh timestamp
+
+Export functions:
+- getLivePricingSnapshot()
+- setLivePricingSnapshot(snapshot)
+- getPreviousPricingSnapshot()
+- setPreviousPricingSnapshot(snapshot)
+
+If the app is client-only, use a module-level store with safe fallbacks.
+If server/runtime support exists, structure it so this can later move to API/server storage.
+
+===================================
+PHASE 2 — PRICING FETCH + REFRESH SYSTEM
+===================================
+
+4. CREATE PROVIDER FETCHERS
+
+Create:
+src/services/pricingFetcher.ts
+
+Implement:
+- fetchOpenAIPrices()
+- fetchAnthropicPrices()
+- fetchGooglePrices()
+- fetchFallbackPrices()
+
+For now:
+- use normalized mock/static provider JSON if no real API integration already exists
+- structure code so real provider/API fetches can be plugged in later without changing consumer code
+
+Each fetcher should return normalized ModelPricing[] entries.
+
+Also create:
+- normalizePricingModels(raw)
+- mergePricingSources(...sources)
+
+5. CREATE PRICING REFRESH ORCHESTRATOR
+
+Create:
+src/utils/pricingRefresher.ts
+
+Implement:
+- refreshPricing()
+- shouldRefreshPricing(lastUpdated, maxAgeHours = 6)
+
+Behavior:
+- fetch latest pricing from all fetchers
+- merge with fallback/static data if some providers fail
+- set previous snapshot before overwriting current snapshot
+- stamp new lastUpdated timestamp
+- fail safely without crashing pages
+- return final snapshot
+
+If app architecture allows:
+- trigger refresh on app bootstrap or relevant page load when data is stale
+If not:
+- simulate refresh on first relevant render with safe guards
+
+6. CREATE PRICE CHANGE DETECTION
+
+Create:
+src/utils/pricingDiff.ts
+
+Implement:
+- detectPriceChanges(oldSnapshot, newSnapshot): PriceChange[]
+- getLargestPriceDrops(changes, limit)
+- getLargestPriceIncreases(changes, limit)
+
+Compare both input and output cost changes and classify direction.
+
+===================================
+PHASE 3 — PRICING ENGINE + INSIGHTS
+===================================
+
+7. CREATE PRICING ENGINE
+
+Create:
+src/utils/pricingEngine.ts
+
+Implement:
+- calculateCost(params: { modelId: string; inputTokens: number; outputTokens: number; snapshot?: PricingSnapshot }): number
+- estimateMonthlyCost(params: { modelId: string; monthlyInputTokens: number; monthlyOutputTokens: number; snapshot?: PricingSnapshot }): number
+- getCheapestModel(params: { category?: ModelCategory; snapshot?: PricingSnapshot }): ModelPricing | null
+- getBestValueModel(params: { category?: ModelCategory; snapshot?: PricingSnapshot }): ModelPricing | null
+- compareModels(params: { modelIds: string[]; monthlyInputTokens: number; monthlyOutputTokens: number; snapshot?: PricingSnapshot })
+
+Use live snapshot if available, otherwise fallback to CURRENT_MODELS.
+
+8. CREATE INSIGHT GENERATOR
+
+Create:
+src/utils/insights.ts
+
+Implement:
+- generatePricingInsights(snapshot: PricingSnapshot): string[]
+- generateChangeInsights(changes: PriceChange[]): string[]
+- generateCategoryInsights(snapshot: PricingSnapshot): Record<string, string[]>
+
+Examples of generated insights:
+- "GPT-4o Mini is dramatically cheaper than GPT-4o for cost-sensitive general use."
+- "Claude Haiku is currently one of the lowest-cost options for lightweight research tasks."
+- "Gemini Flash is among the strongest value picks for high-volume workloads."
+- "GPT-4o Mini input pricing dropped X% since the last snapshot."
+
+Require the functions to:
+- avoid obvious duplicates
+- produce 3–5 concise insight strings
+- be safe if data is missing
+
+9. CREATE PRICING BADGE HELPERS
+
+Create:
+src/utils/pricingBadges.ts
+
+Implement:
+- getCheapestBadge(category, snapshot)
+- getFreshnessLabel(lastUpdated)
+- isPricingStale(lastUpdated, staleDays = 30)
+
+===================================
+PHASE 4 — DECISION ENGINE MOAT
+===================================
+
+10. CREATE DECISION ENGINE TYPES
+
+Create:
+src/types/decision.ts
+
+Add:
+- UseCase = "coding" | "writing" | "research" | "general" | "productivity" | "customer-support"
+- UsageLevel = "low" | "medium" | "high"
+- BudgetMode = "cheapest" | "balanced" | "best-performance"
+
+Create:
+export type DecisionRule = {
+  useCase: UseCase;
+  usageLevel: UsageLevel;
+  budgetMode: BudgetMode;
+  recommendedTool: string;
+  recommendedModelId: string;
+  setupType: "API" | "Subscription" | "Hybrid" | "Single-tool setup";
+  rationale: string;
+  estimatedCost: number;
+  secondaryOption?: string;
+  affiliateKey?: string | null;
+};
+
+export type DecisionResult = {
+  recommendedTool: string;
+  recommendedModelId: string;
+  recommendedModelName: string;
+  setupType: string;
+  rationale: string;
+  estimatedCost: number;
+  currentCost: number;
+  monthlySavings: number;
+  savingsPercent: number;
+  secondaryOption?: string;
+  affiliateKey?: string | null;
+};
+
+11. CREATE CENTRAL RULE TABLE
+
+Create:
+src/utils/decisionRules.ts
+
+Add a typed rule table covering at least these combinations:
+
+coding + low + cheapest
+coding + medium + cheapest
+coding + high + balanced
+writing + low + cheapest
+writing + medium + balanced
+writing + high + cheapest
+research + low + balanced
+research + medium + cheapest
+research + high + balanced
+general + low + cheapest
+general + medium + balanced
+general + high + best-performance
+productivity + low + cheapest
+productivity + medium + balanced
+customer-support + medium + cheapest
+
+Use sensible defaults such as:
+- GPT-4o Mini for low-cost general/coding/research
+- hybrid stack where premium model only appears for higher-performance cases
+- linguix / serpstat / fireflies / mailmunch style recommendations only when they truly fit use case
+
+12. CREATE DECISION ENGINE
+
+Create:
+src/utils/decisionEngine.ts
+
+Implement:
+- estimateCurrentCost(usageLevel, explicitCurrentSpend?)
+  - low => 20
+  - medium => 50
+  - high => 120
+  - explicit current spend overrides baseline
+- getDecisionRule(useCase, usageLevel, budgetMode)
+- computeDecisionResult(params: {
+    useCase: UseCase;
+    usageLevel: UsageLevel;
+    budgetMode: BudgetMode;
+    explicitCurrentSpend?: number;
+    snapshot?: PricingSnapshot;
+  }): DecisionResult
+
+Behavior:
+- use live pricing if available to adjust recommended cost when possible
+- if exact live math is not practical for all rule types, still use model-linked estimate and keep logic consistent
+- compute:
+  currentCost
+  estimatedCost
+  monthlySavings = max(currentCost - estimatedCost, 0)
+  savingsPercent = currentCost > 0 ? round((monthlySavings / currentCost) * 100) : 0
+
+Add a fallback rule if no exact match exists.
+
+===================================
+PHASE 5 — AFFILIATE / MONETIZATION MAPPING
+===================================
+
+13. CREATE AFFILIATE MAP
+
+Create:
+src/utils/affiliateMap.ts
+
+Add typed mapping structure:
+export type AffiliateTarget = {
+  key: string;
+  label: string;
+  url?: string;
+  fallbackInternalUrl: string;
+};
+
+Populate keys for any existing approved or planned partners already represented in the codebase, including at least:
+- linguix
+- serpstat
+- fireflies
+- mailmunch
+- brightlocal
+Add safe fallback internal URLs like:
+- /best
+- /guides/cheapest-ai-content-workflow
+- /compare/writesonic-vs-jasper
+- /calculator
+
+Implement:
+- getAffiliateTarget(key?: string | null): AffiliateTarget | null
+
+If affiliate URLs are not yet filled, preserve the mapping structure and fallback cleanly to internal pages.
+
+===================================
+PHASE 6 — UI COMPONENTS
+===================================
+
+14. CREATE GLOBAL INSIGHTS COMPONENT
+
+Create:
+src/components/pricing/LatestCostInsights.tsx
+
+Props:
+- insights?: string[]
+- title?: string
+
+Render:
+- heading: "Latest AI Cost Insights"
+- 3–5 bullet-style cards or compact rows
+- plain visible text in DOM
+- lightweight styling consistent with current design system
+
+15. CREATE PRICING FRESHNESS COMPONENT
+
+Create:
+src/components/pricing/PricingFreshnessBadge.tsx
+
+Props:
+- lastUpdated: string
+
+Render:
+- "Pricing last updated X hours ago" or "X days ago"
+- if stale > 30 days, show amber warning state
+- keep text visible and crawlable
+
+16. CREATE RECOMMENDATION RESULT COMPONENT
+
+Create:
+src/components/decision/RecommendationResult.tsx
+
+Props:
+- result: DecisionResult
+- affiliateTarget?: AffiliateTarget | null
+
+Render this structure in visible DOM text:
+
+Heading:
+- if monthlySavings > 0: "You are overpaying by $X/month"
+- else: "Your current setup looks cost-efficient"
+
+Then section:
+Best setup for you
+- Tool
+- Model
+- Setup
+- Why
+
+Then cost summary:
+- Estimated monthly cost
+- Typical current spend
+- Estimated savings
+
+Then trust note:
+- "These recommendations are based on use case, usage level, and cost sensitivity."
+- "Savings are directional estimates, not provider quotes."
+
+Then CTA area:
+- one primary CTA button
+- one secondary text link
+
+Rules:
+- if affiliateTarget.url exists, use it for primary CTA
+- otherwise use affiliateTarget.fallbackInternalUrl
+- if no affiliate target exists, fallback primary CTA to /best or /calculator
+- do NOT show more than one primary CTA and one secondary CTA
+
+17. CREATE MODEL TABLE COMPONENT
+
+Create:
+src/components/pricing/ModelsPricingTable.tsx
+
+Render table columns:
+- Provider
+- Model
+- Input Cost / 1K
+- Output Cost / 1K
+- Category
+- Last Updated
+
+Add optional badge if model is cheapest for a category.
+
+===================================
+PHASE 7 — PAGE INTEGRATION
+===================================
+
+18. ENHANCE CALCULATOR / DECISION ENGINE PAGE
+
+Find the current calculator or decision engine route/page and upgrade it.
+
+Requirements:
+- preserve existing introductory copy
+- preserve PageSeo, InternalLinks, SeoContentBlock
+- add or reuse inputs:
+  useCase
+  usageLevel
+  budgetMode
+  explicit current spend if easy to support
+- on calculate:
+  computeDecisionResult(...)
+  render RecommendationResult
+  render PricingFreshnessBadge
+  render LatestCostInsights
+  keep internal links visible below
+
+Ensure result text appears directly in the DOM after interaction and does not rely on hidden modals.
+
+19. ENHANCE HOMEPAGE
+
+On homepage:
+- add LatestCostInsights block using generatePricingInsights
+- add one compact “Cheapest models right now” or “Best-value AI picks right now” section using live snapshot
+- add PricingFreshnessBadge somewhere near pricing-related copy if appropriate
+- keep existing layout clean and additive
+
+20. ENHANCE /best PAGE
+
+On /best:
+- preserve current 1500+ word pillar content
+- inject dynamic data-driven sections:
+  - cheapest models right now
+  - best-value by category
+  - latest cost insights
+  - example recommendation cards
+- add PricingFreshnessBadge
+- add strong internal links to /models and /calculator
+
+21. ENHANCE AI TYPE PAGES
+
+On ai type pages:
+- inject category-specific cheapest badge and/or best-value badge
+- inject category insights from generateCategoryInsights
+- preserve SeoContentBlock and InternalLinks
+- if pricing-related claims are present, show PricingFreshnessBadge
+
+22. ENHANCE COMPARISON PAGES
+
+On comparison pages:
+- if corresponding models exist in pricing store, render a compact dynamic pricing comparison strip
+- show freshness badge if price data is shown
+- keep existing static comparison copy intact
+
+23. ENHANCE GUIDE PAGES
+
+On guide pages:
+- preserve current copy
+- inject relevant internal links and one relevant dynamic cost insight if appropriate
+- do not overload weak guides with too much dynamic UI
+
+===================================
+PHASE 8 — NEW AUTHORITY PAGE
+===================================
+
+24. CREATE /models PAGE
+
+Create:
+src/pages/ModelsPage.tsx
+
+Add route:
+ /models
+
+This page must be a strong authority/SEO asset and include:
+
+- PageSeo with strong title/description/canonical
+- Intro text explaining what the page is and why it matters
+- PricingFreshnessBadge
+- ModelsPricingTable with all live/current models
+- section: Cheapest models by category
+- section: Latest AI Cost Insights
+- section: How to use this data to reduce AI spend
+- strong internal links to:
+  - /best
+  - /calculator
+  - /ai-types
+  - relevant comparisons
+
+This page must contain enough crawlable explanatory text to be indexable, not just a table.
+
+===================================
+PHASE 9 — SEO / INDEXING SAFETY
+===================================
+
+25. PRESERVE AND STRENGTHEN SEO COMPONENTS
+
+Ensure all updated/new pages continue to use:
+- PageSeo
+- canonical tags
+- meta descriptions
+- InternalLinks
+- SeoContentBlock where appropriate
+
+Do not remove existing static explanatory copy.
+Do not replace content with only tables or widgets.
+
+26. ENSURE IMPORTANT CONTENT IS CRAWLABLE
+
+Important pricing and recommendation text must appear:
+- in visible DOM text
+- not only in canvas/modal/tooltip
+- not dependent on delayed hidden rendering
+
+27. SITEMAP SAFETY
+
+Update sitemap generation logic to include:
+- /models
+- other high-quality dynamic-authority pages created here
+
+Continue excluding:
+- draft
+- coming-soon
+- empty pages
+- thin pages
+
+Do not accidentally include junk routes.
+
+===================================
+PHASE 10 — OPTIONAL HISTORY FOUNDATION
+===================================
+
+28. CREATE PRICE HISTORY FOUNDATION
+
+Create:
+src/data/modelPriceHistory.ts
+
+Structure:
+export type HistoricalPricePoint = {
+  modelId: string;
+  inputCostPer1k: number;
+  outputCostPer1k: number;
+  timestamp: string;
+};
+
+Add simple helper functions:
+- appendHistoryFromSnapshot(snapshot)
+- getHistoryForModel(modelId)
+
+This can be in-memory or file-backed if app structure supports it.
+No chart is required yet, but structure the system so charts can be added later.
+
+===================================
+PHASE 11 — BOOTSTRAP / APP WIRING
+===================================
+
+29. ADD SAFE PRICING BOOTSTRAP
+
+In the app bootstrap or a suitable top-level area:
+- initialize live pricing snapshot from CURRENT_MODELS if store is empty
+- if snapshot is stale, trigger refreshPricing safely
+- fail silently and fallback to static data if refresh fails
+
+30. ADD UTILITY SAFEGUARDS
+
+Make every dynamic consumer tolerant of missing pricing data:
+- use fallback snapshot
+- avoid runtime crashes
+- show sensible defaults
+
+===================================
+PHASE 12 — COPY / TRUST / CONVERSION
+===================================
+
+31. ADD TRUST COPY WHERE NEEDED
+
+On pages that show recommendation or live pricing:
+add short crawlable trust notes such as:
+- "Prices are estimates based on the latest available provider data."
+- "Recommendations depend on use case, usage level, and budget sensitivity."
+- "Savings estimates are directional, not provider quotes."
+
+32. CTA LANGUAGE
+
+Use cost-optimization language, not generic affiliate language.
+
+Examples:
+- "Switch to the cheaper setup"
+- "See the lower-cost option"
+- "Check the best-value workflow"
+- "Compare lower-cost alternatives"
+
+Avoid generic spammy CTA copy.
+
+===================================
+PHASE 13 — FINAL QA
+===================================
+
+33. FINAL VERIFICATION REQUIREMENTS
+
+Before finishing, verify:
+- existing calculator logic still works
+- new decision engine result renders clearly
+- /models route works
+- no routes were broken
+- canonical tags still work
+- internal links still render
+- sitemap still generates cleanly
+- important content is visible in DOM
+- no major TypeScript errors
+- live pricing falls back safely if fetch fails
+
+34. DELIVERY SUMMARY
+
+At the end, provide a concise summary of:
+- files created
+- files updated
+- routes added
+- main dynamic capabilities added
+- any placeholders still using static mock fetchers and where real APIs can be plugged in later

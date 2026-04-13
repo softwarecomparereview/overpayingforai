@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "wouter";
+<<<<<<< develop
+import { trackCta, track } from "@/utils/analytics";
+=======
 import { track, trackCta } from "@/utils/analytics";
+>>>>>>> codexbranch
 import aiTypesData from "@/data/aiTypes.json";
 import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
@@ -13,6 +17,12 @@ import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import modelsData from "@/data/models.json";
 import { generateTitle, generateMetaDescription, generateSchemaFAQ } from "@/utils/seo";
+import { PricingFreshnessBadge } from "@/components/pricing/PricingFreshnessBadge";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generateCategoryInsights } from "@/utils/insights";
+import { getCheapestModel } from "@/utils/pricingEngine";
+import type { ModelCategory } from "@/types/pricing";
 
 const latestModelDate = (modelsData as { last_updated?: string }[])
   .map((m) => m.last_updated)
@@ -45,6 +55,41 @@ const COLOR_ACCENT: Record<string, { hero: string; pill: string; icon: string; c
   teal: { hero: "bg-teal-950", pill: "bg-teal-50 text-teal-700", icon: "bg-teal-800 text-white", cta: "bg-teal-700 hover:bg-teal-800" },
   orange: { hero: "bg-orange-950", pill: "bg-orange-50 text-orange-700", icon: "bg-orange-800 text-white", cta: "bg-orange-700 hover:bg-orange-800" },
 };
+
+const AI_TYPE_CATEGORY_MAP: Record<string, ModelCategory> = {
+  "general-ai": "general",
+  "coding-ai": "coding",
+  "writing-ai": "writing",
+  "research-ai": "research",
+  "customer-support-ai": "customer-support",
+  "productivity-ai": "productivity",
+};
+
+function AiTypePageInsights({ categorySlug }: { categorySlug: string }) {
+  const snapshot = getLivePricingSnapshot();
+  const catKey: ModelCategory = AI_TYPE_CATEGORY_MAP[categorySlug] ?? "general";
+  const categoryInsights = generateCategoryInsights(snapshot);
+  const catInsights = categoryInsights[catKey] ?? [];
+  const cheapest = getCheapestModel({ category: catKey, snapshot });
+
+  const insights = [
+    ...(cheapest
+      ? [`Cheapest ${catKey} model right now: ${cheapest.displayName} by ${cheapest.provider} at $${(cheapest.outputCostPer1k * 1000).toFixed(4)}/1M output tokens.`]
+      : []),
+    ...catInsights,
+  ].slice(0, 4);
+
+  if (insights.length === 0) return null;
+
+  return (
+    <div>
+      <PricingFreshnessBadge lastUpdated={snapshot.lastUpdated} />
+      <div className="mt-4">
+        <LatestCostInsights insights={insights} title={`Cost Insights: ${catKey.charAt(0).toUpperCase() + catKey.slice(1)} AI`} />
+      </div>
+    </div>
+  );
+}
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -416,11 +461,16 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
 
       <SeoContentBlock />
 
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <AiTypePageInsights categorySlug={category.slug} />
+      </section>
+
       <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
         <InternalLinks
           links={[
             { href: "/best", text: "Best AI Tools" },
             { href: "/calculator", text: "AI Cost Calculator" },
+            { href: "/models", text: "Full model pricing table" },
             { href: "/ai-types", text: "Browse All AI Types" },
             { href: "/decision-engine", text: "Decision Engine" },
             { href: "/compare", text: "Compare Models" },

@@ -12,6 +12,10 @@ import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
 import modelsData from "@/data/models.json";
 import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
+import { getLivePricingSnapshot } from "@/data/livePricingStore";
+import { generatePricingInsights } from "@/utils/insights";
+import { getCheapestModel } from "@/utils/pricingEngine";
+import { LatestCostInsights } from "@/components/pricing/LatestCostInsights";
 
 const comparisons = comparisonsData.slice(0, 6);
 const faqs = faqsData.slice(0, 6);
@@ -135,6 +139,60 @@ const NAV_ITEMS = [
   { href: "#section-guides", label: "Guides" },
   { href: "#section-faq", label: "FAQs" },
 ];
+
+function HomepageInsightsSection() {
+  const snapshot = getLivePricingSnapshot();
+  const insights = generatePricingInsights(snapshot);
+  const cheapestGeneral = getCheapestModel({ category: "general", snapshot });
+  const cheapestCoding = getCheapestModel({ category: "coding", snapshot });
+
+  return (
+    <section className="border-b border-border py-12 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-10">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Live Data</p>
+            <h2 className="text-xl font-bold text-foreground mb-5">Best-value AI picks right now</h2>
+            <div className="space-y-3">
+              {cheapestGeneral && (
+                <div className="border border-border rounded-lg p-4 flex items-start gap-3">
+                  <span className="bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">
+                    Cheapest general
+                  </span>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{cheapestGeneral.displayName}</p>
+                    <p className="text-xs text-muted-foreground">{cheapestGeneral.provider} · ${(cheapestGeneral.outputCostPer1k * 1000).toFixed(4)}/1M output tokens</p>
+                  </div>
+                </div>
+              )}
+              {cheapestCoding && (
+                <div className="border border-border rounded-lg p-4 flex items-start gap-3">
+                  <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded mt-0.5 flex-shrink-0">
+                    Cheapest coding
+                  </span>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{cheapestCoding.displayName}</p>
+                    <p className="text-xs text-muted-foreground">{cheapestCoding.provider} · ${(cheapestCoding.outputCostPer1k * 1000).toFixed(4)}/1M output tokens</p>
+                  </div>
+                </div>
+              )}
+              <Link
+                href="/models"
+                className="inline-flex items-center gap-1 text-sm text-primary font-medium hover:underline mt-1"
+              >
+                See all model pricing →
+              </Link>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Insights</p>
+            <LatestCostInsights insights={insights} title="Latest AI Cost Insights" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function Design2() {
   return (
@@ -677,6 +735,9 @@ export function Design2() {
           </div>
         </div>
       </section>
+
+      {/* ── LATEST AI COST INSIGHTS ──────────────────────────── */}
+      <HomepageInsightsSection />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section id="section-faq" className="bg-slate-50 border-b border-border py-14">
