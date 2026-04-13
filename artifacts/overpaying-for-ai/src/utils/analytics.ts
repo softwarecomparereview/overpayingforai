@@ -16,6 +16,7 @@ const ALLOWED_EVENTS = new Set([
   "calculator_started",
   "scenario_selected",
   "calculator_completed",
+  "decision_engine_completed",
   "report_generated",
   "lead_capture_clicked",
   "lead_capture_submitted",
@@ -111,4 +112,44 @@ export function trackFeatureOpen(
   } as const;
   trackGaEvent(eventMap[feature]);
   if (isDev) console.log("analytics", eventMap[feature]);
+}
+
+/**
+ * Track calculator/decision flow completion and result visibility.
+ * Uses GA4-only event names that map to key conversion actions.
+ */
+export function trackDecisionEvent(
+  eventName:
+    | "calculator_completed"
+    | "calculator_results_viewed"
+    | "decision_engine_completed",
+  params: AnalyticsPayload = {},
+): void {
+  trackGaEvent(eventName, params);
+  if (eventName === "calculator_completed" || eventName === "decision_engine_completed") {
+    track(eventName, params);
+  }
+  if (isDev) console.log("analytics", eventName, params);
+}
+
+/**
+ * Track high-intent comparison internal CTA clicks (e.g. calculator links).
+ * Keeps a stable GA4 event for compare-page funnel analysis.
+ */
+export function trackCompareCtaClick(params: {
+  sourceComponent: string;
+  ctaLabel: string;
+  destinationPath: string;
+  comparisonSlug?: string;
+}): void {
+  const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+  trackGaEvent("compare_cta_click", {
+    page_type: "compare",
+    page_path: pagePath,
+    source_component: params.sourceComponent,
+    cta_label: params.ctaLabel,
+    destination_path: params.destinationPath,
+    comparison_slug: params.comparisonSlug,
+  });
+  if (isDev) console.log("analytics", "compare_cta_click", params);
 }

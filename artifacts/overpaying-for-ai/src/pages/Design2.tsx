@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { track } from "@/utils/analytics";
-import { trackGaEvent } from "@/utils/ga4";
+import { track, trackCta } from "@/utils/analytics";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
@@ -127,14 +126,27 @@ const AI_TYPE_CARDS = [
 ];
 
 const NAV_ITEMS = [
-  { href: "#section-ai-types", label: "AI Types" },
   { href: "#section-calculator", label: "Calculator" },
+  { href: "#section-comparison", label: "Compare Models" },
   { href: "#section-savings", label: "Savings" },
   { href: "#section-affiliate", label: "Recommendations" },
-  { href: "#section-comparison", label: "Compare Models" },
+  { href: "#section-ai-types", label: "AI Types" },
   { href: "#section-guides", label: "Guides" },
   { href: "#section-faq", label: "FAQs" },
 ];
+
+function trackHomepageCtaClick(ctaLabel: string, destinationUrl: string, ctaType: "primary" | "secondary" = "primary") {
+  trackCta({
+    providerId: "",
+    ctaLabel,
+    ctaType,
+    ctaState: "fallback",
+    pageType: "home",
+    sourceComponent: "Design2/Hero",
+    destinationUrl,
+    isExternal: false,
+  });
+}
 
 export function Design2() {
   return (
@@ -155,38 +167,36 @@ export function Design2() {
                 Free · No sign-up · 20+ AI models tracked
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08] mb-5">
-                Overpaying for AI tools?
+                Stop wasting money on AI.
                 <br />
-                Fix your stack in minutes.
+                Get your cheapest viable setup.
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mb-5">
-                Compare pricing, find a cheaper setup, and estimate your monthly savings before you commit to the wrong AI tool.
+                In under 2 minutes, calculate your real monthly cost and see the fastest path to lower spend.
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-8">
-                Compare pricing, estimate savings, and find the best-value AI setup.
+                Built for teams comparing ChatGPT, Claude, Gemini, and API pricing side-by-side.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/calculator"
                   data-testid="hp-cta-calc"
                   onClick={() => {
-                    trackGaEvent("homepage_cta_calculator_click");
-                    track("affiliate_clicked", { sourceSurface: "homepage", variant: "calculator_primary" });
+                    trackHomepageCtaClick("Homepage Hero - Open Calculator", "/calculator", "primary");
                   }}
                   className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  Check your AI cost →
+                  Open the calculator →
                 </Link>
                 <Link
-                  href="/best"
-                  data-testid="hp-cta-best"
+                  href="/compare/claude-vs-gpt-cost"
+                  data-testid="hp-cta-compare"
                   onClick={() => {
-                    trackGaEvent("homepage_cta_best_click");
-                    track("affiliate_clicked", { sourceSurface: "homepage", variant: "best_primary" });
+                    trackHomepageCtaClick("Homepage Hero - Claude vs GPT Comparison", "/compare/claude-vs-gpt-cost", "secondary");
                   }}
                   className="inline-flex items-center justify-center border border-border hover:bg-muted text-foreground font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  See the best-value tools
+                  See Claude vs GPT costs
                 </Link>
               </div>
             </div>
@@ -215,21 +225,30 @@ export function Design2() {
       <section className="border-b border-border bg-slate-50 py-5">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-3 gap-3 text-sm">
-            <div className="rounded-lg border border-border bg-white px-4 py-3">Compare AI costs</div>
-            <div className="rounded-lg border border-border bg-white px-4 py-3">Estimate savings</div>
-            <div className="rounded-lg border border-border bg-white px-4 py-3">Find the best-value setup</div>
+            <div className="rounded-lg border border-border bg-white px-4 py-3">
+              <p className="font-semibold text-foreground">Step 1: Calculate your spend</p>
+              <p className="text-xs text-muted-foreground mt-1">Input usage, output usage, and model.</p>
+            </div>
+            <div className="rounded-lg border border-border bg-white px-4 py-3">
+              <p className="font-semibold text-foreground">Step 2: Compare your top alternative</p>
+              <p className="text-xs text-muted-foreground mt-1">Start with Claude vs GPT if you're unsure.</p>
+            </div>
+            <div className="rounded-lg border border-border bg-white px-4 py-3">
+              <p className="font-semibold text-foreground">Step 3: Switch with confidence</p>
+              <p className="text-xs text-muted-foreground mt-1">Use side-by-side costs before committing.</p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="border-b border-border bg-white py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">How it works</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Start here</h2>
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
             {[
-              "Enter your use case",
-              "See cheaper options",
-              "Switch to the best-value setup",
+              "Open the calculator first",
+              "Review cheaper alternatives",
+              "Confirm with a direct comparison",
             ].map((step, idx) => (
               <div key={step} className="border border-border rounded-xl p-5 bg-white">
                 <p className="text-xs font-semibold text-primary mb-2">Step {idx + 1}</p>
@@ -237,11 +256,11 @@ export function Design2() {
               </div>
             ))}
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-5">Start with one of these</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-5">Most useful next steps</h2>
           <div className="grid sm:grid-cols-3 gap-4">
             {[
-              { href: "/best", title: "Best AI tools by value", desc: "Start with ranked picks that balance quality and price." },
               { href: "/calculator", title: "AI cost calculator", desc: "Estimate your monthly spend and find your cheaper setup." },
+              { href: "/compare/claude-vs-gpt-cost", title: "Claude vs GPT-4o cost", desc: "Our highest-intent comparison for quick pricing decisions." },
               { href: "/compare", title: "Compare major tools", desc: "See direct price and use-case tradeoffs side by side." },
             ].map((card) => (
               <Link key={card.href} href={card.href} className="border border-border rounded-xl p-5 bg-slate-50 hover:border-primary/40 transition-colors">
