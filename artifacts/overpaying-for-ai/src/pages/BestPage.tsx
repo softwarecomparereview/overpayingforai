@@ -17,7 +17,18 @@ import { generatePricingInsights, generateCategoryInsights } from "@/utils/insig
 import { getCheapestModel } from "@/utils/pricingEngine";
 import type { ModelCategory } from "@/types/pricing";
 
-const bestOf = bestOfData as typeof bestOfData;
+type BestOfEntry = (typeof bestOfData)[number];
+interface BestPageChooserRow {
+  persona: string;
+  pick: string;
+  reason: string;
+}
+type BestOfPage = BestOfEntry & {
+  defaultRecommendation?: string;
+  chooser?: BestPageChooserRow[];
+};
+
+const bestOf = bestOfData as BestOfPage[];
 const models = modelsData as AIModel[];
 
 function BestPageFreshness() {
@@ -112,20 +123,28 @@ export function BestPage() {
       </div>
 
       {/* Default recommendation callout — decisive one-liner for the top pick */}
+<<<<<<< develop
       {!!(page as Record<string, unknown>).defaultRecommendation && (
+=======
+      {page.defaultRecommendation && (
+>>>>>>> codexbranch
         <div className="border border-emerald-200 bg-emerald-50 rounded-lg px-5 py-4 mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-1.5">Default recommendation</p>
-          <p className="text-sm text-foreground font-medium leading-relaxed">{String((page as Record<string, unknown>).defaultRecommendation)}</p>
+          <p className="text-sm text-foreground font-medium leading-relaxed">{page.defaultRecommendation}</p>
         </div>
       )}
 
       {/* Chooser — self-select by use case (e.g. under-$20 page) */}
-      {Array.isArray((page as Record<string, unknown>).chooser) && (
+      {Array.isArray(page.chooser) && (
         <div className="mb-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Pick by use case</p>
           <div className="border border-border rounded-xl overflow-hidden divide-y divide-border">
+<<<<<<< develop
             {(page as unknown as Record<string, unknown[]>).chooser.map((row, i) => {
               const item = row as { persona: string; pick: string; reason: string };
+=======
+            {page.chooser.map((item, i) => {
+>>>>>>> codexbranch
               return (
                 <div key={i} className="flex items-start gap-4 px-5 py-4 bg-white hover:bg-muted/30 transition-colors">
                   <div className="flex-1 min-w-0">

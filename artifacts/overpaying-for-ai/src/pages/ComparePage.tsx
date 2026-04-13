@@ -11,6 +11,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
+import { trackGaEvent } from "@/utils/ga4";
 import {
   QuickDecisionBlock,
   CostBreakdownSection,
@@ -84,6 +85,12 @@ export function ComparePage() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-3">{page.title}</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
+        <p className="text-sm text-muted-foreground mt-3">
+          Not sure this is your exact scenario?{" "}
+          <Link href="/calculator" onClick={() => trackGaEvent("best_cta_calculator_click")} className="text-primary font-medium hover:underline">
+            Use the calculator →
+          </Link>
+        </p>
       </div>
 
       {/* Summary Card */}
@@ -217,15 +224,10 @@ export function ComparePage() {
           <div className="pt-3 border-t border-primary/10 flex flex-wrap gap-3">
             <Link
               href="/calculator"
+              onClick={() => trackGaEvent("best_cta_calculator_click")}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
             >
-              Calculate your cost →
-            </Link>
-            <Link
-              href="/decision-engine"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground hover:underline"
-            >
-              Take the decision quiz →
+              Not sure? Use the calculator →
             </Link>
           </div>
         </div>
@@ -327,12 +329,19 @@ const FEATURED_SLUGS = [
 
 export function CompareIndex() {
   const featuredSlugs = new Set(FEATURED_SLUGS.map((f) => f.slug));
+<<<<<<< develop
   type FeaturedComparison = typeof comparisons[number] & { label: string };
   const featuredComparisons = (FEATURED_SLUGS.map(({ slug, label }) => {
     const found = comparisons.find((c) => c.slug === slug);
     if (!found) return null;
     return { ...found, label };
   }).filter(Boolean)) as FeaturedComparison[];
+=======
+  const featuredComparisons = FEATURED_SLUGS.map(({ slug, label }) => {
+    const match = comparisons.find((c) => c.slug === slug);
+    return match ? { ...match, label } : null;
+  }).filter((c): c is ComparisonEntry & { label: string } => Boolean(c));
+>>>>>>> codexbranch
   const remainingComparisons = comparisons.filter((c) => !featuredSlugs.has(c.slug));
 
   return (
@@ -343,7 +352,7 @@ export function CompareIndex() {
         If you're not sure where to start, the three picks below answer the questions we see most often.
       </p>
       <p className="text-sm text-muted-foreground mb-8">
-        Not sure which applies to you? <Link href="/decision-engine" className="text-primary font-medium hover:underline">Use the decision engine →</Link>
+        Not sure which applies to you? <Link href="/calculator" className="text-primary font-medium hover:underline">Use the calculator →</Link>
       </p>
 
       {/* Start here — 3 featured comparisons */}

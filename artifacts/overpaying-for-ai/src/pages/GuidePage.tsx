@@ -30,7 +30,21 @@ interface GuideWinnerBlock {
   afterSectionIndex: number;
 }
 
-const guides = guidesData as typeof guidesData;
+type GuideEntry = (typeof guidesData)[number];
+interface GuideSeoBlock {
+  audience?: string;
+  notFor?: string;
+  pricingInsight?: string;
+  alternatives?: string;
+  verdict?: string;
+}
+type GuidePageEntry = GuideEntry & {
+  earlyCallout?: string;
+  winnerBlock?: GuideWinnerBlock;
+  seoBlock?: GuideSeoBlock;
+};
+
+const guides = guidesData as GuidePageEntry[];
 
 export function GuidePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -46,7 +60,7 @@ export function GuidePage() {
     );
   }
 
-  const winnerBlockConfig: GuideWinnerBlock | undefined = (guide as Record<string, unknown>).winnerBlock as GuideWinnerBlock | undefined;
+  const winnerBlockConfig = guide.winnerBlock;
 
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
@@ -67,10 +81,14 @@ export function GuidePage() {
       </div>
 
       {/* Early callout — fastest win or key recommendation, shown immediately after intro */}
+<<<<<<< develop
       {!!(guide as Record<string, unknown>).earlyCallout && (
+=======
+      {guide.earlyCallout && (
+>>>>>>> codexbranch
         <div className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">Fastest win</p>
-          <p className="text-sm text-foreground font-medium leading-relaxed">{String((guide as Record<string, unknown>).earlyCallout)}</p>
+          <p className="text-sm text-foreground font-medium leading-relaxed">{guide.earlyCallout}</p>
         </div>
       )}
 
@@ -135,9 +153,7 @@ export function GuidePage() {
       )}
 
       {(() => {
-        const seoBlock = (guide as Record<string, unknown>).seoBlock as {
-          audience?: string; notFor?: string; pricingInsight?: string; alternatives?: string; verdict?: string;
-        } | undefined;
+        const seoBlock = guide.seoBlock;
         return <SeoContentBlock {...(seoBlock ?? {})} />;
       })()}
 

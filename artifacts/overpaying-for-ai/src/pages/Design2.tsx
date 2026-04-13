@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
+import { trackGaEvent } from "@/utils/ga4";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
+import { PageSeo } from "@/components/seo/PageSeo";
+import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
+import { InternalLinks } from "@/components/seo/InternalLinks";
 import comparisonsData from "@/data/comparisons.json";
 import faqsData from "@/data/faqs.json";
 import guidesData from "@/data/guides.json";
@@ -193,79 +197,55 @@ function HomepageInsightsSection() {
 export function Design2() {
   return (
     <div className="bg-white">
+      <PageSeo
+        title="Overpaying for AI Tools? Compare Pricing and Cut Your Monthly Cost"
+        description="Compare AI pricing, estimate monthly savings, and find the best-value AI setup without harming quality."
+        canonicalUrl="/"
+      />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="border-b border-border bg-white py-14 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-[1fr_320px] gap-10 items-start">
+          <div className="max-w-3xl">
             <div>
               <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5 mb-6 text-xs font-semibold text-emerald-700">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Free · No sign-up · 20+ AI models tracked
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08] mb-5">
-                Find the cheapest<br />AI model for your<br />workload.
+                Overpaying for AI tools?
+                <br />
+                Fix your stack in minutes.
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mb-5">
-                Compare token pricing across ChatGPT, Claude, Gemini, and more. Calculate your real monthly spend. Find cheaper alternatives — before you commit.
+                Compare pricing, find a cheaper setup, and estimate your monthly savings before you commit to the wrong AI tool.
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-8 border-l-2 border-emerald-400 pl-3 italic">
-                "Most teams overpay by 60–90% by using premium models for tasks that cheaper ones handle just as well."
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-8">
+                Compare pricing, estimate savings, and find the best-value AI setup.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/calculator"
                   data-testid="hp-cta-calc"
-                  onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "primary" })}
+                  onClick={() => {
+                    trackGaEvent("homepage_cta_calculator_click");
+                    track("affiliate_clicked", { sourceSurface: "homepage", variant: "calculator_primary" });
+                  }}
                   className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  Calculate your AI cost →
+                  Check your AI cost →
                 </Link>
                 <Link
-                  href="/compare/claude-vs-gpt-cost"
-                  data-testid="hp-cta-compare"
-                  onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "secondary" })}
+                  href="/best"
+                  data-testid="hp-cta-best"
+                  onClick={() => {
+                    trackGaEvent("homepage_cta_best_click");
+                    track("affiliate_clicked", { sourceSurface: "homepage", variant: "best_primary" });
+                  }}
                   className="inline-flex items-center justify-center border border-border hover:bg-muted text-foreground font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  See cheaper alternatives
+                  See the best-value tools
                 </Link>
-              </div>
-            </div>
-
-            {/* Right trust panel */}
-            <div className="space-y-3 hidden lg:block">
-              <div className="rounded-2xl bg-slate-900 text-white p-5">
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-3">What you'll find here</p>
-                <ul className="space-y-2.5 text-sm text-white/80">
-                  {[
-                    "Real token-based cost calculator",
-                    "Side-by-side model comparisons",
-                    "Real savings switch scenarios",
-                    "Best model picks by use case",
-                    "Guides on reducing AI spend",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="text-emerald-400 mt-0.5 shrink-0">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={`rounded-2xl border p-4 ${IS_STALE ? "bg-orange-50 border-orange-200" : "bg-amber-50 border-amber-200"}`}>
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className={`w-1.5 h-1.5 rounded-full ${IS_STALE ? "bg-orange-500" : "bg-amber-500"}`} />
-                  <p className={`text-xs font-semibold ${IS_STALE ? "text-orange-800" : "text-amber-800"}`}>Pricing freshness</p>
-                </div>
-                <p className={`text-xs leading-relaxed ${IS_STALE ? "text-orange-700" : "text-amber-700"}`}>
-                  {FRESHNESS_MSG}. All prices sourced from official provider pages.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-border p-4 bg-white">
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  <strong className="text-foreground">No affiliate bias:</strong> recommendations are ranked by cost efficiency, not commissions.
-                </p>
               </div>
             </div>
           </div>
@@ -292,25 +272,41 @@ export function Design2() {
       {/* ── TRUST / FRESHNESS STRIP ──────────────────────────── */}
       <section className="border-b border-border bg-slate-50 py-5">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
-            <div>
-              <p className="text-2xl font-bold text-foreground font-mono">20+</p>
-              <p className="text-xs text-muted-foreground mt-0.5">AI models tracked</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground font-mono">96%</p>
-              <p className="text-xs text-muted-foreground mt-0.5">max savings found</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground font-mono">$216</p>
-              <p className="text-xs text-muted-foreground mt-0.5">avg annual overspend</p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-emerald-700">{FRESHNESS_MSG}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                <Link href="/changelog" className="hover:underline">View pricing changelog →</Link>
-              </p>
-            </div>
+          <div className="grid sm:grid-cols-3 gap-3 text-sm">
+            <div className="rounded-lg border border-border bg-white px-4 py-3">Compare AI costs</div>
+            <div className="rounded-lg border border-border bg-white px-4 py-3">Estimate savings</div>
+            <div className="rounded-lg border border-border bg-white px-4 py-3">Find the best-value setup</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-white py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">How it works</h2>
+          <div className="grid sm:grid-cols-3 gap-4 mb-10">
+            {[
+              "Enter your use case",
+              "See cheaper options",
+              "Switch to the best-value setup",
+            ].map((step, idx) => (
+              <div key={step} className="border border-border rounded-xl p-5 bg-white">
+                <p className="text-xs font-semibold text-primary mb-2">Step {idx + 1}</p>
+                <p className="text-sm font-medium text-foreground">{step}</p>
+              </div>
+            ))}
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-5">Start with one of these</h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              { href: "/best", title: "Best AI tools by value", desc: "Start with ranked picks that balance quality and price." },
+              { href: "/calculator", title: "AI cost calculator", desc: "Estimate your monthly spend and find your cheaper setup." },
+              { href: "/compare", title: "Compare major tools", desc: "See direct price and use-case tradeoffs side by side." },
+            ].map((card) => (
+              <Link key={card.href} href={card.href} className="border border-border rounded-xl p-5 bg-slate-50 hover:border-primary/40 transition-colors">
+                <h3 className="font-semibold text-foreground mb-2">{card.title}</h3>
+                <p className="text-sm text-muted-foreground">{card.desc}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -794,6 +790,16 @@ export function Design2() {
           </div>
         </div>
       </section>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <SeoContentBlock />
+        <InternalLinks heading="Funnel pages" links={[
+          { href: "/calculator", text: "AI Cost Calculator" },
+          { href: "/best", text: "Best AI Tools by Value" },
+          { href: "/ai-types", text: "Browse AI Types" },
+          { href: "/compare", text: "Compare Major Tools" },
+        ]} />
+      </div>
 
     </div>
   );
