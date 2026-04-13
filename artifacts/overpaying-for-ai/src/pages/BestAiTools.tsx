@@ -3,6 +3,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { CTABlock } from "@/components/monetization/CTABlock";
+import { trackGaEvent } from "@/utils/ga4";
 import bestOfData from "@/data/best-of.json";
 import aiTypesData from "@/data/aiTypes.json";
 
@@ -56,6 +57,12 @@ const CHEAPEST_MODELS = [
   },
 ];
 
+const STARTING_POINT_LINKS = [
+  { href: "/calculator", title: "AI cost calculator", description: "Get a personalized answer based on your usage and budget." },
+  { href: "/compare", title: "Top comparison pages", description: "Jump into the largest pricing gaps and quickest savings wins." },
+  { href: "/ai-types", title: "Best pages by AI type", description: "Choose by use case and avoid paying for unnecessary model quality." },
+];
+
 export function BestAiTools() {
   return (
     <div className="bg-white">
@@ -77,19 +84,46 @@ export function BestAiTools() {
             budget. This guide covers the best AI tools by category, use case, and price — backed by real
             token-cost data, not marketing claims.
           </p>
+          <p className="text-white/80 text-sm mb-6">
+            Start here if you want the fastest path to a cheaper AI stack.
+          </p>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/calculator"
+              onClick={() => trackGaEvent("best_cta_calculator_click")}
               className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
             >
               Calculate my AI cost →
             </Link>
             <Link
-              href="/decision-engine"
-              className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-6 py-3 rounded-lg text-sm hover:bg-white/10 transition-colors"
+              href="/compare"
+              className="inline-flex items-center gap-2 text-white/80 text-sm font-medium hover:underline"
             >
-              Find my cheapest stack
+              Explore top comparisons →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl font-bold text-foreground mb-3">Best starting points</h2>
+          <p className="text-sm text-muted-foreground mb-6">Use one of these paths to reduce AI spend quickly.</p>
+          <div className="grid sm:grid-cols-3 gap-4 mb-6">
+            {STARTING_POINT_LINKS.map((item) => (
+              <Link key={item.href} href={item.href} className="border border-border rounded-xl p-5 bg-slate-50 hover:border-primary/40 transition-colors">
+                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="border border-primary/20 bg-primary/5 rounded-xl p-4">
+            <p className="text-sm font-medium text-foreground">
+              Need a personalized answer?{" "}
+              <Link href="/calculator" onClick={() => trackGaEvent("best_cta_calculator_click")} className="text-primary hover:underline">
+                Use the calculator →
+              </Link>
+            </p>
           </div>
         </div>
       </section>
