@@ -11,13 +11,13 @@ import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
-import { trackFeatureOpen } from "@/utils/analytics";
+import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { CTABlock } from "@/components/monetization/CTABlock";
 import { generateTitle, generateMetaDescription, generateSchemaSoftwareApp } from "@/utils/seo";
 import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
-import { trackGaEvent } from "@/utils/ga4";
+import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 
 const CALCULATOR_SEO_TITLE = generateTitle("", "calculator");
 const CALCULATOR_SEO_DESC = generateMetaDescription("", "calculator");
@@ -47,6 +47,7 @@ function buildShareUrl(modelId: string, input: number, output: number): string {
 
 export function Calculator() {
   const inputsRef = useRef<HTMLDivElement | null>(null);
+  const calculationCountRef = useRef(0);
 
   const params = typeof window !== "undefined"
     ? new URLSearchParams(window.location.search)
@@ -68,6 +69,15 @@ export function Calculator() {
         mode: "api",
       });
       setResult(r);
+      calculationCountRef.current += 1;
+      trackDecisionEvent("calculator_completed", {
+        page_type: "calculator",
+        source_component: "Calculator/CalculateButton",
+        page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
+        selected_model: r.model.id,
+        selected_provider: r.model.provider,
+        calculation_index: calculationCountRef.current,
+      });
     } catch (e) {
       console.error(e);
     }
@@ -105,6 +115,19 @@ export function Calculator() {
     inputsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [selectedScenario]);
 
+  useEffect(() => {
+    if (!result) return;
+    trackDecisionEvent("calculator_results_viewed", {
+      page_type: "calculator",
+      source_component: "Calculator/ResultsBlock",
+      page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
+      selected_model: result.model.id,
+      selected_provider: result.model.provider,
+      has_cheaper_alternative: Boolean(result.cheaperAlternatives.length),
+      calculation_index: calculationCountRef.current,
+    });
+  }, [result]);
+
   const copyShareLink = () => {
     navigator.clipboard.writeText(buildShareUrl(modelId, inputTokens, outputTokens));
     setCopied(true);
@@ -124,13 +147,22 @@ export function Calculator() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
       <PageSeo title={CALCULATOR_SEO_TITLE} description={CALCULATOR_SEO_DESC} schema={CALCULATOR_SCHEMA} />
       <div className="mb-5 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">AI Cost Calculator</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">Find your cheapest viable AI setup</h1>
         <p className="text-sm sm:text-base text-muted-foreground max-w-prose">
-          Estimate your monthly AI spend and discover cheaper alternatives.
+          Estimate your real monthly AI spend and immediately see lower-cost alternatives.
         </p>
         <p className="text-xs text-muted-foreground mt-2">
           Recommendations are based on use case, usage level, and cost sensitivity.
         </p>
+      </div>
+
+      <div className="mb-6 sm:mb-8 border border-border rounded-xl bg-muted/20 p-4 sm:p-5">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Use this if…</p>
+        <ul className="text-sm text-foreground space-y-1.5">
+          <li>• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.</li>
+          <li>• You need a fast estimate before choosing between API and subscription plans.</li>
+          <li>• You want one clear next step after seeing your projected monthly spend.</li>
+        </ul>
       </div>
 
       <div className="border border-border rounded-xl bg-card p-4 sm:p-6 mb-6 sm:mb-8">
@@ -317,22 +349,36 @@ export function Calculator() {
                   <li>Potential savings: {formatCost(bestSetup.savings)}/month ({bestSetup.savingsPercent.toFixed(0)}%)</li>
                 </ul>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                  <a
-                    href={primaryTarget.href}
-                    target={primaryTarget.isExternal ? "_blank" : undefined}
-                    rel={primaryTarget.isExternal ? "noopener noreferrer sponsored" : undefined}
-                    onClick={() => trackGaEvent("calculator_result_primary_cta_click", { destination: primaryTarget.href })}
+                  <AffiliateCta
+                    target={{
+                      ...primaryTarget,
+                      label: primaryTarget.isAffiliate ? "Switch to the cheaper setup" : "See the lower-cost option",
+                    }}
                     className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-4 py-2 font-semibold text-sm hover:bg-primary/90 transition-colors"
-                  >
-                    {primaryTarget.isAffiliate ? "Switch to the cheaper setup" : "See the lower-cost option"}
-                  </a>
-                  <Link
-                    href="/best"
-                    onClick={() => trackGaEvent("calculator_result_secondary_cta_click")}
+                    trackingContext={{
+                      providerId: bestSetupProviderId,
+                      ctaType: "primary",
+                      pageType: "calculator",
+                      sourceComponent: "Calculator/ResultsPrimaryCta",
+                    }}
+                  />
+                  <AffiliateCta
+                    target={{
+                      href: "/best",
+                      label: "Compare other best-value tools",
+                      isExternal: false,
+                      isAffiliate: false,
+                      fallbackUsed: true,
+                      status: "unavailable",
+                    }}
                     className="text-sm text-muted-foreground hover:text-foreground hover:underline"
-                  >
-                    Compare other best-value tools →
-                  </Link>
+                    trackingContext={{
+                      providerId: "",
+                      ctaType: "secondary",
+                      pageType: "calculator",
+                      sourceComponent: "Calculator/ResultsSecondaryCta",
+                    }}
+                  />
                 </div>
               </div>
             )}

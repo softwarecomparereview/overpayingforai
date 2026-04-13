@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { trackFeatureOpen } from "@/utils/analytics";
+import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
@@ -117,6 +117,16 @@ export function DecisionEngine() {
       const res = runRecommender(full);
       setResult(res);
       setStep(5);
+      trackDecisionEvent("decision_engine_completed", {
+        page_type: "decision_engine",
+        source_component: "DecisionEngine/QuestionFlow",
+        page_path: typeof window !== "undefined" ? window.location.pathname : "/decision-engine",
+        use_case: full.useCase,
+        budget: full.budget,
+        usage_frequency: full.usageFrequency,
+        quality_preference: full.qualityPreference,
+        free_tier_required: full.freeTierRequired,
+      });
     }
   };
 
