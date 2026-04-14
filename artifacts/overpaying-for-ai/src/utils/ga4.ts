@@ -84,17 +84,29 @@ export function trackCtaClickGa(params: Ga4CtaParams): void {
   });
 }
 
+export interface Ga4FeatureOpenContext {
+  pageType?: string;
+  pagePath?: string;
+  sourceComponent?: string;
+}
+
 /**
  * Track a feature-open event (calculator, decision engine, etc.)
- * Low-noise: only fires a single simple GA4 event.
+ * Low-noise, but includes page context so reports are actionable.
  */
 export function trackFeatureOpen(
   feature: "calculator" | "decision_engine" | "pricing_changelog",
+  context: Ga4FeatureOpenContext = {},
 ): void {
   const eventMap = {
     calculator: "calculator_open",
     decision_engine: "decision_engine_open",
     pricing_changelog: "pricing_changelog_open",
   } as const;
-  safeGtag("event", eventMap[feature], { send_to: GA_ID });
+  safeGtag("event", eventMap[feature], {
+    page_type: context.pageType ?? feature,
+    page_path: context.pagePath ?? (typeof window !== "undefined" ? window.location.pathname : ""),
+    source_component: context.sourceComponent ?? "unknown",
+    send_to: GA_ID,
+  });
 }

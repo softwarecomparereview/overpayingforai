@@ -105,7 +105,12 @@ export function DecisionEngine() {
   const [inputs, setInputs] = useState<Partial<DecisionInputs>>({});
   const [result, setResult] = useState<RecommendationResult | null>(null);
 
-  useEffect(() => { trackFeatureOpen("decision_engine"); }, []);
+  useEffect(() => {
+    trackFeatureOpen("decision_engine", {
+      pageType: "decision_engine",
+      sourceComponent: "DecisionEngine/PageOpen",
+    });
+  }, []);
 
   const set = <K extends keyof DecisionInputs>(key: K, value: DecisionInputs[K]) => {
     const updated = { ...inputs, [key]: value };
