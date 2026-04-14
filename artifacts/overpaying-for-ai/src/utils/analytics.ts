@@ -32,6 +32,24 @@ const ALLOWED_EVENTS = new Set([
   "pricing_refresh_approved",
 ]);
 
+/**
+ * GA4 events that should drive decision-making dashboards and conversion review.
+ * Key events are the ones to mark as conversions in GA4 UI.
+ */
+export const GA4_DECISION_EVENT_CHECKLIST = {
+  keyEvents: [
+    "affiliate_click",
+    "calculator_completed",
+    "calculator_results_viewed",
+    "decision_engine_completed",
+  ] as const,
+  supportingEvents: [
+    "calculator_open",
+    "decision_engine_open",
+    "compare_cta_click",
+  ] as const,
+} as const;
+
 const isDev = import.meta.env.DEV;
 
 /** Internal Segment-style event tracker. Preserves existing behavior. */
@@ -102,20 +120,31 @@ export function trackCta(params: CtaTrackingParams): void {
   trackCtaClickGa(ga4Params);
 }
 
+export interface FeatureOpenTrackingContext {
+  pageType?: string;
+  pagePath?: string;
+  sourceComponent?: string;
+}
+
 /**
  * Track a feature-open event (calculator, decision engine, etc.)
- * Fires GA4 only — lightweight, no internal event needed.
+ * Fires GA4 only — lightweight, but includes enough context for reporting.
  */
 export function trackFeatureOpen(
   feature: "calculator" | "decision_engine" | "pricing_changelog",
+  context: FeatureOpenTrackingContext = {},
 ): void {
   const eventMap = {
     calculator: "calculator_open",
     decision_engine: "decision_engine_open",
     pricing_changelog: "pricing_changelog_open",
   } as const;
-  trackGaEvent(eventMap[feature]);
-  if (isDev) console.log("analytics", eventMap[feature]);
+  trackGaEvent(eventMap[feature], {
+    page_type: context.pageType ?? feature,
+    page_path: context.pagePath ?? (typeof window !== "undefined" ? window.location.pathname : ""),
+    source_component: context.sourceComponent ?? "unknown",
+  });
+  if (isDev) console.log("analytics", eventMap[feature], context);
 }
 
 /**

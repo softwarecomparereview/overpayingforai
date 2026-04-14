@@ -108,7 +108,12 @@ export function Calculator() {
     }
   };
 
-  useEffect(() => { trackFeatureOpen("calculator"); }, []);
+  useEffect(() => {
+    trackFeatureOpen("calculator", {
+      pageType: "calculator",
+      sourceComponent: "Calculator/PageOpen",
+    });
+  }, []);
 
   useEffect(() => {
     if (!selectedScenario) return;
