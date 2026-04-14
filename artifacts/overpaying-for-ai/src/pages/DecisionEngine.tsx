@@ -50,7 +50,7 @@ function OptionButton<T>({
   return (
     <button
       onClick={() => onSelect(option.value)}
-      className={`w-full text-left px-4 py-3.5 rounded-lg border transition-colors ${
+      className={`w-full text-left px-4 py-3.5 rounded-xl border transition-colors ${
         selected
           ? "border-primary bg-primary/10 text-foreground"
           : "border-border bg-card hover:border-primary/40 hover:bg-muted/30 text-foreground"
@@ -80,7 +80,7 @@ function ResultCard({
   const label = labels[tier];
 
   return (
-    <div className={`border rounded-xl p-5 ${highlight ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`} data-testid={`result-${tier}`}>
+    <div className={`border rounded-2xl p-5 ${highlight ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`} data-testid={`result-${tier}`}>
       <div className="flex items-start justify-between mb-3">
         <span className={`text-xs font-semibold px-2.5 py-1 rounded ${label.color}`}>{label.text}</span>
         {highlight && (
@@ -144,126 +144,231 @@ export function DecisionEngine() {
   const stepLabels = ["Use case", "Budget", "Usage", "Quality", "Free tier"];
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">AI Decision Engine</h1>
-        <p className="text-muted-foreground">Answer 5 questions. Get your optimal AI stack.</p>
-      </div>
+    <div className="bg-white">
+      <section className="border-b border-border bg-slate-900 text-white py-14 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Decision engine</p>
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">AI Decision Engine</h1>
+              <p className="text-white/70 text-base max-w-2xl leading-relaxed mb-5">
+                Answer 5 questions and get a practical AI stack recommendation. This is for people who need the cheapest viable setup, not just a single price comparison.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/15 text-white/70">5-question flow</span>
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/15 text-white/70">Cheapest, balanced, premium picks</span>
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/15 text-white/70">Built for practical decisions</span>
+              </div>
+            </div>
 
-      {step < 5 && (
-        <div className="mb-8">
-          {/* Progress */}
-          <div className="flex items-center gap-2 mb-6">
-            {stepLabels.map((label, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className={`flex items-center gap-1.5 text-xs ${i === step ? "text-primary font-medium" : i < step ? "text-muted-foreground line-through" : "text-muted-foreground/50"}`}>
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${i === step ? "bg-primary text-primary-foreground" : i < step ? "bg-muted text-muted-foreground" : "bg-muted/30 text-muted-foreground/50"}`}>
-                    {i + 1}
-                  </div>
-                  <span className="hidden sm:inline">{label}</span>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">What you get</p>
+              <div className="space-y-3">
+                <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                  <p className="text-sm font-semibold text-white">A ranked stack recommendation</p>
+                  <p className="text-xs text-white/60 mt-1">Not just one tool — cheapest viable, balanced, and premium options.</p>
                 </div>
-                {i < stepLabels.length - 1 && (
-                  <div className={`h-px w-4 ${i < step ? "bg-muted" : "bg-muted/30"}`} />
+                <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                  <p className="text-sm font-semibold text-white">Routing guidance</p>
+                  <p className="text-xs text-white/60 mt-1">A simple strategy for how to use those tools together.</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                  <p className="text-sm font-semibold text-white">A next step</p>
+                  <p className="text-xs text-white/60 mt-1">Move into the calculator when you want exact monthly cost based on usage.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-slate-50 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Best for</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">People who are not sure which AI tool or plan should be their default choice.</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">How it works</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">We narrow the recommendation using use case, budget, usage frequency, quality preference, and free-tier requirements.</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Next step</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">After the recommendation, use the calculator to validate the exact cost with your own usage assumptions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {step < 5 && (
+            <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-6 items-start">
+              <div className="border border-border rounded-2xl bg-white p-6">
+                <div className="mb-6">
+                  <h2 className="text-2xl font-bold text-foreground mb-2">Answer 5 questions. Get your optimal AI stack.</h2>
+                  <p className="text-muted-foreground text-sm">Use this when choosing between multiple tools is harder than calculating one model’s cost.</p>
+                </div>
+
+                <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1">
+                  {stepLabels.map((label, i) => (
+                    <div key={i} className="flex items-center gap-2 shrink-0">
+                      <div className={`flex items-center gap-1.5 text-xs ${i === step ? "text-primary font-medium" : i < step ? "text-muted-foreground line-through" : "text-muted-foreground/50"}`}>
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${i === step ? "bg-primary text-primary-foreground" : i < step ? "bg-muted text-muted-foreground" : "bg-muted/30 text-muted-foreground/50"}`}>
+                          {i + 1}
+                        </div>
+                        <span>{label}</span>
+                      </div>
+                      {i < stepLabels.length - 1 && (
+                        <div className={`h-px w-4 ${i < step ? "bg-muted" : "bg-muted/30"}`} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {step === 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">What’s your primary use case?</h3>
+                    <div className="space-y-2">
+                      {USE_CASES.map((o) => (
+                        <OptionButton key={o.value} option={o} selected={inputs.useCase === o.value} onSelect={(v) => set("useCase", v)} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 1 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">What’s your monthly budget?</h3>
+                    <div className="space-y-2">
+                      {BUDGETS.map((o) => (
+                        <OptionButton key={o.value} option={o} selected={inputs.budget === o.value} onSelect={(v) => set("budget", v)} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">How often will you use it?</h3>
+                    <div className="space-y-2">
+                      {FREQUENCIES.map((o) => (
+                        <OptionButton key={o.value} option={o} selected={inputs.usageFrequency === o.value} onSelect={(v) => set("usageFrequency", v)} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 3 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">What’s your quality preference?</h3>
+                    <div className="space-y-2">
+                      {QUALITY_PREFS.map((o) => (
+                        <OptionButton key={o.value} option={o} selected={inputs.qualityPreference === o.value} onSelect={(v) => set("qualityPreference", v)} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {step === 4 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Do you need a free tier option?</h3>
+                    <div className="space-y-2">
+                      {FREE_TIER.map((o) => (
+                        <OptionButton key={String(o.value)} option={o} selected={inputs.freeTierRequired === o.value} onSelect={(v) => set("freeTierRequired", v)} />
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
-            ))}
-          </div>
 
-          {/* Questions */}
-          {step === 0 && (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">What's your primary use case?</h2>
-              <div className="space-y-2">
-                {USE_CASES.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.useCase === o.value} onSelect={(v) => set("useCase", v)} />
-                ))}
+              <div className="space-y-4 lg:sticky lg:top-24">
+                <div className="rounded-2xl border border-border bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Why use this instead of browsing?</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• It narrows the field faster than browsing many categories or comparisons.</li>
+                    <li>• It balances budget, quality, and usage rather than over-optimising for one factor.</li>
+                    <li>• It gives you an actionable next step when the answer is not obvious.</li>
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl border border-primary/15 bg-primary/5 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Good follow-ups</p>
+                  <div className="space-y-3">
+                    <Link href="/calculator" className="block text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      Validate with the calculator →
+                    </Link>
+                    <Link href="/compare/claude-vs-gpt-cost" className="block text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      Compare Claude vs GPT-4o →
+                    </Link>
+                    <Link href="/resources" className="block text-sm font-medium text-foreground hover:text-primary transition-colors">
+                      Browse all resources →
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
-          {step === 1 && (
+          {step === 5 && result && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">What's your monthly budget?</h2>
-              <div className="space-y-2">
-                {BUDGETS.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.budget === o.value} onSelect={(v) => set("budget", v)} />
-                ))}
+              <div className="mb-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Your recommendation</p>
+                <h2 className="text-2xl font-bold text-foreground mb-1">Your AI stack recommendations</h2>
+                <p className="text-sm text-muted-foreground">Based on: {inputs.useCase}, {inputs.budget} budget, {inputs.usageFrequency} usage</p>
               </div>
-            </div>
-          )}
 
-          {step === 2 && (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">How often will you use it?</h2>
-              <div className="space-y-2">
-                {FREQUENCIES.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.usageFrequency === o.value} onSelect={(v) => set("usageFrequency", v)} />
-                ))}
-              </div>
-            </div>
-          )}
+              <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-start">
+                <div className="space-y-4 mb-6 lg:mb-0">
+                  <ResultCard tier="cheapest" rec={result.cheapest} />
+                  <ResultCard tier="balanced" rec={result.balanced} highlight />
+                  <ResultCard tier="premium" rec={result.premium} />
+                </div>
 
-          {step === 3 && (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">What's your quality preference?</h2>
-              <div className="space-y-2">
-                {QUALITY_PREFS.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.qualityPreference === o.value} onSelect={(v) => set("qualityPreference", v)} />
-                ))}
-              </div>
-            </div>
-          )}
+                <div className="space-y-4">
+                  <div className="border border-border rounded-2xl p-5 bg-muted/30">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested strategy</p>
+                    <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
+                  </div>
 
-          {step === 4 && (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Do you need a free tier option?</h2>
-              <div className="space-y-2">
-                {FREE_TIER.map((o) => (
-                  <OptionButton key={String(o.value)} option={o} selected={inputs.freeTierRequired === o.value} onSelect={(v) => set("freeTierRequired", v)} />
-                ))}
+                  <div className="border border-primary/15 rounded-2xl p-5 bg-primary/5">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Recommended next action</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">Now validate the exact monthly cost of your likely default tool before you switch or commit.</p>
+                    <div className="flex flex-wrap gap-3">
+                      <Link
+                        href="/calculator"
+                        className="text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2.5 font-medium hover:bg-primary/90 transition-colors"
+                      >
+                        Calculate exact cost →
+                      </Link>
+                      <button
+                        onClick={reset}
+                        className="text-sm border border-border rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
+                        data-testid="restart-btn"
+                      >
+                        Start Over
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border border-border rounded-2xl p-5 bg-white">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Good follow-ups</p>
+                    <div className="space-y-3">
+                      <Link href="/compare/claude-vs-gpt-cost" className="block text-sm font-medium text-foreground hover:text-primary transition-colors">
+                        Compare Claude vs GPT-4o →
+                      </Link>
+                      <Link href="/resources" className="block text-sm font-medium text-foreground hover:text-primary transition-colors">
+                        Browse all resources →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
         </div>
-      )}
-
-      {/* Results */}
-      {step === 5 && result && (
-        <div>
-          <div className="mb-6">
-            <h2 className="text-xl font-bold mb-1">Your AI Stack Recommendations</h2>
-            <p className="text-sm text-muted-foreground">Based on: {inputs.useCase}, {inputs.budget} budget, {inputs.usageFrequency} usage</p>
-          </div>
-
-          <div className="space-y-4 mb-6">
-            <ResultCard tier="cheapest" rec={result.cheapest} />
-            <ResultCard tier="balanced" rec={result.balanced} highlight />
-            <ResultCard tier="premium" rec={result.premium} />
-          </div>
-
-          {/* Routing strategy */}
-          <div className="border border-border rounded-lg p-4 bg-muted/30 mb-8">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested Strategy</p>
-            <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={reset}
-              className="text-sm border border-border rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
-              data-testid="restart-btn"
-            >
-              Start Over
-            </button>
-            <Link
-              href="/calculator"
-              className="text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2.5 font-medium hover:bg-primary/90 transition-colors"
-            >
-              Calculate exact cost →
-            </Link>
-          </div>
-        </div>
-      )}
+      </section>
     </div>
   );
 }
