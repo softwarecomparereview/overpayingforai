@@ -115,13 +115,11 @@ export function ComparePage() {
         </div>
       </div>
 
-      {/* Summary Card */}
       <div className="bg-muted/50 border border-border rounded-lg p-5 mb-6">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-2">Summary</h2>
         <p className="text-foreground leading-relaxed">{page.summary}</p>
       </div>
 
-      {/* Quick Decision Block — high up, high conversion value */}
       <QuickDecisionBlock
         quickVerdict={page.quickVerdict}
         nameA={nameA}
@@ -130,7 +128,6 @@ export function ComparePage() {
         bestForB={page.bestForB}
       />
 
-      {/* Winner Block — derived from cheapestOption in comparison data */}
       {cheapest && (() => {
         const savings = deriveSavingsFromComparison(page.cheapestOption, page.modelA, page.modelB);
         const savingsLabel = formatSavingsLabel(savings);
@@ -154,7 +151,6 @@ export function ComparePage() {
         );
       })()}
 
-      {/* Pricing Table */}
       <section className="mb-10">
         <h2 className="text-xl font-bold mb-4">Pricing Comparison</h2>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -177,10 +173,8 @@ export function ComparePage() {
         )}
       </section>
 
-      {/* Real-World Cost Breakdown */}
       <CostBreakdownSection costBreakdown={page.costBreakdown} />
 
-      {/* Cheapest Option */}
       {cheapest && (() => {
         const cheapestProviderId = modelIdToProviderId(cheapest.id);
         const cheapestPrimary = getPrimaryCta(cheapestProviderId, "cheapest", "/calculator");
@@ -219,7 +213,6 @@ export function ComparePage() {
         );
       })()}
 
-      {/* Output Quality & Workflow Tradeoffs */}
       <QualityTradeoffSection
         nameA={nameA}
         nameB={nameB}
@@ -227,7 +220,6 @@ export function ComparePage() {
         qualityNotesB={page.qualityNotesB}
       />
 
-      {/* When NOT to use each tool */}
       <AvoidSection
         nameA={nameA}
         nameB={nameB}
@@ -235,10 +227,8 @@ export function ComparePage() {
         avoidB={page.avoidB}
       />
 
-      {/* Cheapest Viable Alternative */}
       <CheapestStackSection cheapestStack={page.cheapestStack} />
 
-      {/* Recommendation */}
       <section className="mb-10">
         <h2 className="text-xl font-bold mb-4">Our Recommendation</h2>
         <div className="border border-primary/20 bg-primary/5 rounded-lg p-5">
@@ -275,10 +265,8 @@ export function ComparePage() {
         </div>
       </section>
 
-      {/* Final Verdict */}
       <FinalVerdictSection finalVerdict={page.finalVerdict} />
 
-      {/* FAQ */}
       {page.faq && page.faq.length > 0 && (
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
@@ -293,7 +281,6 @@ export function ComparePage() {
         </section>
       )}
 
-      {/* Editorial Insight — unique per page, last content before SEO blocks */}
       <EditorialInsight
         editorialInsight={page.editorialInsight}
         pricingNotes={page.pricingNotes}
@@ -358,53 +345,132 @@ export function CompareIndex() {
   const remainingComparisons = comparisons.filter((c) => !featuredSlugs.has(c.slug));
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <h1 className="text-3xl font-bold mb-2">AI Cost Comparisons</h1>
-      <p className="text-muted-foreground mb-3">
-        Each comparison helps you answer one question: which model or plan is cheaper for your actual use case?
-        If you're not sure where to start, the three picks below answer the questions we see most often.
-      </p>
-      <p className="text-sm text-muted-foreground mb-8">
-        Not sure which applies to you? <Link href="/calculator" className="text-primary font-medium hover:underline">Use the calculator →</Link>
-      </p>
-
-      {/* Start here — 3 featured comparisons */}
-      <div className="mb-10">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Start here</p>
-        <div className="space-y-3">
-          {featuredComparisons.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/compare/${c.slug}`}
-              className="flex items-start gap-4 border border-primary/20 bg-primary/5 rounded-lg p-5 hover:border-primary/50 hover:bg-primary/10 transition-colors"
-            >
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded">{c.label}</span>
-                </div>
-                <h2 className="font-semibold text-foreground mb-1 text-base">{c.title}</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
+    <div className="bg-white">
+      <section className="border-b border-border bg-slate-900 text-white py-14 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-[1.35fr_0.85fr] gap-6 items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Compare models</p>
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">AI Cost Comparisons</h1>
+              <p className="text-white/60 text-base max-w-2xl leading-relaxed">
+                Each comparison answers one question: which model or plan is cheaper for your actual use case? Start with the three picks below if you want the fastest path to a useful answer.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {FEATURED_SLUGS.map((item) => (
+                  <span key={item.slug} className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/15 text-white/70">
+                    {item.label}
+                  </span>
+                ))}
               </div>
-              <span className="text-primary text-lg mt-1 shrink-0">→</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+            </div>
 
-      {/* Full list */}
-      <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">More comparisons</p>
-      <div className="grid sm:grid-cols-2 gap-4">
-        {remainingComparisons.map((c) => (
-          <Link
-            key={c.slug}
-            href={`/compare/${c.slug}`}
-            className="block border border-border rounded-lg p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors"
-          >
-            <h2 className="font-semibold text-foreground mb-2 text-base">{c.title}</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
-          </Link>
-        ))}
-      </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Fastest paths</p>
+              <div className="space-y-3">
+                <Link href="/calculator" className="block rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:border-white/20 hover:bg-white/10 transition-colors">
+                  <p className="text-sm font-semibold text-white">Use the calculator first</p>
+                  <p className="text-xs text-white/60 mt-1">Best when you already know your usage and want exact monthly cost.</p>
+                </Link>
+                <Link href="/decision-engine" className="block rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:border-white/20 hover:bg-white/10 transition-colors">
+                  <p className="text-sm font-semibold text-white">Use the decision engine</p>
+                  <p className="text-xs text-white/60 mt-1">Best when you need a ranked stack recommendation, not just one comparison.</p>
+                </Link>
+                <Link href="/resources" className="block rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:border-white/20 hover:bg-white/10 transition-colors">
+                  <p className="text-sm font-semibold text-white">Browse all resources</p>
+                  <p className="text-xs text-white/60 mt-1">Best when you want guides, best-of pages, and comparisons together.</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-slate-50 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold text-primary mb-2">Step 1</p>
+              <h2 className="font-bold text-foreground mb-2">Start with the most likely question</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">Subscription vs API, GPT-4o vs mini, and DeepSeek vs GPT-4o cover the highest-intent pricing decisions first.</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold text-primary mb-2">Step 2</p>
+              <h2 className="font-bold text-foreground mb-2">Validate against your usage</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">Use the calculator when the comparison is directionally useful but you need your own exact cost.</p>
+            </div>
+            <div className="rounded-2xl border border-border bg-white p-5">
+              <p className="text-xs font-semibold text-primary mb-2">Step 3</p>
+              <h2 className="font-bold text-foreground mb-2">Escalate to a stack recommendation</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">Use the decision engine when one model comparison is too narrow for your actual workflow.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="mb-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Start here</p>
+            <h2 className="text-2xl font-bold text-foreground">Three high-intent comparisons</h2>
+            <p className="text-sm text-muted-foreground mt-1 max-w-2xl">These answer the questions most people ask first before they explore the rest of the comparison library.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-4 mb-10">
+            {featuredComparisons.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/compare/${c.slug}`}
+                className="group rounded-2xl border border-primary/20 bg-primary/5 p-5 hover:border-primary/50 hover:bg-primary/10 transition-colors"
+              >
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">{c.label}</span>
+                  <span className="text-primary text-sm">→</span>
+                </div>
+                <h3 className="font-semibold text-foreground mb-2 text-base group-hover:text-primary transition-colors">{c.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mb-4 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">More comparisons</p>
+              <h2 className="text-2xl font-bold text-foreground">Explore the full comparison library</h2>
+            </div>
+            <p className="text-sm text-muted-foreground hidden md:block">Not sure which applies? <Link href="/calculator" className="text-primary font-medium hover:underline">Use the calculator →</Link></p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {remainingComparisons.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/compare/${c.slug}`}
+                className="block border border-border rounded-xl p-5 hover:border-primary/40 hover:bg-muted/30 transition-colors"
+              >
+                <h2 className="font-semibold text-foreground mb-2 text-base">{c.title}</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-slate-50 py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="font-bold text-foreground mb-1">Need a faster answer?</h2>
+            <p className="text-sm text-muted-foreground">Use the calculator for exact cost or the decision engine for a full stack recommendation.</p>
+          </div>
+          <div className="flex gap-3">
+            <Link href="/calculator" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+              Calculate cost →
+            </Link>
+            <Link href="/decision-engine" className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
+              Decision engine
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
