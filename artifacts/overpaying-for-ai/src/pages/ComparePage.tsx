@@ -11,7 +11,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
-import { trackGaEvent } from "@/utils/ga4";
+import { trackCompareCtaClick } from "@/utils/analytics";
 import {
   QuickDecisionBlock,
   CostBreakdownSection,
@@ -69,6 +69,7 @@ export function ComparePage() {
   const seoSchema = cheapest
     ? generateSchemaProduct(cheapest.name, page.description)
     : undefined;
+  const isClaudeVsGptPage = page.slug === "claude-vs-gpt-cost";
 
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -81,12 +82,38 @@ export function ComparePage() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-3">{page.title}</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
-        <p className="text-sm text-muted-foreground mt-3">
-          Not sure this is your exact scenario?{" "}
-          <Link href="/calculator" onClick={() => trackGaEvent("best_cta_calculator_click")} className="text-primary font-medium hover:underline">
-            Use the calculator →
-          </Link>
-        </p>
+        <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">Quick verdict</p>
+          <p className="text-sm text-foreground leading-relaxed mb-3">
+            {page.quickVerdict ?? page.summary}
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/calculator"
+              onClick={() => trackCompareCtaClick({
+                sourceComponent: "ComparePage/HeroQuickVerdict",
+                ctaLabel: "Use calculator from compare hero",
+                destinationPath: "/calculator",
+                comparisonSlug: page.slug,
+              })}
+              className="inline-flex items-center bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Calculate your exact cost →
+            </Link>
+            <Link
+              href="/decision-engine"
+              onClick={() => trackCompareCtaClick({
+                sourceComponent: "ComparePage/HeroQuickVerdict",
+                ctaLabel: "Use decision engine from compare hero",
+                destinationPath: "/decision-engine",
+                comparisonSlug: page.slug,
+              })}
+              className="inline-flex items-center border border-border px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
+            >
+              Need a stack recommendation?
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Summary Card */}
@@ -217,14 +244,36 @@ export function ComparePage() {
         <h2 className="text-xl font-bold mb-4">Our Recommendation</h2>
         <div className="border border-primary/20 bg-primary/5 rounded-lg p-5">
           <p className="text-foreground leading-relaxed mb-4">{page.recommendation}</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            If you're picking today: start with the cheaper viable option, then validate your monthly usage in the calculator before committing.
+          </p>
           <div className="pt-3 border-t border-primary/10 flex flex-wrap gap-3">
             <Link
               href="/calculator"
-              onClick={() => trackGaEvent("best_cta_calculator_click")}
+              onClick={() => trackCompareCtaClick({
+                sourceComponent: "ComparePage/Recommendation",
+                ctaLabel: "Use calculator from compare recommendation",
+                destinationPath: "/calculator",
+                comparisonSlug: page.slug,
+              })}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
             >
-              Not sure? Use the calculator →
+              Validate this with your usage →
             </Link>
+            {!isClaudeVsGptPage && (
+              <Link
+                href="/compare/claude-vs-gpt-cost"
+                onClick={() => trackCompareCtaClick({
+                  sourceComponent: "ComparePage/Recommendation",
+                  ctaLabel: "Go to claude vs gpt from compare recommendation",
+                  destinationPath: "/compare/claude-vs-gpt-cost",
+                  comparisonSlug: page.slug,
+                })}
+                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground hover:underline"
+              >
+                See the highest-intent comparison →
+              </Link>
+            )}
           </div>
         </div>
       </section>
