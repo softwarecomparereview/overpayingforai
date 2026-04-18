@@ -1,0 +1,27 @@
+{
+  "runId": "2026-04-18_18-53-43",
+  "createdAt": "2026-04-18T18:53:54.086Z",
+  "branch": "latestdevelop",
+  "commit": "379e9a7",
+  "commitFull": "379e9a72b1e2dba95312d859caa016bd4c63bace",
+  "runDir": "/home/runner/workspace/out/audits/2026-04-18_18-53-43",
+  "scripts": [
+    {
+      "script": "decision-engine-audit.js",
+      "ranAt": "2026-04-18T18:53:54.086Z",
+      "target": "https://overpayingforai.com",
+      "args": {
+        "base": "https://overpayingforai.com",
+        "headless": true,
+        "timeout": 30000,
+        "maxScenarios": 1,
+        "screenshots": false
+      },
+      "totalScenarios": 5,
+      "successful": 5,
+      "failed": 0,
+      "uniqueRecommendations": 2
+    }
+  ],
+  "updatedAt": "2026-04-18T18:53:54.086Z"
+}

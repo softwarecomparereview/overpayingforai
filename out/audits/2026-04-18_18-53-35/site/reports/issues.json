@@ -1,0 +1,21 @@
+{
+  "startedAt": "2026-04-18T18:53:37.722Z",
+  "finishedAt": "2026-04-18T18:53:41.368Z",
+  "issueCount": 2,
+  "issues": [
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best",
+      "source": null,
+      "detail": ""
+    }
+  ]
+}

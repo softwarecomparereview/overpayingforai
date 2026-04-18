@@ -1,0 +1,153 @@
+{
+  "startedAt": "2026-04-18T18:54:11.255Z",
+  "base": "https://overpayingforai.com",
+  "totalScenarios": 5,
+  "successful": 5,
+  "failed": 0,
+  "uniqueRecommendations": 2,
+  "results": [
+    {
+      "scenarioId": "CALC-tiny",
+      "surface": "calculator",
+      "inputs": {
+        "inputTokens": 5000,
+        "outputTokens": 1000,
+        "preset": "tiny"
+      },
+      "ok": true,
+      "recommendedTool": "Find your cheapest viable AI setup",
+      "alternatives": [
+        "• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.",
+        "• You need a fast estimate before choosing between API and subscription plans.",
+        "• You want one clear next step after seeing your projected monthly spend.",
+        "Cost Calculator",
+        "Decision Engine",
+        "Claude vs GPT-4o",
+        "ChatGPT vs Cursor",
+        "Subscription vs API"
+      ],
+      "pricingText": "Cost",
+      "confidenceText": "",
+      "freshnessText": "",
+      "explanation": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity.",
+      "resultText": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity. USE THIS IF… • You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent. • You need a fast estimate before choosing between API and subscription plans. • You want one clear next step after seeing your projected monthly spend. Start with a common usage scenario Pick a preset to prefill the calculator. Solo Founder Lean daily usage for shipping, support, and planning. LEAN STARTUP Startup Support Bot High-volume support and FAQ automation. AUTOMATION SUPPORT Developer Coding Workflow Coding, refactoring, and debugging with balanced quality. CODING DAILY Content Team Writing-heavy workflow for briefs, drafts, and edits. WRITING TEAM Usage Preset Light (chat, occasional) Moderate (daily use) Heavy (power user) Scale (building products) AI Model GPT-4o — OpenAI GPT-4o Mini — OpenAI Claude 3.5 Sonnet — Anthropic Claude 3.5 Haiku — Anthropic Gemini 1.5 Pro — Google Gemini 1.5 Flash — Google Mistral Large — Mistral Mistral Small — Mistral Llama 3.1 70B — Meta (self-hosted) DeepSeek V3 — DeepSeek Groq (Llama 3.1 70B) — Groq GPT-4 Turbo — OpenAI o3 — OpenAI o3-mini — OpenAI Claude 3 Opus — Anthropic Claude 3 Haiku — Anthropic Gemini 2.5 Pro — Google Gemini 2.5 Flash — Google Codestral — Mistral DeepSeek R1 — DeepSeek DeepSeek Coder V2 — DeepSeek Grok 4 — xAI Grok 4 Fast — xAI Command R+ — Cohere Llama 3.1 Instruct 70B — Meta Qwen Coder — Alibaba Qwen General — Alibaba ChatGPT Plus — OpenAI ChatGPT Free — OpenAI Claude Pro — Anthropic Google One AI Premium — Google Gemini Free — Google Cursor Pro — Cursor Cursor Free — Cursor Perplexity Pro — Perplexity GitHub Copilot Free — GitHub/Microsoft Writesonic — Writesonic Jasper — Jasper AI Copy.ai — Copy.ai Rytr — Rytr Pricing data last reviewed 1 week ago Monthly Input Tokens 5K tokens · ~3,750 words Monthly Output Tokens 1K tokens · ~750 words Calculate Monthly Cost How are costs calculated? API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage. 1 token ≈ 0.75 words ≈ 4 characters of English text. Learn more about tokens → Often 10× cheaper than GPT-4o for the same output Most content and coding tasks cost under $1/month with DeepSeek V3 via API. Try DeepSeek V3 → COMPARE MODELS Best AI Tools by Value GPT-4o vs GPT-4o mini Claude vs GPT-4o DeepSeek vs GPT-4o Not sure which AI is cheapest for your use case? Find out in 30 seconds — no signup required. Calculate Cost Decision Engine → Tools Cost Calculator Decision Engine Comparisons Claude vs GPT-4o ChatGPT vs Cursor Subscription vs API DeepSeek vs GPT-4o Best Lists Best for Coding Under $20/month Best Free Tools Guides Reduce AI Costs Token Cost Explained API vs Subscription All Resources Pricing Data Pricing Changelog Browse AI Types Terms of Service·Media Kit © 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by Aniruddh All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.",
+      "screenshot": "",
+      "error": ""
+    },
+    {
+      "scenarioId": "CALC-light",
+      "surface": "calculator",
+      "inputs": {
+        "inputTokens": 50000,
+        "outputTokens": 10000,
+        "preset": "light"
+      },
+      "ok": true,
+      "recommendedTool": "Find your cheapest viable AI setup",
+      "alternatives": [
+        "• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.",
+        "• You need a fast estimate before choosing between API and subscription plans.",
+        "• You want one clear next step after seeing your projected monthly spend.",
+        "Cost Calculator",
+        "Decision Engine",
+        "Claude vs GPT-4o",
+        "ChatGPT vs Cursor",
+        "Subscription vs API"
+      ],
+      "pricingText": "Cost",
+      "confidenceText": "",
+      "freshnessText": "",
+      "explanation": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity.",
+      "resultText": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity. USE THIS IF… • You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent. • You need a fast estimate before choosing between API and subscription plans. • You want one clear next step after seeing your projected monthly spend. Start with a common usage scenario Pick a preset to prefill the calculator. Solo Founder Lean daily usage for shipping, support, and planning. LEAN STARTUP Startup Support Bot High-volume support and FAQ automation. AUTOMATION SUPPORT Developer Coding Workflow Coding, refactoring, and debugging with balanced quality. CODING DAILY Content Team Writing-heavy workflow for briefs, drafts, and edits. WRITING TEAM Usage Preset Light (chat, occasional) Moderate (daily use) Heavy (power user) Scale (building products) AI Model GPT-4o — OpenAI GPT-4o Mini — OpenAI Claude 3.5 Sonnet — Anthropic Claude 3.5 Haiku — Anthropic Gemini 1.5 Pro — Google Gemini 1.5 Flash — Google Mistral Large — Mistral Mistral Small — Mistral Llama 3.1 70B — Meta (self-hosted) DeepSeek V3 — DeepSeek Groq (Llama 3.1 70B) — Groq GPT-4 Turbo — OpenAI o3 — OpenAI o3-mini — OpenAI Claude 3 Opus — Anthropic Claude 3 Haiku — Anthropic Gemini 2.5 Pro — Google Gemini 2.5 Flash — Google Codestral — Mistral DeepSeek R1 — DeepSeek DeepSeek Coder V2 — DeepSeek Grok 4 — xAI Grok 4 Fast — xAI Command R+ — Cohere Llama 3.1 Instruct 70B — Meta Qwen Coder — Alibaba Qwen General — Alibaba ChatGPT Plus — OpenAI ChatGPT Free — OpenAI Claude Pro — Anthropic Google One AI Premium — Google Gemini Free — Google Cursor Pro — Cursor Cursor Free — Cursor Perplexity Pro — Perplexity GitHub Copilot Free — GitHub/Microsoft Writesonic — Writesonic Jasper — Jasper AI Copy.ai — Copy.ai Rytr — Rytr Pricing data last reviewed 1 week ago Monthly Input Tokens 50K tokens · ~37,500 words Monthly Output Tokens 10K tokens · ~7,500 words Calculate Monthly Cost How are costs calculated? API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage. 1 token ≈ 0.75 words ≈ 4 characters of English text. Learn more about tokens → Often 10× cheaper than GPT-4o for the same output Most content and coding tasks cost under $1/month with DeepSeek V3 via API. Try DeepSeek V3 → COMPARE MODELS Best AI Tools by Value GPT-4o vs GPT-4o mini Claude vs GPT-4o DeepSeek vs GPT-4o Not sure which AI is cheapest for your use case? Find out in 30 seconds — no signup required. Calculate Cost Decision Engine → Tools Cost Calculator Decision Engine Comparisons Claude vs GPT-4o ChatGPT vs Cursor Subscription vs API DeepSeek vs GPT-4o Best Lists Best for Coding Under $20/month Best Free Tools Guides Reduce AI Costs Token Cost Explained API vs Subscription All Resources Pricing Data Pricing Changelog Browse AI Types Terms of Service·Media Kit © 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by Aniruddh All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.",
+      "screenshot": "",
+      "error": ""
+    },
+    {
+      "scenarioId": "CALC-medium",
+      "surface": "calculator",
+      "inputs": {
+        "inputTokens": 500000,
+        "outputTokens": 100000,
+        "preset": "medium"
+      },
+      "ok": true,
+      "recommendedTool": "Find your cheapest viable AI setup",
+      "alternatives": [
+        "• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.",
+        "• You need a fast estimate before choosing between API and subscription plans.",
+        "• You want one clear next step after seeing your projected monthly spend.",
+        "Cost Calculator",
+        "Decision Engine",
+        "Claude vs GPT-4o",
+        "ChatGPT vs Cursor",
+        "Subscription vs API"
+      ],
+      "pricingText": "Cost",
+      "confidenceText": "",
+      "freshnessText": "",
+      "explanation": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity.",
+      "resultText": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity. USE THIS IF… • You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent. • You need a fast estimate before choosing between API and subscription plans. • You want one clear next step after seeing your projected monthly spend. Start with a common usage scenario Pick a preset to prefill the calculator. Solo Founder Lean daily usage for shipping, support, and planning. LEAN STARTUP Startup Support Bot High-volume support and FAQ automation. AUTOMATION SUPPORT Developer Coding Workflow Coding, refactoring, and debugging with balanced quality. CODING DAILY Content Team Writing-heavy workflow for briefs, drafts, and edits. WRITING TEAM Usage Preset Light (chat, occasional) Moderate (daily use) Heavy (power user) Scale (building products) AI Model GPT-4o — OpenAI GPT-4o Mini — OpenAI Claude 3.5 Sonnet — Anthropic Claude 3.5 Haiku — Anthropic Gemini 1.5 Pro — Google Gemini 1.5 Flash — Google Mistral Large — Mistral Mistral Small — Mistral Llama 3.1 70B — Meta (self-hosted) DeepSeek V3 — DeepSeek Groq (Llama 3.1 70B) — Groq GPT-4 Turbo — OpenAI o3 — OpenAI o3-mini — OpenAI Claude 3 Opus — Anthropic Claude 3 Haiku — Anthropic Gemini 2.5 Pro — Google Gemini 2.5 Flash — Google Codestral — Mistral DeepSeek R1 — DeepSeek DeepSeek Coder V2 — DeepSeek Grok 4 — xAI Grok 4 Fast — xAI Command R+ — Cohere Llama 3.1 Instruct 70B — Meta Qwen Coder — Alibaba Qwen General — Alibaba ChatGPT Plus — OpenAI ChatGPT Free — OpenAI Claude Pro — Anthropic Google One AI Premium — Google Gemini Free — Google Cursor Pro — Cursor Cursor Free — Cursor Perplexity Pro — Perplexity GitHub Copilot Free — GitHub/Microsoft Writesonic — Writesonic Jasper — Jasper AI Copy.ai — Copy.ai Rytr — Rytr Pricing data last reviewed 1 week ago Monthly Input Tokens 500K tokens · ~375,000 words Monthly Output Tokens 100K tokens · ~75,000 words Calculate Monthly Cost How are costs calculated? API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage. 1 token ≈ 0.75 words ≈ 4 characters of English text. Learn more about tokens → Often 10× cheaper than GPT-4o for the same output Most content and coding tasks cost under $1/month with DeepSeek V3 via API. Try DeepSeek V3 → COMPARE MODELS Best AI Tools by Value GPT-4o vs GPT-4o mini Claude vs GPT-4o DeepSeek vs GPT-4o Not sure which AI is cheapest for your use case? Find out in 30 seconds — no signup required. Calculate Cost Decision Engine → Tools Cost Calculator Decision Engine Comparisons Claude vs GPT-4o ChatGPT vs Cursor Subscription vs API DeepSeek vs GPT-4o Best Lists Best for Coding Under $20/month Best Free Tools Guides Reduce AI Costs Token Cost Explained API vs Subscription All Resources Pricing Data Pricing Changelog Browse AI Types Terms of Service·Media Kit © 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by Aniruddh All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.",
+      "screenshot": "",
+      "error": ""
+    },
+    {
+      "scenarioId": "CALC-heavy",
+      "surface": "calculator",
+      "inputs": {
+        "inputTokens": 5000000,
+        "outputTokens": 1000000,
+        "preset": "heavy"
+      },
+      "ok": true,
+      "recommendedTool": "Find your cheapest viable AI setup",
+      "alternatives": [
+        "• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.",
+        "• You need a fast estimate before choosing between API and subscription plans.",
+        "• You want one clear next step after seeing your projected monthly spend.",
+        "Cost Calculator",
+        "Decision Engine",
+        "Claude vs GPT-4o",
+        "ChatGPT vs Cursor",
+        "Subscription vs API"
+      ],
+      "pricingText": "Cost",
+      "confidenceText": "",
+      "freshnessText": "",
+      "explanation": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity.",
+      "resultText": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost Find your cheapest viable AI setup Estimate your real monthly AI spend and immediately see lower-cost alternatives. Recommendations are based on use case, usage level, and cost sensitivity. USE THIS IF… • You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent. • You need a fast estimate before choosing between API and subscription plans. • You want one clear next step after seeing your projected monthly spend. Start with a common usage scenario Pick a preset to prefill the calculator. Solo Founder Lean daily usage for shipping, support, and planning. LEAN STARTUP Startup Support Bot High-volume support and FAQ automation. AUTOMATION SUPPORT Developer Coding Workflow Coding, refactoring, and debugging with balanced quality. CODING DAILY Content Team Writing-heavy workflow for briefs, drafts, and edits. WRITING TEAM Usage Preset Light (chat, occasional) Moderate (daily use) Heavy (power user) Scale (building products) AI Model GPT-4o — OpenAI GPT-4o Mini — OpenAI Claude 3.5 Sonnet — Anthropic Claude 3.5 Haiku — Anthropic Gemini 1.5 Pro — Google Gemini 1.5 Flash — Google Mistral Large — Mistral Mistral Small — Mistral Llama 3.1 70B — Meta (self-hosted) DeepSeek V3 — DeepSeek Groq (Llama 3.1 70B) — Groq GPT-4 Turbo — OpenAI o3 — OpenAI o3-mini — OpenAI Claude 3 Opus — Anthropic Claude 3 Haiku — Anthropic Gemini 2.5 Pro — Google Gemini 2.5 Flash — Google Codestral — Mistral DeepSeek R1 — DeepSeek DeepSeek Coder V2 — DeepSeek Grok 4 — xAI Grok 4 Fast — xAI Command R+ — Cohere Llama 3.1 Instruct 70B — Meta Qwen Coder — Alibaba Qwen General — Alibaba ChatGPT Plus — OpenAI ChatGPT Free — OpenAI Claude Pro — Anthropic Google One AI Premium — Google Gemini Free — Google Cursor Pro — Cursor Cursor Free — Cursor Perplexity Pro — Perplexity GitHub Copilot Free — GitHub/Microsoft Writesonic — Writesonic Jasper — Jasper AI Copy.ai — Copy.ai Rytr — Rytr Pricing data last reviewed 1 week ago Monthly Input Tokens 5.0M tokens · ~3,750,000 words Monthly Output Tokens 1.0M tokens · ~750,000 words Calculate Monthly Cost How are costs calculated? API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage. 1 token ≈ 0.75 words ≈ 4 characters of English text. Learn more about tokens → Often 10× cheaper than GPT-4o for the same output Most content and coding tasks cost under $1/month with DeepSeek V3 via API. Try DeepSeek V3 → COMPARE MODELS Best AI Tools by Value GPT-4o vs GPT-4o mini Claude vs GPT-4o DeepSeek vs GPT-4o Not sure which AI is cheapest for your use case? Find out in 30 seconds — no signup required. Calculate Cost Decision Engine → Tools Cost Calculator Decision Engine Comparisons Claude vs GPT-4o ChatGPT vs Cursor Subscription vs API DeepSeek vs GPT-4o Best Lists Best for Coding Under $20/month Best Free Tools Guides Reduce AI Costs Token Cost Explained API vs Subscription All Resources Pricing Data Pricing Changelog Browse AI Types Terms of Service·Media Kit © 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by Aniruddh All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.",
+      "screenshot": "",
+      "error": ""
+    },
+    {
+      "scenarioId": "S0001",
+      "surface": "decision-engine",
+      "inputs": {
+        "id": "S0001",
+        "useCase": "writing",
+        "budget": "under $20",
+        "priority": "cheapest",
+        "volume": "light (a few/day)",
+        "team": "solo"
+      },
+      "ok": true,
+      "recommendedTool": "AI Decision Engine",
+      "alternatives": [
+        "Cost Calculator",
+        "Decision Engine",
+        "Claude vs GPT-4o",
+        "ChatGPT vs Cursor",
+        "Subscription vs API",
+        "DeepSeek vs GPT-4o",
+        "Best for Coding",
+        "Under $20/month"
+      ],
+      "pricingText": "Cost",
+      "confidenceText": "",
+      "freshnessText": "",
+      "explanation": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost AI Decision Engine Answer 5 questions. 1 Use case 2 Budget 3 Usage 4 Quality 5 Free tier How often will you use it?",
+      "resultText": "$ OverpayingForAI Calculator Decision Engine Comparisons AI Types Resources Calculate Cost AI Decision Engine Answer 5 questions. Get your optimal AI stack. 1 Use case 2 Budget 3 Usage 4 Quality 5 Free tier How often will you use it? Light A few times per week Moderate Daily, a few hours Heavy All day, most days Not sure which AI is cheapest for your use case? Find out in 30 seconds — no signup required. Calculate Cost Decision Engine → Tools Cost Calculator Decision Engine Comparisons Claude vs GPT-4o ChatGPT vs Cursor Subscription vs API DeepSeek vs GPT-4o Best Lists Best for Coding Under $20/month Best Free Tools Guides Reduce AI Costs Token Cost Explained API vs Subscription All Resources Pricing Data Pricing Changelog Browse AI Types Terms of Service·Media Kit © 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by Aniruddh All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.",
+      "screenshot": "",
+      "error": ""
+    }
+  ]
+}

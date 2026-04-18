@@ -1,0 +1,96 @@
+We are now ready to run a full audit on the live site from the correct branch.
+
+Branch rules:
+- Use latestdevelop only
+- Do not switch to main or old develop
+- Do not merge from develop
+- Treat latestdevelop as the only source of truth
+
+Before running anything, print:
+- git branch --show-current
+- git --no-optional-locks status --short --branch
+- git log --oneline -n 1
+
+Then create one shared run ID and run BOTH audits into the same dated folder so we can review one complete snapshot together.
+
+Use:
+RUN_ID=$(date +"%Y-%m-%d_%H-%M-%S")
+
+Run:
+node scripts/site-audit.js --runId=$RUN_ID --maxPages=100 --headless=true
+node scripts/decision-engine-audit.js --runId=$RUN_ID --maxScenarios=60
+
+If a full run fails partway:
+- do not stop at the first error
+- preserve any outputs already written
+- report the failing command and the error clearly
+- then retry once with reduced scope:
+  - site audit: --maxPages=40
+  - decision audit: --maxScenarios=30
+
+After both finish successfully, do ALL of the following:
+
+1. Print the run ID
+2. Print the folder tree for:
+   out/audits/$RUN_ID
+3. Print the contents of:
+   out/audits/$RUN_ID/run-meta.json
+
+Then read and analyze these files:
+- out/audits/$RUN_ID/site/reports/summary.md
+- out/audits/$RUN_ID/site/reports/issues.json
+- out/audits/$RUN_ID/site/reports/pages.csv
+- out/audits/$RUN_ID/decision/summary.md
+- out/audits/$RUN_ID/decision/results.csv
+
+Then create TWO new files in the same run folder:
+
+1. out/audits/$RUN_ID/fix-priority.md
+2. out/audits/$RUN_ID/executive-audit-summary.md
+
+Requirements for fix-priority.md:
+Use these sections:
+- P0 — must fix before traffic push
+- P1 — high-value fixes this week
+- P2 — later improvements
+
+For every issue include:
+- affected URL
+- issue name
+- why it matters
+- exact recommended fix
+- whether it is primarily Trust / Conversion / SEO / UX / Data Accuracy
+
+Requirements for executive-audit-summary.md:
+Write a serious operator-level summary, not raw logs, under these headings:
+1. Overall verdict
+2. Top trust issues
+3. Top conversion issues
+4. Top SEO/indexability issues
+5. Top calculator / decision-engine credibility issues
+6. Highest-intent pages to fix first
+7. Pages that look visually bare
+8. Pages with no CTA
+9. Commercial pages with no outbound/affiliate CTA
+10. Duplicate titles or H1s
+11. Whether the site is ready for serious traffic right now: yes/no and why
+12. Top 5 changes most likely to improve affiliate CTR
+13. Top 5 changes most likely to improve trust
+14. Top 5 pages to improve first
+
+Important analysis rules:
+- Do not just restate machine output
+- Use judgment
+- Be blunt where needed
+- Prioritize what matters for a post-newsletter traffic surge
+- Call out anything that makes the site feel thin, gimmicky, inconsistent, or not trustworthy
+- Explicitly state whether the calculator feels credible or gimmicky based on the outputs
+- If recommendations look too repetitive or generic across scenarios, call that out clearly
+
+Also include a final section:
+“Immediate recommendation for next iteration”
+This should be a short ordered list of the exact work to do next in latestdevelop before pushing more traffic.
+
+Finally, print:
+- the paths to fix-priority.md and executive-audit-summary.md
+- a 10-line concise summary directly in the console output for quick review

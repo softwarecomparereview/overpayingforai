@@ -1,0 +1,52 @@
+{
+  "runId": "2026-04-18_19-07-13",
+  "createdAt": "2026-04-18T19:11:24.986Z",
+  "branch": "latestdevelop",
+  "commit": "f03cf94",
+  "commitFull": "f03cf94a2a3ffd4ce43a71addbb258cbeb6fb46d",
+  "runDir": "/home/runner/workspace/out/audits/2026-04-18_19-07-13",
+  "scripts": [
+    {
+      "script": "site-audit.js",
+      "ranAt": "2026-04-18T19:11:24.986Z",
+      "target": "https://overpayingforai.com/",
+      "args": {
+        "seeds": [
+          "https://overpayingforai.com/",
+          "https://overpayingforai.com/best",
+          "https://overpayingforai.com/calculator",
+          "https://overpayingforai.com/ai-types"
+        ],
+        "maxPages": 40,
+        "headless": true,
+        "timeout": 30000,
+        "screenshots": true,
+        "viewport": {
+          "w": 1366,
+          "h": 900
+        }
+      },
+      "pageCount": 40,
+      "issueCount": 69,
+      "startedAt": "2026-04-18T19:10:05.081Z",
+      "finishedAt": "2026-04-18T19:11:24.472Z"
+    },
+    {
+      "script": "decision-engine-audit.js",
+      "ranAt": "2026-04-18T19:12:38.597Z",
+      "target": "https://overpayingforai.com",
+      "args": {
+        "base": "https://overpayingforai.com",
+        "headless": true,
+        "timeout": 30000,
+        "maxScenarios": 30,
+        "screenshots": true
+      },
+      "totalScenarios": 34,
+      "successful": 34,
+      "failed": 0,
+      "uniqueRecommendations": 2
+    }
+  ],
+  "updatedAt": "2026-04-18T19:12:38.597Z"
+}

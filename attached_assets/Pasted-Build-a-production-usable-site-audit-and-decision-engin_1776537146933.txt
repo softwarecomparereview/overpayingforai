@@ -1,0 +1,342 @@
+Build a production-usable site audit and decision-engine audit for https://overpayingforai.com.
+
+Tech stack:
+- Node.js
+- Playwright
+- CSV + JSON output
+- Clean folder structure
+- Runnable in Replit
+- No vague placeholder code
+
+Create these files:
+
+1. scripts/site-audit.js
+2. scripts/decision-engine-audit.js
+3. scripts/lib/crawler.js
+4. scripts/lib/extractors.js
+5. scripts/lib/screenshots.js
+6. scripts/lib/utils.js
+7. package.json updates if needed
+8. README-audit.md
+
+Goal:
+I need a real crawl of my public site plus a separate test harness for the calculator / decision engine so I can review trust, UX, monetization readiness, and recommendation consistency.
+
+==================================================
+PART 1 — SITE AUDIT / CRAWL / SCREENSHOTS
+==================================================
+
+Create scripts/site-audit.js with these requirements:
+
+Starting URLs:
+- https://overpayingforai.com/
+- https://overpayingforai.com/best
+- https://overpayingforai.com/calculator
+- https://overpayingforai.com/ai-types
+
+Crawler behavior:
+- Crawl internal links discovered from these seeds
+- Restrict to overpayingforai.com only
+- Crawl compare pages, guide pages, ai-type pages, best pages, calculator-related pages, and any other internal content pages found
+- Limit to 100 pages by default
+- Retry navigation once on failure
+- Wait for network idle before extraction and screenshots
+- Use desktop viewport first
+- Skip obvious assets, mailto, tel, hash-only links, JS pseudo-links
+- Normalize URLs to avoid duplicate crawl entries caused by trailing slashes, anchors, or tracking params
+
+For every page visited, collect:
+- final URL
+- source/discovered-from URL
+- HTTP status if available
+- page title
+- meta description
+- H1 text
+- all H2s
+- canonical URL if present
+- robots meta if present
+- number of internal links
+- number of outbound links
+- list of outbound domains
+- whether page has visible CTA buttons/links
+- whether page has at least one likely affiliate / outbound money link
+- whether page has pricing-related text
+- whether page has recommendation/winner/best-choice section
+- whether page appears visually bare
+- approximate body text length
+- number of major sections
+- first visible CTA text
+- all visible CTA texts
+- whether page has schema/json-ld blocks
+- page load timing basics if easy to capture
+- screenshot paths
+
+Detect pricing-related text by checking for patterns like:
+- $
+- /month
+- per month
+- token
+- tokens
+- credit
+- credits
+- pricing
+- cost
+- billed
+- usage
+
+Detect recommendation sections by checking visible text patterns like:
+- best
+- winner
+- recommended
+- top pick
+- best choice
+- cheapest
+- balance
+- final verdict
+
+Detect likely commercial pages using URL/path heuristics and page text:
+- /best
+- /compare
+- /vs
+- calculator/result-style pages
+- pages containing “best”, “cheapest”, “vs”, “compare”
+
+CTA detection:
+- find visible buttons, anchors styled as buttons, or anchors with CTA-like text such as:
+  try, start, visit, pricing, choose, compare, calculate, get started, use calculator, see result, read more, learn more
+- record if at least one visible CTA exists
+- record if at least one visible outbound CTA exists
+
+Visual-bare heuristic:
+Mark a page as visually bare if several of these are true:
+- low body text length
+- fewer than 3 meaningful sections
+- no comparison table
+- no CTA
+- no strong recommendation block
+- sparse visible text in viewport
+
+Broken-link checks:
+- collect internal links discovered on each page
+- optionally validate a subset of internal and outbound links
+- flag obvious broken links or navigation failures
+- do not hammer external domains; use a conservative check
+
+Screenshots:
+Take for each page:
+1. full-page screenshot
+2. above-the-fold screenshot
+
+Save into:
+- /out/screenshots/full/
+- /out/screenshots/hero/
+
+File naming:
+- use slugified URL path names
+- ensure unique names for duplicate slugs
+- safe for filesystem
+
+Outputs:
+Create:
+- /out/reports/pages.json
+- /out/reports/pages.csv
+- /out/reports/issues.json
+- /out/reports/summary.md
+
+pages.json / pages.csv should include one row/object per crawled page with all extracted fields.
+
+issues.json should contain structured issues, for example:
+- missing_title
+- missing_meta_description
+- missing_h1
+- duplicate_title
+- duplicate_h1
+- no_cta
+- no_outbound_cta_on_commercial_page
+- low_internal_link_count
+- bare_page
+- possible_broken_link
+- missing_canonical
+- missing_recommendation_block_on_commercial_page
+- missing_pricing_context_on_commercial_page
+
+summary.md should include:
+- total pages crawled
+- total commercial/high-intent pages
+- top pages with no CTA
+- top pages with no outbound/affiliate link
+- pages with pricing text
+- pages with no recommendation block
+- pages flagged as visually bare
+- duplicate titles
+- duplicate H1s
+- likely highest-intent pages
+- outbound domains discovered
+- a short prioritized action summary
+
+Console logging:
+Print useful progress:
+- queue size
+- current page
+- page count
+- warnings
+- output paths at the end
+
+CLI support:
+Allow:
+- max pages
+- seed URLs
+- headless true/false
+- timeout
+- screenshot on/off
+
+Example:
+node scripts/site-audit.js --maxPages=100 --headless=true
+
+==================================================
+PART 2 — DECISION ENGINE / CALCULATOR AUDIT
+==================================================
+
+Create scripts/decision-engine-audit.js with these requirements:
+
+Goal:
+Run a matrix of calculator / decision-engine scenarios against the live site and export results so I can review consistency, trust, and recommendation quality.
+
+This script should:
+- open the calculator page
+- discover the calculator inputs and controls if possible
+- if discovery is unreliable, define a configurable scenario matrix in code
+- execute many realistic scenarios
+- record the input values and the resulting recommendation/output
+- capture screenshots of each result
+- export a CSV and JSON for manual review
+
+Output folders:
+- /out/decision-audit/
+- /out/decision-audit/screenshots/
+
+Create:
+- /out/decision-audit/results.json
+- /out/decision-audit/results.csv
+- /out/decision-audit/summary.md
+
+Scenario matrix:
+Build a configurable scenario set that covers a broad spread of likely user intents. Include combinations across dimensions such as:
+- use case / task type
+- budget sensitivity
+- quality priority
+- speed priority
+- usage volume if applicable
+- model preference if applicable
+- startup/indie vs team if applicable
+- any other visible calculator inputs
+
+If the live calculator has dropdowns/radios/sliders/buttons:
+- read available options where possible
+- generate combinations sensibly
+- avoid impossible or duplicate combinations
+- cap total runs to a configurable limit such as 50–100
+
+For each scenario capture:
+- scenario ID
+- exact inputs used
+- result text
+- recommended model/tool
+- runner-up / alternatives if shown
+- pricing text shown
+- confidence / freshness text if shown
+- raw visible result block text
+- screenshot path
+- error if a scenario fails
+
+Also detect consistency issues such as:
+- identical recommendation across obviously different scenarios
+- empty result
+- result with no explanation
+- result with no alternatives
+- result with no pricing context
+- contradictory wording
+- suspiciously generic outputs
+- broken submission or reset flow
+
+summary.md for decision audit should include:
+- total scenarios run
+- successful runs
+- failed runs
+- unique recommendations observed
+- scenarios producing the same recommendation
+- scenarios with missing explanation
+- scenarios with missing pricing context
+- scenarios with weak or generic result text
+- a concise “trust risk” summary
+
+Implementation guidance:
+- use robust selectors
+- prefer label-based or text-based targeting when possible
+- add small waits only where necessary
+- gracefully handle cases where the calculator is React-rendered
+- log the DOM state if a scenario fails
+- capture a screenshot on failure too
+
+Make scenario definitions easy to edit:
+- keep a SCENARIOS config array or scenario generator function near the top of the file
+
+==================================================
+PART 3 — SHARED IMPLEMENTATION QUALITY
+==================================================
+
+Code quality requirements:
+- write maintainable code, not a throwaway script
+- use helper modules for crawling, extraction, screenshots, and CSV writing
+- use comments where useful
+- add defensive error handling
+- make outputs easy to inspect
+- no TypeScript required unless you want to add it cleanly
+- keep dependencies minimal
+
+Utilities:
+Implement helpers for:
+- slugifying URLs to filenames
+- URL normalization
+- same-domain detection
+- CSV export
+- text cleanup
+- visible CTA extraction
+- recommendation/pricing detection
+- duplicate detection
+
+==================================================
+PART 4 — README
+==================================================
+
+Create README-audit.md with:
+- what each script does
+- install instructions
+- how to run each script
+- output folder structure
+- how to tune crawl size and scenario count
+- common troubleshooting notes for Playwright/Replit
+
+Include commands like:
+- npm install
+- npx playwright install
+- node scripts/site-audit.js
+- node scripts/decision-engine-audit.js
+
+==================================================
+PART 5 — SUCCESS CRITERIA
+==================================================
+
+I want this to work end-to-end in Replit and generate usable artifacts without me hand-holding it.
+
+Make sure:
+- both scripts run independently
+- outputs are written even if some pages/scenarios fail
+- crawl results are readable
+- decision-engine results are reviewable
+- screenshots are actually useful
+- summary files are concise and actionable
+
+If you have to make assumptions about selectors or page structure, do so carefully and log them clearly in the reports.
+
+Do not give me a toy example. Build the real scripts.
