@@ -1,0 +1,1678 @@
+[
+  {
+    "route": "/",
+    "title": "Overpaying for AI Tools? Compare Pricing and Cut Your Monthly Cost",
+    "desc": "Compare AI pricing, estimate monthly savings, and find the best-value AI setup without harming quality.",
+    "canonicals": [
+      "https://overpayingforai.com/"
+    ],
+    "h1s": [
+      "Stop wasting money on AI.Get your cheapest viable setup."
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best overallClaude 3.5 SonnetAnthropic · $3 / 1M out tokensNear-GPT-4o quality a"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokens33× cheaper than GPT-4o."
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Startup optionGemini 1.5 FlashGoogle · $0.075 / 1M out tokensNear-zero cost for "
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for codingClaude 3.5 SonnetAnthropic · $3 / 1M out tokensStrong code genera"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types",
+    "title": "Browse AI Types & Categories | OverpayingForAI",
+    "desc": "Find the cheapest AI tool for your specific use case — coding, writing, research, data, and more. Compare pricing by category.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types"
+    ],
+    "h1s": [
+      "Browse by AI type"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ClaudeStrongest default across writing, research & coding.Start with Claude →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ChatGPT / OpenAIBest ecosystem; mini API is cheapest serious model.Start with Op"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "DeepSeek V3~10× cheaper than GPT-4o for routine inference.Start with DeepSeek →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "GeminiBest free tier right now for chat & long context.Start with Gemini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/general-ai",
+    "title": "General AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest General AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/general-ai"
+    ],
+    "h1s": [
+      "General AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Claude 3.5 Sonnet →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best overallClaude 3.5 SonnetAnthropic · $3 / 1M out tokensNear-GPT-4o quality a"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokens33× cheaper than GPT-4o."
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best budget APIDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensThe lowest-cost model"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/coding-ai",
+    "title": "Coding AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest Coding AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/coding-ai"
+    ],
+    "h1s": [
+      "Coding AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Claude 3.5 Sonnet →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for codingClaude 3.5 SonnetAnthropic · $3 / 1M out tokensBest-in-class code"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best IDE toolCursor ProCursor · $20 / month flatBest-in-class IDE assistant. Bun"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/writing-ai",
+    "title": "Writing AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest Writing AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/writing-ai"
+    ],
+    "h1s": [
+      "Writing AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Claude 3.5 Sonnet →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for writing qualityClaude 3.5 SonnetAnthropic · $3 / 1M out tokensBest natu"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokensProduces clean, publisha"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for scaleClaude 3.5 HaikuAnthropic · $1.25 / 1M out tokensFast, cheap, and "
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/research-ai",
+    "title": "Research AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest Research AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/research-ai"
+    ],
+    "h1s": [
+      "Research AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Perplexity Pro →"
+      },
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for web researchPerplexity ProPerplexity · $20 / monthBest tool for web-sou"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for documentsClaude 3.5 SonnetAnthropic · $3 / 1M out tokens200K token cont"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for large filesGemini 1.5 ProGoogle · $3.50 / 1M out tokens1M token context"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/customer-support-ai",
+    "title": "Customer Support AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest Customer Support AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/customer-support-ai"
+    ],
+    "h1s": [
+      "Customer Support AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with GPT-4o mini →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for volumeGPT-4o miniOpenAI · $0.60 / 1M out tokensThe default choice for h"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best Anthropic optionClaude 3.5 HaikuAnthropic · $1.25 / 1M out tokensFast, chea"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Lowest costDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensLowest cost at near-front"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/ai-types/productivity-ai",
+    "title": "Productivity AI Cost Guide (2026) – Stop Overpaying | OverpayingForAI",
+    "desc": "Compare the cheapest Productivity AI options for 2026. Ranked by real cost-per-task — find out if you're overpaying and which model fits your budget.",
+    "canonicals": [
+      "https://overpayingforai.com/ai-types/productivity-ai"
+    ],
+    "h1s": [
+      "Productivity AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Claude Pro →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best for individualsClaude ProAnthropic · $20 / monthBest subscription value for"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best overallChatGPT PlusOpenAI · $20 / monthAccess to GPT-4o, GPT-4o mini, and D"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Best free optionChatGPT FreeOpenAI · FreeGPT-4o mini access for free. Covers bas"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/calculator",
+    "title": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI",
+    "desc": "Calculate your exact AI API cost by model and token volume. Compare GPT-4o, Claude, Gemini, DeepSeek and more. Find where you are overpaying — free, no signup.",
+    "canonicals": [
+      "https://overpayingforai.com/calculator"
+    ],
+    "h1s": [
+      "Find your cheapest viable AI setup"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "See the lower-cost option"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/decision-engine",
+    "title": "Decision Engine — Get a Personalized AI Pick | OverpayingForAI",
+    "desc": "Answer 5 quick questions and get a personalized AI stack recommendation — ranked by real cost-effectiveness for your use case, budget, and usage level.",
+    "canonicals": [
+      "https://overpayingforai.com/decision-engine"
+    ],
+    "h1s": [
+      "AI Decision Engine"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Gemini"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare",
+    "title": "AI Tool Comparisons | OverpayingForAI",
+    "desc": "Side-by-side AI model and subscription cost comparisons — GPT-4o vs Claude, DeepSeek vs GPT-4o, subscription vs API. Find the cheaper option in seconds.",
+    "canonicals": [
+      "https://overpayingforai.com/compare"
+    ],
+    "h1s": [
+      "AI Cost Comparisons"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with DeepSeek"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/chatgpt-vs-cursor-cost",
+    "title": "ChatGPT Plus vs Cursor Pro: Which Is Worth $20/Month? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for ChatGPT Plus vs Cursor Pro: Which Is Worth $20/Month?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/chatgpt-vs-cursor-cost"
+    ],
+    "h1s": [
+      "ChatGPT Plus vs Cursor Pro: Which Is Worth $20/Month?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/claude-vs-gpt-cost",
+    "title": "Claude vs ChatGPT: Real Cost Comparison for 2025 (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Claude vs ChatGPT: Real Cost Comparison for 2025. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/claude-vs-gpt-cost"
+    ],
+    "h1s": [
+      "Claude vs ChatGPT: Real Cost Comparison for 2025"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/subscription-vs-api-ai-cost",
+    "title": "AI Subscription vs API: Which Costs Less? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for AI Subscription vs API: Which Costs Less?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/subscription-vs-api-ai-cost"
+    ],
+    "h1s": [
+      "AI Subscription vs API: Which Costs Less?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/gpt-4o-vs-gpt-4o-mini-cost",
+    "title": "GPT-4o vs GPT-4o mini: Is the Upgrade Worth It? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for GPT-4o vs GPT-4o mini: Is the Upgrade Worth It?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/gpt-4o-vs-gpt-4o-mini-cost"
+    ],
+    "h1s": [
+      "GPT-4o vs GPT-4o mini: Is the Upgrade Worth It?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/claude-vs-cursor-for-coding",
+    "title": "Claude API vs Cursor Pro for Coding: What's Cheaper? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Claude API vs Cursor Pro for Coding: What's Cheaper?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/claude-vs-cursor-for-coding"
+    ],
+    "h1s": [
+      "Claude API vs Cursor Pro for Coding: What's Cheaper?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude 3.5 Haiku →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude 3.5 Haiku →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/deepseek-vs-gpt4o-cost",
+    "title": "DeepSeek V3 vs GPT-4o: 20x Cheaper, Same Quality? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for DeepSeek V3 vs GPT-4o: 20x Cheaper, Same Quality?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/deepseek-vs-gpt4o-cost"
+    ],
+    "h1s": [
+      "DeepSeek V3 vs GPT-4o: 20x Cheaper, Same Quality?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/gemini-vs-gpt4o-cost",
+    "title": "Gemini 1.5 Pro vs GPT-4o: Google's Challenger on Cost (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Gemini 1.5 Pro vs GPT-4o: Google's Challenger on Cost. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/gemini-vs-gpt4o-cost"
+    ],
+    "h1s": [
+      "Gemini 1.5 Pro vs GPT-4o: Google's Challenger on Cost"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Flash →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/perplexity-vs-chatgpt-cost",
+    "title": "Perplexity Pro vs ChatGPT Plus: Which $20/Month Wins? (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Perplexity Pro vs ChatGPT Plus: Which $20/Month Wins?. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/perplexity-vs-chatgpt-cost"
+    ],
+    "h1s": [
+      "Perplexity Pro vs ChatGPT Plus: Which $20/Month Wins?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/claude-haiku-vs-gpt4o-mini",
+    "title": "Claude 3.5 Haiku vs GPT-4o mini: The Budget Model Showdown (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Claude 3.5 Haiku vs GPT-4o mini: The Budget Model Showdown. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/claude-haiku-vs-gpt4o-mini"
+    ],
+    "h1s": [
+      "Claude 3.5 Haiku vs GPT-4o mini: The Budget Model Showdown"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o Mini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/writesonic-vs-jasper",
+    "title": "Writesonic vs Jasper: Cost Comparison (2026) (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Writesonic vs Jasper: Cost Comparison (2026). Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/writesonic-vs-jasper"
+    ],
+    "h1s": [
+      "Writesonic vs Jasper: Cost Comparison (2026)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/compare/mistral-vs-openai-cost",
+    "title": "Mistral vs OpenAI: The European Alternative at Lower Cost (2026) – Which Is Cheaper? | OverpayingForAI",
+    "desc": "Real pricing data for Mistral vs OpenAI: The European Alternative at Lower Cost. Side-by-side cost breakdown, savings calculator, and a clear cheapest pick. Updated 2026 — stop overpaying for AI.",
+    "canonicals": [
+      "https://overpayingforai.com/compare/mistral-vs-openai-cost"
+    ],
+    "h1s": [
+      "Mistral vs OpenAI: The European Alternative at Lower Cost"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://mistral.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Mistral Small →"
+      },
+      {
+        "href": "https://mistral.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Mistral Small →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best",
+    "title": "Best AI Tools 2025: Cheapest Models Compared | OverpayingForAI",
+    "desc": "The definitive guide to the best AI tools in 2025. Compare pricing, quality, and use cases across OpenAI, Anthropic, Google, DeepSeek, and more — and stop overpaying.",
+    "canonicals": [
+      "https://overpayingforai.com/best"
+    ],
+    "h1s": [
+      "The best AI tools — without the overpaying"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-coding-on-a-budget",
+    "title": "Best AI for Coding on a Budget (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI for Coding on a Budget (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-coding-on-a-budget"
+    ],
+    "h1s": [
+      "Best AI for Coding on a Budget (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude 3.5 Haiku via API →"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 via API →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-under-20-per-month",
+    "title": "Best AI Tools Under $20/Month (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI Tools Under $20/Month (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-under-20-per-month"
+    ],
+    "h1s": [
+      "Best AI Tools Under $20/Month (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro — $20/month →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Plus — $20/month →"
+      },
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Perplexity Pro — $20/month →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Google One AI Premium — $20/month →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-free-ai-tools-for-builders",
+    "title": "Best Free AI Tools for Builders and Developers (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best Free AI Tools for Builders and Developers (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-free-ai-tools-for-builders"
+    ],
+    "h1s": [
+      "Best Free AI Tools for Builders and Developers (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini Free →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-writing-on-a-budget",
+    "title": "Best AI for Writing on a Budget (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI for Writing on a Budget (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-writing-on-a-budget"
+    ],
+    "h1s": [
+      "Best AI for Writing on a Budget (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro — $20/month →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro — $20/month →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini via API →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://mistral.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Mistral Large via API →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro — $20/month →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-research-on-a-budget",
+    "title": "Best AI for Research on a Budget (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI for Research on a Budget (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-research-on-a-budget"
+    ],
+    "h1s": [
+      "Best AI for Research on a Budget (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Perplexity Pro — $20/month →"
+      },
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Perplexity Pro — $20/month →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Pro via API →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude 3.5 Sonnet via API →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini Free →"
+      },
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Perplexity Pro — $20/month →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-automation",
+    "title": "Best AI for Automation and Pipelines (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI for Automation and Pipelines (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-automation"
+    ],
+    "h1s": [
+      "Best AI for Automation and Pipelines (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini →"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://mistral.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Mistral Small →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini 1.5 Flash →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-api-for-startups",
+    "title": "Best AI APIs for Startups (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI APIs for Startups (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-api-for-startups"
+    ],
+    "h1s": [
+      "Best AI APIs for Startups (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini — Default Workhorse →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini — Default Workhorse →"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 — Quality on a Budget →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude 3.5 Haiku — Premium Budget Option →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini — Default Workhorse →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/ai-writing-tools-cheap",
+    "title": "Best AI Writing Tools on a Budget (2026) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI Writing Tools on a Budget (2026) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/ai-writing-tools-cheap"
+    ],
+    "h1s": [
+      "Best AI Writing Tools on a Budget (2026)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://jasper.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Jasper →"
+      },
+      {
+        "href": "https://copy.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Copy.ai →"
+      },
+      {
+        "href": "https://rytr.me",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Rytr →"
+      },
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-chat-on-a-budget",
+    "title": "Best AI Chatbots on a Budget (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI Chatbots on a Budget (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-chat-on-a-budget"
+    ],
+    "h1s": [
+      "Best AI Chatbots on a Budget (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini Free →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini via API →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-open-source-ai-models",
+    "title": "Best Open-Source AI Models to Self-Host (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best Open-Source AI Models to Self-Host (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-open-source-ai-models"
+    ],
+    "h1s": [
+      "Best Open-Source AI Models to Self-Host (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://mistral.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Mistral Large →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/best/best-ai-for-solopreneurs",
+    "title": "Best AI Stack for Solopreneurs (2025) (2026) – Ranked by Cost | OverpayingForAI",
+    "desc": "The best Best AI Stack for Solopreneurs (2025) ranked by real cost-effectiveness. Honest picks with no sponsored rankings. Updated 2026 pricing — find the cheapest option.",
+    "canonicals": [
+      "https://overpayingforai.com/best/best-ai-for-solopreneurs"
+    ],
+    "h1s": [
+      "Best AI Stack for Solopreneurs (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month (if you code) →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month (if you code) →"
+      },
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro — $20/month (if you write) →"
+      },
+      {
+        "href": "https://perplexity.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Perplexity Pro — $20/month (for research) →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try ChatGPT Free — $0 →"
+      },
+      {
+        "href": "https://cursor.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Cursor Pro — $20/month (if you code) →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides",
+    "title": "AI Cost Guides — Cut Your AI Spend | OverpayingForAI",
+    "desc": "Practical, no-fluff guides for reducing AI costs: token optimization, model routing, API vs subscription decisions, and more.",
+    "canonicals": [
+      "https://overpayingforai.com/guides"
+    ],
+    "h1s": [
+      "AI Cost Guides"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ClaudeStrongest default for writing & research.Start with Claude →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ChatGPT / OpenAIMost-supported ecosystem; mini API is cheapest workhorse.Start w"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "DeepSeek V3Cheapest serious model — ~10× less than GPT-4o.Start with DeepSeek →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "GeminiBest free tier right now for daily chat & long context.Start with Gemini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/cheapest-ai-content-workflow",
+    "title": "Cheapest Way to Generate Blog Content with AI | OverpayingForAI",
+    "desc": "A practical cost-first workflow for producing blog content with AI — without overpaying for subscription writing tools.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/cheapest-ai-content-workflow"
+    ],
+    "h1s": [
+      "Cheapest Way to Generate Blog Content with AI"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Use Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/how-to-reduce-ai-cost",
+    "title": "How to Reduce Your AI Costs by 80% Without Losing Quality | OverpayingForAI",
+    "desc": "A practical guide to cutting AI spending through smart model routing, prompt optimization, and caching strategies.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/how-to-reduce-ai-cost"
+    ],
+    "h1s": [
+      "How to Reduce Your AI Costs by 80% Without Losing Quality"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Switch to DeepSeek →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/token-cost-explained",
+    "title": "Token Cost Explained: What You're Actually Paying For | OverpayingForAI",
+    "desc": "A plain-English guide to AI tokens, how they're counted, and exactly how to calculate your real costs.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/token-cost-explained"
+    ],
+    "h1s": [
+      "Token Cost Explained: What You're Actually Paying For"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "See OpenAI pricing →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/when-to-use-api-vs-subscription",
+    "title": "API vs Subscription: How to Choose the Right AI Pricing Model | OverpayingForAI",
+    "desc": "A decision framework for choosing between AI subscriptions and pay-per-use API access based on your actual usage.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/when-to-use-api-vs-subscription"
+    ],
+    "h1s": [
+      "API vs Subscription: How to Choose the Right AI Pricing Model"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/ai-routing-strategies",
+    "title": "AI Model Routing: How to Cut Costs Without Losing Quality | OverpayingForAI",
+    "desc": "How to route AI requests to cheaper models intelligently — the technique used by companies spending millions on AI to stay profitable.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/ai-routing-strategies"
+    ],
+    "h1s": [
+      "AI Model Routing: How to Cut Costs Without Losing Quality"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Use DeepSeek →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/hidden-ai-costs",
+    "title": "Hidden AI Costs Nobody Warns You About | OverpayingForAI",
+    "desc": "The non-obvious costs of running AI in production: embedding models, retries, evaluation pipelines, and tool calls.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/hidden-ai-costs"
+    ],
+    "h1s": [
+      "Hidden AI Costs Nobody Warns You About"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Switch to API pricing →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
+    "title": "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide | OverpayingForAI",
+    "desc": "When does upgrading from GPT-4o mini to GPT-4o actually change your results? A task-by-task comparison.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/gpt-4o-mini-vs-full-when-to-upgrade"
+    ],
+    "h1s": [
+      "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try GPT-4o mini →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/ai-cost-for-saas-founders",
+    "title": "AI Cost Planning for SaaS Founders: A Realistic Budget Guide | OverpayingForAI",
+    "desc": "How to project, control, and optimize AI API costs as you scale a SaaS product from zero to revenue.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/ai-cost-for-saas-founders"
+    ],
+    "h1s": [
+      "AI Cost Planning for SaaS Founders: A Realistic Budget Guide"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "See DeepSeek pricing →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/compare-ai-models-for-your-use-case",
+    "title": "How to Compare AI Models for Your Specific Use Case | OverpayingForAI",
+    "desc": "A systematic framework for evaluating which AI model is actually right for your task — beyond benchmark scores.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/compare-ai-models-for-your-use-case"
+    ],
+    "h1s": [
+      "How to Compare AI Models for Your Specific Use Case"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Test Claude 3.5 Sonnet →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/free-ai-tools-that-are-actually-good",
+    "title": "Free AI Tools That Are Actually Good (2025) | OverpayingForAI",
+    "desc": "Honest guide to AI tools with real free tiers — not bait-and-switch trials masquerading as free.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/free-ai-tools-that-are-actually-good"
+    ],
+    "h1s": [
+      "Free AI Tools That Are Actually Good (2025)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Gemini Free →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/claude-vs-chatgpt-for-business",
+    "title": "Claude vs ChatGPT for Business: A Practical Comparison | OverpayingForAI",
+    "desc": "Which AI assistant is better for business teams — Claude or ChatGPT? A no-BS comparison for 2025.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/claude-vs-chatgpt-for-business"
+    ],
+    "h1s": [
+      "Claude vs ChatGPT for Business: A Practical Comparison"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Claude Pro →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/cheapest-ai-writing-tools",
+    "title": "The Cheapest AI Writing Tools in 2026 (Ranked by Real Cost) | OverpayingForAI",
+    "desc": "A no-fluff ranking of the most affordable AI writing tools — what they actually cost, what you get, and who each one is best for.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/cheapest-ai-writing-tools"
+    ],
+    "h1s": [
+      "The Cheapest AI Writing Tools in 2026 (Ranked by Real Cost)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/best-ai-tools-under-20",
+    "title": "Best AI Tools Under $20/Month in 2026 | OverpayingForAI",
+    "desc": "The top AI tools you can use for $20 or less per month — covering writing, coding, research, and general productivity.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/best-ai-tools-under-20"
+    ],
+    "h1s": [
+      "Best AI Tools Under $20/Month in 2026"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/is-jasper-worth-it",
+    "title": "Is Jasper AI Worth It in 2026? An Honest Cost Analysis | OverpayingForAI",
+    "desc": "Jasper charges $49/month. Is that premium justified — or are you paying for a GPT-4o wrapper? An honest breakdown.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/is-jasper-worth-it"
+    ],
+    "h1s": [
+      "Is Jasper AI Worth It in 2026? An Honest Cost Analysis"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://writesonic.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Writesonic →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/cheapest-ai-for-students",
+    "title": "Cheapest AI Tools for Students in 2026 (Free and Under $10) | OverpayingForAI",
+    "desc": "The best AI tools for students on a tight budget — covering writing, research, coding, and studying. Free tiers that actually work.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/cheapest-ai-for-students"
+    ],
+    "h1s": [
+      "Cheapest AI Tools for Students in 2026 (Free and Under $10)"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://rytr.me",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Try Rytr →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/guides/chatgpt-vs-claude-cost",
+    "title": "ChatGPT vs Claude: Which Costs Less in 2026? | OverpayingForAI",
+    "desc": "A precise cost comparison between ChatGPT and Claude — subscription and API pricing — to find the cheaper option for your actual usage.",
+    "canonicals": [
+      "https://overpayingforai.com/guides/chatgpt-vs-claude-cost"
+    ],
+    "h1s": [
+      "ChatGPT vs Claude: Which Costs Less in 2026?"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "Start with Claude →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/resources",
+    "title": "Free AI Resources & Guides | OverpayingForAI",
+    "desc": "All AI cost comparisons, buyer guides, and best-of lists in one place. Practical, vendor-neutral resources to find the cheapest viable AI stack for your workload.",
+    "canonicals": [
+      "https://overpayingforai.com/resources"
+    ],
+    "h1s": [
+      "All resources"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://claude.ai",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ClaudeBest default for business writing & long documents.Start with Claude →"
+      },
+      {
+        "href": "https://openai.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "ChatGPT / OpenAIGPT-4o mini is the cheapest serious workhorse model.Start with O"
+      },
+      {
+        "href": "https://deepseek.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "DeepSeek V3~10× cheaper than GPT-4o for routed inference.Start with DeepSeek →"
+      },
+      {
+        "href": "https://gemini.google.com",
+        "rel": "noopener noreferrer sponsored",
+        "text": "GeminiStrongest free tier — solid for daily chat and long context.Start with Gem"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/changelog",
+    "title": "Site Changelog | OverpayingForAI",
+    "desc": "Current pricing for every tracked AI model — sourced from official provider pages, dated, and reviewed regularly. See what's fresh and what's stale at a glance.",
+    "canonicals": [
+      "https://overpayingforai.com/changelog"
+    ],
+    "h1s": [
+      "AI pricing data"
+    ],
+    "outboundCtas": [
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://openai.com/chatgpt/pricing/",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://openai.com/chatgpt/pricing/",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://www.anthropic.com/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://one.google.com/about/plans",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://gemini.google.com/",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://www.cursor.com/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://www.cursor.com/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://groq.com/pricing/",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://www.perplexity.ai/pro",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://groq.com/pricing/",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://artificialanalysis.ai/models",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://writesonic.com/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://jasper.ai/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://copy.ai/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      },
+      {
+        "href": "https://rytr.me/pricing",
+        "rel": "noreferrer",
+        "text": "Source →"
+      }
+    ],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/pricing-changelog",
+    "title": "AI Pricing Changelog | OverpayingForAI",
+    "desc": "A dated record of every AI model pricing review — what changed, what was added, and when. Full transparency on the data behind every comparison and recommendation.",
+    "canonicals": [
+      "https://overpayingforai.com/pricing-changelog"
+    ],
+    "h1s": [
+      "Pricing Changelog"
+    ],
+    "outboundCtas": [],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/terms",
+    "title": "Terms of Service | OverpayingForAI",
+    "desc": "Terms of service and affiliate disclosure for OverpayingForAI — how the site uses pricing data, makes recommendations, and discloses sponsored links.",
+    "canonicals": [
+      "https://overpayingforai.com/terms"
+    ],
+    "h1s": [
+      "Terms of Service"
+    ],
+    "outboundCtas": [],
+    "fakeAffordance": 0
+  },
+  {
+    "route": "/media-kit",
+    "title": "Media Kit & Partnerships | OverpayingForAI",
+    "desc": "Partnership and media info for OverpayingForAI — audience, editorial standards, and how AI brands and tools can work with the site.",
+    "canonicals": [
+      "https://overpayingforai.com/media-kit"
+    ],
+    "h1s": [
+      "Media Kit"
+    ],
+    "outboundCtas": [],
+    "fakeAffordance": 0
+  }
+]

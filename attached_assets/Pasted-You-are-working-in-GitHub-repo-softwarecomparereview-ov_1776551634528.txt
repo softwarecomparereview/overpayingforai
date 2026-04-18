@@ -1,0 +1,262 @@
+You are working in GitHub repo `softwarecomparereview/overpayingforai` on branch `latestdevelop`.
+
+Goal:
+Ship the next audit pass by fixing the two remaining P0 issues from `out/audits/2026-04-19_14-00-00`:
+
+1. Increase decision-engine recommendation diversity so results materially react to:
+   - use case
+   - budget
+   - usage frequency
+   - quality preference
+   - free-tier requirement
+   Target: `decision.uniqueRecommendations >= 6` across the audit matrix.
+
+2. Add sponsored outbound CTAs to the remaining non-monetized commercial pages:
+   - `/guides`
+   - `/guides/*`
+   - `/ai-types` hub if still failing
+   - `/resources`
+   Target: these pages should no longer fail the outbound sponsored CTA audit.
+
+Do not redesign the app. Extend the existing implementation.
+
+==================================================
+REPO ANCHORS — USE THESE EXACT FILES/PATTERNS
+==================================================
+
+Decision engine UI:
+- `artifacts/overpaying-for-ai/src/pages/DecisionEngine.tsx`
+
+Decision scoring engine:
+- `artifacts/overpaying-for-ai/src/engine/recommender.ts`
+
+Guide rendering and existing CTA injection path:
+- `artifacts/overpaying-for-ai/src/pages/GuidePage.tsx`
+
+AI type detail page:
+- `artifacts/overpaying-for-ai/src/pages/AiTypePage.tsx`
+
+Affiliate CTA resolution:
+- `artifacts/overpaying-for-ai/src/utils/affiliateResolver.ts`
+
+Important existing implementation details:
+- `DecisionEngine.tsx` already imports `runRecommender()` from `src/engine/recommender.ts`
+- `DecisionEngine.tsx` already renders a semantic audit-visible result block with:
+  - `data-testid="decision-result"`
+  - `data-testid="decision-rationale"`
+  - `data-testid="decision-alternatives"`
+- `GuidePage.tsx` already supports guide-level CTA injection through:
+  - `winnerBlock`
+  - `getPrimaryCta()`
+  - `WinnerBlock`
+- `AiTypePage.tsx` already uses:
+  - `WinnerBlock`
+  - `getPrimaryCta()`
+  - `getSecondaryCta()`
+- `affiliateResolver.ts` already provides the live CTA resolution path:
+  - `getPrimaryCta`
+  - `getSecondaryCta`
+  - `providerNameToId`
+  - outbound sponsored rel handling
+
+Rules:
+- Do NOT create a parallel recommender.
+- Do NOT create a parallel CTA registry unless you can prove the existing `affiliateResolver.ts` path is insufficient.
+- Do NOT remove or rename current audit-visible `data-testid` hooks in `DecisionEngine.tsx`.
+- Prefer extending existing content/data structures over inventing new page-level abstractions.
+- Preserve existing SEO fixes already shipped.
+- Preserve existing sponsored CTA behavior already working on `/best/*`, `/compare/*`, `/calculator`, and `/decision-engine`.
+
+==================================================
+PART A — FIX DECISION-ENGINE SCORING DIVERSITY
+==================================================
+
+Work primarily in:
+- `artifacts/overpaying-for-ai/src/engine/recommender.ts`
+
+Problem:
+The current scoring collapses to only 2 unique recommendations across 20 sampled scenarios. The audit reports that the scorer effectively ignores budget, frequency, and quality axes. Current behavior is dominated by cheap/free options.
+
+Current implementation details to preserve:
+- Keep `runRecommender(inputs)` as the entry point.
+- Keep the returned `RecommendationResult` shape.
+- Keep the semantic result rendering in `DecisionEngine.tsx`.
+
+Required changes:
+1. Refactor `scoreModel()` in `recommender.ts` into a clearer weighted scoring model.
+2. Make the score materially respond to:
+   - `inputs.useCase`
+   - `inputs.budget`
+   - `inputs.usageFrequency`
+   - `inputs.qualityPreference`
+   - `inputs.freeTierRequired`
+3. Reduce the current over-dominance of free/cheap models by improving the weighting logic:
+   - premium budget + best quality should be able to elevate high-quality paid models
+   - under20 + cheap should favor cheaper viable options
+   - heavy usage should materially affect ranking, not just lightly nudge it
+   - coding should favor coding-specialized tools
+   - writing/research/chat/automation should not collapse to the same winner unless justified
+4. Review both:
+   - `scoreModel()`
+   - the `eligible` filtering logic in `runRecommender()`
+   because the current eligibility filter may be over-pruning candidates before scoring.
+5. Keep the outcome deterministic and explainable.
+6. Ensure the balanced recommendation is not systematically forced into the same model class.
+7. Improve `buildReasoning()` and/or the `liveRationale` in `DecisionEngine.tsx` so rationale explicitly references:
+   - budget
+   - usage frequency
+   - quality preference
+   - use case
+8. Compute meaningful alternatives:
+   - cheapest
+   - balanced
+   - premium
+   They must be derived from the same scoring/candidate pool, not hardcoded.
+9. Do not fake diversity. Reach the audit target by fixing the scoring logic honestly.
+
+Implementation guidance:
+- It is acceptable to add helper functions inside `recommender.ts` for:
+  - normalized budget fit
+  - use-case match scoring
+  - plan-type fit
+  - quality-vs-cost weighting
+- Keep the logic readable and auditable.
+- Prefer additive refactor over broad rewrite.
+
+Acceptance criteria:
+- `DecisionEngine.tsx` still renders the existing semantic result block.
+- Distinct scenarios produce materially different winners.
+- Audit target: `decision.uniqueRecommendations >= 6`
+- No regressions to CTA or SEO behavior on `/decision-engine`
+
+==================================================
+PART B — ADD SPONSORED OUTBOUND CTAS TO REMAINING COMMERCIAL PAGES
+==================================================
+
+Use existing monetization primitives first:
+- `getPrimaryCta`
+- `getSecondaryCta`
+- `providerNameToId`
+- `WinnerBlock`
+- current affiliate fallback behavior in `affiliateResolver.ts`
+
+Do NOT introduce raw outbound URLs directly in page components unless there is already a content/data field designed for that.
+
+Affected areas to fix:
+1. `/guides/*`
+2. `/guides` hub
+3. `/resources`
+4. `/ai-types` hub if still failing audit
+5. Check whether `/ai-types/:slug` detail pages are already compliant before changing them, because `AiTypePage.tsx` already contains outbound affiliate pick cards and a `WinnerBlock`
+
+### Guides detail pages (`/guides/*`)
+Work with:
+- `artifacts/overpaying-for-ai/src/pages/GuidePage.tsx`
+- corresponding guide data source already used by that page
+
+Required approach:
+1. Prefer fixing guides through guide content/data first, not by rewriting the template.
+2. Populate missing guide entries with `winnerBlock` and/or `earlyCallout` so they render the existing `WinnerBlock` path already supported by `GuidePage.tsx`.
+3. Ensure each affected guide page has at least one main-content sponsored outbound CTA tied to the guide’s actual recommendation.
+4. Place the CTA in the existing high-intent recommendation area, not only at the end of the page.
+5. Keep CTA logic routed through `getPrimaryCta()`.
+
+If data-only changes are insufficient:
+- make the smallest necessary change to `GuidePage.tsx`
+- preserve existing `WinnerBlock` behavior
+- do not introduce a second guide CTA system
+
+### Guides hub (`/guides`)
+Work with:
+- `GuideIndex` inside `artifacts/overpaying-for-ai/src/pages/GuidePage.tsx`
+
+Required changes:
+1. Add a main-content sponsored CTA module or featured tools strip near the top of the guides hub.
+2. Use existing CTA resolution via `affiliateResolver.ts`.
+3. Keep the page editorially credible and non-spammy.
+4. Ensure the CTA is visible in main content and detectable by the audit.
+
+### Resources page (`/resources`)
+Find the actual page component for `/resources` and update that exact file.
+
+Required changes:
+1. Add a main-content recommended tools block with sponsored outbound CTAs.
+2. Use existing CTA resolution via `getPrimaryCta()` / `getSecondaryCta()`.
+3. Keep recommendations editorially relevant to the page.
+4. Do not bury outbound links in footer-only UI.
+
+### AI types
+Work with:
+- `artifacts/overpaying-for-ai/src/pages/AiTypePage.tsx`
+- and the actual `/ai-types` hub component if distinct
+
+Required process:
+1. First determine whether the audit failure is on:
+   - `/ai-types` hub only
+   - specific `/ai-types/:slug` pages
+   - or both
+2. If only the hub fails, fix the hub and do not unnecessarily rewrite `AiTypePage.tsx`.
+3. If slug pages still fail despite existing affiliate pick cards, inspect why the audit is not counting them and fix the markup or CTA placement without removing the current cards.
+4. Keep all CTA resolution routed through `affiliateResolver.ts`.
+
+Acceptance criteria:
+- Remaining affected commercial pages now expose at least one visible main-content sponsored outbound CTA.
+- Use existing monetization primitives.
+- No regressions to pages already fixed in prior audit pass.
+
+==================================================
+PART C — PRE-EDIT INSPECTION OUTPUT
+==================================================
+
+Before editing any code, print:
+1. Exact files you will modify
+2. For each file, which existing component/function/path you are reusing
+3. Whether `/ai-types` failures are on the hub, detail pages, or both
+4. Whether guides can be fixed via guide data only, or require `GuidePage.tsx` changes
+5. Whether `/resources` already has any CTA component path you can reuse
+
+Do not skip this step.
+
+==================================================
+PART D — VALIDATION
+==================================================
+
+After implementation:
+
+1. Run the repo’s audit runner:
+   - `qa/full-audit.mjs`
+   - or the exact existing wrapper command if the repo already defines one
+2. Write a new audit run under:
+   - `out/audits/<new-run-id>/`
+3. Compare results against:
+   - `out/audits/2026-04-19_14-00-00/`
+
+Explicitly report:
+- decision-engine unique recommendation count before vs after
+- number of remaining pages without sponsored outbound CTA before vs after
+- whether any of the previously fixed issues regressed:
+  - calculator dynamic output
+  - duplicate hub titles
+  - canonicals
+  - duplicate H1s
+
+==================================================
+PART E — DELIVERABLES
+==================================================
+
+When done, output:
+1. Summary of implemented changes
+2. Exact changed files
+3. Before/after audit delta for:
+   - `decision.uniqueRecommendations`
+   - no-outbound-sponsored-CTA page count
+4. Any pages still failing and why
+5. Any providers still using homepage fallback instead of affiliate URL
+6. Whether these two P0 blockers are now resolved
+
+Project grounding constraints:
+- Preserve the DontOverpayAI thesis: pricing clarity, comparison clarity, and decision support.
+- Recommendations must be scenario-based and explainable, not payout-driven.
+- CTAs must be trust-preserving and editorially defensible.
+- Do not add generic filler UI.
+- Fix the commercial decision path using the repo’s existing architecture.

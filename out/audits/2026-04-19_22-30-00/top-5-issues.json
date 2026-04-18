@@ -1,0 +1,51 @@
+{
+  "runId": "2026-04-19_22-30-00",
+  "branch": "latestdevelop",
+  "commit": "d342901",
+  "comparedAgainst": "2026-04-19_14-00-00",
+  "summary": {
+    "siteIssues": 0,
+    "decisionUniqueRecommendations": 10,
+    "decisionScenariosOk": "20/20",
+    "calculatorUniqueTotals": 4,
+    "calculatorDynamic": true,
+    "blockingP0sRemaining": 0
+  },
+  "resolved": [
+    {
+      "id": "P0-A",
+      "issue": "decision_engine_low_diversity",
+      "before": "2 unique across 20 scenarios",
+      "after": "10 unique across 20 scenarios",
+      "fix": "Refactored scoreModel/runRecommender in src/engine/recommender.ts (use-case tag aliases, soft budget penalty, plan-fit, free-sub heavy-usage penalty, robust balanced-vs-premium tier split). Also fixed audit stride from 18 → 19 (coprime to 360) so the sample actually spans freeTier/quality/frequency axes."
+    },
+    {
+      "id": "P0-B",
+      "issue": "no_outbound_cta_on_commercial_page",
+      "before": "13 pages with 0 outbound sponsored CTA (/guides, 11 /guides/*, /resources, /ai-types)",
+      "after": "0 pages flagged",
+      "fix": "Added winnerBlock data to 9 guides + fixed empty providerId on how-to-reduce-ai-cost (src/data/guides.json). Added Featured-tools strip with getPrimaryCta-resolved sponsored links to GuideIndex (src/pages/GuidePage.tsx), ResourcesHub.tsx, and AiTypeIndex.tsx."
+    }
+  ],
+  "preserved": [
+    {"id": "calculator_static_output", "status": "still passing", "uniqueTotals": "4/4", "dynamic": true},
+    {"id": "duplicate_title", "status": "still 0"},
+    {"id": "missing_canonical", "status": "still 0"},
+    {"id": "missing_meta_description", "status": "still 0"},
+    {"id": "duplicate_h1", "status": "still 0"}
+  ],
+  "issues": [],
+  "minorObservations": [
+    {
+      "id": "calculator_uniqueVerdicts",
+      "severity": "P1",
+      "where": "/calculator",
+      "detail": "uniqueVerdicts=1 across 4 presets — verdict copy still doesn't tier by total cost. This is the only remaining P1 from the prior priority list and was out of scope for this pass."
+    },
+    {
+      "id": "providers_using_homepage_fallback",
+      "severity": "info",
+      "detail": "All featured providers (anthropic, openai, deepseek, google, github, cursor, perplexity, mistral, writesonic, jasper, copyai, rytr) currently use directUrl (homepage) — fallbackUsed=true on getPrimaryCta. None have live affiliateUrl yet. Outbound + rel='sponsored' is still emitted, so audits pass; swap directUrl → affiliateUrl in src/data/affiliates.ts as programs are approved without touching pages."
+    }
+  ]
+}

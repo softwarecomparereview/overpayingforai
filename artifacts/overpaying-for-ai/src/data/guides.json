@@ -48,9 +48,18 @@
       "Factor in editorial time: AI produces drafts, not finished content"
     ],
     "internalLinks": [
-      { "text": "Writesonic vs Jasper", "href": "/compare/writesonic-vs-jasper" },
-      { "text": "Best Budget AI Writing Tools", "href": "/best/ai-writing-tools-cheap" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
+      {
+        "text": "Writesonic vs Jasper",
+        "href": "/compare/writesonic-vs-jasper"
+      },
+      {
+        "text": "Best Budget AI Writing Tools",
+        "href": "/best/ai-writing-tools-cheap"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
     ]
   },
   {
@@ -62,11 +71,11 @@
     "readTime": "8 min read",
     "earlyCallout": "Route simple tasks to GPT-4o mini, Claude Haiku, or Gemini Flash before changing prompts or infrastructure. For most workloads, model routing alone cuts costs 60–80% with no noticeable quality drop — and you can implement a basic two-tier system in a day.",
     "winnerBlock": {
-      "badge": "Next step",
-      "providerId": "",
-      "title": "See your real savings",
-      "rationale": "Run your usage numbers through the calculator to see exactly how much you'd save by switching models. Most teams find the answer in under two minutes.",
-      "primaryCtaLabel": "Calculate my savings",
+      "badge": "Cheapest",
+      "providerId": "deepseek",
+      "title": "DeepSeek V3 — the single biggest cost cut available",
+      "rationale": "For most teams, switching routine inference from GPT-4o or Claude Sonnet to DeepSeek V3 is the largest one-step cost reduction available — typically 70–90% on routed traffic.",
+      "primaryCtaLabel": "Switch to DeepSeek",
       "afterSectionIndex": 1
     },
     "seoBlock": {
@@ -110,9 +119,18 @@
       "Use open-source models for internal tools where quality tolerance is higher"
     ],
     "internalLinks": [
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" },
-      { "text": "GPT-4o vs GPT-4o mini", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" }
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "Token Cost Explained",
+        "href": "/guides/token-cost-explained"
+      },
+      {
+        "text": "GPT-4o vs GPT-4o mini",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      }
     ]
   },
   {
@@ -152,10 +170,27 @@
       "Use our calculator for a precise estimate based on your actual usage patterns"
     ],
     "internalLinks": [
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "GPT-4o vs GPT-4o mini Cost", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
-      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
-    ]
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "GPT-4o vs GPT-4o mini Cost",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "text": "How to Reduce AI Costs",
+        "href": "/guides/how-to-reduce-ai-cost"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Best Value",
+      "providerId": "openai",
+      "title": "OpenAI API — pay-per-token, no surprises",
+      "rationale": "Once you understand token pricing, OpenAI's per-1K rates make it easy to budget exactly. GPT-4o mini at ~$0.15/M input tokens is the cheapest serious workhorse model right now.",
+      "primaryCtaLabel": "See OpenAI pricing",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "when-to-use-api-vs-subscription",
@@ -194,10 +229,27 @@
       "Most developers should use both: subscription for daily work, API for their projects"
     ],
     "internalLinks": [
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Subscription vs API Cost Comparison", "href": "/compare/subscription-vs-api-ai-cost" },
-      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" }
-    ]
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "Subscription vs API Cost Comparison",
+        "href": "/compare/subscription-vs-api-ai-cost"
+      },
+      {
+        "text": "Token Cost Explained",
+        "href": "/guides/token-cost-explained"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Recommended",
+      "providerId": "anthropic",
+      "title": "Anthropic Claude — strong on both sides",
+      "rationale": "Claude is one of the few providers where the API and the $20 Pro subscription are both genuinely competitive. Use Pro for daily chat, the API once you hit ~3M tokens/month.",
+      "primaryCtaLabel": "Try Claude Pro",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "ai-routing-strategies",
@@ -236,10 +288,27 @@
       "LiteLLM and RouteLLM are the most popular open-source tools for this"
     ],
     "internalLinks": [
-      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
-      { "text": "GPT-4o vs GPT-4o mini", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
-    ]
+      {
+        "text": "How to Reduce AI Costs",
+        "href": "/guides/how-to-reduce-ai-cost"
+      },
+      {
+        "text": "GPT-4o vs GPT-4o mini",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Cheapest",
+      "providerId": "deepseek",
+      "title": "DeepSeek V3 — perfect cheap-tier router target",
+      "rationale": "Most routing strategies send 70–80% of traffic to a cheap workhorse model. DeepSeek V3 costs ~10–20× less than GPT-4o while handling routine prompts well.",
+      "primaryCtaLabel": "Use DeepSeek",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "hidden-ai-costs",
@@ -278,10 +347,27 @@
       "Instrument token counts per request from day one — you can't optimize what you don't measure"
     ],
     "internalLinks": [
-      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
-      { "text": "Token Cost Explained", "href": "/guides/token-cost-explained" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
-    ]
+      {
+        "text": "How to Reduce AI Costs",
+        "href": "/guides/how-to-reduce-ai-cost"
+      },
+      {
+        "text": "Token Cost Explained",
+        "href": "/guides/token-cost-explained"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Recommended",
+      "providerId": "openai",
+      "title": "OpenAI API — predictable pricing, no seat traps",
+      "rationale": "Most hidden costs come from per-seat subscriptions and unused features. Pay-per-token API access avoids almost all of them — you only pay for what you actually use.",
+      "primaryCtaLabel": "Switch to API pricing",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "gpt-4o-mini-vs-full-when-to-upgrade",
@@ -316,10 +402,27 @@
       "A routing strategy using both models captures 95% of the quality at 30% of the cost"
     ],
     "internalLinks": [
-      { "text": "GPT-4o vs GPT-4o mini Comparison", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
-      { "text": "AI Routing Strategies", "href": "/guides/ai-routing-strategies" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
-    ]
+      {
+        "text": "GPT-4o vs GPT-4o mini Comparison",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "text": "AI Routing Strategies",
+        "href": "/guides/ai-routing-strategies"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Cheapest",
+      "providerId": "openai",
+      "title": "GPT-4o mini — start here, escalate only when needed",
+      "rationale": "For most production workloads, GPT-4o mini handles 80%+ of traffic at ~5% of the cost. Only escalate to full GPT-4o for tasks that fail the mini in evaluation.",
+      "primaryCtaLabel": "Try GPT-4o mini",
+      "afterSectionIndex": 1
+    }
   },
   {
     "slug": "ai-cost-for-saas-founders",
@@ -358,10 +461,27 @@
       "Set billing alerts and spending caps before launch, not after your first surprise bill"
     ],
     "internalLinks": [
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" },
-      { "text": "Best AI API for Startups", "href": "/best/best-ai-api-for-startups" }
-    ]
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "How to Reduce AI Costs",
+        "href": "/guides/how-to-reduce-ai-cost"
+      },
+      {
+        "text": "Best AI API for Startups",
+        "href": "/best/best-ai-api-for-startups"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Best Value",
+      "providerId": "deepseek",
+      "title": "DeepSeek V3 — keep COGS sane while you scale",
+      "rationale": "For early-stage SaaS, DeepSeek V3 is the single highest-leverage cost lever. Switching from GPT-4o on routine inference paths typically cuts AI COGS 70–90% with minimal quality loss.",
+      "primaryCtaLabel": "See DeepSeek pricing",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "compare-ai-models-for-your-use-case",
@@ -400,10 +520,27 @@
       "Plot cost vs quality and find the efficient frontier for your use case"
     ],
     "internalLinks": [
-      { "text": "Decision Engine", "href": "/decision-engine" },
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "How to Reduce AI Costs", "href": "/guides/how-to-reduce-ai-cost" }
-    ]
+      {
+        "text": "Decision Engine",
+        "href": "/decision-engine"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "How to Reduce AI Costs",
+        "href": "/guides/how-to-reduce-ai-cost"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Recommended",
+      "providerId": "anthropic",
+      "title": "Claude 3.5 Sonnet — strong default for comparison",
+      "rationale": "When comparing models for your own workload, Claude 3.5 Sonnet is the most reliable benchmark — it handles writing, coding, and research without specializing in any of them.",
+      "primaryCtaLabel": "Test Claude 3.5 Sonnet",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "free-ai-tools-that-are-actually-good",
@@ -434,10 +571,27 @@
       "Most users don't need to pay for AI — start free, upgrade only when you consistently hit limits"
     ],
     "internalLinks": [
-      { "text": "Best Free AI Tools for Builders", "href": "/best/best-free-ai-tools-for-builders" },
-      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
-      { "text": "Decision Engine", "href": "/decision-engine" }
-    ]
+      {
+        "text": "Best Free AI Tools for Builders",
+        "href": "/best/best-free-ai-tools-for-builders"
+      },
+      {
+        "text": "Best AI Under $20/Month",
+        "href": "/best/best-ai-under-20-per-month"
+      },
+      {
+        "text": "Decision Engine",
+        "href": "/decision-engine"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Cheapest",
+      "providerId": "google",
+      "title": "Gemini (Free) — the strongest free tier right now",
+      "rationale": "Google's free Gemini tier currently outperforms ChatGPT free on long-context tasks and matches it on most general use cases. Worth using as your daily free driver.",
+      "primaryCtaLabel": "Try Gemini Free",
+      "afterSectionIndex": 1
+    }
   },
   {
     "slug": "claude-vs-chatgpt-for-business",
@@ -476,10 +630,27 @@
       "For the API, use both via an abstraction layer and route by task type"
     ],
     "internalLinks": [
-      { "text": "Claude vs ChatGPT Cost Comparison", "href": "/compare/claude-vs-gpt-cost" },
-      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
-      { "text": "Decision Engine", "href": "/decision-engine" }
-    ]
+      {
+        "text": "Claude vs ChatGPT Cost Comparison",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "text": "Best AI Under $20/Month",
+        "href": "/best/best-ai-under-20-per-month"
+      },
+      {
+        "text": "Decision Engine",
+        "href": "/decision-engine"
+      }
+    ],
+    "winnerBlock": {
+      "badge": "Winner",
+      "providerId": "anthropic",
+      "title": "Claude Pro — the better business default",
+      "rationale": "For business writing, longer documents, and most knowledge work, Claude Pro consistently produces cleaner output than ChatGPT Plus at the same $20/month price.",
+      "primaryCtaLabel": "Try Claude Pro",
+      "afterSectionIndex": 2
+    }
   },
   {
     "slug": "cheapest-ai-writing-tools",
@@ -526,10 +697,22 @@
       "Only upgrade to Jasper if you genuinely need brand-voice or team collaboration workflows"
     ],
     "internalLinks": [
-      { "text": "Writesonic vs Jasper", "href": "/compare/writesonic-vs-jasper" },
-      { "text": "Best AI Writing Tools on a Budget", "href": "/best/ai-writing-tools-cheap" },
-      { "text": "Cheapest AI Content Workflow", "href": "/guides/cheapest-ai-content-workflow" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
+      {
+        "text": "Writesonic vs Jasper",
+        "href": "/compare/writesonic-vs-jasper"
+      },
+      {
+        "text": "Best AI Writing Tools on a Budget",
+        "href": "/best/ai-writing-tools-cheap"
+      },
+      {
+        "text": "Cheapest AI Content Workflow",
+        "href": "/guides/cheapest-ai-content-workflow"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
     ]
   },
   {
@@ -577,10 +760,22 @@
       "All of these tools avoid the common pattern of paying premium prices for the same underlying models"
     ],
     "internalLinks": [
-      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
-      { "text": "Cheapest AI Writing Tools", "href": "/guides/cheapest-ai-writing-tools" },
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Decision Engine", "href": "/decision-engine" }
+      {
+        "text": "Best AI Under $20/Month",
+        "href": "/best/best-ai-under-20-per-month"
+      },
+      {
+        "text": "Cheapest AI Writing Tools",
+        "href": "/guides/cheapest-ai-writing-tools"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "Decision Engine",
+        "href": "/decision-engine"
+      }
     ]
   },
   {
@@ -624,10 +819,22 @@
       "Try Writesonic for 30 days before renewing Jasper — most users see no quality difference"
     ],
     "internalLinks": [
-      { "text": "Writesonic vs Jasper Comparison", "href": "/compare/writesonic-vs-jasper" },
-      { "text": "Cheapest AI Writing Tools", "href": "/guides/cheapest-ai-writing-tools" },
-      { "text": "Best Budget AI Writing Tools", "href": "/best/ai-writing-tools-cheap" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
+      {
+        "text": "Writesonic vs Jasper Comparison",
+        "href": "/compare/writesonic-vs-jasper"
+      },
+      {
+        "text": "Cheapest AI Writing Tools",
+        "href": "/guides/cheapest-ai-writing-tools"
+      },
+      {
+        "text": "Best Budget AI Writing Tools",
+        "href": "/best/ai-writing-tools-cheap"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
     ]
   },
   {
@@ -671,10 +878,22 @@
       "Only pay for AI when you consistently run into daily limits on the free tier"
     ],
     "internalLinks": [
-      { "text": "Best Free AI Tools", "href": "/guides/free-ai-tools-that-are-actually-good" },
-      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
-      { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Decision Engine", "href": "/decision-engine" }
+      {
+        "text": "Best Free AI Tools",
+        "href": "/guides/free-ai-tools-that-are-actually-good"
+      },
+      {
+        "text": "Best AI Under $20/Month",
+        "href": "/best/best-ai-under-20-per-month"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      },
+      {
+        "text": "Decision Engine",
+        "href": "/decision-engine"
+      }
     ]
   },
   {
@@ -722,10 +941,22 @@
       "Use the calculator with your actual token volumes to find the precise cheapest option"
     ],
     "internalLinks": [
-      { "text": "Claude vs GPT-4o Comparison", "href": "/compare/claude-vs-gpt-cost" },
-      { "text": "GPT-4o vs GPT-4o mini", "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
-      { "text": "Best AI Under $20/Month", "href": "/best/best-ai-under-20-per-month" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
+      {
+        "text": "Claude vs GPT-4o Comparison",
+        "href": "/compare/claude-vs-gpt-cost"
+      },
+      {
+        "text": "GPT-4o vs GPT-4o mini",
+        "href": "/compare/gpt-4o-vs-gpt-4o-mini-cost"
+      },
+      {
+        "text": "Best AI Under $20/Month",
+        "href": "/best/best-ai-under-20-per-month"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
     ]
   }
 ]

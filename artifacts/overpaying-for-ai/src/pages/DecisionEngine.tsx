@@ -132,7 +132,7 @@ export function DecisionEngine() {
   );
   const primary = liveResult.balanced;
   const alternatives = [liveResult.cheapest, liveResult.premium];
-  const liveRationale = `For ${liveInputs.useCase} use at ${liveInputs.usageFrequency} usage on a ${liveInputs.budget === "free" ? "free-only" : liveInputs.budget} budget with a ${liveInputs.qualityPreference}-quality preference, ${primary.model.name} (${primary.model.provider}) is the best balance — estimated ${primary.estimatedMonthlySpend}.`;
+  const liveRationale = `For ${liveInputs.useCase} workloads at ${liveInputs.usageFrequency} usage on a ${liveInputs.budget === "free" ? "free-only" : liveInputs.budget} budget with a ${liveInputs.qualityPreference}-quality preference${liveInputs.freeTierRequired ? " and a hard free-tier requirement" : ""}, ${primary.model.name} (${primary.model.provider}) is the best balance — estimated ${primary.estimatedMonthlySpend}. Picked over the cheaper ${liveResult.cheapest.model.name} and the higher-quality ${liveResult.premium.model.name} on combined fit across use case, budget, frequency, and quality preference.`;
 
   // Outbound CTA targets for the recommended tool. Resolved via central registry
   // so links can be swapped to affiliate URLs without touching this page.
