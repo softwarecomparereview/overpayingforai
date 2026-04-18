@@ -1,0 +1,219 @@
+You are working in GitHub repo `softwarecomparereview/overpayingforai` on branch `latestdevelop`.
+
+Goal:
+Do a targeted P1 polish pass on calculator verdict specificity.
+
+Context:
+The project has moved from “core trust surfaces broken” to “core trust surfaces reportedly fixed; next issue is refinement.”
+The broad remediation sweep is done. This pass is only about making calculator verdict copy feel materially scenario-specific.
+
+Grounding rule:
+Engineering prompts for DontOverpayAI should be grounded in exact repository files and existing component paths whenever those are known.
+Reason: Repo-anchored prompts reduce speculative refactors and improve execution accuracy.
+Replaces: loosely scoped implementation prompting.
+
+Do not redesign the calculator. Extend the existing implementation.
+
+==================================================
+REPO ANCHORS — USE THESE EXACT FILES/PATHS
+==================================================
+
+Calculator page:
+- `artifacts/overpaying-for-ai/src/pages/CalculatorPage.tsx` or the exact calculator page file already wired into the app router
+
+Calculator logic / result generation:
+- inspect and modify the exact calculator logic currently producing:
+  - dynamic totals (already fixed)
+  - verdict text (still too static)
+
+Audit runner:
+- `qa/full-audit.mjs`
+
+Relevant existing project rule:
+- preserve current audit wins
+- do not regress:
+  - dynamic calculator totals
+  - decision-engine diversity
+  - sponsored CTAs
+  - canonicals
+  - duplicate titles
+  - duplicate H1s
+
+==================================================
+PROBLEM TO FIX
+==================================================
+
+The prior audit pass reportedly left one P1 issue unresolved:
+
+- calculator verdict copy remains identical across materially different spend scenarios
+- reported pattern: `uniqueVerdicts = 1/4`
+- totals already vary correctly, but the qualitative recommendation/verdict does not
+
+This makes the calculator feel less intelligent than it should, even though the numeric output is now working.
+
+==================================================
+OBJECTIVE
+==================================================
+
+Make calculator verdict text materially respond to scenario differences, especially:
+- very low monthly spend vs moderate spend vs high spend vs very high spend
+- subscription vs API fit
+- likely overpaying vs acceptable fit vs premium-justified
+- light vs medium vs heavy usage if available in the current calculator model
+- scenario preset context if already supported
+
+Target:
+- `uniqueVerdicts >= 3/4` across the audit’s sampled calculator presets
+- keep `uniqueTotals = 4/4`
+- no regressions elsewhere
+
+Do not manufacture random variation.
+Verdict changes must be deterministic and tied to real input/result thresholds.
+
+==================================================
+PART A — PRE-EDIT INSPECTION
+==================================================
+
+Before making changes, print:
+
+1. Exact file(s) you will modify
+2. Where the calculator’s numeric totals are currently computed
+3. Where the calculator verdict / recommendation copy is currently generated
+4. Whether the verdict logic is currently:
+   - hardcoded
+   - template-based
+   - threshold-based
+   - derived from result object fields
+5. What existing result fields you can reuse to vary verdict text without rewriting the calculator architecture
+
+Do not skip this step.
+
+==================================================
+PART B — IMPLEMENT THE P1 FIX
+==================================================
+
+Required implementation approach:
+
+1. Keep the current calculator architecture.
+2. Do not rewrite the whole calculator if only the verdict-generation layer needs improvement.
+3. Identify the exact place where verdict copy is generated and refactor that into a deterministic verdict-classification function.
+
+Implement a verdict-classification layer that uses real calculator outputs and/or inputs to produce meaningfully different copy bands.
+
+At minimum, distinguish between cases like:
+
+- very low spend / negligible cost
+- low but real spend
+- meaningful ongoing spend
+- high spend where optimization matters a lot
+
+Also distinguish where justified by current calculator data:
+
+- API is clearly cheaper
+- subscription is sufficient
+- hybrid / depends / upgrade only if needed
+- user appears likely to overpay at current scale
+- premium plan is only justified at higher complexity/volume
+
+Use the exact data already available in the calculator:
+- monthly cost outputs
+- chosen/recommended model
+- plan type
+- scenario preset
+- token/usage inputs
+- any existing recommendation fields
+
+Do not invent fake business logic unrelated to the current calculator model.
+
+==================================================
+PART C — VERDICT DESIGN RULES
+==================================================
+
+Rules for verdict copy:
+
+1. Verdicts must be short, readable, and commercially useful.
+2. Verdicts must clearly reflect what changed:
+   - cost band
+   - fit
+   - overpay risk
+   - escalation threshold
+3. Do not make every verdict sound like generic marketing copy.
+4. Make the recommendation feel like buyer decision support, consistent with DontOverpayAI positioning.
+5. Preserve trust:
+   - do not overclaim
+   - do not pretend precision beyond the calculator inputs
+6. If helpful, split verdict logic into:
+   - verdict headline
+   - one-line rationale
+   - optional “switch/upgrade only when...” line
+7. Keep the output stable and machine-readable for the audit harness.
+
+==================================================
+PART D — PRESERVE EXISTING AUDIT VISIBILITY
+==================================================
+
+Do not remove or break any current calculator audit hooks.
+
+Preserve the existing result block and semantic structure already used by the audit.
+
+If the calculator currently exposes test IDs or a stable result section, keep those intact.
+
+The audit must still be able to harvest:
+- numeric totals
+- verdict text
+- recommendation text
+
+==================================================
+PART E — VALIDATION
+==================================================
+
+After implementation:
+
+1. Run the existing audit via:
+   - `qa/full-audit.mjs`
+   - or the repo’s exact existing audit command if wrapped
+2. Write the results under a new run directory in:
+   - `out/audits/<new-run-id>/`
+3. Compare against the prior successful run baseline.
+
+Explicitly report:
+- `calculator.uniqueTotals` before vs after
+- `calculator.uniqueVerdicts` before vs after
+- whether decision-engine diversity regressed
+- whether outbound sponsored CTA coverage regressed
+- whether duplicate title / canonical / H1 issues regressed
+
+Targets:
+- `calculator.uniqueVerdicts >= 3/4`
+- `calculator.uniqueTotals = 4/4` preserved
+- no regressions on previously fixed items
+
+==================================================
+PART F — DELIVERABLES
+==================================================
+
+When done, provide:
+
+1. Summary of what changed
+2. Exact changed files
+3. Before/after delta for:
+   - `calculator.uniqueVerdicts`
+   - `calculator.uniqueTotals`
+4. A short explanation of the verdict-banding logic you implemented
+5. Any remaining calculator quality issues you still see
+6. Whether this P1 refinement is now resolved
+
+==================================================
+IMPLEMENTATION GUARDRAILS
+==================================================
+
+- Reuse existing repo code paths.
+- Do not create a parallel calculator.
+- Do not introduce speculative abstractions.
+- Prefer a small, clean refactor over a broad rewrite.
+- Keep the result deterministic.
+- Preserve the project thesis:
+  - pricing clarity
+  - comparison clarity
+  - decision support
+  - trust-preserving monetization
