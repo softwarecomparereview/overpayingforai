@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "wouter";
 
 const DEFAULT_TITLE = "Best AI Tools & Cost Comparison | OverpayingForAI";
 const DEFAULT_DESCRIPTION = "Compare AI tools, pricing, and alternatives to avoid overpaying.";
@@ -17,6 +18,10 @@ interface PageSeoProps {
  */
 export function PageSeo({ title, description, schema, canonicalUrl }: PageSeoProps) {
   const scriptIds = useRef<string[]>([]);
+  // Subscribe to wouter's location so the canonical effect re-runs on SPA route
+  // changes even when the caller does not pass an explicit `canonicalUrl`.
+  // Without this, the canonical href can stick to the previous route's path.
+  const [location] = useLocation();
 
   useEffect(() => {
     document.title = title || DEFAULT_TITLE;
@@ -31,7 +36,13 @@ export function PageSeo({ title, description, schema, canonicalUrl }: PageSeoPro
   }, [title, description]);
 
   useEffect(() => {
-    const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+    // Resolve canonical:
+    // 1) explicit canonicalUrl wins (caller controls query-string strategy)
+    // 2) otherwise canonicalize to the bare pathname — strip query/hash so
+    //    state-bearing URLs (?m=&i=&o=, ?ref=, ?utm_*=) collapse to the
+    //    primary surface.
+    const pathname =
+      typeof window !== "undefined" ? window.location.pathname : location || "/";
     const href = canonicalUrl
       ? `https://overpayingforai.com${canonicalUrl}`
       : `https://overpayingforai.com${pathname}`;
@@ -47,7 +58,7 @@ export function PageSeo({ title, description, schema, canonicalUrl }: PageSeoPro
     return () => {
       link.remove();
     };
-  }, [canonicalUrl]);
+  }, [canonicalUrl, location]);
 
   useEffect(() => {
     if (!schema) return;
