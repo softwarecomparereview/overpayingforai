@@ -3,6 +3,7 @@ import { track } from "@/utils/analytics";
 import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
+import { PageSeo } from "@/components/seo/PageSeo";
 
 const FEATURED_COMPARISONS = comparisonsData.slice(0, 3);
 const FEATURED_GUIDES = guidesData.slice(0, 2);
@@ -13,6 +14,10 @@ const REMAINING_BEST = bestOfData.slice(4);
 export function ResourcesHub() {
   return (
     <div className="bg-white">
+      <PageSeo
+        title="Free AI Resources & Guides | OverpayingForAI"
+        description="All AI cost comparisons, buyer guides, and best-of lists in one place. Practical, vendor-neutral resources to find the cheapest viable AI stack for your workload."
+      />
       <section className="border-b border-border bg-slate-900 text-white py-14 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-[1.3fr_0.9fr] gap-6 items-start">

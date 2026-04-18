@@ -347,6 +347,10 @@ export function CompareIndex() {
 
   return (
     <div className="bg-white">
+      <PageSeo
+        title="AI Tool Comparisons | OverpayingForAI"
+        description="Side-by-side AI model and subscription cost comparisons — GPT-4o vs Claude, DeepSeek vs GPT-4o, subscription vs API. Find the cheaper option in seconds."
+      />
       <section className="border-b border-border bg-slate-900 text-white py-14 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-[1.35fr_0.85fr] gap-6 items-start">

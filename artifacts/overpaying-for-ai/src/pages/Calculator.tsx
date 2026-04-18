@@ -15,12 +15,11 @@ import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { CTABlock } from "@/components/monetization/CTABlock";
-import { generateTitle, generateMetaDescription, generateSchemaSoftwareApp } from "@/utils/seo";
+import { generateSchemaSoftwareApp } from "@/utils/seo";
+import { getScenarioSeo } from "@/utils/scenarioSeo";
 import { getPrimaryCta, providerNameToId } from "@/utils/affiliateResolver";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 
-const CALCULATOR_SEO_TITLE = generateTitle("", "calculator");
-const CALCULATOR_SEO_DESC = generateMetaDescription("", "calculator");
 const CALCULATOR_SCHEMA = generateSchemaSoftwareApp();
 
 const CALCULATOR_RELATED_LINKS = [
@@ -268,13 +267,31 @@ export function Calculator() {
     ? `${result.model.name}: ${formatCost(result.estimatedMonthlyCost)}/month at ${formatTokenCount(inputTokens)} in / ${formatTokenCount(outputTokens)} out`
     : `Calculator result`;
 
+  const scenarioSeo = useMemo(
+    () => getScenarioSeo(selectedScenario?.id ?? null),
+    [selectedScenario?.id],
+  );
+  const canonicalUrl = selectedScenario
+    ? `/calculator?scenario=${selectedScenario.id}`
+    : "/calculator";
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-      <PageSeo title={CALCULATOR_SEO_TITLE} description={CALCULATOR_SEO_DESC} schema={CALCULATOR_SCHEMA} />
+      <PageSeo
+        title={scenarioSeo.title}
+        description={scenarioSeo.metaDescription}
+        schema={CALCULATOR_SCHEMA}
+        canonicalUrl={canonicalUrl}
+      />
       <div className="mb-5 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2">Find your cheapest viable AI setup</h1>
-        <p className="text-sm sm:text-base text-muted-foreground max-w-prose">
-          Estimate your real monthly AI spend and immediately see lower-cost alternatives.
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2" data-testid="calc-h1">
+          {scenarioSeo.h1}
+        </h1>
+        <p
+          className="text-sm sm:text-base text-muted-foreground max-w-prose"
+          data-testid="calc-subhead"
+        >
+          {scenarioSeo.subhead}
         </p>
         <p className="text-xs text-muted-foreground mt-2">
           Recommendations are based on use case, usage level, and cost sensitivity.
