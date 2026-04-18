@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { Link } from "wouter";
 import {
   runCalculator,
@@ -53,40 +53,57 @@ export function Calculator() {
     ? new URLSearchParams(window.location.search)
     : new URLSearchParams();
 
-  const [modelId, setModelId] = useState(params.get("m") ?? "gpt-4o");
-  const [inputTokens, setInputTokens] = useState(Number(params.get("i")) || 500_000);
-  const [outputTokens, setOutputTokens] = useState(Number(params.get("o")) || 200_000);
-  const [result, setResult] = useState<CalculatorResult | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [selectedScenario, setSelectedScenario] = useState<ScenarioPreset | null>(null);
+  const scenarioIdParam = params.get("scenario");
+  const initialScenario = scenarioIdParam
+    ? SCENARIOS.find((s) => s.id === scenarioIdParam) ?? null
+    : null;
 
-  const calculate = useCallback(() => {
+  const [modelId, setModelId] = useState(
+    params.get("m") ?? initialScenario?.inputs.modelId ?? "gpt-4o"
+  );
+  const [inputTokens, setInputTokens] = useState(
+    Number(params.get("i")) || initialScenario?.inputs.monthlyInputTokens || 500_000
+  );
+  const [outputTokens, setOutputTokens] = useState(
+    Number(params.get("o")) || initialScenario?.inputs.monthlyOutputTokens || 200_000
+  );
+  const [copied, setCopied] = useState(false);
+  const [selectedScenario, setSelectedScenario] = useState<ScenarioPreset | null>(initialScenario);
+
+  // Result is always computed from inputs — no button gating, no stale state.
+  // This ensures the page renders a real, semantic, scrapable result on every render.
+  const result = useMemo<CalculatorResult | null>(() => {
     try {
-      const r = runCalculator({
+      return runCalculator({
         modelId,
         monthlyInputTokens: inputTokens,
         monthlyOutputTokens: outputTokens,
         mode: "api",
       });
-      setResult(r);
-      calculationCountRef.current += 1;
-      trackDecisionEvent("calculator_completed", {
-        page_type: "calculator",
-        source_component: "Calculator/CalculateButton",
-        page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
-        selected_model: r.model.id,
-        selected_provider: r.model.provider,
-        calculation_index: calculationCountRef.current,
-      });
     } catch (e) {
       console.error(e);
+      return null;
     }
   }, [modelId, inputTokens, outputTokens]);
+
+  // Manual "Calculate" button still tracks an explicit calculation event and
+  // scrolls to the results, but does not gate visibility of the result block.
+  const calculate = useCallback(() => {
+    if (!result) return;
+    calculationCountRef.current += 1;
+    trackDecisionEvent("calculator_completed", {
+      page_type: "calculator",
+      source_component: "Calculator/CalculateButton",
+      page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
+      selected_model: result.model.id,
+      selected_provider: result.model.provider,
+      calculation_index: calculationCountRef.current,
+    });
+  }, [result]);
 
   const applyPreset = (preset: (typeof PRESET_USAGES)[0]) => {
     setInputTokens(preset.inputTokens);
     setOutputTokens(preset.outputTokens);
-    setResult(null);
   };
 
   const applyScenario = (scenario: ScenarioPreset) => {
@@ -94,7 +111,6 @@ export function Calculator() {
     setModelId(scenario.inputs.modelId);
     setInputTokens(scenario.inputs.monthlyInputTokens);
     setOutputTokens(scenario.inputs.monthlyOutputTokens);
-    setResult(null);
     if (typeof window !== "undefined") {
       const analytics = (
         window as typeof window & {
@@ -120,8 +136,16 @@ export function Calculator() {
     inputsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [selectedScenario]);
 
+  // De-dupe the "results_viewed" event by a stable signature of the inputs that
+  // produce a result. With the move to useMemo-based result computation, `result`
+  // changes on every keystroke; without dedupe this event would fire per keypress.
+  // We track each unique modelId|input|output combination at most once per session.
+  const lastViewedSigRef = useRef<string>("");
   useEffect(() => {
     if (!result) return;
+    const sig = `${result.model.id}|${inputTokens}|${outputTokens}`;
+    if (sig === lastViewedSigRef.current) return;
+    lastViewedSigRef.current = sig;
     trackDecisionEvent("calculator_results_viewed", {
       page_type: "calculator",
       source_component: "Calculator/ResultsBlock",
@@ -131,7 +155,7 @@ export function Calculator() {
       has_cheaper_alternative: Boolean(result.cheaperAlternatives.length),
       calculation_index: calculationCountRef.current,
     });
-  }, [result]);
+  }, [result, inputTokens, outputTokens]);
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(buildShareUrl(modelId, inputTokens, outputTokens));
@@ -147,6 +171,102 @@ export function Calculator() {
   const primaryTarget = bestSetup
     ? getPrimaryCta(bestSetupProviderId, "cheapest", "/best")
     : null;
+
+  // Compute "Best fit: API vs subscription" verdict by comparing the cheapest
+  // viable API plan for these inputs against the cheapest subscription plan.
+  // This produces deterministic, input-driven copy on every render.
+  const allModels = models;
+  const apiCandidates = allModels
+    .filter((m) => m.planType === "api")
+    .map((m) => {
+      const inputCost = (inputTokens / 1000) * m.inputCostPer1k;
+      const outputCost = (outputTokens / 1000) * m.outputCostPer1k;
+      return { model: m, monthlyCost: inputCost + outputCost };
+    })
+    .sort((a, b) => a.monthlyCost - b.monthlyCost);
+  const subCandidates = allModels
+    .filter((m) => m.planType === "subscription" && (m.monthlySubscriptionCostIfAny ?? 0) > 0)
+    .map((m) => ({ model: m, monthlyCost: m.monthlySubscriptionCostIfAny ?? 0 }))
+    .sort((a, b) => a.monthlyCost - b.monthlyCost);
+  const cheapestApi = apiCandidates[0] ?? null;
+  const cheapestSub = subCandidates[0] ?? null;
+  const verdict: "API" | "subscription" =
+    !cheapestSub
+      ? "API"
+      : !cheapestApi
+        ? "subscription"
+        : cheapestApi.monthlyCost <= cheapestSub.monthlyCost
+          ? "API"
+          : "subscription";
+  const verdictWinner = verdict === "API" ? cheapestApi : cheapestSub;
+  const verdictRationale =
+    verdict === "API"
+      ? cheapestApi && cheapestSub
+        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, paying per-token on ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo) is cheaper than the cheapest flat subscription, ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo).`
+        : `At this usage level, an API/per-token plan is the cheapest path.`
+      : cheapestApi && cheapestSub
+        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, the flat ${cheapestSub.model.name} subscription (${formatCost(cheapestSub.monthlyCost)}/mo) beats the cheapest API option, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).`
+        : `At this usage level, a flat subscription is the cheapest path.`;
+
+  // Build the semantic options list: cheapest API + cheapest subscription +
+  // up to 2 of the cheaper alternatives we already computed for the selected model.
+  type ResultOption = {
+    key: string;
+    name: string;
+    provider: string;
+    planType: "api" | "subscription";
+    monthlyCost: number;
+  };
+  const options: ResultOption[] = [];
+  const seen = new Set<string>();
+  const pushOpt = (o: ResultOption | null) => {
+    if (!o || seen.has(o.key)) return;
+    seen.add(o.key);
+    options.push(o);
+  };
+  if (cheapestApi) {
+    pushOpt({
+      key: cheapestApi.model.id,
+      name: cheapestApi.model.name,
+      provider: cheapestApi.model.provider,
+      planType: "api",
+      monthlyCost: cheapestApi.monthlyCost,
+    });
+  }
+  if (cheapestSub) {
+    pushOpt({
+      key: cheapestSub.model.id,
+      name: cheapestSub.model.name,
+      provider: cheapestSub.model.provider,
+      planType: "subscription",
+      monthlyCost: cheapestSub.monthlyCost,
+    });
+  }
+  if (result) {
+    pushOpt({
+      key: result.model.id + "-current",
+      name: result.model.name + " (your selection)",
+      provider: result.model.provider,
+      planType: result.model.planType,
+      monthlyCost: result.estimatedMonthlyCost,
+    });
+    for (const a of result.cheaperAlternatives.slice(0, 2)) {
+      pushOpt({
+        key: a.model.id,
+        name: a.model.name,
+        provider: a.model.provider,
+        planType: a.model.planType,
+        monthlyCost: a.estimatedCost,
+      });
+    }
+  }
+
+  const primaryRecommendation = verdictWinner
+    ? `Recommended: ${verdictWinner.model.name} (${verdictWinner.model.provider}) — ${formatCost(verdictWinner.monthlyCost)}/month at your usage. Best fit: ${verdict}.`
+    : `Pick a model and enter usage to see a recommendation.`;
+  const resultHeading = result
+    ? `${result.model.name}: ${formatCost(result.estimatedMonthlyCost)}/month at ${formatTokenCount(inputTokens)} in / ${formatTokenCount(outputTokens)} out`
+    : `Calculator result`;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
@@ -211,7 +331,6 @@ export function Calculator() {
             value={modelId}
               onChange={(e) => {
                 setModelId(e.target.value);
-                setResult(null);
               }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             data-testid="model-select"
@@ -274,7 +393,6 @@ export function Calculator() {
               step={100000}
               onChange={(e) => {
                 setInputTokens(Number(e.target.value));
-                setResult(null);
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="input-tokens"
@@ -296,7 +414,6 @@ export function Calculator() {
               step={50000}
               onChange={(e) => {
                 setOutputTokens(Number(e.target.value));
-                setResult(null);
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               data-testid="output-tokens"
@@ -315,6 +432,33 @@ export function Calculator() {
           Calculate Monthly Cost
         </button>
       </div>
+
+      <section
+        className="space-y-6"
+        data-testid="calc-result"
+        aria-live="polite"
+        aria-label="Calculator result"
+      >
+        <h2 data-testid="calc-result-heading" className="sr-only">
+          {resultHeading}
+        </h2>
+        <p data-testid="calc-primary-recommendation" className="sr-only">
+          {primaryRecommendation}
+        </p>
+        <ul data-testid="calc-options" className="sr-only">
+          {options.map((o) => (
+            <li key={o.key} data-plan={o.planType} data-cost={o.monthlyCost.toFixed(4)}>
+              {o.name} — {o.provider} — {o.planType} — {formatCost(o.monthlyCost)}/month
+            </li>
+          ))}
+        </ul>
+        <p data-testid="calc-rationale" className="sr-only">
+          {verdictRationale}
+        </p>
+        <p data-testid="calc-verdict" className="sr-only">
+          Best fit: {verdict}
+        </p>
+      </section>
 
       {result && (
         <div className="space-y-6" data-testid="results">
@@ -335,6 +479,31 @@ export function Calculator() {
                 <p className="text-sm font-semibold text-foreground">{result.model.name}</p>
                 <p className="text-xs text-muted-foreground">{result.model.provider}</p>
               </div>
+            </div>
+
+            {/* Visible verdict + recommendation, mirrors the testid block above so
+                sighted users see the same input-driven copy that the audit reads. */}
+            <div className="mt-2 mb-4 border border-border rounded-lg bg-muted/30 p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
+                Best fit: {verdict}
+              </p>
+              <p className="text-sm text-foreground font-medium">
+                {primaryRecommendation}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                {verdictRationale}
+              </p>
+              {options.length > 0 && (
+                <ul className="text-xs text-muted-foreground mt-3 space-y-1">
+                  {options.slice(0, 4).map((o) => (
+                    <li key={"v-" + o.key}>
+                      <span className="font-medium text-foreground">{o.name}</span>
+                      <span className="text-muted-foreground"> — {o.provider} ({o.planType}) — </span>
+                      <span className="font-medium text-foreground">{formatCost(o.monthlyCost)}/month</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {result.savingsEstimate !== null && result.savingsEstimate > 0 && (
