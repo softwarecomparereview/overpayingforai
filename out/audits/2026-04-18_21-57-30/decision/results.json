@@ -1,0 +1,462 @@
+{
+  "results": [
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a cheap-quality preference, GitHub Copilot ",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a cheap-quality preference, GitHub Copilot ",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a balanced-quality preference, GitHub Copil",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a balanced-quality preference, GitHub Copil",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a best-quality preference, Cursor Free (Cur",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a free-only budget with a best-quality preference, Cursor Free (Cur",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a cheap-quality preference, GitHub Copilot",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a cheap-quality preference, GitHub Copilot",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a balanced-quality preference, GitHub Copi",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a balanced-quality preference, GitHub Copi",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a best-quality preference, Cursor Free (Cu",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "medium",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a free-only budget with a best-quality preference, Cursor Free (Cu",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a cheap-quality preference, GitHub Copilot ",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a cheap-quality preference, GitHub Copilot ",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a balanced-quality preference, GitHub Copil",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a balanced-quality preference, GitHub Copil",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a best-quality preference, Cursor Free (Cur",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "heavy",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at heavy usage on a free-only budget with a best-quality preference, Cursor Free (Cur",
+      "strategy": "Start with ChatGPT Free. It's free and covers most coding tasks. If you hit limi",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a under20 budget with a cheap-quality preference, GitHub Copilot Fr",
+      "strategy": "Route all coding tasks to ChatGPT Free. Only escalate to GitHub Copilot Free whe",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a under20 budget with a cheap-quality preference, GitHub Copilot Fr",
+      "strategy": "Route all coding tasks to ChatGPT Free. Only escalate to GitHub Copilot Free whe",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a under20 budget with a balanced-quality preference, GitHub Copilot",
+      "strategy": "Use GitHub Copilot Free as your default for coding. Reserve Groq (Llama 3.1 70B)",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a under20 budget with a balanced-quality preference, GitHub Copilot",
+      "strategy": "Use GitHub Copilot Free as your default for coding. Reserve Claude Pro for compl",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at light usage on a under20 budget with a best-quality preference, Cursor Free (Curso",
+      "strategy": "Use Cursor Free as your default for coding. Reserve Groq (Llama 3.1 70B) for com",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Cursor Pro",
+      "recommendedProvider": "Cursor",
+      "cost": "$20/month flat",
+      "rationale": "For coding use at light usage on a under20 budget with a best-quality preference, Cursor Pro (Cursor",
+      "strategy": "Use Cursor Pro as your default for coding. Reserve Claude Pro for complex, high-",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a under20 budget with a cheap-quality preference, GitHub Copilot F",
+      "strategy": "Route all coding tasks to ChatGPT Free. Only escalate to GitHub Copilot Free whe",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a under20 budget with a cheap-quality preference, GitHub Copilot F",
+      "strategy": "Route all coding tasks to ChatGPT Free. Only escalate to GitHub Copilot Free whe",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a under20 budget with a balanced-quality preference, GitHub Copilo",
+      "strategy": "Use GitHub Copilot Free as your default for coding. Reserve Groq (Llama 3.1 70B)",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a under20 budget with a balanced-quality preference, GitHub Copilo",
+      "strategy": "Use GitHub Copilot Free as your default for coding. Reserve Claude Pro for compl",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For coding use at medium usage on a under20 budget with a best-quality preference, Cursor Free (Curs",
+      "strategy": "Use Cursor Free as your default for coding. Reserve Groq (Llama 3.1 70B) for com",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "medium",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Cursor Pro",
+      "recommendedProvider": "Cursor",
+      "cost": "$20/month flat",
+      "rationale": "For coding use at medium usage on a under20 budget with a best-quality preference, Cursor Pro (Curso",
+      "strategy": "Use Cursor Pro as your default for coding. Reserve Claude Pro for complex, high-",
+      "ok": true
+    }
+  ],
+  "totalScenarios": 30,
+  "successful": 30,
+  "uniqueRecommendations": 3,
+  "recommendations": [
+    "GitHub Copilot Free",
+    "Cursor Free",
+    "Cursor Pro"
+  ]
+}

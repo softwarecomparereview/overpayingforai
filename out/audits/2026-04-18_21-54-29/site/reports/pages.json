@@ -7,28 +7,33 @@
       "https://overpayingforai.com/"
     ],
     "h1s": [
-      "Stop wasting money on AI.Get your cheapest viable setup."
+      "Stop wasting money on AI.\nGet your cheapest viable setup."
     ],
     "outboundCtas": [
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best overallClaude 3.5 SonnetAnthropic · $3 / 1M out tokensNear-GPT-4o quality a"
+        "text": "Best overall\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\nNear-GPT-4o qual"
       },
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokens33× cheaper than GPT-4o."
+        "text": "Cheapest viable\nGPT-4o mini\n\nOpenAI · $0.60 / 1M out tokens\n\n33× cheaper than GP"
       },
       {
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Startup optionGemini 1.5 FlashGoogle · $0.075 / 1M out tokensNear-zero cost for "
+        "text": "Startup option\nGemini 1.5 Flash\n\nGoogle · $0.075 / 1M out tokens\n\nNear-zero cost"
       },
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for codingClaude 3.5 SonnetAnthropic · $3 / 1M out tokensStrong code genera"
+        "text": "Best for coding\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\nStrong code g"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -43,7 +48,13 @@
     "h1s": [
       "Browse by AI type"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -65,17 +76,22 @@
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best overallClaude 3.5 SonnetAnthropic · $3 / 1M out tokensNear-GPT-4o quality a"
+        "text": "Best overall\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\nNear-GPT-4o qual"
       },
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokens33× cheaper than GPT-4o."
+        "text": "Cheapest viable\nGPT-4o mini\n\nOpenAI · $0.60 / 1M out tokens\n\n33× cheaper than GP"
       },
       {
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best budget APIDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensThe lowest-cost model"
+        "text": "Best budget API\nDeepSeek V3\n\nDeepSeek · ~$0.28 / 1M out tokens\n\nThe lowest-cost "
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -99,12 +115,17 @@
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for codingClaude 3.5 SonnetAnthropic · $3 / 1M out tokensBest-in-class code"
+        "text": "Best for coding\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\nBest-in-class"
       },
       {
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best IDE toolCursor ProCursor · $20 / month flatBest-in-class IDE assistant. Bun"
+        "text": "Best IDE tool\nCursor Pro\n\nCursor · $20 / month flat\n\nBest-in-class IDE assistant"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -128,17 +149,22 @@
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for writing qualityClaude 3.5 SonnetAnthropic · $3 / 1M out tokensBest natu"
+        "text": "Best for writing quality\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\nBest"
       },
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Cheapest viableGPT-4o miniOpenAI · $0.60 / 1M out tokensProduces clean, publisha"
+        "text": "Cheapest viable\nGPT-4o mini\n\nOpenAI · $0.60 / 1M out tokens\n\nProduces clean, pub"
       },
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for scaleClaude 3.5 HaikuAnthropic · $1.25 / 1M out tokensFast, cheap, and "
+        "text": "Best for scale\nClaude 3.5 Haiku\n\nAnthropic · $1.25 / 1M out tokens\n\nFast, cheap,"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -162,17 +188,22 @@
       {
         "href": "https://perplexity.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for web researchPerplexity ProPerplexity · $20 / monthBest tool for web-sou"
+        "text": "Best for web research\nPerplexity Pro\n\nPerplexity · $20 / month\n\nBest tool for we"
       },
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for documentsClaude 3.5 SonnetAnthropic · $3 / 1M out tokens200K token cont"
+        "text": "Best for documents\nClaude 3.5 Sonnet\n\nAnthropic · $3 / 1M out tokens\n\n200K token"
       },
       {
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for large filesGemini 1.5 ProGoogle · $3.50 / 1M out tokens1M token context"
+        "text": "Best for large files\nGemini 1.5 Pro\n\nGoogle · $3.50 / 1M out tokens\n\n1M token co"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -196,17 +227,22 @@
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for volumeGPT-4o miniOpenAI · $0.60 / 1M out tokensThe default choice for h"
+        "text": "Best for volume\nGPT-4o mini\n\nOpenAI · $0.60 / 1M out tokens\n\nThe default choice "
       },
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best Anthropic optionClaude 3.5 HaikuAnthropic · $1.25 / 1M out tokensFast, chea"
+        "text": "Best Anthropic option\nClaude 3.5 Haiku\n\nAnthropic · $1.25 / 1M out tokens\n\nFast,"
       },
       {
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Lowest costDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensLowest cost at near-front"
+        "text": "Lowest cost\nDeepSeek V3\n\nDeepSeek · ~$0.28 / 1M out tokens\n\nLowest cost at near-"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -230,17 +266,22 @@
       {
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best for individualsClaude ProAnthropic · $20 / monthBest subscription value for"
+        "text": "Best for individuals\nClaude Pro\n\nAnthropic · $20 / month\n\nBest subscription valu"
       },
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best overallChatGPT PlusOpenAI · $20 / monthAccess to GPT-4o, GPT-4o mini, and D"
+        "text": "Best overall\nChatGPT Plus\n\nOpenAI · $20 / month\n\nAccess to GPT-4o, GPT-4o mini, "
       },
       {
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
-        "text": "Best free optionChatGPT FreeOpenAI · FreeGPT-4o mini access for free. Covers bas"
+        "text": "Best free option\nChatGPT Free\n\nOpenAI · Free\n\nGPT-4o mini access for free. Cover"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -265,6 +306,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -284,6 +330,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Start with Gemini"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -303,6 +354,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Start with DeepSeek"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -327,6 +383,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -351,6 +412,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -375,6 +441,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -399,6 +470,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -423,6 +499,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Claude 3.5 Haiku →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -447,6 +528,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -471,6 +557,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -495,6 +586,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -519,6 +615,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -543,6 +644,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -567,6 +673,11 @@
         "href": "https://mistral.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Mistral Small →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -586,6 +697,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -630,6 +746,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -679,6 +800,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -708,6 +834,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -752,6 +883,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Claude Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -796,6 +932,11 @@
         "href": "https://perplexity.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Perplexity Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -840,6 +981,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -879,6 +1025,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o mini — Default Workhorse →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -923,6 +1074,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -962,6 +1118,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -986,6 +1147,11 @@
         "href": "https://mistral.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Mistral Large →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1030,21 +1196,30 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Pro — $20/month (if you code) →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
   },
   {
     "route": "/guides",
-    "title": "AI Cost Guides — Cut Your AI Spend | OverpayingForAI",
-    "desc": "Practical, no-fluff guides for reducing AI costs: token optimization, model routing, API vs subscription decisions, and more.",
-    "canonicals": [
-      "https://overpayingforai.com/guides"
-    ],
+    "title": "Overpaying for AI",
+    "desc": "",
+    "canonicals": [],
     "h1s": [
       "AI Cost Guides"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1062,6 +1237,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Use Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1076,480 +1256,13 @@
     "h1s": [
       "How to Reduce Your AI Costs by 80% Without Losing Quality"
     ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/token-cost-explained",
-    "title": "Token Cost Explained: What You're Actually Paying For | OverpayingForAI",
-    "desc": "A plain-English guide to AI tokens, how they're counted, and exactly how to calculate your real costs.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/token-cost-explained"
-    ],
-    "h1s": [
-      "Token Cost Explained: What You're Actually Paying For"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/when-to-use-api-vs-subscription",
-    "title": "API vs Subscription: How to Choose the Right AI Pricing Model | OverpayingForAI",
-    "desc": "A decision framework for choosing between AI subscriptions and pay-per-use API access based on your actual usage.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/when-to-use-api-vs-subscription"
-    ],
-    "h1s": [
-      "API vs Subscription: How to Choose the Right AI Pricing Model"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/ai-routing-strategies",
-    "title": "AI Model Routing: How to Cut Costs Without Losing Quality | OverpayingForAI",
-    "desc": "How to route AI requests to cheaper models intelligently — the technique used by companies spending millions on AI to stay profitable.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/ai-routing-strategies"
-    ],
-    "h1s": [
-      "AI Model Routing: How to Cut Costs Without Losing Quality"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/hidden-ai-costs",
-    "title": "Hidden AI Costs Nobody Warns You About | OverpayingForAI",
-    "desc": "The non-obvious costs of running AI in production: embedding models, retries, evaluation pipelines, and tool calls.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/hidden-ai-costs"
-    ],
-    "h1s": [
-      "Hidden AI Costs Nobody Warns You About"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
-    "title": "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide | OverpayingForAI",
-    "desc": "When does upgrading from GPT-4o mini to GPT-4o actually change your results? A task-by-task comparison.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/gpt-4o-mini-vs-full-when-to-upgrade"
-    ],
-    "h1s": [
-      "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/ai-cost-for-saas-founders",
-    "title": "AI Cost Planning for SaaS Founders: A Realistic Budget Guide | OverpayingForAI",
-    "desc": "How to project, control, and optimize AI API costs as you scale a SaaS product from zero to revenue.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/ai-cost-for-saas-founders"
-    ],
-    "h1s": [
-      "AI Cost Planning for SaaS Founders: A Realistic Budget Guide"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/compare-ai-models-for-your-use-case",
-    "title": "How to Compare AI Models for Your Specific Use Case | OverpayingForAI",
-    "desc": "A systematic framework for evaluating which AI model is actually right for your task — beyond benchmark scores.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/compare-ai-models-for-your-use-case"
-    ],
-    "h1s": [
-      "How to Compare AI Models for Your Specific Use Case"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/free-ai-tools-that-are-actually-good",
-    "title": "Free AI Tools That Are Actually Good (2025) | OverpayingForAI",
-    "desc": "Honest guide to AI tools with real free tiers — not bait-and-switch trials masquerading as free.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/free-ai-tools-that-are-actually-good"
-    ],
-    "h1s": [
-      "Free AI Tools That Are Actually Good (2025)"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/claude-vs-chatgpt-for-business",
-    "title": "Claude vs ChatGPT for Business: A Practical Comparison | OverpayingForAI",
-    "desc": "Which AI assistant is better for business teams — Claude or ChatGPT? A no-BS comparison for 2025.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/claude-vs-chatgpt-for-business"
-    ],
-    "h1s": [
-      "Claude vs ChatGPT for Business: A Practical Comparison"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/cheapest-ai-writing-tools",
-    "title": "The Cheapest AI Writing Tools in 2026 (Ranked by Real Cost) | OverpayingForAI",
-    "desc": "A no-fluff ranking of the most affordable AI writing tools — what they actually cost, what you get, and who each one is best for.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/cheapest-ai-writing-tools"
-    ],
-    "h1s": [
-      "The Cheapest AI Writing Tools in 2026 (Ranked by Real Cost)"
-    ],
     "outboundCtas": [
       {
-        "href": "https://writesonic.com",
-        "rel": "noopener noreferrer sponsored",
-        "text": "Try Writesonic →"
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/best-ai-tools-under-20",
-    "title": "Best AI Tools Under $20/Month in 2026 | OverpayingForAI",
-    "desc": "The top AI tools you can use for $20 or less per month — covering writing, coding, research, and general productivity.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/best-ai-tools-under-20"
-    ],
-    "h1s": [
-      "Best AI Tools Under $20/Month in 2026"
-    ],
-    "outboundCtas": [
-      {
-        "href": "https://writesonic.com",
-        "rel": "noopener noreferrer sponsored",
-        "text": "Try Writesonic →"
-      }
-    ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/is-jasper-worth-it",
-    "title": "Is Jasper AI Worth It in 2026? An Honest Cost Analysis | OverpayingForAI",
-    "desc": "Jasper charges $49/month. Is that premium justified — or are you paying for a GPT-4o wrapper? An honest breakdown.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/is-jasper-worth-it"
-    ],
-    "h1s": [
-      "Is Jasper AI Worth It in 2026? An Honest Cost Analysis"
-    ],
-    "outboundCtas": [
-      {
-        "href": "https://writesonic.com",
-        "rel": "noopener noreferrer sponsored",
-        "text": "Try Writesonic →"
-      }
-    ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/cheapest-ai-for-students",
-    "title": "Cheapest AI Tools for Students in 2026 (Free and Under $10) | OverpayingForAI",
-    "desc": "The best AI tools for students on a tight budget — covering writing, research, coding, and studying. Free tiers that actually work.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/cheapest-ai-for-students"
-    ],
-    "h1s": [
-      "Cheapest AI Tools for Students in 2026 (Free and Under $10)"
-    ],
-    "outboundCtas": [
-      {
-        "href": "https://rytr.me",
-        "rel": "noopener noreferrer sponsored",
-        "text": "Try Rytr →"
-      }
-    ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/guides/chatgpt-vs-claude-cost",
-    "title": "ChatGPT vs Claude: Which Costs Less in 2026? | OverpayingForAI",
-    "desc": "A precise cost comparison between ChatGPT and Claude — subscription and API pricing — to find the cheaper option for your actual usage.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/chatgpt-vs-claude-cost"
-    ],
-    "h1s": [
-      "ChatGPT vs Claude: Which Costs Less in 2026?"
-    ],
-    "outboundCtas": [
-      {
-        "href": "https://claude.ai",
-        "rel": "noopener noreferrer sponsored",
-        "text": "Start with Claude →"
-      }
-    ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/resources",
-    "title": "Free AI Resources & Guides | OverpayingForAI",
-    "desc": "All AI cost comparisons, buyer guides, and best-of lists in one place. Practical, vendor-neutral resources to find the cheapest viable AI stack for your workload.",
-    "canonicals": [
-      "https://overpayingforai.com/resources"
-    ],
-    "h1s": [
-      "All resources"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/changelog",
-    "title": "Site Changelog | OverpayingForAI",
-    "desc": "Current pricing for every tracked AI model — sourced from official provider pages, dated, and reviewed regularly. See what's fresh and what's stale at a glance.",
-    "canonicals": [
-      "https://overpayingforai.com/changelog"
-    ],
-    "h1s": [
-      "AI pricing data"
-    ],
-    "outboundCtas": [
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://openai.com/chatgpt/pricing/",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://openai.com/chatgpt/pricing/",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://www.anthropic.com/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://one.google.com/about/plans",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://gemini.google.com/",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://www.cursor.com/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://www.cursor.com/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://groq.com/pricing/",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://www.perplexity.ai/pro",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://groq.com/pricing/",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://artificialanalysis.ai/models",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://writesonic.com/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://jasper.ai/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://copy.ai/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      },
-      {
-        "href": "https://rytr.me/pricing",
-        "rel": "noreferrer",
-        "text": "Source →"
-      }
-    ],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/pricing-changelog",
-    "title": "AI Pricing Changelog | OverpayingForAI",
-    "desc": "A dated record of every AI model pricing review — what changed, what was added, and when. Full transparency on the data behind every comparison and recommendation.",
-    "canonicals": [
-      "https://overpayingforai.com/pricing-changelog"
-    ],
-    "h1s": [
-      "Pricing Changelog"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/terms",
-    "title": "Terms of Service | OverpayingForAI",
-    "desc": "Terms of service and affiliate disclosure for OverpayingForAI — how the site uses pricing data, makes recommendations, and discloses sponsored links.",
-    "canonicals": [
-      "https://overpayingforai.com/terms"
-    ],
-    "h1s": [
-      "Terms of Service"
-    ],
-    "outboundCtas": [],
-    "fakeAffordance": 0
-  },
-  {
-    "route": "/media-kit",
-    "title": "Media Kit & Partnerships | OverpayingForAI",
-    "desc": "Partnership and media info for OverpayingForAI — audience, editorial standards, and how AI brands and tools can work with the site.",
-    "canonicals": [
-      "https://overpayingforai.com/media-kit"
-    ],
-    "h1s": [
-      "Media Kit"
-    ],
-    "outboundCtas": [],
     "fakeAffordance": 0
   }
 ]

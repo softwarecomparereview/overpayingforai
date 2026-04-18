@@ -1,21 +1,97 @@
 {
-  "startedAt": "2026-04-18T18:53:56.304Z",
-  "finishedAt": "2026-04-18T18:53:59.545Z",
-  "issueCount": 2,
+  "startedAt": "2026-04-18T22:07:18.546Z",
+  "finishedAt": "2026-04-18T22:07:18.547Z",
+  "issueCount": 15,
   "issues": [
     {
       "type": "no_outbound_cta_on_commercial_page",
       "severity": "high",
-      "url": "https://overpayingforai.com/",
-      "source": null,
+      "url": "/ai-types",
       "detail": ""
     },
     {
       "type": "no_outbound_cta_on_commercial_page",
       "severity": "high",
-      "url": "https://overpayingforai.com/best",
-      "source": null,
+      "url": "/guides",
       "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/how-to-reduce-ai-cost",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/token-cost-explained",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/when-to-use-api-vs-subscription",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/ai-routing-strategies",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/hidden-ai-costs",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/ai-cost-for-saas-founders",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/compare-ai-models-for-your-use-case",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/free-ai-tools-that-are-actually-good",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/guides/claude-vs-chatgpt-for-business",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "/resources",
+      "detail": ""
+    },
+    {
+      "type": "decision_engine_low_diversity",
+      "severity": "medium",
+      "url": "/decision-engine",
+      "detail": "Only 3 unique recommendations across 30 scenarios"
+    },
+    {
+      "type": "decision_engine_low_diversity",
+      "severity": "high",
+      "url": "/decision-engine",
+      "detail": "Only 2 unique recommendations across 20 scenarios"
     }
   ]
 }

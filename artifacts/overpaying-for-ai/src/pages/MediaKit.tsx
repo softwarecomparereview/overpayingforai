@@ -1,8 +1,12 @@
+import { PageSeo } from "@/components/seo/PageSeo";
+
 export function MediaKit() {
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <title>Media Kit | OverpayingForAI</title>
-      <meta name="description" content="Partnership and media information for OverpayingForAI." />
+      <PageSeo
+        title="Media Kit & Partnerships | OverpayingForAI"
+        description="Partnership and media info for OverpayingForAI — audience, editorial standards, and how AI brands and tools can work with the site."
+      />
 
       <div className="mb-10">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded mb-4 inline-block">

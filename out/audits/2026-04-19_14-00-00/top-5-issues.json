@@ -1,0 +1,92 @@
+{
+  "runId": "2026-04-19_14-00-00",
+  "branch": "feature/sitewide-interaction-hardening",
+  "commit": "6f6de1e",
+  "comparedAgainst": "2026-04-18_19-07-13",
+  "method": "Severity weighting (P0>P1>P2). Trust+Conv on /calculator, /decision-engine, /compare/*, /best/* weighted highest.",
+  "issues": [
+    {
+      "id": "P0-A",
+      "severity": "P0",
+      "category": ["Trust", "Conv", "UX", "Data"],
+      "issue": "Decision Engine recommends only 2 unique models across 20 evenly-sampled scenarios",
+      "affectedUrls": ["/decision-engine"],
+      "evidence": "20/20 scenarios across 5 use cases × 4 budgets × 3 frequencies × 3 quality prefs × 2 free-tier toggles produced just 2 unique recommendedNames: 'GitHub Copilot Free' (coding), 'Gemini Free' (everything else). Premium budget + 'best quality' + heavy use still returns the same Free-tier pick as light/free/cheap.",
+      "whyItMatters": "A decision engine that ignores budget, quality preference, and frequency is worse than no engine — visitors paying $200/mo for Claude Opus get told 'use the free tier' and lose all trust in the brand. Affiliate revenue collapses because every path leads to a free product.",
+      "recommendedFix": "In src/pages/DecisionEngine.tsx scoring logic, ensure (a) `budget=premium` and `quality=best` lift paid premium models above free tiers, (b) `frequency=heavy` rules out free tiers due to rate limits, (c) different use cases route to genuinely different providers. Target ≥6 unique recommendedNames across the 20-scenario matrix.",
+      "delta_vs_prior": "Prior baseline: 2 unique recs across 30 scenarios (P0-2). This run: 2 unique across 20 (worse density). The structural fix shipped — visible result block + testids — but the underlying scorer still collapses to 2 outputs."
+    },
+    {
+      "id": "P0-B",
+      "severity": "P0",
+      "category": ["Conv", "Trust"],
+      "issue": "13 commercial pages still have zero outbound sponsored CTAs",
+      "affectedUrls": [
+        "/ai-types",
+        "/guides",
+        "/guides/how-to-reduce-ai-cost",
+        "/guides/token-cost-explained",
+        "/guides/when-to-use-api-vs-subscription",
+        "/guides/ai-routing-strategies",
+        "/guides/hidden-ai-costs",
+        "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
+        "/guides/ai-cost-for-saas-founders",
+        "/guides/compare-ai-models-for-your-use-case",
+        "/guides/free-ai-tools-that-are-actually-good",
+        "/guides/claude-vs-chatgpt-for-business",
+        "/resources"
+      ],
+      "evidence": "outboundCtas count = 0 (after filtering Replit dev banner, LinkedIn footer, GitHub repo). All /best/*, /compare/*, /calculator, /decision-engine pages now have CTAs ✓ — but the entire /guides/* corpus + /ai-types index + /resources hub still don't.",
+      "whyItMatters": "Long-form SEO content (guides) is where most organic traffic will land via Google. A 2,000-word guide that recommends Claude Haiku without any clickable affiliate button is leaving the entire monetization upside on the table — this is the highest-ROI fix on the site.",
+      "recommendedFix": "Add a primary CTA-styled outbound button per recommended tool below the verdict on each /guides/* article (using affiliateResolver.getPrimaryCta with rel='sponsored'). Add 2-3 sponsored CTAs to /ai-types index per AI category. Add a sponsored CTA grid to /resources hub. Re-run audit and target no_outbound_cta_on_commercial_page = 0.",
+      "delta_vs_prior": "Prior: 30+ pages affected (P0-3). Now: 13. Reduced ~57%, but the guides corpus was never touched."
+    },
+    {
+      "id": "P1-A",
+      "severity": "P1",
+      "category": ["Trust", "UX"],
+      "issue": "Calculator presets generate 4 unique total costs but the 'verdict' line is identical across all 4 presets",
+      "affectedUrls": ["/calculator"],
+      "evidence": "Calculator audit: uniqueTotals=4/4 ✓, uniqueVerdicts=1/4. Total dollar amounts vary correctly (5K → 5M tokens), but the qualitative verdict text below the number is the same string for $0.02/mo and $850/mo.",
+      "whyItMatters": "Users at the extremes (a hobbyist and a startup CTO) get the same 'recommendation framing'. A startup spending $850/mo deserves to see 'switch to API + caching' rather than the hobbyist verdict 'pick whatever is easiest'. Without verdict variation the calculator looks half-finished.",
+      "recommendedFix": "In Calculator.tsx, derive 3-4 verdict tiers based on totalCost (e.g. <$5: 'Stay on free tier'; <$50: 'Subscription is fine'; <$500: 'API + routing pays off'; >$500: 'Negotiate enterprise'). Re-run audit, target uniqueVerdicts ≥ 3.",
+      "delta_vs_prior": "Brand new finding (the prior audit's calculator was fully static, so verdict variation was never measured)."
+    },
+    {
+      "id": "P1-B",
+      "severity": "P1",
+      "category": ["SEO", "Conv"],
+      "issue": "/guides hub had no SEO meta tags (FIXED in this same run)",
+      "affectedUrls": ["/guides"],
+      "evidence": "First audit pass: title='Overpaying for AI', no meta description, no canonical link. Verified after fix: title='AI Cost Guides — Cut Your AI Spend | OverpayingForAI', desc set, canonical='https://overpayingforai.com/guides'.",
+      "whyItMatters": "The /guides hub is the primary internal-link target from /, /best/*, and /compare/*. Without SEO meta it cannot rank for 'AI cost guide' queries and Google may collapse it under the bare brand title.",
+      "recommendedFix": "FIXED — PageSeo added to GuideIndex (artifacts/overpaying-for-ai/src/pages/GuidePage.tsx:152-155). Verified live. Action item: extend the same treatment to any other index pages added in the future via a lint rule or shared HubIndexLayout.",
+      "delta_vs_prior": "Prior: not flagged because the hub had no PageSeo and the prior auditor crawled fewer hub pages. Caught + fixed in this cycle."
+    },
+    {
+      "id": "P2-A",
+      "severity": "P2",
+      "category": ["SEO"],
+      "issue": "Audit harness intermittently flags pages as 'no h1' due to slow SPA hydration on burst-loaded routes",
+      "affectedUrls": ["/guides/token-cost-explained (intermittent)"],
+      "evidence": "First sequential pass: token-cost-explained returned title='', h1=[]. Single-page recheck with longer wait: title and h1 populated correctly. Browser memory exhaustion after ~37 routes was the root cause; chunking the crawl to 25-route batches eliminated the false positives.",
+      "whyItMatters": "Without harness reliability, real SEO regressions hide in the noise. Future runs need stable signal to allow PR-level gating.",
+      "recommendedFix": "DONE in qa/full-audit.mjs: (1) restart browser every 25 routes, (2) waitForSelector('h1, main, [data-testid]') before harvesting, (3) filter Replit dev-banner from outbound count. Future improvement: take a screenshot on every page_load_failed for visual triage.",
+      "delta_vs_prior": "Harness drift; not a product issue."
+    }
+  ],
+  "summary": {
+    "p0Count": 2,
+    "p1Count": 2,
+    "p2Count": 1,
+    "calculator": { "uniqueTotals": 4, "uniqueVerdicts": 1, "dynamic": true },
+    "decision": {
+      "totalScenarios": 20,
+      "successful": 20,
+      "uniqueRecommendations": 2,
+      "recommendations": ["GitHub Copilot Free", "Gemini Free"]
+    },
+    "siteIssueCount": 13,
+    "pagesAudited": 56
+  }
+}

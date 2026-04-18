@@ -1,8 +1,12 @@
+import { PageSeo } from "@/components/seo/PageSeo";
+
 export function Terms() {
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <title>Terms of Service | OverpayingForAI</title>
-      <meta name="description" content="Terms and affiliate disclosure for OverpayingForAI." />
+      <PageSeo
+        title="Terms of Service | OverpayingForAI"
+        description="Terms of service and affiliate disclosure for OverpayingForAI — how the site uses pricing data, makes recommendations, and discloses sponsored links."
+      />
 
       <h1 className="text-3xl font-bold tracking-tight mb-2">Terms of Service</h1>
       <p className="text-sm text-muted-foreground mb-10">Last updated: April 2026</p>

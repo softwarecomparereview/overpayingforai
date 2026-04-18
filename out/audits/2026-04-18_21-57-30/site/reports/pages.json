@@ -29,6 +29,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Best for codingClaude 3.5 SonnetAnthropic · $3 / 1M out tokensStrong code genera"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -43,7 +48,13 @@
     "h1s": [
       "Browse by AI type"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -76,6 +87,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Best budget APIDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensThe lowest-cost model"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -105,6 +121,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Best IDE toolCursor ProCursor · $20 / month flatBest-in-class IDE assistant. Bun"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -139,6 +160,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Best for scaleClaude 3.5 HaikuAnthropic · $1.25 / 1M out tokensFast, cheap, and "
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -173,6 +199,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Best for large filesGemini 1.5 ProGoogle · $3.50 / 1M out tokens1M token context"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -207,6 +238,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Lowest costDeepSeek V3DeepSeek · ~$0.28 / 1M out tokensLowest cost at near-front"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -241,6 +277,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Best free optionChatGPT FreeOpenAI · FreeGPT-4o mini access for free. Covers bas"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -265,6 +306,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -284,6 +330,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Start with Gemini"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -303,6 +354,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Start with DeepSeek"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -327,6 +383,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -351,6 +412,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -375,6 +441,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -399,6 +470,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -423,6 +499,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Claude 3.5 Haiku →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -447,6 +528,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -471,6 +557,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -495,6 +586,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -519,6 +615,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o Mini →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -543,6 +644,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -567,6 +673,11 @@
         "href": "https://mistral.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Mistral Small →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -586,6 +697,11 @@
         "href": "https://deepseek.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try DeepSeek V3 →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -630,6 +746,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -679,6 +800,11 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -708,6 +834,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -752,6 +883,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Claude Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -796,6 +932,11 @@
         "href": "https://perplexity.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Perplexity Pro — $20/month →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -840,6 +981,11 @@
         "href": "https://gemini.google.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Gemini 1.5 Flash →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -879,6 +1025,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try GPT-4o mini — Default Workhorse →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -923,6 +1074,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -962,6 +1118,11 @@
         "href": "https://openai.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try ChatGPT Free →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -986,6 +1147,11 @@
         "href": "https://mistral.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Mistral Large →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1030,21 +1196,30 @@
         "href": "https://cursor.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Cursor Pro — $20/month (if you code) →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
   },
   {
     "route": "/guides",
-    "title": "AI Cost Guides — Cut Your AI Spend | OverpayingForAI",
-    "desc": "Practical, no-fluff guides for reducing AI costs: token optimization, model routing, API vs subscription decisions, and more.",
-    "canonicals": [
-      "https://overpayingforai.com/guides"
-    ],
+    "title": "Overpaying for AI",
+    "desc": "",
+    "canonicals": [],
     "h1s": [
       "AI Cost Guides"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1062,6 +1237,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Use Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1076,20 +1256,28 @@
     "h1s": [
       "How to Reduce Your AI Costs by 80% Without Losing Quality"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
     "route": "/guides/token-cost-explained",
-    "title": "Token Cost Explained: What You're Actually Paying For | OverpayingForAI",
-    "desc": "A plain-English guide to AI tokens, how they're counted, and exactly how to calculate your real costs.",
-    "canonicals": [
-      "https://overpayingforai.com/guides/token-cost-explained"
+    "title": "Overpaying for AI",
+    "desc": "",
+    "canonicals": [],
+    "h1s": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
     ],
-    "h1s": [
-      "Token Cost Explained: What You're Actually Paying For"
-    ],
-    "outboundCtas": [],
     "fakeAffordance": 0
   },
   {
@@ -1102,7 +1290,13 @@
     "h1s": [
       "API vs Subscription: How to Choose the Right AI Pricing Model"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1115,7 +1309,13 @@
     "h1s": [
       "AI Model Routing: How to Cut Costs Without Losing Quality"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1128,7 +1328,13 @@
     "h1s": [
       "Hidden AI Costs Nobody Warns You About"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1141,7 +1347,13 @@
     "h1s": [
       "GPT-4o mini vs Full GPT-4o: A Practical Upgrade Guide"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1154,7 +1366,13 @@
     "h1s": [
       "AI Cost Planning for SaaS Founders: A Realistic Budget Guide"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1167,7 +1385,13 @@
     "h1s": [
       "How to Compare AI Models for Your Specific Use Case"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1180,7 +1404,13 @@
     "h1s": [
       "Free AI Tools That Are Actually Good (2025)"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1193,7 +1423,13 @@
     "h1s": [
       "Claude vs ChatGPT for Business: A Practical Comparison"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1211,6 +1447,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1230,6 +1471,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1249,6 +1495,11 @@
         "href": "https://writesonic.com",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Writesonic →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1268,6 +1519,11 @@
         "href": "https://rytr.me",
         "rel": "noopener noreferrer sponsored",
         "text": "Try Rytr →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1287,6 +1543,11 @@
         "href": "https://claude.ai",
         "rel": "noopener noreferrer sponsored",
         "text": "Start with Claude →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1301,7 +1562,13 @@
     "h1s": [
       "All resources"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1509,6 +1776,11 @@
         "href": "https://rytr.me/pricing",
         "rel": "noreferrer",
         "text": "Source →"
+      },
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
       }
     ],
     "fakeAffordance": 0
@@ -1523,7 +1795,13 @@
     "h1s": [
       "Pricing Changelog"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1536,7 +1814,13 @@
     "h1s": [
       "Terms of Service"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   },
   {
@@ -1549,7 +1833,13 @@
     "h1s": [
       "Media Kit"
     ],
-    "outboundCtas": [],
+    "outboundCtas": [
+      {
+        "href": "https://docs.replit.com/category/replit-deployments?ref=replit-dev-banner",
+        "rel": "",
+        "text": "Publish your app"
+      }
+    ],
     "fakeAffordance": 0
   }
 ]

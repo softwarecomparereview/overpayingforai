@@ -146,6 +146,10 @@ export function GuidePage() {
 export function GuideIndex() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo
+        title="AI Cost Guides — Cut Your AI Spend | OverpayingForAI"
+        description="Practical, no-fluff guides for reducing AI costs: token optimization, model routing, API vs subscription decisions, and more."
+      />
       <h1 className="text-3xl font-bold mb-2">AI Cost Guides</h1>
       <p className="text-muted-foreground mb-8">Practical guides for reducing AI spend and making smarter model choices.</p>
       <div className="grid sm:grid-cols-2 gap-4">

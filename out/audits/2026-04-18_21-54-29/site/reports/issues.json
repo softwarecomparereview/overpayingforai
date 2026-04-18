@@ -1,0 +1,163 @@
+{
+  "startedAt": "2026-04-18T21:56:18.043Z",
+  "finishedAt": "2026-04-18T21:56:18.043Z",
+  "issueCount": 26,
+  "issues": [
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/token-cost-explained",
+      "detail": "page.goto: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - navigating to \"https://f38aede2-74e0-49ab-a3ea-df366b420e8d-00-1jfq47c50qq7a.janeway.replit.dev/guides/token-cost-explained\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/when-to-use-api-vs-subscription",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/ai-routing-strategies",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/hidden-ai-costs",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/ai-cost-for-saas-founders",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/compare-ai-models-for-your-use-case",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/free-ai-tools-that-are-actually-good",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/claude-vs-chatgpt-for-business",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/cheapest-ai-writing-tools",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/best-ai-tools-under-20",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/is-jasper-worth-it",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/cheapest-ai-for-students",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/guides/chatgpt-vs-claude-cost",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/resources",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/changelog",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/pricing-changelog",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/terms",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "page_load_failed",
+      "severity": "high",
+      "url": "/media-kit",
+      "detail": "page.goto: Target page, context or browser has been closed"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/ai-types",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "/guides",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "/guides",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "/guides",
+      "detail": ""
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/how-to-reduce-ai-cost",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "decision_engine_low_diversity",
+      "severity": "medium",
+      "url": "/decision-engine",
+      "detail": "Only 3 unique recommendations across 27 scenarios"
+    }
+  ]
+}
