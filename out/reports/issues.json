@@ -1,0 +1,28 @@
+{
+  "startedAt": "2026-04-18T18:44:38.705Z",
+  "finishedAt": "2026-04-18T18:44:43.275Z",
+  "issueCount": 3,
+  "issues": [
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator",
+      "source": null,
+      "detail": ""
+    }
+  ]
+}
