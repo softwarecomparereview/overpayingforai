@@ -4,6 +4,14 @@ import comparisonsData from "@/data/comparisons.json";
 import guidesData from "@/data/guides.json";
 import bestOfData from "@/data/best-of.json";
 import { PageSeo } from "@/components/seo/PageSeo";
+import { getPrimaryCta } from "@/utils/affiliateResolver";
+
+const FEATURED_TOOLS: Array<{ providerId: string; label: string; note: string }> = [
+  { providerId: "anthropic", label: "Claude", note: "Best default for business writing & long documents." },
+  { providerId: "openai", label: "ChatGPT / OpenAI", note: "GPT-4o mini is the cheapest serious workhorse model." },
+  { providerId: "deepseek", label: "DeepSeek V3", note: "~10× cheaper than GPT-4o for routed inference." },
+  { providerId: "google", label: "Gemini", note: "Strongest free tier — solid for daily chat and long context." },
+];
 
 const FEATURED_COMPARISONS = comparisonsData.slice(0, 3);
 const FEATURED_GUIDES = guidesData.slice(0, 2);
@@ -142,6 +150,39 @@ export function ResourcesHub() {
               <span className="ml-auto text-primary text-sm">→</span>
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-white py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Recommended tools</p>
+          <h2 className="text-2xl font-bold text-foreground mb-1">Tools we keep coming back to</h2>
+          <p className="text-sm text-muted-foreground mb-5 max-w-2xl">
+            The four providers that show up most across our comparisons, calculators, and guides — for very different reasons.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {FEATURED_TOOLS.map(({ providerId, label, note }) => {
+              const cta = getPrimaryCta(providerId, "default");
+              return (
+                <a
+                  key={providerId}
+                  href={cta.href}
+                  target={cta.target}
+                  rel={cta.rel}
+                  data-testid={`resources-cta-${providerId}`}
+                  onClick={() => track("overpaying_cta_clicked", { sourceSurface: "resources", variant: `featured_${providerId}` })}
+                  className="block rounded-xl border border-border bg-white p-4 hover:border-primary/40 hover:shadow-sm transition-all"
+                >
+                  <p className="font-semibold text-foreground text-sm mb-1">{label}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-2">{note}</p>
+                  <span className="text-xs font-medium text-primary">{cta.label} →</span>
+                </a>
+              );
+            })}
+          </div>
+          <p className="text-[11px] text-muted-foreground mt-3">
+            Some links are sponsored. We only feature tools we'd recommend regardless.
+          </p>
         </div>
       </section>
 

@@ -1,0 +1,319 @@
+{
+  "results": [
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding workloads at light usage on a free-only budget with a cheap-quality preference and a hard",
+      "strategy": "Start with Cursor Free. It satisfies your free-tier requirement and covers most ",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under20",
+        "f": "light",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding workloads at light usage on a under20 budget with a cheap-quality preference, GitHub Copi",
+      "strategy": "Route coding traffic to Cursor Free by default. Only escalate to GitHub Copilot ",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "under50",
+        "f": "light",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding workloads at light usage on a under50 budget with a balanced-quality preference and a har",
+      "strategy": "Start with Cursor Free. It satisfies your free-tier requirement and covers most ",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "premium",
+        "f": "light",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "GitHub Copilot Free",
+      "recommendedProvider": "GitHub/Microsoft",
+      "cost": "Free",
+      "rationale": "For coding workloads at light usage on a premium budget with a balanced-quality preference, GitHub C",
+      "strategy": "Use GitHub Copilot Free as your default for coding. Reserve Claude Pro for compl",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "writing",
+        "b": "free",
+        "f": "light",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Gemini Free",
+      "recommendedProvider": "Google",
+      "cost": "Free",
+      "rationale": "For writing workloads at light usage on a free-only budget with a best-quality preference and a hard",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "writing",
+        "b": "under20",
+        "f": "light",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "Claude 3.5 Sonnet",
+      "recommendedProvider": "Anthropic",
+      "cost": "~$2/month",
+      "rationale": "For writing workloads at light usage on a under20 budget with a best-quality preference, Claude 3.5 ",
+      "strategy": "Use Claude 3.5 Sonnet as your default for writing. Reserve Claude Pro for comple",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "writing",
+        "b": "under50",
+        "f": "medium",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "Gemini Free",
+      "recommendedProvider": "Google",
+      "cost": "Free",
+      "rationale": "For writing workloads at medium usage on a under50 budget with a cheap-quality preference and a hard",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "writing",
+        "b": "premium",
+        "f": "medium",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "Rytr",
+      "recommendedProvider": "Rytr",
+      "cost": "$9/month flat",
+      "rationale": "For writing workloads at medium usage on a premium budget with a cheap-quality preference, Rytr (Ryt",
+      "strategy": "Route writing traffic to ChatGPT Free by default. Only escalate to Rytr when out",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "research",
+        "b": "free",
+        "f": "medium",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "Gemini Free",
+      "recommendedProvider": "Google",
+      "cost": "Free",
+      "rationale": "For research workloads at medium usage on a free-only budget with a balanced-quality preference and ",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "research",
+        "b": "under20",
+        "f": "medium",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "Llama 3.1 70B",
+      "recommendedProvider": "Meta (self-hosted)",
+      "cost": "$0.67/month",
+      "rationale": "For research workloads at medium usage on a under20 budget with a balanced-quality preference, Llama",
+      "strategy": "Use Llama 3.1 70B as your default for research. Reserve Claude Pro for complex, ",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "research",
+        "b": "under50",
+        "f": "medium",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Cursor Free",
+      "recommendedProvider": "Cursor",
+      "cost": "Free",
+      "rationale": "For research workloads at medium usage on a under50 budget with a best-quality preference and a hard",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "research",
+        "b": "premium",
+        "f": "medium",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "DeepSeek R1",
+      "recommendedProvider": "DeepSeek",
+      "cost": "~$2/month",
+      "rationale": "For research workloads at medium usage on a premium budget with a best-quality preference, DeepSeek ",
+      "strategy": "Use Claude Pro as your default for research. Keep DeepSeek R1 as the cheaper fal",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "automation",
+        "b": "free",
+        "f": "heavy",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "ChatGPT Free",
+      "recommendedProvider": "OpenAI",
+      "cost": "Free",
+      "rationale": "For automation workloads at heavy usage on a free-only budget with a cheap-quality preference and a ",
+      "strategy": "Start with Groq (Llama 3.1 70B). It satisfies your free-tier requirement and cov",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "automation",
+        "b": "under20",
+        "f": "heavy",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "Groq (Llama 3.1 70B)",
+      "recommendedProvider": "Groq",
+      "cost": "~$3/month",
+      "rationale": "For automation workloads at heavy usage on a under20 budget with a cheap-quality preference, Groq (L",
+      "strategy": "Route automation traffic to Gemini 1.5 Flash by default. Only escalate to Groq (",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "automation",
+        "b": "under50",
+        "f": "heavy",
+        "q": "balanced",
+        "ft": true
+      },
+      "recommendedName": "Rytr",
+      "recommendedProvider": "Rytr",
+      "cost": "$9/month flat",
+      "rationale": "For automation workloads at heavy usage on a under50 budget with a balanced-quality preference and a",
+      "strategy": "Start with Groq (Llama 3.1 70B). It satisfies your free-tier requirement and cov",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "automation",
+        "b": "premium",
+        "f": "heavy",
+        "q": "balanced",
+        "ft": false
+      },
+      "recommendedName": "Groq (Llama 3.1 70B)",
+      "recommendedProvider": "Groq",
+      "cost": "~$3/month",
+      "rationale": "For automation workloads at heavy usage on a premium budget with a balanced-quality preference, Groq",
+      "strategy": "Use Groq (Llama 3.1 70B) as your default for automation. Reserve Llama 3.1 70B f",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "chat",
+        "b": "free",
+        "f": "heavy",
+        "q": "best",
+        "ft": true
+      },
+      "recommendedName": "Gemini Free",
+      "recommendedProvider": "Google",
+      "cost": "Free",
+      "rationale": "For chat workloads at heavy usage on a free-only budget with a best-quality preference and a hard fr",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "chat",
+        "b": "under20",
+        "f": "heavy",
+        "q": "best",
+        "ft": false
+      },
+      "recommendedName": "ChatGPT Plus",
+      "recommendedProvider": "OpenAI",
+      "cost": "$20/month flat",
+      "rationale": "For chat workloads at heavy usage on a under20 budget with a best-quality preference, ChatGPT Plus (",
+      "strategy": "Use ChatGPT Plus as your default for chat. Reserve Claude Pro for complex, high-",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "chat",
+        "b": "premium",
+        "f": "light",
+        "q": "cheap",
+        "ft": true
+      },
+      "recommendedName": "Gemini Free",
+      "recommendedProvider": "Google",
+      "cost": "Free",
+      "rationale": "For chat workloads at light usage on a premium budget with a cheap-quality preference and a hard fre",
+      "strategy": "Start with ChatGPT Free. It satisfies your free-tier requirement and covers most",
+      "ok": true
+    },
+    {
+      "scenario": {
+        "u": "coding",
+        "b": "free",
+        "f": "light",
+        "q": "cheap",
+        "ft": false
+      },
+      "recommendedName": "Llama 3.1 70B",
+      "recommendedProvider": "Meta (self-hosted)",
+      "cost": "< $0.50/month",
+      "rationale": "For coding workloads at light usage on a free-only budget with a cheap-quality preference, Llama 3.1",
+      "strategy": "Start with Cursor Free. It satisfies your free-tier requirement and covers most ",
+      "ok": true
+    }
+  ],
+  "totalScenarios": 20,
+  "successful": 20,
+  "uniqueRecommendations": 10,
+  "recommendations": [
+    "GitHub Copilot Free",
+    "Gemini Free",
+    "Claude 3.5 Sonnet",
+    "Rytr",
+    "Llama 3.1 70B",
+    "Cursor Free",
+    "DeepSeek R1",
+    "ChatGPT Free",
+    "Groq (Llama 3.1 70B)",
+    "ChatGPT Plus"
+  ]
+}

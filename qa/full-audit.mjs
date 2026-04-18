@@ -192,9 +192,13 @@ async function auditDecisionEngine(browser) {
     all.push({ u, b, f, q, ft });
   }
   const N = 20;
-  const stride = Math.floor(all.length / N);
+  // Use a stride coprime to 360 so the sample spans every axis.
+  // 360 = 2^3 * 3^2 * 5; stride 19 is coprime, so freeTier/quality/frequency
+  // all rotate independently from useCase/budget. (The previous floor(360/N)=18
+  // locked freeTier=true, quality=cheap, frequency=light across all 20 samples.)
+  const stride = (all.length === 360 && N === 20) ? 19 : Math.floor(all.length / N);
   const limited = [];
-  for (let k = 0; k < N; k++) limited.push(all[k * stride]);
+  for (let k = 0; k < N; k++) limited.push(all[(k * stride) % all.length]);
 
   const results = [];
   for (const s of limited) {

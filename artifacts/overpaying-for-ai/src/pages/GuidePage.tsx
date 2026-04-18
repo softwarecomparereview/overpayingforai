@@ -143,6 +143,13 @@ export function GuidePage() {
   );
 }
 
+const FEATURED_GUIDE_HUB_TOOLS: Array<{ providerId: string; label: string; note: string }> = [
+  { providerId: "anthropic", label: "Claude", note: "Strongest default for writing & research." },
+  { providerId: "openai", label: "ChatGPT / OpenAI", note: "Most-supported ecosystem; mini API is cheapest workhorse." },
+  { providerId: "deepseek", label: "DeepSeek V3", note: "Cheapest serious model — ~10× less than GPT-4o." },
+  { providerId: "google", label: "Gemini", note: "Best free tier right now for daily chat & long context." },
+];
+
 export function GuideIndex() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -152,6 +159,35 @@ export function GuideIndex() {
       />
       <h1 className="text-3xl font-bold mb-2">AI Cost Guides</h1>
       <p className="text-muted-foreground mb-8">Practical guides for reducing AI spend and making smarter model choices.</p>
+
+      <section className="mb-10 rounded-2xl border border-border bg-muted/30 p-5">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+          Tools the guides reference most
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {FEATURED_GUIDE_HUB_TOOLS.map(({ providerId, label, note }) => {
+            const cta = getPrimaryCta(providerId, "default");
+            return (
+              <a
+                key={providerId}
+                href={cta.href}
+                target={cta.target}
+                rel={cta.rel}
+                data-testid={`guides-hub-cta-${providerId}`}
+                className="block rounded-xl border border-border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition-all"
+              >
+                <p className="font-semibold text-foreground text-sm mb-1">{label}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-2">{note}</p>
+                <span className="text-xs font-medium text-primary">{cta.label} →</span>
+              </a>
+            );
+          })}
+        </div>
+        <p className="text-[11px] text-muted-foreground mt-3">
+          Some links are sponsored. We only feature tools the guides actually recommend.
+        </p>
+      </section>
+
       <div className="grid sm:grid-cols-2 gap-4">
         {guides.map((g) => (
           <Link

@@ -1,0 +1,33 @@
+{
+  "runId": "2026-04-19_22-30-00",
+  "createdAt": "2026-04-18T22:48:28.150Z",
+  "branch": "latestdevelop",
+  "commit": "d342901",
+  "commitFull": "d342901d382f99f829684ea4eb70408aa04d6be6",
+  "runDir": "out/audits/2026-04-19_22-30-00",
+  "pageCount": 56,
+  "issueCount": 0,
+  "byType": {},
+  "calculator": {
+    "uniqueTotals": 4,
+    "uniqueVerdicts": 1,
+    "dynamic": true
+  },
+  "decision": {
+    "totalScenarios": 20,
+    "successful": 20,
+    "uniqueRecommendations": 10,
+    "recommendations": [
+      "GitHub Copilot Free",
+      "Gemini Free",
+      "Claude 3.5 Sonnet",
+      "Rytr",
+      "Llama 3.1 70B",
+      "Cursor Free",
+      "DeepSeek R1",
+      "ChatGPT Free",
+      "Groq (Llama 3.1 70B)",
+      "ChatGPT Plus"
+    ]
+  }
+}
