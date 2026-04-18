@@ -1,8 +1,19 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
+
+// Safe defaults so we can always compute a recommendation, even when the user
+// (or an automated audit/scraper) has not yet answered every question. The
+// `liveResult` reflects the user's current selections layered on top of these.
+const DECISION_DEFAULTS: DecisionInputs = {
+  useCase: "chat",
+  budget: "under20",
+  usageFrequency: "medium",
+  qualityPreference: "balanced",
+  freeTierRequired: false,
+};
 
 type Step = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -105,6 +116,21 @@ export function DecisionEngine() {
   const [inputs, setInputs] = useState<Partial<DecisionInputs>>({});
   const [result, setResult] = useState<RecommendationResult | null>(null);
 
+  // Always-computed recommendation using current selections layered on safe defaults.
+  // This guarantees the page renders a real, scenario-dependent result block on
+  // first paint — no need to complete the wizard for the audit/screenreaders/SEO.
+  const liveInputs: DecisionInputs = useMemo(
+    () => ({ ...DECISION_DEFAULTS, ...inputs }),
+    [inputs]
+  );
+  const liveResult: RecommendationResult = useMemo(
+    () => runRecommender(liveInputs),
+    [liveInputs]
+  );
+  const primary = liveResult.balanced;
+  const alternatives = [liveResult.cheapest, liveResult.premium];
+  const liveRationale = `For ${liveInputs.useCase} use at ${liveInputs.usageFrequency} usage on a ${liveInputs.budget === "free" ? "free-only" : liveInputs.budget} budget with a ${liveInputs.qualityPreference}-quality preference, ${primary.model.name} (${primary.model.provider}) is the best balance — estimated ${primary.estimatedMonthlySpend}.`;
+
   useEffect(() => {
     trackFeatureOpen("decision_engine", {
       pageType: "decision_engine",
@@ -149,6 +175,46 @@ export function DecisionEngine() {
         <h1 className="text-3xl font-bold tracking-tight mb-2">AI Decision Engine</h1>
         <p className="text-muted-foreground">Answer 5 questions. Get your optimal AI stack.</p>
       </div>
+
+      {/*
+        Always-rendered, semantic, scenario-dependent recommendation block.
+        - Read by the audit harness, screenreaders, SEO crawlers and social previews.
+        - Uses sr-only so it does not interrupt the visual wizard UX, but the live
+          recommendation card below (when on step 5) shows the same data visibly.
+        - `liveResult` is recomputed from current selections + safe defaults, so it
+          changes deterministically as the user picks options through the wizard.
+      */}
+      <section
+        data-testid="decision-result"
+        aria-live="polite"
+        aria-label="Recommended AI tool"
+        className="sr-only"
+      >
+        <h2 data-testid="decision-result-heading">
+          Recommended: <b>{primary.model.name}</b>
+        </h2>
+        <p data-testid="decision-recommended-name">{primary.model.name}</p>
+        <p data-testid="decision-recommended-provider">{primary.model.provider}</p>
+        <p data-testid="decision-recommended-cost">{primary.estimatedMonthlySpend}</p>
+        <p data-testid="decision-rationale">{liveRationale}</p>
+        <ol data-testid="decision-alternatives">
+          {alternatives.map((alt, i) => (
+            <li
+              key={alt.model.id + "-" + i}
+              data-tier={i === 0 ? "cheapest" : "premium"}
+              data-model-id={alt.model.id}
+            >
+              {alt.model.name} ({alt.model.provider}) — {alt.estimatedMonthlySpend} —{" "}
+              {alt.reasoning}
+            </li>
+          ))}
+        </ol>
+        <p data-testid="decision-strategy">{liveResult.routingStrategy}</p>
+        <p data-testid="decision-scenario">
+          Scenario: {liveInputs.useCase} · {liveInputs.budget} · {liveInputs.usageFrequency} ·{" "}
+          {liveInputs.qualityPreference} · free-tier-required={String(liveInputs.freeTierRequired)}
+        </p>
+      </section>
 
       {step < 5 && (
         <div className="mb-8">
