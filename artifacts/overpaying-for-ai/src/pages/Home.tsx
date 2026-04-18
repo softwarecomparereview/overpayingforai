@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
+import { PageSeo } from "@/components/seo/PageSeo";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
@@ -138,6 +139,7 @@ function SectionCard({
 export function Home() {
   return (
     <div className="bg-background">
+      <PageSeo canonicalUrl="/" />
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="border-b border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">

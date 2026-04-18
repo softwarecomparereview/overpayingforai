@@ -81,14 +81,10 @@ export function GuidePage() {
       </div>
 
       {/* Early callout — fastest win or key recommendation, shown immediately after intro */}
-<<<<<<< develop
       {!!(guide as Record<string, unknown>).earlyCallout && (
-=======
-      {guide.earlyCallout && (
->>>>>>> codexbranch
         <div className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">Fastest win</p>
-          <p className="text-sm text-foreground font-medium leading-relaxed">{guide.earlyCallout}</p>
+          <p className="text-sm text-foreground font-medium leading-relaxed">{String((guide as Record<string, unknown>).earlyCallout)}</p>
         </div>
       )}
 

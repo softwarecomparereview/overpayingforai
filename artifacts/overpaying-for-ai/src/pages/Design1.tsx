@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
+import { PageSeo } from "@/components/seo/PageSeo";
 import comparisonsData from "@/data/comparisons.json";
 import faqsData from "@/data/faqs.json";
 
@@ -57,6 +58,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export function Design1() {
   return (
     <div className="bg-white">
+      <PageSeo canonicalUrl="/" />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 text-white">

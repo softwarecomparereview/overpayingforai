@@ -329,19 +329,12 @@ const FEATURED_SLUGS = [
 
 export function CompareIndex() {
   const featuredSlugs = new Set(FEATURED_SLUGS.map((f) => f.slug));
-<<<<<<< develop
   type FeaturedComparison = typeof comparisons[number] & { label: string };
   const featuredComparisons = (FEATURED_SLUGS.map(({ slug, label }) => {
     const found = comparisons.find((c) => c.slug === slug);
     if (!found) return null;
     return { ...found, label };
   }).filter(Boolean)) as FeaturedComparison[];
-=======
-  const featuredComparisons = FEATURED_SLUGS.map(({ slug, label }) => {
-    const match = comparisons.find((c) => c.slug === slug);
-    return match ? { ...match, label } : null;
-  }).filter((c): c is ComparisonEntry & { label: string } => Boolean(c));
->>>>>>> codexbranch
   const remainingComparisons = comparisons.filter((c) => !featuredSlugs.has(c.slug));
 
   return (
