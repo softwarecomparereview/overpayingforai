@@ -123,7 +123,7 @@ export function BestPage() {
               title={winner.title}
               rationale={winner.why}
               savingsLabel={savingsLabel || undefined}
-              primaryCta={winnerPrimary.isAffiliate
+              primaryCta={winnerPrimary.isExternal
                 ? { ...winnerPrimary, label: `Try ${winner.title}` }
                 : { ...winnerPrimary, label: `Check my real monthly cost` }
               }
@@ -164,7 +164,7 @@ export function BestPage() {
                   {(() => {
                     const providerId = modelIdToProviderId(pick.modelId);
                     const primary = getPrimaryCta(providerId, "default", "/calculator");
-                    const label = primary.isAffiliate
+                    const label = primary.isExternal
                       ? `Try ${pick.title}`
                       : `Calculate your cost with ${pick.title}`;
                     return (
@@ -208,7 +208,7 @@ export function BestPage() {
             <p className="font-semibold text-foreground mb-1">Not sure which is right for you?</p>
             <p className="text-sm text-muted-foreground mb-4">Use the calculator to estimate your real cost, or take the decision quiz.</p>
             <StandardCtaGroup
-              primary={primary.isAffiliate ? { ...primary, label: `Try ${winner.title}` } : { ...primary, label: "Calculate your cost" }}
+              primary={primary.isExternal ? { ...primary, label: `Try ${winner.title}` } : { ...primary, label: "Calculate your cost" }}
               secondary={secondary}
             />
           </section>

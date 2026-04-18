@@ -104,6 +104,25 @@ export function getAffiliateTarget(
     };
   }
 
+  // No affiliate URL yet — prefer the tool's homepage (directUrl) as a real
+  // outbound CTA so commercial pages always link out to the recommended tool.
+  // We still tag rel="sponsored" because the link is editorially placed for
+  // monetization intent (and will be swapped to an affiliate URL once approved).
+  // `overrideFallback` only replaces the *internal* fallback below; it does
+  // NOT suppress the outbound homepage CTA, which is always preferred.
+  if (entry.directUrl) {
+    return {
+      href: entry.directUrl,
+      isExternal: true,
+      isAffiliate: false,
+      status: entry.status,
+      label: buildPrimaryLabel(entry, context),
+      fallbackUsed: true,
+      rel: "noopener noreferrer sponsored",
+      target: "_blank",
+    };
+  }
+
   return {
     href: overrideFallback ?? entry.fallbackUrl,
     isExternal: false,
@@ -164,12 +183,15 @@ export function getSecondaryCta(toolId: string): AffiliateTarget {
     };
   }
 
+  // No affiliate URL — internal "compare alternatives" page is a sensible
+  // secondary action alongside the new outbound primary CTA (which now points
+  // to the tool's homepage). Falls back to /calculator if no fallbackUrl is set.
   return {
-    href: "/calculator",
+    href: entry.fallbackUrl ?? "/calculator",
     isExternal: false,
     isAffiliate: false,
     status: entry.status,
-    label: "Calculate your cost",
+    label: entry.ctaLabelSecondary ?? "Compare alternatives",
     fallbackUsed: true,
   };
 }

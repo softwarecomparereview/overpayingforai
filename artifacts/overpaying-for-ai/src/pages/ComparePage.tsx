@@ -5,6 +5,7 @@ import type { AIModel } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { getPrimaryCta, modelIdToProviderId } from "@/utils/affiliateResolver";
 import { RecommendationCtas } from "@/components/monetization/RecommendationCtas";
+import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import { WinnerBlock } from "@/components/conversion/WinnerBlock";
 import { deriveSavingsFromComparison, formatSavingsLabel } from "@/utils/savingsEngine";
 import { PageSeo } from "@/components/seo/PageSeo";
@@ -140,7 +141,7 @@ export function ComparePage() {
             title={`Cheapest option: ${cheapest.name}`}
             rationale={page.cheapestOptionNote}
             savingsLabel={savingsLabel}
-            primaryCta={primary.isAffiliate
+            primaryCta={primary.isExternal
               ? { ...primary, label: `Try ${cheapest.name}` }
               : { ...primary, label: `Calculate your savings` }
             }
@@ -191,11 +192,11 @@ export function ComparePage() {
               <p className="text-sm text-muted-foreground mb-4">{page.cheapestOptionNote}</p>
               <div className="pt-3 border-t border-green-100 dark:border-green-900">
                 <RecommendationCtas
-                  primary={cheapestPrimary.isAffiliate
+                  primary={cheapestPrimary.isExternal
                     ? { ...cheapestPrimary, label: `Try ${cheapest.name}` }
                     : { ...cheapestPrimary, label: `Calculate your savings with ${cheapest.name}` }
                   }
-                  secondary={cheapestPrimary.isAffiliate ? {
+                  secondary={cheapestPrimary.isExternal ? {
                     ...cheapestSecondary,
                     href: "/calculator",
                     label: "Calculate your cost",
@@ -458,11 +459,22 @@ export function CompareIndex() {
       <section className="border-t border-border bg-slate-50 py-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h2 className="font-bold text-foreground mb-1">Need a faster answer?</h2>
-            <p className="text-sm text-muted-foreground">Use the calculator for exact cost or the decision engine for a full stack recommendation.</p>
+            <h2 className="font-bold text-foreground mb-1">Skip the comparison — try the cheap winner</h2>
+            <p className="text-sm text-muted-foreground">Across most comparisons, DeepSeek V3 wins on $/token. Or use the calculator/decision engine for your own scenario.</p>
           </div>
-          <div className="flex gap-3">
-            <Link href="/calculator" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+          <div className="flex flex-wrap gap-3">
+            <AffiliateCta
+              target={getPrimaryCta("deepseek", "default")}
+              className="cta-primary inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-primary/90 transition-colors"
+              trackingContext={{
+                providerId: "deepseek",
+                providerName: "DeepSeek",
+                ctaType: "primary",
+                pageType: "compare-index",
+                sourceComponent: "CompareIndex/PrimaryOutboundCta",
+              }}
+            />
+            <Link href="/calculator" className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
               Calculate cost →
             </Link>
             <Link href="/decision-engine" className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
