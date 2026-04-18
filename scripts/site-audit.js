@@ -4,14 +4,17 @@
 // Usage:
 //   node scripts/site-audit.js --maxPages=100 --headless=true
 //   node scripts/site-audit.js --maxPages=20 --noScreenshots --seeds=https://overpayingforai.com/best
+//   node scripts/site-audit.js --runId=2026-04-19_14-00-00     # share folder with decision audit
 //
-// Outputs:
-//   out/screenshots/full/<slug>.png
-//   out/screenshots/hero/<slug>.png
-//   out/reports/pages.json
-//   out/reports/pages.csv
-//   out/reports/issues.json
-//   out/reports/summary.md
+// Outputs (run-folder versioned):
+//   out/audits/<runId>/site/reports/pages.json
+//   out/audits/<runId>/site/reports/pages.csv
+//   out/audits/<runId>/site/reports/issues.json
+//   out/audits/<runId>/site/reports/summary.md
+//   out/audits/<runId>/site/screenshots/full/<slug>.png
+//   out/audits/<runId>/site/screenshots/hero/<slug>.png
+//   out/audits/<runId>/run-meta.json
+//   out/audits/latest-run, latest-site (plain-text pointer files)
 
 import { createRequire } from "node:module";
 import { join, resolve } from "node:path";
@@ -25,6 +28,9 @@ import {
 import { extractPage } from "./lib/extractors.js";
 import { captureScreenshots } from "./lib/screenshots.js";
 import { crawlSite } from "./lib/crawler.js";
+import {
+  resolveRunPaths, ensureRunDirs, updateLatestPointers, updateRunMeta,
+} from "./lib/run-paths.js";
 
 const require = createRequire(import.meta.url);
 // Reuse the Playwright install already vendored under qa/node_modules.
@@ -62,13 +68,11 @@ const SEEDS = args.seeds
   ? args.seeds.split(",").map((s) => s.trim()).filter(Boolean)
   : DEFAULT_SEEDS;
 
-const ROOT = resolve(process.cwd());
-const OUT_BASE = join(ROOT, "out");
-const FULL_DIR = join(OUT_BASE, "screenshots", "full");
-const FOLD_DIR = join(OUT_BASE, "screenshots", "hero");
-const REPORTS_DIR = join(OUT_BASE, "reports");
-
-[OUT_BASE, FULL_DIR, FOLD_DIR, REPORTS_DIR].forEach(ensureDir);
+const RUN_PATHS = resolveRunPaths(args.runId, process.cwd());
+ensureRunDirs(RUN_PATHS, "site");
+const FULL_DIR = RUN_PATHS.site.screensFull;
+const FOLD_DIR = RUN_PATHS.site.screensHero;
+const REPORTS_DIR = RUN_PATHS.site.reports;
 
 const ROOT_HOST = (() => {
   try { return new URL(SEEDS[0]).hostname.replace(/^www\./, ""); }
@@ -76,6 +80,8 @@ const ROOT_HOST = (() => {
 })();
 
 console.log("Site audit starting");
+console.log(`  runId:      ${RUN_PATHS.runId}`);
+console.log(`  runDir:     ${RUN_PATHS.runDir}`);
 console.log(`  seeds:      ${SEEDS.join(", ")}`);
 console.log(`  rootHost:   ${ROOT_HOST}`);
 console.log(`  maxPages:   ${MAX_PAGES}`);
@@ -83,7 +89,7 @@ console.log(`  headless:   ${HEADLESS}`);
 console.log(`  timeout:    ${TIMEOUT_MS}ms`);
 console.log(`  viewport:   ${VIEWPORT_W}x${VIEWPORT_H}`);
 console.log(`  screenshots:${SHOTS}`);
-console.log(`  outputDir:  ${OUT_BASE}`);
+console.log(`  outputDir:  ${RUN_PATHS.site.root}`);
 
 const slugSeen = new Map();
 const errors = [];
@@ -324,10 +330,29 @@ const errors = [];
 
   writeFileSync(join(REPORTS_DIR, "summary.md"), md.join("\n"), "utf8");
 
+  // Run metadata + latest pointers
+  updateRunMeta(RUN_PATHS, {
+    script: "site-audit.js",
+    target: SEEDS[0],
+    args: {
+      seeds: SEEDS, maxPages: MAX_PAGES, headless: HEADLESS,
+      timeout: TIMEOUT_MS, screenshots: SHOTS,
+      viewport: { w: VIEWPORT_W, h: VIEWPORT_H },
+    },
+    extra: {
+      pageCount: pages.length,
+      issueCount: issues.length,
+      startedAt, finishedAt,
+    },
+  });
+  updateLatestPointers(RUN_PATHS, ["run", "site"]);
+
   console.log(`\nDone.`);
   console.log(`  pages: ${pages.length}, issues: ${issues.length}`);
   console.log(`  reports: ${REPORTS_DIR}`);
   console.log(`  screenshots: ${FULL_DIR} and ${FOLD_DIR}`);
+  console.log(`  runId:    ${RUN_PATHS.runId}`);
+  console.log(`  pointers: ${RUN_PATHS.pointers.latestSite}`);
 })().catch((err) => {
   console.error("Site audit fatal error:", err);
   process.exit(1);

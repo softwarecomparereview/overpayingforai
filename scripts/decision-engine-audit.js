@@ -10,11 +10,15 @@
 //   node scripts/decision-engine-audit.js --maxScenarios=50 --headless=true
 //   node scripts/decision-engine-audit.js --base=https://overpayingforai.com
 //
-// Outputs:
-//   out/decision-audit/results.json
-//   out/decision-audit/results.csv
-//   out/decision-audit/summary.md
-//   out/decision-audit/screenshots/<scenarioId>.png
+// Outputs (run-folder versioned):
+//   out/audits/<runId>/decision/results.json
+//   out/audits/<runId>/decision/results.csv
+//   out/audits/<runId>/decision/summary.md
+//   out/audits/<runId>/decision/screenshots/<scenarioId>.png
+//   out/audits/<runId>/run-meta.json
+//   out/audits/latest-run, latest-decision (plain-text pointer files)
+//
+// Pass --runId=<existing> to share a run folder with site-audit.
 
 import { createRequire } from "node:module";
 import { join, resolve } from "node:path";
@@ -24,6 +28,9 @@ import {
   parseArgs, asBool, asInt, ensureDir, writeJson, writeCsv,
   cleanText, nowIso,
 } from "./lib/utils.js";
+import {
+  resolveRunPaths, ensureRunDirs, updateLatestPointers, updateRunMeta,
+} from "./lib/run-paths.js";
 
 const require = createRequire(import.meta.url);
 const { chromium } = require("../qa/node_modules/playwright");
@@ -49,10 +56,10 @@ const TIMEOUT_MS = asInt(args.timeout, 30000);
 const MAX_SCENARIOS = asInt(args.maxScenarios, 60);
 const SHOTS = !asBool(args.noScreenshots, false);
 
-const OUT_BASE = resolve(process.cwd(), "out", "decision-audit");
-const SHOTS_DIR = join(OUT_BASE, "screenshots");
-ensureDir(OUT_BASE);
-ensureDir(SHOTS_DIR);
+const RUN_PATHS = resolveRunPaths(args.runId, process.cwd());
+ensureRunDirs(RUN_PATHS, "decision");
+const OUT_BASE = RUN_PATHS.decision.root;
+const SHOTS_DIR = RUN_PATHS.decision.screens;
 
 // ────────────────────────────────────────────────────────────────────
 // SCENARIO MATRIX
@@ -101,6 +108,8 @@ const TOKEN_PRESETS = [
 ];
 
 console.log("Decision-engine audit starting");
+console.log(`  runId:        ${RUN_PATHS.runId}`);
+console.log(`  runDir:       ${RUN_PATHS.runDir}`);
 console.log(`  base:         ${BASE}`);
 console.log(`  headless:     ${HEADLESS}`);
 console.log(`  timeout:      ${TIMEOUT_MS}ms`);
@@ -295,9 +304,28 @@ console.log(`  output:       ${OUT_BASE}`);
 
   writeFileSync(join(OUT_BASE, "summary.md"), md.join("\n"), "utf8");
 
+  // Run metadata + latest pointers
+  updateRunMeta(RUN_PATHS, {
+    script: "decision-engine-audit.js",
+    target: BASE,
+    args: {
+      base: BASE, headless: HEADLESS, timeout: TIMEOUT_MS,
+      maxScenarios: MAX_SCENARIOS, screenshots: SHOTS,
+    },
+    extra: {
+      totalScenarios: results.length,
+      successful: ok.length,
+      failed: failed.length,
+      uniqueRecommendations: recCounts.size,
+    },
+  });
+  updateLatestPointers(RUN_PATHS, ["run", "decision"]);
+
   console.log(`\nDone.`);
   console.log(`  scenarios: ${results.length} (ok=${ok.length}, fail=${failed.length})`);
   console.log(`  output:    ${OUT_BASE}`);
+  console.log(`  runId:     ${RUN_PATHS.runId}`);
+  console.log(`  pointers:  ${RUN_PATHS.pointers.latestDecision}`);
 })().catch((err) => {
   console.error("Decision-engine audit fatal error:", err);
   process.exit(1);

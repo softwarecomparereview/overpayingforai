@@ -1,0 +1,198 @@
+Update the audit system so every run writes into a new dated run folder instead of overwriting /out/reports and /out/decision-audit.
+
+Branch rule:
+- use latestdevelop only
+- do not switch to main or old develop
+
+First confirm:
+- git branch --show-current
+- git status
+
+Then implement the following.
+
+==================================================
+GOAL
+==================================================
+
+I want each audit run to create a unique timestamped output folder so I can review historical runs and compare changes over time.
+
+Current output is too flat:
+- /out/reports/
+- /out/screenshots/
+- /out/decision-audit/
+
+Change it so each run gets its own folder.
+
+==================================================
+NEW OUTPUT STRUCTURE
+==================================================
+
+Create a timestamped run folder under /out/audits/
+
+Format:
+- /out/audits/YYYY-MM-DD_HH-mm-ss/
+
+Inside each run folder create:
+
+- /out/audits/YYYY-MM-DD_HH-mm-ss/site/
+- /out/audits/YYYY-MM-DD_HH-mm-ss/site/reports/
+- /out/audits/YYYY-MM-DD_HH-mm-ss/site/screenshots/full/
+- /out/audits/YYYY-MM-DD_HH-mm-ss/site/screenshots/hero/
+
+- /out/audits/YYYY-MM-DD_HH-mm-ss/decision/
+- /out/audits/YYYY-MM-DD_HH-mm-ss/decision/screenshots/
+
+Also create/update:
+- /out/audits/latest-site
+- /out/audits/latest-decision
+- /out/audits/latest-run
+
+These can be implemented as:
+- symlinks if supported
+OR
+- small text files containing the latest folder path
+OR
+- copied summary pointers
+Choose the most reliable option for Replit/Linux.
+
+==================================================
+REQUIRED BEHAVIOR
+==================================================
+
+1. site-audit.js
+Instead of writing to:
+- /out/reports/
+- /out/screenshots/
+
+write to the current run folder:
+- /out/audits/<timestamp>/site/reports/
+- /out/audits/<timestamp>/site/screenshots/full/
+- /out/audits/<timestamp>/site/screenshots/hero/
+
+2. decision-engine-audit.js
+Instead of writing to:
+- /out/decision-audit/
+
+write to:
+- /out/audits/<timestamp>/decision/
+- /out/audits/<timestamp>/decision/screenshots/
+
+3. Shared run folder behavior
+Both scripts must support:
+- auto-generating a new timestamped run folder when run independently
+- optionally sharing the same run folder when passed a run ID
+
+Add CLI support:
+- --runId=YYYY-MM-DD_HH-mm-ss
+
+If runId is supplied:
+- write into that exact run folder
+
+If runId is not supplied:
+- create a new one automatically
+
+This is important because I may want:
+- site audit and decision audit in same run folder
+OR
+- run them independently
+
+==================================================
+CLI EXAMPLES
+==================================================
+
+These should work:
+
+node scripts/site-audit.js --maxPages=100 --headless=true
+-> creates new run folder automatically
+
+node scripts/decision-engine-audit.js --maxScenarios=60
+-> creates new run folder automatically
+
+node scripts/site-audit.js --runId=2026-04-19_14-00-00 --maxPages=100 --headless=true
+node scripts/decision-engine-audit.js --runId=2026-04-19_14-00-00 --maxScenarios=60
+-> both write into same run folder
+
+==================================================
+FILES TO UPDATE
+==================================================
+
+Update as needed:
+- scripts/site-audit.js
+- scripts/decision-engine-audit.js
+- scripts/lib/utils.js
+- scripts/lib/screenshots.js
+- README-audit.md
+
+If needed add:
+- scripts/lib/run-paths.js
+
+==================================================
+IMPLEMENTATION DETAILS
+==================================================
+
+Add helpers for:
+- generating timestamp string in local filesystem-safe format YYYY-MM-DD_HH-mm-ss
+- resolving run folder paths
+- ensuring directories exist
+- writing/updating latest pointers
+- optionally reading the latest run
+
+Keep implementation clean and reusable.
+
+Site audit outputs should go to:
+- pages.json
+- pages.csv
+- issues.json
+- summary.md
+
+Decision audit outputs should go to:
+- results.json
+- results.csv
+- summary.md
+
+All screenshot paths recorded inside JSON/CSV should reference the actual run folder used.
+
+==================================================
+BONUS: COMPARISON READINESS
+==================================================
+
+Prepare the system for future comparison runs by also writing a small metadata file in each run folder:
+
+- /out/audits/<timestamp>/run-meta.json
+
+Include:
+- runId
+- createdAt
+- branch name
+- commit hash
+- target site URL
+- script name(s) run
+- key CLI args if easy to capture
+
+If site and decision audit are run into the same runId, update run-meta.json safely so both scripts are listed.
+
+==================================================
+README UPDATE
+==================================================
+
+Update README-audit.md to explain:
+- new folder structure
+- automatic run IDs
+- how to force a shared runId
+- where to find latest output
+- how this supports future before/after comparisons
+
+Add example commands.
+
+==================================================
+SUCCESS CRITERIA
+==================================================
+
+When done:
+1. print branch name again
+2. list changed files
+3. show one sample output path for site audit
+4. show one sample output path for decision audit
+5. confirm whether latest pointers are symlinks or files
+
+Do not change audit logic unnecessarily. Focus on output versioning and run organization.

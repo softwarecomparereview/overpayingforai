@@ -1,0 +1,36 @@
+{
+  "runId": "2026-04-18_18-53-35",
+  "createdAt": "2026-04-18T18:53:41.717Z",
+  "branch": "latestdevelop",
+  "commit": "379e9a7",
+  "commitFull": "379e9a72b1e2dba95312d859caa016bd4c63bace",
+  "runDir": "/home/runner/workspace/out/audits/2026-04-18_18-53-35",
+  "scripts": [
+    {
+      "script": "site-audit.js",
+      "ranAt": "2026-04-18T18:53:41.717Z",
+      "target": "https://overpayingforai.com/",
+      "args": {
+        "seeds": [
+          "https://overpayingforai.com/",
+          "https://overpayingforai.com/best",
+          "https://overpayingforai.com/calculator",
+          "https://overpayingforai.com/ai-types"
+        ],
+        "maxPages": 2,
+        "headless": true,
+        "timeout": 30000,
+        "screenshots": false,
+        "viewport": {
+          "w": 1366,
+          "h": 900
+        }
+      },
+      "pageCount": 2,
+      "issueCount": 2,
+      "startedAt": "2026-04-18T18:53:37.722Z",
+      "finishedAt": "2026-04-18T18:53:41.368Z"
+    }
+  ],
+  "updatedAt": "2026-04-18T18:53:41.717Z"
+}

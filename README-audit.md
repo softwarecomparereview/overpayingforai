@@ -20,24 +20,54 @@ scripts/
     extractors.js    # Page snapshot + heuristics (CTA / pricing / recommendation / bare)
     screenshots.js   # Full-page + above-the-fold captures
     utils.js         # URL normalization, slugify, CSV writer, dedup helpers
+    run-paths.js     # Versioned run-folder layout + latest pointers + run-meta
 
 out/
-  reports/                       (site audit)
-    pages.json
-    pages.csv
-    issues.json
-    summary.md
-  screenshots/
-    full/<slug>.png
-    hero/<slug>.png
-  decision-audit/                (decision-engine audit)
-    results.json
-    results.csv
-    summary.md
-    screenshots/<scenarioId>.png
+  audits/
+    <runId>/                                # YYYY-MM-DD_HH-mm-ss
+      run-meta.json                         # branch, commit, scripts run, args
+      site/
+        reports/
+          pages.json
+          pages.csv
+          issues.json
+          summary.md
+        screenshots/
+          full/<slug>.png
+          hero/<slug>.png
+      decision/
+        results.json
+        results.csv
+        summary.md
+        screenshots/<scenarioId>.png
+    latest-run                              # text file: "<runId>"
+    latest-site                             # text file: absolute path to last site/ folder
+    latest-decision                         # text file: absolute path to last decision/ folder
 
 README-audit.md
 ```
+
+### Run versioning
+
+Every invocation creates a new `out/audits/<runId>/` folder by default — historical runs are preserved automatically. To **share** a folder between site + decision audits in the same logical run, pass a matching `--runId`:
+
+```bash
+RUN=$(date +%Y-%m-%d_%H-%M-%S)
+node scripts/site-audit.js            --runId=$RUN --maxPages=100
+node scripts/decision-engine-audit.js --runId=$RUN --maxScenarios=60
+# Both write into out/audits/$RUN/, and run-meta.json lists both scripts.
+```
+
+The three plain-text pointer files (`latest-run`, `latest-site`, `latest-decision`) make scripted before/after comparisons easy:
+
+```bash
+DIFF_FROM=$(cat out/audits/latest-site)
+# ... run a new site audit ...
+DIFF_TO=$(cat out/audits/latest-site)
+diff "$DIFF_FROM/reports/issues.json" "$DIFF_TO/reports/issues.json"
+```
+
+Pointers are plain text files (not symlinks) for cross-platform reliability on Replit/Linux containers.
 
 ---
 
