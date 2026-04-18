@@ -168,7 +168,7 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                 badge="Recommended"
                 title={`Best starting option: ${top.model}`}
                 rationale={top.pitch}
-                primaryCta={primary.isAffiliate
+                primaryCta={primary.isExternal
                   ? { ...primary, label: `Start with ${top.model}` }
                   : { ...primary, label: `Compare ${top.model}` }
                 }
@@ -194,7 +194,7 @@ export function AiTypePage({ params }: { params: { slug: string } }) {
                   </p>
                   <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
                   <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
-                    {target.isAffiliate ? target.label : pick.cta}
+                    {target.isExternal ? target.label : pick.cta}
                   </span>
                 </>
               );

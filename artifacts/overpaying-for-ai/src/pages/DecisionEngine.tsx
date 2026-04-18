@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
+import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
+import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
 
 // Safe defaults so we can always compute a recommendation, even when the user
@@ -131,6 +133,18 @@ export function DecisionEngine() {
   const alternatives = [liveResult.cheapest, liveResult.premium];
   const liveRationale = `For ${liveInputs.useCase} use at ${liveInputs.usageFrequency} usage on a ${liveInputs.budget === "free" ? "free-only" : liveInputs.budget} budget with a ${liveInputs.qualityPreference}-quality preference, ${primary.model.name} (${primary.model.provider}) is the best balance — estimated ${primary.estimatedMonthlySpend}.`;
 
+  // Outbound CTA targets for the recommended tool. Resolved via central registry
+  // so links can be swapped to affiliate URLs without touching this page.
+  const primaryProviderId = providerNameToId(primary.model.provider);
+  const primaryCtaTarget = useMemo(
+    () => getPrimaryCta(primaryProviderId, "default"),
+    [primaryProviderId]
+  );
+  const secondaryCtaTarget = useMemo(
+    () => getSecondaryCta(primaryProviderId),
+    [primaryProviderId]
+  );
+
   useEffect(() => {
     trackFeatureOpen("decision_engine", {
       pageType: "decision_engine",
@@ -197,6 +211,14 @@ export function DecisionEngine() {
         <p data-testid="decision-recommended-provider">{primary.model.provider}</p>
         <p data-testid="decision-recommended-cost">{primary.estimatedMonthlySpend}</p>
         <p data-testid="decision-rationale">{liveRationale}</p>
+        <a
+          data-testid="decision-primary-cta"
+          href={primaryCtaTarget.href}
+          rel={primaryCtaTarget.rel ?? (primaryCtaTarget.isExternal ? "noopener noreferrer sponsored" : undefined)}
+          target={primaryCtaTarget.target ?? (primaryCtaTarget.isExternal ? "_blank" : undefined)}
+        >
+          {primaryCtaTarget.label}
+        </a>
         <ol data-testid="decision-alternatives">
           {alternatives.map((alt, i) => (
             <li
@@ -311,6 +333,39 @@ export function DecisionEngine() {
           <div className="border border-border rounded-lg p-4 bg-muted/30 mb-8">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested Strategy</p>
             <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
+          </div>
+
+          {/* Outbound primary CTA — links to recommended tool's homepage (or
+              affiliate URL once approved). Sourced from central registry. */}
+          <div className="border border-primary/30 bg-primary/5 rounded-lg p-4 mb-6" data-testid="decision-cta-card">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Recommended next step</p>
+            <p className="text-sm text-foreground mb-3">
+              Try <b>{primary.model.name}</b> from {primary.model.provider} — {primary.estimatedMonthlySpend}.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <AffiliateCta
+                target={primaryCtaTarget}
+                className="cta-primary inline-flex items-center justify-center text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2.5 font-semibold hover:bg-primary/90 transition-colors"
+                trackingContext={{
+                  providerId: primaryProviderId,
+                  providerName: primary.model.provider,
+                  ctaType: "primary",
+                  pageType: "decision_engine",
+                  sourceComponent: "DecisionEngine/PrimaryCta",
+                }}
+              />
+              <AffiliateCta
+                target={secondaryCtaTarget}
+                className="inline-flex items-center justify-center text-sm border border-border bg-background rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
+                trackingContext={{
+                  providerId: primaryProviderId,
+                  providerName: primary.model.provider,
+                  ctaType: "secondary",
+                  pageType: "decision_engine",
+                  sourceComponent: "DecisionEngine/SecondaryCta",
+                }}
+              />
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-3">

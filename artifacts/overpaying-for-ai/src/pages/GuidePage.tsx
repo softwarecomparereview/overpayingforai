@@ -106,7 +106,7 @@ export function GuidePage() {
                   badge={winnerBlockConfig.badge}
                   title={winnerBlockConfig.title}
                   rationale={winnerBlockConfig.rationale}
-                  primaryCta={primary.isAffiliate
+                  primaryCta={primary.isExternal
                     ? { ...primary, label: winnerBlockConfig.primaryCtaLabel ?? `Try ${winnerBlockConfig.title}` }
                     : { ...primary, label: winnerBlockConfig.primaryCtaLabel ?? `See options` }
                   }
