@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import changelogData from "@/data/pricingChangelog.json";
+import { PageSeo } from "@/components/seo/PageSeo";
 
 interface ChangedField {
   field: string;
@@ -62,6 +63,10 @@ export function PricingChangelogPage() {
 
   return (
     <div className="bg-white">
+      <PageSeo
+        title="AI Pricing Changelog | OverpayingForAI"
+        description="A dated record of every AI model pricing review — what changed, what was added, and when. Full transparency on the data behind every comparison and recommendation."
+      />
       {/* Header */}
       <section className="border-b border-border bg-slate-900 text-white py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

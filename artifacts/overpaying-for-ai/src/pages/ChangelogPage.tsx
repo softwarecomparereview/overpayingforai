@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { track } from "@/utils/analytics";
 import { freshnessLabel, getDaysSinceUpdate, isPricingStale } from "@/utils/pricingFreshness";
 import modelsData from "@/data/models.json";
+import { PageSeo } from "@/components/seo/PageSeo";
 
 interface ModelEntry {
   id: string;
@@ -49,6 +50,10 @@ function freshnessColor(dateStr?: string) {
 export function ChangelogPage() {
   return (
     <div className="bg-white">
+      <PageSeo
+        title="Site Changelog | OverpayingForAI"
+        description="Current pricing for every tracked AI model — sourced from official provider pages, dated, and reviewed regularly. See what's fresh and what's stale at a glance."
+      />
       {/* Header */}
       <section className="border-b border-border bg-slate-900 text-white py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">

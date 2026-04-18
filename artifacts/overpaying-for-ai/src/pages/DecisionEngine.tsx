@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
+import { PageSeo } from "@/components/seo/PageSeo";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
 
 // Safe defaults so we can always compute a recommendation, even when the user
@@ -185,6 +186,10 @@ export function DecisionEngine() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <PageSeo
+        title="Decision Engine — Get a Personalized AI Pick | OverpayingForAI"
+        description="Answer 5 quick questions and get a personalized AI stack recommendation — ranked by real cost-effectiveness for your use case, budget, and usage level."
+      />
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">AI Decision Engine</h1>
         <p className="text-muted-foreground">Answer 5 questions. Get your optimal AI stack.</p>
