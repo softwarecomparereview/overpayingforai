@@ -1,0 +1,490 @@
+{
+  "startedAt": "2026-04-18T19:10:05.081Z",
+  "finishedAt": "2026-04-18T19:11:24.472Z",
+  "issueCount": 69,
+  "issues": [
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator",
+      "source": null,
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator",
+      "source": null,
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types",
+      "source": null,
+      "detail": ""
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/decision-engine",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/decision-engine",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/decision-engine",
+      "source": "https://overpayingforai.com/",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/decision-engine",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/compare",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/compare",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/compare",
+      "source": "https://overpayingforai.com/",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/resources",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/resources",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/resources",
+      "source": "https://overpayingforai.com/",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/resources",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/claude-vs-gpt-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/general-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/coding-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/writing-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/research-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/customer-support-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/ai-types/productivity-ai",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=chatgpt-plus-user",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=chatgpt-plus-user",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator?scenario=chatgpt-plus-user",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=developer-coding-workflow",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=developer-coding-workflow",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator?scenario=developer-coding-workflow",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=startup-support-bot",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=startup-support-bot",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator?scenario=startup-support-bot",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=content-team",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=content-team",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator?scenario=content-team",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=solo-founder",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=solo-founder",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/calculator?scenario=solo-founder",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/gpt-4o-vs-gpt-4o-mini-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/subscription-vs-api-ai-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/deepseek-vs-gpt4o-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/gemini-vs-gpt4o-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/claude-vs-cursor-for-coding",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/chatgpt-vs-cursor-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/pricing-changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/pricing-changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/pricing-changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/pricing-changelog",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/guides/cheapest-ai-content-workflow",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/guides/how-to-reduce-ai-cost",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/guides/token-cost-explained",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/guides/when-to-use-api-vs-subscription",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-ai-for-coding-on-a-budget",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-ai-under-20-per-month",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-free-ai-tools-for-builders",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-ai-for-writing-on-a-budget",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/terms",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/terms",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "https://overpayingforai.com/media-kit",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/media-kit",
+      "source": "https://overpayingforai.com/",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/compare/claude-haiku-vs-gpt4o-mini",
+      "source": "https://overpayingforai.com/best",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-ai-for-research-on-a-budget",
+      "source": "https://overpayingforai.com/best",
+      "detail": ""
+    },
+    {
+      "type": "no_outbound_cta_on_commercial_page",
+      "severity": "high",
+      "url": "https://overpayingforai.com/best/best-ai-for-automation",
+      "source": "https://overpayingforai.com/best",
+      "detail": ""
+    }
+  ]
+}
