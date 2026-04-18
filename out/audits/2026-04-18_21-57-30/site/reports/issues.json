@@ -1,0 +1,133 @@
+{
+  "startedAt": "2026-04-18T21:58:49.754Z",
+  "finishedAt": "2026-04-18T21:58:49.754Z",
+  "issueCount": 21,
+  "issues": [
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/ai-types",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "/guides",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "/guides",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "/guides",
+      "detail": ""
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/how-to-reduce-ai-cost",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "/guides/token-cost-explained",
+      "detail": "Overpaying for AI"
+    },
+    {
+      "type": "missing_meta_description",
+      "severity": "medium",
+      "url": "/guides/token-cost-explained",
+      "detail": ""
+    },
+    {
+      "type": "missing_canonical",
+      "severity": "medium",
+      "url": "/guides/token-cost-explained",
+      "detail": ""
+    },
+    {
+      "type": "missing_h1",
+      "severity": "medium",
+      "url": "/guides/token-cost-explained",
+      "detail": ""
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/token-cost-explained",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/when-to-use-api-vs-subscription",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/ai-routing-strategies",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/hidden-ai-costs",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/gpt-4o-mini-vs-full-when-to-upgrade",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/ai-cost-for-saas-founders",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/compare-ai-models-for-your-use-case",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/free-ai-tools-that-are-actually-good",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/guides/claude-vs-chatgpt-for-business",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "outbound_missing_rel_sponsored",
+      "severity": "low",
+      "url": "/resources",
+      "detail": "1 outbound, 0 sponsored"
+    },
+    {
+      "type": "decision_engine_low_diversity",
+      "severity": "medium",
+      "url": "/decision-engine",
+      "detail": "Only 3 unique recommendations across 30 scenarios"
+    }
+  ]
+}

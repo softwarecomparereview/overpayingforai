@@ -1,0 +1,33 @@
+{
+  "runId": "2026-04-18_21-57-30",
+  "createdAt": "2026-04-18T22:00:37.405Z",
+  "branch": "latestdevelop",
+  "commit": "6f6de1e",
+  "commitFull": "6f6de1ebb97c9c88a45d0c4cc1eeffcd156cbbaa",
+  "runDir": "out/audits/2026-04-18_21-57-30",
+  "pageCount": 56,
+  "issueCount": 21,
+  "byType": {
+    "outbound_missing_rel_sponsored": 13,
+    "duplicate_title": 2,
+    "missing_meta_description": 2,
+    "missing_canonical": 2,
+    "missing_h1": 1,
+    "decision_engine_low_diversity": 1
+  },
+  "calculator": {
+    "uniqueTotals": 4,
+    "uniqueVerdicts": 1,
+    "dynamic": true
+  },
+  "decision": {
+    "totalScenarios": 30,
+    "successful": 30,
+    "uniqueRecommendations": 3,
+    "recommendations": [
+      "GitHub Copilot Free",
+      "Cursor Free",
+      "Cursor Pro"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "preset": "5K",
+      "totalCost": "$0.038",
+      "heading": "Find your cheapest viable AI setup",
+      "verdict": "Best fit: API",
+      "recommended": "Recommended: Gemini 1.5 Flash (Google) — < $0.01/month at your usage. Best fit: API."
+    },
+    {
+      "preset": "50K",
+      "totalCost": "$0.375",
+      "heading": "Find your cheapest viable AI setup",
+      "verdict": "Best fit: API",
+      "recommended": "Recommended: Gemini 1.5 Flash (Google) — $0.011/month at your usage. Best fit: API."
+    },
+    {
+      "preset": "500K",
+      "totalCost": "$3.75",
+      "heading": "Find your cheapest viable AI setup",
+      "verdict": "Best fit: API",
+      "recommended": "Recommended: Gemini 1.5 Flash (Google) — $0.112/month at your usage. Best fit: API."
+    },
+    {
+      "preset": "5M",
+      "totalCost": "$37.50",
+      "heading": "Find your cheapest viable AI setup",
+      "verdict": "Best fit: API",
+      "recommended": "Recommended: Gemini 1.5 Flash (Google) — $1.12/month at your usage. Best fit: API."
+    }
+  ],
+  "uniqueTotals": 4,
+  "uniqueVerdicts": 1,
+  "dynamic": true
+}
