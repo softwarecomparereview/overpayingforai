@@ -198,14 +198,56 @@ export function Calculator() {
           ? "API"
           : "subscription";
   const verdictWinner = verdict === "API" ? cheapestApi : cheapestSub;
-  const verdictRationale =
-    verdict === "API"
-      ? cheapestApi && cheapestSub
-        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, paying per-token on ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo) is cheaper than the cheapest flat subscription, ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo).`
-        : `At this usage level, an API/per-token plan is the cheapest path.`
-      : cheapestApi && cheapestSub
-        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, the flat ${cheapestSub.model.name} subscription (${formatCost(cheapestSub.monthlyCost)}/mo) beats the cheapest API option, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).`
-        : `At this usage level, a flat subscription is the cheapest path.`;
+
+  const currentMonthlyCost = result?.estimatedMonthlyCost ?? verdictWinner?.monthlyCost ?? 0;
+  const spendBand =
+    currentMonthlyCost < 0.5
+      ? "negligible"
+      : currentMonthlyCost < 5
+        ? "low"
+        : currentMonthlyCost < 30
+          ? "moderate"
+          : "high";
+  const winnerGap = cheapestApi && cheapestSub
+    ? Math.abs(cheapestApi.monthlyCost - cheapestSub.monthlyCost)
+    : 0;
+  const winnerGapPercent = verdictWinner && winnerGap > 0
+    ? (winnerGap / Math.max(verdictWinner.monthlyCost, 0.01)) * 100
+    : 0;
+  const apiClearlyCheaper =
+    verdict === "API" && cheapestApi && cheapestSub && cheapestApi.monthlyCost <= cheapestSub.monthlyCost * 0.7;
+  const subClearlyCheaper =
+    verdict === "subscription" && cheapestApi && cheapestSub && cheapestSub.monthlyCost <= cheapestApi.monthlyCost * 0.7;
+  const selectedIsWinner = result?.model.id === verdictWinner?.model.id;
+
+  const verdictHeadline =
+    spendBand === "negligible"
+      ? `Negligible spend — keep setup simple (${verdict})`
+      : spendBand === "low"
+        ? `Low spend — ${verdict} is enough right now`
+        : spendBand === "moderate"
+          ? `${verdict} is the value lane at this usage`
+          : `High spend — optimization matters now (${verdict})`;
+
+  const verdictRationale = verdict === "API"
+    ? cheapestApi && cheapestSub
+      ? `Why: at ${formatTokenCount(inputTokens)} in / ${formatTokenCount(outputTokens)} out tokens, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo) costs less than ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo).`
+      : `Your usage profile favors per-token billing over a flat plan.`
+    : cheapestApi && cheapestSub
+      ? `Why: at ${formatTokenCount(inputTokens)} in / ${formatTokenCount(outputTokens)} out tokens, ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo) costs less than ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).`
+      : `Your usage profile is cheaper on a flat subscription plan.`;
+
+  const escalationLine = !result
+    ? ""
+    : result.savingsEstimate && result.savingsEstimate > 0
+      ? `Spend is still manageable, but a cheaper option can trim about ${formatCost(result.savingsEstimate)}/month.`
+      : apiClearlyCheaper || subClearlyCheaper
+        ? `Price gap is clear (${winnerGapPercent.toFixed(0)}%): stay with ${verdict} unless quality needs change.`
+        : spendBand === "high" && !selectedIsWinner
+          ? `At this scale, move to ${verdictWinner?.model.name} to reduce burn.`
+          : spendBand === "negligible" || spendBand === "low"
+            ? "Upgrade only when workload complexity or quality needs increase."
+            : "";
 
   // Build the semantic options list: cheapest API + cheapest subscription +
   // up to 2 of the cheaper alternatives we already computed for the selected model.
@@ -261,7 +303,7 @@ export function Calculator() {
   }
 
   const primaryRecommendation = verdictWinner
-    ? `Recommended: ${verdictWinner.model.name} (${verdictWinner.model.provider}) — ${formatCost(verdictWinner.monthlyCost)}/month at your usage. Best fit: ${verdict}.`
+    ? `Next step: run ${verdictWinner.model.name} (${verdictWinner.model.provider}) at about ${formatCost(verdictWinner.monthlyCost)}/month for this usage.`
     : `Pick a model and enter usage to see a recommendation.`;
   const resultHeading = result
     ? `${result.model.name}: ${formatCost(result.estimatedMonthlyCost)}/month at ${formatTokenCount(inputTokens)} in / ${formatTokenCount(outputTokens)} out`
@@ -470,10 +512,10 @@ export function Calculator() {
           ))}
         </ul>
         <p data-testid="calc-rationale" className="sr-only">
-          {verdictRationale}
+          {verdictRationale} {escalationLine}
         </p>
         <p data-testid="calc-verdict" className="sr-only">
-          Best fit: {verdict}
+          {verdictHeadline}
         </p>
       </section>
 
@@ -502,13 +544,13 @@ export function Calculator() {
                 sighted users see the same input-driven copy that the audit reads. */}
             <div className="mt-2 mb-4 border border-border rounded-lg bg-muted/30 p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
-                Best fit: {verdict}
+                {verdictHeadline}
               </p>
               <p className="text-sm text-foreground font-medium">
                 {primaryRecommendation}
               </p>
               <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                {verdictRationale}
+                {verdictRationale} {escalationLine}
               </p>
               {options.length > 0 && (
                 <ul className="text-xs text-muted-foreground mt-3 space-y-1">
