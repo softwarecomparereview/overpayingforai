@@ -30,6 +30,13 @@ const ALLOWED_EVENTS = new Set([
   "pricing_refresh_started",
   "pricing_diff_reviewed",
   "pricing_refresh_approved",
+  "page_view_models",
+  "models_primary_cta_click",
+  "models_secondary_cta_click",
+  "models_quick_winner_click",
+  "models_table_action_click",
+  "models_category_winner_click",
+  "models_final_cta_click",
 ]);
 
 /**

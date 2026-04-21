@@ -1,0 +1,217 @@
+Implement a conversion-first AI Models page for OverpayingForAI by upgrading the existing /models page. Do NOT redesign the entire site. Make a clean, mergeable change set focused on structure, CTA flow, and analytics.
+
+OBJECTIVE
+Turn /models from a static pricing reference page into a decision-entry page that drives users to:
+1. calculator
+2. decision engine
+3. model/provider outbound links if present
+4. future recommendation flows
+
+IMPORTANT CONSTRAINTS
+- Keep existing URL/slug for the models page
+- Reuse current site styling/components where possible
+- Do not break sitemap, routing, or SEO helpers
+- Do not remove existing pricing table data
+- Do not invent affiliate flows; use generic outbound/provider CTAs
+- Keep implementation additive and easy to review
+- Preserve mobile usability
+- If there is an analytics utility already, extend it; otherwise add a lightweight tracking helper
+
+PAGE GOAL
+The page should answer:
+- what is the cheapest model?
+- what is the best value model?
+- what model is best for coding/writing/research/productivity/support?
+- what should the user do next?
+
+IMPLEMENT THESE SECTIONS IN THIS ORDER
+
+1. HERO SECTION
+Add a conversion-first hero above the pricing table.
+
+Headline:
+"Stop Overpaying for AI Models"
+
+Subheadline:
+"Most teams waste 50–90% of AI spend by using the wrong default model. Compare costs, see the cheapest options by use case, and choose a better-fit model."
+
+Primary CTA button:
+"Calculate My Cost"
+-> route to /calculator
+
+Secondary CTA button:
+"Use Decision Engine"
+-> route to /decision-engine or existing decision route
+
+Optional helper line:
+"Pricing data last reviewed today" (if page data already supports this, otherwise use existing reviewed date source)
+
+2. QUICK WINNERS BLOCK
+Above the full table, add a 4-card or responsive grid section called:
+"Best value picks right now"
+
+Cards:
+- Best Overall Value
+- Cheapest Overall
+- Best for Coding
+- Best for Writing
+
+For each card display:
+- model name
+- provider
+- short rationale
+- input price
+- output price
+- 1 CTA button
+- 1 secondary text link
+
+CTA logic:
+Primary button:
+- "Use this model" -> provider link if available, otherwise calculator page
+Secondary text link:
+- "Compare options" -> anchor jump to pricing table or relevant comparison/calculator
+
+Use current known examples from page data where available (do not hardcode blindly if data source already exists):
+- Gemini 1.5 Flash
+- GPT-4o Mini
+- Mistral Small
+- DeepSeek V3
+
+3. OVERPAYING WARNING BLOCK
+Insert a highlighted strip below quick winners:
+
+Title:
+"Most users overpay with one bad default"
+
+Body:
+"Using GPT-4o or Claude Sonnet for every task can multiply costs unnecessarily. Smaller models often cut spend by 90%+ for routine coding, support, writing, and summarization."
+
+CTA:
+"Find a cheaper setup" -> /calculator
+
+4. ENHANCE THE EXISTING PRICING TABLE
+Keep the current ranked pricing table, but add these columns if not present:
+- Best for
+- Value status
+- Action
+
+Value status rules:
+- Green badge: "Best value"
+- Yellow badge: "Situational"
+- Red badge: "Premium / expensive"
+
+Action column:
+Primary action text/button:
+- "Use this model"
+Fallback if no provider URL:
+- "Calculate cost"
+
+Also keep model/provider/category/updated fields.
+
+If there is an existing data structure for models, extend it with:
+- bestFor
+- valueStatus
+- actionUrl (optional)
+- actionType
+- monthlyEstimateExample (optional)
+
+5. MONTHLY ESTIMATE MICROCOPY
+For at least top visible models, show a small line such as:
+"Typical moderate usage: ~$X/month"
+Only do this if you can calculate it from an existing helper or simple shared estimation utility.
+If there is no reliable utility yet, add a placeholder-safe helper based on a documented example usage scenario and keep it clearly labeled as an estimate.
+
+6. CATEGORY WINNERS SECTION
+Keep or upgrade the existing "Cheapest Models by Category" section.
+
+For each category card:
+- model
+- provider
+- input/output price
+- one-sentence rationale
+- CTA row:
+  - "Use this model"
+  - "Calculate exact cost"
+
+Categories to support if present in current data:
+- General AI
+- Coding
+- Writing
+- Research
+- Productivity
+- Customer Support
+
+7. ACTIONABLE INSIGHTS SECTION
+Keep the insights section but tighten wording for actionability.
+
+Use concise bullets/cards like:
+- "Cheapest capable model is 50× less expensive than the most expensive in the dataset."
+- "GPT-4o Mini is far cheaper than GPT-4o for routine coding."
+- "DeepSeek V3 is a strong value option for research-heavy work."
+- "Gemini Flash is one of the lowest-cost options for high-volume automation."
+
+Add CTA under this section:
+- "Calculate your exact cost"
+- "Use the decision engine"
+
+8. FINAL CTA SECTION
+At the bottom, add a stronger closing CTA block:
+
+Headline:
+"The cheapest model is the one that fits your actual workload"
+
+Body:
+"Use the calculator or decision engine to choose the lowest-cost model that still meets your quality needs."
+
+Buttons:
+- "Calculate Cost"
+- "Use Decision Engine"
+
+ANALYTICS IMPLEMENTATION
+Add lightweight event tracking for the models page. If a global analytics helper already exists, use it. Otherwise create a small helper.
+
+Track these events:
+- page_view_models
+- models_primary_cta_click
+- models_secondary_cta_click
+- models_quick_winner_click
+- models_table_action_click
+- models_category_winner_click
+- models_final_cta_click
+
+Each event payload should include where useful:
+- page_type: "models"
+- model_name
+- provider
+- cta_location
+- cta_label
+
+Example cta_location values:
+- hero
+- quick_winners
+- overpaying_strip
+- pricing_table
+- category_winners
+- insights
+- final_cta
+
+TECHNICAL REQUIREMENTS
+- Reuse existing SEO component and metadata pattern
+- Preserve internal linking to calculator, decision engine, compare pages, and best pages
+- Ensure the page renders well on mobile
+- Prefer existing design tokens/components
+- No major refactor of unrelated files
+- Keep code clean and production-ready
+
+DATA / CONTENT RULES
+- Do not fabricate provider pricing beyond what is already present in the project data
+- If certain URLs are missing, gracefully fall back to calculator links
+- Do not use affiliate language anywhere
+- Keep the tone practical, credible, and cost-focused
+
+DELIVERABLES
+1. Updated /models page implementation
+2. Any supporting utility/component files added
+3. Event tracking helper changes
+4. Brief summary of files changed
+5. Notes on any assumptions/fallbacks used
