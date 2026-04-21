@@ -7,6 +7,7 @@ import { Calculator } from "@/pages/Calculator";
 import { DecisionEngine } from "@/pages/DecisionEngine";
 import { ComparePage, CompareIndex } from "@/pages/ComparePage";
 import { BestPage } from "@/pages/BestPage";
+import { ModelsPage } from "@/pages/ModelsPage";
 import { BestAiTools } from "@/pages/BestAiTools";
 import { GuidePage, GuideIndex } from "@/pages/GuidePage";
 import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
@@ -68,6 +69,7 @@ function Router() {
                 <Route path="/decision-engine" component={DecisionEngine} />
                 <Route path="/compare" component={CompareIndex} />
                 <Route path="/compare/:slug" component={ComparePage} />
+                <Route path="/models" component={ModelsPage} />
                 <Route path="/best" component={BestAiTools} />
                 <Route path="/best/:slug" component={BestPage} />
                 <Route path="/guides" component={GuideIndex} />
