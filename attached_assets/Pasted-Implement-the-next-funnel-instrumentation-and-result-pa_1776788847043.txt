@@ -1,0 +1,93 @@
+Implement the next funnel instrumentation and result-page optimization for OverpayingForAI.
+
+OBJECTIVE
+Extend the current event discipline from /models into the calculator and decision engine, then tighten both result states so they drive clearer next actions.
+
+SCOPE
+Only work on:
+- calculator page
+- decision engine page
+- analytics helper / allowlist
+- any minimal shared CTA/result components if needed
+
+DO NOT
+- redesign unrelated pages
+- add new features like freeform use-case engine
+- change URLs
+- change SEO structure
+- refactor the whole app
+
+STEP 1 — CALCULATOR EVENTS
+Add and wire these events:
+- calculator_start
+- calculator_complete
+- calculator_result_view
+- calculator_recommendation_click
+- calculator_secondary_cta_click
+
+Include payload fields where available:
+- page_type: "calculator"
+- selected_model
+- recommended_model
+- savings_amount
+- savings_percent
+- cta_location
+- cta_label
+
+STEP 2 — DECISION ENGINE EVENTS
+Add and wire these events:
+- decision_engine_start
+- decision_engine_complete
+- decision_result_view
+- decision_recommendation_click
+- decision_restart_click
+
+Include payload fields where available:
+- page_type: "decision_engine"
+- use_case
+- budget_band
+- recommended_tool
+- recommended_plan_type
+- cta_location
+- cta_label
+
+STEP 3 — CALCULATOR RESULT UI
+Improve the result state without changing core logic.
+
+Required structure:
+1. strong result headline
+2. clear savings line
+3. one dominant primary CTA
+4. one secondary CTA
+5. edit/restart action
+
+Rules:
+- primary CTA should be the most obvious next action
+- secondary CTA should be visually weaker
+- passive wording like “see option” should be replaced with directive wording
+- preserve current recommendation logic
+
+STEP 4 — DECISION ENGINE RESULT UI
+Improve the result state with the same discipline.
+
+Required structure:
+1. best-fit recommendation
+2. cheaper alternative if relevant
+3. one dominant CTA
+4. one compare/secondary CTA
+5. restart/edit action
+
+STEP 5 — ANALYTICS SUPPORT
+Update analytics allowlist/helper to include all new events.
+If there is a simple dev-only reporting/debug utility already, extend it.
+Otherwise add a minimal internal helper or console-friendly grouped output for:
+- /models clicks
+- calculator starts/completes/result views/clicks
+- decision engine starts/completes/result views/clicks
+
+DELIVERABLES
+1. updated calculator instrumentation
+2. updated decision engine instrumentation
+3. tighter result UIs for both pages
+4. analytics helper updates
+5. short summary of changed files and assumptions

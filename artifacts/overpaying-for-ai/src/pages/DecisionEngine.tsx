@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { trackDecisionEvent, trackFeatureOpen, track, debugFunnelLog } from "@/utils/analytics";
 import { Link } from "wouter";
 import { runRecommender } from "@/engine/recommender";
 import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
@@ -153,7 +153,21 @@ export function DecisionEngine() {
     });
   }, []);
 
+  const startedRef = useRef(false);
+  const fireStartOnce = (firstAnswer?: { key: keyof DecisionInputs; value: unknown }) => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    const payload = {
+      page_type: "decision_engine" as const,
+      first_question: firstAnswer?.key,
+      first_answer: firstAnswer?.value,
+    };
+    track("decision_engine_start", payload);
+    debugFunnelLog("decision_engine", "decision_engine_start", payload);
+  };
+
   const set = <K extends keyof DecisionInputs>(key: K, value: DecisionInputs[K]) => {
+    fireStartOnce({ key, value });
     const updated = { ...inputs, [key]: value };
     setInputs(updated);
     if (step < 4) {
@@ -163,24 +177,56 @@ export function DecisionEngine() {
       const res = runRecommender(full);
       setResult(res);
       setStep(5);
-      trackDecisionEvent("decision_engine_completed", {
-        page_type: "decision_engine",
+      const recommended = res.balanced.model;
+      const completePayload = {
+        page_type: "decision_engine" as const,
         source_component: "DecisionEngine/QuestionFlow",
         page_path: typeof window !== "undefined" ? window.location.pathname : "/decision-engine",
         use_case: full.useCase,
-        budget: full.budget,
+        budget_band: full.budget,
         usage_frequency: full.usageFrequency,
         quality_preference: full.qualityPreference,
         free_tier_required: full.freeTierRequired,
-      });
+        recommended_tool: recommended.id,
+        recommended_plan_type: recommended.planType,
+      };
+      trackDecisionEvent("decision_engine_completed", completePayload);
+      track("decision_engine_complete", completePayload);
+      debugFunnelLog("decision_engine", "decision_engine_complete", completePayload);
     }
   };
 
   const reset = () => {
+    const payload = {
+      page_type: "decision_engine" as const,
+      cta_location: "result",
+      cta_label: "Start Over",
+    };
+    track("decision_restart_click", payload);
+    debugFunnelLog("decision_engine", "decision_restart_click", payload);
     setStep(0);
     setInputs({});
     setResult(null);
+    startedRef.current = false;
   };
+
+  // Fire result_view exactly once per result instance.
+  const lastResultIdRef = useRef<string>("");
+  useEffect(() => {
+    if (step !== 5 || !result) return;
+    const sig = `${result.balanced.model.id}|${liveInputs.useCase}|${liveInputs.budget}`;
+    if (sig === lastResultIdRef.current) return;
+    lastResultIdRef.current = sig;
+    const payload = {
+      page_type: "decision_engine" as const,
+      use_case: liveInputs.useCase,
+      budget_band: liveInputs.budget,
+      recommended_tool: result.balanced.model.id,
+      recommended_plan_type: result.balanced.model.planType,
+    };
+    track("decision_result_view", payload);
+    debugFunnelLog("decision_engine", "decision_result_view", payload);
+  }, [step, result, liveInputs.useCase, liveInputs.budget]);
 
   const stepLabels = ["Use case", "Budget", "Usage", "Quality", "Free tier"];
 
@@ -323,34 +369,22 @@ export function DecisionEngine() {
       {/* Results */}
       {step === 5 && result && (
         <div>
-          <div className="mb-6">
-            <h2 className="text-xl font-bold mb-1">Your AI Stack Recommendations</h2>
-            <p className="text-sm text-muted-foreground">Based on: {inputs.useCase}, {inputs.budget} budget, {inputs.usageFrequency} usage</p>
-          </div>
-
-          <div className="space-y-4 mb-6">
-            <ResultCard tier="cheapest" rec={result.cheapest} />
-            <ResultCard tier="balanced" rec={result.balanced} highlight />
-            <ResultCard tier="premium" rec={result.premium} />
-          </div>
-
-          {/* Routing strategy */}
-          <div className="border border-border rounded-lg p-4 bg-muted/30 mb-8">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested Strategy</p>
-            <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
-          </div>
-
-          {/* Outbound primary CTA — links to recommended tool's homepage (or
-              affiliate URL once approved). Sourced from central registry. */}
-          <div className="border border-primary/30 bg-primary/5 rounded-lg p-4 mb-6" data-testid="decision-cta-card">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Recommended next step</p>
-            <p className="text-sm text-foreground mb-3">
-              Try <b>{primary.model.name}</b> from {primary.model.provider} — {primary.estimatedMonthlySpend}.
+          {/* Dominant best-fit recommendation */}
+          <div className="border border-primary/40 bg-primary/5 rounded-xl p-5 mb-4" data-testid="decision-cta-card">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Best fit for you</p>
+            <h2 className="text-2xl font-bold text-foreground mb-1">
+              Use {result.balanced.model.name}
+            </h2>
+            <p className="text-sm text-muted-foreground mb-1">
+              {result.balanced.model.provider} · {result.balanced.estimatedMonthlySpend}
             </p>
-            <div className="flex flex-wrap gap-2">
+            <p className="text-sm text-foreground mb-4 leading-relaxed">
+              {result.balanced.reasoning}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
               <AffiliateCta
-                target={primaryCtaTarget}
-                className="cta-primary inline-flex items-center justify-center text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2.5 font-semibold hover:bg-primary/90 transition-colors"
+                target={{ ...primaryCtaTarget, label: `Try ${result.balanced.model.name}` }}
+                className="cta-primary inline-flex items-center justify-center text-sm bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold hover:bg-primary/90 transition-colors"
                 trackingContext={{
                   providerId: primaryProviderId,
                   providerName: primary.model.provider,
@@ -358,19 +392,60 @@ export function DecisionEngine() {
                   pageType: "decision_engine",
                   sourceComponent: "DecisionEngine/PrimaryCta",
                 }}
-              />
-              <AffiliateCta
-                target={secondaryCtaTarget}
-                className="inline-flex items-center justify-center text-sm border border-border bg-background rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
-                trackingContext={{
-                  providerId: primaryProviderId,
-                  providerName: primary.model.provider,
-                  ctaType: "secondary",
-                  pageType: "decision_engine",
-                  sourceComponent: "DecisionEngine/SecondaryCta",
+                onClick={() => {
+                  const payload = {
+                    page_type: "decision_engine" as const,
+                    cta_location: "result_primary",
+                    cta_label: `Try ${result.balanced.model.name}`,
+                    use_case: liveInputs.useCase,
+                    budget_band: liveInputs.budget,
+                    recommended_tool: result.balanced.model.id,
+                    recommended_plan_type: result.balanced.model.planType,
+                  };
+                  track("decision_recommendation_click", payload);
+                  debugFunnelLog("decision_engine", "decision_recommendation_click", payload);
                 }}
               />
+              <Link
+                href="/calculator"
+                className="text-sm border border-border bg-background rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors text-center"
+                onClick={() => {
+                  const payload = {
+                    page_type: "decision_engine" as const,
+                    cta_location: "result_secondary",
+                    cta_label: "Compare exact cost",
+                  };
+                  track("decision_recommendation_click", payload);
+                  debugFunnelLog("decision_engine", "decision_recommendation_click", payload);
+                }}
+              >
+                Compare exact cost
+              </Link>
             </div>
+          </div>
+
+          {/* Cheaper alternative — only surface if it differs from the balanced pick */}
+          {result.cheapest.model.id !== result.balanced.model.id && (
+            <div className="border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/20 rounded-lg p-4 mb-4" data-testid="decision-cheaper-alt">
+              <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 mb-1">Cheaper alternative</p>
+              <p className="text-sm text-foreground">
+                <b>{result.cheapest.model.name}</b> ({result.cheapest.model.provider}) — {result.cheapest.estimatedMonthlySpend}.
+                {" "}{result.cheapest.reasoning}
+              </p>
+            </div>
+          )}
+
+          {/* Full ranked breakdown for context */}
+          <div className="space-y-4 mb-6">
+            <ResultCard tier="cheapest" rec={result.cheapest} />
+            <ResultCard tier="balanced" rec={result.balanced} highlight />
+            <ResultCard tier="premium" rec={result.premium} />
+          </div>
+
+          {/* Routing strategy */}
+          <div className="border border-border rounded-lg p-4 bg-muted/30 mb-6">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested Strategy</p>
+            <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -379,14 +454,8 @@ export function DecisionEngine() {
               className="text-sm border border-border rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
               data-testid="restart-btn"
             >
-              Start Over
+              Start over
             </button>
-            <Link
-              href="/calculator"
-              className="text-sm bg-primary text-primary-foreground rounded-lg px-4 py-2.5 font-medium hover:bg-primary/90 transition-colors"
-            >
-              Calculate exact cost →
-            </Link>
           </div>
         </div>
       )}

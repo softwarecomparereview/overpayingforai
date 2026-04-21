@@ -37,7 +37,32 @@ const ALLOWED_EVENTS = new Set([
   "models_table_action_click",
   "models_category_winner_click",
   "models_final_cta_click",
+  "calculator_start",
+  "calculator_complete",
+  "calculator_result_view",
+  "calculator_recommendation_click",
+  "calculator_secondary_cta_click",
+  "decision_engine_start",
+  "decision_engine_complete",
+  "decision_result_view",
+  "decision_recommendation_click",
+  "decision_restart_click",
 ]);
+
+/**
+ * Dev-only grouped logger for funnel events. Mirrors `track()` output but
+ * bundles related events into console groups so we can quickly verify wiring
+ * during local development. No-op in production.
+ */
+export function debugFunnelLog(group: "models" | "calculator" | "decision_engine", event: string, payload: AnalyticsPayload = {}): void {
+  if (!isDev) return;
+  // eslint-disable-next-line no-console
+  console.groupCollapsed(`[funnel:${group}] ${event}`);
+  // eslint-disable-next-line no-console
+  console.log(payload);
+  // eslint-disable-next-line no-console
+  console.groupEnd();
+}
 
 /**
  * GA4 events that should drive decision-making dashboards and conversion review.
