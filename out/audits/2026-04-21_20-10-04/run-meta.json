@@ -1,0 +1,33 @@
+{
+  "runId": "2026-04-21_20-10-04",
+  "createdAt": "2026-04-21T20:10:25.694Z",
+  "branch": "developphase2",
+  "commit": "2c55ea6",
+  "commitFull": "2c55ea6f98e7d5cf25c159f72e3e4d0aac87ad1c",
+  "runDir": "/home/runner/workspace/out/audits/2026-04-21_20-10-04",
+  "scripts": [
+    {
+      "script": "site-audit.js",
+      "ranAt": "2026-04-21T20:10:25.694Z",
+      "target": "https://overpayingforai.com/",
+      "args": {
+        "seeds": [
+          "https://overpayingforai.com/"
+        ],
+        "maxPages": 15,
+        "headless": true,
+        "timeout": 30000,
+        "screenshots": true,
+        "viewport": {
+          "w": 1366,
+          "h": 900
+        }
+      },
+      "pageCount": 15,
+      "issueCount": 4,
+      "startedAt": "2026-04-21T20:10:05.356Z",
+      "finishedAt": "2026-04-21T20:10:25.368Z"
+    }
+  ],
+  "updatedAt": "2026-04-21T20:10:25.694Z"
+}

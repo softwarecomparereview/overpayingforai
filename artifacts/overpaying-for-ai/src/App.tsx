@@ -14,6 +14,7 @@ import { PricingRefreshPage } from "@/pages/admin/PricingRefreshPage";
 import { AffiliatesAdminPage } from "@/pages/admin/AffiliatesAdminPage";
 import { AffiliateAuditPage } from "@/pages/admin/AffiliateAuditPage";
 import { SitemapPreviewPage } from "@/pages/admin/SitemapPreviewPage";
+import { AuditRunnerPage } from "@/pages/admin/AuditRunnerPage";
 import { Design1 } from "@/pages/Design1";
 import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
@@ -51,6 +52,7 @@ function Router() {
         <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
         <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
         <Route path="/admin/sitemap-preview" component={SitemapPreviewPage} />
+        <Route path="/admin/audits" component={AuditRunnerPage} />
         <Route>
           {() => (
             <Layout>

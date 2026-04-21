@@ -1,0 +1,116 @@
+Build a protected internal admin audit runner for OverpayingForAI that can run a read-only production site audit on demand and make the resulting audit pack downloadable as a zip.
+
+OBJECTIVE
+Create an internal admin page that triggers a live production audit for https://overpayingforai.com, stores the results, zips them, and lets an authorized admin download the zip.
+
+CRITICAL CONSTRAINTS
+- Internal/admin only
+- Read-only audit only
+- No production mutations
+- No code deployment changes
+- No edits to robots.txt, sitemap.xml, metadata, canonicals, structured data, or page content
+- No indexing or SEO-impacting actions
+- No public exposure of audit artifacts
+- No preview/dev domain auditing by default
+- Do not break existing routing or production UX
+
+PRODUCT REQUIREMENTS
+
+1. ADMIN ROUTE
+Add a protected route:
+- /admin/audits
+
+Requirements:
+- server-side auth guard or equivalent existing protected-admin mechanism
+- do not expose from public navigation unless admin-only navigation already exists
+- add noindex/nofollow meta on admin page
+- ensure admin routes are excluded from robots if that pattern already exists; otherwise add safe exclusion without affecting public pages
+
+2. AUDIT ACTION
+Add a “Run live audit” action on the admin page.
+
+Behavior:
+- fixed target domain: https://overpayingforai.com
+- optional mode select:
+  - quick
+  - full
+
+When triggered:
+- run the existing or new Playwright audit script in read-only mode
+- write output to a timestamped folder, e.g.
+  out/audits/YYYY-MM-DD_HH-MM-SS_live_prod_audit/
+- collect:
+  - executive-summary.md
+  - detailed-findings.md
+  - seo-safety-check.md
+  - analytics-check.md
+  - screenshots/
+  - run-meta.json
+  - url-inventory.json
+
+3. ZIP OUTPUT
+After audit completion:
+- generate a zip file for the audit folder
+- store it alongside the audit output or in a downloads subfolder
+- make it downloadable from the admin UI
+
+4. ADMIN PAGE UI
+Show:
+- latest runs first
+- timestamp
+- mode
+- status (running / complete / failed)
+- audited domain
+- screenshot count if available
+- issues summary if available
+- buttons:
+  - Download ZIP
+  - View Summary
+  - View Files (optional)
+
+5. CONCURRENCY / SAFETY
+- only allow one audit run at a time
+- if another run is active, disable the button and show status
+- add lightweight cooldown/rate limit to prevent abuse
+- hardcode read-only mode for production
+- prevent arbitrary URL input in v1
+
+6. IMPLEMENTATION NOTES
+- reuse any existing audit script if already present
+- do not invent a second audit system if one already exists
+- keep changes mergeable and scoped
+- use existing app patterns for admin pages, routing, and auth where possible
+- use Node-side zip creation
+- keep file paths predictable
+
+7. AUDIT RULES
+The audit runner must:
+- capture screenshots
+- check key production pages
+- inspect SEO-visible elements observationally
+- record console/network issues
+- not make any production writes
+
+8. ERROR HANDLING
+If audit fails:
+- mark run as failed
+- keep partial logs if useful
+- show failure reason in admin UI
+- do not crash the admin page
+
+9. DELIVERABLES
+- protected /admin/audits page
+- backend audit trigger
+- run history list
+- zip generation
+- download action
+- summary of files changed
+- assumptions/security notes
+
+10. NON-GOALS
+Do not add:
+- public audit access
+- arbitrary URL scanning
+- emailing results
+- scheduled automation
+- heavy dashboarding
