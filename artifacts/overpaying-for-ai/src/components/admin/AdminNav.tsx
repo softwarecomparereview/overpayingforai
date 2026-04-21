@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { href: "/admin/pricing-refresh", label: "Pricing Refresh" },
   { href: "/admin/affiliates", label: "Affiliates" },
   { href: "/admin/affiliate-audit", label: "Audit Dashboard" },
+  { href: "/admin/audits", label: "Site Audit" },
 ];
 
 export function AdminNav({ title }: { title: string }) {

@@ -1,0 +1,34 @@
+Site audit starting
+  runId:      2026-04-21_20-10-04
+  runDir:     /home/runner/workspace/out/audits/2026-04-21_20-10-04
+  seeds:      https://overpayingforai.com/
+  rootHost:   overpayingforai.com
+  maxPages:   15
+  headless:   true
+  timeout:    30000ms
+  viewport:   1366x900
+  screenshots:true
+  outputDir:  /home/runner/workspace/out/audits/2026-04-21_20-10-04/site
+  chromium:   /nix/store/qa9cnw4v5xkxyip6mb9kxqfq1z4x2dx1-chromium-138.0.7204.100/bin/chromium
+[crawl 1/15] queue=0 https://overpayingforai.com/
+[crawl 2/15] queue=34 https://overpayingforai.com/calculator
+[crawl 3/15] queue=33 https://overpayingforai.com/decision-engine
+[crawl 4/15] queue=32 https://overpayingforai.com/compare
+[crawl 5/15] queue=36 https://overpayingforai.com/ai-types
+[crawl 6/15] queue=36 https://overpayingforai.com/resources
+[crawl 7/15] queue=54 https://overpayingforai.com/compare/claude-vs-gpt-cost
+[crawl 8/15] queue=53 https://overpayingforai.com/ai-types/general-ai
+[crawl 9/15] queue=52 https://overpayingforai.com/ai-types/coding-ai
+[crawl 10/15] queue=51 https://overpayingforai.com/ai-types/writing-ai
+[crawl 11/15] queue=50 https://overpayingforai.com/ai-types/research-ai
+[crawl 12/15] queue=49 https://overpayingforai.com/ai-types/customer-support-ai
+[crawl 13/15] queue=48 https://overpayingforai.com/ai-types/productivity-ai
+[crawl 14/15] queue=47 https://overpayingforai.com/calculator?scenario=chatgpt-plus-user
+[crawl 15/15] queue=46 https://overpayingforai.com/calculator?scenario=developer-coding-workflow
+
+Done.
+  pages: 15, issues: 4
+  reports: /home/runner/workspace/out/audits/2026-04-21_20-10-04/site/reports
+  screenshots: /home/runner/workspace/out/audits/2026-04-21_20-10-04/site/screenshots/full and /home/runner/workspace/out/audits/2026-04-21_20-10-04/site/screenshots/hero
+  runId:    2026-04-21_20-10-04
+  pointers: /home/runner/workspace/out/audits/latest-site

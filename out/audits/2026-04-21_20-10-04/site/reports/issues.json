@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-04-21T20:10:05.356Z",
+  "finishedAt": "2026-04-21T20:10:25.368Z",
+  "issueCount": 4,
+  "issues": [
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    },
+    {
+      "type": "duplicate_title",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=chatgpt-plus-user",
+      "source": "https://overpayingforai.com/",
+      "detail": "AI Cost Calculator (2026) – Compare Model Pricing | OverpayingForAI"
+    },
+    {
+      "type": "duplicate_h1",
+      "severity": "low",
+      "url": "https://overpayingforai.com/calculator?scenario=chatgpt-plus-user",
+      "source": "https://overpayingforai.com/",
+      "detail": "Find your cheapest viable AI setup"
+    }
+  ]
+}
