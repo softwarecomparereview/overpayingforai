@@ -11,7 +11,7 @@ import type { CalculatorResult } from "@/engine/types";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { ScenarioSelector, type ScenarioPreset } from "@/components/ScenarioSelector";
 import scenarios from "@/data/scenarios.json";
-import { trackDecisionEvent, trackFeatureOpen } from "@/utils/analytics";
+import { trackDecisionEvent, trackFeatureOpen, track, debugFunnelLog } from "@/utils/analytics";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { CTABlock } from "@/components/monetization/CTABlock";
@@ -90,22 +90,41 @@ export function Calculator() {
   const calculate = useCallback(() => {
     if (!result) return;
     calculationCountRef.current += 1;
-    trackDecisionEvent("calculator_completed", {
-      page_type: "calculator",
+    const recommended = result.cheaperAlternatives[0]?.model;
+    const completePayload = {
+      page_type: "calculator" as const,
       source_component: "Calculator/CalculateButton",
       page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
       selected_model: result.model.id,
       selected_provider: result.model.provider,
+      recommended_model: recommended?.id,
+      savings_amount: result.savingsEstimate ?? 0,
+      savings_percent: result.cheaperAlternatives[0]?.savingsPercent ?? 0,
       calculation_index: calculationCountRef.current,
-    });
+    };
+    trackDecisionEvent("calculator_completed", completePayload);
+    track("calculator_complete", completePayload);
+    debugFunnelLog("calculator", "calculator_complete", completePayload);
   }, [result]);
 
+  // Fire `calculator_start` exactly once per session on the first user input.
+  const startedRef = useRef(false);
+  const fireStartOnce = useCallback(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    const payload = { page_type: "calculator" as const, selected_model: modelId };
+    track("calculator_start", payload);
+    debugFunnelLog("calculator", "calculator_start", payload);
+  }, [modelId]);
+
   const applyPreset = (preset: (typeof PRESET_USAGES)[0]) => {
+    fireStartOnce();
     setInputTokens(preset.inputTokens);
     setOutputTokens(preset.outputTokens);
   };
 
   const applyScenario = (scenario: ScenarioPreset) => {
+    fireStartOnce();
     setSelectedScenario(scenario);
     setModelId(scenario.inputs.modelId);
     setInputTokens(scenario.inputs.monthlyInputTokens);
@@ -145,15 +164,22 @@ export function Calculator() {
     const sig = `${result.model.id}|${inputTokens}|${outputTokens}`;
     if (sig === lastViewedSigRef.current) return;
     lastViewedSigRef.current = sig;
-    trackDecisionEvent("calculator_results_viewed", {
-      page_type: "calculator",
+    const recommended = result.cheaperAlternatives[0];
+    const viewPayload = {
+      page_type: "calculator" as const,
       source_component: "Calculator/ResultsBlock",
       page_path: typeof window !== "undefined" ? window.location.pathname : "/calculator",
       selected_model: result.model.id,
       selected_provider: result.model.provider,
+      recommended_model: recommended?.model.id,
+      savings_amount: recommended?.savings ?? 0,
+      savings_percent: recommended?.savingsPercent ?? 0,
       has_cheaper_alternative: Boolean(result.cheaperAlternatives.length),
       calculation_index: calculationCountRef.current,
-    });
+    };
+    trackDecisionEvent("calculator_results_viewed", viewPayload);
+    track("calculator_result_view", viewPayload);
+    debugFunnelLog("calculator", "calculator_result_view", viewPayload);
   }, [result, inputTokens, outputTokens]);
 
   const copyShareLink = () => {
@@ -347,6 +373,7 @@ export function Calculator() {
             id="model-select"
             value={modelId}
               onChange={(e) => {
+                fireStartOnce();
                 setModelId(e.target.value);
               }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -409,6 +436,7 @@ export function Calculator() {
               min={0}
               step={100000}
               onChange={(e) => {
+                fireStartOnce();
                 setInputTokens(Number(e.target.value));
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -430,6 +458,7 @@ export function Calculator() {
               min={0}
               step={50000}
               onChange={(e) => {
+                fireStartOnce();
                 setOutputTokens(Number(e.target.value));
               }}
               className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -532,42 +561,67 @@ export function Calculator() {
             )}
 
             {bestSetup && primaryTarget && (
-              <div className="mt-4 border border-primary/20 bg-primary/5 rounded-xl p-4 sm:p-5 space-y-3">
-                <p className="text-sm font-semibold text-foreground">Best setup for you: {bestSetup.model.name}</p>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>Estimated monthly cost: {formatCost(bestSetup.estimatedCost)}</li>
-                  <li>Typical current spend: {formatCost(result.estimatedMonthlyCost)}</li>
-                  <li>Potential savings: {formatCost(bestSetup.savings)}/month ({bestSetup.savingsPercent.toFixed(0)}%)</li>
-                </ul>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="mt-4 border border-primary/30 bg-primary/5 rounded-xl p-4 sm:p-5 space-y-3" data-testid="calc-result-cta-card">
+                <p className="text-lg font-bold text-foreground">
+                  Switch to {bestSetup.model.name} — save {formatCost(bestSetup.savings)}/month
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {bestSetup.savingsPercent.toFixed(0)}% lower than {result.model.name} at this usage
+                  ({formatCost(bestSetup.estimatedCost)} vs {formatCost(result.estimatedMonthlyCost)} per month).
+                </p>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
                   <AffiliateCta
                     target={{
                       ...primaryTarget,
-                      label: primaryTarget.isAffiliate ? "Switch to the cheaper setup" : "See the lower-cost option",
+                      label: `Switch to ${bestSetup.model.name}`,
                     }}
-                    className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-4 py-2 font-semibold text-sm hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
                     trackingContext={{
                       providerId: bestSetupProviderId,
                       ctaType: "primary",
                       pageType: "calculator",
                       sourceComponent: "Calculator/ResultsPrimaryCta",
                     }}
+                    onClick={() => {
+                      const payload = {
+                        page_type: "calculator" as const,
+                        cta_location: "result_primary",
+                        cta_label: `Switch to ${bestSetup.model.name}`,
+                        selected_model: result.model.id,
+                        recommended_model: bestSetup.model.id,
+                        savings_amount: bestSetup.savings,
+                        savings_percent: bestSetup.savingsPercent,
+                      };
+                      track("calculator_recommendation_click", payload);
+                      debugFunnelLog("calculator", "calculator_recommendation_click", payload);
+                    }}
                   />
                   <AffiliateCta
                     target={{
                       href: "/best",
-                      label: "Compare other best-value tools",
+                      label: "Compare more options",
                       isExternal: false,
                       isAffiliate: false,
                       fallbackUsed: true,
                       status: "unavailable",
                     }}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:underline"
+                    className="text-sm text-muted-foreground hover:text-foreground underline"
                     trackingContext={{
                       providerId: "",
                       ctaType: "secondary",
                       pageType: "calculator",
                       sourceComponent: "Calculator/ResultsSecondaryCta",
+                    }}
+                    onClick={() => {
+                      const payload = {
+                        page_type: "calculator" as const,
+                        cta_location: "result_secondary",
+                        cta_label: "Compare more options",
+                        selected_model: result.model.id,
+                        recommended_model: bestSetup.model.id,
+                      };
+                      track("calculator_secondary_cta_click", payload);
+                      debugFunnelLog("calculator", "calculator_secondary_cta_click", payload);
                     }}
                   />
                 </div>
@@ -579,7 +633,14 @@ export function Calculator() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 no-print">
+          <div className="flex flex-wrap items-center gap-3 no-print">
+            <button
+              onClick={() => inputsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className="text-sm border border-border rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
+              data-testid="edit-inputs-btn"
+            >
+              Edit inputs
+            </button>
             <button
               onClick={copyShareLink}
               className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -587,7 +648,6 @@ export function Calculator() {
             >
               {copied ? "Copied!" : "Copy Share Link"}
             </button>
-            <Link href="/best" className="text-sm text-primary hover:underline">See best-value tool picks →</Link>
           </div>
         </div>
       )}
