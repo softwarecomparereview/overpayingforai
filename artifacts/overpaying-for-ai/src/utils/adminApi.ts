@@ -1,15 +1,20 @@
 /**
  * Returns the base URL for all admin API calls.
  *
- * Dev (Vite):   "/admin-api"  — Vite proxies this to localhost:8080
- * Production:   The value of VITE_API_SERVER_URL env var, e.g.
- *               "https://api-server-yourusername.replit.app"
+ * Dev (Vite):            "/admin-api"  — Vite proxies this to localhost:8080
+ *                        and strips the prefix, so /admin-api/api/... → /api/...
  *
- * To configure for production, set VITE_API_SERVER_URL in your Cloudflare
- * Pages environment variables to your deployed Replit API server URL.
+ * Production (Replit):   ""  — API server is on the same domain at /api,
+ *                        so calls go directly to /api/admin/...
+ *
+ * Production (Cloudflare Pages):
+ *                        VITE_API_SERVER_URL env var, e.g.
+ *                        "https://overpaying-for-ai.yourname.replit.app"
+ *                        Set this in Cloudflare Pages → Settings → Environment Variables.
  */
 export function getAdminApiBase(): string {
   const override = import.meta.env.VITE_API_SERVER_URL;
   if (override) return override.replace(/\/$/, "");
-  return "/admin-api";
+  if (import.meta.env.DEV) return "/admin-api";
+  return "";
 }
