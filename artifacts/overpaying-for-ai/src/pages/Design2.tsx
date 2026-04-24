@@ -22,8 +22,8 @@ const allDates = (modelsData as { last_updated?: string }[])
   .map((m) => m.last_updated)
   .filter(Boolean) as string[];
 allDates.sort();
-const FRESHEST_DATE = allDates[allDates.length - 1] ?? "2025-04-01";
-const OLDEST_DATE = allDates[0] ?? "2025-04-01";
+const FRESHEST_DATE = allDates[allDates.length - 1] ?? new Date().toISOString().slice(0, 10);
+const OLDEST_DATE = allDates[0] ?? new Date().toISOString().slice(0, 10);
 const FRESHNESS_MSG = freshnessLabel(FRESHEST_DATE);
 const IS_STALE = isPricingStale(FRESHEST_DATE, 30);
 

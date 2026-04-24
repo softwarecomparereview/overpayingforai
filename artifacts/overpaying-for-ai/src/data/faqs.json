@@ -25,7 +25,7 @@
   },
   {
     "q": "What AI model is best for coding?",
-    "a": "Claude 3.5 Sonnet leads most 2025 coding benchmarks. GPT-4o is close behind. For budget coding: Claude 3.5 Haiku. For integrated coding experience: Cursor Pro (which uses these models). For free: Cursor Free or GitHub Copilot Free."
+    "a": "Claude 3.5 Sonnet leads current coding benchmarks. GPT-4o is close behind. For budget coding: Claude 3.5 Haiku. For integrated coding experience: Cursor Pro (which uses these models). For free: Cursor Free or GitHub Copilot Free."
   },
   {
     "q": "Can I use DeepSeek instead of GPT-4o to save money?",

@@ -1,9 +1,9 @@
 [
   {
     "slug": "best-ai-for-coding-on-a-budget",
-    "title": "Best AI for Coding on a Budget (2025)",
+    "title": "Best AI for Coding on a Budget",
     "description": "Top AI coding tools ranked by cost-effectiveness. From free tiers to $20/month subscriptions.",
-    "metaDescription": "Best AI coding tools on a budget in 2025. Compare Cursor, GitHub Copilot, Claude, and GPT-4o for developers who don't want to overpay.",
+    "metaDescription": "Best AI coding tools on a budget. Compare Cursor, GitHub Copilot, Claude, and GPT-4o for developers who don't want to overpay.",
     "category": "coding",
     "updatedAt": "2025-04-01",
     "defaultRecommendation": "Most developers should start with Cursor Free and only upgrade when they hit real workflow limits. If you code professionally and want unlimited frontier access, Cursor Pro at $20/month pays for itself in under a day.",
@@ -72,9 +72,9 @@
   },
   {
     "slug": "best-ai-under-20-per-month",
-    "title": "Best AI Tools Under $20/Month (2025)",
+    "title": "Best AI Tools Under $20/Month",
     "description": "The best AI assistants you can get for $20 or less per month, ranked by real-world value.",
-    "metaDescription": "Best AI tools under $20/month in 2025. Ranked by quality, features, and actual value. Find the right AI subscription without overpaying.",
+    "metaDescription": "Best AI tools under $20/month. Ranked by quality, features, and actual value. Find the right AI subscription without overpaying.",
     "category": "budget",
     "updatedAt": "2025-04-01",
     "intro": "There is no universal winner at $20/month — the right pick depends entirely on what you use AI for. At this price point, five genuinely excellent options exist. The goal is to match one to your primary use case, not to find the \"best\" tool in isolation.",
@@ -149,9 +149,9 @@
   },
   {
     "slug": "best-free-ai-tools-for-builders",
-    "title": "Best Free AI Tools for Builders and Developers (2025)",
+    "title": "Best Free AI Tools for Builders and Developers",
     "description": "Free-tier AI tools that are actually useful for developers, indie hackers, and technical users.",
-    "metaDescription": "Best free AI tools for developers and builders in 2025. Real free tiers with meaningful limits — no bait-and-switch.",
+    "metaDescription": "Best free AI tools for developers and builders. Real free tiers with meaningful limits — no bait-and-switch.",
     "category": "free",
     "updatedAt": "2025-04-01",
     "intro": "Not all free AI tiers are created equal. Some are generous enough to run real projects; others are marketing traps. Here are the ones that actually deliver value at zero cost.",
@@ -219,9 +219,9 @@
   },
   {
     "slug": "best-ai-for-writing-on-a-budget",
-    "title": "Best AI for Writing on a Budget (2025)",
+    "title": "Best AI for Writing on a Budget",
     "description": "The best AI writing assistants for content creators, copywriters, and marketers who want to keep costs low.",
-    "metaDescription": "Best AI writing tools on a budget in 2025. Compare Claude, ChatGPT, and alternatives for content creators who don't want to overpay.",
+    "metaDescription": "Best AI writing tools on a budget. Compare Claude, ChatGPT, and alternatives for content creators who don't want to overpay.",
     "category": "writing",
     "updatedAt": "2025-04-01",
     "intro": "Writing is one of the most cost-effective AI use cases — you don't need frontier model quality for most content tasks. Here's how to get great results without a premium subscription.",
@@ -277,9 +277,9 @@
   },
   {
     "slug": "best-ai-for-research-on-a-budget",
-    "title": "Best AI for Research on a Budget (2025)",
+    "title": "Best AI for Research on a Budget",
     "description": "AI tools that actually help with research — with citations, accuracy, and long-context support — without premium pricing.",
-    "metaDescription": "Best AI research tools on a budget in 2025. Compare Perplexity, Claude, Gemini for researchers who need accuracy and citations without overpaying.",
+    "metaDescription": "Best AI research tools on a budget. Compare Perplexity, Claude, Gemini for researchers who need accuracy and citations without overpaying.",
     "category": "research",
     "updatedAt": "2025-04-01",
     "intro": "Research is where AI tools diverge most in quality. Hallucination rates, citation quality, and context length matter enormously. Here's what actually works.",
@@ -335,9 +335,9 @@
   },
   {
     "slug": "best-ai-for-automation",
-    "title": "Best AI for Automation and Pipelines (2025)",
+    "title": "Best AI for Automation and Pipelines",
     "description": "The cheapest capable models for building AI automation workflows, agents, and production pipelines.",
-    "metaDescription": "Best AI models for automation and AI pipelines in 2025. Find the cheapest capable models for production workloads.",
+    "metaDescription": "Best AI models for automation and AI pipelines. Find the cheapest capable models for production workloads.",
     "category": "automation",
     "updatedAt": "2025-04-01",
     "intro": "Automation is where cost compounds fast. A model that costs $15/1M output tokens running thousands of tasks daily becomes expensive immediately. Here are the best options by cost-performance.",
@@ -393,9 +393,9 @@
   },
   {
     "slug": "best-ai-api-for-startups",
-    "title": "Best AI APIs for Startups (2025)",
+    "title": "Best AI APIs for Startups",
     "description": "Which AI APIs offer the best quality, reliability, and cost for early-stage startups building AI products?",
-    "metaDescription": "Best AI APIs for startups in 2025. Compare OpenAI, Anthropic, Google, and open-source options for building AI products without burning runway.",
+    "metaDescription": "Best AI APIs for startups. Compare OpenAI, Anthropic, Google, and open-source options for building AI products without burning runway.",
     "category": "coding",
     "updatedAt": "2025-04-01",
     "intro": "Startups building AI products face a real dilemma: frontier model quality versus runway preservation. Here's how to pick an API strategy that scales without burning cash.",
@@ -513,9 +513,9 @@
   },
   {
     "slug": "best-ai-for-chat-on-a-budget",
-    "title": "Best AI Chatbots on a Budget (2025)",
+    "title": "Best AI Chatbots on a Budget",
     "description": "Free and cheap AI chat assistants compared for everyday use — without paying $20/month unnecessarily.",
-    "metaDescription": "Best AI chatbots on a budget in 2025. Find the best free and cheap AI chat assistants for everyday use.",
+    "metaDescription": "Best AI chatbots on a budget. Find the best free and cheap AI chat assistants for everyday use.",
     "category": "chat",
     "updatedAt": "2025-04-01",
     "intro": "Most people don't need a $20/month AI subscription for casual chat use. The free tiers from major providers handle light-to-moderate use well. Here's how they compare.",
@@ -551,7 +551,7 @@
         "a": "Probably not. Free tiers from ChatGPT and Gemini handle most casual use cases. Pay only if you consistently hit rate limits or need specific premium features."
       },
       {
-        "q": "What's the best free AI chatbot in 2025?",
+        "q": "What's the best free AI chatbot right now?",
         "a": "ChatGPT Free for general use. Gemini Free for Google ecosystem users. Both are meaningfully capable at zero cost."
       }
     ],
@@ -563,12 +563,12 @@
   },
   {
     "slug": "best-open-source-ai-models",
-    "title": "Best Open-Source AI Models to Self-Host (2025)",
+    "title": "Best Open-Source AI Models to Self-Host",
     "description": "The best open-weight AI models you can run yourself for zero per-token cost.",
-    "metaDescription": "Best open-source AI models to self-host in 2025. Llama, Mistral, DeepSeek and more — free inference for developers with the right hardware.",
+    "metaDescription": "Best open-source AI models to self-host. Llama, Mistral, DeepSeek and more — free inference for developers with the right hardware.",
     "category": "automation",
     "updatedAt": "2025-04-01",
-    "intro": "If you have GPU access, self-hosting open-weight models eliminates per-token costs entirely. Here are the top models worth running yourself in 2025.",
+    "intro": "If you have GPU access, self-hosting open-weight models eliminates per-token costs entirely. Here are the top models worth running yourself.",
     "picks": [
       {
         "rank": 1,
@@ -613,9 +613,9 @@
   },
   {
     "slug": "best-ai-for-solopreneurs",
-    "title": "Best AI Stack for Solopreneurs (2025)",
+    "title": "Best AI Stack for Solopreneurs",
     "description": "A practical AI toolkit for solopreneurs who need writing, coding, and research without spending hundreds per month.",
-    "metaDescription": "Best AI tools for solopreneurs in 2025. Build an effective AI stack under $30/month for writing, coding, and research.",
+    "metaDescription": "Best AI tools for solopreneurs. Build an effective AI stack under $30/month for writing, coding, and research.",
     "category": "budget",
     "updatedAt": "2025-04-01",
     "intro": "Solopreneurs don't need an enterprise AI budget. With smart tool selection, you can cover writing, coding, research, and automation for $20–40/month total. Here's a practical stack.",

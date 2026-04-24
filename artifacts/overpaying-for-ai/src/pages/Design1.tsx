@@ -63,7 +63,7 @@ export function Design1() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-24 sm:pb-20">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 mb-8 text-xs font-medium text-white/80">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-            20 models tracked · Prices updated April 2025
+            20 models tracked · Regularly updated
           </div>
 
           <div className="max-w-3xl mb-10">

@@ -66,7 +66,7 @@
     "slug": "how-to-reduce-ai-cost",
     "title": "How to Reduce Your AI Costs by 80% Without Losing Quality",
     "description": "A practical guide to cutting AI spending through smart model routing, prompt optimization, and caching strategies.",
-    "metaDescription": "How to reduce AI costs in 2025. Practical strategies for cutting ChatGPT, Claude, and API spending by 60-80% without sacrificing quality.",
+    "metaDescription": "How to reduce AI costs. Practical strategies for cutting ChatGPT, Claude, and API spending by 60-80% without sacrificing quality.",
     "updatedAt": "2025-04-01",
     "readTime": "8 min read",
     "earlyCallout": "Route simple tasks to GPT-4o mini, Claude Haiku, or Gemini Flash before changing prompts or infrastructure. For most workloads, model routing alone cuts costs 60–80% with no noticeable quality drop — and you can implement a basic two-tier system in a day.",
@@ -196,7 +196,7 @@
     "slug": "when-to-use-api-vs-subscription",
     "title": "API vs Subscription: How to Choose the Right AI Pricing Model",
     "description": "A decision framework for choosing between AI subscriptions and pay-per-use API access based on your actual usage.",
-    "metaDescription": "API vs subscription AI pricing: when to use each and how to calculate which is cheaper for your use case. Practical decision framework for 2025.",
+    "metaDescription": "API vs subscription AI pricing: when to use each and how to calculate which is cheaper for your use case. Practical decision framework.",
     "updatedAt": "2025-04-01",
     "readTime": "5 min read",
     "sections": [
@@ -255,7 +255,7 @@
     "slug": "ai-routing-strategies",
     "title": "AI Model Routing: How to Cut Costs Without Losing Quality",
     "description": "How to route AI requests to cheaper models intelligently — the technique used by companies spending millions on AI to stay profitable.",
-    "metaDescription": "AI model routing strategies for 2025. How to reduce AI API costs 60-80% by routing tasks to cheaper models without sacrificing quality.",
+    "metaDescription": "AI model routing strategies. How to reduce AI API costs 60-80% by routing tasks to cheaper models without sacrificing quality.",
     "updatedAt": "2025-04-01",
     "readTime": "7 min read",
     "sections": [
@@ -544,9 +544,9 @@
   },
   {
     "slug": "free-ai-tools-that-are-actually-good",
-    "title": "Free AI Tools That Are Actually Good (2025)",
+    "title": "Free AI Tools That Are Actually Good",
     "description": "Honest guide to AI tools with real free tiers — not bait-and-switch trials masquerading as free.",
-    "metaDescription": "Free AI tools that are genuinely useful in 2025. No bait-and-switch — real free tiers with meaningful limits for everyday use.",
+    "metaDescription": "Free AI tools that are genuinely useful. No bait-and-switch — real free tiers with meaningful limits for everyday use.",
     "updatedAt": "2025-04-01",
     "readTime": "4 min read",
     "sections": [
@@ -596,8 +596,8 @@
   {
     "slug": "claude-vs-chatgpt-for-business",
     "title": "Claude vs ChatGPT for Business: A Practical Comparison",
-    "description": "Which AI assistant is better for business teams — Claude or ChatGPT? A no-BS comparison for 2025.",
-    "metaDescription": "Claude vs ChatGPT for business use in 2025. Which AI assistant is better for teams, writing, research, and productivity? Honest comparison.",
+    "description": "Which AI assistant is better for business teams — Claude or ChatGPT? A no-BS comparison.",
+    "metaDescription": "Claude vs ChatGPT for business use. Which AI assistant is better for teams, writing, research, and productivity? Honest comparison.",
     "updatedAt": "2025-04-01",
     "readTime": "6 min read",
     "sections": [
