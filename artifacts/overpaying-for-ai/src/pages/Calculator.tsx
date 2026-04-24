@@ -154,6 +154,9 @@ export function Calculator() {
   const lastViewedSigRef = useRef<string>("");
   useEffect(() => {
     if (!result) return;
+    // Only fire after the user has interacted with any input (model, tokens, preset, scenario)
+    // or has explicitly clicked Calculate. Prevents firing on the default pre-loaded result.
+    if (!startedRef.current && calculationCountRef.current === 0) return;
     const sig = `${result.model.id}|${inputTokens}|${outputTokens}`;
     if (sig === lastViewedSigRef.current) return;
     lastViewedSigRef.current = sig;

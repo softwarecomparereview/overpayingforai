@@ -810,7 +810,8 @@
       { "text": "AI Cost Calculator", "href": "/calculator" },
       { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
       { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
-      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" }
+      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
+      { "text": "Claude Pricing Breakdown", "href": "/pricing/claude-pricing" }
     ]
   },
   {
@@ -877,7 +878,8 @@
       { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
       { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
       { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" }
+      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
+      { "text": "Gemini Pricing Breakdown", "href": "/pricing/gemini-pricing" }
     ]
   },
   {
@@ -944,7 +946,9 @@
       { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
       { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
       { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" }
+      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" },
+      { "text": "Claude Pricing Breakdown", "href": "/pricing/claude-pricing" },
+      { "text": "Gemini Pricing Breakdown", "href": "/pricing/gemini-pricing" }
     ]
   }
 ]

@@ -31,7 +31,7 @@
       {
         "name": "DeepSeek V3",
         "category": "Best Budget API Alternative",
-        "pricingSummary": "API only: ~$0.0004 per 1K input tokens, ~$0.00089 per 1K output tokens.",
+        "pricingSummary": "API only. Often among the lowest-cost capable models, but pricing changes frequently — check current DeepSeek pricing before building.",
         "whyBetter": "Excellent quality-to-cost ratio — often 5–10× cheaper than GPT-4o for similar quality on most tasks. Strong for coding, writing, and general reasoning. Best value API model for cost-sensitive developers.",
         "notBetter": "API-only — no consumer chat interface. Requires developer setup. No image capabilities.",
         "comparisonLink": "/compare",
