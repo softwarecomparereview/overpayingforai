@@ -28,6 +28,7 @@ import { AiTypeIndex } from "@/pages/AiTypeIndex";
 import { AiTypePage } from "@/pages/AiTypePage";
 import { Terms } from "@/pages/Terms";
 import { MediaKit } from "@/pages/MediaKit";
+import { Contact } from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -91,6 +92,7 @@ function Router() {
                 <Route path="/guides/:slug" component={GuidePage} />
                 <Route path="/terms" component={Terms} />
                 <Route path="/media-kit" component={MediaKit} />
+                <Route path="/contact" component={Contact} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
