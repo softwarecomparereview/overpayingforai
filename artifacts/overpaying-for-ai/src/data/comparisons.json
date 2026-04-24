@@ -71,9 +71,9 @@
   },
   {
     "slug": "claude-vs-gpt-cost",
-    "title": "Claude vs ChatGPT: Real Cost Comparison for 2025",
+    "title": "Claude vs ChatGPT: Real Cost Comparison",
     "description": "A side-by-side cost analysis of Anthropic Claude and OpenAI ChatGPT for API and subscription users.",
-    "metaDescription": "Claude vs ChatGPT cost comparison for 2025. Compare API pricing, subscription plans, and which model gives the best value for your use case.",
+    "metaDescription": "Claude vs ChatGPT cost comparison. Compare API pricing, subscription plans, and which model gives the best value for your use case.",
     "modelA": "claude-3-5-sonnet",
     "modelB": "gpt-4o",
     "summary": "Claude 3.5 Sonnet and GPT-4o are competitive in quality, but Claude has cheaper input tokens. Output costs are roughly equivalent. For heavy output workloads, DeepSeek V3 beats both by 10x.",
@@ -114,7 +114,7 @@
       "hybrid": "GPT-4o mini for volume, GPT-4o or Claude Sonnet only for flagged high-complexity tasks"
     },
     "editorialInsight": "Teams that obsess over Claude vs GPT-4o are usually solving the wrong problem. Both models are interchangeable for most tasks. The budget wins come from routing — sending simple tasks to mini/haiku instead of premium models — not from picking the right frontier model.",
-    "pricingNotes": "API pricing as of early 2025. Subscription pricing ($20/month for ChatGPT Plus, $20/month for Claude Pro) unchanged. Verify with providers before committing to a high-volume architecture.",
+    "pricingNotes": "API pricing as of our last review. Subscription pricing ($20/month for ChatGPT Plus, $20/month for Claude Pro) unchanged. Verify with providers before committing to a high-volume architecture.",
     "faq": [
       {
         "q": "Is Claude or ChatGPT cheaper for API usage?",
@@ -122,7 +122,7 @@
       },
       {
         "q": "Which model is better for coding?",
-        "a": "Claude 3.5 Sonnet leads most coding benchmarks in 2025. GPT-4o is close behind. Both significantly outperform their budget counterparts for complex debugging and architecture work."
+        "a": "Claude 3.5 Sonnet leads most coding benchmarks. GPT-4o is close behind. Both significantly outperform their budget counterparts for complex debugging and architecture work."
       },
       {
         "q": "Should I use the subscription or API?",
@@ -254,7 +254,7 @@
       "hybrid": "Default to mini, route to GPT-4o based on task complexity classification"
     },
     "editorialInsight": "Most teams overpay because they default to GPT-4o out of caution. The rational approach is the reverse: default to mini, measure quality, and only escalate when your data shows you need to. The quality gap is real but narrow — it mainly matters for complex reasoning, not everyday tasks.",
-    "pricingNotes": "Token pricing as of early 2025. Both models are accessed via the same OpenAI API endpoint with a model parameter change. No other integration work required to implement routing.",
+    "pricingNotes": "Token pricing as of our last review. Both models are accessed via the same OpenAI API endpoint with a model parameter change. No other integration work required to implement routing.",
     "faq": [
       {
         "q": "How much worse is GPT-4o mini at coding?",
@@ -358,7 +358,7 @@
       "modelB": "Teams requiring enterprise reliability, US data residency, multimodal support, and tight OpenAI ecosystem integration."
     },
     "cheapestOption": "deepseek-v3",
-    "cheapestOptionNote": "DeepSeek V3 is one of the best quality-per-dollar models available in 2025.",
+    "cheapestOptionNote": "DeepSeek V3 is one of the best quality-per-dollar models available today.",
     "recommendation": "If data privacy and US residency aren't constraints, DeepSeek V3 is a compelling alternative to GPT-4o for coding and analysis. Run your own quality benchmarks on your specific task before committing.",
     "quickVerdict": "DeepSeek V3 matches GPT-4o quality on many tasks at ~95% lower cost. The blocker is data privacy — not performance.",
     "bestForA": [
@@ -389,7 +389,7 @@
       "hybrid": "DeepSeek V3 for non-sensitive batch work + GPT-4o mini for anything requiring US data handling"
     },
     "editorialInsight": "DeepSeek V3 is the most interesting cost story in AI right now. The quality-per-dollar ratio is genuinely exceptional. But the data residency question is a real business decision, not a technical one. Before routing production traffic to DeepSeek, get a legal opinion on your data type — not just a benchmark comparison.",
-    "pricingNotes": "DeepSeek API pricing as published in 2025. Self-hosted pricing depends on infrastructure costs. Privacy policies subject to change; verify before production deployment.",
+    "pricingNotes": "DeepSeek API pricing as last reviewed. Self-hosted pricing depends on infrastructure costs. Privacy policies subject to change; verify before production deployment.",
     "faq": [
       {
         "q": "Is DeepSeek safe to use for business data?",
@@ -455,7 +455,7 @@
       "hybrid": "Gemini Flash for volume and long-context tasks + GPT-4o for multimodal and vision work"
     },
     "editorialInsight": "Gemini 1.5 Pro's 2M context window is genuinely differentiating, not a marketing claim. If you're building anything that processes large documents — legal contracts, research papers, full codebases — the ability to send everything in one prompt simplifies architecture and reduces cost significantly. That alone justifies evaluating it.",
-    "pricingNotes": "Gemini pricing as of 2025 via Google AI Studio and Vertex AI. Free tier available for development. Production pricing requires a Google Cloud account.",
+    "pricingNotes": "Gemini pricing as of our last review via Google AI Studio and Vertex AI. Free tier available for development. Production pricing requires a Google Cloud account.",
     "faq": [
       {
         "q": "Can Gemini actually use 2M tokens effectively?",
@@ -680,7 +680,7 @@
     "slug": "mistral-vs-openai-cost",
     "title": "Mistral vs OpenAI: The European Alternative at Lower Cost",
     "description": "How does Mistral's pricing and quality stack up against OpenAI for developers and businesses?",
-    "metaDescription": "Mistral vs OpenAI cost comparison for 2025. Is Mistral a viable, cheaper alternative to GPT-4o for developers and European businesses?",
+    "metaDescription": "Mistral vs OpenAI cost comparison. Is Mistral a viable, cheaper alternative to GPT-4o for developers and European businesses?",
     "modelA": "mistral-large",
     "modelB": "gpt-4o",
     "summary": "Mistral Large is roughly 60% cheaper than GPT-4o with competitive quality on reasoning and coding. It's also GDPR-friendly with EU data residency — a meaningful advantage for European teams.",
@@ -721,7 +721,7 @@
       "hybrid": "Mistral for text-heavy tasks and EU compliance + GPT-4o for multimodal requirements"
     },
     "editorialInsight": "Mistral deserves more attention than it gets in the US market. For European teams, it's not just cheaper — it's the right choice from a legal and compliance standpoint. For US teams, the cost savings at Mistral Large are real enough to justify a quality evaluation. Don't dismiss it because it's not from OpenAI.",
-    "pricingNotes": "Mistral API pricing as of 2025 via La Plateforme (api.mistral.ai). EU data residency applies to all API requests. Open-source models available separately for self-hosting.",
+    "pricingNotes": "Mistral API pricing as of our last review via La Plateforme (api.mistral.ai). EU data residency applies to all API requests. Open-source models available separately for self-hosting.",
     "faq": [
       {
         "q": "Is Mistral GDPR compliant?",
@@ -810,7 +810,8 @@
       { "text": "AI Cost Calculator", "href": "/calculator" },
       { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
       { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
-      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" }
+      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
+      { "text": "Claude Pricing Breakdown", "href": "/pricing/claude-pricing" }
     ]
   },
   {
@@ -877,7 +878,8 @@
       { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
       { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
       { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" }
+      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
+      { "text": "Gemini Pricing Breakdown", "href": "/pricing/gemini-pricing" }
     ]
   },
   {
@@ -944,7 +946,9 @@
       { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
       { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
       { "text": "AI Cost Calculator", "href": "/calculator" },
-      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" }
+      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" },
+      { "text": "Claude Pricing Breakdown", "href": "/pricing/claude-pricing" },
+      { "text": "Gemini Pricing Breakdown", "href": "/pricing/gemini-pricing" }
     ]
   }
 ]

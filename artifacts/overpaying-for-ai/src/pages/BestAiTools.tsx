@@ -57,6 +57,8 @@ const CHEAPEST_MODELS = [
   },
 ];
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 const STARTING_POINT_LINKS = [
   { href: "/calculator", title: "AI cost calculator", description: "Get a personalized answer based on your usage and budget." },
   { href: "/compare", title: "Top comparison pages", description: "Jump into the largest pricing gaps and quickest savings wins." },
@@ -67,20 +69,20 @@ export function BestAiTools() {
   return (
     <div className="bg-white">
       <PageSeo
-        title="Best AI Tools 2025: Cheapest Models Compared | OverpayingForAI"
-        description="The definitive guide to the best AI tools in 2025. Compare pricing, quality, and use cases across OpenAI, Anthropic, Google, DeepSeek, and more — and stop overpaying."
+        title={`Best AI Tools ${CURRENT_YEAR}: Cheapest Models Compared | OverpayingForAI`}
+        description={`The definitive guide to the best AI tools in ${CURRENT_YEAR}. Compare pricing, quality, and use cases across OpenAI, Anthropic, Google, DeepSeek, and more — and stop overpaying.`}
         canonicalUrl="/best"
       />
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section className="border-b border-border bg-slate-900 text-white py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Best of 2025</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Best of {CURRENT_YEAR}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5 leading-tight">
             The best AI tools — without the overpaying
           </h1>
           <p className="text-white/65 text-base max-w-2xl leading-relaxed mb-8">
-            There are hundreds of AI tools available in 2025. Most people are using the wrong one for their
+            There are hundreds of AI tools available today. Most people are using the wrong one for their
             budget. This guide covers the best AI tools by category, use case, and price — backed by real
             token-cost data, not marketing claims.
           </p>
@@ -162,7 +164,7 @@ export function BestAiTools() {
       <section className="border-b border-border bg-slate-50 py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Price leaders</p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">The cheapest capable AI models in 2025</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">The cheapest capable AI models in {CURRENT_YEAR}</h2>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl leading-relaxed">
             These models deliver strong results at a fraction of the cost of flagship models like GPT-4o or
             Claude 3.5 Sonnet. For most everyday tasks, the quality gap is negligible — but the price gap is huge.
@@ -300,7 +302,7 @@ export function BestAiTools() {
                 <div>
                   <h3 className="font-bold text-foreground text-sm mb-1.5">Re-evaluate quarterly</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    AI pricing moves fast. GPT-4o dropped 50% in price in early 2025. Models that were
+                    AI pricing moves fast. GPT-4o dropped 50% in price in recent months. Models that were
                     expensive six months ago may now be among the cheapest. Follow this site's{" "}
                     <Link href="/changelog" className="text-primary font-medium hover:underline">pricing changelog</Link>{" "}
                     or check back regularly to catch price drops.
@@ -369,9 +371,9 @@ export function BestAiTools() {
       <SeoContentBlock
         audience="Developers, content teams, startups, and anyone using AI tools who suspects they're paying too much. This guide is especially useful if you're choosing between ChatGPT Plus, Claude Pro, Gemini Advanced, or direct API access."
         notFor="Enterprise buyers requiring SSO, compliance certifications, or dedicated support SLAs should evaluate vendor contracts directly. This guide focuses on self-serve pricing for individuals and small teams."
-        pricingInsight="The AI pricing landscape shifted dramatically in 2024–2025. GPT-4o dropped 50% in price, DeepSeek released models at a fraction of Western AI pricing, and Google's Gemini Flash became the fastest cheap option. The result: many users are paying for premium models they no longer need."
+        pricingInsight="The AI pricing landscape has shifted dramatically over the past two years. GPT-4o dropped 50% in price, DeepSeek released models at a fraction of Western AI pricing, and Google's Gemini Flash became the fastest cheap option. The result: many users are paying for premium models they no longer need."
         alternatives="If none of the models here suit your needs, also consider: Mistral (strong for European data compliance), Llama 3.3 via Groq (fast and cheap open-source), or Perplexity for search-augmented tasks. Use the decision engine to get a personalised recommendation."
-        verdict="The best AI tool in 2025 is the cheapest one that meets your quality bar. Most users can save 50–80% by switching from a default flagship model to a smarter, cheaper alternative — without any noticeable quality drop. Start with the calculator, then check the category pages."
+        verdict="The best AI tool today is the cheapest one that meets your quality bar. Most users can save 50–80% by switching from a default flagship model to a smarter, cheaper alternative — without any noticeable quality drop. Start with the calculator, then check the category pages."
       />
 
       <section className="py-12 border-t border-border">

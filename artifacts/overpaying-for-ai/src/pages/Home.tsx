@@ -145,7 +145,7 @@ export function Home() {
           <div className="flex items-center gap-2 mb-8">
             <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
-              20 models tracked · Updated April 2025
+              20 models tracked · Regularly updated
             </span>
           </div>
 

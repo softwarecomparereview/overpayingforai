@@ -154,6 +154,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
               <span className="mx-2">·</span>
               <Link href="/media-kit" className="hover:text-foreground transition-colors">Media Kit</Link>
+              <span className="mx-2">·</span>
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
             </p>
             <p>© 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by <a href="https://www.linkedin.com/in/aniruddhpanvalkar" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Aniruddh</a></p>
             <p>All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.</p>
