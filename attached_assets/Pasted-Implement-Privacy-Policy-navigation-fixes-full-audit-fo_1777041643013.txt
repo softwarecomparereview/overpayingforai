@@ -1,0 +1,155 @@
+Implement Privacy Policy + navigation fixes + full audit for overpayingforai.com.
+
+TASK 1 — Add Privacy Policy page
+Create route: /privacy-policy
+
+Page title:
+Privacy Policy
+
+Meta title:
+Privacy Policy | OverpayingForAI
+
+Meta description:
+Read the OverpayingForAI Privacy Policy, including how we handle analytics, contact emails, affiliate links, and website usage data.
+
+Content requirements:
+- H1: Privacy Policy
+- Short intro: OverpayingForAI helps users avoid overpaying for AI tools through pricing clarity, comparisons, calculators, and decision support.
+- Sections:
+  1. Information we collect
+     - Basic website analytics
+     - Contact form/email information if users contact us
+     - Affiliate click data where applicable
+  2. How we use information
+     - Improve site content
+     - Understand which pages are useful
+     - Respond to enquiries
+     - Track affiliate or outbound clicks
+  3. Analytics
+     - State that analytics tools may collect aggregated usage data
+  4. Affiliate links
+     - State that some links may be affiliate/referral links
+  5. Cookies
+     - State that cookies or similar technologies may be used for analytics and site improvement
+  6. Data sharing
+     - Do not sell personal information
+     - Data may be shared with service providers such as analytics or affiliate platforms
+  7. Contact
+     - contact@overpayingforai.com as a mailto link
+  8. Updates
+     - Policy may be updated as the site evolves
+
+Use a "Last updated" line near the top using the current date or a static date.
+
+Keep styling consistent with Terms.tsx, Contact.tsx, About.tsx, and AffiliateDisclosure.tsx.
+
+TASK 2 — Footer link order and positioning
+Update footer navigation in Layout.tsx.
+
+Footer order should be:
+Contact · About · Media Kit · Affiliate Disclosure · Privacy Policy · Terms of Service
+
+Requirements:
+- Footer links visible sitewide
+- Footer links work on desktop and mobile
+- Keep spacing clean and readable
+- Do not crowd mobile footer; allow wrapping if needed
+- Use consistent link styling
+
+TASK 3 — Add Contact to top navigation
+Add Contact to the main top navigation.
+
+Suggested top nav order:
+Best Tools · Compare · Pricing · Calculator · Media Kit · Contact
+
+Requirements:
+- Contact links to /contact
+- Works in desktop nav
+- Works in mobile nav / hamburger menu if present
+- Do not remove existing nav items
+
+TASK 4 — Fix scroll-to-top issue on route changes
+Currently clicking bottom footer links does not auto-scroll to top.
+
+Implement a route-change scroll reset.
+
+Preferred implementation:
+Create a ScrollToTop component using react-router location:
+
+- Listen to pathname changes
+- Run window.scrollTo({ top: 0, left: 0, behavior: "instant" }) or window.scrollTo(0, 0)
+- Mount it inside the Router/App layout so all route changes scroll to top
+
+Make sure:
+- Footer link clicks scroll to top
+- Header link clicks scroll to top
+- Internal route navigation scrolls to top
+- Do not break anchor links if any exist
+
+TASK 5 — Sitemap
+Update public/sitemap.xml.
+
+Add:
+/privacy-policy
+
+Use:
+changefreq: monthly
+priority: 0.4
+
+Confirm existing utility pages are present:
+- /contact
+- /about
+- /media-kit
+- /affiliate-disclosure
+- /privacy-policy
+- /terms
+
+TASK 6 — Full web + mobile audit
+After implementation, run a full site audit using Playwright.
+
+Audit requirements:
+- Test desktop viewport: 1440x900
+- Test mobile viewport: 390x844
+- Visit all sitemap URLs
+- Capture screenshots for every page in both desktop and mobile
+- Check for:
+  - broken routes
+  - blank pages
+  - horizontal overflow on mobile
+  - footer visibility
+  - top nav visibility
+  - mobile menu functionality
+  - Contact link in header
+  - footer utility links
+  - route changes scroll to top
+  - missing H1
+  - missing title/meta description where detectable
+  - console errors
+  - obvious layout breakage
+  - CTA/link clickability
+
+Output audit files into:
+out/audits/latest/
+
+Create:
+1. out/audits/latest/audit-summary.md
+2. out/audits/latest/audit-results.json
+3. out/audits/latest/screenshots/desktop/
+4. out/audits/latest/screenshots/mobile/
+
+audit-summary.md should include:
+- total pages tested
+- desktop pass/fail summary
+- mobile pass/fail summary
+- route/link issues
+- scroll-to-top result
+- footer result
+- header nav result
+- top 10 issues by priority
+- recommended fixes
+
+Important:
+- Do not modify unrelated business logic.
+- Do not rewrite existing page content unless required for consistency.
+- Keep changes small, clean, and mergeable.
+- After completing, show exact files changed.

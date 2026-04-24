@@ -7,6 +7,7 @@ const navLinks = [
   { href: "/compare", label: "Comparisons" },
   { href: "/ai-types", label: "AI Types" },
   { href: "/resources", label: "Resources" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -150,7 +151,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground/75 leading-relaxed text-center sm:text-left">
-            <p className="mb-2">
+            <p className="mb-2 flex flex-wrap gap-x-0 gap-y-1">
               <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
               <span className="mx-2">·</span>
               <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
@@ -158,6 +159,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/media-kit" className="hover:text-foreground transition-colors">Media Kit</Link>
               <span className="mx-2">·</span>
               <Link href="/affiliate-disclosure" className="hover:text-foreground transition-colors">Affiliate Disclosure</Link>
+              <span className="mx-2">·</span>
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
               <span className="mx-2">·</span>
               <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
             </p>

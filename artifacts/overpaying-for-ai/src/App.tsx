@@ -31,6 +31,7 @@ import { MediaKit } from "@/pages/MediaKit";
 import { Contact } from "@/pages/Contact";
 import { About } from "@/pages/About";
 import { AffiliateDisclosure } from "@/pages/AffiliateDisclosure";
+import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -49,6 +50,14 @@ function PageViewTracker() {
   return null;
 }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, [location]);
+  return null;
+}
+
 function CalculatorRedirect() {
   const [, setLocation] = useLocation();
   useEffect(() => { setLocation("/calculator"); }, [setLocation]);
@@ -59,6 +68,7 @@ function Router() {
   return (
     <>
       <PageViewTracker />
+      <ScrollToTop />
       <Switch>
         <Route path="/admin/pricing-refresh" component={PricingRefreshPage} />
         <Route path="/admin/affiliates" component={AffiliatesAdminPage} />
@@ -97,6 +107,7 @@ function Router() {
                 <Route path="/contact" component={Contact} />
                 <Route path="/about" component={About} />
                 <Route path="/affiliate-disclosure" component={AffiliateDisclosure} />
+                <Route path="/privacy-policy" component={PrivacyPolicy} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
