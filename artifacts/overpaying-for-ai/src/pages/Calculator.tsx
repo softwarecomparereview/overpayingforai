@@ -102,7 +102,7 @@ export function Calculator() {
       savings_percent: result.cheaperAlternatives[0]?.savingsPercent ?? 0,
       calculation_index: calculationCountRef.current,
     };
-    trackDecisionEvent("calculator_completed", completePayload);
+    trackDecisionEvent("calculator_complete", completePayload);
     track("calculator_complete", completePayload);
     debugFunnelLog("calculator", "calculator_complete", completePayload);
   }, [result]);
@@ -129,17 +129,10 @@ export function Calculator() {
     setModelId(scenario.inputs.modelId);
     setInputTokens(scenario.inputs.monthlyInputTokens);
     setOutputTokens(scenario.inputs.monthlyOutputTokens);
-    if (typeof window !== "undefined") {
-      const analytics = (
-        window as typeof window & {
-          analytics?: { track?: (event: string, props?: Record<string, unknown>) => void };
-        }
-      ).analytics;
-      analytics?.track?.("scenario_selected", {
-        scenarioId: scenario.id,
-        scenarioName: scenario.name,
-      });
-    }
+    track("scenario_selected", {
+      scenarioId: scenario.id,
+      scenarioName: scenario.name,
+    });
   };
 
   useEffect(() => {
@@ -177,7 +170,7 @@ export function Calculator() {
       has_cheaper_alternative: Boolean(result.cheaperAlternatives.length),
       calculation_index: calculationCountRef.current,
     };
-    trackDecisionEvent("calculator_results_viewed", viewPayload);
+    trackDecisionEvent("recommendation_result_view", viewPayload);
     track("calculator_result_view", viewPayload);
     debugFunnelLog("calculator", "calculator_result_view", viewPayload);
   }, [result, inputTokens, outputTokens]);
@@ -201,18 +194,35 @@ export function Calculator() {
   // viable API plan for these inputs against the cheapest subscription plan.
   // This produces deterministic, input-driven copy on every render.
   const allModels = models;
+  const isSubscriptionSelected = selectedModel?.planType === "subscription";
+
+  // Exclude the currently-selected model so it never appears as its own alternative.
+  // Only include paid API models — free-tier API models are already the cheapest and
+  // should not inflate savings estimates.
   const apiCandidates = allModels
-    .filter((m) => m.planType === "api")
+    .filter((m) => m.planType === "api" && m.id !== modelId)
     .map((m) => {
       const inputCost = (inputTokens / 1000) * m.inputCostPer1k;
       const outputCost = (outputTokens / 1000) * m.outputCostPer1k;
       return { model: m, monthlyCost: inputCost + outputCost };
     })
     .sort((a, b) => a.monthlyCost - b.monthlyCost);
+
+  // Only AI model subscriptions (chat/research/coding) that support real API-equivalent
+  // usage. Exclude writing-tool subscriptions (Rytr, Jasper, Writesonic, Copy.ai) and
+  // coding IDE subscriptions (Cursor, Copilot) — these are categorically different
+  // products and should never win an API-vs-subscription cost race for LLM users.
   const subCandidates = allModels
-    .filter((m) => m.planType === "subscription" && (m.monthlySubscriptionCostIfAny ?? 0) > 0)
+    .filter(
+      (m) =>
+        m.planType === "subscription" &&
+        (m.monthlySubscriptionCostIfAny ?? 0) > 0 &&
+        m.supportsApiUsage !== false &&
+        m.id !== modelId,
+    )
     .map((m) => ({ model: m, monthlyCost: m.monthlySubscriptionCostIfAny ?? 0 }))
     .sort((a, b) => a.monthlyCost - b.monthlyCost);
+
   const cheapestApi = apiCandidates[0] ?? null;
   const cheapestSub = subCandidates[0] ?? null;
   const verdict: "API" | "subscription" =
@@ -224,14 +234,22 @@ export function Calculator() {
           ? "API"
           : "subscription";
   const verdictWinner = verdict === "API" ? cheapestApi : cheapestSub;
+
+  // If the user selected a subscription plan, note that the comparison is
+  // between their subscription cost and API pricing — different purchase intents.
+  const subscriptionConflationNote =
+    isSubscriptionSelected
+      ? ` Note: your selection is a flat subscription — switching to API requires technical integration and may not suit a no-code workflow.`
+      : "";
+
   const verdictRationale =
     verdict === "API"
       ? cheapestApi && cheapestSub
-        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, paying per-token on ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo) is cheaper than the cheapest flat subscription, ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo).`
-        : `At this usage level, an API/per-token plan is the cheapest path.`
+        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, paying per-token on ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo) is cheaper than the cheapest flat subscription, ${cheapestSub.model.name} (${formatCost(cheapestSub.monthlyCost)}/mo).${subscriptionConflationNote}`
+        : `At this usage level, an API/per-token plan is the cheapest path.${subscriptionConflationNote}`
       : cheapestApi && cheapestSub
-        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, the flat ${cheapestSub.model.name} subscription (${formatCost(cheapestSub.monthlyCost)}/mo) beats the cheapest API option, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).`
-        : `At this usage level, a flat subscription is the cheapest path.`;
+        ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, the flat ${cheapestSub.model.name} subscription (${formatCost(cheapestSub.monthlyCost)}/mo) beats the cheapest API option, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).${subscriptionConflationNote}`
+        : `At this usage level, a flat subscription is the cheapest path.${subscriptionConflationNote}`;
 
   // Build the semantic options list: cheapest API + cheapest subscription +
   // up to 2 of the cheaper alternatives we already computed for the selected model.

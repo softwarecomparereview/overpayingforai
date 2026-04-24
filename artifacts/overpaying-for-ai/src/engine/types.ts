@@ -1,3 +1,12 @@
+export type ModelCategory =
+  | "chat"
+  | "api"
+  | "writing"
+  | "coding"
+  | "image"
+  | "productivity"
+  | "research";
+
 export interface AIModel {
   id: string;
   name: string;
@@ -14,6 +23,9 @@ export interface AIModel {
   notes: string;
   source?: string;
   last_updated?: string;
+  category?: ModelCategory;
+  supportsApiUsage?: boolean;
+  freeTierLimitDescription?: string;
 }
 
 export interface CalculatorInputs {

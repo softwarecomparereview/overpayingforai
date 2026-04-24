@@ -2,61 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://overpayingforai.com/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://overpayingforai.com/best</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://overpayingforai.com/calculator</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://overpayingforai.com/ai-types</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://overpayingforai.com/calculator/ai-savings-calculator</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/best</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Priority compare pages -->
+  <url>
+    <loc>https://overpayingforai.com/compare/chatgpt-vs-claude</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/compare/chatgpt-vs-gemini</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/compare/claude-vs-gemini</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Pricing pages -->
+  <url>
+    <loc>https://overpayingforai.com/pricing/chatgpt-pricing</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/pricing/claude-pricing</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/pricing/gemini-pricing</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Worth it pages -->
+  <url>
+    <loc>https://overpayingforai.com/worth-it/is-chatgpt-plus-worth-it</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://overpayingforai.com/ai-types/general-ai</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://overpayingforai.com/worth-it/which-ai-subscription-is-worth-paying-for</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Alternatives pages -->
   <url>
-    <loc>https://overpayingforai.com/ai-types/coding-ai</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://overpayingforai.com/alternatives/best-chatgpt-alternatives</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Compare index + existing comparison pages -->
   <url>
-    <loc>https://overpayingforai.com/ai-types/writing-ai</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://overpayingforai.com/ai-types/research-ai</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://overpayingforai.com/ai-types/customer-support-ai</loc>
-    <lastmod>2026-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://overpayingforai.com/ai-types/productivity-ai</loc>
-    <lastmod>2026-04-11</lastmod>
+    <loc>https://overpayingforai.com/compare</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -85,6 +114,80 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://overpayingforai.com/compare/gemini-vs-gpt4o-cost</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/compare/deepseek-vs-gpt4o-cost</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/compare/claude-vs-gemini-cost</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/compare/mistral-vs-gpt4o-cost</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- AI Types -->
+  <url>
+    <loc>https://overpayingforai.com/ai-types</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/general-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/coding-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/writing-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/research-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/customer-support-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/ai-types/productivity-ai</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Guides -->
+  <url>
+    <loc>https://overpayingforai.com/guides</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://overpayingforai.com/guides/cheapest-ai-content-workflow</loc>
     <lastmod>2026-04-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -104,6 +207,37 @@
   </url>
   <url>
     <loc>https://overpayingforai.com/guides/is-jasper-worth-it</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/guides/when-to-use-api-vs-subscription</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/guides/how-to-reduce-ai-cost</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/guides/token-cost-explained</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Other core pages -->
+  <url>
+    <loc>https://overpayingforai.com/decision-engine</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overpayingforai.com/models</loc>
     <lastmod>2026-04-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

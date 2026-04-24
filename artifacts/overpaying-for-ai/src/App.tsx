@@ -18,6 +18,9 @@ import { AuditRunnerPage } from "@/pages/admin/AuditRunnerPage";
 import { Design1 } from "@/pages/Design1";
 import { Design2 } from "@/pages/Design2";
 import { Design3 } from "@/pages/Design3";
+import { PricingPage } from "@/pages/PricingPage";
+import { WorthItPage } from "@/pages/WorthItPage";
+import { AlternativesPage } from "@/pages/AlternativesPage";
 import { ResourcesHub } from "@/pages/ResourcesHub";
 import { ChangelogPage } from "@/pages/ChangelogPage";
 import { PricingChangelogPage } from "@/pages/PricingChangelogPage";
@@ -40,6 +43,12 @@ function PageViewTracker() {
   useEffect(() => {
     trackPageView(location);
   }, [location]);
+  return null;
+}
+
+function CalculatorRedirect() {
+  const [, setLocation] = useLocation();
+  useEffect(() => { setLocation("/calculator"); }, [setLocation]);
   return null;
 }
 
@@ -74,6 +83,10 @@ function Router() {
                 <Route path="/models" component={ModelsPage} />
                 <Route path="/best" component={BestAiTools} />
                 <Route path="/best/:slug" component={BestPage} />
+                <Route path="/pricing/:slug" component={PricingPage} />
+                <Route path="/worth-it/:slug" component={WorthItPage} />
+                <Route path="/alternatives/:slug" component={AlternativesPage} />
+                <Route path="/calculator/ai-savings-calculator" component={CalculatorRedirect} />
                 <Route path="/guides" component={GuideIndex} />
                 <Route path="/guides/:slug" component={GuidePage} />
                 <Route path="/terms" component={Terms} />

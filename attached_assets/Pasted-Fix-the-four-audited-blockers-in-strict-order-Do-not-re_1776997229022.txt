@@ -1,0 +1,149 @@
+Fix the four audited blockers in strict order. Do not redesign. Do not add unrelated pages.
+
+OBJECTIVE
+Make overpayingforai.com commercially valid by fixing:
+1. calculator credibility
+2. real priority pages/routes
+3. page metadata + sitemap
+4. analytics integrity
+
+SOURCE OF TRUTH
+Use the latest audit files in /out/audits/:
+- latest-commercial-audit.md
+- latest-commercial-fix-priority.md
+- latest-commercial-event-map.md
+
+PART 1 — FIX CALCULATOR CREDIBILITY
+
+Find the calculator/recommendation logic.
+
+Fix these trust-breaking bugs:
+- Free plans must not automatically win just because price is $0.
+- Free tiers must be excluded or downgraded when the user’s usage exceeds realistic free-tier limits.
+- Writing tools like Rytr must never be recommended for API-heavy/model-token users.
+- Tool recommendations must match user intent/category.
+
+Add or enforce these fields in tool/plan data if missing:
+- category: chat | api | writing | coding | image | productivity
+- supportsApiUsage: boolean
+- supportsTokenUsage: boolean
+- freeTierLimitDescription
+- minViableUsageThreshold
+- recommendedUseCases
+
+Recommendation rules:
+- If user scenario is API/token-heavy, only consider API-capable/model providers.
+- If user scenario is writing/marketing, writing tools may be considered.
+- If plan price is 0, it can be shown as “free option” but cannot be the primary paid alternative unless usage is within the free-tier threshold.
+- If free tier is insufficient, show: “Free tier likely insufficient for this usage.”
+- Never show “100% savings” as the main result unless it is genuinely valid and usage-compatible.
+
+Add tests or scenario checks for:
+- low usage individual
+- high usage individual
+- 50M token API user
+- freelancer
+- marketer
+- developer
+- agency/team
+- budget user
+- undecided buyer
+- ChatGPT Plus user comparing alternatives
+
+Output should include:
+- recommendation
+- rationale
+- category match reason
+- savings estimate if credible
+- warning if estimate is not apples-to-apples
+
+PART 2 — CREATE REAL PRIORITY PAGES
+
+Create real pages/routes for these 10 URLs:
+
+/compare/chatgpt-vs-claude
+/pricing/chatgpt-pricing
+/pricing/claude-pricing
+/alternatives/best-chatgpt-alternatives
+/worth-it/is-chatgpt-plus-worth-it
+/pricing/gemini-pricing
+/compare/chatgpt-vs-gemini
+/compare/claude-vs-gemini
+/worth-it/which-ai-subscription-is-worth-paying-for
+/calculator/ai-savings-calculator
+
+Each page must:
+- render real content, not NotFound or “Comparison not found”
+- have a unique H1
+- have useful above-the-fold copy
+- include pricing/value decision content
+- include “who this is for / not for”
+- include internal links to related priority pages
+- include a primary CTA
+- include a fallback CTA to calculator, alternatives, or comparison page
+
+Do not invent precise live pricing if the data is not already present. Use conservative language and existing project data. If pricing is uncertain, say “check current provider pricing before buying”.
+
+PART 3 — FIX METADATA + SITEMAP
+
+For every priority page:
+- unique <title>
+- unique meta description
+- canonical URL
+- Open Graph title/description if SEO component supports it
+
+Fix raw/static HTML metadata as much as possible for crawlers. If the app is Vite/React SPA, implement route-level metadata using the existing SEO/PageSeo system and ensure prerender/static generation if already available. Do not introduce a heavy framework migration.
+
+Update sitemap.xml to include all 10 priority URLs.
+
+Verify robots.txt does not block them.
+
+PART 4 — FIX ANALYTICS INTEGRITY
+
+Inspect current event tracking.
+
+Fix duplicate calculator events:
+- Keep only: calculator_complete
+- Remove/replace: calculator_completed
+
+Ensure these events fire consistently:
+- primary_cta_click
+- comparison_cta_click
+- affiliate_click
+- outbound_click
+- calculator_start
+- calculator_complete
+- recommendation_result_view
+
+Add event payloads where useful:
+- page_path
+- page_type
+- cta_label
+- tool_name
+- recommendation_id
+- scenario_type
+
+Remove dead allowlisted events or wire them properly. Do not keep fake events that never fire.
+
+PART 5 — VALIDATION OUTPUT
+
+After changes, create:
+
+/out/audits/four-blocker-fix-summary.md
+
+Include:
+- files changed
+- calculator logic changes
+- priority pages created/fixed
+- sitemap/metadata changes
+- analytics event changes
+- scenarios tested
+- remaining known risks
+
+Also run whatever local validation is available:
+- npm test if present
+- npm run build
+- sitemap check if script exists
+- Playwright audit if available
+
+Do not stop after partial fixes unless blocked by missing files. If blocked, document exact blocker and best partial fix.
