@@ -2,8 +2,10 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminNav } from "@/components/admin/AdminNav";
 
+import { getAdminApiBase } from "@/utils/adminApi";
+
 const ADMIN_KEY_HEADER = "refresh";
-const BASE = "/admin-api/api/admin/audit";
+const BASE = `${getAdminApiBase()}/api/admin/audit`;
 
 type RunStatus = "running" | "complete" | "failed" | "unknown";
 type AuditMode = "quick" | "full";

@@ -19,18 +19,16 @@
 
 import type { AIModel } from "@/engine/types";
 import type { ProviderFetchResult } from "./types";
+import { getAdminApiBase } from "@/utils/adminApi";
 
 // ── Configuration ─────────────────────────────────────────────────────────────
 
 /**
- * Calls the Vite dev-server proxy at /admin-api, which forwards to the API
- * server at localhost:8080 server-side. This avoids CORS issues and means the
- * browser never has to reach localhost:8080 directly (which would fail in the
- * Replit preview environment).
- *
- * Proxy config: vite.config.ts → server.proxy["/admin-api"]
+ * In dev: calls via the Vite proxy at /admin-api → localhost:8080.
+ * In production: calls the deployed Replit API server URL directly
+ * (configured via VITE_API_SERVER_URL in Cloudflare Pages env vars).
  */
-const PROXY_ENDPOINT = "/admin-api/api/admin/artificial-analysis-pricing";
+const PROXY_ENDPOINT = `${getAdminApiBase()}/api/admin/artificial-analysis-pricing`;
 const AA_SOURCE_URL = "https://artificialanalysis.ai/models";
 
 // ── Fetch ──────────────────────────────────────────────────────────────────────

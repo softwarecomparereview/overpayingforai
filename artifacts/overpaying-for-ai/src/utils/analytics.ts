@@ -13,23 +13,26 @@ import { trackCtaClickGa, trackGaEvent, type Ga4CtaParams } from "@/utils/ga4";
 type AnalyticsPayload = Record<string, unknown>;
 
 const ALLOWED_EVENTS = new Set([
-  "calculator_started",
+  // Calculator funnel
   "scenario_selected",
-  "calculator_completed",
-  "decision_engine_completed",
-  "section_nav_clicked",
-  "card_clicked",
-  "overpaying_cta_clicked",
-  "calculator_used",
-  "report_generated",
-  "lead_capture_clicked",
-  "lead_capture_submitted",
+  "calculator_start",
+  "calculator_complete",
+  "calculator_result_view",
+  "calculator_recommendation_click",
+  "calculator_secondary_cta_click",
+  // Decision engine funnel
+  "decision_engine_complete",
+  "decision_result_view",
+  "decision_recommendation_click",
+  "decision_restart_click",
+  // CTA / affiliate
   "affiliate_clicked",
+  "primary_cta_click",
+  "outbound_click",
+  // SEO pages
   "seo_page_viewed",
   "seo_cta_clicked",
-  "pricing_refresh_started",
-  "pricing_diff_reviewed",
-  "pricing_refresh_approved",
+  // Models page
   "page_view_models",
   "models_primary_cta_click",
   "models_secondary_cta_click",
@@ -37,16 +40,10 @@ const ALLOWED_EVENTS = new Set([
   "models_table_action_click",
   "models_category_winner_click",
   "models_final_cta_click",
-  "calculator_start",
-  "calculator_complete",
-  "calculator_result_view",
-  "calculator_recommendation_click",
-  "calculator_secondary_cta_click",
-  "decision_engine_start",
-  "decision_engine_complete",
-  "decision_result_view",
-  "decision_recommendation_click",
-  "decision_restart_click",
+  // Admin / internal
+  "pricing_refresh_started",
+  "pricing_diff_reviewed",
+  "pricing_refresh_approved",
 ]);
 
 /**
@@ -65,20 +62,22 @@ export function debugFunnelLog(group: "models" | "calculator" | "decision_engine
 }
 
 /**
- * GA4 events that should drive decision-making dashboards and conversion review.
- * Key events are the ones to mark as conversions in GA4 UI.
+ * GA4 key events that drive decision-making dashboards and conversion review.
+ * Mark these as conversions in the GA4 UI.
  */
 export const GA4_DECISION_EVENT_CHECKLIST = {
   keyEvents: [
     "affiliate_click",
-    "calculator_completed",
-    "calculator_results_viewed",
-    "decision_engine_completed",
+    "calculator_complete",
+    "recommendation_result_view",
+    "decision_engine_complete",
   ] as const,
   supportingEvents: [
     "calculator_open",
     "decision_engine_open",
-    "compare_cta_click",
+    "comparison_cta_click",
+    "primary_cta_click",
+    "outbound_click",
   ] as const,
 } as const;
 
@@ -114,16 +113,17 @@ export interface CtaTrackingParams {
  * Unified CTA/affiliate click tracker.
  *
  * Fires:
- * 1. Internal "affiliate_clicked" event (existing Segment-style tracking)
+ * 1. Internal "affiliate_clicked" event (Segment-style tracking)
  * 2. GA4 "affiliate_click" event via ga4.ts
+ * 3. When ctaType is "primary", also fires internal "primary_cta_click"
+ *    and GA4 "primary_cta_click" for dashboard isolation.
  *
  * Call this once per CTA click. Do NOT also call track() or trackCtaClickGa() separately.
  */
 export function trackCta(params: CtaTrackingParams): void {
   const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
 
-  // 1. Internal event (existing allowlist)
-  track("affiliate_clicked", {
+  const payload = {
     providerId: params.providerId,
     providerName: params.providerName,
     ctaLabel: params.ctaLabel,
@@ -134,9 +134,12 @@ export function trackCta(params: CtaTrackingParams): void {
     destinationUrl: params.destinationUrl,
     isExternal: params.isExternal,
     pagePath,
-  });
+  };
 
-  // 2. GA4 event
+  // 1. Internal event
+  track("affiliate_clicked", payload);
+
+  // 2. GA4 affiliate_click event
   const ga4Params: Ga4CtaParams = {
     providerId: params.providerId,
     providerName: params.providerName,
@@ -150,6 +153,19 @@ export function trackCta(params: CtaTrackingParams): void {
     isExternal: params.isExternal,
   };
   trackCtaClickGa(ga4Params);
+
+  // 3. Separate primary_cta_click event for isolated funnel analysis
+  if (params.ctaType === "primary") {
+    track("primary_cta_click", payload);
+    trackGaEvent("primary_cta_click", {
+      provider_id: params.providerId,
+      cta_label: params.ctaLabel,
+      page_type: params.pageType ?? "unknown",
+      page_path: pagePath,
+      source_component: params.sourceComponent ?? "unknown",
+      destination_url: params.destinationUrl,
+    });
+  }
 }
 
 export interface FeatureOpenTrackingContext {
@@ -185,21 +201,21 @@ export function trackFeatureOpen(
  */
 export function trackDecisionEvent(
   eventName:
-    | "calculator_completed"
-    | "calculator_results_viewed"
-    | "decision_engine_completed",
+    | "calculator_complete"
+    | "recommendation_result_view"
+    | "decision_engine_complete",
   params: AnalyticsPayload = {},
 ): void {
   trackGaEvent(eventName, params);
-  if (eventName === "calculator_completed" || eventName === "decision_engine_completed") {
+  if (eventName === "calculator_complete" || eventName === "decision_engine_complete") {
     track(eventName, params);
   }
   if (isDev) console.log("analytics", eventName, params);
 }
 
 /**
- * Track high-intent comparison internal CTA clicks (e.g. calculator links).
- * Keeps a stable GA4 event for compare-page funnel analysis.
+ * Track high-intent comparison internal CTA clicks (e.g. calculator links on compare pages).
+ * Fires GA4 event "comparison_cta_click" for funnel analysis.
  */
 export function trackCompareCtaClick(params: {
   sourceComponent: string;
@@ -208,7 +224,7 @@ export function trackCompareCtaClick(params: {
   comparisonSlug?: string;
 }): void {
   const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
-  trackGaEvent("compare_cta_click", {
+  trackGaEvent("comparison_cta_click", {
     page_type: "compare",
     page_path: pagePath,
     source_component: params.sourceComponent,
@@ -216,5 +232,33 @@ export function trackCompareCtaClick(params: {
     destination_path: params.destinationPath,
     comparison_slug: params.comparisonSlug,
   });
-  if (isDev) console.log("analytics", "compare_cta_click", params);
+  if (isDev) console.log("analytics", "comparison_cta_click", params);
+}
+
+/**
+ * Track outbound clicks to non-affiliate external links.
+ * Use this for "Verify with provider", external source links, etc.
+ */
+export function trackOutboundClick(params: {
+  url: string;
+  sourceComponent: string;
+  linkLabel?: string;
+  pageType?: string;
+}): void {
+  const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+  track("outbound_click", {
+    url: params.url,
+    sourceComponent: params.sourceComponent,
+    linkLabel: params.linkLabel,
+    pageType: params.pageType,
+    pagePath,
+  });
+  trackGaEvent("outbound_click", {
+    url: params.url,
+    source_component: params.sourceComponent,
+    link_label: params.linkLabel ?? "",
+    page_type: params.pageType ?? "unknown",
+    page_path: pagePath,
+  });
+  if (isDev) console.log("analytics", "outbound_click", params);
 }

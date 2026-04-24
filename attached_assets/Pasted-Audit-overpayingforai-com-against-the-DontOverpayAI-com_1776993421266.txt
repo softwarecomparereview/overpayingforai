@@ -1,0 +1,99 @@
+Audit overpayingforai.com against the DontOverpayAI commercial execution plan.
+
+Use the first 10 priority pages as the required baseline:
+1. /compare/chatgpt-vs-claude
+2. /pricing/chatgpt-pricing
+3. /pricing/claude-pricing
+4. /alternatives/best-chatgpt-alternatives
+5. /worth-it/is-chatgpt-plus-worth-it
+6. /pricing/gemini-pricing
+7. /compare/chatgpt-vs-gemini
+8. /compare/claude-vs-gemini
+9. /worth-it/which-ai-subscription-is-worth-paying-for
+10. /calculator/ai-savings-calculator
+
+Audit and produce a markdown report in /out/audits/latest-commercial-audit.md covering:
+
+A. Page existence
+- status code
+- title
+- meta description
+- canonical
+- h1
+- whether page is indexable
+- whether included in sitemap.xml
+- whether blocked by robots.txt
+
+B. Commercial page quality
+For each page, check:
+- clear above-the-fold value proposition
+- pricing clarity
+- comparison/value table if relevant
+- “who this is for / not for”
+- recommendation logic
+- internal links to adjacent pricing/comparison/alternative/calculator pages
+- primary CTA
+- affiliate/referral CTA if available
+- fallback CTA if no affiliate link exists
+
+C. Calculator and decision engine
+Test at least 20 scenarios:
+- solo founder
+- freelancer
+- developer
+- marketer
+- agency
+- small team
+- API-heavy user
+- low-budget user
+- high-usage user
+- undecided tool buyer
+
+For each scenario record:
+- input values
+- displayed recommendation
+- rationale
+- savings estimate
+- whether recommendation is credible
+- whether output repeats page heading or generic text
+- whether CTA matches result
+
+Flag any result that is gimmicky, repetitive, false, stale, or commercially weak.
+
+D. Analytics event audit
+Inspect codebase and rendered pages for:
+- page_view
+- outbound_click
+- affiliate_click
+- primary_cta_click
+- comparison_cta_click
+- calculator_start
+- calculator_complete
+- recommendation_result_view
+
+Report:
+- event name
+- trigger location
+- page types covered
+- missing coverage
+- duplicate/inconsistent names
+- recommended fix
+
+E. Output
+Create:
+1. /out/audits/latest-commercial-audit.md
+2. /out/audits/latest-commercial-fix-priority.md
+3. /out/audits/latest-commercial-event-map.md
+
+Prioritize fixes in this order:
+P0: trust-breaking pricing/calculator/decision errors
+P1: missing first-10 pages or broken indexability
+P2: missing CTAs / monetization path
+P3: weak internal linking
+P4: analytics gaps
+P5: copy/design polish
+
+Do not make broad redesign changes.
+Do not add new page ideas unless one of the first 10 is missing.
+Do not invent pricing claims.
+Focus on trust, monetization, SEO indexability, calculator credibility, and measurable CTA behavior.

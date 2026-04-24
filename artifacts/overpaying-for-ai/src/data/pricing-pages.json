@@ -1,0 +1,183 @@
+[
+  {
+    "slug": "chatgpt-pricing",
+    "toolName": "ChatGPT",
+    "provider": "OpenAI",
+    "providerId": "openai",
+    "title": "ChatGPT Pricing 2026: Free vs Plus vs API — What You Actually Pay",
+    "metaDescription": "ChatGPT pricing explained: Free tier limits, ChatGPT Plus at $20/month, and GPT-4o API costs. Find out which plan is worth it for your usage.",
+    "h1": "ChatGPT Pricing: Which Plan Is Worth It for Your Usage?",
+    "intro": "ChatGPT has three pricing tiers: a free plan with rate limits, a $20/month Plus subscription for heavy personal use, and pay-per-token API access for developers and teams. The right tier depends entirely on how much you use it — and what you're building.",
+    "plans": [
+      {
+        "name": "ChatGPT Free",
+        "price": "$0/month",
+        "description": "Limited access to GPT-4o with daily rate limits. Fine for casual, occasional use — not for daily heavy work.",
+        "bestFor": "Trying ChatGPT before committing, or for light use (a few prompts per day).",
+        "notFor": "Daily heavy use, long documents, or any workflow where you hit limits regularly."
+      },
+      {
+        "name": "ChatGPT Plus",
+        "price": "$20/month",
+        "description": "Unlimited GPT-4o access (fair-use), faster responses, image generation, advanced data analysis, and custom GPTs.",
+        "bestFor": "Daily users who consistently hit free-tier limits, need image tools, or use ChatGPT as their primary work assistant.",
+        "notFor": "Light users (free tier is fine) or developers building products (API is cheaper at scale)."
+      },
+      {
+        "name": "GPT-4o via API",
+        "price": "~$0.0025 per 1K input tokens, ~$0.01 per 1K output tokens",
+        "description": "Pay per token — no monthly subscription. You call the model directly from your code or integration.",
+        "bestFor": "Developers, teams, and anyone building AI-powered products where usage-based pricing is more cost-efficient than a flat subscription.",
+        "notFor": "Non-technical users who need a chat interface without building integrations."
+      }
+    ],
+    "pricingNote": "Pricing based on publicly available rates as of April 2026. Check current OpenAI pricing before subscribing.",
+    "verdictSection": {
+      "heading": "Which plan should you choose?",
+      "content": "Use the free tier first. If you hit rate limits more than 3 times per week, ChatGPT Plus is likely worth $20/month. If you're a developer, the API is almost always cheaper than Plus once you account for actual token usage — a typical developer workflow costs $2–$15/month via API vs $20/month flat for Plus."
+    },
+    "isWorthItLink": "/worth-it/is-chatgpt-plus-worth-it",
+    "alternativesLink": "/alternatives/best-chatgpt-alternatives",
+    "internalLinks": [
+      { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
+      { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
+      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
+      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ],
+    "faq": [
+      {
+        "q": "Is ChatGPT free to use?",
+        "a": "Yes — ChatGPT Free provides limited access to GPT-4o at no cost. There are daily rate limits, and heavy users will hit them regularly. For daily work use, ChatGPT Plus at $20/month removes most of those limits."
+      },
+      {
+        "q": "Is ChatGPT Plus worth $20/month?",
+        "a": "It depends on your usage. If you use ChatGPT daily for work and regularly hit the free tier's limits, Plus is worth it. If you use it a few times per week for simple tasks, the free tier is sufficient. See our full breakdown."
+      },
+      {
+        "q": "How much does GPT-4o API access cost?",
+        "a": "GPT-4o is priced at approximately $0.0025 per 1K input tokens and $0.01 per 1K output tokens via the API. A typical 500-word exchange costs less than $0.01. Check OpenAI's current pricing before building."
+      }
+    ]
+  },
+  {
+    "slug": "claude-pricing",
+    "toolName": "Claude",
+    "provider": "Anthropic",
+    "providerId": "anthropic",
+    "title": "Claude Pricing 2026: Free Tier, Claude Pro, and API Costs Explained",
+    "metaDescription": "Claude pricing breakdown: free tier limits, Claude Pro at $20/month, and Anthropic API costs per token. Find out which plan fits your usage and budget.",
+    "h1": "Claude Pricing: Free vs Pro vs API — Which Plan Makes Sense?",
+    "intro": "Claude by Anthropic has three access paths: a free tier through Claude.ai, a Claude Pro subscription at $20/month, and pay-per-token API access for developers. The right choice depends on your use case — casual chat, professional writing, or building AI applications.",
+    "plans": [
+      {
+        "name": "Claude Free",
+        "price": "$0/month",
+        "description": "Free access to Claude 3.5 Sonnet via Claude.ai with daily rate limits. Good for testing and occasional use.",
+        "bestFor": "Users who want to try Claude before committing, or who use it a few times per week for simple tasks.",
+        "notFor": "Daily intensive use — you will hit the rate limits. Long document analysis or production workflows need Pro or API."
+      },
+      {
+        "name": "Claude Pro",
+        "price": "$20/month",
+        "description": "Priority access to Claude 3.5 Sonnet and Opus with higher rate limits, a 200K context window, and Projects for persistent memory.",
+        "bestFor": "Writers, analysts, and researchers who use Claude daily for long documents, complex analysis, or detailed writing tasks.",
+        "notFor": "Light users (free tier is enough) or developers building at scale (API is cheaper for higher token volumes)."
+      },
+      {
+        "name": "Claude API (Anthropic API)",
+        "price": "~$0.003 per 1K input tokens, ~$0.015 per 1K output tokens (Claude 3.5 Sonnet)",
+        "description": "Pay-per-token access to Claude models. Cheaper for high-volume use and necessary for building applications.",
+        "bestFor": "Developers, teams building AI tools, and power users processing high volumes of text where per-token pricing beats a flat $20/month.",
+        "notFor": "Non-technical users who need a ready-made chat interface without coding."
+      }
+    ],
+    "pricingNote": "Pricing based on publicly available Anthropic rates as of April 2026. Check Anthropic's current pricing before subscribing.",
+    "verdictSection": {
+      "heading": "Which Claude plan is right for you?",
+      "content": "Start with the free tier. Claude.ai free gives you real Claude 3.5 Sonnet access. If you consistently need more context, longer sessions, or hit rate limits multiple times per week, Claude Pro at $20/month is fair value. Developers processing significant token volumes should calculate their actual monthly usage — the API is often cheaper than Pro above ~1M output tokens/month."
+    },
+    "isWorthItLink": "/worth-it/which-ai-subscription-is-worth-paying-for",
+    "alternativesLink": "/alternatives/best-chatgpt-alternatives",
+    "internalLinks": [
+      { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
+      { "text": "Claude vs Gemini", "href": "/compare/claude-vs-gemini" },
+      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ],
+    "faq": [
+      {
+        "q": "Is Claude free?",
+        "a": "Yes — Claude.ai offers a free tier with access to Claude 3.5 Sonnet. There are daily rate limits. Claude Pro at $20/month removes most limits and adds a 200K context window."
+      },
+      {
+        "q": "Is Claude Pro worth $20/month?",
+        "a": "For writers and researchers who use Claude daily for long documents, yes. For casual users, the free tier is sufficient. For developers, API access is usually cheaper once token volumes are significant."
+      },
+      {
+        "q": "How much does the Anthropic API cost?",
+        "a": "Claude 3.5 Sonnet via API is approximately $0.003 per 1K input tokens and $0.015 per 1K output tokens. Claude 3.5 Haiku is significantly cheaper. Check Anthropic's current pricing before building."
+      }
+    ]
+  },
+  {
+    "slug": "gemini-pricing",
+    "toolName": "Gemini",
+    "provider": "Google",
+    "providerId": "google",
+    "title": "Gemini Pricing 2026: Free, Gemini Advanced, and API Costs Explained",
+    "metaDescription": "Gemini pricing breakdown: free tier limits, Gemini Advanced via Google One at $20/month, and Google AI API costs. Find out what you're actually paying for.",
+    "h1": "Gemini Pricing: Which Google AI Plan Is Worth Paying For?",
+    "intro": "Google's Gemini AI comes in three forms: a free web app at Gemini.google.com, a premium Gemini Advanced subscription bundled with Google One, and the Gemini API for developers. Choosing the right tier depends on whether you use Google Workspace and how much you rely on AI daily.",
+    "plans": [
+      {
+        "name": "Gemini Free",
+        "price": "$0/month",
+        "description": "Free access to Gemini through the Gemini.google.com web app and Google mobile apps. Rate-limited for heavy use.",
+        "bestFor": "Casual use, trying Gemini before committing, or users who only need AI a few times per week.",
+        "notFor": "Daily heavy use or users who need AI integrated into Gmail, Docs, and Sheets — that requires Gemini Advanced."
+      },
+      {
+        "name": "Gemini Advanced (Google One AI Premium)",
+        "price": "$20/month",
+        "description": "Access to Gemini 1.5 Pro and Ultra, AI integration in Gmail, Google Docs, Sheets, and Meet, plus 2TB Google One storage.",
+        "bestFor": "Google Workspace users who want AI embedded in their existing tools. If you'd pay for 2TB Google storage anyway, the AI is effectively free.",
+        "notFor": "Users who don't use Google Workspace — you'd be paying for integrations you won't use. ChatGPT Plus or Claude Pro may be better standalone options."
+      },
+      {
+        "name": "Gemini API (Google AI Studio)",
+        "price": "Gemini 1.5 Flash: ~$0.000075 per 1K input tokens, ~$0.0003 per 1K output. Gemini 1.5 Pro: ~$0.00125 per 1K input tokens, ~$0.005 per 1K output.",
+        "description": "Pay-per-token access to Gemini models via the Google AI Studio API. Includes generous free tier quotas for development.",
+        "bestFor": "Developers, teams building AI applications, and high-volume workloads where Gemini 1.5 Flash's low price makes it an exceptionally cost-effective choice.",
+        "notFor": "Non-technical users who need a ready-made interface."
+      }
+    ],
+    "pricingNote": "Pricing based on publicly available Google rates as of April 2026. Check Google AI Studio pricing before building.",
+    "verdictSection": {
+      "heading": "Which Gemini plan should you choose?",
+      "content": "If you live in Google Workspace (Gmail, Docs, Sheets), Gemini Advanced at $20/month is likely worth it — especially if you'd pay for 2TB storage anyway. If you're a developer, Gemini 1.5 Flash via API is one of the cheapest capable models available (often under $1/month for moderate use). If you're a casual user, start with Gemini Free."
+    },
+    "isWorthItLink": "/worth-it/which-ai-subscription-is-worth-paying-for",
+    "alternativesLink": "/alternatives/best-chatgpt-alternatives",
+    "internalLinks": [
+      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
+      { "text": "Claude vs Gemini", "href": "/compare/claude-vs-gemini" },
+      { "text": "Which AI Subscription Is Worth It?", "href": "/worth-it/which-ai-subscription-is-worth-paying-for" },
+      { "text": "AI Cost Calculator", "href": "/calculator" }
+    ],
+    "faq": [
+      {
+        "q": "Is Gemini free to use?",
+        "a": "Yes — Gemini has a free tier at gemini.google.com with rate limits. Gemini Advanced ($20/month via Google One AI Premium) removes limits and adds Workspace integration."
+      },
+      {
+        "q": "Is Gemini Advanced worth $20/month?",
+        "a": "For Google Workspace users who also use Google One storage, yes — the AI is essentially bundled with storage you'd pay for anyway. For users who don't use Google's suite, ChatGPT Plus or Claude Pro may be better value."
+      },
+      {
+        "q": "How cheap is Gemini API pricing?",
+        "a": "Gemini 1.5 Flash is one of the cheapest capable AI models: approximately $0.000075 per 1K input tokens and $0.0003 per 1K output tokens. A typical moderate workload costs under $1/month. Check current Google AI Studio pricing."
+      }
+    ]
+  }
+]

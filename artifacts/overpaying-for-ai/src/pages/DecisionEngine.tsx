@@ -190,7 +190,7 @@ export function DecisionEngine() {
         recommended_tool: recommended.id,
         recommended_plan_type: recommended.planType,
       };
-      trackDecisionEvent("decision_engine_completed", completePayload);
+      trackDecisionEvent("decision_engine_complete", completePayload);
       track("decision_engine_complete", completePayload);
       debugFunnelLog("decision_engine", "decision_engine_complete", completePayload);
     }

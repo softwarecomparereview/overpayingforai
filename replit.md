@@ -27,13 +27,20 @@ Static-first React + Vite web app. No backend dependency.
 - `/` — Homepage with hero, comparisons, best lists, guides, FAQ
 - `/calculator` — Cost calculator (model × tokens → monthly estimate + cheaper alternatives)
 - `/decision-engine` — 5-step guided wizard → 3 ranked recommendations
-- `/compare/:slug` — 10 pre-seeded AI tool comparison pages
+- `/compare/:slug` — 13 comparison pages (includes chatgpt-vs-claude, chatgpt-vs-gemini, claude-vs-gemini)
+- `/pricing/:slug` — 3 pricing breakdown pages (chatgpt-pricing, claude-pricing, gemini-pricing)
+- `/worth-it/:slug` — 2 "is it worth it" pages
+- `/alternatives/:slug` — 1 alternatives guide (best-chatgpt-alternatives)
+- `/calculator/ai-savings-calculator` — redirects to `/calculator`
 - `/best/:slug` — 10 pre-seeded best-of lists
 - `/guides/:slug` — 10 pre-seeded practical guides
 
 **Data layer** (`src/data/`):
 - `models.json` — 20 AI models with pricing, quality, cost, latency scores
-- `comparisons.json` — 10 comparison pages (slug, content, FAQ, links)
+- `comparisons.json` — 13 comparison pages (slug, content, FAQ, links)
+- `pricing-pages.json` — 3 pricing breakdown pages (chatgpt, claude, gemini)
+- `worth-it-pages.json` — 2 "is it worth it" editorial pages
+- `alternatives-pages.json` — 1 alternatives guide
 - `best-of.json` — 10 best-of lists (picks, FAQs, links)
 - `guides.json` — 10 guides (sections, key takeaways, links)
 - `faqs.json` — 12 global FAQs
