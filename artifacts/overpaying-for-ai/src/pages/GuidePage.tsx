@@ -60,10 +60,11 @@ export function GuidePage() {
         <div className="flex items-center gap-3 mb-3">
           <span className="text-xs text-muted-foreground">{guide.readTime}</span>
           <span className="text-xs text-muted-foreground">·</span>
-          <span className="text-xs text-muted-foreground">Updated {guide.updatedAt}</span>
+          <span className="text-xs text-muted-foreground">Last reviewed for accuracy</span>
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-3">{guide.title}</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">{guide.description}</p>
+        <p className="text-xs text-muted-foreground/70 mt-2">This page is periodically reviewed to reflect current pricing and plan changes.</p>
       </div>
 
       {/* Early callout — fastest win or key recommendation, shown immediately after intro */}
