@@ -1,7 +1,18 @@
-# Pricing Audit Report — April 25, 2026
+# Pricing Audit Report
 
-**Scope:** All 44 entries in `models.json`, all 4 pages in `pricing-pages.json`, all 14 comparisons in `comparisons.json`.
-**Sources checked:** OpenAI, Anthropic, Google AI, Mistral, DeepSeek, xAI, Groq, Cohere, Cursor, Perplexity, Jasper, Rytr, Copy.ai, Writesonic (official pricing pages via live web search, April 2026).
+**Audit date:** 2026-04-25
+**Branch:** developphase2
+**Auditor:** automated pricing agent
+
+---
+
+## Files Inspected
+
+| File | Path |
+|---|---|
+| Model data | `artifacts/overpaying-for-ai/src/data/models.json` |
+| Comparison data | `artifacts/overpaying-for-ai/src/data/comparisons.json` |
+| Pricing page data | `artifacts/overpaying-for-ai/src/data/pricing-pages.json` |
 
 ---
 
@@ -9,25 +20,26 @@
 
 | Category | Count |
 |---|---|
-| Entries audited | 44 |
+| Total entries audited | 44 |
 | **Price corrections applied** | **5** |
-| Source updated to official URL | 24 |
-| Date refreshed (was stale 2025-04-01) | 33 |
-| Entries needing manual review | 7 |
-| Comparisons with stale price claims fixed | 6 |
-| Build result | ✅ Pass (typecheck + vite build) |
+| Sources updated to official provider URL | 24 |
+| `last_updated` dates refreshed to 2026-04-25 | 33 |
+| Comparisons with stale pricing claims fixed | 6 |
+| Entries flagged for manual review | 7 |
 
 ---
 
 ## Price Corrections Applied (`models.json`)
 
-| ID | Model | Stored Input/1M | Corrected Input/1M | Stored Output/1M | Corrected Output/1M | New costScore | Notes |
+| ID | Model | Stored Input/1M | Corrected Input/1M | Stored Output/1M | Corrected Output/1M | costScore change | Source |
 |---|---|---|---|---|---|---|---|
-| `deepseek-v3` | DeepSeek V3 | $0.40 | **$0.27** | $0.89 | **$1.10** | 65 (was 64) | Original V3 (Dec 2024) official pricing |
-| `deepseek-r1` | DeepSeek R1 | $1.35 | **$0.55** | $4.00 | **$2.19** | 60 (was 50) | R1 (Jan 2025) official pricing |
-| `mistral-large` | Mistral Large | $4.00 | **$0.50** | $12.00 | **$1.50** | 74 (was 40) | Mistral Large 3 (Dec 2025) — major drop |
-| `mistral-small` | Mistral Small | $0.20 | **$0.10** | $0.60 | **$0.30** | 85 (was 71) | Mistral Small 3.1 |
-| `command-r-plus` | Command R+ | $3.00 | **$2.50** | $15.00 | **$10.00** | 45 (was 40) | Command R+ 08-2024 version |
+| `deepseek-v3` | DeepSeek V3 | $0.40 | **$0.27** | $0.89 | **$1.10** | 64 → 65 | api-docs.deepseek.com |
+| `deepseek-r1` | DeepSeek R1 | $1.35 | **$0.55** | $4.00 | **$2.19** | 50 → 60 | api-docs.deepseek.com |
+| `mistral-large` | Mistral Large | $4.00 | **$0.50** | $12.00 | **$1.50** | 40 → 74 | mistral.ai/pricing |
+| `mistral-small` | Mistral Small | $0.20 | **$0.10** | $0.60 | **$0.30** | 71 → 85 | mistral.ai/pricing |
+| `command-r-plus` | Command R+ | $3.00 | **$2.50** | $15.00 | **$10.00** | 40 → 45 | cohere.com/pricing |
+
+**Verification sources:** All corrections verified against official provider pricing pages via live web search on 2026-04-25.
 
 ---
 
@@ -66,71 +78,111 @@
 
 ---
 
-## Entries Needing Manual Review (pricing not confirmed from official source)
+## Source Updates Summary (`models.json`)
 
-| ID | Stored Price | Issue |
+**24 entries** previously sourcing from the third-party aggregator `artificialanalysis.ai` were updated to official provider pricing pages:
+
+| Provider | Official Source URL | Entries Updated |
 |---|---|---|
-| `deepseek-coder-v2` | $0.50/$1.50/1M | DeepSeek has moved to V4 family; Coder V2 pricing unclear. Check api-docs.deepseek.com |
-| `llama-3-1-instruct-70b` | $0.56/$0.56/1M | Equal input/output cost is unusual; sourced via third-party aggregator only |
-| `qwen-coder` | $0.35/$1.20/1M | No official Alibaba/Qwen API pricing page verified |
-| `qwen-general` | $0.60/$3.60/1M | No official Alibaba/Qwen API pricing page verified |
-| `writesonic-basic` | $20/mo | Writesonic has restructured plans; current cheapest paid tier may differ |
-| `copyai-free` | $36/mo | Copy.ai Pro is $49/mo monthly or $36/mo annually — stored price is annual rate |
-| `rytr-saver` | $9/mo | Could not fully verify; likely still correct per search results |
+| OpenAI | https://openai.com/api/pricing/ | gpt-4o, gpt-4o-mini, gpt-4-turbo, o3, o3-mini |
+| Anthropic | https://www.anthropic.com/pricing | claude-3-5-sonnet, claude-3-5-haiku, claude-3-opus, claude-3-haiku |
+| Google | https://ai.google.dev/gemini-api/docs/pricing | gemini-1-5-pro, gemini-1-5-flash, gemini-2-5-pro, gemini-2-5-flash |
+| Mistral | https://mistral.ai/pricing | mistral-large, mistral-small, codestral |
+| DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | deepseek-v3, deepseek-r1, deepseek-coder-v2 |
+| xAI | https://docs.x.ai/api/ | grok-4, grok-4-fast |
+| Cohere | https://cohere.com/pricing | command-r-plus |
+| Groq | https://groq.com/pricing/ | groq-llama, llama-3-1-70b |
+
+Three entries still use the third-party aggregator source due to no official API pricing page being available for these models: `llama-3-1-instruct-70b`, `qwen-coder`, `qwen-general`.
 
 ---
 
-## Sources Updated to Official URLs
+## `last_updated` Refresh Summary
 
-All 24 entries that were previously sourcing from `artificialanalysis.ai` have been updated to the official provider pricing page. Three entries still use third-party sources due to no official pricing page available:
+**33 entries** refreshed from stale dates (earliest: 2025-04-01) to `2026-04-25`. This covers all entries where the source was changed to an official URL, plus the following subscription-based entries whose plans were re-verified:
 
-- `llama-3-1-instruct-70b` — artificialanalysis.ai
-- `qwen-coder` — artificialanalysis.ai
-- `qwen-general` — artificialanalysis.ai
+`chatgpt-plus`, `chatgpt-free`, `claude-pro`, `gemini-advanced`, `gemini-free`, `cursor-pro`, `cursor-free`, `perplexity-pro`, `groq-llama`, `llama-3-1-70b`, `copilot-free`.
 
 ---
 
 ## Comparisons Updated (`comparisons.json`)
 
-All 6 comparisons that contained stale GPT-4o price claims (`$5/1M input, $15/1M output`) have been corrected to the current `$2.50/1M input, $10/1M output`. The Mistral Large comparison was also corrected from `$2/$6` to `$0.50/$1.50` and Mistral Small from `$0.20/$0.60` to `$0.10/$0.30`.
+### GPT-4o pricing corrections (6 comparisons)
 
-| Comparison Slug | Fix Applied |
+All 6 comparisons that quoted the stale GPT-4o rate of `$5/1M input, $15/1M output` were corrected to the current `$2.50/1M input, $10/1M output`. Related in-body math was recalculated.
+
+| Comparison Slug | Fields Updated |
 |---|---|
-| `claude-vs-gpt-cost` | GPT-4o price corrected; avoidB editorial updated (GPT-4o now cheaper per input than Claude) |
-| `subscription-vs-api-ai-cost` | GPT-4o API price + monthly cost math updated |
-| `gpt-4o-vs-gpt-4o-mini-cost` | GPT-4o pricingComparison + output token math corrected |
-| `deepseek-vs-gpt4o-cost` | GPT-4o price corrected; monthly cost math updated |
-| `gemini-vs-gpt4o-cost` | GPT-4o price corrected |
-| `mistral-vs-openai-cost` | GPT-4o, Mistral Large, Mistral Small prices all corrected |
+| `claude-vs-gpt-cost` | `pricingComparison`, `costBreakdown`, `avoidB` — GPT-4o is now cheaper per input token than Claude 3.5 Sonnet, so the "67% more expensive" claim was corrected |
+| `subscription-vs-api-ai-cost` | `pricingComparison`, monthly cost math ($8/mo → $6/mo at 500K tokens; $30/mo → $25/mo at 2M tokens) |
+| `gpt-4o-vs-gpt-4o-mini-cost` | `pricingComparison`, output cost comparison ($15 → $10 per 1M output tokens) |
+| `deepseek-vs-gpt4o-cost` | `pricingComparison`, monthly cost math ($150 → $100 for GPT-4o baseline) |
+| `gemini-vs-gpt4o-cost` | `pricingComparison` |
+| `mistral-vs-openai-cost` | `pricingComparison`, `summary` — see below |
 
-Stale "as of our last review" phrases updated to "as of April 2026" across all relevant pricingNotes fields.
+### Mistral comparison corrected (`mistral-vs-openai-cost`)
+
+- Mistral Large: `$2/1M input, $6/1M output` → **`$0.50/1M input, $1.50/1M output`** (Mistral Large 3, Dec 2025)
+- Mistral Small: `$0.20/1M input, $0.60/1M output` → **`$0.10/1M input, $0.30/1M output`** (Mistral Small 3.1)
+- `"roughly 60% cheaper"` claim updated to **`"roughly 80% cheaper"`** (Mistral Large input is now 80% cheaper than GPT-4o, not 60%)
+
+### `pricingNotes` date freshness
+
+All `pricingNotes` fields containing the vague phrase `"as of our last review"` or `"as last reviewed"` were updated to `"as of April 2026"`.
 
 ---
 
-## Pricing Pages (`pricing-pages.json`)
+## Manual Review List
 
-No price corrections needed. All 4 pages (`chatgpt-pricing`, `claude-pricing`, `gemini-pricing`, `gpt-5-5-pricing`) already carried April 2026 dates and correct plan descriptions. No changes made.
+The following 7 entries could not be price-verified against an official source and retain their previously stored values:
+
+| ID | Stored Price | Reason Unverified |
+|---|---|---|
+| `deepseek-coder-v2` | $0.50/$1.50/1M | DeepSeek has moved to the V4 model family; Coder V2 status and pricing unclear. Verify at api-docs.deepseek.com |
+| `llama-3-1-instruct-70b` | $0.56/$0.56/1M | Equal input/output cost is unusual; only third-party aggregator data found, no official Meta API pricing page |
+| `qwen-coder` | $0.35/$1.20/1M | No official Alibaba/Qwen international pricing page verified |
+| `qwen-general` | $0.60/$3.60/1M | No official Alibaba/Qwen international pricing page verified |
+| `writesonic-basic` | $20/mo | Writesonic has restructured its plans; current cheapest paid tier may have changed |
+| `copyai-free` | $36/mo | Stored value appears to be the annual billing rate; monthly rate is $49/mo. Clarify which to display for consistency |
+| `rytr-saver` | $9/mo | Search results confirm $9/mo is likely still correct, but could not reach official pricing page directly |
+
+---
+
+## Validation
+
+| Check | Result |
+|---|---|
+| TypeScript typecheck (`tsc --noEmit`) | ✅ Pass — zero errors |
+| Production build (`vite build`) | ✅ Pass — built in 7.72s |
+| JSON validity (`models.json`) | ✅ Valid — 44 entries, no duplicate IDs |
+| JSON validity (`comparisons.json`) | ✅ Valid |
+| JSON validity (`pricing-pages.json`) | ✅ Valid — no changes required |
+
+### Skipped items and why
+
+| Item | Reason Skipped |
+|---|---|
+| `pricing-pages.json` price values | All 4 pages already carried April 2026 dates and correct plan descriptions. No corrections needed. |
+| `llama-3-1-instruct-70b`, `qwen-coder`, `qwen-general` source update | No official provider API pricing URL available to link; kept third-party aggregator source with note |
+| Complex editorial rewrites in comparison body text | Targeted factual price corrections were made; broader prose rewrites (e.g. rewriting complete savings examples with new arithmetic) are outside the scope of a data-accuracy audit and should be reviewed by a human |
+| Subscription tool confirmations for Rytr/Copy.ai/Writesonic | Official pricing pages could not be definitively scraped; stored prices are plausible but flagged for manual confirmation |
 
 ---
 
 ## Key Market Context (April 2026)
 
-- **Mistral Large** dropped ~87% from $4/$12 to $0.50/$1.50 per 1M tokens (Dec 2025 version). It is now cheaper per token than GPT-4o mini for output.
-- **GPT-4o** price was cut in half (from $5/$10 to $2.50/$10), making it cheaper per input than Claude 3.5 Sonnet. The comparisons `claude-vs-gpt-cost` now correctly reflect this reversal.
-- **DeepSeek R1** dropped 59% on input from $1.35 to $0.55/1M. DeepSeek has since released V4 (flash/pro) models — the site tracks the original R1 and V3 anchors.
-- **Cursor** restructured to credit-based pricing in June 2025; the $20/month Pro price is confirmed correct.
-- **Google Gemini 1.5** family is deprecated (shutdown announced); entries remain as historical reference models on the site.
+- **Mistral Large** price dropped ~87% (from $4/$12 to $0.50/$1.50 per 1M tokens) with the December 2025 "Large 3" release. It now beats GPT-4o mini on output price.
+- **GPT-4o** was cut from $5/$15 to $2.50/$10 per 1M tokens. It is now cheaper per input token than Claude 3.5 Sonnet ($3/1M).
+- **DeepSeek R1** input dropped 59% (from $1.35 to $0.55/1M). DeepSeek has since released V4 models — the site tracks the original V3 and R1 anchors.
+- **Cursor** restructured to a credit-based pricing model in June 2025; the $20/month Pro headline price is confirmed correct.
+- **Gemini 1.5** family is deprecated (shutdown scheduled); entries remain as historical reference models on the site.
 
 ---
 
 ## Recommended Follow-Up Actions
 
-1. **Add Mistral Large 3 deprecation note** to the `mistral-large` entry (the model is "Mistral Large" but specifically the Dec 2025 "2512" version).
-2. **Verify Copy.ai pricing** — stored value ($36/mo) is the annual rate; consider showing monthly rate ($49/mo) for consistency with other subscription tools.
-3. **Consider adding newer models**: Gemini 3.1 Pro ($2/$12/1M), Claude Haiku 4.5 ($1/$5/1M), DeepSeek V4 Flash/Pro — all released in 2025–2026.
-4. **DeepSeek Coder V2**: Confirm whether to retain or replace with a current DeepSeek model (V3.2 or V4).
-5. **Qwen pricing**: Official Qwen API pricing is available via Alibaba Cloud; verify and update source.
-
----
-
-*Audit completed: 2026-04-25 | Auditor: automated pricing agent*
+1. **Verify Copy.ai pricing convention** — decide whether to show monthly ($49/mo) or annual ($36/mo) rate for consistency with other tools.
+2. **Confirm Writesonic current plan** — their plan names have changed; the $20/mo tier may no longer exist.
+3. **Consider adding newer models**: Gemini 3.1 Pro ($2/$12/1M), Claude Haiku 4.5 ($1/$5/1M), DeepSeek V4 Flash ($0.14/$0.28/1M).
+4. **DeepSeek Coder V2**: Decide whether to retain as a historical reference or replace with a current DeepSeek model.
+5. **Qwen pricing**: Official international pricing is available via Alibaba Cloud — verify and update source URL.
