@@ -56,7 +56,7 @@ export function PricingPage() {
             <div key={plan.name} className="border border-border rounded-xl p-5 bg-card">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                 <h3 className="font-semibold text-foreground text-lg">{plan.name}</h3>
-                <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap">
+                <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
                   {plan.price}
                 </span>
               </div>
