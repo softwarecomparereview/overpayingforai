@@ -1,0 +1,119 @@
+Good. Do not build more pages yet.
+
+Now do a focused launch-hardening QA pass for the second commercial cluster only.
+
+Scope:
+- /pricing/gemini-pricing
+- /compare/chatgpt-vs-gemini
+- /compare/claude-vs-gemini
+- /worth-it/which-ai-subscription-is-worth-paying-for
+- /calculator/ai-savings-calculator
+
+Do not add new pages.
+Do not refactor unrelated code.
+Do not redesign the site.
+
+Check and report:
+
+1. SEO / canonical / metadata
+- Confirm each page has a unique document title.
+- Confirm each page has a unique meta description.
+- Confirm /calculator/ai-savings-calculator does not incorrectly inherit generic /calculator metadata.
+- Confirm canonical handling is correct and does not create duplicate-indexing confusion with /calculator.
+
+2. Route and render QA
+- Confirm all five pages load without console errors.
+- Confirm the correct H1 appears on each page.
+- Confirm pricing notes, last-updated dates, and affiliate/referral disclosures appear where relevant.
+- Confirm the calculator landing page clearly routes users to the active calculator experience and does not create a dead-end.
+
+3. Pricing/data accuracy
+List every pricing or cost claim on these five pages.
+Mark each as:
+- verified from local data
+- approximate with freshness caveat
+- needs manual review
+
+Pay special attention to:
+- Gemini Advanced monthly pricing
+- Gemini Advanced 2TB bundle/storage claim
+- Gemini Flash API pricing
+- any ChatGPT/Claude comparison pricing repeated from cluster one
+
+Confirm no unverified price is presented as guaranteed/current/final.
+
+4. Analytics completeness
+Confirm whether these events fire where relevant:
+- calculator_start
+- calculator_complete if supported
+- internal_link_click
+- primary_cta_click
+- comparison_cta_click
+- outbound_click
+- affiliate_click
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+For each missing event, classify it as:
+- not applicable yet
+- missing and should be patched
+- intentionally deferred
+
+5. CTA review
+For each of the five pages, list:
+- primary CTA
+- secondary CTA
+- calculator CTA
+- internal comparison/pricing links
+- any provider/outbound CTA placeholder
+
+Confirm every CTA has either:
+- correct navigation
+- correct analytics
+- or a clear reason it is intentionally disabled.
+
+6. Calculator-specific QA
+For /calculator/ai-savings-calculator:
+- Confirm it is not only a thin SEO page.
+- Confirm it explains what the calculator estimates.
+- Confirm it links clearly to the active calculator route/experience.
+- Confirm calculator_start fires once, not repeatedly on every render.
+- Confirm internal links from the calculator page work.
+- Confirm mobile layout is usable.
+
+7. Mobile and layout QA
+Check all five pages at mobile width:
+- header search
+- mobile menu search
+- comparison cards
+- pricing cards
+- CTA cards
+- InternalLinks strip
+- footer disclosures
+- no horizontal overflow
+
+8. Search QA
+Confirm:
+- each of the 5 pages appears in site search
+- primary queries return the expected page at rank 1
+- first-cluster search queries still rank correctly
+- no-results state works
+- result clicks navigate correctly
+
+9. Final launch status
+Return a table:
+- Area
+- Pass/Fail
+- Issue
+- Required fix
+- File to change
+
+Then return:
+- Launch ready: Yes/No
+- Blocking fixes
+- Non-blocking improvements
+- Files changed, if any
+
+Important:
+Do not answer generally. Inspect the actual source files and rendered routes. Where possible, name the exact file and component responsible for each pass/fail item. If something cannot be verified automatically, mark it as “manual verification required” instead of assuming it passes.

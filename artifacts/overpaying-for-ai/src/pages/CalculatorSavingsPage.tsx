@@ -58,7 +58,7 @@ export function CalculatorSavingsPage() {
       <PageSeo
         title="AI Savings Calculator — Estimate What You're Overpaying | OverpayingForAI"
         description="Use the AI Savings Calculator to estimate what you could save by switching AI tools, consolidating subscriptions, or routing tasks to cheaper models. Free and instant."
-        canonicalUrl="https://overpayingforai.com/calculator/ai-savings-calculator"
+        canonicalUrl="/calculator/ai-savings-calculator"
       />
 
       <nav className="text-sm text-muted-foreground mb-6 flex items-center gap-1">
