@@ -26,6 +26,11 @@ export interface AIModel {
   category?: ModelCategory;
   supportsApiUsage?: boolean;
   freeTierLimitDescription?: string;
+  cachedInputCostPer1k?: number | null;
+  contextWindow?: string;
+  releaseDate?: string;
+  overpayRisk?: string;
+  sourceLabel?: string;
 }
 
 export interface CalculatorInputs {

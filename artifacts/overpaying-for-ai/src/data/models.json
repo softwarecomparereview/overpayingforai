@@ -8,7 +8,12 @@
     "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "chat", "writing", "multimodal"],
+    "bestFor": [
+      "general",
+      "chat",
+      "writing",
+      "multimodal"
+    ],
     "qualityScore": 88,
     "costScore": 43,
     "latencyScore": 42,
@@ -27,7 +32,12 @@
     "outputCostPer1k": 0.0006,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat", "high-volume"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
     "qualityScore": 70,
     "costScore": 73,
     "latencyScore": 29,
@@ -46,7 +56,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["chat", "writing", "research"],
+    "bestFor": [
+      "chat",
+      "writing",
+      "research"
+    ],
     "qualityScore": 92,
     "costScore": 55,
     "latencyScore": 75,
@@ -65,7 +79,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 70,
     "costScore": 100,
     "latencyScore": 65,
@@ -85,7 +102,12 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "writing", "research", "general"],
+    "bestFor": [
+      "coding",
+      "writing",
+      "research",
+      "general"
+    ],
     "qualityScore": 90,
     "costScore": 40,
     "latencyScore": 30,
@@ -104,7 +126,11 @@
     "outputCostPer1k": 0.004,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "chat", "automation"],
+    "bestFor": [
+      "budget",
+      "chat",
+      "automation"
+    ],
     "qualityScore": 72,
     "costScore": 54,
     "latencyScore": 45,
@@ -123,7 +149,12 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["writing", "research", "coding", "chat"],
+    "bestFor": [
+      "writing",
+      "research",
+      "coding",
+      "chat"
+    ],
     "qualityScore": 94,
     "costScore": 55,
     "latencyScore": 74,
@@ -142,7 +173,11 @@
     "outputCostPer1k": 0.005,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["research", "long-context", "general"],
+    "bestFor": [
+      "research",
+      "long-context",
+      "general"
+    ],
     "qualityScore": 82,
     "costScore": 58,
     "latencyScore": 45,
@@ -161,7 +196,12 @@
     "outputCostPer1k": 0.0003,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat", "high-volume"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
     "qualityScore": 68,
     "costScore": 90,
     "latencyScore": 80,
@@ -180,7 +220,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research", "chat", "writing"],
+    "bestFor": [
+      "research",
+      "chat",
+      "writing"
+    ],
     "qualityScore": 86,
     "costScore": 55,
     "latencyScore": 72,
@@ -199,7 +243,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 68,
     "costScore": 100,
     "latencyScore": 70,
@@ -219,7 +266,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 93,
     "costScore": 60,
     "latencyScore": 85,
@@ -238,7 +287,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 80,
     "costScore": 90,
     "latencyScore": 82,
@@ -258,7 +309,11 @@
     "outputCostPer1k": 0.012,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "europe", "writing"],
+    "bestFor": [
+      "general",
+      "europe",
+      "writing"
+    ],
     "qualityScore": 75,
     "costScore": 40,
     "latencyScore": 20,
@@ -277,7 +332,11 @@
     "outputCostPer1k": 0.0006,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat"
+    ],
     "qualityScore": 64,
     "costScore": 71,
     "latencyScore": 53,
@@ -296,7 +355,11 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "automation", "research"],
+    "bestFor": [
+      "coding",
+      "automation",
+      "research"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 75,
@@ -315,7 +378,11 @@
     "outputCostPer1k": 0.00089,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "budget", "coding"],
+    "bestFor": [
+      "general",
+      "budget",
+      "coding"
+    ],
     "qualityScore": 80,
     "costScore": 64,
     "latencyScore": 35,
@@ -334,7 +401,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research"],
+    "bestFor": [
+      "research"
+    ],
     "qualityScore": 85,
     "costScore": 58,
     "latencyScore": 82,
@@ -353,7 +422,10 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": true,
-    "bestFor": ["automation", "coding"],
+    "bestFor": [
+      "automation",
+      "coding"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 99,
@@ -372,7 +444,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 75,
     "costScore": 100,
     "latencyScore": 85,
@@ -392,7 +466,10 @@
     "outputCostPer1k": 0.03,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["legacy", "general"],
+    "bestFor": [
+      "legacy",
+      "general"
+    ],
     "qualityScore": 72,
     "costScore": 30,
     "latencyScore": 4,
@@ -411,7 +488,10 @@
     "outputCostPer1k": 0.008,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "coding"],
+    "bestFor": [
+      "reasoning",
+      "coding"
+    ],
     "qualityScore": 86,
     "costScore": 46,
     "latencyScore": 38,
@@ -430,7 +510,10 @@
     "outputCostPer1k": 0.0044,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "budget"],
+    "bestFor": [
+      "reasoning",
+      "budget"
+    ],
     "qualityScore": 74,
     "costScore": 52,
     "latencyScore": 54,
@@ -449,7 +532,11 @@
     "outputCostPer1k": 0.075,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["premium", "writing", "research"],
+    "bestFor": [
+      "premium",
+      "writing",
+      "research"
+    ],
     "qualityScore": 84,
     "costScore": 23,
     "latencyScore": 15,
@@ -468,7 +555,11 @@
     "outputCostPer1k": 0.00125,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "support", "chat"],
+    "bestFor": [
+      "budget",
+      "support",
+      "chat"
+    ],
     "qualityScore": 65,
     "costScore": 66,
     "latencyScore": 50,
@@ -487,7 +578,11 @@
     "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "reasoning", "general"],
+    "bestFor": [
+      "coding",
+      "reasoning",
+      "general"
+    ],
     "qualityScore": 84,
     "costScore": 46,
     "latencyScore": 48,
@@ -506,7 +601,11 @@
     "outputCostPer1k": 0.0025,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "high-volume", "automation"],
+    "bestFor": [
+      "reasoning",
+      "high-volume",
+      "automation"
+    ],
     "qualityScore": 74,
     "costScore": 61,
     "latencyScore": 60,
@@ -525,7 +624,9 @@
     "outputCostPer1k": 0.0009,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 78,
     "costScore": 74,
     "latencyScore": 55,
@@ -544,7 +645,11 @@
     "outputCostPer1k": 0.004,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "research", "coding"],
+    "bestFor": [
+      "reasoning",
+      "research",
+      "coding"
+    ],
     "qualityScore": 83,
     "costScore": 50,
     "latencyScore": 28,
@@ -563,7 +668,10 @@
     "outputCostPer1k": 0.0015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "budget"],
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
     "qualityScore": 81,
     "costScore": 70,
     "latencyScore": 45,
@@ -582,7 +690,11 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "reasoning", "coding"],
+    "bestFor": [
+      "general",
+      "reasoning",
+      "coding"
+    ],
     "qualityScore": 82,
     "costScore": 40,
     "latencyScore": 28,
@@ -601,7 +713,11 @@
     "outputCostPer1k": 0.0005,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "reasoning", "high-volume"],
+    "bestFor": [
+      "budget",
+      "reasoning",
+      "high-volume"
+    ],
     "qualityScore": 72,
     "costScore": 72,
     "latencyScore": 59,
@@ -620,7 +736,11 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["research", "rag", "enterprise"],
+    "bestFor": [
+      "research",
+      "rag",
+      "enterprise"
+    ],
     "qualityScore": 76,
     "costScore": 40,
     "latencyScore": 30,
@@ -639,7 +759,11 @@
     "outputCostPer1k": 0.00056,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["open-weight", "budget", "general"],
+    "bestFor": [
+      "open-weight",
+      "budget",
+      "general"
+    ],
     "qualityScore": 70,
     "costScore": 65,
     "latencyScore": 15,
@@ -658,7 +782,10 @@
     "outputCostPer1k": 0.0012,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "budget"],
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
     "qualityScore": 77,
     "costScore": 64,
     "latencyScore": 53,
@@ -677,7 +804,10 @@
     "outputCostPer1k": 0.0036,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "reasoning"],
+    "bestFor": [
+      "general",
+      "reasoning"
+    ],
     "qualityScore": 78,
     "costScore": 56,
     "latencyScore": 30,
@@ -696,7 +826,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "budget"],
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
     "qualityScore": 68,
     "costScore": 72,
     "latencyScore": 50,
@@ -715,7 +849,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 49,
     "hasFreeTier": false,
-    "bestFor": ["writing", "content", "marketing"],
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
     "qualityScore": 72,
     "costScore": 40,
     "latencyScore": 50,
@@ -734,7 +872,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 36,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "marketing"],
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
     "qualityScore": 65,
     "costScore": 55,
     "latencyScore": 50,
@@ -753,7 +895,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 9,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "budget"],
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
     "qualityScore": 58,
     "costScore": 80,
     "latencyScore": 60,
@@ -762,5 +908,116 @@
     "notes": "Lowest-cost AI writing subscription. Quality is below Writesonic or Jasper but usable for simple content tasks.",
     "last_updated": "2026-04-11",
     "source": "https://rytr.me/pricing"
+  },
+  {
+    "id": "gpt-5-5",
+    "name": "GPT-5.5",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.005,
+    "cachedInputCostPer1k": 0.0005,
+    "outputCostPer1k": 0.03,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "professional-work",
+      "agentic",
+      "reasoning",
+      "general"
+    ],
+    "qualityScore": 96,
+    "costScore": 25,
+    "latencyScore": 45,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Premium OpenAI model for coding, professional work, complex multi-step tasks, and agentic workflows. Strong capability, but expensive as a default model.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "releaseDate": "2026-04-23",
+    "contextWindow": "1M tokens",
+    "overpayRisk": "High if used as the default for simple prompts, summaries, classification, or routine automation."
+  },
+  {
+    "id": "gpt-5-5-pro",
+    "name": "GPT-5.5 Pro",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.03,
+    "cachedInputCostPer1k": null,
+    "outputCostPer1k": 0.18,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "premium",
+      "reasoning",
+      "coding",
+      "professional-work"
+    ],
+    "qualityScore": 99,
+    "costScore": 10,
+    "latencyScore": 25,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Highest-accuracy OpenAI option for very hard questions and high-value professional work. Not suitable as a default model.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "releaseDate": "2026-04-23",
+    "overpayRisk": "Very high unless the task has high value or requires maximum accuracy."
+  },
+  {
+    "id": "gpt-5-4",
+    "name": "GPT-5.4",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.0025,
+    "cachedInputCostPer1k": 0.00025,
+    "outputCostPer1k": 0.015,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "professional-work",
+      "general"
+    ],
+    "qualityScore": 90,
+    "costScore": 35,
+    "latencyScore": 48,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "More affordable OpenAI model for coding and professional work compared with GPT-5.5.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "overpayRisk": "Medium. Cheaper than GPT-5.5, but still overkill for simple high-volume tasks."
+  },
+  {
+    "id": "gpt-5-4-mini",
+    "name": "GPT-5.4 mini",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.00075,
+    "cachedInputCostPer1k": 0.000075,
+    "outputCostPer1k": 0.0045,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "automation",
+      "subagents",
+      "high-volume"
+    ],
+    "qualityScore": 78,
+    "costScore": 55,
+    "latencyScore": 65,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Lower-cost OpenAI mini model for coding, computer use, subagents, and higher-volume workflows.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "overpayRisk": "Low to medium. Better default candidate than GPT-5.5 for routine workloads."
   }
 ]
