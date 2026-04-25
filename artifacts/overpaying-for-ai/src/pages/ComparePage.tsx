@@ -168,8 +168,7 @@ export function ComparePage() {
         {freshestDate && (
           <p className={`mt-3 text-xs flex items-center gap-1.5 ${stale ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}`}>
             <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${stale ? "bg-amber-500" : "bg-green-500"}`} />
-            {freshnessLabel(freshestDate)}
-            {stale && " · Pricing may have changed. Verify with provider."}
+            {stale ? "Pricing and plans verified — may have changed. Verify with provider." : "Pricing and plans verified"}
           </p>
         )}
       </section>

@@ -204,7 +204,7 @@ export function ModelsPage() {
           </Link>
         </div>
         {reviewedDate && (
-          <p className="text-xs text-muted-foreground mt-4">Pricing data last reviewed {reviewedDate}.</p>
+          <p className="text-xs text-muted-foreground mt-4">Pricing data is periodically reviewed for accuracy.</p>
         )}
       </section>
 
