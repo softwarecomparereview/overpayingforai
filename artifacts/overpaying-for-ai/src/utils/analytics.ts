@@ -50,7 +50,6 @@ const ALLOWED_EVENTS = new Set([
   "site_search_no_results",
   // Commercial pages
   "internal_link_click",
-  "calculator_start",
 ]);
 
 /**
