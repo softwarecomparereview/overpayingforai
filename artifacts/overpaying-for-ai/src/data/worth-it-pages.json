@@ -161,12 +161,24 @@
         "href": "/pricing/gemini-pricing"
       },
       {
-        "text": "Calculate Your AI Cost",
-        "href": "/calculator"
+        "text": "ChatGPT vs Claude",
+        "href": "/compare/chatgpt-vs-claude"
       },
       {
-        "text": "Best ChatGPT Alternatives",
-        "href": "/alternatives/best-chatgpt-alternatives"
+        "text": "ChatGPT vs Gemini",
+        "href": "/compare/chatgpt-vs-gemini"
+      },
+      {
+        "text": "Claude vs Gemini",
+        "href": "/compare/claude-vs-gemini"
+      },
+      {
+        "text": "AI Savings Calculator",
+        "href": "/calculator/ai-savings-calculator"
+      },
+      {
+        "text": "Calculate Your AI Cost",
+        "href": "/calculator"
       }
     ],
     "faq": [

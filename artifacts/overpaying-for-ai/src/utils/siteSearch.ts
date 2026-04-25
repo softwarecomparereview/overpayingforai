@@ -104,11 +104,25 @@ function buildIndex(): SiteSearchEntry[] {
   // ── Static / tool pages ────────────────────────────────────────────────────
   const staticPages: SiteSearchEntry[] = [
     {
+      href: "/",
+      title: "OverpayingForAI — Stop Overpaying for AI Tools",
+      description: "Compare AI tool pricing, find cheaper alternatives, and avoid overpaying for AI subscriptions.",
+      pageType: label("tool"),
+      keywords: "overpaying for ai stop overpaying ai tools compare ai costs cheaper ai avoid overpaying ai subscription site home",
+    },
+    {
       href: "/calculator",
       title: "AI Cost Calculator",
       description: "Enter your token usage and see your exact monthly AI spend.",
       pageType: label("tool"),
-      keywords: "calculator cost tokens calculate price estimate spend monthly token pricing api",
+      keywords: "calculator ai cost calculator overpaying for ai savings estimate tokens calculate price spend monthly token pricing api reduce ai costs avoid overpaying",
+    },
+    {
+      href: "/calculator/ai-savings-calculator",
+      title: "AI Savings Calculator",
+      description: "Estimate how much you could save by switching AI tools, consolidating subscriptions, or routing to cheaper models.",
+      pageType: label("tool"),
+      keywords: "ai savings calculator savings calculator ai savings estimate savings overpaying subscription consolidate chatgpt claude gemini cost reduce monthly savings cheaper models avoid overpaying",
     },
     {
       href: "/decision-engine",
@@ -225,7 +239,7 @@ function buildIndex(): SiteSearchEntry[] {
         w.slug.replace(/-/g, " "),
         w.title,
         w.verdict?.slice(0, 200) ?? "",
-        "worth it should i pay is it worth value overpaying ai subscription monthly fee chatgpt openai anthropic claude",
+        "worth it should i pay is it worth value overpaying subscription monthly fee chatgpt openai anthropic claude best ai subscription which ai subscription",
       ]
         .join(" ")
         .toLowerCase(),

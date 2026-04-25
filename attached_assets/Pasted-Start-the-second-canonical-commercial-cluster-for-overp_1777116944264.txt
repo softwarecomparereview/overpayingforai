@@ -1,0 +1,240 @@
+Start the second canonical commercial cluster for overpayingforai.com.
+
+Important:
+The first commercial cluster is launch-ready. Do not modify those pages unless required for internal linking to this new cluster.
+Do not redesign the site.
+Do not refactor unrelated code.
+Do not add extra pages beyond the five listed below.
+
+Create or upgrade these five pages:
+1. /pricing/gemini-pricing
+2. /compare/chatgpt-vs-gemini
+3. /compare/claude-vs-gemini
+4. /worth-it/which-ai-subscription-is-worth-paying-for
+5. /calculator/ai-savings-calculator
+
+Goal:
+Build the second high-intent commercial cluster focused on AI pricing clarity, comparison, subscription value, and savings estimation. These pages must support the DontOverpayAI thesis: helping users avoid overpaying for AI tools through pricing clarity, comparison, and decision support.
+
+Global requirements:
+- Use existing site styling and page patterns.
+- Reuse existing page templates/components where appropriate.
+- Keep content trust-first and buyer-oriented.
+- Do not make unverified pricing claims.
+- Add visible last-updated dates.
+- Add pricing freshness notes.
+- Add affiliate/referral disclosure where commercial CTAs appear.
+- Add each page to sitemap.xml and leanSitemap.ts if relevant.
+- Add each page to internal website search.
+- Add strong internal links between:
+  - Gemini pricing
+  - ChatGPT pricing
+  - Claude pricing
+  - ChatGPT vs Gemini
+  - Claude vs Gemini
+  - ChatGPT vs Claude
+  - Which AI Subscription Is Worth Paying For
+  - AI Savings Calculator
+- Preserve existing first-cluster routes and behavior.
+
+Search requirements:
+Add searchable metadata for all five new pages:
+- title
+- slug
+- description
+- page_type
+- tools mentioned
+- category
+- tags
+- primary intent
+
+Suggested metadata:
+
+1. /pricing/gemini-pricing
+title: Gemini Pricing Explained
+page_type: Pricing
+tools: Gemini, Google
+category: AI pricing
+tags: gemini pricing, gemini advanced, google ai pricing, gemini cost, ai subscription, chatgpt vs gemini
+
+2. /compare/chatgpt-vs-gemini
+title: ChatGPT vs Gemini
+page_type: Comparison
+tools: ChatGPT, Gemini, OpenAI, Google
+category: AI assistant comparison
+tags: chatgpt vs gemini, gemini vs chatgpt, ai comparison, google ai, openai, ai pricing
+
+3. /compare/claude-vs-gemini
+title: Claude vs Gemini
+page_type: Comparison
+tools: Claude, Gemini, Anthropic, Google
+category: AI assistant comparison
+tags: claude vs gemini, gemini vs claude, anthropic, google ai, ai comparison, ai pricing
+
+4. /worth-it/which-ai-subscription-is-worth-paying-for
+title: Which AI Subscription Is Actually Worth Paying For?
+page_type: Decision
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot
+category: AI buying decision
+tags: which ai subscription is worth it, best ai subscription, ai subscription value, avoid overpaying, chatgpt plus, claude pro, gemini advanced
+
+5. /calculator/ai-savings-calculator
+title: AI Savings Calculator
+page_type: Calculator
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot
+category: AI cost calculator
+tags: ai savings calculator, ai cost calculator, ai subscription calculator, overpaying for ai, ai tool cost, ai pricing calculator
+
+Page requirements:
+
+1. /pricing/gemini-pricing
+Sections:
+- Hero with quick pricing clarity summary
+- Current Gemini plan breakdown
+- Free vs paid
+- Gemini Advanced / Google AI plan discussion
+- Who should pay
+- Who should stay free
+- Hidden overpay risks
+- Gemini vs ChatGPT value notes
+- Gemini vs Claude value notes
+- CTA to AI Savings Calculator
+- Internal links to ChatGPT vs Gemini, Claude vs Gemini, ChatGPT Pricing, Claude Pricing
+
+2. /compare/chatgpt-vs-gemini
+Sections:
+- Hero with quick verdict
+- Pricing comparison
+- Best for writing
+- Best for coding
+- Best for research
+- Best for Google ecosystem users
+- When ChatGPT is better
+- When Gemini is better
+- Who may be overpaying
+- Recommendation by use case
+- CTA to AI Savings Calculator
+- Internal links to Gemini Pricing, ChatGPT Pricing, Claude vs Gemini, ChatGPT vs Claude
+
+3. /compare/claude-vs-gemini
+Sections:
+- Hero with quick verdict
+- Pricing comparison
+- Best for writing and long documents
+- Best for research
+- Best for Google ecosystem users
+- Best for business/team use
+- When Claude is better
+- When Gemini is better
+- Who may be overpaying
+- Recommendation by use case
+- CTA to AI Savings Calculator
+- Internal links to Claude Pricing, Gemini Pricing, ChatGPT vs Gemini, ChatGPT vs Claude
+
+4. /worth-it/which-ai-subscription-is-worth-paying-for
+Sections:
+- Hero with clear decision framing
+- Quick answer by user type
+- Best subscription for general users
+- Best subscription for writers
+- Best subscription for coders
+- Best subscription for researchers
+- Best subscription for Google Workspace users
+- Who should not pay for any subscription yet
+- When API or cheaper models may be better
+- Subscription comparison table/cards
+- Common overpaying scenarios
+- CTA to AI Savings Calculator
+- Internal links to ChatGPT Pricing, Claude Pricing, Gemini Pricing, ChatGPT vs Claude, ChatGPT vs Gemini, Claude vs Gemini
+
+5. /calculator/ai-savings-calculator
+Build a practical calculator page if one does not already exist. If /calculator already exists and is the canonical calculator route, do not create a duplicate confusing calculator. Instead:
+- either make /calculator/ai-savings-calculator route to the existing calculator experience with improved SEO wrapper
+- or add a canonical/redirect strategy consistent with the existing router
+
+Calculator page requirements:
+- Clear hero: “AI Savings Calculator”
+- Explain what the calculator estimates
+- Let users compare current AI tool/subscription spend against likely alternatives if existing calculator logic supports it
+- Include example scenarios:
+  - solo user paying for one subscription
+  - freelancer using multiple AI tools
+  - small team with multiple seats
+  - API-heavy user
+- Include assumptions and limitations
+- Include links to pricing/comparison pages
+- Track calculator_start and calculator_complete if completion exists
+- Do not overpromise exact savings
+
+Analytics requirements:
+Use the existing analytics helpers. Do not create a competing system.
+
+Track:
+- calculator_start
+- calculator_complete if supported
+- internal_link_click
+- primary_cta_click
+- comparison_cta_click
+- affiliate_click where provider CTAs exist
+- outbound_click where non-affiliate outbound links exist
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+Payloads should include:
+- pageSlug
+- pageType
+- ctaLabel
+- destinationSlug where relevant
+- toolName where relevant
+- sourceComponent where relevant
+
+SEO requirements:
+- Unique title and meta description for each page
+- Clean H1/H2 structure
+- FAQ section where useful
+- Canonical handling consistent with existing PageSeo component
+- Sitemap inclusion
+- No crawlable search result pages
+- No thin pages
+
+Trust/freshness requirements:
+- Add “Last updated” date
+- Add pricing freshness note
+- Any API/token pricing must be clearly marked as approximate or requiring verification
+- Do not present volatile pricing as guaranteed
+- Avoid saying “official” unless supported by local data/source pattern
+
+Validation:
+Run:
+- pnpm tsc --noEmit
+- pnpm build if available and not too slow
+
+Confirm routes:
+- /pricing/gemini-pricing
+- /compare/chatgpt-vs-gemini
+- /compare/claude-vs-gemini
+- /worth-it/which-ai-subscription-is-worth-paying-for
+- /calculator/ai-savings-calculator
+
+Confirm search:
+- gemini pricing
+- chatgpt vs gemini
+- claude vs gemini
+- which ai subscription is worth paying for
+- ai savings calculator
+- best ai subscription
+- google ai pricing
+- overpaying for ai
+
+Return:
+1. Branch name
+2. Files changed
+3. Routes added/updated
+4. Search index entries added
+5. Sitemap entries added
+6. Analytics events wired
+7. Pricing/data items needing manual review
+8. Typecheck/build result
+9. Known issues or skipped items
+10. Launch-hardening QA recommendation
