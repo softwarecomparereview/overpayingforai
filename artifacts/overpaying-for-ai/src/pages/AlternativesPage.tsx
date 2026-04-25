@@ -154,7 +154,7 @@ export function AlternativesPage() {
         </section>
       )}
 
-      <InternalLinks links={page.internalLinks} heading="Related comparisons" />
+      <InternalLinks links={page.internalLinks} heading="Related comparisons" trackingContext={{ pageSlug: page.slug, pageType: "alternatives" }} />
 
       <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
         Pricing approximate as of April 2026. Check current provider pricing before switching.

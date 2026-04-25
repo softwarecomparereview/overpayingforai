@@ -122,7 +122,7 @@ export function PricingPage() {
         </section>
       )}
 
-      <InternalLinks links={page.internalLinks} heading="Related comparisons" />
+      <InternalLinks links={page.internalLinks} heading="Related comparisons" trackingContext={{ pageSlug: page.slug, pageType: "pricing" }} />
 
       <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
         Pricing based on publicly available rates. Check current provider pricing before subscribing.

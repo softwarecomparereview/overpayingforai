@@ -109,8 +109,8 @@ export function getAffiliateTarget(
 
   // No affiliate URL yet — prefer the tool's homepage (directUrl) as a real
   // outbound CTA so commercial pages always link out to the recommended tool.
-  // We still tag rel="sponsored" because the link is editorially placed for
-  // monetization intent (and will be swapped to an affiliate URL once approved).
+  // No rel="sponsored" here: this is a direct (non-paid) homepage link.
+  // rel="sponsored" is reserved for active affiliate/tracking URLs only.
   // `overrideFallback` only replaces the *internal* fallback below; it does
   // NOT suppress the outbound homepage CTA, which is always preferred.
   if (entry.directUrl) {
@@ -121,7 +121,7 @@ export function getAffiliateTarget(
       status: entry.status,
       label: buildPrimaryLabel(entry, context),
       fallbackUsed: true,
-      rel: "noopener noreferrer sponsored",
+      rel: "noopener noreferrer",
       target: "_blank",
     };
   }

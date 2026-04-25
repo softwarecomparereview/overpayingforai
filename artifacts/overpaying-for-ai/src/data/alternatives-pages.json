@@ -58,7 +58,7 @@
       {
         "name": "Llama 3.1 70B via Groq",
         "category": "Speed + Budget",
-        "pricingSummary": "API: ~$0.00059 per 1K tokens. Free tier on Groq.",
+        "pricingSummary": "API: ~$0.00059 per 1K tokens (pricing changes frequently — verify current rates at groq.com before building). Free tier on Groq.",
         "whyBetter": "World-class inference speed (Groq hardware). Near-frontier quality at a fraction of GPT-4o's price. Great for real-time applications and latency-sensitive workloads.",
         "notBetter": "No consumer interface. Requires API/developer setup. Less refined on creative writing tasks.",
         "comparisonLink": "/compare",

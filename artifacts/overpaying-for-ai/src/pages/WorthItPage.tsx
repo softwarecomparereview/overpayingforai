@@ -190,7 +190,7 @@ export function WorthItPage() {
         </section>
       )}
 
-      <InternalLinks links={page.internalLinks} heading="Related guides" />
+      <InternalLinks links={page.internalLinks} heading="Related guides" trackingContext={{ pageSlug: page.slug, pageType: "worth-it" }} />
 
       <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
         This page contains editorial assessments based on publicly available pricing.

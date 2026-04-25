@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { trackInternalLinkClick } from "@/utils/analytics";
 
 export interface InternalLink {
   href: string;
@@ -18,14 +19,16 @@ interface InternalLinksProps {
   links?: InternalLink[];
   heading?: string;
   maxLinks?: number;
+  trackingContext?: { pageSlug: string; pageType: string };
 }
 
 /**
  * InternalLinks — renders a "Related" link strip for SEO and user navigation.
  * Caps at maxLinks (default 8) to keep the list scannable.
  * Falls back to site-wide links if no links are provided.
+ * When trackingContext is supplied, fires internal_link_click on every click.
  */
-export function InternalLinks({ links, heading = "Related", maxLinks = 8 }: InternalLinksProps) {
+export function InternalLinks({ links, heading = "Related", maxLinks = 8, trackingContext }: InternalLinksProps) {
   const displayLinks = (links && links.length > 0) ? links : FALLBACK_LINKS;
 
   return (
@@ -36,6 +39,17 @@ export function InternalLinks({ links, heading = "Related", maxLinks = 8 }: Inte
           <Link
             key={link.href}
             href={link.href}
+            onClick={
+              trackingContext
+                ? () =>
+                    trackInternalLinkClick({
+                      pageSlug: trackingContext.pageSlug,
+                      pageType: trackingContext.pageType,
+                      ctaLabel: link.text,
+                      destinationSlug: link.href,
+                    })
+                : undefined
+            }
             className="text-sm px-3 py-1.5 rounded border border-border bg-muted/30 hover:bg-muted transition-colors text-foreground"
           >
             {link.text}

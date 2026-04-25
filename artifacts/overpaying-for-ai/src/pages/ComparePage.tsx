@@ -287,7 +287,7 @@ export function ComparePage() {
       />
 
       <SeoContentBlock />
-      <InternalLinks links={page.internalLinks} />
+      <InternalLinks links={page.internalLinks} trackingContext={{ pageSlug: page.slug, pageType: "compare" }} />
     </article>
   );
 }
