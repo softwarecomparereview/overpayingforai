@@ -1,0 +1,193 @@
+Work on branch developphase2, not main.
+
+Repository:
+softwarecomparereview/overpayingforai
+
+Goal:
+Audit and refresh pricing for all models and AI tools used by OverpayingForAI, with source links and last-verified dates.
+
+Important:
+- Do NOT work on main.
+- Confirm current branch is developphase2.
+- If not, checkout developphase2.
+- Pull latest from origin/developphase2.
+- Do NOT open a PR unless asked.
+- Do NOT redesign the site.
+- Do NOT replace the homepage.
+- Do NOT add a new pricing architecture unless necessary.
+- Keep existing JSON/data structures unless a small optional type extension is required.
+- Preserve existing routing and page layout.
+- Make changes in small, reviewable form.
+
+Primary files to inspect:
+- artifacts/overpaying-for-ai/src/data/models.json
+- artifacts/overpaying-for-ai/src/data/pricing-pages.json
+- artifacts/overpaying-for-ai/src/data/comparisons.json
+- artifacts/overpaying-for-ai/src/engine/types.ts
+- artifacts/overpaying-for-ai/src/pages/ModelsPage.tsx
+- artifacts/overpaying-for-ai/src/pages/PricingPage.tsx
+- artifacts/overpaying-for-ai/public/sitemap.xml or public/sitemap.xml if relevant
+
+Audit scope:
+Check every model/tool entry in models.json and pricing-pages.json.
+
+For each entry, verify:
+- provider
+- model/tool name
+- planType: api or subscription
+- inputCostPer1k
+- outputCostPer1k
+- monthlySubscriptionCostIfAny
+- free tier status
+- source URL
+- last_updated date
+- notes that mention pricing
+- any pricing claims in pricing-pages.json
+- any pricing claims in comparisons.json
+
+Critical unit rule:
+models.json stores API costs per 1K tokens, not per 1M tokens.
+
+So:
+- $5.00 per 1M input tokens = 0.005 per 1K input tokens
+- $30.00 per 1M output tokens = 0.03 per 1K output tokens
+- $0.15 per 1M input tokens = 0.00015 per 1K input tokens
+
+Do not confuse per-1M and per-1K pricing.
+
+Source priority:
+Use official provider pricing pages first.
+Use Artificial Analysis or third-party sources only when official provider pricing is unavailable or unclear.
+If using a third-party source, mark that clearly in source or notes.
+
+Preferred official sources to check:
+- OpenAI: https://openai.com/api/pricing/
+- OpenAI ChatGPT plans: https://openai.com/chatgpt/pricing/
+- Anthropic: https://www.anthropic.com/pricing
+- Google AI / Gemini: official Google AI pricing pages
+- Google One AI Premium: official Google One pricing page
+- xAI: official xAI API pricing page
+- Mistral: official Mistral pricing page
+- Cohere: official Cohere pricing page
+- DeepSeek: official DeepSeek API pricing page
+- Groq: official Groq pricing page
+- Cursor: official Cursor pricing page
+- GitHub Copilot: official GitHub Copilot pricing page
+- Perplexity: official Perplexity pricing page
+- Jasper: official Jasper pricing page
+- Writesonic: official Writesonic pricing page
+- Replit: official Replit pricing page if present in the data
+- Any other providers currently present in models.json or pricing-pages.json
+
+Phase 1 — Audit report first:
+Before changing data, create a markdown audit report:
+
+Path:
+artifacts/overpaying-for-ai/out/pricing-audits/latest-model-pricing-audit.md
+
+Include:
+1. Audit date
+2. Branch
+3. Files inspected
+4. Total model/tool entries checked
+5. Table of entries with:
+   - id or slug
+   - name
+   - provider
+   - current stored inputCostPer1k
+   - verified inputCostPer1k
+   - current stored outputCostPer1k
+   - verified outputCostPer1k
+   - current monthlySubscriptionCostIfAny
+   - verified monthlySubscriptionCostIfAny
+   - source URL
+   - status: correct / updated / needs manual review / source unavailable
+   - notes
+6. List of stale entries where last_updated is older than 90 days.
+7. List of entries using third-party sources instead of official provider sources.
+8. List of pricing claims in pricing-pages.json or comparisons.json that need wording changes.
+9. Summary of high-risk inaccuracies.
+
+Phase 2 — Update data:
+After creating the audit report, update data only where you can verify the pricing confidently.
+
+Update:
+- models.json
+- pricing-pages.json
+- comparisons.json only if it contains stale or incorrect pricing copy
+- types.ts only if optional fields are needed
+
+For each updated model/tool entry:
+- update source to the best source URL
+- update last_updated to today’s date
+- preserve existing id values unless absolutely necessary
+- preserve existing category, bestFor, and scoring unless pricing change makes them clearly wrong
+- adjust costScore only if the pricing changed materially
+- do not remove entries unless clearly obsolete; instead mark notes if legacy
+
+Use today’s date as:
+2026-04-25
+
+If pricing cannot be verified:
+- do not guess
+- leave the existing price
+- update audit report status as needs manual review
+- add a clear note in the audit report
+
+Phase 3 — Data consistency checks:
+After updates, check:
+- JSON is valid
+- no duplicate ids in models.json
+- all API models have numeric inputCostPer1k and outputCostPer1k
+- all subscription models have monthlySubscriptionCostIfAny as number or null
+- all source fields are valid URLs
+- all last_updated fields are YYYY-MM-DD
+- pricing-pages.json contains no stale phrases like “as of early 2025”
+- no page says “current pricing” without a last-verified/source note where possible
+
+Phase 4 — Optional UI improvement:
+If low-risk, add or improve a small pricing freshness note on the Models page:
+“Pricing can change. We show source and last-verified dates where available.”
+
+Do not redesign tables.
+
+Phase 5 — Validation:
+Run:
+pnpm install if needed
+pnpm run typecheck
+pnpm run build
+
+Fix any TypeScript/build errors.
+
+Final response required:
+Return:
+- current branch confirmed
+- files inspected
+- files changed
+- number of models/tools checked
+- number updated
+- number needing manual review
+- list of high-risk pricing changes
+- path to audit report
+- typecheck result
+- build result
+- skipped items and why
+- suggested PR title and PR body
+
+Suggested PR title:
+Audit and refresh AI model pricing data
+
+Suggested PR body:
+## Summary
+- Audited model/tool pricing across models.json, pricing-pages.json, and comparisons.json.
+- Updated verified prices, sources, and last-updated dates.
+- Added a pricing audit report.
+- Flagged entries needing manual review.
+
+## Validation
+- [ ] Pricing audit report created
+- [ ] JSON validity checked
+- [ ] No duplicate model ids
+- [ ] Typecheck passes
+- [ ] Build passes
+- [ ] High-risk pricing changes reviewed manually
