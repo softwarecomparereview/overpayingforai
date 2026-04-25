@@ -179,6 +179,50 @@ The following 7 entries could not be price-verified against an official source a
 
 ---
 
+## Manual Review Resolution — 2026-04-25
+
+The 7 entries flagged for manual review in the initial audit have been tagged in `models.json` with the new optional fields `needsManualReview`, `verificationStatus`, and `pricingDisplayNote` (added to the `AIModel` type in `types.ts`). This prevents unverified data from silently influencing winner recommendations.
+
+### Entries marked `legacy`
+
+| ID | Reason |
+|---|---|
+| `deepseek-coder-v2` | DeepSeek has moved to the V4 model family; original Coder V2 pricing/availability unconfirmed on the current API. Retained as historical context only. |
+
+### Entries marked `third-party-source`
+
+| ID | Reason |
+|---|---|
+| `llama-3-1-instruct-70b` | No official Meta API pricing page exists; pricing sourced from third-party aggregator only. |
+| `qwen-coder` | No official Alibaba/Qwen international API pricing page verified. |
+| `qwen-general` | No official Alibaba/Qwen international API pricing page verified. |
+
+### Entries marked `manual-review`
+
+| ID | Reason |
+|---|---|
+| `writesonic-basic` | Writesonic has restructured plan names and pricing; stored $20/mo requires re-verification. |
+| `copyai-free` | Stored $36/mo appears to be the annual billing equivalent; monthly rate ($49/mo) needs confirmation. |
+| `rytr-saver` | $9/mo is plausible from search results but could not be confirmed directly from the official pricing page. |
+
+### Winner and category recommendation exclusions
+
+All 7 entries above are **excluded from winner and category recommendation slots** in `ModelsPage.tsx`. The exclusion is enforced by the `isPricingVerified()` helper, which returns `false` for any model where `needsManualReview === true` or `verificationStatus` is `"manual-review"`, `"legacy"`, or `"third-party-source"`.
+
+Affected pick functions:
+- `pickQuickWinners()` — Best Overall Value, Cheapest Overall, Best for Coding, Best for Writing
+- `pickCategoryWinners()` — General AI, Coding, Writing, Research, Productivity, Customer Support
+
+### Caution labels in the full pricing table
+
+Entries with `needsManualReview: true` still appear in the full `/models` pricing table but are marked with:
+- A visible amber `⚠ Needs manual pricing review` badge
+- The `pricingDisplayNote` text (if present) in smaller muted text below the badge
+
+The table layout is unchanged. No models were removed from the table.
+
+---
+
 ## Recommended Follow-Up Actions
 
 1. **Verify Copy.ai pricing convention** — decide whether to show monthly ($49/mo) or annual ($36/mo) rate for consistency with other tools.

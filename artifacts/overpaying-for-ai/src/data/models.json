@@ -677,9 +677,11 @@
     "latencyScore": 45,
     "category": "coding",
     "supportsApiUsage": true,
-    "notes": "High-value coding-focused model candidate for V1.",
+    "notes": "Legacy DeepSeek coding model. Pricing/status needs manual confirmation because DeepSeek has moved to newer model families.",
     "last_updated": "2026-04-25",
-    "source": "https://api-docs.deepseek.com/quick_start/pricing"
+    "source": "https://api-docs.deepseek.com/quick_start/pricing",
+    "needsManualReview": true,
+    "verificationStatus": "legacy"
   },
   {
     "id": "grok-4",
@@ -771,7 +773,10 @@
     "supportsApiUsage": true,
     "notes": "Represents mainstream open-weight served alternatives.",
     "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "source": "https://artificialanalysis.ai/models",
+    "needsManualReview": true,
+    "verificationStatus": "third-party-source",
+    "pricingDisplayNote": "No official Meta API pricing source verified; pricing is based on third-party served-model data."
   },
   {
     "id": "qwen-coder",
@@ -793,7 +798,10 @@
     "supportsApiUsage": true,
     "notes": "Strong coding-focused Alibaba entry for comparison breadth.",
     "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "source": "https://artificialanalysis.ai/models",
+    "needsManualReview": true,
+    "verificationStatus": "third-party-source",
+    "pricingDisplayNote": "Official Alibaba/Qwen international pricing source requires manual confirmation."
   },
   {
     "id": "qwen-general",
@@ -815,7 +823,10 @@
     "supportsApiUsage": true,
     "notes": "Represents Qwen family for broader provider coverage in V1.",
     "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "source": "https://artificialanalysis.ai/models",
+    "needsManualReview": true,
+    "verificationStatus": "third-party-source",
+    "pricingDisplayNote": "Official Alibaba/Qwen international pricing source requires manual confirmation."
   },
   {
     "id": "writesonic-basic",
@@ -838,7 +849,10 @@
     "supportsApiUsage": false,
     "notes": "Budget-friendly AI writing tool. Good for blog posts, ads, and marketing copy at lower cost than Jasper.",
     "last_updated": "2026-04-11",
-    "source": "https://writesonic.com/pricing"
+    "source": "https://writesonic.com/pricing",
+    "needsManualReview": true,
+    "verificationStatus": "manual-review",
+    "pricingDisplayNote": "Writesonic plan names/prices may have changed; verify official pricing before relying on this amount."
   },
   {
     "id": "jasper-creator",
@@ -884,7 +898,10 @@
     "supportsApiUsage": false,
     "notes": "AI writing tool with workflow automation features. Mid-tier cost positioning between Writesonic and Jasper.",
     "last_updated": "2026-04-11",
-    "source": "https://copy.ai/pricing"
+    "source": "https://copy.ai/pricing",
+    "needsManualReview": true,
+    "verificationStatus": "manual-review",
+    "pricingDisplayNote": "Stored price may represent annual billing equivalent. Confirm month-to-month price for consistent comparison."
   },
   {
     "id": "rytr-saver",
@@ -907,7 +924,10 @@
     "supportsApiUsage": false,
     "notes": "Lowest-cost AI writing subscription. Quality is below Writesonic or Jasper but usable for simple content tasks.",
     "last_updated": "2026-04-11",
-    "source": "https://rytr.me/pricing"
+    "source": "https://rytr.me/pricing",
+    "needsManualReview": true,
+    "verificationStatus": "manual-review",
+    "pricingDisplayNote": "Pricing likely current but requires official confirmation."
   },
   {
     "id": "gpt-5-5",

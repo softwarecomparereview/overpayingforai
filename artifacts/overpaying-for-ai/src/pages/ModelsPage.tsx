@@ -11,6 +11,21 @@ const models = modelsData as AIModel[];
 
 const PAGE_TYPE = "models";
 
+/**
+ * Returns true only if the model has fully verified pricing.
+ * Models flagged as manual-review, legacy, or third-party-source are excluded
+ * from winner and category recommendation logic.
+ */
+function isPricingVerified(m: AIModel): boolean {
+  if (m.needsManualReview) return false;
+  if (
+    m.verificationStatus === "manual-review" ||
+    m.verificationStatus === "legacy" ||
+    m.verificationStatus === "third-party-source"
+  ) return false;
+  return true;
+}
+
 interface ValueClass {
   label: "Best value" | "Situational" | "Premium / expensive";
   className: string;
@@ -69,7 +84,10 @@ interface QuickWinner {
 function pickQuickWinners(): QuickWinner[] {
   // Restrict value-oriented picks to paid API models so we surface buying decisions,
   // not free tiers. Cheapest pick can include any priced model.
-  const paidApi = models.filter((m) => m.planType === "api" && m.outputCostPer1k > 0);
+  // Exclude models with unverified/manual-review/legacy/third-party-source pricing.
+  const paidApi = models.filter(
+    (m) => m.planType === "api" && m.outputCostPer1k > 0 && isPricingVerified(m),
+  );
 
   // Best Overall Value: highest (qualityScore + costScore) among paid API models
   const bestOverall = [...paidApi]
@@ -114,9 +132,11 @@ const CATEGORY_DEFS: Array<{ category: string; key: string; rationale: string }>
 ];
 
 function pickCategoryWinners(): CategoryWinner[] {
+  // Only models with verified pricing are eligible for category winner slots.
+  const verifiedModels = models.filter(isPricingVerified);
   return CATEGORY_DEFS.map(({ category, key, rationale }) => {
-    const pool = models.filter((m) => (m.bestFor || []).includes(key));
-    const winner = [...(pool.length ? pool : models)]
+    const pool = verifiedModels.filter((m) => (m.bestFor || []).includes(key));
+    const winner = [...(pool.length ? pool : verifiedModels)]
       .sort((a, b) => estimateMonthly(a) - estimateMonthly(b) || b.qualityScore - a.qualityScore)[0];
     return { category, bestForKey: key, model: winner, rationale };
   }).filter((c) => !!c.model);
@@ -342,7 +362,21 @@ export function ModelsPage() {
                 const actionLabel = cta.isExternal ? "Use this model" : "Calculate cost";
                 return (
                   <tr key={m.id} className="border-t" data-testid={`row-${m.id}`}>
-                    <td className="p-3 font-semibold">{m.name}</td>
+                    <td className="p-3">
+                      <div className="font-semibold">{m.name}</div>
+                      {m.needsManualReview && (
+                        <div className="mt-0.5">
+                          <span className="inline-block text-xs text-amber-700 dark:text-amber-400 font-medium">
+                            ⚠ Needs manual pricing review
+                          </span>
+                          {m.pricingDisplayNote && (
+                            <div className="text-xs text-muted-foreground mt-0.5 leading-snug max-w-xs">
+                              {m.pricingDisplayNote}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </td>
                     <td className="p-3">{m.provider}</td>
                     <td className="p-3 text-right">
                       {formatPrice(m.inputCostPer1k)}
