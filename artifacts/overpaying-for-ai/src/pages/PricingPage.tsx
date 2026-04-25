@@ -4,6 +4,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import { getAffiliateTarget } from "@/utils/affiliateResolver";
+import { trackCalculatorStart } from "@/utils/analytics";
 
 type PricingPage = typeof pricingData[number];
 const pages = pricingData as PricingPage[];
@@ -87,6 +88,7 @@ export function PricingPage() {
         <div className="mt-4 flex flex-col sm:flex-row gap-3">
           <Link
             href="/calculator"
+            onClick={() => trackCalculatorStart({ pageSlug: page.slug, pageType: "pricing", sourceComponent: "PricingPage/VerdictCta" })}
             className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
           >
             Calculate your exact cost →
@@ -121,6 +123,14 @@ export function PricingPage() {
       )}
 
       <InternalLinks links={page.internalLinks} heading="Related comparisons" />
+
+      <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
+        Pricing based on publicly available rates. Check current provider pricing before subscribing.
+        Some links may be affiliate links — see our{" "}
+        <Link href="/affiliate-disclosure" className="underline hover:text-foreground">
+          affiliate disclosure
+        </Link>.
+      </p>
     </article>
   );
 }

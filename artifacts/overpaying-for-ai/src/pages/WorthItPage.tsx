@@ -2,6 +2,7 @@ import { useParams, Link } from "wouter";
 import worthItData from "@/data/worth-it-pages.json";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
+import { trackCalculatorStart } from "@/utils/analytics";
 
 type WorthItPage = typeof worthItData[number];
 const pages = worthItData as WorthItPage[];
@@ -48,6 +49,7 @@ export function WorthItPage() {
   const costComparison = hasCostComparison ? (page as { costComparison: { heading: string; content: string } }).costComparison : null;
   const hasRecommendation = "recommendation" in page && typeof (page as { recommendation?: unknown }).recommendation === "string";
   const recommendation = hasRecommendation ? (page as { recommendation: string }).recommendation : null;
+  const pricingNote = (page as { pricingNote?: string }).pricingNote ?? null;
 
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -66,6 +68,12 @@ export function WorthItPage() {
       </nav>
 
       <header className="mb-8">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xs font-medium text-muted-foreground bg-muted px-2.5 py-1 rounded-full">Worth It?</span>
+          {pricingNote && (
+            <span className="text-xs text-muted-foreground italic">{pricingNote}</span>
+          )}
+        </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{page.h1}</h1>
         <div className="border border-primary/20 bg-primary/5 rounded-xl p-4 mb-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Bottom line</p>
@@ -137,6 +145,7 @@ export function WorthItPage() {
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">{costComparison.content}</p>
           <Link
             href="/calculator"
+            onClick={() => trackCalculatorStart({ pageSlug: page.slug, pageType: "worth-it", sourceComponent: "WorthItPage/CostComparisonCta" })}
             className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
           >
             Calculate your exact cost →
@@ -152,6 +161,7 @@ export function WorthItPage() {
           </p>
           <Link
             href="/calculator"
+            onClick={() => trackCalculatorStart({ pageSlug: page.slug, pageType: "worth-it", sourceComponent: "WorthItPage/DefaultCta" })}
             className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
           >
             Calculate your AI cost →
@@ -181,6 +191,14 @@ export function WorthItPage() {
       )}
 
       <InternalLinks links={page.internalLinks} heading="Related guides" />
+
+      <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
+        This page contains editorial assessments based on publicly available pricing.
+        Some links may be affiliate links — see our{" "}
+        <Link href="/affiliate-disclosure" className="underline hover:text-foreground">
+          affiliate disclosure
+        </Link>.
+      </p>
     </article>
   );
 }

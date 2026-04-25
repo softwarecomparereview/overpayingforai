@@ -168,7 +168,7 @@ function buildIndex(): SiteSearchEntry[] {
         c.modelA ?? "",
         c.modelB ?? "",
         c.summary ?? "",
-        "compare vs cost pricing",
+        "compare vs cost pricing overpaying chatgpt claude openai anthropic gemini",
       ]
         .join(" ")
         .toLowerCase(),
@@ -188,7 +188,7 @@ function buildIndex(): SiteSearchEntry[] {
         p.toolName ?? "",
         p.provider ?? "",
         p.h1 ?? "",
-        "pricing plans cost worth",
+        "pricing plans cost worth overpaying subscription monthly fee openai anthropic google",
       ]
         .join(" ")
         .toLowerCase(),
@@ -207,7 +207,7 @@ function buildIndex(): SiteSearchEntry[] {
         a.title,
         a.h1 ?? "",
         a.intro?.slice(0, 200) ?? "",
-        "alternatives cheaper better compare",
+        "alternatives cheaper better compare overpaying cheaper than chatgpt free option switch",
       ]
         .join(" ")
         .toLowerCase(),
@@ -225,7 +225,7 @@ function buildIndex(): SiteSearchEntry[] {
         w.slug.replace(/-/g, " "),
         w.title,
         w.verdict?.slice(0, 200) ?? "",
-        "worth it should i pay is it worth value",
+        "worth it should i pay is it worth value overpaying ai subscription monthly fee chatgpt openai anthropic claude",
       ]
         .join(" ")
         .toLowerCase(),
@@ -306,10 +306,13 @@ function scoreEntry(entry: SiteSearchEntry, tokens: string[]): number {
   let score = 0;
   for (const token of tokens) {
     if (!token) continue;
-    // Word-boundary: preceded by space or start
-    const wordBoundary = new RegExp(`(?:^|\\s)${token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "i");
-    if (wordBoundary.test(haystack)) {
-      score += 3;
+    // Count ALL word-boundary occurrences so pages with the term in slug + title + toolName
+    // rank above pages that only have it once in a generic suffix.
+    const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const wordBoundary = new RegExp(`(?:^|\\s)${escaped}`, "gi");
+    const wbCount = (haystack.match(wordBoundary) ?? []).length;
+    if (wbCount > 0) {
+      score += wbCount * 3;
     } else if (haystack.includes(token)) {
       score += 1;
     }

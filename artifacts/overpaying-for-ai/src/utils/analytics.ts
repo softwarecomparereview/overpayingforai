@@ -48,6 +48,9 @@ const ALLOWED_EVENTS = new Set([
   "site_search_submit",
   "site_search_result_click",
   "site_search_no_results",
+  // Commercial pages
+  "internal_link_click",
+  "calculator_start",
 ]);
 
 /**
@@ -265,6 +268,53 @@ export function trackOutboundClick(params: {
     page_path: pagePath,
   });
   if (isDev) console.log("analytics", "outbound_click", params);
+}
+
+// ─── Commercial page tracking ─────────────────────────────────────────────────
+
+export interface CommercialPageEventParams {
+  pageSlug: string;
+  pageType: string;
+  ctaLabel?: string;
+  destinationSlug?: string;
+  outboundUrl?: string;
+  toolName?: string;
+}
+
+/**
+ * Track internal link clicks on commercial pages (pricing, worth-it, alternatives, compare).
+ */
+export function trackInternalLinkClick(params: CommercialPageEventParams): void {
+  const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+  track("internal_link_click", { ...params, pagePath });
+  trackGaEvent("internal_link_click", {
+    page_slug: params.pageSlug,
+    page_type: params.pageType,
+    cta_label: params.ctaLabel ?? "",
+    destination_slug: params.destinationSlug ?? "",
+    tool_name: params.toolName ?? "",
+    page_path: pagePath,
+  });
+  if (isDev) console.log("analytics", "internal_link_click", params);
+}
+
+/**
+ * Track calculator start events from commercial pages.
+ */
+export function trackCalculatorStart(params: {
+  pageSlug: string;
+  pageType: string;
+  sourceComponent: string;
+}): void {
+  const pagePath = typeof window !== "undefined" ? window.location.pathname : "";
+  track("calculator_start", { ...params, pagePath });
+  trackGaEvent("calculator_start", {
+    page_slug: params.pageSlug,
+    page_type: params.pageType,
+    source_component: params.sourceComponent,
+    page_path: pagePath,
+  });
+  if (isDev) console.log("analytics", "calculator_start", params);
 }
 
 // ─── Site search tracking ─────────────────────────────────────────────────────
