@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { SearchBox } from "@/components/search/SearchBox";
 
 const navLinks = [
   { href: "/calculator", label: "Calculator" },
@@ -11,13 +12,38 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+function SearchIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.304 10.011a3.5 3.5 0 1 1 .707-.707l2.343 2.343a.5.5 0 0 1-.707.707L9.304 10.011Z"
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const closeSearch = () => setSearchOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
+        {/* ── Main header row ──────────────────────────────────── */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
           <Link
             href="/"
@@ -44,6 +70,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-2 ml-auto">
+            {/* Desktop search icon */}
+            <button
+              onClick={() => {
+                setSearchOpen((v) => !v);
+                setMenuOpen(false);
+              }}
+              aria-label={searchOpen ? "Close search" : "Open search"}
+              title="Search"
+              className={`hidden md:flex items-center justify-center w-8 h-8 rounded transition-colors ${
+                searchOpen
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+              }`}
+            >
+              {searchOpen ? (
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                  <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <SearchIcon />
+              )}
+            </button>
+
             <Link
               href="/calculator"
               className="text-xs sm:text-sm bg-primary text-primary-foreground px-3 sm:px-4 py-1 sm:py-1.5 rounded font-medium hover:bg-primary/90 transition-colors"
@@ -53,17 +102,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <span className="sm:hidden">Calculate</span>
             </Link>
 
+            {/* Mobile: search icon + hamburger */}
             <button
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => {
+                setSearchOpen(false);
+                setMenuOpen((v) => !v);
+              }}
               aria-label="Toggle navigation menu"
               className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 rounded hover:bg-muted transition-colors"
             >
               <span
                 className={`block w-5 h-0.5 bg-foreground transition-transform origin-center ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
               />
-              <span
-                className={`block w-5 h-0.5 bg-foreground transition-opacity ${menuOpen ? "opacity-0" : ""}`}
-              />
+              <span className={`block w-5 h-0.5 bg-foreground transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
               <span
                 className={`block w-5 h-0.5 bg-foreground transition-transform origin-center ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
               />
@@ -71,22 +122,45 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
+        {/* ── Desktop search row (expands below header bar) ────── */}
+        {searchOpen && (
+          <div className="hidden md:block border-t border-border bg-background px-4 py-3">
+            <div className="max-w-2xl mx-auto">
+              <SearchBox
+                placeholder="Search AI pricing, comparisons, guides…"
+                onClose={closeSearch}
+                autoFocus
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ── Mobile menu ───────────────────────────────────────── */}
         {menuOpen && (
-          <div className="md:hidden border-t border-border bg-background px-4 py-3 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`px-3 py-2 rounded text-sm transition-colors ${
-                  location.startsWith(link.href)
-                    ? "bg-muted text-foreground font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="md:hidden border-t border-border bg-background px-4 py-3 flex flex-col gap-2">
+            {/* Search at top of mobile menu */}
+            <div className="pb-1">
+              <SearchBox
+                placeholder="Search pages…"
+                onClose={closeMenu}
+              />
+            </div>
+            <div className="border-t border-border/60 pt-1 flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className={`px-3 py-2 rounded text-sm transition-colors ${
+                    location.startsWith(link.href)
+                      ? "bg-muted text-foreground font-medium"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </header>

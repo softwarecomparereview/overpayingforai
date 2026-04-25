@@ -44,6 +44,10 @@ const ALLOWED_EVENTS = new Set([
   "pricing_refresh_started",
   "pricing_diff_reviewed",
   "pricing_refresh_approved",
+  // Site search
+  "site_search_submit",
+  "site_search_result_click",
+  "site_search_no_results",
 ]);
 
 /**
@@ -261,4 +265,39 @@ export function trackOutboundClick(params: {
     page_path: pagePath,
   });
   if (isDev) console.log("analytics", "outbound_click", params);
+}
+
+// ─── Site search tracking ─────────────────────────────────────────────────────
+
+export interface SearchTrackingParams {
+  query: string;
+  result_count: number;
+  clicked_slug?: string;
+  page_location?: string;
+}
+
+/**
+ * Track site search interactions.
+ * @param action  "submit" | "result_click" | "no_results"
+ * @param params  Query, result count, and optional clicked slug / page location
+ */
+export function trackSearch(
+  action: "submit" | "result_click" | "no_results",
+  params: SearchTrackingParams,
+): void {
+  const eventName =
+    action === "submit"
+      ? "site_search_submit"
+      : action === "result_click"
+        ? "site_search_result_click"
+        : "site_search_no_results";
+
+  track(eventName, { ...params });
+  trackGaEvent(eventName, {
+    query: params.query,
+    result_count: String(params.result_count),
+    clicked_slug: params.clicked_slug ?? "",
+    page_location: params.page_location ?? "",
+  });
+  if (isDev) console.log("analytics", eventName, params);
 }

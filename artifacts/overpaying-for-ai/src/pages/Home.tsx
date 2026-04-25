@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track } from "@/utils/analytics";
+import { SearchBox } from "@/components/search/SearchBox";
 import comparisonsData from "@/data/comparisons.json";
 import bestOfData from "@/data/best-of.json";
 import guidesData from "@/data/guides.json";
@@ -195,6 +196,16 @@ export function Home() {
                 </a>
               </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── SEARCH ────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6">
+          <p className="text-xs font-medium text-muted-foreground text-center mb-3 uppercase tracking-wide">
+            Find AI pricing pages, comparisons, and guides
+          </p>
+          <SearchBox placeholder={`Search — try "chatgpt pricing", "claude vs gpt", "coding tools"…`} />
         </div>
       </section>
 
