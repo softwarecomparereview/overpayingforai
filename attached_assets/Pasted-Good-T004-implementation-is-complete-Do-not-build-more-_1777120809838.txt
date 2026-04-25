@@ -1,0 +1,168 @@
+Good. T004 implementation is complete.
+
+Do not build more pages yet.
+
+Now do focused launch-hardening QA for the third content block only.
+
+Scope:
+1. /best/best-ai-tools-for-freelancers
+2. /best/best-ai-tools-for-founders
+3. /best/best-ai-tools-for-developers
+4. /best/best-value-ai-tools
+5. /best/best-ai-tools-by-budget
+6. /compare/chatgpt-free-vs-plus
+7. /compare/claude-free-vs-paid
+8. /compare/gemini-free-vs-paid
+9. /pricing/cheapest-ai-tools
+10. /decision/which-ai-tool-should-i-buy
+
+Do not add pages.
+Do not redesign.
+Do not refactor unrelated code.
+Do not change first-cluster or second-cluster pages unless there is a clear broken-link issue.
+
+Check and report:
+
+1. Route/render QA
+- Confirm all 10 routes render without console errors.
+- Confirm each page has the correct H1.
+- Confirm each page has visible last-updated date.
+- Confirm pricing freshness notes appear where pricing is discussed.
+- Confirm affiliate/referral disclosure appears where commercial CTAs appear.
+- Confirm no page is thin or placeholder-like.
+
+2. SEO / metadata
+For each page confirm:
+- unique document title
+- title is not too long if avoidable
+- unique meta description
+- canonical URL is correct
+- page is included in sitemap.xml
+- page is included in leanSitemap.ts
+- page is included in internal site search
+- no duplicate-indexing issue is created
+
+3. Search QA
+Confirm these primary searches rank the expected page #1:
+- best ai tools for freelancers
+- best ai tools for founders
+- best ai tools for developers
+- best value ai tools
+- best ai tools by budget
+- chatgpt free vs plus
+- claude free vs paid
+- gemini free vs paid
+- cheapest ai tools
+- which ai tool should i buy
+
+Also test:
+- ai tools under 20 dollars
+- avoid overpaying for ai
+
+Regression-check:
+- chatgpt pricing
+- claude pricing
+- gemini pricing
+- chatgpt vs claude
+- chatgpt vs gemini
+- claude vs gemini
+- ai savings calculator
+
+4. Pricing/data accuracy
+List every pricing or cost claim shown on the 10 pages.
+
+Mark each as:
+- verified from local data
+- approximate with freshness caveat
+- needs manual review
+
+Pay special attention to:
+- free vs paid claims
+- under $20/month claims
+- cheapest AI tools claims
+- Gemini / Google AI Pro storage wording
+- API/token pricing if shown
+- “best value” claims that could sound objective without a framework
+
+Confirm no unverified price is presented as guaranteed/current/final.
+
+5. Recommendation quality
+For every “best” or “cheapest” page, confirm:
+- ranking logic is explained
+- recommendations are scenario-based
+- page does not look like generic AI directory content
+- page explains who should not pay
+- page routes users to calculator/comparison/pricing pages
+
+6. CTA review
+For each page, list:
+- primary CTA
+- secondary CTA
+- calculator CTA
+- internal comparison/pricing links
+- provider/outbound CTA if any
+
+Confirm every CTA has:
+- correct navigation
+- correct analytics
+- or clear reason it is intentionally disabled
+
+7. Analytics completeness
+Confirm whether these events fire where relevant:
+- calculator_start
+- internal_link_click
+- primary_cta_click
+- comparison_cta_click
+- affiliate_click
+- outbound_click where relevant
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+For missing events, classify:
+- not applicable yet
+- missing and should be patched
+- intentionally deferred
+
+8. Mobile/layout QA
+Check all 10 pages at mobile width:
+- header search
+- mobile menu search
+- role/value cards
+- pricing cards
+- comparison cards
+- CTA cards
+- InternalLinks strip
+- footer disclosures
+- no horizontal overflow
+- no table/card clipping
+
+9. Internal linking QA
+Confirm the 10 pages link into the first 10 commercial pages where relevant:
+- /pricing/chatgpt-pricing
+- /pricing/claude-pricing
+- /pricing/gemini-pricing
+- /compare/chatgpt-vs-claude
+- /compare/chatgpt-vs-gemini
+- /compare/claude-vs-gemini
+- /worth-it/is-chatgpt-plus-worth-it
+- /worth-it/which-ai-subscription-is-worth-paying-for
+- /alternatives/best-chatgpt-alternatives
+- /calculator/ai-savings-calculator
+
+10. Final launch status
+Return a table:
+- Area
+- Pass/Fail
+- Issue
+- Required fix
+- File to change
+
+Then return:
+- Launch ready: Yes/No
+- Blocking fixes
+- Non-blocking improvements
+- Files changed, if any
+
+Important:
+Do not answer generally. Inspect actual source files and rendered routes. Where possible, name the exact file/component responsible for each pass/fail item. If something cannot be verified automatically, mark it as “manual verification required” instead of assuming it passes.
