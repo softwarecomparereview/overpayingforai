@@ -1,0 +1,166 @@
+Create a new standalone landing page for OverpayingForAI.
+
+Do NOT replace the homepage.
+
+Route:
+ /audit/ai-cost-reliability-audit
+
+Page title:
+ AI Cost & Reliability Audit | OverpayingForAI
+
+Meta description:
+ Find where your team is overpaying for AI tools, subscriptions, APIs, and unreliable workflows. Get a fixed-scope AI cost and reliability audit in 1–2 weeks.
+
+Requirements:
+- Keep the current homepage unchanged.
+- Use existing site branding, layout, header, footer, typography, spacing, and responsive styles.
+- Add the new page as a proper routed page.
+- Add a subtle “Audit” link in the main navigation if it fits existing nav style.
+- Add “AI Cost Audit” in the footer.
+- Add the page to sitemap.xml:
+  loc: https://overpayingforai.com/audit/ai-cost-reliability-audit
+  changefreq: monthly
+  priority: 0.6
+- Ensure page scrolls to top when route changes.
+- Ensure all internal links work on desktop and mobile.
+- Use mailto CTA:
+  contact@overpayingforai.com
+  subject: AI Cost & Reliability Audit
+- Add analytics events if analytics helpers already exist:
+  audit_page_view
+  audit_primary_cta_click
+  audit_secondary_cta_click
+  audit_contact_click
+- Do not add new analytics libraries if none exist. Use existing event tracking pattern only.
+- Do not create a SaaS dashboard or new product UI.
+- Do not alter pricing/comparison/calculator pages.
+
+Page content:
+
+H1:
+Stop paying for AI outputs you can’t trust.
+
+Hero subheading:
+OverpayingForAI helps teams find wasted AI spend, unreliable workflows, and avoidable tool overlap before it becomes expensive.
+
+Hero support line:
+Get a fixed-scope AI Cost & Reliability Audit in 1–2 weeks.
+
+Primary CTA:
+Request an audit
+
+Secondary CTA:
+See what we check
+
+Section: The hidden cost of AI is not just the subscription
+Copy:
+AI waste rarely shows up as one obvious bill. It usually shows up as duplicated tools, underused premium plans, expensive model defaults, inconsistent outputs, and manual rework.
+
+Bullets:
+- Too many overlapping AI subscriptions
+- Premium plans used for basic work
+- API usage routed to expensive models by default
+- Prompts producing inconsistent answers
+- Staff manually checking AI output because trust is low
+- Workflows that look automated but still need rework
+
+Closing sentence:
+That is how teams overpay: not just through price, but through rework, duplication, and poor model choices.
+
+Section: AI Cost & Reliability Audit
+Copy:
+A short, practical review of your AI tools, prompts, model usage, and workflows.
+
+We identify:
+- Where you are overspending
+- Where cheaper alternatives may fit
+- Where API or subscription choices are mismatched
+- Where AI outputs are inconsistent
+- Where validation or retry logic is missing
+- What to fix first
+
+Section: What we review
+Create four cards:
+
+Card 1 title:
+Tool and subscription overlap
+Card 1 copy:
+We look for duplicate tools, unused paid plans, avoidable seat costs, and subscriptions that no longer match actual usage.
+
+Card 2 title:
+API and model cost fit
+Card 2 copy:
+We check whether expensive models are being used where cheaper or faster models would be enough.
+
+Card 3 title:
+Output reliability
+Card 3 copy:
+We test whether the same prompt produces materially different, incomplete, or risky outputs across repeated runs.
+
+Card 4 title:
+Workflow risk
+Card 4 copy:
+We identify places where AI output is being trusted without enough review, validation, fallback, or human approval.
+
+Section: What you receive
+Bullets:
+- AI spend and tool-overlap summary
+- Model/API cost-fit review
+- Prompt reliability and drift findings
+- Risk flags for inconsistent outputs
+- Quick-win savings recommendations
+- Practical validation and retry patterns
+- Prioritized 30-day action plan
+
+Section: Who this is for
+Bullets:
+- Founders and operators using several AI tools
+- Consultants building AI-enabled delivery workflows
+- Agencies paying for multiple AI subscriptions
+- Engineering teams using AI APIs
+- Small teams unsure which AI plans are actually worth paying for
+
+Section: Pricing
+Copy:
+Fixed-scope audit from $2,500 AUD.
+
+Typical timeline:
+1–2 weeks.
+
+Guarantee:
+If we do not find meaningful improvement opportunities, you do not pay.
+
+Section: Final CTA
+Heading:
+Find out where AI spend is leaking.
+
+Copy:
+Send us your current AI stack, rough monthly spend, or one workflow you are unsure about. We will confirm whether an audit is worth doing.
+
+CTA:
+Request an audit
+
+FAQ section:
+Q: Do you need access to our systems?
+A: No. We can start with tool lists, billing exports, sample prompts, workflows, and example outputs.
+
+Q: Is this only about reducing cost?
+A: No. Cost is part of it. The bigger issue is paying for AI workflows that still produce inconsistent or risky outputs.
+
+Q: Do you replace our tools?
+A: No. The audit recommends what to keep, downgrade, switch, validate, or stop using.
+
+Q: Is this suitable for small teams?
+A: Yes. Small teams often overpay because they subscribe to too many overlapping tools too quickly.
+
+Q: Is this a SaaS product?
+A: No. This is a fixed-scope audit service. Productized tooling may come later only if demand is validated.
+
+After implementation:
+- Run build/tests if available.
+- Fix any TypeScript/lint errors.
+- Confirm the new route loads.
+- Confirm homepage is unchanged.
+- Confirm navigation/footer links work.
+- Confirm mobile layout is usable.
+- Provide a concise summary of files changed.

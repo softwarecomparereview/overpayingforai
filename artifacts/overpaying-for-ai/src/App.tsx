@@ -32,6 +32,7 @@ import { Contact } from "@/pages/Contact";
 import { About } from "@/pages/About";
 import { AffiliateDisclosure } from "@/pages/AffiliateDisclosure";
 import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
+import { AiCostAudit } from "@/pages/AiCostAudit";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -108,6 +109,7 @@ function Router() {
                 <Route path="/about" component={About} />
                 <Route path="/affiliate-disclosure" component={AffiliateDisclosure} />
                 <Route path="/privacy-policy" component={PrivacyPolicy} />
+                <Route path="/audit/ai-cost-reliability-audit" component={AiCostAudit} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>
