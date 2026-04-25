@@ -40,6 +40,7 @@ export function modelIdToProviderId(modelId: string): string {
   if (id.startsWith("jasper")) return "jasper";
   if (id.startsWith("copyai") || id.startsWith("copy.ai") || id.startsWith("copy-ai")) return "copyai";
   if (id.startsWith("rytr")) return "rytr";
+  if (id.startsWith("pressmaster")) return "pressmaster";
   return id;
 }
 
@@ -59,6 +60,8 @@ export function providerNameToId(providerName: string): string {
     Perplexity: "perplexity",
     Mistral: "mistral",
     "Mistral AI": "mistral",
+    Pressmaster: "pressmaster",
+    "Pressmaster.ai": "pressmaster",
   };
   return map[providerName] ?? providerName.toLowerCase().replace(/\s+/g, "-");
 }
