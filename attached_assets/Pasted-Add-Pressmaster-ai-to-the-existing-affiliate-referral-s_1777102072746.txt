@@ -1,0 +1,140 @@
+Add Pressmaster.ai to the existing affiliate/referral setup.
+
+IMPORTANT:
+Do NOT create a new affiliate model.
+Do NOT create a new referral architecture.
+Do NOT create duplicate tracking patterns.
+Use the existing affiliate setup, data structures, components, redirect logic, disclosure wording, and analytics conventions already in the codebase.
+
+REFERRAL PARTNER
+Vendor: Pressmaster.ai
+Referral URL:
+https://pressmasterai.cello.so/ivYDJwIP9XL
+
+Category:
+AI content publishing / LinkedIn content / thought leadership / founder marketing
+
+CTA label:
+Try Pressmaster
+
+Best-fit users:
+founders, consultants, creators, marketers, agencies, coaches, LinkedIn-heavy operators
+
+Trust note:
+Best for users who need content publishing, LinkedIn thought leadership, or founder-led marketing workflows. Not for API cost optimization, coding assistance, or model-cost comparison.
+
+TASKS
+
+1. Inspect existing affiliate setup
+Find the current files/components used for:
+- affiliate partner data
+- referral links
+- outbound/affiliate click tracking
+- disclosure text
+- CTA rendering
+- any /go/ redirect or equivalent tracking route
+
+Use those existing patterns only.
+
+2. Add Pressmaster to existing affiliate data
+Add Pressmaster in the same structure as the existing partners.
+
+Do not introduce a new schema unless absolutely required.
+
+If fields exist for:
+- id
+- name
+- url
+- affiliateUrl
+- category
+- ctaLabel
+- status
+- disclosure
+- notes
+- recommendedPages
+- excludedPages
+- trackingId
+
+Populate using existing naming conventions.
+
+3. Use existing redirect/tracking approach
+If the site already has a /go/[partner] route, add Pressmaster there.
+
+Preferred public route if supported:
+/go/pressmaster
+
+If the existing setup uses direct outbound links instead, use that.
+
+Do not create a second redirect system.
+
+4. Add Pressmaster only where relevant
+Search existing pages/data for founder, marketing, content, LinkedIn, social publishing, and best-tools pages.
+
+Add Pressmaster CTA only to relevant existing pages.
+
+Good placements:
+- founder AI tools page
+- marketing/content AI tools page
+- LinkedIn/content workflow page
+- best AI tools for founders page
+- any page about content creation or thought leadership
+
+Bad placements — do NOT add:
+- API calculator
+- API/token cost pages
+- coding tools pages
+- ChatGPT vs Claude core assistant pages unless there is a clearly separated “content workflow add-on” section
+- model-cost comparison pages
+
+5. CTA copy
+Use fit-based CTA copy, not generic spam.
+
+Examples:
+- Try Pressmaster for LinkedIn content workflows
+- Use Pressmaster if thought leadership is your main AI workflow
+- Compare Pressmaster for founder-led content publishing
+
+Include the existing affiliate disclosure pattern wherever required.
+
+6. Analytics
+Use the existing affiliate analytics event name and payload format.
+
+Do not invent new events.
+
+If the existing event is affiliate_click, use that.
+If the existing event is affiliate_clicked or outbound_click, follow the codebase convention.
+
+Make sure Pressmaster clicks are trackable by partner/tool name.
+
+7. Validation
+Run:
+- tsc --noEmit
+- npm run build if available
+- grep/search for Pressmaster
+- grep/search for the raw referral URL
+- confirm it appears only in the existing affiliate config or existing redirect mapping, not scattered everywhere
+- confirm Pressmaster does not appear on API/coding/model-cost pages
+- confirm analytics uses existing event names only
+
+8. Output
+Write:
+/out/audits/pressmaster-existing-affiliate-setup-summary.md
+
+Include:
+- existing affiliate setup discovered
+- files changed
+- Pressmaster data added
+- pages/components where CTA appears
+- pages deliberately excluded
+- analytics event used
+- disclosure behavior
+- validation results
+- remaining TODOs if any
+
+ACCEPTANCE CRITERIA
+- No new affiliate architecture created
+- Pressmaster added through existing affiliate setup
+- Referral link is tracked using existing analytics convention
+- CTA appears only on relevant content/founder/marketing pages
+- No invented pricing claims
+- Build/typecheck passes

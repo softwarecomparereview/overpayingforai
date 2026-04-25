@@ -489,6 +489,14 @@
         "why": "Lowest-cost paid AI writing tool at $9/month. Quality is basic — suitable for short-form content and first drafts. Not a replacement for Jasper or Writesonic on longer content.",
         "monthlyEstimate": "Free / $9/month",
         "badge": "Cheapest Paid Option"
+      },
+      {
+        "rank": 5,
+        "modelId": "pressmaster-pro",
+        "title": "Pressmaster.ai",
+        "why": "Built specifically for LinkedIn thought leadership and founder-led content publishing. If your primary content workflow is LinkedIn — not blog posts or ad copy — Pressmaster is a more focused fit than general writing tools.",
+        "monthlyEstimate": "See site for plans",
+        "badge": "Best for LinkedIn & Thought Leadership"
       }
     ],
     "faqs": [
@@ -651,6 +659,14 @@
         "why": "Keep this in your toolkit as a free fallback for one-off tasks. No reason to pay for ChatGPT Plus if you already have Claude or Cursor.",
         "monthlyEstimate": "$0",
         "badge": "Best Free Fallback"
+      },
+      {
+        "rank": 5,
+        "modelId": "pressmaster-pro",
+        "title": "Pressmaster.ai — if LinkedIn is your main channel",
+        "why": "For founders and consultants whose primary distribution is LinkedIn, Pressmaster is a specialized content publishing tool built around thought leadership workflows. Not a general writing tool — only worth adding if LinkedIn content is a core part of your strategy.",
+        "monthlyEstimate": "See site for plans",
+        "badge": "Best for Founder Content Publishing"
       }
     ],
     "faqs": [

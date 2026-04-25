@@ -174,4 +174,16 @@ export const affiliates: Record<string, AffiliateEntry> = {
     notes: "Affiliate program application pending.",
     updatedAt: "2026-04-11",
   },
+  pressmaster: {
+    id: "pressmaster",
+    name: "Pressmaster.ai",
+    affiliateUrl: "https://pressmasterai.cello.so/ivYDJwIP9XL",
+    directUrl: "https://pressmaster.ai",
+    fallbackUrl: "/best/ai-writing-tools-cheap",
+    status: "active",
+    ctaLabelPrimary: "Try Pressmaster",
+    ctaLabelSecondary: "Compare writing tools",
+    notes: "Active referral via Cello. Best for LinkedIn content workflows, thought leadership, and founder-led content publishing. Not for API cost optimization or coding tools.",
+    updatedAt: "2026-04-25",
+  },
 };
