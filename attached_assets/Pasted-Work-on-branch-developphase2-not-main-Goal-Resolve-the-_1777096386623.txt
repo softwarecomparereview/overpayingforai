@@ -1,0 +1,144 @@
+Work on branch developphase2, not main.
+
+Goal:
+Resolve the remaining manual-review pricing trust risks from the pricing audit.
+
+Files:
+- artifacts/overpaying-for-ai/src/data/models.json
+- artifacts/overpaying-for-ai/src/engine/types.ts
+- artifacts/overpaying-for-ai/src/pages/ModelsPage.tsx
+- artifacts/overpaying-for-ai/out/pricing-audits/latest-model-pricing-audit.md
+
+Context:
+The pricing audit flagged these entries for manual review:
+- deepseek-coder-v2
+- llama-3-1-instruct-70b
+- qwen-coder
+- qwen-general
+- writesonic-basic
+- copyai-free
+- rytr-saver
+
+Do not guess prices.
+Do not mark unverified pricing as fully verified.
+Do not work on main.
+Do not redesign the site.
+
+Task 1 — Extend AIModel type
+
+In artifacts/overpaying-for-ai/src/engine/types.ts, add optional fields:
+
+needsManualReview?: boolean;
+verificationStatus?: "verified" | "manual-review" | "legacy" | "third-party-source";
+pricingDisplayNote?: string;
+
+Do not make these required.
+
+Task 2 — Update manual-review entries in models.json
+
+For deepseek-coder-v2:
+- Set needsManualReview: true
+- Set verificationStatus: "legacy"
+- Update notes to:
+  "Legacy DeepSeek coding model. Pricing/status needs manual confirmation because DeepSeek has moved to newer model families."
+- Keep existing pricing only as historical/unverified unless official DeepSeek docs clearly confirm the exact model and price.
+
+For llama-3-1-instruct-70b:
+- Set needsManualReview: true
+- Set verificationStatus: "third-party-source"
+- Add pricingDisplayNote:
+  "No official Meta API pricing source verified; pricing is based on third-party served-model data."
+- Do not present this as official Meta pricing.
+
+For qwen-coder:
+- Set needsManualReview: true
+- Set verificationStatus: "third-party-source"
+- Add pricingDisplayNote:
+  "Official Alibaba/Qwen international pricing source requires manual confirmation."
+
+For qwen-general:
+- Set needsManualReview: true
+- Set verificationStatus: "third-party-source"
+- Add pricingDisplayNote:
+  "Official Alibaba/Qwen international pricing source requires manual confirmation."
+
+For writesonic-basic:
+- Set needsManualReview: true
+- Set verificationStatus: "manual-review"
+- Add pricingDisplayNote:
+  "Writesonic plan names/prices may have changed; verify official pricing before relying on this amount."
+
+For copyai-free:
+- Set needsManualReview: true
+- Set verificationStatus: "manual-review"
+- Add pricingDisplayNote:
+  "Stored price may represent annual billing equivalent. Confirm month-to-month price for consistent comparison."
+- Do not change to $49 unless official month-to-month pricing is verified during this task.
+
+For rytr-saver:
+- Set needsManualReview: true unless official Rytr pricing page confirms current pricing.
+- Set verificationStatus: "manual-review"
+- Add pricingDisplayNote:
+  "Pricing likely current but requires official confirmation."
+
+Task 3 — Fix winner logic
+
+In artifacts/overpaying-for-ai/src/pages/ModelsPage.tsx:
+
+Update winner selection logic so models with:
+- needsManualReview === true
+- verificationStatus === "manual-review"
+- verificationStatus === "legacy"
+- verificationStatus === "third-party-source"
+
+are excluded from:
+- Best Overall Value
+- Cheapest Overall
+- Best for Coding
+- Best for Writing
+- Category winners
+
+They may still appear in the full pricing table, but with a visible caution label.
+
+Task 4 — Add caution display in /models table
+
+For any model with needsManualReview or non-verified verificationStatus, show a small caution note in the row:
+
+"Needs manual pricing review"
+
+If pricingDisplayNote exists, show it in smaller text.
+
+Do not redesign the table.
+
+Task 5 — Update audit report
+
+Update:
+artifacts/overpaying-for-ai/out/pricing-audits/latest-model-pricing-audit.md
+
+Add a new section:
+
+## Manual Review Resolution — 2026-04-25
+
+Include:
+- Which entries were marked manual-review
+- Which entries were marked legacy
+- Which entries were marked third-party-source
+- Confirmation that unverified models are excluded from winner/category recommendation logic
+- Confirmation that they still appear in the full table with caution labels
+
+Task 6 — Validation
+
+Run:
+pnpm run typecheck
+pnpm run build
+
+Fix errors.
+
+Final response:
+- branch confirmed
+- files changed
+- entries updated
+- whether manual-review models are excluded from winners
+- typecheck result
+- build result
+- suggested PR title/body

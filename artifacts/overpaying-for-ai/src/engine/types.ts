@@ -31,6 +31,9 @@ export interface AIModel {
   releaseDate?: string;
   overpayRisk?: string;
   sourceLabel?: string;
+  needsManualReview?: boolean;
+  verificationStatus?: "verified" | "manual-review" | "legacy" | "third-party-source";
+  pricingDisplayNote?: string;
 }
 
 export interface CalculatorInputs {
