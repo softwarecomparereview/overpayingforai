@@ -8,15 +8,20 @@
     "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "chat", "writing", "multimodal"],
+    "bestFor": [
+      "general",
+      "chat",
+      "writing",
+      "multimodal"
+    ],
     "qualityScore": 88,
     "costScore": 43,
     "latencyScore": 42,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Strong general-purpose flagship. Good default for mixed workloads.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "gpt-4o-mini",
@@ -27,15 +32,20 @@
     "outputCostPer1k": 0.0006,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat", "high-volume"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
     "qualityScore": 70,
     "costScore": 73,
     "latencyScore": 29,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Cheap and practical for high-volume everyday tasks.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "chatgpt-plus",
@@ -46,14 +56,18 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["chat", "writing", "research"],
+    "bestFor": [
+      "chat",
+      "writing",
+      "research"
+    ],
     "qualityScore": 92,
     "costScore": 55,
     "latencyScore": 75,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Flat $20/month for access to GPT-4o. Good value for moderate usage; bad value for heavy API usage.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://openai.com/chatgpt/pricing/"
   },
   {
@@ -65,7 +79,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 70,
     "costScore": 100,
     "latencyScore": 65,
@@ -73,7 +90,7 @@
     "supportsApiUsage": true,
     "freeTierLimitDescription": "Limited GPT-4o access with daily rate limits — sufficient for light, occasional use only.",
     "notes": "Limited access to GPT-4o with rate limits. Fine for light, occasional use.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://openai.com/chatgpt/pricing/"
   },
   {
@@ -85,15 +102,20 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "writing", "research", "general"],
+    "bestFor": [
+      "coding",
+      "writing",
+      "research",
+      "general"
+    ],
     "qualityScore": 90,
     "costScore": 40,
     "latencyScore": 30,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "One of the strongest all-round models for coding and writing.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "claude-3-5-haiku",
@@ -104,15 +126,19 @@
     "outputCostPer1k": 0.004,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "chat", "automation"],
+    "bestFor": [
+      "budget",
+      "chat",
+      "automation"
+    ],
     "qualityScore": 72,
     "costScore": 54,
     "latencyScore": 45,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Fast and cheaper Anthropic option for lighter workloads.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "claude-pro",
@@ -123,14 +149,19 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["writing", "research", "coding", "chat"],
+    "bestFor": [
+      "writing",
+      "research",
+      "coding",
+      "chat"
+    ],
     "qualityScore": 94,
     "costScore": 55,
     "latencyScore": 74,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Access to Claude 3.5 Sonnet + Opus. Good deal if you use it heavily for writing and research.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://www.anthropic.com/pricing"
   },
   {
@@ -142,15 +173,19 @@
     "outputCostPer1k": 0.005,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["research", "long-context", "general"],
+    "bestFor": [
+      "research",
+      "long-context",
+      "general"
+    ],
     "qualityScore": 82,
     "costScore": 58,
     "latencyScore": 45,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Strong long-context model. Good fit for research and large-document workflows.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing"
   },
   {
     "id": "gemini-1-5-flash",
@@ -161,15 +196,20 @@
     "outputCostPer1k": 0.0003,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat", "high-volume"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat",
+      "high-volume"
+    ],
     "qualityScore": 68,
     "costScore": 90,
     "latencyScore": 80,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "One of the strongest value options for high-volume lightweight tasks.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing"
   },
   {
     "id": "gemini-advanced",
@@ -180,14 +220,18 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research", "chat", "writing"],
+    "bestFor": [
+      "research",
+      "chat",
+      "writing"
+    ],
     "qualityScore": 86,
     "costScore": 55,
     "latencyScore": 72,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Gemini Advanced via Google One. Includes 2TB storage — value depends on whether you use Google ecosystem.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://one.google.com/about/plans"
   },
   {
@@ -199,7 +243,10 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["chat", "writing"],
+    "bestFor": [
+      "chat",
+      "writing"
+    ],
     "qualityScore": 68,
     "costScore": 100,
     "latencyScore": 70,
@@ -207,7 +254,7 @@
     "supportsApiUsage": true,
     "freeTierLimitDescription": "Free access to Gemini with rate limits — best for light, occasional use only.",
     "notes": "Free access to Gemini 1.5 Flash with rate limits. Good fallback option.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://gemini.google.com/"
   },
   {
@@ -219,14 +266,16 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 93,
     "costScore": 60,
     "latencyScore": 85,
     "category": "coding",
     "supportsApiUsage": false,
     "notes": "Best-in-class coding IDE with AI embedded. Worth every dollar for professional developers.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://www.cursor.com/pricing"
   },
   {
@@ -238,7 +287,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 80,
     "costScore": 90,
     "latencyScore": 82,
@@ -246,7 +297,7 @@
     "supportsApiUsage": false,
     "freeTierLimitDescription": "2,000 completions/month — sufficient for light coding use only.",
     "notes": "Free tier with limited premium model uses per month. Good starting point.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://www.cursor.com/pricing"
   },
   {
@@ -254,38 +305,46 @@
     "name": "Mistral Large",
     "provider": "Mistral",
     "planType": "api",
-    "inputCostPer1k": 0.004,
-    "outputCostPer1k": 0.012,
+    "inputCostPer1k": 0.0005,
+    "outputCostPer1k": 0.0015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "europe", "writing"],
+    "bestFor": [
+      "general",
+      "europe",
+      "writing"
+    ],
     "qualityScore": 75,
-    "costScore": 40,
+    "costScore": 74,
     "latencyScore": 20,
     "category": "chat",
     "supportsApiUsage": true,
-    "notes": "Recognizable premium Mistral entry. Useful for provider diversity.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "notes": "Mistral Large 3 (Dec 2025). Significantly cheaper than prior versions. GDPR-friendly with EU data residency.",
+    "last_updated": "2026-04-25",
+    "source": "https://mistral.ai/pricing"
   },
   {
     "id": "mistral-small",
     "name": "Mistral Small",
     "provider": "Mistral",
     "planType": "api",
-    "inputCostPer1k": 0.0002,
-    "outputCostPer1k": 0.0006,
+    "inputCostPer1k": 0.0001,
+    "outputCostPer1k": 0.0003,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "automation", "chat"],
+    "bestFor": [
+      "budget",
+      "automation",
+      "chat"
+    ],
     "qualityScore": 64,
-    "costScore": 71,
+    "costScore": 85,
     "latencyScore": 53,
     "category": "chat",
     "supportsApiUsage": true,
-    "notes": "Affordable Mistral option for budget-sensitive workloads.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "notes": "Mistral Small 3.1. Very competitive pricing — $0.10/1M input, $0.30/1M output. Strong budget option with EU data residency.",
+    "last_updated": "2026-04-25",
+    "source": "https://mistral.ai/pricing"
   },
   {
     "id": "llama-3-1-70b",
@@ -296,14 +355,18 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "automation", "research"],
+    "bestFor": [
+      "coding",
+      "automation",
+      "research"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 75,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Open-source powerhouse via Groq/Together/etc. Near-frontier quality at a fraction of the cost.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://groq.com/pricing/"
   },
   {
@@ -311,19 +374,23 @@
     "name": "DeepSeek V3",
     "provider": "DeepSeek",
     "planType": "api",
-    "inputCostPer1k": 0.0004,
-    "outputCostPer1k": 0.00089,
+    "inputCostPer1k": 0.00027,
+    "outputCostPer1k": 0.0011,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "budget", "coding"],
+    "bestFor": [
+      "general",
+      "budget",
+      "coding"
+    ],
     "qualityScore": 80,
-    "costScore": 64,
+    "costScore": 65,
     "latencyScore": 35,
     "category": "chat",
     "supportsApiUsage": true,
-    "notes": "Excellent cost-to-performance profile. Strong differentiator in value comparisons.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "notes": "Excellent cost-to-performance profile. Strong differentiator in value comparisons. Pricing: $0.27/1M input, $1.10/1M output (cache-miss). Off-peak discounts available.",
+    "last_updated": "2026-04-25",
+    "source": "https://api-docs.deepseek.com/quick_start/pricing"
   },
   {
     "id": "perplexity-pro",
@@ -334,14 +401,16 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": false,
-    "bestFor": ["research"],
+    "bestFor": [
+      "research"
+    ],
     "qualityScore": 85,
     "costScore": 58,
     "latencyScore": 82,
     "category": "research",
     "supportsApiUsage": false,
     "notes": "Best for real-time web research with citations. Not a general-purpose assistant.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://www.perplexity.ai/pro"
   },
   {
@@ -353,14 +422,17 @@
     "outputCostPer1k": 0.00079,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": true,
-    "bestFor": ["automation", "coding"],
+    "bestFor": [
+      "automation",
+      "coding"
+    ],
     "qualityScore": 82,
     "costScore": 88,
     "latencyScore": 99,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "World's fastest inference. Free tier available. Perfect for latency-sensitive apps.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://groq.com/pricing/"
   },
   {
@@ -372,7 +444,9 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 0,
     "hasFreeTier": true,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 75,
     "costScore": 100,
     "latencyScore": 85,
@@ -380,7 +454,7 @@
     "supportsApiUsage": false,
     "freeTierLimitDescription": "2,000 completions/month + 50 chat messages — for VS Code users doing light coding.",
     "notes": "2000 completions/month and 50 chat messages free. Decent starting point for VS Code users.",
-    "last_updated": "2025-04-01",
+    "last_updated": "2026-04-25",
     "source": "https://github.com/features/copilot"
   },
   {
@@ -392,15 +466,18 @@
     "outputCostPer1k": 0.03,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["legacy", "general"],
+    "bestFor": [
+      "legacy",
+      "general"
+    ],
     "qualityScore": 72,
     "costScore": 30,
     "latencyScore": 4,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Legacy premium OpenAI option. Keep only for comparison continuity.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "o3",
@@ -411,15 +488,18 @@
     "outputCostPer1k": 0.008,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "coding"],
+    "bestFor": [
+      "reasoning",
+      "coding"
+    ],
     "qualityScore": 86,
     "costScore": 46,
     "latencyScore": 38,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Reasoning-oriented OpenAI model for harder tasks.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "o3-mini",
@@ -430,15 +510,18 @@
     "outputCostPer1k": 0.0044,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "budget"],
+    "bestFor": [
+      "reasoning",
+      "budget"
+    ],
     "qualityScore": 74,
     "costScore": 52,
     "latencyScore": 54,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Lower-cost reasoning option within the OpenAI family.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/"
   },
   {
     "id": "claude-3-opus",
@@ -449,15 +532,19 @@
     "outputCostPer1k": 0.075,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["premium", "writing", "research"],
+    "bestFor": [
+      "premium",
+      "writing",
+      "research"
+    ],
     "qualityScore": 84,
     "costScore": 23,
     "latencyScore": 15,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Premium high-quality Anthropic model. Expensive, but useful as a top-tier comparison anchor.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "claude-3-haiku",
@@ -468,15 +555,19 @@
     "outputCostPer1k": 0.00125,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "support", "chat"],
+    "bestFor": [
+      "budget",
+      "support",
+      "chat"
+    ],
     "qualityScore": 65,
     "costScore": 66,
     "latencyScore": 50,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Cheap Anthropic option suitable for support and light automation.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://www.anthropic.com/pricing"
   },
   {
     "id": "gemini-2-5-pro",
@@ -487,15 +578,19 @@
     "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "reasoning", "general"],
+    "bestFor": [
+      "coding",
+      "reasoning",
+      "general"
+    ],
     "qualityScore": 84,
     "costScore": 46,
     "latencyScore": 48,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Higher-end Google model suitable for coding and deeper analysis.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing"
   },
   {
     "id": "gemini-2-5-flash",
@@ -506,15 +601,19 @@
     "outputCostPer1k": 0.0025,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "high-volume", "automation"],
+    "bestFor": [
+      "reasoning",
+      "high-volume",
+      "automation"
+    ],
     "qualityScore": 74,
     "costScore": 61,
     "latencyScore": 60,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Good balance between budget and stronger capability in the Google family.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing"
   },
   {
     "id": "codestral",
@@ -525,34 +624,40 @@
     "outputCostPer1k": 0.0009,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding"],
+    "bestFor": [
+      "coding"
+    ],
     "qualityScore": 78,
     "costScore": 74,
     "latencyScore": 55,
     "category": "coding",
     "supportsApiUsage": true,
     "notes": "Coding-focused Mistral option. Keep as a dedicated coding candidate.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://mistral.ai/pricing"
   },
   {
     "id": "deepseek-r1",
     "name": "DeepSeek R1",
     "provider": "DeepSeek",
     "planType": "api",
-    "inputCostPer1k": 0.00135,
-    "outputCostPer1k": 0.004,
+    "inputCostPer1k": 0.00055,
+    "outputCostPer1k": 0.00219,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["reasoning", "research", "coding"],
+    "bestFor": [
+      "reasoning",
+      "research",
+      "coding"
+    ],
     "qualityScore": 83,
-    "costScore": 50,
+    "costScore": 60,
     "latencyScore": 28,
     "category": "chat",
     "supportsApiUsage": true,
-    "notes": "Reasoning-oriented DeepSeek model. Strong for analytical workloads.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "notes": "Reasoning-oriented DeepSeek model. Strong for analytical workloads. Pricing: $0.55/1M input, $2.19/1M output.",
+    "last_updated": "2026-04-25",
+    "source": "https://api-docs.deepseek.com/quick_start/pricing"
   },
   {
     "id": "deepseek-coder-v2",
@@ -563,15 +668,18 @@
     "outputCostPer1k": 0.0015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "budget"],
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
     "qualityScore": 81,
     "costScore": 70,
     "latencyScore": 45,
     "category": "coding",
     "supportsApiUsage": true,
     "notes": "High-value coding-focused model candidate for V1.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://api-docs.deepseek.com/quick_start/pricing"
   },
   {
     "id": "grok-4",
@@ -582,15 +690,19 @@
     "outputCostPer1k": 0.015,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "reasoning", "coding"],
+    "bestFor": [
+      "general",
+      "reasoning",
+      "coding"
+    ],
     "qualityScore": 82,
     "costScore": 40,
     "latencyScore": 28,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Recognizable xAI flagship for high-interest comparison traffic.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://docs.x.ai/api/"
   },
   {
     "id": "grok-4-fast",
@@ -601,34 +713,42 @@
     "outputCostPer1k": 0.0005,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["budget", "reasoning", "high-volume"],
+    "bestFor": [
+      "budget",
+      "reasoning",
+      "high-volume"
+    ],
     "qualityScore": 72,
     "costScore": 72,
     "latencyScore": 59,
     "category": "chat",
     "supportsApiUsage": true,
     "notes": "Budget-friendly xAI candidate for cheaper alternative recommendations.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "last_updated": "2026-04-25",
+    "source": "https://docs.x.ai/api/"
   },
   {
     "id": "command-r-plus",
     "name": "Command R+",
     "provider": "Cohere",
     "planType": "api",
-    "inputCostPer1k": 0.003,
-    "outputCostPer1k": 0.015,
+    "inputCostPer1k": 0.0025,
+    "outputCostPer1k": 0.01,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["research", "rag", "enterprise"],
+    "bestFor": [
+      "research",
+      "rag",
+      "enterprise"
+    ],
     "qualityScore": 76,
-    "costScore": 40,
+    "costScore": 45,
     "latencyScore": 30,
     "category": "chat",
     "supportsApiUsage": true,
-    "notes": "Good enterprise/retrieval-oriented model to represent Cohere.",
-    "last_updated": "2026-04-11",
-    "source": "https://artificialanalysis.ai/models"
+    "notes": "Command R+ 08-2024 version. $2.50/1M input, $10/1M output. Good enterprise/retrieval-oriented model for Cohere coverage.",
+    "last_updated": "2026-04-25",
+    "source": "https://cohere.com/pricing"
   },
   {
     "id": "llama-3-1-instruct-70b",
@@ -639,7 +759,11 @@
     "outputCostPer1k": 0.00056,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["open-weight", "budget", "general"],
+    "bestFor": [
+      "open-weight",
+      "budget",
+      "general"
+    ],
     "qualityScore": 70,
     "costScore": 65,
     "latencyScore": 15,
@@ -658,7 +782,10 @@
     "outputCostPer1k": 0.0012,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["coding", "budget"],
+    "bestFor": [
+      "coding",
+      "budget"
+    ],
     "qualityScore": 77,
     "costScore": 64,
     "latencyScore": 53,
@@ -677,7 +804,10 @@
     "outputCostPer1k": 0.0036,
     "monthlySubscriptionCostIfAny": null,
     "hasFreeTier": false,
-    "bestFor": ["general", "reasoning"],
+    "bestFor": [
+      "general",
+      "reasoning"
+    ],
     "qualityScore": 78,
     "costScore": 56,
     "latencyScore": 30,
@@ -696,7 +826,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 20,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "budget"],
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
     "qualityScore": 68,
     "costScore": 72,
     "latencyScore": 50,
@@ -715,7 +849,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 49,
     "hasFreeTier": false,
-    "bestFor": ["writing", "content", "marketing"],
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
     "qualityScore": 72,
     "costScore": 40,
     "latencyScore": 50,
@@ -734,7 +872,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 36,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "marketing"],
+    "bestFor": [
+      "writing",
+      "content",
+      "marketing"
+    ],
     "qualityScore": 65,
     "costScore": 55,
     "latencyScore": 50,
@@ -753,7 +895,11 @@
     "outputCostPer1k": 0,
     "monthlySubscriptionCostIfAny": 9,
     "hasFreeTier": true,
-    "bestFor": ["writing", "content", "budget"],
+    "bestFor": [
+      "writing",
+      "content",
+      "budget"
+    ],
     "qualityScore": 58,
     "costScore": 80,
     "latencyScore": 60,
@@ -762,5 +908,116 @@
     "notes": "Lowest-cost AI writing subscription. Quality is below Writesonic or Jasper but usable for simple content tasks.",
     "last_updated": "2026-04-11",
     "source": "https://rytr.me/pricing"
+  },
+  {
+    "id": "gpt-5-5",
+    "name": "GPT-5.5",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.005,
+    "cachedInputCostPer1k": 0.0005,
+    "outputCostPer1k": 0.03,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "professional-work",
+      "agentic",
+      "reasoning",
+      "general"
+    ],
+    "qualityScore": 96,
+    "costScore": 25,
+    "latencyScore": 45,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Premium OpenAI model for coding, professional work, complex multi-step tasks, and agentic workflows. Strong capability, but expensive as a default model.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "releaseDate": "2026-04-23",
+    "contextWindow": "1M tokens",
+    "overpayRisk": "High if used as the default for simple prompts, summaries, classification, or routine automation."
+  },
+  {
+    "id": "gpt-5-5-pro",
+    "name": "GPT-5.5 Pro",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.03,
+    "cachedInputCostPer1k": null,
+    "outputCostPer1k": 0.18,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "premium",
+      "reasoning",
+      "coding",
+      "professional-work"
+    ],
+    "qualityScore": 99,
+    "costScore": 10,
+    "latencyScore": 25,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Highest-accuracy OpenAI option for very hard questions and high-value professional work. Not suitable as a default model.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "releaseDate": "2026-04-23",
+    "overpayRisk": "Very high unless the task has high value or requires maximum accuracy."
+  },
+  {
+    "id": "gpt-5-4",
+    "name": "GPT-5.4",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.0025,
+    "cachedInputCostPer1k": 0.00025,
+    "outputCostPer1k": 0.015,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "professional-work",
+      "general"
+    ],
+    "qualityScore": 90,
+    "costScore": 35,
+    "latencyScore": 48,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "More affordable OpenAI model for coding and professional work compared with GPT-5.5.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "overpayRisk": "Medium. Cheaper than GPT-5.5, but still overkill for simple high-volume tasks."
+  },
+  {
+    "id": "gpt-5-4-mini",
+    "name": "GPT-5.4 mini",
+    "provider": "OpenAI",
+    "planType": "api",
+    "inputCostPer1k": 0.00075,
+    "cachedInputCostPer1k": 0.000075,
+    "outputCostPer1k": 0.0045,
+    "monthlySubscriptionCostIfAny": null,
+    "hasFreeTier": false,
+    "bestFor": [
+      "coding",
+      "automation",
+      "subagents",
+      "high-volume"
+    ],
+    "qualityScore": 78,
+    "costScore": 55,
+    "latencyScore": 65,
+    "category": "chat",
+    "supportsApiUsage": true,
+    "notes": "Lower-cost OpenAI mini model for coding, computer use, subagents, and higher-volume workflows.",
+    "last_updated": "2026-04-25",
+    "source": "https://openai.com/api/pricing/",
+    "sourceLabel": "OpenAI API pricing",
+    "overpayRisk": "Low to medium. Better default candidate than GPT-5.5 for routine workloads."
   }
 ]

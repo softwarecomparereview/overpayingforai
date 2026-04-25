@@ -135,7 +135,8 @@ function fireCta(eventName:
   | "models_quick_winner_click"
   | "models_table_action_click"
   | "models_category_winner_click"
-  | "models_final_cta_click", payload: CtaPayload) {
+  | "models_final_cta_click"
+  | "model_pricing_cta_click", payload: CtaPayload) {
   track(eventName, { page_type: PAGE_TYPE, ...payload });
 }
 
@@ -293,11 +294,32 @@ export function ModelsPage() {
         </Link>
       </section>
 
+      {/* GPT-5.5 CALLOUT */}
+      <section className="mb-8 border border-primary/20 bg-primary/5 rounded-lg p-5">
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1">New model</p>
+        <h2 className="text-lg font-bold mb-2">GPT-5.5 is powerful, but expensive as a default</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+          GPT-5.5 is best treated as a premium model for complex coding, professional work, and agentic workflows.
+          If you route every simple prompt to GPT-5.5, you may overpay quickly. Use cheaper models for routine tasks
+          and reserve GPT-5.5 for work where the higher success rate matters.
+        </p>
+        <Link
+          href="/pricing/gpt-5-5-pricing"
+          className="inline-flex items-center text-sm font-semibold text-primary hover:underline"
+          onClick={() => fireCta("model_pricing_cta_click", { cta_label: "See GPT-5.5 pricing", cta_location: "gpt55_callout", model_name: "GPT-5.5" })}
+        >
+          See GPT-5.5 pricing →
+        </Link>
+      </section>
+
       {/* 4. PRICING TABLE */}
       <section className="mb-12" id="pricing-table" data-testid="pricing-table">
         <h2 className="text-2xl font-bold mb-2">Full AI model pricing comparison</h2>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-muted-foreground mb-1">
           Ranked by typical moderate monthly usage (~{MODERATE_INPUT_K}K input + {MODERATE_OUTPUT_K}K output tokens).
+        </p>
+        <p className="text-xs text-muted-foreground mb-4 italic">
+          Pricing can change. Model prices are shown from the listed provider source and last verified date.
         </p>
         <div className="overflow-x-auto border rounded-lg">
           <table className="w-full text-sm">
@@ -322,7 +344,12 @@ export function ModelsPage() {
                   <tr key={m.id} className="border-t" data-testid={`row-${m.id}`}>
                     <td className="p-3 font-semibold">{m.name}</td>
                     <td className="p-3">{m.provider}</td>
-                    <td className="p-3 text-right">{formatPrice(m.inputCostPer1k)}</td>
+                    <td className="p-3 text-right">
+                      {formatPrice(m.inputCostPer1k)}
+                      {m.cachedInputCostPer1k != null && (
+                        <div className="text-xs text-muted-foreground">{formatPrice(m.cachedInputCostPer1k)} cached</div>
+                      )}
+                    </td>
                     <td className="p-3 text-right">{formatPrice(m.outputCostPer1k)}</td>
                     <td className="p-3 text-right">{formatMonthly(estimateMonthly(m))}</td>
                     <td className="p-3 text-xs">{(m.bestFor || []).slice(0, 3).join(", ")}</td>

@@ -1,0 +1,406 @@
+Work on branch developphase2, not main.
+
+Repository:
+softwarecomparereview/overpayingforai
+
+Before making changes:
+- Confirm the current checked-out branch is developphase2.
+- If not, checkout developphase2.
+- Pull latest changes from origin/developphase2.
+- Make all changes only on developphase2.
+- Do not commit directly to main.
+- Do not open a PR unless asked.
+- Do not redesign the site.
+- Do not replace the homepage.
+- Do not create a new pricing architecture unless necessary.
+- Use the existing app structure under artifacts/overpaying-for-ai.
+- Use existing Wouter routing.
+- Use existing PageSeo, Layout, analytics, and styling patterns.
+- Preserve existing pages unless explicitly updating content.
+- Run typecheck/build after changes and fix errors.
+
+Goal:
+Integrate the latest OpenAI GPT-5.5 launch and pricing into the existing OverpayingForAI model, pricing, and comparison system.
+
+Current repo structure to respect:
+- App routes are in artifacts/overpaying-for-ai/src/App.tsx
+- Model data is in artifacts/overpaying-for-ai/src/data/models.json
+- Model type is in artifacts/overpaying-for-ai/src/engine/types.ts
+- Model comparison page is artifacts/overpaying-for-ai/src/pages/ModelsPage.tsx
+- Pricing page data is artifacts/overpaying-for-ai/src/data/pricing-pages.json
+- Generic pricing renderer is artifacts/overpaying-for-ai/src/pages/PricingPage.tsx
+- Comparison pages use artifacts/overpaying-for-ai/src/data/comparisons.json and src/pages/ComparePage.tsx
+- Sitemap is likely artifacts/overpaying-for-ai/public/sitemap.xml or public/sitemap.xml
+
+Official source values to use:
+Source: https://openai.com/api/pricing/
+Last verified: 2026-04-25
+
+GPT-5.5:
+- Input: $5.00 per 1M tokens
+- Cached input: $0.50 per 1M tokens
+- Output: $30.00 per 1M tokens
+- Context window: 1M tokens
+- Positioning: high-end model for coding, professional work, complex multi-step tasks, agentic workflows
+- Overpay risk: high if used as the default for simple prompts, summaries, classification, or routine automation
+
+GPT-5.5 Pro:
+- Input: $30.00 per 1M tokens
+- Output: $180.00 per 1M tokens
+- Cached input: not listed
+- Positioning: highest-accuracy option for very hard questions and professional work
+- Overpay risk: very high unless the task has high value or requires maximum accuracy
+
+GPT-5.4:
+- Input: $2.50 per 1M tokens
+- Cached input: $0.25 per 1M tokens
+- Output: $15.00 per 1M tokens
+- Positioning: more affordable model for coding and professional work
+
+GPT-5.4 mini:
+- Input: $0.75 per 1M tokens
+- Cached input: $0.075 per 1M tokens
+- Output: $4.50 per 1M tokens
+- Positioning: strong mini model for coding, computer use, and subagents
+
+Implementation tasks:
+
+1. Update AIModel type
+
+File:
+artifacts/overpaying-for-ai/src/engine/types.ts
+
+Add these optional fields to AIModel:
+cachedInputCostPer1k?: number | null;
+contextWindow?: string;
+releaseDate?: string;
+overpayRisk?: string;
+sourceLabel?: string;
+
+Important:
+- Do not make these required.
+- Do not break existing model entries.
+
+2. Update models.json
+
+File:
+artifacts/overpaying-for-ai/src/data/models.json
+
+Add entries for:
+- gpt-5-5
+- gpt-5-5-pro
+- gpt-5-4
+- gpt-5-4-mini
+
+Use the existing schema.
+
+Important conversion:
+The existing site stores costs per 1K tokens, not per 1M.
+
+Use these values:
+
+GPT-5.5:
+id: "gpt-5-5"
+name: "GPT-5.5"
+provider: "OpenAI"
+planType: "api"
+inputCostPer1k: 0.005
+cachedInputCostPer1k: 0.0005
+outputCostPer1k: 0.03
+monthlySubscriptionCostIfAny: null
+hasFreeTier: false
+bestFor: ["coding", "professional-work", "agentic", "reasoning", "general"]
+qualityScore: 96
+costScore: 25
+latencyScore: 45
+category: "chat"
+supportsApiUsage: true
+notes: "Premium OpenAI model for coding, professional work, complex multi-step tasks, and agentic workflows. Strong capability, but expensive as a default model."
+last_updated: "2026-04-25"
+source: "https://openai.com/api/pricing/"
+sourceLabel: "OpenAI API pricing"
+releaseDate: "2026-04-23"
+contextWindow: "1M tokens"
+overpayRisk: "High if used as the default for simple prompts, summaries, classification, or routine automation."
+
+GPT-5.5 Pro:
+id: "gpt-5-5-pro"
+name: "GPT-5.5 Pro"
+provider: "OpenAI"
+planType: "api"
+inputCostPer1k: 0.03
+cachedInputCostPer1k: null
+outputCostPer1k: 0.18
+monthlySubscriptionCostIfAny: null
+hasFreeTier: false
+bestFor: ["premium", "reasoning", "coding", "professional-work"]
+qualityScore: 99
+costScore: 10
+latencyScore: 25
+category: "chat"
+supportsApiUsage: true
+notes: "Highest-accuracy OpenAI option for very hard questions and high-value professional work. Not suitable as a default model."
+last_updated: "2026-04-25"
+source: "https://openai.com/api/pricing/"
+sourceLabel: "OpenAI API pricing"
+releaseDate: "2026-04-23"
+overpayRisk: "Very high unless the task has high value or requires maximum accuracy."
+
+GPT-5.4:
+id: "gpt-5-4"
+name: "GPT-5.4"
+provider: "OpenAI"
+planType: "api"
+inputCostPer1k: 0.0025
+cachedInputCostPer1k: 0.00025
+outputCostPer1k: 0.015
+monthlySubscriptionCostIfAny: null
+hasFreeTier: false
+bestFor: ["coding", "professional-work", "general"]
+qualityScore: 90
+costScore: 35
+latencyScore: 48
+category: "chat"
+supportsApiUsage: true
+notes: "More affordable OpenAI model for coding and professional work compared with GPT-5.5."
+last_updated: "2026-04-25"
+source: "https://openai.com/api/pricing/"
+sourceLabel: "OpenAI API pricing"
+overpayRisk: "Medium. Cheaper than GPT-5.5, but still overkill for simple high-volume tasks."
+
+GPT-5.4 mini:
+id: "gpt-5-4-mini"
+name: "GPT-5.4 mini"
+provider: "OpenAI"
+planType: "api"
+inputCostPer1k: 0.00075
+cachedInputCostPer1k: 0.000075
+outputCostPer1k: 0.0045
+monthlySubscriptionCostIfAny: null
+hasFreeTier: false
+bestFor: ["coding", "automation", "subagents", "high-volume"]
+qualityScore: 78
+costScore: 55
+latencyScore: 65
+category: "chat"
+supportsApiUsage: true
+notes: "Lower-cost OpenAI mini model for coding, computer use, subagents, and higher-volume workflows."
+last_updated: "2026-04-25"
+source: "https://openai.com/api/pricing/"
+sourceLabel: "OpenAI API pricing"
+overpayRisk: "Low to medium. Better default candidate than GPT-5.5 for routine workloads."
+
+3. Update ModelsPage display
+
+File:
+artifacts/overpaying-for-ai/src/pages/ModelsPage.tsx
+
+Keep the existing layout.
+
+Enhance the pricing table:
+- If cachedInputCostPer1k exists and is not null, show cached input as a smaller line under input price.
+- If contextWindow exists, show it in the row or model detail area.
+- If overpayRisk exists, show a concise warning in the row or under model notes.
+- Keep the existing red/yellow/green value signal logic.
+- Ensure table remains usable on mobile.
+
+Add an editorial note near the pricing table:
+"Pricing can change. Model prices are shown from the listed provider source and last verified date."
+
+Add one small callout near the hero or pricing table:
+
+Heading:
+New: GPT-5.5 is powerful, but expensive as a default
+
+Copy:
+GPT-5.5 is best treated as a premium model for complex coding, professional work, and agentic workflows. If you route every simple prompt to GPT-5.5, you may overpay quickly. Use cheaper models for routine tasks and reserve GPT-5.5 for work where the higher success rate matters.
+
+Link:
+"/pricing/gpt-5-5-pricing"
+
+CTA text:
+See GPT-5.5 pricing
+
+Use existing analytics helper if available. Do not add a new analytics library.
+
+4. Add GPT-5.5 pricing page data
+
+File:
+artifacts/overpaying-for-ai/src/data/pricing-pages.json
+
+Add a new pricing page object with this content:
+
+slug:
+gpt-5-5-pricing
+
+toolName:
+GPT-5.5
+
+provider:
+OpenAI
+
+providerId:
+openai
+
+title:
+GPT-5.5 Pricing Explained: API Cost, Pro Pricing, and When It Is Worth It
+
+metaDescription:
+GPT-5.5 costs $5 per 1M input tokens and $30 per 1M output tokens. See GPT-5.5 Pro pricing, cost examples, cheaper alternatives, and when GPT-5.5 is worth paying for.
+
+h1:
+GPT-5.5 Pricing: When Is OpenAI’s Premium Model Worth the Cost?
+
+intro:
+GPT-5.5 is OpenAI’s premium model for coding, professional work, complex multi-step tasks, and agentic workflows. It is powerful, but it is not the cheapest default model. The key question is whether the higher task success rate justifies the higher token cost.
+
+plans:
+Plan 1:
+name: "GPT-5.5 API"
+price: "$5.00 / 1M input tokens, $0.50 / 1M cached input tokens, $30.00 / 1M output tokens"
+description: "Premium API model for coding, professional work, complex multi-step tasks, and agentic workflows."
+bestFor: "High-value coding, agentic workflows, complex professional tasks, and tasks where failure is expensive."
+notFor: "Simple summaries, classification, basic chat, routine automation, or low-value high-volume workloads."
+
+Plan 2:
+name: "GPT-5.5 Pro API"
+price: "$30.00 / 1M input tokens, $180.00 / 1M output tokens"
+description: "Highest-accuracy GPT-5.5 option for very hard questions and high-stakes work."
+bestFor: "Very difficult reasoning, high-accuracy professional work, and tasks where the cost of being wrong is high."
+notFor: "Routine production traffic, simple prompts, or cost-sensitive workflows."
+
+Plan 3:
+name: "GPT-5.4"
+price: "$2.50 / 1M input tokens, $0.25 / 1M cached input tokens, $15.00 / 1M output tokens"
+description: "More affordable OpenAI model for coding and professional work."
+bestFor: "Teams that need strong capability but do not need GPT-5.5 for every request."
+notFor: "Ultra-low-cost automation or maximum-accuracy GPT-5.5 Pro use cases."
+
+pricingNote:
+"Pricing based on OpenAI API pricing, last verified 2026-04-25. Pricing and availability can change; check the official OpenAI pricing page before building."
+
+verdictSection:
+heading:
+"Should you use GPT-5.5?"
+content:
+"Use GPT-5.5 when the work is complex, high-value, or benefits from stronger reasoning and agentic execution. Do not route every prompt to GPT-5.5 by default. For simple summaries, classification, extraction, or high-volume automation, a cheaper model is usually the better default. The most cost-effective setup is usually model routing: GPT-5.5 for hard work, cheaper models for routine work."
+
+internalLinks:
+- text: "Compare AI models", href: "/models"
+- text: "AI Cost Calculator", href: "/calculator"
+- text: "ChatGPT Pricing Explained", href: "/pricing/chatgpt-pricing"
+- text: "Which AI Subscription Is Worth Paying For?", href: "/worth-it/which-ai-subscription-is-worth-paying-for"
+- text: "ChatGPT vs Claude", href: "/compare/chatgpt-vs-claude"
+
+faq:
+Q: How much does GPT-5.5 cost?
+A: GPT-5.5 costs $5.00 per 1M input tokens, $0.50 per 1M cached input tokens, and $30.00 per 1M output tokens via the OpenAI API.
+
+Q: How much does GPT-5.5 Pro cost?
+A: GPT-5.5 Pro costs $30.00 per 1M input tokens and $180.00 per 1M output tokens. OpenAI does not list a cached input discount for GPT-5.5 Pro.
+
+Q: Is GPT-5.5 worth it?
+A: GPT-5.5 is worth considering for complex coding, professional work, agentic workflows, and tasks where better task completion saves meaningful time or risk. It is usually overkill for simple high-volume prompts.
+
+Q: What is the cheaper alternative to GPT-5.5?
+A: GPT-5.4 and GPT-5.4 mini are cheaper OpenAI alternatives. For very simple workloads, even lower-cost models may be more appropriate depending on quality requirements.
+
+Important:
+- Match the existing JSON structure exactly.
+- Keep JSON valid.
+- Do not introduce trailing commas.
+
+5. Update ChatGPT pricing page
+
+File:
+artifacts/overpaying-for-ai/src/data/pricing-pages.json
+
+In the existing chatgpt-pricing object:
+- Add an internal link to /pricing/gpt-5-5-pricing with text "GPT-5.5 Pricing Explained"
+- Update intro or verdict copy lightly to mention that GPT-5.5 is a premium model/API option for high-value work, while cheaper models should handle routine tasks.
+- Do not remove the existing page structure.
+- Do not remove GPT-4o references unless necessary.
+
+6. Update comparisons only if data exists
+
+Check:
+artifacts/overpaying-for-ai/src/data/comparisons.json
+
+If there is an OpenAI/API comparison where GPT-5.5 fits naturally:
+- Add a related internal link to /pricing/gpt-5-5-pricing
+- Do not rewrite all comparison pages.
+- Do not create a new comparison page unless the existing schema is obvious and safe.
+
+Optional new comparison only if easy and schema is clear:
+slug:
+gpt-5-5-vs-gpt-5-4-cost
+
+title:
+GPT-5.5 vs GPT-5.4: Is the Higher API Cost Worth It?
+
+Compare GPT-5.5 and GPT-5.4 using the existing comparison schema.
+
+If the schema is unclear, skip this optional comparison and report it.
+
+7. Update sitemap
+
+Find the sitemap file, likely one of:
+artifacts/overpaying-for-ai/public/sitemap.xml
+public/sitemap.xml
+
+Add:
+loc: https://overpayingforai.com/pricing/gpt-5-5-pricing
+changefreq: weekly
+priority: 0.7
+
+Keep XML valid.
+
+8. Analytics
+
+Use existing analytics helper only.
+
+Add event tracking for the new GPT-5.5 callout link if consistent with current patterns:
+model_pricing_cta_click
+
+Do not add new analytics libraries.
+
+9. Validation
+
+Run:
+pnpm install if needed
+pnpm run typecheck
+pnpm run build
+
+Fix TypeScript/build errors.
+
+10. Final response required
+
+When done, provide:
+- Current branch confirmed
+- Files changed
+- Routes added or affected
+- Whether /pricing/gpt-5-5-pricing works
+- Whether /models displays GPT-5.5, GPT-5.5 Pro, GPT-5.4, and GPT-5.4 mini
+- Whether sitemap was updated
+- Typecheck result
+- Build result
+- Any skipped optional work and why
+- Suggested PR title and PR body for merging developphase2 into main after review
+
+Suggested PR title:
+Add GPT-5.5 pricing and model comparison updates
+
+Suggested PR body:
+## Summary
+- Added GPT-5.5, GPT-5.5 Pro, GPT-5.4, and GPT-5.4 mini to model pricing data.
+- Added GPT-5.5 pricing page content.
+- Updated model comparison display with cached-input/context/source/overpay-risk context where available.
+- Added internal links and sitemap entry.
+
+## Validation
+- [ ] Typecheck passes
+- [ ] Build passes
+- [ ] /models shows GPT-5.5 entries
+- [ ] /pricing/gpt-5-5-pricing loads
+- [ ] Existing homepage unchanged
+- [ ] Sitemap includes GPT-5.5 pricing page
