@@ -24,17 +24,52 @@
       "content": "If you're technically inclined, GPT-4o via the OpenAI API costs approximately $0.0025 per 1K input tokens and $0.01 per 1K output tokens. A typical moderate workflow (500K input + 200K output tokens/month) costs about $0.75/month via API — compared to $20/month for Plus. The API is significantly cheaper for developers but requires integration work."
     },
     "alternatives": [
-      { "name": "Claude Pro", "price": "$20/month", "bestFor": "Writing and long document analysis" },
-      { "name": "Gemini Advanced", "price": "$20/month", "bestFor": "Google Workspace users" },
-      { "name": "GPT-4o via API", "price": "Pay-per-token (~$0.75–$15/month typical)", "bestFor": "Developers and technical users" },
-      { "name": "DeepSeek V3 via API", "price": "Pay-per-token (often under $1/month)", "bestFor": "Budget-conscious developers" }
+      {
+        "name": "Claude Pro",
+        "price": "$20/month",
+        "bestFor": "Writing and long document analysis"
+      },
+      {
+        "name": "Gemini Advanced",
+        "price": "$20/month",
+        "bestFor": "Google Workspace users"
+      },
+      {
+        "name": "GPT-4o via API",
+        "price": "Pay-per-token (~$0.75–$15/month typical)",
+        "bestFor": "Developers and technical users"
+      },
+      {
+        "name": "DeepSeek V3 via API",
+        "price": "Pay-per-token (often under $1/month)",
+        "bestFor": "Budget-conscious developers"
+      }
     ],
     "internalLinks": [
-      { "text": "ChatGPT Plus Pricing Breakdown", "href": "/pricing/chatgpt-pricing" },
-      { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
-      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
-      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" },
-      { "text": "Calculate Your AI Cost", "href": "/calculator" }
+      {
+        "text": "ChatGPT Plus Pricing Breakdown",
+        "href": "/pricing/chatgpt-pricing"
+      },
+      {
+        "text": "Claude Pricing Explained",
+        "href": "/pricing/claude-pricing"
+      },
+      {
+        "text": "ChatGPT vs Claude",
+        "href": "/compare/chatgpt-vs-claude"
+      },
+      {
+        "text": "ChatGPT vs Gemini",
+        "href": "/compare/chatgpt-vs-gemini"
+      },
+      {
+        "text": "Best ChatGPT Alternatives",
+        "href": "/alternatives/best-chatgpt-alternatives"
+      },
+      {
+        "text": "Calculate Your AI Cost",
+        "href": "/calculator"
+      }
     ],
     "faq": [
       {
@@ -49,7 +84,8 @@
         "q": "Is the free tier good enough?",
         "a": "For many users, yes. ChatGPT Free provides real GPT-4o access with daily limits. If you use ChatGPT for a few tasks per day and don't need image tools, the free tier handles most use cases without a $20/month commitment."
       }
-    ]
+    ],
+    "pricingNote": "Pricing based on publicly available OpenAI rates as of April 2026. Check current OpenAI pricing before subscribing."
   },
   {
     "slug": "which-ai-subscription-is-worth-paying-for",
@@ -108,12 +144,30 @@
     },
     "recommendation": "Subscribe to one tool, not two. Pick based on your dominant daily use case. If you write daily, Claude Pro. If you need general breadth, ChatGPT Plus. If you live in Google Workspace, Gemini Advanced. If you code, Cursor Pro. Test the free tier for two weeks first.",
     "internalLinks": [
-      { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
-      { "text": "ChatGPT Pricing Breakdown", "href": "/pricing/chatgpt-pricing" },
-      { "text": "Claude Pricing Breakdown", "href": "/pricing/claude-pricing" },
-      { "text": "Gemini Pricing Breakdown", "href": "/pricing/gemini-pricing" },
-      { "text": "Calculate Your AI Cost", "href": "/calculator" },
-      { "text": "Best ChatGPT Alternatives", "href": "/alternatives/best-chatgpt-alternatives" }
+      {
+        "text": "Is ChatGPT Plus Worth It?",
+        "href": "/worth-it/is-chatgpt-plus-worth-it"
+      },
+      {
+        "text": "ChatGPT Pricing Breakdown",
+        "href": "/pricing/chatgpt-pricing"
+      },
+      {
+        "text": "Claude Pricing Breakdown",
+        "href": "/pricing/claude-pricing"
+      },
+      {
+        "text": "Gemini Pricing Breakdown",
+        "href": "/pricing/gemini-pricing"
+      },
+      {
+        "text": "Calculate Your AI Cost",
+        "href": "/calculator"
+      },
+      {
+        "text": "Best ChatGPT Alternatives",
+        "href": "/alternatives/best-chatgpt-alternatives"
+      }
     ],
     "faq": [
       {

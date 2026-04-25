@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { track, trackCta } from "@/utils/analytics";
+import { SearchBox } from "@/components/search/SearchBox";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { SeoContentBlock } from "@/components/seo/SeoContentBlock";
@@ -201,6 +202,16 @@ export function Design2() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── SEARCH ────────────────────────────────────────────── */}
+      <section className="border-b border-border bg-muted/20">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-5">
+          <p className="text-xs font-medium text-muted-foreground text-center mb-3 uppercase tracking-wide">
+            Find AI pricing pages, comparisons, and guides
+          </p>
+          <SearchBox placeholder={`Search — try "chatgpt pricing", "claude vs gpt", "coding tools"…`} />
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import { useParams, Link } from "wouter";
 import alternativesData from "@/data/alternatives-pages.json";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
+import { trackCalculatorStart, trackInternalLinkClick } from "@/utils/analytics";
 
 type AlternativesPage = typeof alternativesData[number];
 const pages = alternativesData as AlternativesPage[];
@@ -24,6 +25,9 @@ export function AlternativesPage() {
     );
   }
 
+  const notToSwitch = (page as { notToSwitch?: string[] }).notToSwitch ?? [];
+  const summaryNote = page.summaryTable?.note ?? null;
+
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
       <PageSeo
@@ -41,10 +45,17 @@ export function AlternativesPage() {
       </nav>
 
       <header className="mb-10">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xs font-medium text-muted-foreground bg-muted px-2.5 py-1 rounded-full">Alternatives</span>
+          {summaryNote && (
+            <span className="text-xs text-muted-foreground italic">{summaryNote}</span>
+          )}
+        </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{page.h1}</h1>
         <p className="text-lg text-muted-foreground leading-relaxed mb-5">{page.intro}</p>
         <Link
           href={page.primaryCta.href}
+          onClick={() => trackCalculatorStart({ pageSlug: page.slug, pageType: "alternatives", sourceComponent: "AlternativesPage/HeroCta" })}
           className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
         >
           {page.primaryCta.label} →
@@ -87,6 +98,7 @@ export function AlternativesPage() {
               {alt.comparisonLink && (
                 <Link
                   href={alt.comparisonLink}
+                  onClick={() => trackInternalLinkClick({ pageSlug: page.slug, pageType: "alternatives", ctaLabel: `See full comparison — ${alt.name}`, destinationSlug: alt.comparisonLink ?? undefined })}
                   className="text-sm text-primary hover:underline inline-flex items-center gap-1"
                 >
                   See full comparison →
@@ -97,6 +109,23 @@ export function AlternativesPage() {
         </div>
       </section>
 
+      {notToSwitch.length > 0 && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-4">When not to switch from ChatGPT</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Switching has real switching costs. These scenarios are where staying on ChatGPT Plus makes sense.
+          </p>
+          <ul className="space-y-2">
+            {notToSwitch.map((item, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground border border-border rounded-lg px-4 py-3 bg-card">
+                <span className="text-muted-foreground/50 font-mono text-xs mt-0.5 shrink-0">{i + 1}.</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="border border-border rounded-xl bg-muted/20 p-6 mb-10">
         <h2 className="text-lg font-bold mb-2">Find the cheapest option for your usage</h2>
         <p className="text-sm text-muted-foreground mb-4">
@@ -104,6 +133,7 @@ export function AlternativesPage() {
         </p>
         <Link
           href="/calculator"
+          onClick={() => trackCalculatorStart({ pageSlug: page.slug, pageType: "alternatives", sourceComponent: "AlternativesPage/MidPageCta" })}
           className="inline-flex items-center justify-center bg-primary text-primary-foreground rounded-lg px-5 py-2.5 font-semibold text-sm hover:bg-primary/90 transition-colors"
         >
           Calculate your AI cost →
@@ -124,7 +154,15 @@ export function AlternativesPage() {
         </section>
       )}
 
-      <InternalLinks links={page.internalLinks} heading="Related comparisons" />
+      <InternalLinks links={page.internalLinks} heading="Related comparisons" trackingContext={{ pageSlug: page.slug, pageType: "alternatives" }} />
+
+      <p className="text-xs text-muted-foreground mt-8 pt-6 border-t border-border">
+        Pricing approximate as of April 2026. Check current provider pricing before switching.
+        Some links may be affiliate links — see our{" "}
+        <Link href="/affiliate-disclosure" className="underline hover:text-foreground">
+          affiliate disclosure
+        </Link>.
+      </p>
     </article>
   );
 }

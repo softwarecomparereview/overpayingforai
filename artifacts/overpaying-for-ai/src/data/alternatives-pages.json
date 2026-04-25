@@ -58,7 +58,7 @@
       {
         "name": "Llama 3.1 70B via Groq",
         "category": "Speed + Budget",
-        "pricingSummary": "API: ~$0.00059 per 1K tokens. Free tier on Groq.",
+        "pricingSummary": "API: ~$0.00059 per 1K tokens (pricing changes frequently — verify current rates at groq.com before building). Free tier on Groq.",
         "whyBetter": "World-class inference speed (Groq hardware). Near-frontier quality at a fraction of GPT-4o's price. Great for real-time applications and latency-sensitive workloads.",
         "notBetter": "No consumer interface. Requires API/developer setup. Less refined on creative writing tasks.",
         "comparisonLink": "/compare",
@@ -70,11 +70,30 @@
       "note": "Pricing approximate as of April 2026. Check current provider pricing before buying."
     },
     "internalLinks": [
-      { "text": "Is ChatGPT Plus Worth It?", "href": "/worth-it/is-chatgpt-plus-worth-it" },
-      { "text": "ChatGPT Pricing", "href": "/pricing/chatgpt-pricing" },
-      { "text": "ChatGPT vs Claude", "href": "/compare/chatgpt-vs-claude" },
-      { "text": "ChatGPT vs Gemini", "href": "/compare/chatgpt-vs-gemini" },
-      { "text": "AI Cost Calculator", "href": "/calculator" }
+      {
+        "text": "Is ChatGPT Plus Worth It?",
+        "href": "/worth-it/is-chatgpt-plus-worth-it"
+      },
+      {
+        "text": "ChatGPT Pricing",
+        "href": "/pricing/chatgpt-pricing"
+      },
+      {
+        "text": "Claude Pricing Explained",
+        "href": "/pricing/claude-pricing"
+      },
+      {
+        "text": "ChatGPT vs Claude",
+        "href": "/compare/chatgpt-vs-claude"
+      },
+      {
+        "text": "ChatGPT vs Gemini",
+        "href": "/compare/chatgpt-vs-gemini"
+      },
+      {
+        "text": "AI Cost Calculator",
+        "href": "/calculator"
+      }
     ],
     "faq": [
       {
@@ -89,6 +108,12 @@
         "q": "Is there a free ChatGPT alternative?",
         "a": "Yes — Claude.ai, Gemini Free, and Groq's free tier all provide quality AI access at no cost. Claude and Gemini use frontier models; Groq provides ultra-fast Llama inference. All have rate limits, but all are genuinely usable for moderate use."
       }
+    ],
+    "notToSwitch": [
+      "You primarily need ChatGPT plugins or custom GPTs — the ecosystem is still strongest on ChatGPT Plus.",
+      "Your team already has ChatGPT Enterprise and is under contract — switching cost outweighs savings.",
+      "You rely heavily on DALL-E image generation built into the chat interface — no alternative matches it directly.",
+      "You have significant prompt engineering work tuned specifically for GPT-4o — retuning for a new model has real time cost."
     ]
   }
 ]

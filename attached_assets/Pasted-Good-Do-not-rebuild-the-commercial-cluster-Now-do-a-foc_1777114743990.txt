@@ -1,0 +1,85 @@
+Good. Do not rebuild the commercial cluster.
+
+Now do a focused launch-hardening QA pass only.
+
+Scope:
+- /compare/chatgpt-vs-claude
+- /pricing/chatgpt-pricing
+- /pricing/claude-pricing
+- /alternatives/best-chatgpt-alternatives
+- /worth-it/is-chatgpt-plus-worth-it
+
+Do not add new pages.
+Do not refactor unrelated code.
+Do not redesign the site.
+
+Check and report:
+
+1. Pricing/data accuracy
+- List every pricing or API cost claim currently shown on these pages.
+- Mark each as:
+  - verified from local data
+  - approximate with freshness caveat
+  - needs manual review
+- Confirm no unverified price is presented as guaranteed/current/final.
+
+2. Analytics completeness
+Confirm whether these events fire where relevant:
+- calculator_start
+- internal_link_click
+- primary_cta_click
+- comparison_cta_click
+- outbound_click
+- affiliate_click
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+If any event is not wired, explain whether:
+- not applicable yet because no real provider/affiliate CTA exists
+- missing and should be patched
+- intentionally deferred
+
+3. CTA review
+For each of the five pages, list:
+- primary CTA
+- secondary CTA
+- calculator CTA
+- internal comparison/pricing links
+- any provider/outbound CTA placeholder
+
+Confirm every CTA has either:
+- correct navigation
+- correct analytics
+- or a clear reason it is intentionally disabled.
+
+4. Mobile and layout QA
+Check:
+- header search
+- mobile menu search
+- tables
+- CTA cards
+- long sections
+- footer disclosures
+- no horizontal overflow
+
+5. Search QA
+Confirm again:
+- each of the 5 pages appears in site search
+- primary queries return the expected page at rank 1
+- no-results state works
+- result clicks navigate correctly
+
+6. Final launch status
+Return a table:
+- Area
+- Pass/Fail
+- Issue
+- Required fix
+- File to change
+
+Then return:
+- “Launch ready: Yes/No”
+- “Blocking fixes”
+- “Non-blocking improvements”
+- “Files changed, if any”

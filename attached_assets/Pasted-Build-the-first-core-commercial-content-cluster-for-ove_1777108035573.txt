@@ -1,0 +1,264 @@
+Build the first core commercial content cluster for overpayingforai.com, now integrated with the website search feature.
+
+Context:
+The site now has an internal website search feature. All new commercial pages must be discoverable through site search, with useful metadata and analytics. Do not treat search as a separate later feature.
+
+Goal:
+Create or upgrade the first high-intent commercial page cluster focused on helping users avoid overpaying for AI tools. These pages should provide pricing clarity, comparison logic, alternatives, and decision support. They should not read like generic AI directory content.
+
+Pages to create or upgrade:
+1. /compare/chatgpt-vs-claude
+2. /pricing/chatgpt-pricing
+3. /pricing/claude-pricing
+4. /alternatives/best-chatgpt-alternatives
+5. /worth-it/is-chatgpt-plus-worth-it
+
+Strategic requirements:
+- Keep the site positioned around AI pricing clarity, AI cost comparison, and buyer decision support.
+- Do not turn the site into a generic AI tool directory.
+- Each page must help answer one or more of:
+  - What does this AI tool cost?
+  - Is it worth paying for?
+  - What is cheaper?
+  - What is better for my use case?
+  - Am I overpaying?
+  - What plan should I choose?
+
+Global page requirements:
+- Use existing site styling and components.
+- Keep design credible, clean, and commercial.
+- Add strong internal links between all five pages.
+- Add clear CTAs to the calculator where relevant.
+- Add provider/outbound CTA placeholders where appropriate.
+- Keep commercial CTAs trust-first, not aggressive or spammy.
+- Add affiliate/referral disclosure text where commercial CTAs appear.
+- Add last-updated dates.
+- Add pricing freshness notes.
+- Add structured SEO metadata.
+- Add each page to sitemap.xml if not already present.
+- Ensure mobile layout works.
+- Ensure footer/header navigation still works.
+- Ensure clicking internal links scrolls to top.
+- Avoid duplicated generic copy across pages.
+- Avoid unverified pricing claims unless they are clearly marked as needing review.
+
+Internal website search requirements:
+- Add all five pages to the existing website search index.
+- Use the existing search index pattern/component/data file already in the codebase.
+- Do not create a second search system.
+- Do not create crawlable search result pages.
+- Do not add search query URLs to sitemap.xml.
+
+For each new/updated page, include searchable metadata:
+- title
+- slug
+- description
+- page_type
+- tools mentioned
+- category
+- tags
+- primary intent
+- commercial intent label if supported
+
+Suggested metadata:
+
+1. /compare/chatgpt-vs-claude
+title: ChatGPT vs Claude
+page_type: Comparison
+tools: ChatGPT, Claude, OpenAI, Anthropic
+category: AI assistant comparison
+tags: chatgpt, claude, chatgpt vs claude, ai comparison, ai pricing, best ai assistant, overpaying
+
+2. /pricing/chatgpt-pricing
+title: ChatGPT Pricing Explained
+page_type: Pricing
+tools: ChatGPT, OpenAI
+category: AI pricing
+tags: chatgpt pricing, chatgpt cost, chatgpt plus, chatgpt pro, chatgpt team, openai pricing, ai subscription
+
+3. /pricing/claude-pricing
+title: Claude Pricing Explained
+page_type: Pricing
+tools: Claude, Anthropic
+category: AI pricing
+tags: claude pricing, claude cost, claude pro, claude max, anthropic pricing, ai subscription
+
+4. /alternatives/best-chatgpt-alternatives
+title: Best ChatGPT Alternatives
+page_type: Alternatives
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot
+category: AI alternatives
+tags: chatgpt alternatives, cheaper chatgpt alternatives, best ai tools, ai assistant alternatives, free chatgpt alternatives
+
+5. /worth-it/is-chatgpt-plus-worth-it
+title: Is ChatGPT Plus Worth It?
+page_type: Decision
+tools: ChatGPT, OpenAI
+category: AI buying decision
+tags: is chatgpt plus worth it, chatgpt free vs paid, should i pay for chatgpt, ai subscription worth it, overpaying for chatgpt
+
+Search UX validation:
+Confirm these searches return relevant results:
+- chatgpt pricing
+- claude pricing
+- chatgpt vs claude
+- best chatgpt alternatives
+- chatgpt plus worth it
+- cheaper than chatgpt
+- ai subscription
+- overpaying
+- openai
+- anthropic
+
+Search result quality:
+- Results should show page title, description, page type label, and link.
+- Comparison pages should be labelled as Comparison.
+- Pricing pages should be labelled as Pricing.
+- Alternatives pages should be labelled as Alternatives.
+- Worth-it pages should be labelled as Decision or Worth It.
+- Search should work on desktop and mobile.
+- Search should not break existing navigation.
+
+Analytics requirements:
+Use the existing analytics helper if available. Do not invent a conflicting analytics system.
+
+Track commercial-page events:
+- primary_cta_click
+- comparison_cta_click
+- affiliate_click
+- outbound_click
+- calculator_start
+- internal_link_click
+
+Track website search events:
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+Search event payload should include:
+- query
+- result_count
+- clicked_slug where relevant
+- page_location
+- page_type where relevant
+
+Commercial event payload should include:
+- page_slug
+- page_type
+- cta_label
+- destination_slug where relevant
+- outbound_url where relevant
+- tool_name where relevant
+
+Page structure requirements:
+
+1. /compare/chatgpt-vs-claude
+Sections:
+- Hero with quick verdict
+- Pricing comparison table
+- Best for writing
+- Best for coding
+- Best for research
+- Best for business/team use
+- When ChatGPT is better
+- When Claude is better
+- Who may be overpaying
+- Recommendation by use case
+- CTA to calculator
+- Internal links to ChatGPT pricing, Claude pricing, ChatGPT alternatives, and ChatGPT Plus worth-it
+
+2. /pricing/chatgpt-pricing
+Sections:
+- Hero with pricing clarity angle
+- Current plan breakdown
+- Free vs paid
+- Who should pay
+- Who should stay free
+- Hidden overpay risks
+- Better alternatives depending on use case
+- CTA to calculator
+- Internal links to ChatGPT vs Claude, Best ChatGPT Alternatives, Is ChatGPT Plus Worth It
+
+3. /pricing/claude-pricing
+Sections:
+- Hero with pricing clarity angle
+- Current plan breakdown
+- Free vs paid
+- Who should pay
+- Who should not pay
+- Claude vs ChatGPT value discussion
+- Claude vs Gemini teaser link if route exists
+- CTA to comparison page
+- Internal links to ChatGPT vs Claude and ChatGPT pricing
+
+4. /alternatives/best-chatgpt-alternatives
+Sections:
+- Hero focused on cheaper/better-fit alternatives
+- Why users look for ChatGPT alternatives
+- Best overall alternative
+- Best cheaper alternative
+- Best for writing
+- Best for coding
+- Best for research
+- Best free option
+- Best business/team option
+- When not to switch
+- Comparison table
+- CTA to calculator
+- Internal links to ChatGPT pricing, ChatGPT vs Claude, Is ChatGPT Plus Worth It
+
+5. /worth-it/is-chatgpt-plus-worth-it
+Sections:
+- Hero with clear yes/no/maybe verdict
+- Who ChatGPT Plus is worth it for
+- Who should avoid paying
+- Common overpaying scenarios
+- Alternatives by budget
+- Free vs paid decision table
+- Subscription vs API consideration
+- Final verdict
+- CTA to calculator
+- Internal links to ChatGPT pricing, ChatGPT vs Claude, Best ChatGPT Alternatives
+
+SEO requirements:
+- Add unique title and meta description for each page.
+- Use clean H1/H2 structure.
+- Include canonical tags if the existing SEO component supports them.
+- Add FAQ sections where useful.
+- Add FAQ schema only if the existing project already has a safe pattern for it.
+- Add pages to sitemap.xml.
+- Do not index internal search result URLs.
+- Do not create thin pages.
+
+Trust and freshness requirements:
+- Add visible “Last updated” date.
+- Add pricing freshness note.
+- Mark uncertain pricing as “check current provider pricing before purchase” if exact live pricing is not verified.
+- Avoid saying “official” unless sourced or already supported by existing data.
+- Keep recommendations scenario-based.
+
+Validation checklist:
+- Run typecheck/build.
+- Confirm all five routes load.
+- Confirm all five pages appear in sitemap.xml.
+- Confirm all five pages appear in website search.
+- Confirm desktop search works.
+- Confirm mobile search works.
+- Confirm test searches return relevant pages.
+- Confirm search result clicks navigate correctly and scroll to top.
+- Confirm internal links between the five pages work.
+- Confirm calculator CTAs work.
+- Confirm analytics events are wired or clearly note if the analytics helper is missing.
+- Confirm no crawlable search query pages were created.
+- Return changed files and a short test summary.
+
+Expected final report:
+Return:
+1. Files changed
+2. Routes added/updated
+3. Search index entries added
+4. Search tests passed/failed
+5. Analytics events wired
+6. Sitemap confirmation
+7. Build/typecheck result
+8. Any pricing/data items needing manual review
