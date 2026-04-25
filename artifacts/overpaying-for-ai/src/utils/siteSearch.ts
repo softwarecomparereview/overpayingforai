@@ -166,6 +166,13 @@ function buildIndex(): SiteSearchEntry[] {
       pageType: label("ai-type"),
       keywords: "ai types general coding writing research customer support productivity categories",
     },
+    {
+      href: "/decision/which-ai-tool-should-i-buy",
+      title: "Which AI Tool Should I Buy? 2025 Buying Guide",
+      description: "Use-case table, budget tiers, and a quick recommendation matrix to find the right AI tool without overpaying.",
+      pageType: label("guide"),
+      keywords: "which ai tool should i buy ai buying guide best ai tool decision 2025 budget tiers use case recommendation chatgpt claude gemini copilot avoid overpaying cheapest",
+    },
   ];
   entries.push(...staticPages);
 

@@ -34,6 +34,7 @@ import { AffiliateDisclosure } from "@/pages/AffiliateDisclosure";
 import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
 import { AiCostAudit } from "@/pages/AiCostAudit";
 import { CalculatorSavingsPage } from "@/pages/CalculatorSavingsPage";
+import { DecisionBuyPage } from "@/pages/DecisionBuyPage";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -102,6 +103,7 @@ function Router() {
                 <Route path="/worth-it/:slug" component={WorthItPage} />
                 <Route path="/alternatives/:slug" component={AlternativesPage} />
                 <Route path="/calculator/ai-savings-calculator" component={CalculatorSavingsPage} />
+                <Route path="/decision/which-ai-tool-should-i-buy" component={DecisionBuyPage} />
                 <Route path="/guides" component={GuideIndex} />
                 <Route path="/guides/:slug" component={GuidePage} />
                 <Route path="/terms" component={Terms} />

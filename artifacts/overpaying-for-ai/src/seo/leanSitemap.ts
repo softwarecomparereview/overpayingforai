@@ -40,6 +40,18 @@ export const LEAN_SITEMAP_ROUTES: SitemapEntry[] = [
   { path: "/guides/cheapest-ai-writing-tools", priority: "0.7", changefreq: "weekly" },
   { path: "/guides/best-ai-tools-under-20", priority: "0.7", changefreq: "weekly" },
   { path: "/guides/is-jasper-worth-it", priority: "0.7", changefreq: "weekly" },
+
+  // Third commercial cluster — role-based, free-vs-paid, budget, and decision content
+  { path: "/best/best-ai-tools-for-freelancers", priority: "0.9", changefreq: "weekly" },
+  { path: "/best/best-ai-tools-for-founders", priority: "0.9", changefreq: "weekly" },
+  { path: "/best/best-ai-tools-for-developers", priority: "0.9", changefreq: "weekly" },
+  { path: "/best/best-value-ai-tools", priority: "0.8", changefreq: "weekly" },
+  { path: "/best/best-ai-tools-by-budget", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/chatgpt-free-vs-plus", priority: "0.9", changefreq: "weekly" },
+  { path: "/compare/claude-free-vs-paid", priority: "0.9", changefreq: "weekly" },
+  { path: "/compare/gemini-free-vs-paid", priority: "0.9", changefreq: "weekly" },
+  { path: "/pricing/cheapest-ai-tools", priority: "0.9", changefreq: "weekly" },
+  { path: "/decision/which-ai-tool-should-i-buy", priority: "0.9", changefreq: "weekly" },
 ];
 
 export const CANONICAL_SITE_URL = "https://overpayingforai.com";
