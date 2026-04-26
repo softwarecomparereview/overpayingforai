@@ -35,6 +35,13 @@ export const LEAN_SITEMAP_ROUTES: SitemapEntry[] = [
   { path: "/compare/chatgpt-vs-cursor-cost", priority: "0.8", changefreq: "weekly" },
   { path: "/compare/subscription-vs-api-ai-cost", priority: "0.8", changefreq: "weekly" },
   { path: "/compare/gpt-4o-vs-gpt-4o-mini-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/gemini-vs-gpt4o-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/deepseek-vs-gpt4o-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/mistral-vs-openai-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/claude-vs-cursor-for-coding", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/perplexity-vs-chatgpt-cost", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/claude-haiku-vs-gpt4o-mini", priority: "0.8", changefreq: "weekly" },
+  { path: "/compare/writesonic-vs-jasper", priority: "0.7", changefreq: "weekly" },
 
   { path: "/guides/cheapest-ai-content-workflow", priority: "0.7", changefreq: "weekly" },
   { path: "/guides/cheapest-ai-writing-tools", priority: "0.7", changefreq: "weekly" },
