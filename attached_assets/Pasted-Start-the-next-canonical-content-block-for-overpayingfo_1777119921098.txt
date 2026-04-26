@@ -1,0 +1,315 @@
+Start the next canonical content block for overpayingforai.com.
+
+Important:
+The first 10 commercial pages are already built or launch-ready. Do not rebuild them.
+Do not redesign the site.
+Do not refactor unrelated code.
+Do not add pages outside the 10 listed below.
+Do not create generic AI directory pages.
+
+Create or upgrade these 10 pages:
+
+1. /best/best-ai-tools-for-freelancers
+2. /best/best-ai-tools-for-founders
+3. /best/best-ai-tools-for-developers
+4. /best/best-value-ai-tools
+5. /pricing/cheapest-ai-tools
+6. /compare/chatgpt-free-vs-plus
+7. /compare/claude-free-vs-paid
+8. /compare/gemini-free-vs-paid
+9. /decision/which-ai-tool-should-i-buy
+10. /best/best-ai-tools-by-budget
+
+Goal:
+Build the next commercial content block focused on role-based AI buying decisions, free-vs-paid decisions, budget/value decisions, and avoiding overpayment.
+
+Strategic framing:
+Every page must support the OverpayingForAI thesis:
+- help users avoid overpaying for AI tools
+- clarify pricing and plan tradeoffs
+- recommend tools by use case and budget
+- route users toward comparison, pricing, calculator, and decision pages
+- preserve trust-first commercial intent
+
+Global requirements:
+- Use existing site styling, templates, and components.
+- Reuse existing data-driven page patterns where possible.
+- Do not duplicate large blocks of generic copy.
+- Keep recommendations scenario-based, not one-size-fits-all.
+- Add visible last-updated dates.
+- Add pricing freshness notes.
+- Add affiliate/referral disclosure where commercial CTAs appear.
+- Add all 10 pages to sitemap.xml and leanSitemap.ts if relevant.
+- Add all 10 pages to internal website search.
+- Add strong internal links to the first 10 commercial pages:
+  - /pricing/chatgpt-pricing
+  - /pricing/claude-pricing
+  - /pricing/gemini-pricing
+  - /compare/chatgpt-vs-claude
+  - /compare/chatgpt-vs-gemini
+  - /compare/claude-vs-gemini
+  - /worth-it/is-chatgpt-plus-worth-it
+  - /worth-it/which-ai-subscription-is-worth-paying-for
+  - /alternatives/best-chatgpt-alternatives
+  - /calculator/ai-savings-calculator
+
+Search requirements:
+For every new/updated page, add searchable metadata:
+- title
+- slug
+- description
+- page_type
+- tools mentioned
+- category
+- tags
+- primary intent
+
+Suggested metadata:
+
+1. /best/best-ai-tools-for-freelancers
+title: Best AI Tools for Freelancers
+page_type: Best
+tools: ChatGPT, Claude, Gemini, Perplexity, Canva, Notion AI, Grammarly
+category: Role-based AI tools
+tags: best ai tools for freelancers, freelancer ai stack, ai tools for solo workers, avoid overpaying for ai
+
+2. /best/best-ai-tools-for-founders
+title: Best AI Tools for Founders
+page_type: Best
+tools: ChatGPT, Claude, Gemini, Perplexity, Notion AI, Canva, Replit, Cursor
+category: Role-based AI tools
+tags: best ai tools for founders, startup ai tools, founder ai stack, ai tools for startups, ai subscription value
+
+3. /best/best-ai-tools-for-developers
+title: Best AI Tools for Developers
+page_type: Best
+tools: ChatGPT, Claude, Gemini, Cursor, GitHub Copilot, Replit
+category: Role-based AI tools
+tags: best ai tools for developers, coding ai tools, cursor vs copilot, ai coding assistant, developer ai stack
+
+4. /best/best-value-ai-tools
+title: Best Value AI Tools Right Now
+page_type: Best
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot, Cursor, Canva
+category: AI value ranking
+tags: best value ai tools, cheapest useful ai tools, ai tools worth paying for, avoid overpaying
+
+5. /pricing/cheapest-ai-tools
+title: Cheapest AI Tools Right Now
+page_type: Pricing
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot, DeepSeek, Llama, Groq
+category: AI pricing
+tags: cheapest ai tools, cheap ai subscriptions, free ai tools, low cost ai tools, ai pricing comparison
+
+6. /compare/chatgpt-free-vs-plus
+title: ChatGPT Free vs Plus
+page_type: Comparison
+tools: ChatGPT, OpenAI
+category: Free vs paid
+tags: chatgpt free vs plus, is chatgpt plus worth it, chatgpt paid plan, chatgpt subscription
+
+7. /compare/claude-free-vs-paid
+title: Claude Free vs Paid
+page_type: Comparison
+tools: Claude, Anthropic
+category: Free vs paid
+tags: claude free vs paid, claude pro worth it, claude pricing, anthropic subscription
+
+8. /compare/gemini-free-vs-paid
+title: Gemini Free vs Paid
+page_type: Comparison
+tools: Gemini, Google AI
+category: Free vs paid
+tags: gemini free vs paid, gemini advanced worth it, google ai pro, gemini pricing
+
+9. /decision/which-ai-tool-should-i-buy
+title: Which AI Tool Should I Buy?
+page_type: Decision
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot, Cursor, Replit, Canva
+category: AI buying decision
+tags: which ai tool should i buy, best ai tool for me, ai buying guide, ai decision guide, avoid overpaying
+
+10. /best/best-ai-tools-by-budget
+title: Best AI Tools by Budget
+page_type: Best
+tools: ChatGPT, Claude, Gemini, Perplexity, Copilot, Cursor, Canva
+category: Budget-based AI tools
+tags: best ai tools by budget, ai tools under 20 dollars, ai subscription budget, low cost ai stack
+
+Page requirements:
+
+A. Role pages:
+- Best AI Tools for Freelancers
+- Best AI Tools for Founders
+- Best AI Tools for Developers
+
+Each role page should include:
+- Hero with role-specific overpaying angle
+- Quick recommendation table/cards
+- Best overall
+- Best budget option
+- Best for writing/research
+- Best for coding/technical work where relevant
+- Best for meetings/docs/content where relevant
+- What not to pay for yet
+- Suggested lean AI stack under a monthly budget
+- Common overpaying mistakes for that role
+- CTA to AI Savings Calculator
+- Internal links to relevant pricing, comparison, and worth-it pages
+
+B. Value and budget pages:
+- Best Value AI Tools Right Now
+- Cheapest AI Tools Right Now
+- Best AI Tools by Budget
+
+Each page should include:
+- Hero with value/cost framing
+- Clear ranking framework
+- Value tiers:
+  - free
+  - under $20/month
+  - $20–$40/month
+  - team/business
+  - API/usage-based where relevant
+- Best value by use case
+- Cheapest option that is still useful
+- Where cheap becomes false economy
+- Pricing freshness note
+- CTA to AI Savings Calculator
+- Internal links to comparison and pricing pages
+
+C. Free vs paid pages:
+- ChatGPT Free vs Plus
+- Claude Free vs Paid
+- Gemini Free vs Paid
+
+Each page should include:
+- Hero with quick verdict
+- Free plan: what it is good for
+- Paid plan: what it adds
+- Who should upgrade
+- Who should stay free
+- Common overpaying scenarios
+- Alternatives if paid plan is not worth it
+- Pricing freshness note
+- CTA to AI Savings Calculator
+- Internal links to tool pricing page, relevant comparison pages, and worth-it pages
+
+D. Decision page:
+- Which AI Tool Should I Buy?
+
+This page should include:
+- Hero with direct decision-support framing
+- Short quiz-style decision framework
+- Choose by use case:
+  - writing
+  - coding
+  - research
+  - business/admin
+  - Google Workspace
+  - budget buyer
+  - API builder
+- Choose by budget:
+  - free
+  - around $20/month
+  - team budget
+  - usage-based/API
+- Common mistakes
+- Final recommendation matrix
+- CTA to AI Savings Calculator
+- Internal links to all major pricing/comparison/worth-it pages
+
+Analytics requirements:
+Use existing analytics helpers. Do not create a competing analytics system.
+
+Track where relevant:
+- calculator_start
+- internal_link_click
+- primary_cta_click
+- comparison_cta_click
+- affiliate_click
+- outbound_click where non-affiliate outbound links exist
+- site_search_submit
+- site_search_result_click
+- site_search_no_results
+
+Payloads should include:
+- pageSlug
+- pageType
+- ctaLabel
+- destinationSlug where relevant
+- toolName where relevant
+- sourceComponent where relevant
+
+SEO requirements:
+- Unique title and meta description for each page
+- Clean H1/H2 structure
+- Canonical handling consistent with existing PageSeo component
+- FAQ section where useful
+- Sitemap inclusion
+- Internal search inclusion
+- No crawlable search result pages
+- No thin pages
+- Avoid 100+ character page titles where possible
+
+Trust/freshness requirements:
+- Add “Last updated” date
+- Add pricing freshness note
+- Do not present volatile API/token prices as guaranteed
+- Avoid exact prices unless already supported by local data or caveated
+- Avoid saying “official” unless supported by existing local data/source pattern
+- Use wording like “verify current provider pricing before subscribing” for volatile claims
+- For Google AI Pro/Gemini storage benefits, use cautious wording:
+  “includes Google One storage benefits; verify the current storage allowance in your region before subscribing”
+
+Validation:
+Run:
+- pnpm tsc --noEmit
+- pnpm build if available and not too slow
+
+Confirm routes:
+- /best/best-ai-tools-for-freelancers
+- /best/best-ai-tools-for-founders
+- /best/best-ai-tools-for-developers
+- /best/best-value-ai-tools
+- /pricing/cheapest-ai-tools
+- /compare/chatgpt-free-vs-plus
+- /compare/claude-free-vs-paid
+- /compare/gemini-free-vs-paid
+- /decision/which-ai-tool-should-i-buy
+- /best/best-ai-tools-by-budget
+
+Confirm search:
+- best ai tools for freelancers
+- best ai tools for founders
+- best ai tools for developers
+- best value ai tools
+- cheapest ai tools
+- chatgpt free vs plus
+- claude free vs paid
+- gemini free vs paid
+- which ai tool should i buy
+- best ai tools by budget
+- ai tools under 20 dollars
+- avoid overpaying for ai
+
+Also regression-check search:
+- chatgpt pricing
+- claude pricing
+- gemini pricing
+- chatgpt vs claude
+- chatgpt vs gemini
+- claude vs gemini
+- ai savings calculator
+
+Return:
+1. Branch name
+2. Files changed
+3. Routes added/updated
+4. Search index entries added
+5. Sitemap entries added
+6. Analytics events wired
+7. Pricing/data items needing manual review
+8. Typecheck/build result
+9. Known issues or skipped items
+10. Launch-hardening QA recommendation

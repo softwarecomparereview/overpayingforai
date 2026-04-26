@@ -165,6 +165,30 @@
     "source": "https://www.anthropic.com/pricing"
   },
   {
+    "id": "claude-free",
+    "name": "Claude (Free)",
+    "provider": "Anthropic",
+    "planType": "subscription",
+    "inputCostPer1k": 0,
+    "outputCostPer1k": 0,
+    "monthlySubscriptionCostIfAny": 0,
+    "hasFreeTier": true,
+    "bestFor": [
+      "writing",
+      "reasoning",
+      "chat"
+    ],
+    "qualityScore": 68,
+    "costScore": 100,
+    "latencyScore": 65,
+    "category": "chat",
+    "supportsApiUsage": false,
+    "freeTierLimitDescription": "Free access to Claude 3.5 Sonnet with daily rate limits. Sufficient for occasional writing and research tasks.",
+    "notes": "Free tier with daily rate limits. Priority access and longer context require Claude Pro.",
+    "last_updated": "2026-04-25",
+    "source": "https://claude.ai"
+  },
+  {
     "id": "gemini-1-5-pro",
     "name": "Gemini 1.5 Pro",
     "provider": "Google",

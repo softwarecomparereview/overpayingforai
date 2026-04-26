@@ -39,8 +39,11 @@ export function BestPage() {
     );
   }
 
-  const seoTitle = generateTitle(page.title, "best");
-  const seoDesc = generateMetaDescription(page.title, "best");
+  // Strip trailing "in YYYY" from title before generating to avoid "(YYYY)" duplication
+  const titleKeyword = page.title.replace(/\s+in\s+\d{4}$/, "").trim();
+  const seoTitle = generateTitle(titleKeyword, "best");
+  // Use the custom metaDescription from data if present; fall back to auto-generated
+  const seoDesc = page.metaDescription || generateMetaDescription(page.title, "best");
   const rank1Model = models.find((m) => m.id === page.picks[0]?.modelId);
   const seoSchema = rank1Model
     ? generateSchemaProduct(rank1Model.name, page.description)
