@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 import { SearchBox } from "@/components/search/SearchBox";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-const navLinks = [
-  { href: "/calculator", label: "Calculator" },
-  { href: "/decision-engine", label: "Decision Engine" },
-  { href: "/compare", label: "Comparisons" },
-  { href: "/ai-types", label: "AI Types" },
-  { href: "/resources", label: "Resources" },
-  { href: "/audit/ai-cost-reliability-audit", label: "Audit" },
-  { href: "/contact", label: "Contact" },
+const NAV_HREFS = [
+  { href: "/calculator", tKey: "nav.calculator" },
+  { href: "/decision-engine", tKey: "nav.decisionEngine" },
+  { href: "/compare", tKey: "nav.comparisons" },
+  { href: "/ai-types", tKey: "nav.aiTypes" },
+  { href: "/resources", tKey: "nav.resources" },
+  { href: "/audit/ai-cost-reliability-audit", tKey: "nav.audit" },
+  { href: "/contact", tKey: "nav.contact" },
 ];
 
 function SearchIcon({ className = "" }: { className?: string }) {
@@ -33,12 +35,15 @@ function SearchIcon({ className = "" }: { className?: string }) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { t } = useTranslation();
   const [location] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
   const closeSearch = () => setSearchOpen(false);
   const closeMenu = () => setMenuOpen(false);
+
+  const navLinks = NAV_HREFS.map(({ href, tKey }) => ({ href, label: t(tKey) }));
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -76,8 +81,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 setSearchOpen((v) => !v);
                 setMenuOpen(false);
               }}
-              aria-label={searchOpen ? "Close search" : "Open search"}
-              title="Search"
+              aria-label={searchOpen ? t("nav.closeSearch") : t("nav.openSearch")}
+              title={searchOpen ? t("nav.closeSearch") : t("nav.openSearch")}
               className={`hidden md:flex items-center justify-center w-8 h-8 rounded transition-colors ${
                 searchOpen
                   ? "bg-muted text-foreground"
@@ -93,22 +98,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
               )}
             </button>
 
+            {/* Language switcher — desktop */}
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
+
             <Link
               href="/calculator"
               className="text-xs sm:text-sm bg-primary text-primary-foreground px-3 sm:px-4 py-1 sm:py-1.5 rounded font-medium hover:bg-primary/90 transition-colors"
               data-testid="nav-cta"
             >
-              <span className="hidden sm:inline">Calculate Cost</span>
-              <span className="sm:hidden">Calculate</span>
+              <span className="hidden sm:inline">{t("nav.calculateCost")}</span>
+              <span className="sm:hidden">{t("nav.calculate")}</span>
             </Link>
 
-            {/* Mobile: search icon + hamburger */}
+            {/* Mobile: hamburger */}
             <button
               onClick={() => {
                 setSearchOpen(false);
                 setMenuOpen((v) => !v);
               }}
-              aria-label="Toggle navigation menu"
+              aria-label={t("nav.toggleMenu")}
               className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 rounded hover:bg-muted transition-colors"
             >
               <span
@@ -127,7 +137,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="hidden md:block border-t border-border bg-background px-4 py-3">
             <div className="max-w-2xl mx-auto">
               <SearchBox
-                placeholder="Search AI pricing, comparisons, guides…"
+                placeholder={t("nav.searchDesktopPlaceholder")}
                 onClose={closeSearch}
                 autoFocus
               />
@@ -141,7 +151,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {/* Search at top of mobile menu */}
             <div className="pb-1">
               <SearchBox
-                placeholder="Search pages…"
+                placeholder={t("nav.searchMobilePlaceholder")}
                 onClose={closeMenu}
               />
             </div>
@@ -161,6 +171,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               ))}
             </div>
+            {/* Language switcher — mobile */}
+            <div className="border-t border-border/60 pt-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         )}
       </header>
@@ -171,15 +185,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="border-t border-border bg-muted/40 py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p className="text-muted-foreground text-center sm:text-left">
-            <span className="font-semibold text-foreground">Not sure which AI is cheapest for your use case?</span>{" "}
-            Find out in 30 seconds — no signup required.
+            <span className="font-semibold text-foreground">{t("layout.banner.text")}</span>{" "}
+            {t("layout.banner.subtext")}
           </p>
           <div className="flex items-center gap-3 flex-shrink-0">
             <a href="/calculator" className="bg-primary text-primary-foreground font-medium px-4 py-1.5 rounded-lg hover:bg-primary/90 transition-colors text-sm">
-              Calculate Cost
+              {t("layout.banner.calculateCost")}
             </a>
             <a href="/decision-engine" className="text-muted-foreground hover:text-foreground transition-colors">
-              Decision Engine →
+              {t("layout.banner.decisionEngine")}
             </a>
           </div>
         </div>
@@ -189,60 +203,64 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <div>
-              <p className="font-semibold text-foreground mb-3">Tools</p>
+              <p className="font-semibold text-foreground mb-3">{t("layout.footer.tools")}</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/calculator" className="hover:text-foreground transition-colors">Cost Calculator</Link></li>
-                <li><Link href="/decision-engine" className="hover:text-foreground transition-colors">Decision Engine</Link></li>
+                <li><Link href="/calculator" className="hover:text-foreground transition-colors">{t("layout.footer.costCalculator")}</Link></li>
+                <li><Link href="/decision-engine" className="hover:text-foreground transition-colors">{t("layout.footer.decisionEngine")}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-foreground mb-3">Comparisons</p>
+              <p className="font-semibold text-foreground mb-3">{t("layout.footer.comparisons")}</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/compare/claude-vs-gpt-cost" className="hover:text-foreground transition-colors">Claude vs GPT-4o</Link></li>
-                <li><Link href="/compare/chatgpt-vs-cursor-cost" className="hover:text-foreground transition-colors">ChatGPT vs Cursor</Link></li>
-                <li><Link href="/compare/subscription-vs-api-ai-cost" className="hover:text-foreground transition-colors">Subscription vs API</Link></li>
-                <li><Link href="/compare/deepseek-vs-gpt4o-cost" className="hover:text-foreground transition-colors">DeepSeek vs GPT-4o</Link></li>
+                <li><Link href="/compare/claude-vs-gpt-cost" className="hover:text-foreground transition-colors">{t("layout.footer.claudeVsGpt")}</Link></li>
+                <li><Link href="/compare/chatgpt-vs-cursor-cost" className="hover:text-foreground transition-colors">{t("layout.footer.chatgptVsCursor")}</Link></li>
+                <li><Link href="/compare/subscription-vs-api-ai-cost" className="hover:text-foreground transition-colors">{t("layout.footer.subscriptionVsApi")}</Link></li>
+                <li><Link href="/compare/deepseek-vs-gpt4o-cost" className="hover:text-foreground transition-colors">{t("layout.footer.deepseekVsGpt")}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-foreground mb-3">Best Lists</p>
+              <p className="font-semibold text-foreground mb-3">{t("layout.footer.bestLists")}</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/best/best-ai-for-coding-on-a-budget" className="hover:text-foreground transition-colors">Best for Coding</Link></li>
-                <li><Link href="/best/best-ai-under-20-per-month" className="hover:text-foreground transition-colors">Under $20/month</Link></li>
-                <li><Link href="/best/best-free-ai-tools-for-builders" className="hover:text-foreground transition-colors">Best Free Tools</Link></li>
+                <li><Link href="/best/best-ai-for-coding-on-a-budget" className="hover:text-foreground transition-colors">{t("layout.footer.bestForCoding")}</Link></li>
+                <li><Link href="/best/best-ai-under-20-per-month" className="hover:text-foreground transition-colors">{t("layout.footer.under20")}</Link></li>
+                <li><Link href="/best/best-free-ai-tools-for-builders" className="hover:text-foreground transition-colors">{t("layout.footer.bestFree")}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-foreground mb-3">Guides</p>
+              <p className="font-semibold text-foreground mb-3">{t("layout.footer.guides")}</p>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link href="/guides/how-to-reduce-ai-cost" className="hover:text-foreground transition-colors">Reduce AI Costs</Link></li>
-                <li><Link href="/guides/token-cost-explained" className="hover:text-foreground transition-colors">Token Cost Explained</Link></li>
-                <li><Link href="/guides/when-to-use-api-vs-subscription" className="hover:text-foreground transition-colors">API vs Subscription</Link></li>
-                <li><Link href="/resources" className="hover:text-foreground transition-colors">All Resources</Link></li>
-                <li><Link href="/changelog" className="hover:text-foreground transition-colors">Pricing Data</Link></li>
-                <li><Link href="/pricing-changelog" className="hover:text-foreground transition-colors">Pricing Changelog</Link></li>
-                <li><Link href="/ai-types" className="hover:text-foreground transition-colors">Browse AI Types</Link></li>
+                <li><Link href="/guides/how-to-reduce-ai-cost" className="hover:text-foreground transition-colors">{t("layout.footer.reduceAiCosts")}</Link></li>
+                <li><Link href="/guides/token-cost-explained" className="hover:text-foreground transition-colors">{t("layout.footer.tokenCostExplained")}</Link></li>
+                <li><Link href="/guides/when-to-use-api-vs-subscription" className="hover:text-foreground transition-colors">{t("layout.footer.apiVsSubscription")}</Link></li>
+                <li><Link href="/resources" className="hover:text-foreground transition-colors">{t("layout.footer.allResources")}</Link></li>
+                <li><Link href="/changelog" className="hover:text-foreground transition-colors">{t("layout.footer.pricingData")}</Link></li>
+                <li><Link href="/pricing-changelog" className="hover:text-foreground transition-colors">{t("layout.footer.pricingChangelog")}</Link></li>
+                <li><Link href="/ai-types" className="hover:text-foreground transition-colors">{t("layout.footer.browseAiTypes")}</Link></li>
               </ul>
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground/75 leading-relaxed text-center sm:text-left">
             <p className="mb-2 flex flex-wrap gap-x-0 gap-y-1">
-              <Link href="/audit/ai-cost-reliability-audit" className="hover:text-foreground transition-colors">AI Cost Audit</Link>
+              <Link href="/audit/ai-cost-reliability-audit" className="hover:text-foreground transition-colors">{t("layout.footer.aiCostAudit")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+              <Link href="/contact" className="hover:text-foreground transition-colors">{t("nav.contact")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+              <Link href="/about" className="hover:text-foreground transition-colors">{t("layout.footer.about")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/media-kit" className="hover:text-foreground transition-colors">Media Kit</Link>
+              <Link href="/media-kit" className="hover:text-foreground transition-colors">{t("layout.footer.mediaKit")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/affiliate-disclosure" className="hover:text-foreground transition-colors">Affiliate Disclosure</Link>
+              <Link href="/affiliate-disclosure" className="hover:text-foreground transition-colors">{t("layout.footer.affiliateDisclosure")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">{t("layout.footer.privacyPolicy")}</Link>
               <span className="mx-2">·</span>
-              <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">{t("layout.footer.termsOfService")}</Link>
             </p>
-            <p>© 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by <a href="https://www.linkedin.com/in/aniruddhpanvalkar" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Aniruddh</a></p>
-            <p>All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited.</p>
+            <p>
+              {t("layout.footer.copyrightPrefix")}
+              <a href="https://www.linkedin.com/in/aniruddhpanvalkar" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Aniruddh</a>
+              {t("layout.footer.copyrightSuffix")}
+            </p>
+            <p>{t("layout.footer.copyrightSub")}</p>
           </div>
         </div>
       </footer>

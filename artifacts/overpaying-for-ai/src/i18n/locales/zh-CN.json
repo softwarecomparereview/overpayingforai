@@ -1,0 +1,322 @@
+{
+  "nav": {
+    "calculator": "费用计算器",
+    "decisionEngine": "决策引擎",
+    "comparisons": "对比分析",
+    "aiTypes": "AI 类型",
+    "resources": "资源",
+    "audit": "合规审计",
+    "contact": "联系我们",
+    "openSearch": "打开搜索",
+    "closeSearch": "关闭搜索",
+    "toggleMenu": "切换导航菜单",
+    "searchDesktopPlaceholder": "搜索 AI 定价、对比分析、使用指南…",
+    "searchMobilePlaceholder": "搜索页面…",
+    "calculateCost": "计算费用",
+    "calculate": "计算"
+  },
+  "layout": {
+    "banner": {
+      "text": "不确定哪个 AI 对你的使用场景最划算？",
+      "subtext": "30 秒内找到答案——无需注册。",
+      "calculateCost": "计算费用",
+      "decisionEngine": "决策引擎 →"
+    },
+    "footer": {
+      "tools": "工具",
+      "costCalculator": "费用计算器",
+      "decisionEngine": "决策引擎",
+      "comparisons": "对比分析",
+      "claudeVsGpt": "Claude 与 GPT-4o 对比",
+      "chatgptVsCursor": "ChatGPT 与 Cursor 对比",
+      "subscriptionVsApi": "订阅制 vs 按量付费",
+      "deepseekVsGpt": "DeepSeek 与 GPT-4o 对比",
+      "bestLists": "精选推荐",
+      "bestForCoding": "最佳编程工具",
+      "under20": "$20/月以内",
+      "bestFree": "最佳免费工具",
+      "guides": "使用指南",
+      "reduceAiCosts": "降低 AI 成本",
+      "tokenCostExplained": "Token 费用详解",
+      "apiVsSubscription": "API 与订阅制对比",
+      "allResources": "所有资源",
+      "pricingData": "定价数据",
+      "pricingChangelog": "定价变更记录",
+      "browseAiTypes": "浏览 AI 类型",
+      "aiCostAudit": "AI 费用审计",
+      "about": "关于",
+      "mediaKit": "媒体资料包",
+      "affiliateDisclosure": "推广合作披露",
+      "privacyPolicy": "隐私政策",
+      "termsOfService": "服务条款",
+      "copyrightPrefix": "© 2026 OverpayingForAI · Aniruddh Consultancy Pty Ltd 旗下产品 · 由 ",
+      "copyrightSuffix": " 构建",
+      "copyrightSub": "所有内容 © 2026 Aniruddh Consultancy Pty Ltd。未经授权禁止转载。"
+    }
+  },
+  "home": {
+    "badge": "免费 · 无需注册 · 追踪 20+ AI 模型",
+    "hero": {
+      "h1Line1": "停止在 AI 上浪费金钱。",
+      "h1Line2": "找到最优价比的 AI 方案。",
+      "subtitle1": "2 分钟内，计算你的真实月度费用，找到降低开支的最快路径。",
+      "subtitle2": "专为需要对比 ChatGPT、Claude、Gemini 和 API 定价的团队而建。",
+      "ctaPrimary": "打开计算器 →",
+      "ctaSecondary": "查看 Claude 与 GPT 费用对比"
+    },
+    "search": {
+      "label": "搜索 AI 定价页、对比分析和使用指南",
+      "placeholder": "搜索——试试「chatgpt 定价」、「claude 对比 gpt」、「编程工具」…"
+    },
+    "jumpNav": {
+      "jumpTo": "跳转至：",
+      "calculator": "计算器",
+      "compareModels": "模型对比",
+      "savings": "节省金额",
+      "recommendations": "推荐",
+      "aiTypes": "AI 类型",
+      "guides": "使用指南",
+      "faqs": "常见问题"
+    },
+    "steps": {
+      "title": "从这里开始",
+      "step": "步骤",
+      "step1": "首先打开计算器",
+      "step2": "查看更便宜的替代方案",
+      "step3": "通过直接对比确认",
+      "nextTitle": "最实用的下一步",
+      "card1Title": "AI 费用计算器",
+      "card1Desc": "估算你的月度开支，找到更划算的方案。",
+      "card2Title": "Claude 与 GPT-4o 费用对比",
+      "card2Desc": "我们最受欢迎的对比，助你快速做出定价决策。",
+      "card3Title": "对比主要工具",
+      "card3Desc": "并排查看直接价格和用途取舍对比。"
+    },
+    "trust": {
+      "step1Title": "第一步：计算你的开支",
+      "step1Desc": "输入用量、输出用量和模型。",
+      "step2Title": "第二步：对比你的最优替代方案",
+      "step2Desc": "如有疑问，从 Claude 与 GPT 对比开始。",
+      "step3Title": "第三步：自信地切换",
+      "step3Desc": "在承诺前查看并排费用对比。"
+    },
+    "aiTypes": {
+      "label": "按 AI 类型浏览",
+      "title": "找到最适合你使用场景的最便宜模型",
+      "desc": "定价策略因类别而异。选择你的使用场景，查看相关模型选项、费用基准和推荐。",
+      "viewAll": "查看全部 →",
+      "viewAllBtn": "查看所有 AI 类型分类 →",
+      "explore": "探索 →",
+      "general-ai": { "title": "通用 AI", "tagline": "按性价比排名的最佳全能助手", "bestFor": "日常任务与写作" },
+      "coding-ai": { "title": "编程 AI", "tagline": "面向开发者的 IDE 工具和 API", "bestFor": "代码生成与调试" },
+      "writing-ai": { "title": "写作 AI", "tagline": "内容创作性价比最高的模型", "bestFor": "博客、文案和邮件" },
+      "research-ai": { "title": "研究 AI", "tagline": "搜索与文档分析工具", "bestFor": "分析与综合" },
+      "customer-support-ai": { "title": "客服 AI", "tagline": "高吞吐量、低成本的对话模型", "bestFor": "聊天、工单与机器人" },
+      "productivity-ai": { "title": "效率 AI", "tagline": "用于文档、会议和工作流的 AI", "bestFor": "团队与独立创业者" }
+    },
+    "whatItDoes": {
+      "label": "这个工具能做什么",
+      "title": "告别猜测，开始精确计算。",
+      "desc": "OverpayingForAI 对比各大 AI 厂商的模型定价，计算你的真实月度 Token 费用，并推荐更便宜的替代方案——不含任何营销噪音。",
+      "bullet1": "计算任意模型的真实 Token 费用",
+      "bullet2": "并排对比 ChatGPT、Claude、Gemini、DeepSeek",
+      "bullet3": "获取针对你的工作负载的 3 个性价比更高的替代方案",
+      "bullet4": "通过决策引擎用 5 个问题找到最适合的方案",
+      "bullet5": "浏览关于模型路由、API 与订阅制对比等主题的指南",
+      "cta": "计算你的费用 →"
+    },
+    "overpay": {
+      "label": "为什么人们会多花钱",
+      "title": "三种快速积累浪费的模式",
+      "fixLabel": "解决方案：",
+      "fixCta": "立即解决 →",
+      "patterns": {
+        "0": { "title": "订阅制陷阱", "problem": "你每月花 $20 订阅 ChatGPT Plus，但使用频率很低。按你的实际用量，使用 API 只需 $2。", "fix": "改用 API 方式访问 GPT-4o mini。质量相当，费用降低 90%。", "metricLabel": "平均浪费在闲置订阅容量上" },
+        "1": { "title": "对所有任务都使用 GPT-4o", "problem": "GPT-4o 每 Token 费用是 GPT-4o mini 的 33 倍。大多数任务根本不需要那么强的性能。", "fix": "将简单任务路由到 mini，只为复杂推理保留 GPT-4o。", "metricLabel": "通过模型路由消除的 API 开支，且质量不变" },
+        "2": { "title": "没有路由策略", "problem": "所有任务使用同一个模型，意味着全程支付高价。", "fix": "先对任务分类。批量任务用 Flash 或 mini，只在必要时升级到 Sonnet。", "metricLabel": "通过两级路由策略实现的成本降低" }
+      }
+    },
+    "calcEntry": {
+      "label": "计算器",
+      "title": "查看你的月度开支",
+      "desc": "输入你的月度 Token 用量——或选择一个场景——查看真实费用及换用更智能模型后的节省金额。",
+      "bullet1": "分别对比输入和输出 Token 费用",
+      "bullet2": "综合考虑订阅制与按 Token 付费方案",
+      "bullet3": "按节省金额排列展示 3 个更便宜的替代方案",
+      "scenarioLabel": "从使用场景开始：",
+      "scenarios": {
+        "chatgptPlus": "ChatGPT Plus 用户",
+        "apiDev": "API 开发者",
+        "startupBot": "创业公司机器人",
+        "contentTeam": "内容团队",
+        "soloFounder": "独立创业者",
+        "enterprise": "企业团队"
+      },
+      "openFull": "打开完整计算器 →"
+    },
+    "savings": {
+      "label": "真实节省",
+      "title": "团队实际节省多少",
+      "desc": "基于当前市场定价的真实切换场景。",
+      "seeYourSavings": "查看你的节省金额 →",
+      "findCheapest": "找到我最便宜的方案",
+      "perMonth": "/月",
+      "perYear": "/年节省",
+      "seeComparison": "查看对比 →"
+    },
+    "affiliate": {
+      "label": "推荐",
+      "title": "找到最适合你的模型",
+      "desc": "决策支持，非广告推销。基于真实定价数据按性价比排名。",
+      "quiz": "参加 5 题问卷 →",
+      "picks": {
+        "bestOverall": { "label": "综合最佳", "pitch": "接近 GPT-4o 的质量，成本仅为其几分之一。适合大多数团队的最安全升级路径。", "cta": "选择这个方案" },
+        "cheapestViable": { "label": "最廉价可用", "pitch": "比 GPT-4o 便宜 33 倍。轻松处理分类、问答和摘要任务，毫不妥协。", "cta": "用这个方案节省" },
+        "startupOption": { "label": "创业团队首选", "pitch": "高量处理流水线成本几乎为零。适合早期精益团队。", "cta": "精益团队使用这个" },
+        "bestForCoding": { "label": "编程最佳", "pitch": "强大的代码生成和推理能力。处理复杂重构效果优于更便宜的模型。", "cta": "尝试用于编程" }
+      }
+    },
+    "comparisons": {
+      "label": "模型对比",
+      "title": "热门对比",
+      "viewAll": "查看全部 →",
+      "readComparison": "查看对比",
+      "cantFind": "找不到你的使用场景？",
+      "useDecision": "使用决策引擎 →",
+      "browseAll": "浏览所有资源 →"
+    },
+    "pricingData": {
+      "label": "定价数据",
+      "title": "值得信赖的定价",
+      "desc": "所有定价数据均来自官方厂商页面并定期审核。价格变动时，我们会记录差异，让你清楚地了解变化内容和时间。",
+      "coverageLabel": "定价覆盖范围",
+      "viewAll": "查看全部定价数据 →",
+      "changelog": "上次审核的变化 →"
+    },
+    "guides": {
+      "label": "使用指南与资源",
+      "title": "学会减少开支",
+      "browseAll": "浏览全部 →",
+      "readGuide": "阅读指南 →"
+    },
+    "faq": {
+      "label": "常见问题",
+      "title": "常见问题解答",
+      "checkSpend": "立即查看你的开支 →",
+      "browseAll": "浏览所有资源"
+    },
+    "bottomCta": {
+      "title": "了解你实际支付的费用。",
+      "desc": "输入你的月度 Token 用量，查看真实费用——以及切换模型后能节省多少。",
+      "openCalc": "打开计算器 →",
+      "findCheapest": "找到我最便宜的方案"
+    }
+  },
+  "calc": {
+    "useThisIf": "以下情况适用：",
+    "bullet1": "你在为 GPT-4o、Claude 或订阅服务付费，希望找到更便宜的替代方案。",
+    "bullet2": "在 API 和订阅方案之间做选择前，你需要快速估算费用。",
+    "bullet3": "你希望在看到预估月度开支后，得到一个明确的下一步行动。",
+    "recommendations": "推荐结果基于使用场景、用量和成本敏感度。",
+    "usagePreset": "用量预设",
+    "preset": {
+      "light": "轻量（偶尔聊天）",
+      "moderate": "中等（每日使用）",
+      "heavy": "重度（高级用户）",
+      "scale": "大规模（构建产品）"
+    },
+    "aiModel": "AI 模型",
+    "apiModels": "API 模型",
+    "subscriptions": "订阅计划",
+    "yourSelection": "（你的选择）",
+    "presetApplied": "已应用预设",
+    "selected": "已选择：",
+    "monthlyInput": "月度输入 Token",
+    "monthlyOutput": "月度输出 Token",
+    "tokens": "个 Token",
+    "words": "个词",
+    "calculateBtn": "计算月度费用",
+    "editInputs": "编辑输入",
+    "compareMoreOptions": "对比更多选项",
+    "howCalculated": "费用是如何计算的？",
+    "howDesc1": "API 费用计算公式：（输入 Token 数 / 1000 × 每千输入 Token 费用）+（输出 Token 数 / 1000 × 每千输出 Token 费用）。订阅计划为固定月费，与用量无关。",
+    "howDesc2": "1 个 Token ≈ 0.75 个英文单词 ≈ 4 个英文字符。",
+    "tokenGuide": "了解更多关于 Token 的信息 →",
+    "stale": {
+      "mayHaveChanged": "定价可能已有变化。",
+      "verify": "请向提供商确认。"
+    },
+    "result": {
+      "estimatedCost": "预估月度费用",
+      "bestFit": "最佳选择：",
+      "input": "输入：",
+      "output": "输出：",
+      "month": "月",
+      "perMonth": "/月",
+      "overpaying": "你正在多付",
+      "switchTo": "切换至",
+      "save": "节省",
+      "lowerThan": "低于",
+      "at": "在",
+      "vs": "vs",
+      "shareLink": "复制分享链接",
+      "copied": "已复制！"
+    }
+  },
+  "decision": {
+    "title": "AI 决策引擎",
+    "subtitle": "回答 5 个问题，获取最优 AI 方案。",
+    "steps": {
+      "useCase": "使用场景",
+      "budget": "预算",
+      "usage": "用量",
+      "quality": "质量偏好",
+      "freeTier": "免费层"
+    },
+    "q0": "你的主要使用场景是什么？",
+    "q1": "你的月度预算是多少？",
+    "q2": "你将多频繁地使用？",
+    "q3": "你对质量的偏好是什么？",
+    "q4": "你需要免费套餐选项吗？",
+    "useCase": {
+      "coding": { "label": "代码编写", "desc": "代码生成、调试、重构" },
+      "writing": { "label": "文案写作", "desc": "博客、文案、邮件、文档" },
+      "research": { "label": "研究分析", "desc": "分析、综合、总结" },
+      "automation": { "label": "自动化", "desc": "流程、机器人、智能体、工作流" },
+      "chat": { "label": "对话聊天", "desc": "一般问答、助手、日常对话" }
+    },
+    "budget": {
+      "free": { "label": "仅免费", "desc": "无需信用卡，零成本" },
+      "under20": { "label": "$20/月以内", "desc": "标准消费级范围" },
+      "under50": { "label": "$50/月以内", "desc": "适中的专业预算" },
+      "premium": { "label": "无固定上限", "desc": "为最佳效果付费" }
+    },
+    "frequency": {
+      "light": { "label": "轻量", "desc": "每周使用几次" },
+      "medium": { "label": "中等", "desc": "每天使用几小时" },
+      "heavy": { "label": "重度", "desc": "几乎全天使用" }
+    },
+    "quality": {
+      "cheap": { "label": "最低可用成本", "desc": "够用就行，不追求昂贵" },
+      "balanced": { "label": "均衡", "desc": "最佳性价比" },
+      "best": { "label": "最高质量", "desc": "质量不妥协" }
+    },
+    "freeTier": {
+      "true": { "label": "是，需要免费套餐", "desc": "必须有免费选项" },
+      "false": { "label": "不，值得就付费", "desc": "付费方案也可以" }
+    },
+    "result": {
+      "bestFit": "最适合你的选择",
+      "use": "使用",
+      "compareExactCost": "对比精确费用",
+      "cheaperAlt": "更便宜的替代方案",
+      "cheapestViable": "最廉价可用",
+      "bestBalance": "最佳均衡",
+      "premiumPick": "高端选择",
+      "recommended": "推荐",
+      "freeTierAvailable": "提供免费套餐",
+      "suggestedStrategy": "建议策略",
+      "startOver": "重新开始"
+    }
+  }
+}
