@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 import { track, trackCta } from "@/utils/analytics";
 import { SearchBox } from "@/components/search/SearchBox";
 import { freshnessLabel, isPricingStale } from "@/utils/pricingFreshness";
@@ -34,74 +35,45 @@ const SAVINGS = [
   { from: "Claude Sonnet", to: "DeepSeek V3", save: "$13.90", savePerYear: "$167", pct: "93%", usage: "1M output tokens/month", slug: "deepseek-vs-gpt4o-cost" },
 ];
 
-const AFFILIATE_PICKS = [
-  {
-    label: "Best overall",
-    badge: "bg-slate-900 text-white",
-    model: "Claude 3.5 Sonnet",
-    provider: "Anthropic",
-    cost: "$3 / 1M out tokens",
-    pitch: "Near-GPT-4o quality at a fraction of the cost. The safest default upgrade path for most teams.",
-    cta: "Start with this option",
-    href: "/compare/claude-vs-gpt-cost",
-  },
-  {
-    label: "Cheapest viable",
-    badge: "bg-emerald-700 text-white",
-    model: "GPT-4o mini",
-    provider: "OpenAI",
-    cost: "$0.60 / 1M out tokens",
-    pitch: "33× cheaper than GPT-4o. Handles classification, Q&A, and summaries without compromise.",
-    cta: "Save with this option",
-    href: "/compare/gpt-4o-vs-gpt-4o-mini-cost",
-  },
-  {
-    label: "Startup option",
-    badge: "bg-violet-700 text-white",
-    model: "Gemini 1.5 Flash",
-    provider: "Google",
-    cost: "$0.075 / 1M out tokens",
-    pitch: "Near-zero cost for high-volume pipelines. Good enough for lean teams early on.",
-    cta: "Use this for lean teams",
-    href: "/compare/gemini-vs-gpt4o-cost",
-  },
-  {
-    label: "Best for coding",
-    badge: "bg-blue-700 text-white",
-    model: "Claude 3.5 Sonnet",
-    provider: "Anthropic",
-    cost: "$3 / 1M out tokens",
-    pitch: "Strong code generation and reasoning. Handles complex refactors better than cheaper models.",
-    cta: "Try for coding",
-    href: "/compare/claude-vs-cursor-for-coding",
-  },
+const AFFILIATE_PICKS_DATA = [
+  { pickKey: "bestOverall", badge: "bg-slate-900 text-white", model: "Claude 3.5 Sonnet", provider: "Anthropic", cost: "$3 / 1M out tokens", href: "/compare/claude-vs-gpt-cost" },
+  { pickKey: "cheapestViable", badge: "bg-emerald-700 text-white", model: "GPT-4o mini", provider: "OpenAI", cost: "$0.60 / 1M out tokens", href: "/compare/gpt-4o-vs-gpt-4o-mini-cost" },
+  { pickKey: "startupOption", badge: "bg-violet-700 text-white", model: "Gemini 1.5 Flash", provider: "Google", cost: "$0.075 / 1M out tokens", href: "/compare/gemini-vs-gpt4o-cost" },
+  { pickKey: "bestForCoding", badge: "bg-blue-700 text-white", model: "Claude 3.5 Sonnet", provider: "Anthropic", cost: "$3 / 1M out tokens", href: "/compare/claude-vs-cursor-for-coding" },
 ];
 
-const OVERPAY_PATTERNS = [
-  {
-    label: "01",
-    title: "The subscription trap",
-    problem: "You pay $20/month for ChatGPT Plus but use it lightly. At your actual usage, the API costs $2.",
-    fix: "Switch to GPT-4o mini via API. Same quality, 90% less cost.",
-    metric: "$216/yr",
-    metricLabel: "average wasted on unused subscription capacity",
-  },
-  {
-    label: "02",
-    title: "Using GPT-4o for everything",
-    problem: "GPT-4o costs 33× more per token than GPT-4o mini. Most tasks don't need that power.",
-    fix: "Route simple tasks to mini. Reserve GPT-4o for complex reasoning only.",
-    metric: "80%",
-    metricLabel: "of API spend eliminated by model routing with no quality change",
-  },
-  {
-    label: "03",
-    title: "No routing strategy",
-    problem: "One model for every task means paying premium prices across the board.",
-    fix: "Classify tasks first. Use Flash or mini for bulk, escalate to Sonnet only when needed.",
-    metric: "60–80%",
-    metricLabel: "cost reduction with a two-tier routing strategy",
-  },
+const OVERPAY_METRICS = [
+  { label: "01", metric: "$216/yr" },
+  { label: "02", metric: "80%" },
+  { label: "03", metric: "60–80%" },
+];
+
+const AI_TYPE_SLUGS = [
+  { slug: "general-ai", icon: "🧠" },
+  { slug: "coding-ai", icon: "💻" },
+  { slug: "writing-ai", icon: "✍️" },
+  { slug: "research-ai", icon: "🔍" },
+  { slug: "customer-support-ai", icon: "💬" },
+  { slug: "productivity-ai", icon: "⚡" },
+];
+
+const JUMP_NAV_ITEMS = [
+  { href: "#section-calculator", tKey: "home.jumpNav.calculator" },
+  { href: "#section-comparison", tKey: "home.jumpNav.compareModels" },
+  { href: "#section-savings", tKey: "home.jumpNav.savings" },
+  { href: "#section-affiliate", tKey: "home.jumpNav.recommendations" },
+  { href: "#section-ai-types", tKey: "home.jumpNav.aiTypes" },
+  { href: "#section-guides", tKey: "home.jumpNav.guides" },
+  { href: "#section-faq", tKey: "home.jumpNav.faqs" },
+];
+
+const CALC_SCENARIOS = [
+  { tKey: "home.calcEntry.scenarios.chatgptPlus", href: "/calculator?scenario=chatgpt-plus-user" },
+  { tKey: "home.calcEntry.scenarios.apiDev", href: "/calculator?scenario=developer-coding-workflow" },
+  { tKey: "home.calcEntry.scenarios.startupBot", href: "/calculator?scenario=startup-support-bot" },
+  { tKey: "home.calcEntry.scenarios.contentTeam", href: "/calculator?scenario=content-team" },
+  { tKey: "home.calcEntry.scenarios.soloFounder", href: "/calculator?scenario=solo-founder" },
+  { tKey: "home.calcEntry.scenarios.enterprise", href: "/calculator" },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -117,25 +89,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-const AI_TYPE_CARDS = [
-  { slug: "general-ai", icon: "🧠", title: "General AI", tagline: "Best all-purpose assistants by cost", bestFor: "Everyday tasks & writing" },
-  { slug: "coding-ai", icon: "💻", title: "Coding AI", tagline: "IDE tools and APIs for developers", bestFor: "Code generation & debugging" },
-  { slug: "writing-ai", icon: "✍️", title: "Writing AI", tagline: "Cheapest models for content work", bestFor: "Blogs, copy & emails" },
-  { slug: "research-ai", icon: "🔍", title: "Research AI", tagline: "Search & document analysis tools", bestFor: "Analysis & synthesis" },
-  { slug: "customer-support-ai", icon: "💬", title: "Customer Support AI", tagline: "High-volume, low-cost chat models", bestFor: "Chat, tickets & bots" },
-  { slug: "productivity-ai", icon: "⚡", title: "Productivity AI", tagline: "AI for docs, meetings & workflows", bestFor: "Teams & solopreneurs" },
-];
-
-const NAV_ITEMS = [
-  { href: "#section-calculator", label: "Calculator" },
-  { href: "#section-comparison", label: "Compare Models" },
-  { href: "#section-savings", label: "Savings" },
-  { href: "#section-affiliate", label: "Recommendations" },
-  { href: "#section-ai-types", label: "AI Types" },
-  { href: "#section-guides", label: "Guides" },
-  { href: "#section-faq", label: "FAQs" },
-];
-
 function trackHomepageCtaClick(ctaLabel: string, destinationUrl: string, ctaType: "primary" | "secondary" = "primary") {
   trackCta({
     providerId: "",
@@ -150,6 +103,8 @@ function trackHomepageCtaClick(ctaLabel: string, destinationUrl: string, ctaType
 }
 
 export function Design2() {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white">
       <PageSeo
@@ -165,18 +120,18 @@ export function Design2() {
             <div>
               <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5 mb-6 text-xs font-semibold text-emerald-700">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Free · No sign-up · 20+ AI models tracked
+                {t("home.badge")}
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08] mb-5">
-                Stop wasting money on AI.
+                {t("home.hero.h1Line1")}
                 <br />
-                Get your cheapest viable setup.
+                {t("home.hero.h1Line2")}
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mb-5">
-                In under 2 minutes, calculate your real monthly cost and see the fastest path to lower spend.
+                {t("home.hero.subtitle1")}
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-8">
-                Built for teams comparing ChatGPT, Claude, Gemini, and API pricing side-by-side.
+                {t("home.hero.subtitle2")}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
@@ -187,7 +142,7 @@ export function Design2() {
                   }}
                   className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  Open the calculator →
+                  {t("home.hero.ctaPrimary")}
                 </Link>
                 <Link
                   href="/compare/claude-vs-gpt-cost"
@@ -197,7 +152,7 @@ export function Design2() {
                   }}
                   className="inline-flex items-center justify-center border border-border hover:bg-muted text-foreground font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
                 >
-                  See Claude vs GPT costs
+                  {t("home.hero.ctaSecondary")}
                 </Link>
               </div>
             </div>
@@ -209,24 +164,24 @@ export function Design2() {
       <section className="border-b border-border bg-muted/20">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-5">
           <p className="text-xs font-medium text-muted-foreground text-center mb-3 uppercase tracking-wide">
-            Find AI pricing pages, comparisons, and guides
+            {t("home.search.label")}
           </p>
-          <SearchBox placeholder={`Search — try "chatgpt pricing", "claude vs gpt", "coding tools"…`} />
+          <SearchBox placeholder={t("home.search.placeholder")} />
         </div>
       </section>
 
       {/* ── STICKY JUMP NAV — sits exactly below the h-14 main header ── */}
       <div className="sticky top-14 z-40 bg-white border-b border-border shadow-sm">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap scrollbar-none">
-          <span className="text-xs font-semibold text-muted-foreground mr-2 shrink-0 hidden sm:block">Jump to:</span>
-          {NAV_ITEMS.map(({ href, label }) => (
+          <span className="text-xs font-semibold text-muted-foreground mr-2 shrink-0 hidden sm:block">{t("home.jumpNav.jumpTo")}</span>
+          {JUMP_NAV_ITEMS.map(({ href, tKey }) => (
             <a
               key={href}
               href={href}
               onClick={() => track("section_nav_clicked", { section: href.replace("#section-", ""), sourceSurface: "homepage" })}
               className="text-xs font-medium px-3 py-1.5 rounded-full border border-border hover:bg-muted hover:text-foreground text-muted-foreground transition-colors shrink-0"
             >
-              {label}
+              {t(tKey)}
             </a>
           ))}
         </div>
@@ -237,16 +192,16 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-3 gap-3 text-sm">
             <div className="rounded-lg border border-border bg-white px-4 py-3">
-              <p className="font-semibold text-foreground">Step 1: Calculate your spend</p>
-              <p className="text-xs text-muted-foreground mt-1">Input usage, output usage, and model.</p>
+              <p className="font-semibold text-foreground">{t("home.trust.step1Title")}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("home.trust.step1Desc")}</p>
             </div>
             <div className="rounded-lg border border-border bg-white px-4 py-3">
-              <p className="font-semibold text-foreground">Step 2: Compare your top alternative</p>
-              <p className="text-xs text-muted-foreground mt-1">Start with Claude vs GPT if you're unsure.</p>
+              <p className="font-semibold text-foreground">{t("home.trust.step2Title")}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("home.trust.step2Desc")}</p>
             </div>
             <div className="rounded-lg border border-border bg-white px-4 py-3">
-              <p className="font-semibold text-foreground">Step 3: Switch with confidence</p>
-              <p className="text-xs text-muted-foreground mt-1">Use side-by-side costs before committing.</p>
+              <p className="font-semibold text-foreground">{t("home.trust.step3Title")}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("home.trust.step3Desc")}</p>
             </div>
           </div>
         </div>
@@ -254,29 +209,29 @@ export function Design2() {
 
       <section className="border-b border-border bg-white py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Start here</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">{t("home.steps.title")}</h2>
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
-            {[
-              "Open the calculator first",
-              "Review cheaper alternatives",
-              "Confirm with a direct comparison",
-            ].map((step, idx) => (
-              <div key={step} className="border border-border rounded-xl p-5 bg-white">
-                <p className="text-xs font-semibold text-primary mb-2">Step {idx + 1}</p>
+            {([
+              t("home.steps.step1"),
+              t("home.steps.step2"),
+              t("home.steps.step3"),
+            ] as string[]).map((step, idx) => (
+              <div key={idx} className="border border-border rounded-xl p-5 bg-white">
+                <p className="text-xs font-semibold text-primary mb-2">{t("home.steps.step")} {idx + 1}</p>
                 <p className="text-sm font-medium text-foreground">{step}</p>
               </div>
             ))}
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-5">Most useful next steps</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-5">{t("home.steps.nextTitle")}</h2>
           <div className="grid sm:grid-cols-3 gap-4">
             {[
-              { href: "/calculator", title: "AI cost calculator", desc: "Estimate your monthly spend and find your cheaper setup." },
-              { href: "/compare/claude-vs-gpt-cost", title: "Claude vs GPT-4o cost", desc: "Our highest-intent comparison for quick pricing decisions." },
-              { href: "/compare", title: "Compare major tools", desc: "See direct price and use-case tradeoffs side by side." },
+              { href: "/calculator", titleKey: "home.steps.card1Title", descKey: "home.steps.card1Desc" },
+              { href: "/compare/claude-vs-gpt-cost", titleKey: "home.steps.card2Title", descKey: "home.steps.card2Desc" },
+              { href: "/compare", titleKey: "home.steps.card3Title", descKey: "home.steps.card3Desc" },
             ].map((card) => (
               <Link key={card.href} href={card.href} className="border border-border rounded-xl p-5 bg-slate-50 hover:border-primary/40 transition-colors">
-                <h3 className="font-semibold text-foreground mb-2">{card.title}</h3>
-                <p className="text-sm text-muted-foreground">{card.desc}</p>
+                <h3 className="font-semibold text-foreground mb-2">{t(card.titleKey)}</h3>
+                <p className="text-sm text-muted-foreground">{t(card.descKey)}</p>
               </Link>
             ))}
           </div>
@@ -288,10 +243,10 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-7">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Browse by AI type</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Find the cheapest model for your use case</h2>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("home.aiTypes.label")}</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">{t("home.aiTypes.title")}</h2>
               <p className="text-sm text-muted-foreground mt-2 max-w-xl">
-                Pricing strategy varies by category. Pick your use case to see relevant model options, cost benchmarks, and recommendations.
+                {t("home.aiTypes.desc")}
               </p>
             </div>
             <Link
@@ -299,11 +254,11 @@ export function Design2() {
               onClick={() => track("section_nav_clicked", { section: "ai_types", sourceSurface: "homepage" })}
               className="text-sm text-primary hover:underline hidden sm:block font-medium shrink-0"
             >
-              View all →
+              {t("home.aiTypes.viewAll")}
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-            {AI_TYPE_CARDS.map((cat) => (
+            {AI_TYPE_SLUGS.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/ai-types/${cat.slug}`}
@@ -312,13 +267,21 @@ export function Design2() {
               >
                 <div className="flex items-start gap-3 mb-2.5">
                   <span className="text-xl leading-none mt-0.5">{cat.icon}</span>
-                  <h3 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors">{cat.title}</h3>
+                  <h3 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors">
+                    {t(`home.aiTypes.${cat.slug}.title`)}
+                  </h3>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-2 line-clamp-2">{cat.tagline}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-2 line-clamp-2">
+                  {t(`home.aiTypes.${cat.slug}.tagline`)}
+                </p>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">{cat.bestFor}</span>
+                  <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full shrink-0">
+                    {t(`home.aiTypes.${cat.slug}.bestFor`)}
+                  </span>
                 </div>
-                <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Explore →</p>
+                <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {t("home.aiTypes.explore")}
+                </p>
               </Link>
             ))}
           </div>
@@ -327,7 +290,7 @@ export function Design2() {
             onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "ai_types_all" })}
             className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground hover:border-slate-400 font-medium px-5 py-2.5 rounded-lg text-sm transition-colors"
           >
-            View all AI type categories →
+            {t("home.aiTypes.viewAllBtn")}
           </Link>
         </div>
       </section>
@@ -337,21 +300,21 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">What this tool does</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">{t("home.whatItDoes.label")}</p>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 leading-tight">
-                Stop guessing. Start calculating.
+                {t("home.whatItDoes.title")}
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                OverpayingForAI compares AI model pricing across providers, calculates your real monthly token cost, and recommends cheaper alternatives — without the marketing noise.
+                {t("home.whatItDoes.desc")}
               </p>
               <ul className="space-y-2.5 text-sm text-foreground">
-                {[
-                  "Calculate real token-based costs across any model",
-                  "Compare ChatGPT, Claude, Gemini, DeepSeek side-by-side",
-                  "Get 3 ranked cheaper alternatives for your workload",
-                  "Use the decision engine to find the right plan in 5 questions",
-                  "Browse guides on model routing, API vs subscription, and more",
-                ].map((item) => (
+                {([
+                  t("home.whatItDoes.bullet1"),
+                  t("home.whatItDoes.bullet2"),
+                  t("home.whatItDoes.bullet3"),
+                  t("home.whatItDoes.bullet4"),
+                  t("home.whatItDoes.bullet5"),
+                ] as string[]).map((item) => (
                   <li key={item} className="flex gap-2.5 items-start">
                     <span className="text-emerald-600 mt-0.5 shrink-0">✓</span>
                     <span>{item}</span>
@@ -364,26 +327,26 @@ export function Design2() {
                   onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "what_tool_does" })}
                   className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
                 >
-                  Calculate your cost →
+                  {t("home.whatItDoes.cta")}
                 </Link>
               </div>
             </div>
 
             {/* Why people overpay */}
             <div className="bg-slate-50 rounded-2xl border border-border p-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Why people overpay</p>
-              <h3 className="text-xl font-bold text-foreground mb-5 leading-tight">Three patterns that add up fast</h3>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">{t("home.overpay.label")}</p>
+              <h3 className="text-xl font-bold text-foreground mb-5 leading-tight">{t("home.overpay.title")}</h3>
               <div className="space-y-5">
-                {OVERPAY_PATTERNS.map((p) => (
+                {OVERPAY_METRICS.map((p, idx) => (
                   <div key={p.label} className="flex gap-3">
                     <span className="text-xs font-mono font-bold text-muted-foreground/40 mt-0.5 shrink-0 w-5">{p.label}</span>
                     <div>
-                      <p className="font-semibold text-sm text-foreground mb-1">{p.title}</p>
-                      <p className="text-xs text-muted-foreground leading-relaxed mb-1">{p.problem}</p>
-                      <p className="text-xs text-emerald-700 font-medium">Fix: {p.fix}</p>
+                      <p className="font-semibold text-sm text-foreground mb-1">{t(`home.overpay.patterns.${idx}.title`)}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed mb-1">{t(`home.overpay.patterns.${idx}.problem`)}</p>
+                      <p className="text-xs text-emerald-700 font-medium">{t("home.overpay.fixLabel")} {t(`home.overpay.patterns.${idx}.fix`)}</p>
                       <div className="mt-2 inline-flex items-center gap-1.5 bg-white border border-border rounded-md px-2 py-1">
                         <span className="text-sm font-bold font-mono text-foreground">{p.metric}</span>
-                        <span className="text-xs text-muted-foreground">{p.metricLabel}</span>
+                        <span className="text-xs text-muted-foreground">{t(`home.overpay.patterns.${idx}.metricLabel`)}</span>
                       </div>
                     </div>
                   </div>
@@ -395,7 +358,7 @@ export function Design2() {
                   onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "fix_this_now" })}
                   className="text-sm text-emerald-700 font-semibold hover:underline"
                 >
-                  Fix this now →
+                  {t("home.overpay.fixCta")}
                 </Link>
               </div>
             </div>
@@ -408,35 +371,28 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Calculator</p>
-              <h2 className="text-3xl font-bold text-foreground mb-3">Check your monthly spend</h2>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">{t("home.calcEntry.label")}</p>
+              <h2 className="text-3xl font-bold text-foreground mb-3">{t("home.calcEntry.title")}</h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Enter your monthly token usage — or pick a scenario — to see your real cost and what you'd save with a smarter model.
+                {t("home.calcEntry.desc")}
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span> Compares input + output token costs separately</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span> Factors in subscription vs pay-per-token plans</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span> Shows top 3 cheaper alternatives ranked by savings</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span> {t("home.calcEntry.bullet1")}</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span> {t("home.calcEntry.bullet2")}</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span> {t("home.calcEntry.bullet3")}</li>
               </ul>
             </div>
             <div className="bg-white border border-border rounded-2xl p-5 shadow-sm">
-              <p className="text-sm font-semibold text-foreground mb-3">Start with a usage scenario:</p>
+              <p className="text-sm font-semibold text-foreground mb-3">{t("home.calcEntry.scenarioLabel")}</p>
               <div className="grid grid-cols-2 gap-2 mb-4">
-                {[
-                  { label: "ChatGPT Plus user", href: "/calculator?scenario=chatgpt-plus-user" },
-                  { label: "API developer", href: "/calculator?scenario=developer-coding-workflow" },
-                  { label: "Startup bot", href: "/calculator?scenario=startup-support-bot" },
-                  { label: "Content team", href: "/calculator?scenario=content-team" },
-                  { label: "Solo founder", href: "/calculator?scenario=solo-founder" },
-                  { label: "Enterprise team", href: "/calculator" },
-                ].map(({ label, href }) => (
+                {CALC_SCENARIOS.map(({ tKey, href }) => (
                   <Link
-                    key={label}
+                    key={href}
                     href={href}
-                    onClick={() => track("calculator_used", { sourceSurface: "homepage", scenario: label })}
+                    onClick={() => track("calculator_used", { sourceSurface: "homepage", scenario: tKey })}
                     className="border border-border rounded-lg px-3 py-2.5 text-xs text-foreground font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors text-center cursor-pointer"
                   >
-                    {label}
+                    {t(tKey)}
                   </Link>
                 ))}
               </div>
@@ -446,7 +402,7 @@ export function Design2() {
                 onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "calculator_open" })}
                 className="block w-full text-center bg-slate-900 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg text-sm transition-colors"
               >
-                Open full calculator →
+                {t("home.calcEntry.openFull")}
               </Link>
             </div>
           </div>
@@ -458,9 +414,9 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">Real savings</p>
-              <h2 className="text-3xl font-bold text-foreground">What teams actually save</h2>
-              <p className="text-muted-foreground text-sm mt-2">Real switch scenarios with current market pricing.</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700 mb-2">{t("home.savings.label")}</p>
+              <h2 className="text-3xl font-bold text-foreground">{t("home.savings.title")}</h2>
+              <p className="text-muted-foreground text-sm mt-2">{t("home.savings.desc")}</p>
             </div>
           </div>
           <div className="space-y-3 mb-6">
@@ -481,11 +437,11 @@ export function Design2() {
                 </div>
                 <div className="flex items-center gap-4 sm:gap-6 shrink-0">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-emerald-700 font-mono">{ex.save}/mo</p>
-                    <p className="text-xs text-muted-foreground">{ex.savePerYear}/yr saved</p>
+                    <p className="text-2xl font-bold text-emerald-700 font-mono">{ex.save}{t("home.savings.perMonth")}</p>
+                    <p className="text-xs text-muted-foreground">{ex.savePerYear}{t("home.savings.perYear")}</p>
                   </div>
                   <span className="bg-emerald-100 text-emerald-700 text-sm font-bold px-3 py-1.5 rounded-lg">-{ex.pct}</span>
-                  <span className="text-xs text-emerald-700 font-medium group-hover:underline hidden sm:block">See comparison →</span>
+                  <span className="text-xs text-emerald-700 font-medium group-hover:underline hidden sm:block">{t("home.savings.seeComparison")}</span>
                 </div>
               </Link>
             ))}
@@ -496,14 +452,14 @@ export function Design2() {
               onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "savings_cta" })}
               className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
             >
-              See your savings →
+              {t("home.savings.seeYourSavings")}
             </Link>
             <Link
               href="/decision-engine"
               onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "decision_engine_savings" })}
               className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground font-medium px-6 py-3 rounded-lg text-sm transition-colors"
             >
-              Find my cheapest stack
+              {t("home.savings.findCheapest")}
             </Link>
           </div>
         </div>
@@ -513,46 +469,49 @@ export function Design2() {
       <section id="section-affiliate" className="border-b border-border bg-slate-50 py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="mb-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Recommendations</p>
-            <h2 className="text-3xl font-bold text-foreground">Find the right model for you</h2>
-            <p className="text-sm text-muted-foreground mt-2">Decision support, not ads. Ranked by cost efficiency from real pricing data.</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("home.affiliate.label")}</p>
+            <h2 className="text-3xl font-bold text-foreground">{t("home.affiliate.title")}</h2>
+            <p className="text-sm text-muted-foreground mt-2">{t("home.affiliate.desc")}</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {AFFILIATE_PICKS.map((pick) => {
+            {AFFILIATE_PICKS_DATA.map((pick) => {
               const target = getPrimaryCta(providerNameToId(pick.provider), "default", pick.href);
+              const label = t(`home.affiliate.picks.${pick.pickKey}.label`);
+              const pitch = t(`home.affiliate.picks.${pick.pickKey}.pitch`);
+              const cta = t(`home.affiliate.picks.${pick.pickKey}.cta`);
               const cardClass = "group flex flex-col bg-white border border-border rounded-xl p-5 hover:border-slate-400 hover:shadow-sm transition-all";
               const cardInner = (
                 <>
                   <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-md mb-3 ${pick.badge}`}>
-                    {pick.label}
+                    {label}
                   </span>
                   <h3 className="font-bold text-foreground mb-0.5 text-sm">{pick.model}</h3>
                   <p className="text-xs text-muted-foreground mb-1">
                     {pick.provider} ·{" "}
                     <span className="text-emerald-700 font-mono font-semibold">{pick.cost}</span>
                   </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pick.pitch}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{pitch}</p>
                   <span className="block w-full text-center text-xs font-semibold text-white bg-slate-800 group-hover:bg-slate-700 py-2 rounded-lg transition-colors">
-                    {target.isAffiliate ? target.label : pick.cta}
+                    {target.isAffiliate ? target.label : cta}
                   </span>
                 </>
               );
               return target.isExternal ? (
                 <a
-                  key={pick.label}
+                  key={pick.pickKey}
                   href={target.href}
                   rel={target.rel ?? "noopener noreferrer sponsored"}
                   target="_blank"
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
+                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label })}
                   className={cardClass}
                 >
                   {cardInner}
                 </a>
               ) : (
                 <Link
-                  key={pick.label}
+                  key={pick.pickKey}
                   href={target.href}
-                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label: pick.label })}
+                  onClick={() => track("affiliate_clicked", { sourceSurface: "homepage", model: pick.model, label })}
                   className={cardClass}
                 >
                   {cardInner}
@@ -565,7 +524,7 @@ export function Design2() {
             onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "quiz_affiliate" })}
             className="inline-flex items-center gap-2 border border-slate-300 text-slate-700 hover:bg-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors"
           >
-            Take the 5-question quiz →
+            {t("home.affiliate.quiz")}
           </Link>
         </div>
       </section>
@@ -575,11 +534,11 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Compare models</p>
-              <h2 className="text-3xl font-bold text-foreground">Popular comparisons</h2>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("home.comparisons.label")}</p>
+              <h2 className="text-3xl font-bold text-foreground">{t("home.comparisons.title")}</h2>
             </div>
             <Link href="/compare" className="text-sm text-primary hover:underline hidden sm:block font-medium">
-              View all →
+              {t("home.comparisons.viewAll")}
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
@@ -593,19 +552,19 @@ export function Design2() {
                 <h3 className="font-semibold text-foreground text-sm leading-snug mb-2 group-hover:text-primary transition-colors">{c.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{c.summary}</p>
                 <div className="mt-3 pt-3 border-t border-border/60 text-xs text-primary font-medium flex justify-between items-center">
-                  <span>Read comparison</span><span>→</span>
+                  <span>{t("home.comparisons.readComparison")}</span><span>→</span>
                 </div>
               </Link>
             ))}
           </div>
           <p className="text-xs text-muted-foreground">
-            Can't find your use case?{" "}
+            {t("home.comparisons.cantFind")}{" "}
             <Link href="/decision-engine" className="text-primary font-medium hover:underline">
-              Use the decision engine →
+              {t("home.comparisons.useDecision")}
             </Link>
             {" · "}
             <Link href="/resources" className="text-primary font-medium hover:underline">
-              Browse all resources →
+              {t("home.comparisons.browseAll")}
             </Link>
           </p>
         </div>
@@ -616,10 +575,10 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Pricing data</p>
-              <h2 className="text-3xl font-bold text-foreground mb-3">Pricing you can trust</h2>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">{t("home.pricingData.label")}</p>
+              <h2 className="text-3xl font-bold text-foreground mb-3">{t("home.pricingData.title")}</h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                All pricing data is sourced from official provider pages and reviewed regularly. When prices change, we log the diff so you can see what changed and when.
+                {t("home.pricingData.desc")}
               </p>
               <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium ${IS_STALE ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}>
                 <span className={`w-2 h-2 rounded-full ${IS_STALE ? "bg-orange-500" : "bg-emerald-500"}`} />
@@ -627,7 +586,7 @@ export function Design2() {
               </div>
             </div>
             <div className="bg-white border border-border rounded-2xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Pricing coverage</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">{t("home.pricingData.coverageLabel")}</p>
               <div className="space-y-2.5 text-sm">
                 {[
                   { provider: "OpenAI", models: "GPT-4o, GPT-4o mini, ChatGPT Plus", updated: FRESHEST_DATE },
@@ -650,14 +609,14 @@ export function Design2() {
                   onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "changelog_link" })}
                   className="text-sm text-primary font-medium hover:underline"
                 >
-                  View all pricing data →
+                  {t("home.pricingData.viewAll")}
                 </Link>
                 <Link
                   href="/pricing-changelog"
                   onClick={() => track("card_clicked", { sourceSurface: "homepage", cardType: "pricing_changelog_link" })}
                   className="text-sm text-muted-foreground hover:text-foreground hover:underline"
                 >
-                  What changed in our last review →
+                  {t("home.pricingData.changelog")}
                 </Link>
               </div>
             </div>
@@ -670,11 +629,11 @@ export function Design2() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Guides & resources</p>
-              <h2 className="text-3xl font-bold text-foreground">Learn to spend less</h2>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("home.guides.label")}</p>
+              <h2 className="text-3xl font-bold text-foreground">{t("home.guides.title")}</h2>
             </div>
             <Link href="/resources" className="text-sm text-primary hover:underline hidden sm:block font-medium">
-              Browse all →
+              {t("home.guides.browseAll")}
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 gap-3 mb-6">
@@ -688,7 +647,7 @@ export function Design2() {
                 <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">{g.readTime}</span>
                 <h3 className="font-semibold text-foreground text-sm mt-3 mb-2 group-hover:text-primary transition-colors leading-snug">{g.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{g.description}</p>
-                <p className="text-xs text-primary font-medium mt-3">Read guide →</p>
+                <p className="text-xs text-primary font-medium mt-3">{t("home.guides.readGuide")}</p>
               </Link>
             ))}
           </div>
@@ -711,8 +670,8 @@ export function Design2() {
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section id="section-faq" className="bg-slate-50 border-b border-border py-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">FAQ</p>
-          <h2 className="text-2xl font-bold text-foreground mb-6">Common questions</h2>
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("home.faq.label")}</p>
+          <h2 className="text-2xl font-bold text-foreground mb-6">{t("home.faq.title")}</h2>
           <div className="border border-border rounded-xl overflow-hidden bg-white divide-y divide-border px-6">
             {faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
           </div>
@@ -722,13 +681,13 @@ export function Design2() {
               onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "faq_cta" })}
               className="inline-flex items-center justify-center bg-foreground text-background font-semibold px-6 py-3 rounded-lg text-sm hover:bg-foreground/80 transition-colors"
             >
-              Check your spend now →
+              {t("home.faq.checkSpend")}
             </Link>
             <Link
               href="/resources"
               className="inline-flex items-center justify-center border border-border text-muted-foreground hover:text-foreground font-medium px-6 py-3 rounded-lg text-sm transition-colors"
             >
-              Browse all resources
+              {t("home.faq.browseAll")}
             </Link>
           </div>
         </div>
@@ -737,9 +696,9 @@ export function Design2() {
       {/* ── BOTTOM CTA ───────────────────────────────────────── */}
       <section className="bg-slate-900 text-white py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Find out what you're actually paying.</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t("home.bottomCta.title")}</h2>
           <p className="text-white/60 mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-            Enter your monthly token usage and see the real cost — and exactly how much you'd save by switching models.
+            {t("home.bottomCta.desc")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
@@ -747,14 +706,14 @@ export function Design2() {
               onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "bottom_cta" })}
               className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition-colors"
             >
-              Open Calculator →
+              {t("home.bottomCta.openCalc")}
             </Link>
             <Link
               href="/decision-engine"
               onClick={() => track("overpaying_cta_clicked", { sourceSurface: "homepage", variant: "bottom_engine" })}
               className="border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl text-sm hover:bg-white/10 transition-colors"
             >
-              Find my cheapest stack
+              {t("home.bottomCta.findCheapest")}
             </Link>
           </div>
         </div>

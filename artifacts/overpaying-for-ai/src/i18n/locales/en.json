@@ -1,0 +1,322 @@
+{
+  "nav": {
+    "calculator": "Calculator",
+    "decisionEngine": "Decision Engine",
+    "comparisons": "Comparisons",
+    "aiTypes": "AI Types",
+    "resources": "Resources",
+    "audit": "Audit",
+    "contact": "Contact",
+    "openSearch": "Open search",
+    "closeSearch": "Close search",
+    "toggleMenu": "Toggle navigation menu",
+    "searchDesktopPlaceholder": "Search AI pricing, comparisons, guides…",
+    "searchMobilePlaceholder": "Search pages…",
+    "calculateCost": "Calculate Cost",
+    "calculate": "Calculate"
+  },
+  "layout": {
+    "banner": {
+      "text": "Not sure which AI is cheapest for your use case?",
+      "subtext": "Find out in 30 seconds — no signup required.",
+      "calculateCost": "Calculate Cost",
+      "decisionEngine": "Decision Engine →"
+    },
+    "footer": {
+      "tools": "Tools",
+      "costCalculator": "Cost Calculator",
+      "decisionEngine": "Decision Engine",
+      "comparisons": "Comparisons",
+      "claudeVsGpt": "Claude vs GPT-4o",
+      "chatgptVsCursor": "ChatGPT vs Cursor",
+      "subscriptionVsApi": "Subscription vs API",
+      "deepseekVsGpt": "DeepSeek vs GPT-4o",
+      "bestLists": "Best Lists",
+      "bestForCoding": "Best for Coding",
+      "under20": "Under $20/month",
+      "bestFree": "Best Free Tools",
+      "guides": "Guides",
+      "reduceAiCosts": "Reduce AI Costs",
+      "tokenCostExplained": "Token Cost Explained",
+      "apiVsSubscription": "API vs Subscription",
+      "allResources": "All Resources",
+      "pricingData": "Pricing Data",
+      "pricingChangelog": "Pricing Changelog",
+      "browseAiTypes": "Browse AI Types",
+      "aiCostAudit": "AI Cost Audit",
+      "about": "About",
+      "mediaKit": "Media Kit",
+      "affiliateDisclosure": "Affiliate Disclosure",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "copyrightPrefix": "© 2026 OverpayingForAI · A product by Aniruddh Consultancy Pty Ltd · Built by ",
+      "copyrightSuffix": "",
+      "copyrightSub": "All content © 2026 Aniruddh Consultancy Pty Ltd. Unauthorized reproduction prohibited."
+    }
+  },
+  "home": {
+    "badge": "Free · No sign-up · 20+ AI models tracked",
+    "hero": {
+      "h1Line1": "Stop wasting money on AI.",
+      "h1Line2": "Get your cheapest viable setup.",
+      "subtitle1": "In under 2 minutes, calculate your real monthly cost and see the fastest path to lower spend.",
+      "subtitle2": "Built for teams comparing ChatGPT, Claude, Gemini, and API pricing side-by-side.",
+      "ctaPrimary": "Open the calculator →",
+      "ctaSecondary": "See Claude vs GPT costs"
+    },
+    "search": {
+      "label": "Find AI pricing pages, comparisons, and guides",
+      "placeholder": "Search — try \"chatgpt pricing\", \"claude vs gpt\", \"coding tools\"…"
+    },
+    "jumpNav": {
+      "jumpTo": "Jump to:",
+      "calculator": "Calculator",
+      "compareModels": "Compare Models",
+      "savings": "Savings",
+      "recommendations": "Recommendations",
+      "aiTypes": "AI Types",
+      "guides": "Guides",
+      "faqs": "FAQs"
+    },
+    "steps": {
+      "title": "Start here",
+      "step": "Step",
+      "step1": "Open the calculator first",
+      "step2": "Review cheaper alternatives",
+      "step3": "Confirm with a direct comparison",
+      "nextTitle": "Most useful next steps",
+      "card1Title": "AI cost calculator",
+      "card1Desc": "Estimate your monthly spend and find your cheaper setup.",
+      "card2Title": "Claude vs GPT-4o cost",
+      "card2Desc": "Our highest-intent comparison for quick pricing decisions.",
+      "card3Title": "Compare major tools",
+      "card3Desc": "See direct price and use-case tradeoffs side by side."
+    },
+    "trust": {
+      "step1Title": "Step 1: Calculate your spend",
+      "step1Desc": "Input usage, output usage, and model.",
+      "step2Title": "Step 2: Compare your top alternative",
+      "step2Desc": "Start with Claude vs GPT if you're unsure.",
+      "step3Title": "Step 3: Switch with confidence",
+      "step3Desc": "Use side-by-side costs before committing."
+    },
+    "aiTypes": {
+      "label": "Browse by AI type",
+      "title": "Find the cheapest model for your use case",
+      "desc": "Pricing strategy varies by category. Pick your use case to see relevant model options, cost benchmarks, and recommendations.",
+      "viewAll": "View all →",
+      "viewAllBtn": "View all AI type categories →",
+      "explore": "Explore →",
+      "general-ai": { "title": "General AI", "tagline": "Best all-purpose assistants by cost", "bestFor": "Everyday tasks & writing" },
+      "coding-ai": { "title": "Coding AI", "tagline": "IDE tools and APIs for developers", "bestFor": "Code generation & debugging" },
+      "writing-ai": { "title": "Writing AI", "tagline": "Cheapest models for content work", "bestFor": "Blogs, copy & emails" },
+      "research-ai": { "title": "Research AI", "tagline": "Search & document analysis tools", "bestFor": "Analysis & synthesis" },
+      "customer-support-ai": { "title": "Customer Support AI", "tagline": "High-volume, low-cost chat models", "bestFor": "Chat, tickets & bots" },
+      "productivity-ai": { "title": "Productivity AI", "tagline": "AI for docs, meetings & workflows", "bestFor": "Teams & solopreneurs" }
+    },
+    "whatItDoes": {
+      "label": "What this tool does",
+      "title": "Stop guessing. Start calculating.",
+      "desc": "OverpayingForAI compares AI model pricing across providers, calculates your real monthly token cost, and recommends cheaper alternatives — without the marketing noise.",
+      "bullet1": "Calculate real token-based costs across any model",
+      "bullet2": "Compare ChatGPT, Claude, Gemini, DeepSeek side-by-side",
+      "bullet3": "Get 3 ranked cheaper alternatives for your workload",
+      "bullet4": "Use the decision engine to find the right plan in 5 questions",
+      "bullet5": "Browse guides on model routing, API vs subscription, and more",
+      "cta": "Calculate your cost →"
+    },
+    "overpay": {
+      "label": "Why people overpay",
+      "title": "Three patterns that add up fast",
+      "fixLabel": "Fix:",
+      "fixCta": "Fix this now →",
+      "patterns": {
+        "0": { "title": "The subscription trap", "problem": "You pay $20/month for ChatGPT Plus but use it lightly. At your actual usage, the API costs $2.", "fix": "Switch to GPT-4o mini via API. Same quality, 90% less cost.", "metricLabel": "average wasted on unused subscription capacity" },
+        "1": { "title": "Using GPT-4o for everything", "problem": "GPT-4o costs 33× more per token than GPT-4o mini. Most tasks don't need that power.", "fix": "Route simple tasks to mini. Reserve GPT-4o for complex reasoning only.", "metricLabel": "of API spend eliminated by model routing with no quality change" },
+        "2": { "title": "No routing strategy", "problem": "One model for every task means paying premium prices across the board.", "fix": "Classify tasks first. Use Flash or mini for bulk, escalate to Sonnet only when needed.", "metricLabel": "cost reduction with a two-tier routing strategy" }
+      }
+    },
+    "calcEntry": {
+      "label": "Calculator",
+      "title": "Check your monthly spend",
+      "desc": "Enter your monthly token usage — or pick a scenario — to see your real cost and what you'd save with a smarter model.",
+      "bullet1": "Compares input + output token costs separately",
+      "bullet2": "Factors in subscription vs pay-per-token plans",
+      "bullet3": "Shows top 3 cheaper alternatives ranked by savings",
+      "scenarioLabel": "Start with a usage scenario:",
+      "scenarios": {
+        "chatgptPlus": "ChatGPT Plus user",
+        "apiDev": "API developer",
+        "startupBot": "Startup bot",
+        "contentTeam": "Content team",
+        "soloFounder": "Solo founder",
+        "enterprise": "Enterprise team"
+      },
+      "openFull": "Open full calculator →"
+    },
+    "savings": {
+      "label": "Real savings",
+      "title": "What teams actually save",
+      "desc": "Real switch scenarios with current market pricing.",
+      "seeYourSavings": "See your savings →",
+      "findCheapest": "Find my cheapest stack",
+      "perMonth": "/mo",
+      "perYear": "/yr saved",
+      "seeComparison": "See comparison →"
+    },
+    "affiliate": {
+      "label": "Recommendations",
+      "title": "Find the right model for you",
+      "desc": "Decision support, not ads. Ranked by cost efficiency from real pricing data.",
+      "quiz": "Take the 5-question quiz →",
+      "picks": {
+        "bestOverall": { "label": "Best overall", "pitch": "Near-GPT-4o quality at a fraction of the cost. The safest default upgrade path for most teams.", "cta": "Start with this option" },
+        "cheapestViable": { "label": "Cheapest viable", "pitch": "33× cheaper than GPT-4o. Handles classification, Q&A, and summaries without compromise.", "cta": "Save with this option" },
+        "startupOption": { "label": "Startup option", "pitch": "Near-zero cost for high-volume pipelines. Good enough for lean teams early on.", "cta": "Use this for lean teams" },
+        "bestForCoding": { "label": "Best for coding", "pitch": "Strong code generation and reasoning. Handles complex refactors better than cheaper models.", "cta": "Try for coding" }
+      }
+    },
+    "comparisons": {
+      "label": "Compare models",
+      "title": "Popular comparisons",
+      "viewAll": "View all →",
+      "readComparison": "Read comparison",
+      "cantFind": "Can't find your use case?",
+      "useDecision": "Use the decision engine →",
+      "browseAll": "Browse all resources →"
+    },
+    "pricingData": {
+      "label": "Pricing data",
+      "title": "Pricing you can trust",
+      "desc": "All pricing data is sourced from official provider pages and reviewed regularly. When prices change, we log the diff so you can see what changed and when.",
+      "coverageLabel": "Pricing coverage",
+      "viewAll": "View all pricing data →",
+      "changelog": "What changed in our last review →"
+    },
+    "guides": {
+      "label": "Guides & resources",
+      "title": "Learn to spend less",
+      "browseAll": "Browse all →",
+      "readGuide": "Read guide →"
+    },
+    "faq": {
+      "label": "FAQ",
+      "title": "Common questions",
+      "checkSpend": "Check your spend now →",
+      "browseAll": "Browse all resources"
+    },
+    "bottomCta": {
+      "title": "Find out what you're actually paying.",
+      "desc": "Enter your monthly token usage and see the real cost — and exactly how much you'd save by switching models.",
+      "openCalc": "Open Calculator →",
+      "findCheapest": "Find my cheapest stack"
+    }
+  },
+  "calc": {
+    "useThisIf": "Use this if…",
+    "bullet1": "You're paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.",
+    "bullet2": "You need a fast estimate before choosing between API and subscription plans.",
+    "bullet3": "You want one clear next step after seeing your projected monthly spend.",
+    "recommendations": "Recommendations are based on use case, usage level, and cost sensitivity.",
+    "usagePreset": "Usage Preset",
+    "preset": {
+      "light": "Light (chat, occasional)",
+      "moderate": "Moderate (daily use)",
+      "heavy": "Heavy (power user)",
+      "scale": "Scale (building products)"
+    },
+    "aiModel": "AI Model",
+    "apiModels": "API Models",
+    "subscriptions": "Subscriptions",
+    "yourSelection": "(your selection)",
+    "presetApplied": "Preset applied",
+    "selected": "Selected:",
+    "monthlyInput": "Monthly Input Tokens",
+    "monthlyOutput": "Monthly Output Tokens",
+    "tokens": "tokens",
+    "words": "words",
+    "calculateBtn": "Calculate Monthly Cost",
+    "editInputs": "Edit inputs",
+    "compareMoreOptions": "Compare more options",
+    "howCalculated": "How are costs calculated?",
+    "howDesc1": "API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees regardless of usage.",
+    "howDesc2": "1 token ≈ 0.75 words ≈ 4 characters of English text.",
+    "tokenGuide": "Learn more about tokens →",
+    "stale": {
+      "mayHaveChanged": "Pricing may have changed.",
+      "verify": "Verify with provider."
+    },
+    "result": {
+      "estimatedCost": "Estimated Monthly Cost",
+      "bestFit": "Best fit:",
+      "input": "Input:",
+      "output": "Output:",
+      "month": "month",
+      "perMonth": "/month",
+      "overpaying": "You are overpaying by",
+      "switchTo": "Switch to",
+      "save": "save",
+      "lowerThan": "lower than",
+      "at": "at",
+      "vs": "vs",
+      "shareLink": "Copy Share Link",
+      "copied": "Copied!"
+    }
+  },
+  "decision": {
+    "title": "AI Decision Engine",
+    "subtitle": "Answer 5 questions. Get your optimal AI stack.",
+    "steps": {
+      "useCase": "Use case",
+      "budget": "Budget",
+      "usage": "Usage",
+      "quality": "Quality",
+      "freeTier": "Free tier"
+    },
+    "q0": "What's your primary use case?",
+    "q1": "What's your monthly budget?",
+    "q2": "How often will you use it?",
+    "q3": "What's your quality preference?",
+    "q4": "Do you need a free tier option?",
+    "useCase": {
+      "coding": { "label": "Coding", "desc": "Code generation, debugging, refactoring" },
+      "writing": { "label": "Writing", "desc": "Blog posts, copy, emails, docs" },
+      "research": { "label": "Research", "desc": "Analysis, synthesis, summarization" },
+      "automation": { "label": "Automation", "desc": "Pipelines, bots, agents, workflows" },
+      "chat": { "label": "Chat", "desc": "General Q&A, assistant, conversation" }
+    },
+    "budget": {
+      "free": { "label": "Free only", "desc": "No credit card, zero cost" },
+      "under20": { "label": "Under $20/month", "desc": "Standard consumer range" },
+      "under50": { "label": "Under $50/month", "desc": "Moderate professional budget" },
+      "premium": { "label": "No hard limit", "desc": "Paying for the best outcome" }
+    },
+    "frequency": {
+      "light": { "label": "Light", "desc": "A few times per week" },
+      "medium": { "label": "Moderate", "desc": "Daily, a few hours" },
+      "heavy": { "label": "Heavy", "desc": "All day, most days" }
+    },
+    "quality": {
+      "cheap": { "label": "Cheapest viable", "desc": "Good enough beats expensive" },
+      "balanced": { "label": "Balanced", "desc": "Best quality-to-cost ratio" },
+      "best": { "label": "Best available", "desc": "Quality is non-negotiable" }
+    },
+    "freeTier": {
+      "true": { "label": "Yes, free tier required", "desc": "Must have a no-cost option" },
+      "false": { "label": "No, I'll pay if it's worth it", "desc": "Paid plans are fine" }
+    },
+    "result": {
+      "bestFit": "Best fit for you",
+      "use": "Use",
+      "compareExactCost": "Compare exact cost",
+      "cheaperAlt": "Cheaper alternative",
+      "cheapestViable": "Cheapest Viable",
+      "bestBalance": "Best Balance",
+      "premiumPick": "Premium Pick",
+      "recommended": "Recommended",
+      "freeTierAvailable": "Free tier available",
+      "suggestedStrategy": "Suggested Strategy",
+      "startOver": "Start over"
+    }
+  }
+}

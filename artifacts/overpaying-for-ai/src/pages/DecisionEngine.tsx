@@ -1,15 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { trackDecisionEvent, trackFeatureOpen, track, debugFunnelLog } from "@/utils/analytics";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 import { runRecommender } from "@/engine/recommender";
 import { getPrimaryCta, getSecondaryCta, providerNameToId } from "@/utils/affiliateResolver";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import { PageSeo } from "@/components/seo/PageSeo";
 import type { DecisionInputs, RecommendationResult, UseCase, Budget, UsageFrequency, QualityPreference } from "@/engine/types";
 
-// Safe defaults so we can always compute a recommendation, even when the user
-// (or an automated audit/scraper) has not yet answered every question. The
-// `liveResult` reflects the user's current selections layered on top of these.
 const DECISION_DEFAULTS: DecisionInputs = {
   useCase: "chat",
   budget: "under20",
@@ -20,59 +18,38 @@ const DECISION_DEFAULTS: DecisionInputs = {
 
 type Step = 0 | 1 | 2 | 3 | 4 | 5;
 
-const USE_CASES: { value: UseCase; label: string; desc: string }[] = [
-  { value: "coding", label: "Coding", desc: "Code generation, debugging, refactoring" },
-  { value: "writing", label: "Writing", desc: "Blog posts, copy, emails, docs" },
-  { value: "research", label: "Research", desc: "Analysis, synthesis, summarization" },
-  { value: "automation", label: "Automation", desc: "Pipelines, bots, agents, workflows" },
-  { value: "chat", label: "Chat", desc: "General Q&A, assistant, conversation" },
-];
-
-const BUDGETS: { value: Budget; label: string; desc: string }[] = [
-  { value: "free", label: "Free only", desc: "No credit card, zero cost" },
-  { value: "under20", label: "Under $20/month", desc: "Standard consumer range" },
-  { value: "under50", label: "Under $50/month", desc: "Moderate professional budget" },
-  { value: "premium", label: "No hard limit", desc: "Paying for the best outcome" },
-];
-
-const FREQUENCIES: { value: UsageFrequency; label: string; desc: string }[] = [
-  { value: "light", label: "Light", desc: "A few times per week" },
-  { value: "medium", label: "Moderate", desc: "Daily, a few hours" },
-  { value: "heavy", label: "Heavy", desc: "All day, most days" },
-];
-
-const QUALITY_PREFS: { value: QualityPreference; label: string; desc: string }[] = [
-  { value: "cheap", label: "Cheapest viable", desc: "Good enough beats expensive" },
-  { value: "balanced", label: "Balanced", desc: "Best quality-to-cost ratio" },
-  { value: "best", label: "Best available", desc: "Quality is non-negotiable" },
-];
-
-const FREE_TIER: { value: boolean; label: string; desc: string }[] = [
-  { value: true, label: "Yes, free tier required", desc: "Must have a no-cost option" },
-  { value: false, label: "No, I'll pay if it's worth it", desc: "Paid plans are fine" },
-];
+// Static value arrays — labels/descs are looked up via t() in the component
+const USE_CASE_VALUES: UseCase[] = ["coding", "writing", "research", "automation", "chat"];
+const BUDGET_VALUES: Budget[] = ["free", "under20", "under50", "premium"];
+const FREQUENCY_VALUES: UsageFrequency[] = ["light", "medium", "heavy"];
+const QUALITY_PREF_VALUES: QualityPreference[] = ["cheap", "balanced", "best"];
+const FREE_TIER_VALUES: boolean[] = [true, false];
 
 function OptionButton<T>({
-  option,
+  value,
+  label,
+  desc,
   selected,
   onSelect,
 }: {
-  option: { value: T; label: string; desc: string };
+  value: T;
+  label: string;
+  desc: string;
   selected: boolean;
   onSelect: (v: T) => void;
 }) {
   return (
     <button
-      onClick={() => onSelect(option.value)}
+      onClick={() => onSelect(value)}
       className={`w-full text-left px-4 py-3.5 rounded-lg border transition-colors ${
         selected
           ? "border-primary bg-primary/10 text-foreground"
           : "border-border bg-card hover:border-primary/40 hover:bg-muted/30 text-foreground"
       }`}
-      data-testid={`option-${String(option.value)}`}
+      data-testid={`option-${String(value)}`}
     >
-      <p className={`font-medium text-sm ${selected ? "text-primary" : "text-foreground"}`}>{option.label}</p>
-      <p className="text-xs text-muted-foreground mt-0.5">{option.desc}</p>
+      <p className={`font-medium text-sm ${selected ? "text-primary" : "text-foreground"}`}>{label}</p>
+      <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
     </button>
   );
 }
@@ -81,24 +58,26 @@ function ResultCard({
   tier,
   rec,
   highlight,
+  labels,
 }: {
   tier: "cheapest" | "balanced" | "premium";
   rec: RecommendationResult["cheapest"];
   highlight?: boolean;
+  labels: { cheapestViable: string; bestBalance: string; premiumPick: string; recommended: string; freeTierAvailable: string };
 }) {
-  const labels = {
-    cheapest: { text: "Cheapest Viable", color: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200" },
-    balanced: { text: "Best Balance", color: "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" },
-    premium: { text: "Premium Pick", color: "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200" },
+  const tierLabels = {
+    cheapest: { text: labels.cheapestViable, color: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200" },
+    balanced: { text: labels.bestBalance, color: "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200" },
+    premium: { text: labels.premiumPick, color: "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200" },
   };
-  const label = labels[tier];
+  const label = tierLabels[tier];
 
   return (
     <div className={`border rounded-xl p-5 ${highlight ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`} data-testid={`result-${tier}`}>
       <div className="flex items-start justify-between mb-3">
         <span className={`text-xs font-semibold px-2.5 py-1 rounded ${label.color}`}>{label.text}</span>
         {highlight && (
-          <span className="text-xs text-primary font-medium">Recommended</span>
+          <span className="text-xs text-primary font-medium">{labels.recommended}</span>
         )}
       </div>
       <h3 className="text-xl font-bold text-foreground mb-0.5">{rec.model.name}</h3>
@@ -107,7 +86,7 @@ function ResultCard({
       <p className="text-sm text-muted-foreground leading-relaxed mb-4">{rec.reasoning}</p>
       {rec.model.hasFreeTier && (
         <div className="text-xs inline-flex items-center gap-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">
-          Free tier available
+          {labels.freeTierAvailable}
         </div>
       )}
     </div>
@@ -115,13 +94,11 @@ function ResultCard({
 }
 
 export function DecisionEngine() {
+  const { t } = useTranslation();
   const [step, setStep] = useState<Step>(0);
   const [inputs, setInputs] = useState<Partial<DecisionInputs>>({});
   const [result, setResult] = useState<RecommendationResult | null>(null);
 
-  // Always-computed recommendation using current selections layered on safe defaults.
-  // This guarantees the page renders a real, scenario-dependent result block on
-  // first paint — no need to complete the wizard for the audit/screenreaders/SEO.
   const liveInputs: DecisionInputs = useMemo(
     () => ({ ...DECISION_DEFAULTS, ...inputs }),
     [inputs]
@@ -134,8 +111,6 @@ export function DecisionEngine() {
   const alternatives = [liveResult.cheapest, liveResult.premium];
   const liveRationale = `For ${liveInputs.useCase} workloads at ${liveInputs.usageFrequency} usage on a ${liveInputs.budget === "free" ? "free-only" : liveInputs.budget} budget with a ${liveInputs.qualityPreference}-quality preference${liveInputs.freeTierRequired ? " and a hard free-tier requirement" : ""}, ${primary.model.name} (${primary.model.provider}) is the best balance — estimated ${primary.estimatedMonthlySpend}. Picked over the cheaper ${liveResult.cheapest.model.name} and the higher-quality ${liveResult.premium.model.name} on combined fit across use case, budget, frequency, and quality preference.`;
 
-  // Outbound CTA targets for the recommended tool. Resolved via central registry
-  // so links can be swapped to affiliate URLs without touching this page.
   const primaryProviderId = providerNameToId(primary.model.provider);
   const primaryCtaTarget = useMemo(
     () => getPrimaryCta(primaryProviderId, "default"),
@@ -210,7 +185,6 @@ export function DecisionEngine() {
     startedRef.current = false;
   };
 
-  // Fire result_view exactly once per result instance.
   const lastResultIdRef = useRef<string>("");
   useEffect(() => {
     if (step !== 5 || !result) return;
@@ -228,7 +202,21 @@ export function DecisionEngine() {
     debugFunnelLog("decision_engine", "decision_result_view", payload);
   }, [step, result, liveInputs.useCase, liveInputs.budget]);
 
-  const stepLabels = ["Use case", "Budget", "Usage", "Quality", "Free tier"];
+  const stepLabels = [
+    t("decision.steps.useCase"),
+    t("decision.steps.budget"),
+    t("decision.steps.usage"),
+    t("decision.steps.quality"),
+    t("decision.steps.freeTier"),
+  ];
+
+  const resultLabels = {
+    cheapestViable: t("decision.result.cheapestViable"),
+    bestBalance: t("decision.result.bestBalance"),
+    premiumPick: t("decision.result.premiumPick"),
+    recommended: t("decision.result.recommended"),
+    freeTierAvailable: t("decision.result.freeTierAvailable"),
+  };
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
@@ -237,17 +225,13 @@ export function DecisionEngine() {
         description="Answer 5 quick questions and get a personalized AI stack recommendation — ranked by real cost-effectiveness for your use case, budget, and usage level."
       />
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">AI Decision Engine</h1>
-        <p className="text-muted-foreground">Answer 5 questions. Get your optimal AI stack.</p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">{t("decision.title")}</h1>
+        <p className="text-muted-foreground">{t("decision.subtitle")}</p>
       </div>
 
       {/*
         Always-rendered, semantic, scenario-dependent recommendation block.
-        - Read by the audit harness, screenreaders, SEO crawlers and social previews.
-        - Uses sr-only so it does not interrupt the visual wizard UX, but the live
-          recommendation card below (when on step 5) shows the same data visibly.
-        - `liveResult` is recomputed from current selections + safe defaults, so it
-          changes deterministically as the user picks options through the wizard.
+        Read by the audit harness, screenreaders, SEO crawlers and social previews.
       */}
       <section
         data-testid="decision-result"
@@ -311,10 +295,17 @@ export function DecisionEngine() {
           {/* Questions */}
           {step === 0 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">What's your primary use case?</h2>
+              <h2 className="text-lg font-semibold mb-4">{t("decision.q0")}</h2>
               <div className="space-y-2">
-                {USE_CASES.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.useCase === o.value} onSelect={(v) => set("useCase", v)} />
+                {USE_CASE_VALUES.map((v) => (
+                  <OptionButton
+                    key={v}
+                    value={v}
+                    label={t(`decision.useCase.${v}.label`)}
+                    desc={t(`decision.useCase.${v}.desc`)}
+                    selected={inputs.useCase === v}
+                    onSelect={(val) => set("useCase", val)}
+                  />
                 ))}
               </div>
             </div>
@@ -322,10 +313,17 @@ export function DecisionEngine() {
 
           {step === 1 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">What's your monthly budget?</h2>
+              <h2 className="text-lg font-semibold mb-4">{t("decision.q1")}</h2>
               <div className="space-y-2">
-                {BUDGETS.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.budget === o.value} onSelect={(v) => set("budget", v)} />
+                {BUDGET_VALUES.map((v) => (
+                  <OptionButton
+                    key={v}
+                    value={v}
+                    label={t(`decision.budget.${v}.label`)}
+                    desc={t(`decision.budget.${v}.desc`)}
+                    selected={inputs.budget === v}
+                    onSelect={(val) => set("budget", val)}
+                  />
                 ))}
               </div>
             </div>
@@ -333,10 +331,17 @@ export function DecisionEngine() {
 
           {step === 2 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">How often will you use it?</h2>
+              <h2 className="text-lg font-semibold mb-4">{t("decision.q2")}</h2>
               <div className="space-y-2">
-                {FREQUENCIES.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.usageFrequency === o.value} onSelect={(v) => set("usageFrequency", v)} />
+                {FREQUENCY_VALUES.map((v) => (
+                  <OptionButton
+                    key={v}
+                    value={v}
+                    label={t(`decision.frequency.${v}.label`)}
+                    desc={t(`decision.frequency.${v}.desc`)}
+                    selected={inputs.usageFrequency === v}
+                    onSelect={(val) => set("usageFrequency", val)}
+                  />
                 ))}
               </div>
             </div>
@@ -344,10 +349,17 @@ export function DecisionEngine() {
 
           {step === 3 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">What's your quality preference?</h2>
+              <h2 className="text-lg font-semibold mb-4">{t("decision.q3")}</h2>
               <div className="space-y-2">
-                {QUALITY_PREFS.map((o) => (
-                  <OptionButton key={o.value} option={o} selected={inputs.qualityPreference === o.value} onSelect={(v) => set("qualityPreference", v)} />
+                {QUALITY_PREF_VALUES.map((v) => (
+                  <OptionButton
+                    key={v}
+                    value={v}
+                    label={t(`decision.quality.${v}.label`)}
+                    desc={t(`decision.quality.${v}.desc`)}
+                    selected={inputs.qualityPreference === v}
+                    onSelect={(val) => set("qualityPreference", val)}
+                  />
                 ))}
               </div>
             </div>
@@ -355,10 +367,17 @@ export function DecisionEngine() {
 
           {step === 4 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">Do you need a free tier option?</h2>
+              <h2 className="text-lg font-semibold mb-4">{t("decision.q4")}</h2>
               <div className="space-y-2">
-                {FREE_TIER.map((o) => (
-                  <OptionButton key={String(o.value)} option={o} selected={inputs.freeTierRequired === o.value} onSelect={(v) => set("freeTierRequired", v)} />
+                {FREE_TIER_VALUES.map((v) => (
+                  <OptionButton
+                    key={String(v)}
+                    value={v}
+                    label={t(`decision.freeTier.${String(v)}.label`)}
+                    desc={t(`decision.freeTier.${String(v)}.desc`)}
+                    selected={inputs.freeTierRequired === v}
+                    onSelect={(val) => set("freeTierRequired", val)}
+                  />
                 ))}
               </div>
             </div>
@@ -371,9 +390,9 @@ export function DecisionEngine() {
         <div>
           {/* Dominant best-fit recommendation */}
           <div className="border border-primary/40 bg-primary/5 rounded-xl p-5 mb-4" data-testid="decision-cta-card">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Best fit for you</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">{t("decision.result.bestFit")}</p>
             <h2 className="text-2xl font-bold text-foreground mb-1">
-              Use {result.balanced.model.name}
+              {t("decision.result.use")} {result.balanced.model.name}
             </h2>
             <p className="text-sm text-muted-foreground mb-1">
               {result.balanced.model.provider} · {result.balanced.estimatedMonthlySpend}
@@ -419,15 +438,15 @@ export function DecisionEngine() {
                   debugFunnelLog("decision_engine", "decision_recommendation_click", payload);
                 }}
               >
-                Compare exact cost
+                {t("decision.result.compareExactCost")}
               </Link>
             </div>
           </div>
 
-          {/* Cheaper alternative — only surface if it differs from the balanced pick */}
+          {/* Cheaper alternative */}
           {result.cheapest.model.id !== result.balanced.model.id && (
             <div className="border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/20 rounded-lg p-4 mb-4" data-testid="decision-cheaper-alt">
-              <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 mb-1">Cheaper alternative</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 mb-1">{t("decision.result.cheaperAlt")}</p>
               <p className="text-sm text-foreground">
                 <b>{result.cheapest.model.name}</b> ({result.cheapest.model.provider}) — {result.cheapest.estimatedMonthlySpend}.
                 {" "}{result.cheapest.reasoning}
@@ -435,16 +454,16 @@ export function DecisionEngine() {
             </div>
           )}
 
-          {/* Full ranked breakdown for context */}
+          {/* Full ranked breakdown */}
           <div className="space-y-4 mb-6">
-            <ResultCard tier="cheapest" rec={result.cheapest} />
-            <ResultCard tier="balanced" rec={result.balanced} highlight />
-            <ResultCard tier="premium" rec={result.premium} />
+            <ResultCard tier="cheapest" rec={result.cheapest} labels={resultLabels} />
+            <ResultCard tier="balanced" rec={result.balanced} highlight labels={resultLabels} />
+            <ResultCard tier="premium" rec={result.premium} labels={resultLabels} />
           </div>
 
           {/* Routing strategy */}
           <div className="border border-border rounded-lg p-4 bg-muted/30 mb-6">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Suggested Strategy</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">{t("decision.result.suggestedStrategy")}</p>
             <p className="text-sm text-foreground leading-relaxed">{result.routingStrategy}</p>
           </div>
 
@@ -454,7 +473,7 @@ export function DecisionEngine() {
               className="text-sm border border-border rounded-lg px-4 py-2.5 font-medium hover:bg-muted transition-colors"
               data-testid="restart-btn"
             >
-              Start over
+              {t("decision.result.startOver")}
             </button>
           </div>
         </div>

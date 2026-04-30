@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 import {
   runCalculator,
   getAllModels,
@@ -33,10 +34,10 @@ const models = getAllModels();
 const SCENARIOS = scenarios as ScenarioPreset[];
 
 const PRESET_USAGES = [
-  { label: "Light (chat, occasional)", inputTokens: 100_000, outputTokens: 50_000 },
-  { label: "Moderate (daily use)", inputTokens: 500_000, outputTokens: 200_000 },
-  { label: "Heavy (power user)", inputTokens: 2_000_000, outputTokens: 800_000 },
-  { label: "Scale (building products)", inputTokens: 10_000_000, outputTokens: 4_000_000 },
+  { id: "light", label: "Light (chat, occasional)", inputTokens: 100_000, outputTokens: 50_000 },
+  { id: "moderate", label: "Moderate (daily use)", inputTokens: 500_000, outputTokens: 200_000 },
+  { id: "heavy", label: "Heavy (power user)", inputTokens: 2_000_000, outputTokens: 800_000 },
+  { id: "scale", label: "Scale (building products)", inputTokens: 10_000_000, outputTokens: 4_000_000 },
 ];
 
 function buildShareUrl(modelId: string, input: number, output: number): string {
@@ -45,6 +46,7 @@ function buildShareUrl(modelId: string, input: number, output: number): string {
 }
 
 export function Calculator() {
+  const { t } = useTranslation();
   const inputsRef = useRef<HTMLDivElement | null>(null);
   const calculationCountRef = useRef(0);
 
@@ -70,7 +72,6 @@ export function Calculator() {
   const [selectedScenario, setSelectedScenario] = useState<ScenarioPreset | null>(initialScenario);
 
   // Result is always computed from inputs — no button gating, no stale state.
-  // This ensures the page renders a real, semantic, scrapable result on every render.
   const result = useMemo<CalculatorResult | null>(() => {
     try {
       return runCalculator({
@@ -85,8 +86,6 @@ export function Calculator() {
     }
   }, [modelId, inputTokens, outputTokens]);
 
-  // Manual "Calculate" button still tracks an explicit calculation event and
-  // scrolls to the results, but does not gate visibility of the result block.
   const calculate = useCallback(() => {
     if (!result) return;
     calculationCountRef.current += 1;
@@ -107,7 +106,6 @@ export function Calculator() {
     debugFunnelLog("calculator", "calculator_complete", completePayload);
   }, [result]);
 
-  // Fire `calculator_start` exactly once per session on the first user input.
   const startedRef = useRef(false);
   const fireStartOnce = useCallback(() => {
     if (startedRef.current) return;
@@ -147,15 +145,10 @@ export function Calculator() {
     inputsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [selectedScenario]);
 
-  // De-dupe the "results_viewed" event by a stable signature of the inputs that
-  // produce a result. With the move to useMemo-based result computation, `result`
-  // changes on every keystroke; without dedupe this event would fire per keypress.
-  // We track each unique modelId|input|output combination at most once per session.
+  // De-dupe the "results_viewed" event by a stable signature
   const lastViewedSigRef = useRef<string>("");
   useEffect(() => {
     if (!result) return;
-    // Only fire after the user has interacted with any input (model, tokens, preset, scenario)
-    // or has explicitly clicked Calculate. Prevents firing on the default pre-loaded result.
     if (!startedRef.current && calculationCountRef.current === 0) return;
     const sig = `${result.model.id}|${inputTokens}|${outputTokens}`;
     if (sig === lastViewedSigRef.current) return;
@@ -193,15 +186,9 @@ export function Calculator() {
     ? getPrimaryCta(bestSetupProviderId, "cheapest", "/best")
     : null;
 
-  // Compute "Best fit: API vs subscription" verdict by comparing the cheapest
-  // viable API plan for these inputs against the cheapest subscription plan.
-  // This produces deterministic, input-driven copy on every render.
   const allModels = models;
   const isSubscriptionSelected = selectedModel?.planType === "subscription";
 
-  // Exclude the currently-selected model so it never appears as its own alternative.
-  // Only include paid API models — free-tier API models are already the cheapest and
-  // should not inflate savings estimates.
   const apiCandidates = allModels
     .filter((m) => m.planType === "api" && m.id !== modelId)
     .map((m) => {
@@ -211,10 +198,6 @@ export function Calculator() {
     })
     .sort((a, b) => a.monthlyCost - b.monthlyCost);
 
-  // Only AI model subscriptions (chat/research/coding) that support real API-equivalent
-  // usage. Exclude writing-tool subscriptions (Rytr, Jasper, Writesonic, Copy.ai) and
-  // coding IDE subscriptions (Cursor, Copilot) — these are categorically different
-  // products and should never win an API-vs-subscription cost race for LLM users.
   const subCandidates = allModels
     .filter(
       (m) =>
@@ -238,8 +221,6 @@ export function Calculator() {
           : "subscription";
   const verdictWinner = verdict === "API" ? cheapestApi : cheapestSub;
 
-  // If the user selected a subscription plan, note that the comparison is
-  // between their subscription cost and API pricing — different purchase intents.
   const subscriptionConflationNote =
     isSubscriptionSelected
       ? ` Note: your selection is a flat subscription — switching to API requires technical integration and may not suit a no-code workflow.`
@@ -254,8 +235,6 @@ export function Calculator() {
         ? `At ${formatTokenCount(inputTokens)} input + ${formatTokenCount(outputTokens)} output tokens/month, the flat ${cheapestSub.model.name} subscription (${formatCost(cheapestSub.monthlyCost)}/mo) beats the cheapest API option, ${cheapestApi.model.name} (${formatCost(cheapestApi.monthlyCost)}/mo).${subscriptionConflationNote}`
         : `At this usage level, a flat subscription is the cheapest path.${subscriptionConflationNote}`;
 
-  // Build the semantic options list: cheapest API + cheapest subscription +
-  // up to 2 of the cheaper alternatives we already computed for the selected model.
   type ResultOption = {
     key: string;
     name: string;
@@ -291,7 +270,7 @@ export function Calculator() {
   if (result) {
     pushOpt({
       key: result.model.id + "-current",
-      name: result.model.name + " (your selection)",
+      name: result.model.name + " " + t("calc.yourSelection"),
       provider: result.model.provider,
       planType: result.model.planType,
       monthlyCost: result.estimatedMonthlyCost,
@@ -341,16 +320,16 @@ export function Calculator() {
           {scenarioSeo.subhead}
         </p>
         <p className="text-xs text-muted-foreground mt-2">
-          Recommendations are based on use case, usage level, and cost sensitivity.
+          {t("calc.recommendations")}
         </p>
       </div>
 
       <div className="mb-6 sm:mb-8 border border-border rounded-xl bg-muted/20 p-4 sm:p-5">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Use this if…</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">{t("calc.useThisIf")}</p>
         <ul className="text-sm text-foreground space-y-1.5">
-          <li>• You’re paying for GPT-4o, Claude, or a subscription and want a cheaper equivalent.</li>
-          <li>• You need a fast estimate before choosing between API and subscription plans.</li>
-          <li>• You want one clear next step after seeing your projected monthly spend.</li>
+          <li>• {t("calc.bullet1")}</li>
+          <li>• {t("calc.bullet2")}</li>
+          <li>• {t("calc.bullet3")}</li>
         </ul>
       </div>
 
@@ -359,28 +338,28 @@ export function Calculator() {
 
         {selectedScenario && (
           <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
-            <p className="text-sm font-semibold text-foreground">Selected: {selectedScenario.name}</p>
+            <p className="text-sm font-semibold text-foreground">{t("calc.selected")} {selectedScenario.name}</p>
             <p className="text-xs text-muted-foreground mt-1">
-              Preset applied · {formatTokenCount(selectedScenario.inputs.monthlyInputTokens)} input · {formatTokenCount(selectedScenario.inputs.monthlyOutputTokens)} output
+              {t("calc.presetApplied")} · {formatTokenCount(selectedScenario.inputs.monthlyInputTokens)} input · {formatTokenCount(selectedScenario.inputs.monthlyOutputTokens)} output
             </p>
           </div>
         )}
 
         <div className="mb-6" ref={inputsRef}>
-          <label className="text-sm font-medium text-foreground block mb-2">Usage Preset</label>
+          <label className="text-sm font-medium text-foreground block mb-2">{t("calc.usagePreset")}</label>
           <div className="flex flex-wrap gap-2">
             {PRESET_USAGES.map((p) => (
               <button
-                key={p.label}
+                key={p.id}
                 onClick={() => applyPreset(p)}
                 className={`text-xs px-3 py-1.5 rounded border transition-colors ${
                   inputTokens === p.inputTokens && outputTokens === p.outputTokens
                     ? "border-primary bg-primary/10 text-primary font-medium"
                     : "border-border bg-muted/30 text-muted-foreground hover:bg-muted"
                 }`}
-                data-testid={`preset-${p.label.split(" ")[0].toLowerCase()}`}
+                data-testid={`preset-${p.id}`}
               >
-                {p.label}
+                {t(`calc.preset.${p.id}`)}
               </button>
             ))}
           </div>
@@ -388,26 +367,26 @@ export function Calculator() {
 
         <div className="mb-5">
           <label className="text-sm font-medium text-foreground block mb-2" htmlFor="model-select">
-            AI Model
+            {t("calc.aiModel")}
           </label>
           <select
             id="model-select"
             value={modelId}
-              onChange={(e) => {
-                fireStartOnce();
-                setModelId(e.target.value);
-              }}
+            onChange={(e) => {
+              fireStartOnce();
+              setModelId(e.target.value);
+            }}
             className="w-full border border-border rounded-lg px-3 py-2.5 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             data-testid="model-select"
           >
-            <optgroup label="API Models">
+            <optgroup label={t("calc.apiModels")}>
               {models.filter((m) => m.planType === "api").map((m) => (
                 <option key={m.id} value={m.id}>
                   {m.name} — {m.provider}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="Subscriptions">
+            <optgroup label={t("calc.subscriptions")}>
               {models.filter((m) => m.planType === "subscription").map((m) => (
                 <option key={m.id} value={m.id}>
                   {m.name} — {m.provider}
@@ -430,14 +409,14 @@ export function Calculator() {
               <span>{freshnessLabel(dateStr)}</span>
               {stale && (
                 <span className="ml-1">
-                  · Pricing may have changed.{" "}
+                  · {t("calc.stale.mayHaveChanged")}{" "}
                   <a
                     href={selectedModel?.source ?? "#"}
                     target="_blank"
                     rel="noreferrer"
                     className="underline hover:no-underline"
                   >
-                    Verify with provider.
+                    {t("calc.stale.verify")}
                   </a>
                 </span>
               )}
@@ -448,7 +427,7 @@ export function Calculator() {
         <div className="grid sm:grid-cols-2 gap-5 mb-6">
           <div>
             <label className="text-sm font-medium text-foreground block mb-2" htmlFor="input-tokens">
-              Monthly Input Tokens
+              {t("calc.monthlyInput")}
             </label>
             <input
               id="input-tokens"
@@ -464,13 +443,13 @@ export function Calculator() {
               data-testid="input-tokens"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              {formatTokenCount(inputTokens)} tokens · ~{Math.round(inputTokens * 0.75).toLocaleString()} words
+              {formatTokenCount(inputTokens)} {t("calc.tokens")} · ~{Math.round(inputTokens * 0.75).toLocaleString()} {t("calc.words")}
             </p>
           </div>
 
           <div>
             <label className="text-sm font-medium text-foreground block mb-2" htmlFor="output-tokens">
-              Monthly Output Tokens
+              {t("calc.monthlyOutput")}
             </label>
             <input
               id="output-tokens"
@@ -486,7 +465,7 @@ export function Calculator() {
               data-testid="output-tokens"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              {formatTokenCount(outputTokens)} tokens · ~{Math.round(outputTokens * 0.75).toLocaleString()} words
+              {formatTokenCount(outputTokens)} {t("calc.tokens")} · ~{Math.round(outputTokens * 0.75).toLocaleString()} {t("calc.words")}
             </p>
           </div>
         </div>
@@ -496,7 +475,7 @@ export function Calculator() {
           className="w-full bg-primary text-primary-foreground rounded-lg py-3 font-semibold text-sm hover:bg-primary/90 transition-colors"
           data-testid="calculate-btn"
         >
-          Calculate Monthly Cost
+          {t("calc.calculateBtn")}
         </button>
       </div>
 
@@ -532,13 +511,13 @@ export function Calculator() {
           <div className="border border-border rounded-xl bg-card p-6">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Estimated Monthly Cost</p>
+                <p className="text-sm text-muted-foreground mb-1">{t("calc.result.estimatedCost")}</p>
                 <p className="text-4xl font-bold text-foreground" data-testid="total-cost">
                   {formatCost(result.estimatedMonthlyCost)}
                 </p>
                 {result.model.planType === "api" && (
                   <p className="text-xs text-muted-foreground mt-1">
-                    Input: {formatCost(result.inputCost)} · Output: {formatCost(result.outputCost)}
+                    {t("calc.result.input")} {formatCost(result.inputCost)} · {t("calc.result.output")} {formatCost(result.outputCost)}
                   </p>
                 )}
               </div>
@@ -548,11 +527,9 @@ export function Calculator() {
               </div>
             </div>
 
-            {/* Visible verdict + recommendation, mirrors the testid block above so
-                sighted users see the same input-driven copy that the audit reads. */}
             <div className="mt-2 mb-4 border border-border rounded-lg bg-muted/30 p-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
-                Best fit: {verdict}
+                {t("calc.result.bestFit")} {verdict}
               </p>
               <p className="text-sm text-foreground font-medium">
                 {primaryRecommendation}
@@ -566,7 +543,7 @@ export function Calculator() {
                     <li key={"v-" + o.key}>
                       <span className="font-medium text-foreground">{o.name}</span>
                       <span className="text-muted-foreground"> — {o.provider} ({o.planType}) — </span>
-                      <span className="font-medium text-foreground">{formatCost(o.monthlyCost)}/month</span>
+                      <span className="font-medium text-foreground">{formatCost(o.monthlyCost)}{t("calc.result.perMonth")}</span>
                     </li>
                   ))}
                 </ul>
@@ -576,7 +553,7 @@ export function Calculator() {
             {result.savingsEstimate !== null && result.savingsEstimate > 0 && (
               <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg px-4 py-3">
                 <p className="text-sm text-amber-800 dark:text-amber-200 font-medium">
-                  You are overpaying by {formatCost(result.savingsEstimate)}/month.
+                  {t("calc.result.overpaying")} {formatCost(result.savingsEstimate)}{t("calc.result.perMonth")}.
                 </p>
               </div>
             )}
@@ -584,7 +561,7 @@ export function Calculator() {
             {bestSetup && primaryTarget && (
               <div className="mt-4 border border-primary/30 bg-primary/5 rounded-xl p-4 sm:p-5 space-y-3" data-testid="calc-result-cta-card">
                 <p className="text-lg font-bold text-foreground">
-                  Switch to {bestSetup.model.name} — save {formatCost(bestSetup.savings)}/month
+                  {t("calc.result.switchTo")} {bestSetup.model.name} — {t("calc.result.save")} {formatCost(bestSetup.savings)}{t("calc.result.perMonth")}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {bestSetup.savingsPercent.toFixed(0)}% lower than {result.model.name} at this usage
@@ -620,7 +597,7 @@ export function Calculator() {
                   <AffiliateCta
                     target={{
                       href: "/best",
-                      label: "Compare more options",
+                      label: t("calc.compareMoreOptions"),
                       isExternal: false,
                       isAffiliate: false,
                       fallbackUsed: true,
@@ -660,30 +637,28 @@ export function Calculator() {
               className="text-sm border border-border rounded-lg px-4 py-2 text-foreground hover:bg-muted transition-colors"
               data-testid="edit-inputs-btn"
             >
-              Edit inputs
+              {t("calc.editInputs")}
             </button>
             <button
               onClick={copyShareLink}
               className="text-sm border border-border rounded-lg px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               data-testid="share-btn"
             >
-              {copied ? "Copied!" : "Copy Share Link"}
+              {copied ? t("calc.result.copied") : t("calc.result.shareLink")}
             </button>
           </div>
         </div>
       )}
 
       <div className="mt-10 border-t border-border pt-8 no-print">
-        <h2 className="font-semibold text-foreground mb-3">How are costs calculated?</h2>
+        <h2 className="font-semibold text-foreground mb-3">{t("calc.howCalculated")}</h2>
         <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-          API costs are calculated as: (input tokens / 1000 × input cost per 1K) + (output
-          tokens / 1000 × output cost per 1K). Subscription costs are flat monthly fees
-          regardless of usage.
+          {t("calc.howDesc1")}
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          1 token ≈ 0.75 words ≈ 4 characters of English text.{" "}
+          {t("calc.howDesc2")}{" "}
           <Link href="/guides/token-cost-explained" className="text-primary hover:underline">
-            Learn more about tokens →
+            {t("calc.tokenGuide")}
           </Link>
         </p>
       </div>
