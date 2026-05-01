@@ -459,8 +459,16 @@ async function main() {
   const canonicalUrls = parseSitemap(SITEMAP_PATH);
   console.log(`   Found ${canonicalUrls.length} URLs in sitemap\n`);
 
-  // Launch browser
-  const browser = await chromium.launch({ headless: true });
+  // Launch browser — use system Chromium if the Playwright bundle is missing libs
+  const SYSTEM_CHROMIUM = "/nix/store/qa9cnw4v5xkxyip6mb9kxqfq1z4x2dx1-chromium-138.0.7204.100/bin/chromium";
+  const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+    || (fs.existsSync(SYSTEM_CHROMIUM) ? SYSTEM_CHROMIUM : undefined);
+
+  const browser = await chromium.launch({
+    headless: true,
+    executablePath,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const context = await browser.newContext({
     userAgent: "OverpayingForAI-Audit/1.0 (task-fit-model-guidance)",
     ignoreHTTPSErrors: true,

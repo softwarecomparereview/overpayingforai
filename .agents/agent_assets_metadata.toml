@@ -1,0 +1,14 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "D_BZdpEmn-56_Z47MfEQb"
+uri = "file://artifacts/overpaying-for-ai/out/audits/task-fit-model-guidance-audit.md"
+type = "text"
+title = "Task-Fit Model Guidance Audit (Markdown)"
+
+[[outputs]]
+id = "wo39hcuKlVQy4URXtH_yX"
+uri = "file://artifacts/overpaying-for-ai/out/audits/task-fit-model-guidance-audit.json"
+type = "unspecified"
+title = "Task-Fit Model Guidance Audit (JSON)"
