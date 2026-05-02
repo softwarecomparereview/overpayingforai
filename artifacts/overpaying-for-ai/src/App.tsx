@@ -35,6 +35,8 @@ import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
 import { AiCostAudit } from "@/pages/AiCostAudit";
 import { CalculatorSavingsPage } from "@/pages/CalculatorSavingsPage";
 import { DecisionBuyPage } from "@/pages/DecisionBuyPage";
+import { AiPricingTrackerPage } from "@/pages/AiPricingTrackerPage";
+import { PricingHistoryPage } from "@/pages/PricingHistoryPage";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -113,6 +115,8 @@ function Router() {
                 <Route path="/affiliate-disclosure" component={AffiliateDisclosure} />
                 <Route path="/privacy-policy" component={PrivacyPolicy} />
                 <Route path="/audit/ai-cost-reliability-audit" component={AiCostAudit} />
+                <Route path="/insights/ai-pricing-tracker" component={AiPricingTrackerPage} />
+                <Route path="/pricing-history" component={PricingHistoryPage} />
                 <Route component={NotFound} />
               </Switch>
             </Layout>

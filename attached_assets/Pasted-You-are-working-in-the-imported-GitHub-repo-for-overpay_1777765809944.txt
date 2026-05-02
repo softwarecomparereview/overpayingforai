@@ -1,0 +1,197 @@
+You are working in the imported GitHub repo for overpayingforai.com / DontOverpayAI.
+
+Goal:
+Build a lightweight Daily AI Pricing Intelligence Pipeline that checks trusted sources for AI pricing/news changes, stores source-backed history in JSON files, and exposes this through public trust-building pages.
+
+Critical guardrails:
+- Do NOT add a database.
+- Do NOT add Supabase, Firebase, Postgres, Prisma, SQLite, Redis, queues, workers, or external backend infrastructure.
+- Do NOT change the deployment architecture.
+- Do NOT rewrite the app architecture.
+- Do NOT introduce Dart, Python, Next.js, Express, server routes, or a separate backend.
+- Do NOT auto-merge pricing changes into production.
+- Do NOT treat OpenAI output as source of truth.
+- Do NOT generate unsourced pricing claims.
+- Do NOT delete or overwrite historical pricing data.
+- Do NOT modify unrelated pages/components.
+- Do NOT touch main branch directly.
+- Work on the current Replit branch only.
+
+Existing stack assumptions:
+- The site is a lightweight frontend/static app.
+- Use the existing project structure and conventions.
+- Use existing data files under src/data or data where appropriate.
+- Use TypeScript/JavaScript only, matching the current repo.
+- Use GitHub Actions for scheduled automation.
+- Use JSON files as the data store.
+- Deployment should remain whatever the repo currently uses.
+- Build must continue to work with the current npm scripts.
+- Any new public page must fit existing routing/layout/style patterns.
+
+Core feature:
+Create a daily pricing/news intelligence system.
+
+Build these pieces:
+
+1. Trusted source registry
+
+Create:
+
+data/trusted-pricing-sources.json
+
+Each entry should include:
+- vendor
+- tool
+- sourceType
+- url
+- trustLevel: official | trusted_third_party | untrusted
+- allowedForAutoDraft: true/false
+- notes
+
+Start with a small safe seed list only. Prefer official pricing/docs/blog/changelog pages.
+
+2. Daily intelligence script
+
+Create:
+
+scripts/daily-pricing-intelligence.mjs
+
+The script should:
+- Load data/trusted-pricing-sources.json
+- Fetch each trusted source URL
+- Extract useful visible text
+- Send extracted text plus source URL to OpenAI only for classification/summarisation
+- Ask OpenAI for strict JSON only
+- Reject any item with no source URL
+- Reject unsupported claims
+- Classify each item as:
+  - pricing_change
+  - plan_change
+  - model_launch
+  - free_tier_change
+  - enterprise_change
+  - general_news
+- Assign confidence:
+  - high = official source + clear price/plan change
+  - medium = official source but ambiguous
+  - low = third-party or unclear
+- Assign requiresReview:
+  - false only for high-confidence official-source entries
+  - true for everything else
+- Save daily digest to:
+
+data/ai-pricing-news.json
+
+- Append detected pricing snapshots to:
+
+data/pricing-history.json
+
+Important:
+- Never overwrite pricing-history.json.
+- Append only.
+- Avoid duplicates by checking vendor + tool + changeType + sourceUrl + detectedDate.
+- If OpenAI key is missing, script should fail gracefully with clear message.
+- Keep output deterministic and auditable.
+
+3. GitHub Actions workflow
+
+Create:
+
+.github/workflows/daily-pricing-intelligence.yml
+
+It should:
+- Run daily
+- Support manual workflow_dispatch
+- Install dependencies
+- Run the script
+- Upload generated JSON/audit files as artifacts
+- Optionally commit changes only to the current automation branch, not main
+- Do not force push
+- Do not auto-merge
+
+4. Public tracker page
+
+Add route:
+
+/insights/ai-pricing-tracker
+
+Page should show:
+- latest 10 pricing/news changes
+- vendor/tool
+- change type
+- summary
+- source link
+- confidence badge
+- requires review badge
+- detected date
+- last checked date
+
+Add trust language:
+“Official pricing pages and vendor documentation are prioritised. Third-party or ambiguous reports are marked for review before being treated as verified.”
+
+5. Historical pricing page
+
+Add route:
+
+/pricing-history
+
+Page should show:
+- tool/vendor selector
+- date range selector
+- change type filter
+- simple trend display from JSON history
+- historical change table
+- source URL for every row
+- confidence label
+- detected date and effective date where available
+
+No database. Use local JSON import/data loading consistent with the current app.
+
+6. Analytics events
+
+Wire lightweight existing analytics pattern only if one already exists.
+
+Events:
+- pricing_tracker_view
+- pricing_history_filter_change
+- pricing_source_click
+- pricing_change_detail_expand
+
+Do not add a new analytics vendor.
+
+7. Audit summary
+
+Write:
+
+out/audits/daily-pricing-intelligence-summary.md
+
+Include:
+- files changed
+- routes added
+- data files added
+- how to run locally
+- how to run manually in GitHub Actions
+- guardrails respected
+- known limitations
+- next recommended improvements
+
+8. Validation
+
+Run:
+- npm install if needed
+- npm run build
+- npm run typecheck if available
+- any existing audit/test command if available
+
+Report exact commands and results.
+
+Success criteria:
+- No database added.
+- No backend added.
+- Existing app still builds.
+- New pages are reachable.
+- Daily workflow exists.
+- Pricing/news data is source-backed.
+- Historical pricing data is append-only.
+- Untrusted or ambiguous changes require review.
+- The feature improves credibility by showing freshness, source links, and historical change tracking.
