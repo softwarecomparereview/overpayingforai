@@ -2,10 +2,10 @@
   "projectName": "OverpayingForAI",
   "domain": "overpayingforai.com",
   "lastUpdated": "2026-05-03",
-  "currentCommit": "9a0ba32",
+  "currentCommit": "53d042d",
   "branch": "developphase2",
   "currentPhase": "Post-MVP Feature Extension",
-  "overallStatus": "Active development — TypeScript clean, build clean, mobile nav fixed",
+  "overallStatus": "Active development — TypeScript clean, build clean, mobile overflow fixed, mobile nav fixed",
   "implementedFeatures": [
     "AI cost calculator",
     "Head-to-head model comparisons (6 slugs)",
@@ -29,7 +29,8 @@
     "Admin pricing-intelligence-control page with manual-no-update mode",
     "ChatGPT review export from admin panel",
     "How-autopilot-works explainer (collapsible)",
-    "Mobile hamburger navigation fix",
+    "Mobile hamburger navigation fix (phase-004)",
+    "Homepage mobile overflow fix (phase-006)",
     "i18n EN + ZH",
     "GA4 analytics with custom events",
     "SEO components (PageSeo, SeoContentBlock, InternalLinks)",
@@ -39,14 +40,13 @@
     "Scroll-to-top on footer nav"
   ],
   "plannedFeatures": [
-    "Fix homepage hero mobile overflow (404px > 390px)",
     "Connect OPENAI_API_KEY in GitHub Actions for live pipeline",
     "Dismiss/archive for review page queue",
-    "Unit tests when testing enabled",
-    "Code splitting (bundle currently >500kb)"
+    "Code splitting (bundle currently >500kb)",
+    "Add Audit link to mobile nav",
+    "Unit tests when testing enabled"
   ],
   "knownGaps": [
-    "Homepage mobile overflow: body 404px > 390px at 390px viewport",
     "No unit tests",
     "Admin key is static localStorage secret, no session expiry",
     "Pipeline requires OPENAI_API_KEY secret (not set in dev)",
@@ -66,7 +66,9 @@
     "localStorage AdminGuard (pragmatic for solo maintainer)",
     "Append-only pricing history",
     "FreshnessIndicator thresholds: 3/14 days",
-    "SearchBox mousedown: removed onClose to fix mobile nav"
+    "SearchBox mousedown: removed onClose to fix mobile nav",
+    "Homepage savings grid: removed min-w-[600px] — grid-cols-2 sufficient",
+    "Project memory in /project-memory/ within repo"
   ],
   "stack": {
     "frontend": "React 19 + Vite 7 + Wouter + Tailwind CSS 4",
@@ -110,10 +112,16 @@
     {
       "id": "phase-005",
       "name": "Project Memory Setup",
-      "status": "In Progress",
+      "status": "Complete",
+      "commit": "53d042d"
+    },
+    {
+      "id": "phase-006",
+      "name": "Homepage Mobile Overflow Fix",
+      "status": "Complete",
       "commit": "pending"
     }
   ],
-  "latestPhaseReport": "project-memory/phase-reports/phase-004-mobile-nav-fix.md",
-  "nextRecommendedAction": "Fix homepage hero mobile overflow (body 404px > 390px at 390px viewport)"
+  "latestPhaseReport": "project-memory/phase-reports/phase-006-homepage-mobile-overflow.md",
+  "nextRecommendedAction": "Set OPENAI_API_KEY in GitHub Actions to enable live pipeline runs"
 }

@@ -6,19 +6,20 @@
 
 ## Completed
 
-| Item | Commit |
-|------|--------|
-| MVP: calculator, compare, pricing, alternatives, worth-it, best-of, guides, AI types, decision engine, models, resources | abe99f3 |
-| AI Pricing Tracker + Pricing History pages | abe99f3 |
-| Global FreshnessIndicator on all pricing pages | faae5f9 |
-| Admin: pricing-intelligence-review + control pages | faae5f9 |
-| Pipeline: freshnessTimestamp + run log | faae5f9 |
-| Pipeline: 4 run modes (full/dry_run/manual_no_update/reprocess) | 979fbd8 |
-| GitHub Actions workflow with mode dispatch input | 979fbd8 |
-| Admin: manual-no-update result panel + ChatGPT export | 979fbd8 |
-| Admin: "How autopilot works" collapsible explainer | 979fbd8 |
-| Mobile hamburger nav fix (SearchBox mousedown race) | 9a0ba32 |
-| Project memory system | current |
+| Item | Phase | Commit |
+|------|-------|--------|
+| MVP: calculator, compare, pricing, alternatives, worth-it, best-of, guides, AI types, decision engine, models, resources | 001 | abe99f3 |
+| AI Pricing Tracker + Pricing History pages | 001 | abe99f3 |
+| Global FreshnessIndicator on all pricing pages | 002 | faae5f9 |
+| Admin: pricing-intelligence-review + control pages | 002 | faae5f9 |
+| Pipeline: freshnessTimestamp + run log | 002 | faae5f9 |
+| Pipeline: 4 run modes (full/dry_run/manual_no_update/reprocess) | 003 | 979fbd8 |
+| GitHub Actions workflow with mode dispatch input | 003 | 979fbd8 |
+| Admin: manual-no-update result panel + ChatGPT export | 003 | 979fbd8 |
+| Admin: "How autopilot works" collapsible explainer | 003 | 979fbd8 |
+| Mobile hamburger nav fix (SearchBox mousedown race) | 004 | 9a0ba32 |
+| Project memory system | 005 | 53d042d |
+| Homepage mobile overflow fix (min-w-[600px] removed) | 006 | pending |
 
 ---
 
@@ -26,7 +27,6 @@
 
 | Priority | Item | Notes |
 |----------|------|-------|
-| P0 | Fix homepage hero mobile overflow | Body 404px > 390px at 390px viewport. Pre-existing. Isolated to hero. |
 | P0 | Set `OPENAI_API_KEY` in GitHub Actions | Required for live pipeline runs |
 | P1 | Dismiss/archive for review page | Makes review queue manageable |
 | P1 | Run pipeline `manual_no_update` end-to-end | Validate real source classification |

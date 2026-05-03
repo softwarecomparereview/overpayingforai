@@ -1,23 +1,20 @@
 # Latest Phase Summary — OverpayingForAI
 
-**Phase:** 004 — Mobile Navigation Fix  
+**Phase:** 006 — Homepage Mobile Overflow Fix  
 **Date:** 2026-05-03  
-**Commit:** 9a0ba32
+**Commit:** pending (pre-commit: 53d042d)
 
 ---
 
 ## What was done
 
-Fixed a critical mobile navigation bug where tapping items in the hamburger menu did not navigate anywhere.
+Fixed the pre-existing homepage mobile overflow: at 390px viewport, the body was 404px wide causing horizontal scroll.
 
-**Root cause:** The `SearchBox` component had a native `document.addEventListener("mousedown", handler)` that called `onClose()` whenever the user tapped outside the search input. In the mobile menu context, `onClose = closeMenu = setMenuOpen(false)`. Because this was a native DOM event handler (not a React synthetic event), React flushed the state update immediately on `mousedown` — before `click` could fire on the tapped nav link. The menu unmounted, and the nav link click had nothing to land on.
+**Root cause:** The savings strip grid in `Home.tsx` had `min-w-[600px] sm:min-w-0`. At 390px, the `sm:` breakpoint (640px) never kicks in, so the grid forced itself to be 600px wide. The parent `<section>` had `overflow-x-auto` but the body itself expanded to contain the 600px element before the overflow clip could fire.
 
-**Fix:**
-1. `SearchBox.tsx` — removed `onClose()` from the mousedown listener. Now only closes results dropdown (`setShowDropdown(false)`). `onClose` is still called on Escape and after result navigation.
-2. `Layout.tsx` — added `useEffect(() => { setMenuOpen(false); setSearchOpen(false); }, [location])` to close the menu cleanly after any route change.
-3. Touch targets bumped to `min-h-[44px]` on mobile nav links.
+**Fix:** Removed `min-w-[600px] sm:min-w-0` from the grid div and `overflow-x-auto` from the parent section. The grid already renders correctly as `grid-cols-2` on mobile — no other changes needed.
 
-**Desktop nav:** completely unchanged.
+**Desktop layout:** Unchanged — `sm:grid-cols-4` activates at 640px+ as before.
 
 ---
 
@@ -27,11 +24,21 @@ Fixed a critical mobile navigation bug where tapping items in the hamburger menu
 |-------|--------|
 | TypeScript | ✅ 0 errors |
 | Vite build | ✅ 205 modules, clean |
-| All routes HTTP 200 | ✅ |
-| Mobile nav navigation | ✅ fixed |
+| Homepage HTTP 200 | ✅ |
+| Calculator HTTP 200 (regression) | ✅ |
+| Mobile screenshot (390×844) | ✅ no overflow |
 
 ---
 
-## Open issue
+## All known issues resolved
 
-Homepage mobile overflow (body 404px > 390px) — pre-existing, not caused by this fix. **This is the recommended next task.**
+| Issue | Status |
+|-------|--------|
+| Homepage mobile overflow | ✅ Fixed (this phase) |
+| Mobile nav click-through | ✅ Fixed (phase-004) |
+
+---
+
+## Next recommended task
+
+Set `OPENAI_API_KEY` in GitHub Actions to enable live pipeline runs, then run `manual_no_update` to validate the full fetch-classify-preview cycle.

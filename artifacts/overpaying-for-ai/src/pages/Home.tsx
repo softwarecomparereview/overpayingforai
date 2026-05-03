@@ -286,10 +286,10 @@ export function Home() {
       </section>
 
       {/* ── SAVINGS STRIP ────────────────────────────────────── */}
-      <section id="savings" className="border-b border-border bg-muted/20 py-8 overflow-x-auto">
+      <section id="savings" className="border-b border-border bg-muted/20 py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">Real savings examples</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 min-w-[600px] sm:min-w-0">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {SAVINGS_EXAMPLES.map((ex) => (
               <button
                 key={ex.scenario}
