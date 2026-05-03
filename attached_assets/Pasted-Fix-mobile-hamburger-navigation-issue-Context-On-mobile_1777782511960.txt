@@ -1,0 +1,149 @@
+Fix mobile hamburger navigation issue.
+
+Context:
+On mobile (Samsung S26 Ultra, Chrome):
+
+* Hamburger menu opens
+* Clicking main menu items does NOT navigate
+* Submenu page-specific links DO work
+
+This indicates:
+
+* Routing works
+* Mobile menu interaction layer is broken
+
+---
+
+PART 1 — DEBUG CLICK BEHAVIOR
+
+Inspect mobile menu component:
+
+1. Check if any overlay element is covering links:
+
+   * position: fixed or absolute
+   * width: 100vw / height: 100vh
+   * z-index above menu items
+
+2. Ensure menu items are clickable:
+
+   * pointer-events must be enabled
+   * no parent has pointer-events: none
+
+3. Log click events:
+
+   * add temporary console.log on menu item click
+   * confirm click is firing
+
+---
+
+PART 2 — FIX NAVIGATION HANDLING
+
+Ensure each menu item:
+
+* uses proper navigation element:
+
+  * React Router → <Link to="...">
+  * OR <a href="...">
+
+* OR uses explicit navigation:
+
+```js
+navigate("/target-path");
+```
+
+---
+
+PART 3 — FIX STATE RACE CONDITION
+
+If using:
+
+```js
+onClick={() => {
+  setMenuOpen(false);
+  navigate("/page");
+}}
+```
+
+Fix order:
+
+```js
+onClick={() => {
+  navigate("/page");
+  setTimeout(() => setMenuOpen(false), 50);
+}}
+```
+
+OR:
+
+* close menu AFTER navigation completes
+
+---
+
+PART 4 — REMOVE CLICK BLOCKERS
+
+Check for:
+
+* e.preventDefault()
+* e.stopPropagation()
+
+Remove unless absolutely required.
+
+---
+
+PART 5 — Z-INDEX FIX
+
+Ensure:
+
+* menu container z-index > overlay
+* clickable elements are topmost layer
+
+---
+
+PART 6 — TOUCH TARGET FIX
+
+Ensure:
+
+* buttons/links have:
+
+  * display: block
+  * width: 100%
+  * min-height: 44px
+
+---
+
+PART 7 — VALIDATION
+
+Test on mobile viewport:
+
+* open hamburger
+* click each main menu item
+* verify navigation works
+* verify menu closes properly
+* verify no console errors
+
+---
+
+PART 8 — AUDIT OUTPUT
+
+Create:
+out/audits/mobile-navigation-fix.md
+
+Include:
+
+* root cause
+* files changed
+* before/after behavior
+* device tested (390px viewport)
+* confirmation all menu links work
+
+---
+
+IMPORTANT
+
+Do NOT:
+
+* break desktop nav
+* modify unrelated pages
+* change routing system
+
+Focus only on mobile navigation layer.
