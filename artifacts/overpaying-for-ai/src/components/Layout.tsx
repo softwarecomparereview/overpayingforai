@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { SearchBox } from "@/components/search/SearchBox";
@@ -42,6 +42,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const closeSearch = () => setSearchOpen(false);
   const closeMenu = () => setMenuOpen(false);
+
+  // Close mobile menu and search whenever the route changes.
+  // This is the reliable fallback: even if a click event is swallowed or
+  // the menu is closed before navigation completes, the location change
+  // guarantees the menu is gone once the new page renders.
+  useEffect(() => {
+    setMenuOpen(false);
+    setSearchOpen(false);
+  }, [location]);
 
   const navLinks = NAV_HREFS.map(({ href, tKey }) => ({ href, label: t(tKey) }));
 
@@ -160,8 +169,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={closeMenu}
-                  className={`px-3 py-2 rounded text-sm transition-colors ${
+                  className={`block w-full px-3 py-3 rounded text-sm transition-colors min-h-[44px] flex items-center ${
                     location.startsWith(link.href)
                       ? "bg-muted text-foreground font-medium"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/60"

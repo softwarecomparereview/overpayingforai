@@ -1,0 +1,255 @@
+Extend the pricing intelligence admin control page with a clear no-update manual run mode and an explainer section.
+
+Context:
+The project already has:
+- Global FreshnessIndicator across pricing-related pages
+- AI Pricing Tracker
+- Pricing History
+- Autopilot pipeline with freshnessTimestamp and freshnessStatus
+- pipeline-run-log.json append-only log
+- /admin/pricing-intelligence-review
+- /admin/pricing-intelligence-control
+- GitHub Actions trigger link
+- TypeScript and Vite build clean
+- All public/admin routes HTTP 200
+
+Goal:
+Improve /admin/pricing-intelligence-control so I can safely run the autopilot manually in "no update" mode, review the proposed changes, and understand exactly how the autopilot works.
+
+PART 1 — ADD NO-UPDATE MANUAL RUN MODE
+
+On /admin/pricing-intelligence-control, add a prominent button:
+
+"Run manual check — no updates"
+
+Behavior:
+- Runs the pricing intelligence pipeline in dry-run/no-update mode.
+- Does NOT write to pricing tracker.
+- Does NOT write to pricing history.
+- Does NOT publish public changes.
+- Does NOT approve review items.
+- Does NOT modify freshness data on public pages.
+- Does write a temporary review output file only:
+  out/manual-autopilot-preview.json
+- Does append a run entry to pipeline-run-log.json with:
+  mode: "manual_no_update"
+  status
+  timestamp
+  sourcesChecked
+  itemsDetected
+  autoCandidates
+  reviewCandidates
+  alertCandidates
+  rejectedCandidates
+  errors
+
+The purpose is inspection only.
+
+PART 2 — CLEAR RESULT DISPLAY IN ADMIN UI
+
+After running "manual check — no updates", show a result panel with:
+
+1. Run summary:
+   - run time
+   - mode
+   - sources checked
+   - items detected
+   - auto candidates
+   - review candidates
+   - alert candidates
+   - rejected / low-confidence candidates
+   - errors
+
+2. Proposed changes table:
+   Columns:
+   - Vendor
+   - Tool
+   - Change type
+   - Confidence
+   - Route decision
+   - Freshness status
+   - Source
+   - Proposed headline
+   - Proposed summary
+   - Reason for route
+
+3. Visual route labels:
+   - AUTO CANDIDATE = green
+   - REVIEW CANDIDATE = yellow
+   - ALERT CANDIDATE = red
+   - REJECTED LOW CONFIDENCE = gray
+
+4. Add copy buttons:
+   - Copy full preview JSON
+   - Copy human-readable summary
+   - Copy proposed changes for ChatGPT review
+
+PART 3 — CHATGPT REVIEW EXPORT
+
+Add a button:
+
+"Copy for ChatGPT review"
+
+It should copy text in this exact format:
+
+Pricing Autopilot Manual Preview
+Run time:
+Mode: manual_no_update
+Sources checked:
+Items detected:
+
+Proposed changes:
+1. Vendor:
+   Tool:
+   Change type:
+   Confidence:
+   Route:
+   Source:
+   Headline:
+   Summary:
+   Reason:
+
+Question:
+Please review these proposed pricing intelligence changes for accuracy, trust risk, duplicate risk, and whether they should be published, reviewed, rejected, or marked as alert-worthy.
+
+PART 4 — HOW AUTOPILOT WORKS EXPLAINER
+
+Add a collapsible section on /admin/pricing-intelligence-control titled:
+
+"How the pricing autopilot works"
+
+Content must be clear enough for a non-engineer founder.
+
+Include these sections:
+
+1. What it checks
+- trusted pricing sources
+- official provider pricing pages
+- docs
+- source registry
+
+2. What it extracts
+- vendor
+- tool/model
+- pricing or plan change
+- usage-limit change
+- hidden-cost change
+- confidence
+- source URL
+
+3. How it routes changes
+- AUTO: safe, high-confidence, trusted-source change
+- REVIEW: plausible but needs human review
+- ALERT: high-impact, major, suspicious, or commercially important change
+- REJECTED_LOW_CONFIDENCE: too weak to publish
+
+4. What "manual no-update" means
+- checks sources
+- classifies possible changes
+- shows proposed updates
+- does not update public site
+- does not change tracker/history
+- safe for review
+
+5. What "dry run" means
+- can simulate pipeline output
+- may write preview or audit files
+- does not publish public updates
+
+6. What "full run" means
+- runs live pipeline
+- writes safe AUTO items
+- queues REVIEW/ALERT items
+- updates run log
+- may update tracker/history depending on route
+
+7. What gets published automatically
+- only high-confidence trusted-source AUTO items
+- never low-confidence items
+- never review/alert items
+
+8. What still needs human review
+- major price changes
+- hidden costs
+- source conflicts
+- ambiguous wording
+- non-primary sources
+- suspicious or commercially sensitive changes
+
+9. Safety rules
+- append-only history
+- no overwriting history
+- no automatic publishing for low confidence
+- no direct commits to main
+- all runs logged
+- source shown for every change
+
+PART 5 — BACKEND / SCRIPT SUPPORT
+
+Update the autopilot script or wrapper so it supports these modes:
+
+- full
+- dry_run
+- manual_no_update
+- reprocess
+
+manual_no_update must:
+- fetch sources
+- classify changes
+- score and route changes
+- dedupe against history
+- write out/manual-autopilot-preview.json
+- append run metadata to pipeline-run-log.json
+- not write to public tracker
+- not write to pricing history
+- not update public freshness timestamps
+- not commit changes automatically
+
+PART 6 — GITHUB ACTION INPUT
+
+If the GitHub Actions workflow supports workflow_dispatch, add or verify input:
+
+mode:
+  description: "Run mode"
+  required: true
+  default: "dry_run"
+  type: choice
+  options:
+    - full
+    - dry_run
+    - manual_no_update
+    - reprocess
+
+Important:
+GitHub workflow_dispatch supports manual workflow runs and inputs. Use the input to pass mode to the script.
+
+PART 7 — VALIDATION
+
+Run:
+- TypeScript check
+- Vite build
+- Admin route check:
+  /admin/pricing-intelligence-control
+  /admin/pricing-intelligence-review
+- Verify "Run manual check — no updates" does not mutate:
+  src/data/pricing-tracker.json
+  src/data/pricing-history.json
+- Verify it does write:
+  out/manual-autopilot-preview.json
+  pipeline-run-log.json
+
+PART 8 — AUDIT OUTPUT
+
+Create:
+out/audits/manual-no-update-autopilot-run.md
+
+Include:
+- files changed
+- how manual no-update works
+- how to run it from admin
+- how to run it from GitHub Actions
+- what it does not update
+- validation results
+
+Do not ask questions.
+Implement this as an extension to the existing admin control page and autopilot pipeline.

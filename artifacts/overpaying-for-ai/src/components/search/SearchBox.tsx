@@ -38,17 +38,22 @@ export function SearchBox({
     }
   }, [autoFocus]);
 
-  // Close on outside click
+  // Close results dropdown on outside click.
+  // NOTE: We intentionally do NOT call onClose() here.
+  // onClose() closes the parent menu/panel. Calling it on mousedown (a native
+  // DOM event) causes React to flush the state update before the subsequent
+  // click event fires on sibling elements (e.g. mobile nav links), unmounting
+  // them and preventing navigation. onClose is called only on Escape and on
+  // successful result navigation.
   useEffect(() => {
     function onMouseDown(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setShowDropdown(false);
-        onClose?.();
       }
     }
     document.addEventListener("mousedown", onMouseDown);
     return () => document.removeEventListener("mousedown", onMouseDown);
-  }, [onClose]);
+  }, []);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value;
