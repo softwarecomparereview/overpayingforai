@@ -1,0 +1,119 @@
+{
+  "projectName": "OverpayingForAI",
+  "domain": "overpayingforai.com",
+  "lastUpdated": "2026-05-03",
+  "currentCommit": "9a0ba32",
+  "branch": "developphase2",
+  "currentPhase": "Post-MVP Feature Extension",
+  "overallStatus": "Active development — TypeScript clean, build clean, mobile nav fixed",
+  "implementedFeatures": [
+    "AI cost calculator",
+    "Head-to-head model comparisons (6 slugs)",
+    "Per-vendor pricing pages (ChatGPT, Claude, Gemini)",
+    "Best-of lists",
+    "Worth-it analysis pages",
+    "Alternatives pages",
+    "AI types browser",
+    "Guides",
+    "Decision engine",
+    "Model explorer",
+    "Resources hub",
+    "AI Pricing Tracker (live feed)",
+    "Pricing History table",
+    "Global FreshnessIndicator (all pricing pages)",
+    "Freshness thresholds: live≤3d, recent≤14d, stale>14d",
+    "Admin panel with 7 admin pages",
+    "Pricing intelligence pipeline (4 modes: full/dry_run/manual_no_update/reprocess)",
+    "GitHub Actions workflow for pipeline",
+    "Admin pricing-intelligence-review page",
+    "Admin pricing-intelligence-control page with manual-no-update mode",
+    "ChatGPT review export from admin panel",
+    "How-autopilot-works explainer (collapsible)",
+    "Mobile hamburger navigation fix",
+    "i18n EN + ZH",
+    "GA4 analytics with custom events",
+    "SEO components (PageSeo, SeoContentBlock, InternalLinks)",
+    "Affiliate CTAs and audit",
+    "Sitemap preview",
+    "Site search (SearchBox)",
+    "Scroll-to-top on footer nav"
+  ],
+  "plannedFeatures": [
+    "Fix homepage hero mobile overflow (404px > 390px)",
+    "Connect OPENAI_API_KEY in GitHub Actions for live pipeline",
+    "Dismiss/archive for review page queue",
+    "Unit tests when testing enabled",
+    "Code splitting (bundle currently >500kb)"
+  ],
+  "knownGaps": [
+    "Homepage mobile overflow: body 404px > 390px at 390px viewport",
+    "No unit tests",
+    "Admin key is static localStorage secret, no session expiry",
+    "Pipeline requires OPENAI_API_KEY secret (not set in dev)",
+    "manual_no_update in admin UI is client-side simulation only",
+    "No SSR — fully client-side SPA",
+    "Bundle >500kb (Vite warns about chunk size)"
+  ],
+  "risks": [
+    "Static admin key leakage",
+    "OpenAI cost from unbounded pipeline runs",
+    "Data staleness if pipeline fails silently",
+    "No automated tests — regressions caught manually only"
+  ],
+  "decisions": [
+    "Wouter over React Router (lighter)",
+    "Static JSON for pricing data (avoids DB dependency)",
+    "localStorage AdminGuard (pragmatic for solo maintainer)",
+    "Append-only pricing history",
+    "FreshnessIndicator thresholds: 3/14 days",
+    "SearchBox mousedown: removed onClose to fix mobile nav"
+  ],
+  "stack": {
+    "frontend": "React 19 + Vite 7 + Wouter + Tailwind CSS 4",
+    "backend": "Express + Drizzle ORM + PostgreSQL",
+    "monorepo": "pnpm workspaces",
+    "i18n": "react-i18next",
+    "analytics": "GA4 custom events",
+    "ci": "GitHub Actions",
+    "deployment": "Replit"
+  },
+  "ports": {
+    "web": 18972,
+    "api": 8080
+  },
+  "adminKey": "***REDACTED***",
+  "phases": [
+    {
+      "id": "phase-001",
+      "name": "MVP Build",
+      "status": "Complete",
+      "commit": "abe99f3"
+    },
+    {
+      "id": "phase-002",
+      "name": "Freshness System + Admin Pages",
+      "status": "Complete",
+      "commit": "faae5f9"
+    },
+    {
+      "id": "phase-003",
+      "name": "Manual No-Update Pipeline Mode",
+      "status": "Complete",
+      "commit": "979fbd8"
+    },
+    {
+      "id": "phase-004",
+      "name": "Mobile Navigation Fix",
+      "status": "Complete",
+      "commit": "9a0ba32"
+    },
+    {
+      "id": "phase-005",
+      "name": "Project Memory Setup",
+      "status": "In Progress",
+      "commit": "pending"
+    }
+  ],
+  "latestPhaseReport": "project-memory/phase-reports/phase-004-mobile-nav-fix.md",
+  "nextRecommendedAction": "Fix homepage hero mobile overflow (body 404px > 390px at 390px viewport)"
+}
