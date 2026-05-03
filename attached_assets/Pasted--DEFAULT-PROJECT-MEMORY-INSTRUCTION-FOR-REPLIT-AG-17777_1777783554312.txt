@@ -1,0 +1,351 @@
+==================================================
+DEFAULT PROJECT MEMORY INSTRUCTION FOR REPLIT AGENT
+==================================================
+
+For every project, maintain a persistent Project Memory system.
+
+This project memory is mandatory and must be updated before every final response.
+
+Do not rely only on chat history.
+
+Do not finish any implementation task without updating the memory files.
+
+==================================================
+PROJECT MEMORY LOCATION
+==================================================
+
+Create and maintain:
+
+/workspace/project-memory/
+
+Required files:
+
+/workspace/project-memory/
+  PROJECT_MEMORY.md
+  PROJECT_MEMORY.json
+  ROADMAP.md
+  TASK_BOARD.md
+  DECISION_LOG.md
+  RISK_REGISTER.md
+  ARCHITECTURE_SNAPSHOT.md
+  CHANGELOG.md
+  OPEN_QUESTIONS.md
+  PROMPT_HISTORY.md
+  VALIDATION_STATUS.md
+  SHARED_OUTPUT_INDEX.md
+
+  /phase-reports
+  /tasks
+  /shared-export
+    PROJECT_MEMORY_EXPORT.md
+    PROJECT_MEMORY_EXPORT.html
+    LATEST_PHASE_SUMMARY.md
+    LATEST_STATUS_FOR_CHATGPT.md
+
+==================================================
+PRIMARY RULE
+==================================================
+
+At the end of every task, update:
+
+/workspace/project-memory/shared-export/LATEST_STATUS_FOR_CHATGPT.md
+
+This file must be written for an external AI reviewer.
+
+It must include:
+
+1. Current project state
+2. What was just implemented
+3. Files created
+4. Files modified
+5. Files deleted
+6. Data model changes
+7. Route/API changes
+8. Service changes
+9. UI changes
+10. Security/RBAC impact
+11. Data retention impact
+12. Customer/data isolation impact if relevant
+13. Validation checks run
+14. Checks passed
+15. Checks failed
+16. Known issues
+17. Deferred items
+18. Git commit hash
+19. Next recommended task or phase
+20. Suggested next Replit prompt
+
+==================================================
+PROJECT_MEMORY.md FORMAT
+==================================================
+
+PROJECT_MEMORY.md must include:
+
+1. Project overview
+2. Current product state
+3. Architecture summary
+4. Implemented features
+5. Known gaps
+6. Roadmap
+7. Current active phase/task
+8. Key decisions
+9. Risks
+10. Validation status
+11. Latest task summary
+12. Next recommended action
+
+==================================================
+PROJECT_MEMORY.json FORMAT
+==================================================
+
+Maintain structured JSON:
+
+{
+  "projectName": "",
+  "lastUpdated": "",
+  "currentPhase": "",
+  "overallStatus": "",
+  "implementedFeatures": [],
+  "plannedFeatures": [],
+  "knownGaps": [],
+  "risks": [],
+  "decisions": [],
+  "phases": [],
+  "latestPhaseReport": "",
+  "nextRecommendedAction": ""
+}
+
+==================================================
+TASK_BOARD.md FORMAT
+==================================================
+
+Maintain a task board:
+
+| Task/Phase | Title | Status | Depends On | Last Updated | Output |
+|---|---|---|---|---|---|
+
+Allowed statuses:
+
+- Not Started
+- Planned
+- In Progress
+- Blocked
+- Complete
+- Complete with Issues
+- Deferred
+
+==================================================
+PHASE / TASK REPORTS
+==================================================
+
+For each meaningful task, create a report under:
+
+/workspace/project-memory/phase-reports/
+
+Use this structure:
+
+# Task / Phase Report
+
+## Task / Phase
+## Date
+## Objective
+## Summary
+## Completed Work
+## Files Created
+## Files Modified
+## Files Deleted
+## Behaviour Changed
+## Security/RBAC Impact
+## Data Retention Impact
+## Customer/Data Isolation Impact
+## Validation Performed
+## Checks Passed
+## Checks Failed
+## Known Issues
+## Deferred Items
+## Risks Added/Updated
+## Decisions Added/Updated
+## Next Recommended Task
+## Suggested Next Prompt
+
+==================================================
+PROMPT HISTORY
+==================================================
+
+Append each major user prompt or implementation instruction to:
+
+/workspace/project-memory/PROMPT_HISTORY.md
+
+Do not store secrets in prompt history.
+
+If a prompt contains credentials, redact them.
+
+==================================================
+DECISION LOG
+==================================================
+
+Update:
+
+/workspace/project-memory/DECISION_LOG.md
+
+Whenever an architecture or implementation decision is made.
+
+Each decision must include:
+
+- Date
+- Decision
+- Reason
+- Alternatives considered if known
+- Impact
+- Status
+
+==================================================
+RISK REGISTER
+==================================================
+
+Update:
+
+/workspace/project-memory/RISK_REGISTER.md
+
+Whenever a new risk is found or changed.
+
+Each risk must include:
+
+- Risk
+- Impact
+- Likelihood
+- Mitigation
+- Owner
+- Status
+
+==================================================
+VALIDATION STATUS
+==================================================
+
+Update:
+
+/workspace/project-memory/VALIDATION_STATUS.md
+
+After every task.
+
+Include:
+
+- TypeScript check
+- Build
+- Lint
+- Unit tests if any
+- Integration tests if any
+- Security checks if any
+- Validation scripts if any
+- Manual verification if any
+- Known failures
+- Reason for skipped checks
+
+Do not hide failed checks.
+
+==================================================
+SHARED EXPORT
+==================================================
+
+Maintain:
+
+/workspace/project-memory/shared-export/PROJECT_MEMORY_EXPORT.md
+
+This file must combine the important current state from:
+
+- PROJECT_MEMORY.md
+- TASK_BOARD.md
+- DECISION_LOG.md
+- RISK_REGISTER.md
+- VALIDATION_STATUS.md
+- Latest phase/task report
+
+Maintain:
+
+/workspace/project-memory/shared-export/LATEST_STATUS_FOR_CHATGPT.md
+
+This must be concise enough to paste into ChatGPT, but complete enough for ChatGPT to continue advising.
+
+==================================================
+GOOGLE DOC / DRIVE MIRROR
+==================================================
+
+If the project needs a shared external document, prepare exports in Markdown and HTML.
+
+Primary source of truth remains repo/workspace files.
+
+Google Docs/Drive sync is optional.
+
+Do not require Google credentials.
+
+If Google sync is implemented later:
+- Credentials must come from environment variables only
+- Do not store credentials in repo
+- Do not make Google Docs the only source of truth
+
+==================================================
+FINAL RESPONSE REQUIREMENT
+==================================================
+
+At the end of every Replit task, include:
+
+1. What was implemented
+2. Files created
+3. Files modified
+4. Validation/check results
+5. Known issues
+6. Git commit hash
+7. Next recommended task
+8. Full contents of:
+
+/workspace/project-memory/shared-export/LATEST_STATUS_FOR_CHATGPT.md
+
+Do not provide vague summaries only.
+
+==================================================
+SECURITY RULES
+==================================================
+
+Never write secrets into project memory.
+
+Redact values for keys containing:
+
+- apiKey
+- api_key
+- token
+- password
+- secret
+- privateKey
+- private_key
+- authorization
+- bearer
+- credential
+
+Use:
+
+***REDACTED***
+
+Project memory must not leak customer data, credentials, or sensitive operational details.
+
+==================================================
+COMMIT RULE
+==================================================
+
+After completing a task and updating project memory, commit changes to main unless instructed otherwise.
+
+Commit message format:
+
+Complete: [short task name]
+
+If checks fail but changes are still useful, commit only if safe and clearly document failures in VALIDATION_STATUS.md and final response.
+
+==================================================
+DO NOT DO
+==================================================
+
+Do not skip project memory updates.
+Do not rely on chat history.
+Do not store secrets.
+Do not claim checks passed if they were not run.
+Do not create undocumented architecture changes.
+Do not leave the next reviewer guessing what happened.
