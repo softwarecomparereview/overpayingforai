@@ -3,6 +3,9 @@ import worthItData from "@/data/worth-it-pages.json";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { trackCalculatorStart } from "@/utils/analytics";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
+
+const PRICING_VERIFIED_DATE = "2026-04-25";
 
 type WorthItPage = typeof worthItData[number];
 const pages = worthItData as WorthItPage[];
@@ -75,6 +78,11 @@ export function WorthItPage() {
           )}
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{page.h1}</h1>
+        <FreshnessIndicator
+          dateStr={PRICING_VERIFIED_DATE}
+          source="Vendor documentation"
+          className="mb-4"
+        />
         <div className="border border-primary/20 bg-primary/5 rounded-xl p-4 mb-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-1">Bottom line</p>
           <p className="text-base font-medium text-foreground leading-snug">{page.verdict}</p>

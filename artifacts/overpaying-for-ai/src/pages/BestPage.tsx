@@ -10,6 +10,7 @@ import { getSavingsSummary, formatSavingsLabel } from "@/utils/savingsEngine";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { generateTitle, generateMetaDescription, generateSchemaProduct } from "@/utils/seo";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
 
 type BestOfEntry = (typeof bestOfData)[number];
 interface BestPageChooserRow {
@@ -62,11 +63,13 @@ export function BestPage() {
           <span className="text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-2.5 py-1 rounded">
             {page.category}
           </span>
-          <span className="text-xs text-muted-foreground">Pricing and plans verified</span>
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-3">{page.title}</h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
-        <p className="text-xs text-muted-foreground/70 mt-2">This page is periodically reviewed to reflect current pricing and plan changes.</p>
+        <p className="text-lg text-muted-foreground leading-relaxed mb-3">{page.description}</p>
+        <FreshnessIndicator
+          dateStr={rank1Model?.last_updated ?? "2026-04-25"}
+          source="Model registry + editorial review"
+        />
       </div>
 
       <div className="bg-muted/50 border border-border rounded-lg p-5 mb-6 text-sm text-foreground leading-relaxed">

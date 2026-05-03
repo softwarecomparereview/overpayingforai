@@ -1,7 +1,7 @@
 # Site Audit Summary
 **Date:** 2026-05-03  
 **Base URL:** http://localhost:18972  
-**Total pages tested:** 33  
+**Total pages tested:** 35  
 **Viewports:** Desktop 1440×900 · Mobile 390×844
 
 ---
@@ -10,8 +10,8 @@
 
 | | Pass | Fail | Total |
 |---|---|---|---|
-| Desktop | 33 | 0 | 33 |
-| Mobile | 32 | 1 | 33 |
+| Desktop | 33 | 2 | 35 |
+| Mobile | 32 | 3 | 35 |
 
 ---
 
@@ -24,13 +24,13 @@
 
 ## Header Nav — Contact Link
 
-- Pages missing Contact in desktop nav: None ✓
+- Pages missing Contact in desktop nav: /admin/pricing-intelligence-review, /admin/pricing-intelligence-control
 
 ---
 
 ## Footer Visibility
 
-- Footer present on all desktop pages: YES ✓
+- Footer present on all desktop pages: /admin/pricing-intelligence-review, /admin/pricing-intelligence-control
 
 ---
 
@@ -54,13 +54,16 @@
 
 ## Failed Routes (Desktop)
 
-No broken routes — all pages return valid content. ✓
+- **/admin/pricing-intelligence-review** — No footer, Contact not in nav
+- **/admin/pricing-intelligence-control** — No footer, Contact not in nav
 
 ---
 
 ## Top Issues by Frequency
 
-1. **Overflow: body 404px > 390px** (1×)
+1. **No footer** (4×)
+2. **Contact not in nav** (4×)
+3. **Overflow: body 404px > 390px** (1×)
 
 ---
 
@@ -79,5 +82,5 @@ No broken routes — all pages return valid content. ✓
 
 ## Screenshots
 
-- Desktop: `out/audits/latest/screenshots/desktop/` (33 JPGs)
-- Mobile: `out/audits/latest/screenshots/mobile/` (33 JPGs)
+- Desktop: `out/audits/latest/screenshots/desktop/` (35 JPGs)
+- Mobile: `out/audits/latest/screenshots/mobile/` (35 JPGs)

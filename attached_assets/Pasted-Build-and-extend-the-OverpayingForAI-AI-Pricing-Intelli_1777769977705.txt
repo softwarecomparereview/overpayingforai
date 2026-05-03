@@ -1,0 +1,111 @@
+Build and extend the OverpayingForAI AI Pricing Intelligence system.
+
+Context:
+The project is overpayingforai.com.
+It is an AI pricing intelligence and decision-support platform focused on helping users avoid overpaying for AI tools.
+
+Do NOT use the name "DontOverpayAI" anywhere.
+
+---
+
+GLOBAL RULE — PRICING FRESHNESS
+
+All pricing-related pages must include a visible freshness indicator.
+
+Every pricing page, comparison page, alternatives page, tracker page, and history page must show:
+
+* Pricing last verified date
+* Source of pricing
+* Freshness status (live / recent / stale)
+
+Freshness logic:
+
+* ≤ 3 days → live
+* ≤ 14 days → recent
+* > 14 days → stale
+
+Display using green / yellow / red indicators.
+
+This is mandatory and must be implemented consistently.
+
+---
+
+EXTEND EXISTING SYSTEM
+
+Do NOT rebuild from scratch.
+
+Extend existing:
+
+* pricing tracker
+* pricing history
+* autopilot script
+* GitHub Actions
+* analytics
+
+---
+
+AUTOPILOT REQUIREMENTS
+
+Maintain:
+
+* daily execution
+* classification via OpenAI
+* deduplication
+* append-only history
+
+Add:
+
+* freshness timestamp to every item
+* propagate freshness to UI
+* ensure tracker items are always marked "live"
+
+---
+
+ADMIN PANEL
+
+Ensure admin pages exist:
+
+* /admin/pricing-intelligence-review
+* /admin/pricing-intelligence-control
+
+Add:
+
+* on-demand run
+* dry-run mode
+* run logs
+* last run status
+* ability to reprocess data
+
+---
+
+GUARDRAILS
+
+* Never overwrite history
+* Never publish low-confidence items automatically
+* Never commit to main branch
+* Always log runs
+* Always show freshness indicators
+
+---
+
+VALIDATION
+
+* TypeScript: zero errors
+* Vite build clean
+* All routes HTTP 200
+* No mobile overflow issues
+* Freshness indicator visible everywhere pricing appears
+
+---
+
+OUTPUT
+
+Update:
+
+* UI components to include freshness
+* tracker + history data models
+* admin panels
+* audit report describing freshness system
+
+Do not ask questions.
+Implement everything.

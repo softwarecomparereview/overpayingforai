@@ -4,6 +4,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { trackGaEvent } from "@/utils/ga4";
 import { trackOutboundClick } from "@/utils/analytics";
 import historyDataRaw from "@/data/pricing-history.json";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -17,6 +18,7 @@ interface HistoryEntry {
   sourceUrl: string;
   sourceTrustLevel: string;
   detectedDate: string;
+  freshnessTimestamp?: string;
   notes?: string;
 }
 
@@ -306,6 +308,7 @@ export function PricingHistoryPage() {
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Vendor / Tool</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Type</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Summary</th>
+                    <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Freshness</th>
                     <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Confidence</th>
                     <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Review</th>
                     <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground whitespace-nowrap">Detected</th>
@@ -393,6 +396,12 @@ function HistoryRow({ entry }: { entry: HistoryEntry }) {
         {entry.notes && (
           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{entry.notes}</p>
         )}
+      </td>
+      <td className="px-4 py-3 text-center">
+        <FreshnessIndicator
+          dateStr={entry.freshnessTimestamp ?? entry.detectedDate}
+          compact
+        />
       </td>
       <td className="px-4 py-3 text-center">
         <span className={`text-xs font-medium capitalize ${confColor}`}>

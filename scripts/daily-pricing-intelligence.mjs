@@ -26,6 +26,7 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const SOURCES_PATH = path.join(REPO_ROOT, "data", "trusted-pricing-sources.json");
 const NEWS_PATH = path.join(REPO_ROOT, "artifacts", "overpaying-for-ai", "src", "data", "ai-pricing-news.json");
 const HISTORY_PATH = path.join(REPO_ROOT, "artifacts", "overpaying-for-ai", "src", "data", "pricing-history.json");
+const RUN_LOG_PATH = path.join(REPO_ROOT, "artifacts", "overpaying-for-ai", "src", "data", "pipeline-run-log.json");
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -273,6 +274,8 @@ ${visibleText}`;
         sourceUrl: url,
         sourceTrustLevel: trustLevel,
         detectedDate: TODAY,
+        freshnessTimestamp: NOW_ISO,
+        freshnessStatus: "live",
         notes: item.notes || "",
       };
 
@@ -308,6 +311,24 @@ ${visibleText}`;
   } else {
     log("No new history entries to append.");
   }
+
+  // Append run entry to run log (never overwrite previous runs)
+  const existingLog = readJson(RUN_LOG_PATH) ?? { runs: [], lastRunAt: null, lastRunStatus: null };
+  const runEntry = {
+    runAt: NOW_ISO,
+    status: "success",
+    digestItems: digestItems.length,
+    newHistoryEntries: newHistoryEntries.length,
+    sourceCount: sources.length,
+    auditLog,
+  };
+  const updatedLog = {
+    runs: [...(existingLog.runs ?? []).slice(-49), runEntry],
+    lastRunAt: NOW_ISO,
+    lastRunStatus: "success",
+  };
+  writeJson(RUN_LOG_PATH, updatedLog);
+  log(`Wrote run log: ${RUN_LOG_PATH}`);
 
   log("Pipeline complete.");
   log(`Summary: ${digestItems.length} digest items, ${newHistoryEntries.length} new history entries`);

@@ -1,0 +1,65 @@
+[
+  {
+    "vendor": "OpenAI",
+    "tool": "ChatGPT / GPT API",
+    "sourceType": "official_pricing",
+    "url": "https://openai.com/api/pricing/",
+    "trustLevel": "official",
+    "allowedForAutoDraft": true,
+    "notes": "Official OpenAI API pricing page. Updated when models are released or repriced."
+  },
+  {
+    "vendor": "Anthropic",
+    "tool": "Claude API",
+    "sourceType": "official_pricing",
+    "url": "https://www.anthropic.com/pricing",
+    "trustLevel": "official",
+    "allowedForAutoDraft": true,
+    "notes": "Official Anthropic pricing page for Claude models."
+  },
+  {
+    "vendor": "Google",
+    "tool": "Gemini API",
+    "sourceType": "official_pricing",
+    "url": "https://ai.google.dev/pricing",
+    "trustLevel": "official",
+    "allowedForAutoDraft": true,
+    "notes": "Official Google AI Studio / Gemini API pricing."
+  },
+  {
+    "vendor": "Mistral AI",
+    "tool": "Mistral API",
+    "sourceType": "official_pricing",
+    "url": "https://mistral.ai/technology/",
+    "trustLevel": "official",
+    "allowedForAutoDraft": true,
+    "notes": "Official Mistral API pricing and model capabilities."
+  },
+  {
+    "vendor": "OpenAI",
+    "tool": "ChatGPT",
+    "sourceType": "official_blog",
+    "url": "https://openai.com/blog",
+    "trustLevel": "official",
+    "allowedForAutoDraft": false,
+    "notes": "OpenAI blog. Blog posts often announce plan and pricing changes. Requires review before applying."
+  },
+  {
+    "vendor": "Anthropic",
+    "tool": "Claude",
+    "sourceType": "official_blog",
+    "url": "https://www.anthropic.com/news",
+    "trustLevel": "official",
+    "allowedForAutoDraft": false,
+    "notes": "Anthropic news and announcements. New model and plan announcements appear here."
+  },
+  {
+    "vendor": "Artificial Analysis",
+    "tool": "Model Benchmarks",
+    "sourceType": "trusted_third_party",
+    "url": "https://artificialanalysis.ai/models",
+    "trustLevel": "trusted_third_party",
+    "allowedForAutoDraft": false,
+    "notes": "Independent benchmarking and pricing aggregator. Not a vendor source — always requires review."
+  }
+]

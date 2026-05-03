@@ -1,9 +1,9 @@
 {
-  "runAt": "2026-05-03T00:30:18.963Z",
-  "totalPages": 33,
+  "runAt": "2026-05-03T01:10:50.442Z",
+  "totalPages": 35,
   "desktop": {
     "pass": 33,
-    "fail": 0,
+    "fail": 2,
     "results": [
       {
         "url": "/",
@@ -400,12 +400,42 @@
         "hasContactInNav": true,
         "horizontalOverflow": false,
         "consoleErrors": []
+      },
+      {
+        "url": "/admin/pricing-intelligence-review",
+        "viewport": "1440x900",
+        "pass": false,
+        "issues": [
+          "No footer",
+          "Contact not in nav"
+        ],
+        "h1": "Pricing Intelligence Review",
+        "title": "Stop Overpaying for AI — Compare Costs, Find Cheaper Alternatives",
+        "hasFooter": false,
+        "hasContactInNav": false,
+        "horizontalOverflow": false,
+        "consoleErrors": []
+      },
+      {
+        "url": "/admin/pricing-intelligence-control",
+        "viewport": "1440x900",
+        "pass": false,
+        "issues": [
+          "No footer",
+          "Contact not in nav"
+        ],
+        "h1": "Pricing Intelligence Control",
+        "title": "Stop Overpaying for AI — Compare Costs, Find Cheaper Alternatives",
+        "hasFooter": false,
+        "hasContactInNav": false,
+        "horizontalOverflow": false,
+        "consoleErrors": []
       }
     ]
   },
   "mobile": {
     "pass": 32,
-    "fail": 1,
+    "fail": 3,
     "results": [
       {
         "url": "/",
@@ -804,6 +834,36 @@
         "hasContactInNav": true,
         "horizontalOverflow": false,
         "consoleErrors": []
+      },
+      {
+        "url": "/admin/pricing-intelligence-review",
+        "viewport": "390x844",
+        "pass": false,
+        "issues": [
+          "No footer",
+          "Contact not in nav"
+        ],
+        "h1": "Pricing Intelligence Review",
+        "title": "Stop Overpaying for AI — Compare Costs, Find Cheaper Alternatives",
+        "hasFooter": false,
+        "hasContactInNav": false,
+        "horizontalOverflow": false,
+        "consoleErrors": []
+      },
+      {
+        "url": "/admin/pricing-intelligence-control",
+        "viewport": "390x844",
+        "pass": false,
+        "issues": [
+          "No footer",
+          "Contact not in nav"
+        ],
+        "h1": "Pricing Intelligence Control",
+        "title": "Stop Overpaying for AI — Compare Costs, Find Cheaper Alternatives",
+        "hasFooter": false,
+        "hasContactInNav": false,
+        "horizontalOverflow": false,
+        "consoleErrors": []
       }
     ]
   },
@@ -813,9 +873,49 @@
   },
   "allIssues": [
     {
+      "url": "/admin/pricing-intelligence-review",
+      "viewport": "1440x900",
+      "issue": "No footer"
+    },
+    {
+      "url": "/admin/pricing-intelligence-review",
+      "viewport": "1440x900",
+      "issue": "Contact not in nav"
+    },
+    {
+      "url": "/admin/pricing-intelligence-control",
+      "viewport": "1440x900",
+      "issue": "No footer"
+    },
+    {
+      "url": "/admin/pricing-intelligence-control",
+      "viewport": "1440x900",
+      "issue": "Contact not in nav"
+    },
+    {
       "url": "/",
       "viewport": "390x844",
       "issue": "Overflow: body 404px > 390px"
+    },
+    {
+      "url": "/admin/pricing-intelligence-review",
+      "viewport": "390x844",
+      "issue": "No footer"
+    },
+    {
+      "url": "/admin/pricing-intelligence-review",
+      "viewport": "390x844",
+      "issue": "Contact not in nav"
+    },
+    {
+      "url": "/admin/pricing-intelligence-control",
+      "viewport": "390x844",
+      "issue": "No footer"
+    },
+    {
+      "url": "/admin/pricing-intelligence-control",
+      "viewport": "390x844",
+      "issue": "Contact not in nav"
     }
   ]
 }

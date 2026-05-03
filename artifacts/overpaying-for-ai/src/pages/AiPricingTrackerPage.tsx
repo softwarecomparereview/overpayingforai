@@ -4,6 +4,7 @@ import { PageSeo } from "@/components/seo/PageSeo";
 import { trackGaEvent } from "@/utils/ga4";
 import { trackOutboundClick } from "@/utils/analytics";
 import newsDataRaw from "@/data/ai-pricing-news.json";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -17,6 +18,8 @@ interface NewsItem {
   sourceUrl: string;
   sourceTrustLevel: string;
   detectedDate: string;
+  freshnessTimestamp?: string;
+  freshnessStatus?: string;
   notes?: string;
 }
 
@@ -121,6 +124,14 @@ export function AiPricingTrackerPage() {
               <p className="text-white/40 text-xs mt-3">
                 {digest.sourceCount} source{digest.sourceCount !== 1 ? "s" : ""} monitored
               </p>
+              <div className="mt-3 pt-3 border-t border-white/10">
+                <FreshnessIndicator
+                  forceLive={!!digest.lastChecked}
+                  dateStr={digest.lastChecked}
+                  compact
+                  className="text-white/70"
+                />
+              </div>
             </div>
           </div>
         </div>

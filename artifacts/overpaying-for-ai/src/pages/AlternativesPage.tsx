@@ -3,6 +3,9 @@ import alternativesData from "@/data/alternatives-pages.json";
 import { PageSeo } from "@/components/seo/PageSeo";
 import { InternalLinks } from "@/components/seo/InternalLinks";
 import { trackCalculatorStart, trackInternalLinkClick } from "@/utils/analytics";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
+
+const PRICING_VERIFIED_DATE = "2026-04-25";
 
 type AlternativesPage = typeof alternativesData[number];
 const pages = alternativesData as AlternativesPage[];
@@ -60,6 +63,11 @@ export function AlternativesPage() {
         >
           {page.primaryCta.label} →
         </Link>
+        <FreshnessIndicator
+          dateStr={PRICING_VERIFIED_DATE}
+          source="Market research + vendor documentation"
+          className="mt-4"
+        />
       </header>
 
       <section className="mb-10">

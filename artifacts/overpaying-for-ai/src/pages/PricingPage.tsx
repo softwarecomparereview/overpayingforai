@@ -5,6 +5,9 @@ import { InternalLinks } from "@/components/seo/InternalLinks";
 import { AffiliateCta } from "@/components/monetization/AffiliateCta";
 import { getAffiliateTarget } from "@/utils/affiliateResolver";
 import { trackCalculatorStart } from "@/utils/analytics";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
+
+const PRICING_VERIFIED_DATE = "2026-04-25";
 
 type PricingPage = typeof pricingData[number];
 const pages = pricingData as PricingPage[];
@@ -47,7 +50,12 @@ export function PricingPage() {
 
       <header className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{page.h1}</h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">{page.intro}</p>
+        <p className="text-lg text-muted-foreground leading-relaxed mb-4">{page.intro}</p>
+        <FreshnessIndicator
+          dateStr={PRICING_VERIFIED_DATE}
+          source="Vendor documentation"
+          className="mt-2"
+        />
       </header>
 
       <section className="mb-10">

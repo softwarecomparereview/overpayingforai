@@ -37,6 +37,8 @@ import { CalculatorSavingsPage } from "@/pages/CalculatorSavingsPage";
 import { DecisionBuyPage } from "@/pages/DecisionBuyPage";
 import { AiPricingTrackerPage } from "@/pages/AiPricingTrackerPage";
 import { PricingHistoryPage } from "@/pages/PricingHistoryPage";
+import { PricingIntelligenceReviewPage } from "@/pages/admin/PricingIntelligenceReviewPage";
+import { PricingIntelligenceControlPage } from "@/pages/admin/PricingIntelligenceControlPage";
 import NotFound from "@/pages/not-found";
 import { trackPageView } from "@/utils/ga4";
 
@@ -80,6 +82,8 @@ function Router() {
         <Route path="/admin/affiliate-audit" component={AffiliateAuditPage} />
         <Route path="/admin/sitemap-preview" component={SitemapPreviewPage} />
         <Route path="/admin/audits" component={AuditRunnerPage} />
+        <Route path="/admin/pricing-intelligence-review" component={PricingIntelligenceReviewPage} />
+        <Route path="/admin/pricing-intelligence-control" component={PricingIntelligenceControlPage} />
         <Route>
           {() => (
             <Layout>
