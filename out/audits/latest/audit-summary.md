@@ -1,7 +1,7 @@
 # Site Audit Summary
-**Date:** 2026-04-24  
-**Base URL:** http://localhost:80  
-**Total pages tested:** 31  
+**Date:** 2026-05-03  
+**Base URL:** http://localhost:18972  
+**Total pages tested:** 33  
 **Viewports:** Desktop 1440×900 · Mobile 390×844
 
 ---
@@ -10,8 +10,8 @@
 
 | | Pass | Fail | Total |
 |---|---|---|---|
-| Desktop | 31 | 0 | 31 |
-| Mobile | 27 | 4 | 31 |
+| Desktop | 33 | 0 | 33 |
+| Mobile | 32 | 1 | 33 |
 
 ---
 
@@ -36,7 +36,7 @@
 
 ## Mobile Horizontal Overflow
 
-- Pages with horizontal overflow: /, /pricing/chatgpt-pricing, /pricing/claude-pricing, /pricing/gemini-pricing
+- Pages with horizontal overflow: /
 
 ---
 
@@ -61,9 +61,6 @@ No broken routes — all pages return valid content. ✓
 ## Top Issues by Frequency
 
 1. **Overflow: body 404px > 390px** (1×)
-2. **Overflow: body 441px > 390px** (1×)
-3. **Overflow: body 578px > 390px** (1×)
-4. **Overflow: body 1022px > 390px** (1×)
 
 ---
 
@@ -82,5 +79,5 @@ No broken routes — all pages return valid content. ✓
 
 ## Screenshots
 
-- Desktop: `out/audits/latest/screenshots/desktop/` (31 JPGs)
-- Mobile: `out/audits/latest/screenshots/mobile/` (31 JPGs)
+- Desktop: `out/audits/latest/screenshots/desktop/` (33 JPGs)
+- Mobile: `out/audits/latest/screenshots/mobile/` (33 JPGs)

@@ -1,8 +1,8 @@
 {
-  "runAt": "2026-04-24T14:50:10.369Z",
-  "totalPages": 31,
+  "runAt": "2026-05-03T00:30:18.963Z",
+  "totalPages": 33,
   "desktop": {
-    "pass": 31,
+    "pass": 33,
     "fail": 0,
     "results": [
       {
@@ -376,12 +376,36 @@
         "hasContactInNav": true,
         "horizontalOverflow": false,
         "consoleErrors": []
+      },
+      {
+        "url": "/insights/ai-pricing-tracker",
+        "viewport": "1440x900",
+        "pass": true,
+        "issues": [],
+        "h1": "AI Pricing Tracker",
+        "title": "AI Pricing Tracker | Daily Intelligence | OverpayingForAI",
+        "hasFooter": true,
+        "hasContactInNav": true,
+        "horizontalOverflow": false,
+        "consoleErrors": []
+      },
+      {
+        "url": "/pricing-history",
+        "viewport": "1440x900",
+        "pass": true,
+        "issues": [],
+        "h1": "AI Pricing History",
+        "title": "AI Pricing History | Source-Backed Change Log | OverpayingForAI",
+        "hasFooter": true,
+        "hasContactInNav": true,
+        "horizontalOverflow": false,
+        "consoleErrors": []
       }
     ]
   },
   "mobile": {
-    "pass": 27,
-    "fail": 4,
+    "pass": 32,
+    "fail": 1,
     "results": [
       {
         "url": "/",
@@ -508,43 +532,37 @@
       {
         "url": "/pricing/chatgpt-pricing",
         "viewport": "390x844",
-        "pass": false,
-        "issues": [
-          "Overflow: body 441px > 390px"
-        ],
+        "pass": true,
+        "issues": [],
         "h1": "ChatGPT Pricing: Which Plan Is Worth It for Your Usage?",
         "title": "ChatGPT Pricing 2026: Free vs Plus vs API — What You Actually Pay",
         "hasFooter": true,
         "hasContactInNav": true,
-        "horizontalOverflow": true,
+        "horizontalOverflow": false,
         "consoleErrors": []
       },
       {
         "url": "/pricing/claude-pricing",
         "viewport": "390x844",
-        "pass": false,
-        "issues": [
-          "Overflow: body 578px > 390px"
-        ],
+        "pass": true,
+        "issues": [],
         "h1": "Claude Pricing: Free vs Pro vs API — Which Plan Makes Sense?",
         "title": "Claude Pricing 2026: Free Tier, Claude Pro, and API Costs Explained",
         "hasFooter": true,
         "hasContactInNav": true,
-        "horizontalOverflow": true,
+        "horizontalOverflow": false,
         "consoleErrors": []
       },
       {
         "url": "/pricing/gemini-pricing",
         "viewport": "390x844",
-        "pass": false,
-        "issues": [
-          "Overflow: body 1022px > 390px"
-        ],
+        "pass": true,
+        "issues": [],
         "h1": "Gemini Pricing: Which Google AI Plan Is Worth Paying For?",
         "title": "Gemini Pricing 2026: Free, Gemini Advanced, and API Costs Explained",
         "hasFooter": true,
         "hasContactInNav": true,
-        "horizontalOverflow": true,
+        "horizontalOverflow": false,
         "consoleErrors": []
       },
       {
@@ -762,6 +780,30 @@
         "hasContactInNav": true,
         "horizontalOverflow": false,
         "consoleErrors": []
+      },
+      {
+        "url": "/insights/ai-pricing-tracker",
+        "viewport": "390x844",
+        "pass": true,
+        "issues": [],
+        "h1": "AI Pricing Tracker",
+        "title": "AI Pricing Tracker | Daily Intelligence | OverpayingForAI",
+        "hasFooter": true,
+        "hasContactInNav": true,
+        "horizontalOverflow": false,
+        "consoleErrors": []
+      },
+      {
+        "url": "/pricing-history",
+        "viewport": "390x844",
+        "pass": true,
+        "issues": [],
+        "h1": "AI Pricing History",
+        "title": "AI Pricing History | Source-Backed Change Log | OverpayingForAI",
+        "hasFooter": true,
+        "hasContactInNav": true,
+        "horizontalOverflow": false,
+        "consoleErrors": []
       }
     ]
   },
@@ -774,21 +816,6 @@
       "url": "/",
       "viewport": "390x844",
       "issue": "Overflow: body 404px > 390px"
-    },
-    {
-      "url": "/pricing/chatgpt-pricing",
-      "viewport": "390x844",
-      "issue": "Overflow: body 441px > 390px"
-    },
-    {
-      "url": "/pricing/claude-pricing",
-      "viewport": "390x844",
-      "issue": "Overflow: body 578px > 390px"
-    },
-    {
-      "url": "/pricing/gemini-pricing",
-      "viewport": "390x844",
-      "issue": "Overflow: body 1022px > 390px"
     }
   ]
 }
