@@ -50,6 +50,18 @@ const ALLOWED_EVENTS = new Set([
   "site_search_no_results",
   // Commercial pages
   "internal_link_click",
+  // Pricing intelligence tracker
+  "pricing_tracker_view",
+  "pricing_history_filter_change",
+  "pricing_source_click",
+  "pricing_change_detail_expand",
+  // Admin — pricing intelligence pipeline
+  "pipeline_review_approved",
+  "pipeline_review_rejected",
+  "pipeline_dry_run_triggered",
+  "pipeline_reprocess_triggered",
+  "pipeline_control_viewed",
+  "pipeline_review_viewed",
 ]);
 
 /**

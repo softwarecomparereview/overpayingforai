@@ -22,6 +22,7 @@ import {
   FinalVerdictSection,
   EditorialInsight,
 } from "@/components/comparison/ComparisonSections";
+import { FreshnessIndicator } from "@/components/FreshnessIndicator";
 
 type ComparisonEntry = typeof comparisonsData[number] & {
   quickVerdict?: string;
@@ -81,7 +82,14 @@ export function ComparePage() {
           <span>Comparisons</span>
         </div>
         <h1 className="text-3xl font-bold tracking-tight mb-3">{page.title}</h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">{page.description}</p>
+        <p className="text-lg text-muted-foreground leading-relaxed mb-3">{page.description}</p>
+        {freshestDate && (
+          <FreshnessIndicator
+            dateStr={freshestDate}
+            source="Model registry + vendor documentation"
+            className="mb-2"
+          />
+        )}
         <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">Quick verdict</p>
           <p className="text-sm text-foreground leading-relaxed mb-3">

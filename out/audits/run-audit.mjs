@@ -3,7 +3,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("/home/runner/workspace/qa/node_modules/playwright");
 import fs from "fs";
 
-const BASE_URL = "http://localhost:80";
+const BASE_URL = "http://localhost:18972";
 const CHROMIUM_PATH = "/nix/store/qa9cnw4v5xkxyip6mb9kxqfq1z4x2dx1-chromium-138.0.7204.100/bin/chromium";
 const OUT_DIR = "out/audits/latest";
 const DESKTOP_DIR = `${OUT_DIR}/screenshots/desktop`;
@@ -20,6 +20,7 @@ const URLS = [
   "/guides", "/guides/how-to-reduce-ai-cost", "/guides/token-cost-explained",
   "/decision-engine", "/models", "/resources",
   "/contact", "/about", "/affiliate-disclosure", "/privacy-policy", "/terms", "/media-kit", "/changelog",
+  "/insights/ai-pricing-tracker", "/pricing-history",
 ];
 
 const DESKTOP_VIEWPORT = { width: 1440, height: 900 };
