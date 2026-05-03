@@ -1,6 +1,43 @@
 {
-  "lastChecked": null,
-  "generatedAt": null,
-  "sourceCount": 0,
+  "lastChecked": "2026-05-03",
+  "generatedAt": "2026-05-03T09:57:12.384Z",
+  "sourceCount": 7,
+  "auditLog": [
+    {
+      "url": "https://openai.com/api/pricing/",
+      "status": "fetch_error",
+      "error": "HTTP 403 for https://openai.com/api/pricing/"
+    },
+    {
+      "url": "https://www.anthropic.com/pricing",
+      "status": "ai_error",
+      "error": "OpenAI API error 429: {\n    \"error\": {\n        \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        "
+    },
+    {
+      "url": "https://ai.google.dev/pricing",
+      "status": "fetch_error",
+      "error": "Invalid URL"
+    },
+    {
+      "url": "https://mistral.ai/technology/",
+      "status": "fetch_error",
+      "error": "Invalid URL"
+    },
+    {
+      "url": "https://openai.com/blog",
+      "status": "fetch_error",
+      "error": "HTTP 403 for https://openai.com/blog"
+    },
+    {
+      "url": "https://www.anthropic.com/news",
+      "status": "ai_error",
+      "error": "OpenAI API error 429: {\n    \"error\": {\n        \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        "
+    },
+    {
+      "url": "https://artificialanalysis.ai/models",
+      "status": "ai_error",
+      "error": "OpenAI API error 429: {\n    \"error\": {\n        \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        "
+    }
+  ],
   "items": []
 }
