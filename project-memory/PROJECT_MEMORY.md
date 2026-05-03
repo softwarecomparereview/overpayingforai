@@ -1,7 +1,7 @@
 # Project Memory — OverpayingForAI
 
 **Last updated:** 2026-05-03  
-**Commit:** 9a0ba32  
+**Commit:** 53d042d (pre-fix) → phase-006 pending commit  
 **Branch:** developphase2
 
 ---
@@ -20,11 +20,12 @@
 - Full public site live with pricing, compare, alternatives, worth-it, best-of, calculator, decision engine, guides, AI types, resources, tracker, history pages
 - Global freshness indicators on all pricing-related pages (live/recent/stale with color coding)
 - AI Pricing Tracker and Pricing History with per-entry freshness
-- Admin panel with 6+ admin pages (all behind AdminGuard)
+- Admin panel with 7 admin pages (all behind AdminGuard)
 - Pricing intelligence autopilot pipeline with 4 run modes
 - GitHub Actions workflow for scheduled and manual pipeline runs
-- Mobile hamburger nav fixed (was breaking due to SearchBox mousedown race condition)
-- TypeScript + Vite build clean as of latest commit
+- Mobile hamburger nav fixed (SearchBox mousedown race condition)
+- Homepage mobile overflow fixed (min-w-[600px] on savings grid removed)
+- TypeScript + Vite build clean
 
 ---
 
@@ -81,7 +82,7 @@
 - Thresholds: ≤3 days = Live, ≤14 days = Recent, >14 days = Stale
 - Applied to: PricingPage, ComparePage, AlternativesPage, WorthItPage, BestPage, AiPricingTrackerPage, PricingHistoryPage (column)
 
-### Admin Pages (all behind AdminGuard, key = "refresh")
+### Admin Pages (all behind AdminGuard, key = ***REDACTED***)
 - `/admin/pricing-refresh` — Manual pricing refresh
 - `/admin/affiliates` — Affiliate management
 - `/admin/affiliate-audit` — Affiliate audit
@@ -108,12 +109,12 @@
 
 ## 5. Known Gaps
 
-- Homepage mobile overflow: body 404px > 390px (pre-existing, isolated to hero section)
 - No unit tests (testing disabled in current environment)
 - Admin key is a static localStorage secret — no session expiry
 - Pipeline requires `OPENAI_API_KEY` secret in GitHub Actions (not set in dev)
 - `manual_no_update` in admin UI is a simulation (uses existing data) — real mode runs via CLI/GHA
 - No server-side rendering — fully client-side SPA
+- Bundle >500kb (code splitting not yet done)
 
 ---
 
@@ -122,18 +123,18 @@
 See `ROADMAP.md` for details.
 
 **Near-term priorities:**
-1. Fix homepage mobile overflow (pre-existing, 404px > 390px)
-2. Set up `OPENAI_API_KEY` in GitHub Actions for live pipeline runs
-3. Connect pipeline to production data commit flow
-4. Add dismiss/archive to pricing intelligence review page
+1. Set up `OPENAI_API_KEY` in GitHub Actions for live pipeline runs
+2. Add dismiss/archive to pricing intelligence review page
+3. Code splitting for admin pages (bundle >500kb)
+4. Add "Audit" link to mobile nav
 
 ---
 
 ## 7. Current Active Phase
 
 **Phase:** Post-MVP Feature Extension  
-**Active task:** Project Memory Setup (this file)  
-**Last completed:** Mobile navigation fix (SearchBox mousedown race condition)
+**Last completed:** Homepage mobile overflow fix (phase-006)  
+**Active task:** None — ready for next task
 
 ---
 
@@ -145,8 +146,9 @@ See `DECISION_LOG.md` for full log.
 - **Static JSON data files** for pricing data — avoids DB dependency for content
 - **localStorage AdminGuard** — pragmatic for solo maintainer, no auth server needed
 - **Append-only history** — prevents accidental data loss from pipeline reruns
-- **FreshnessIndicator** thresholds: 3 days live, 14 days recent — chosen to match typical vendor pricing update cadence
-- **SearchBox mousedown fix**: removed `onClose` from native DOM listener — only call on Escape/result-nav
+- **FreshnessIndicator** thresholds: 3 days live, 14 days recent
+- **SearchBox mousedown fix**: removed `onClose` from native DOM listener
+- **Homepage overflow fix**: removed `min-w-[600px]` from savings grid — `grid-cols-2` sufficient for mobile
 
 ---
 
@@ -166,21 +168,23 @@ See `RISK_REGISTER.md` for full register.
 - Vite build: ✅ clean, 205 modules
 - All 33 public routes: ✅ HTTP 200
 - Admin routes: ✅ HTTP 200
-- Mobile nav: ✅ fixed
+- Mobile nav: ✅ fixed (phase-004)
+- Homepage mobile overflow: ✅ fixed (phase-006)
 
 ---
 
 ## 11. Latest Task Summary
 
-**Mobile navigation fix (commit 9a0ba32):**
-- Root cause: SearchBox `mousedown` document listener called `onClose()` before `click` could fire on nav links
-- Fix: removed `onClose` from mousedown handler; added `useEffect` on location change in Layout
-- Touch targets bumped to `min-h-[44px]` on mobile nav links
+**Homepage mobile overflow fix (phase-006):**
+- Root cause: `min-w-[600px] sm:min-w-0` on savings strip grid in `Home.tsx` — at 390px viewport, `sm:` never activates, grid forces body to 600px
+- Fix: removed `min-w-[600px] sm:min-w-0` from grid div; removed `overflow-x-auto` from parent section
+- Desktop layout unchanged (`sm:grid-cols-4` still activates at 640px+)
+- File: `src/pages/Home.tsx`
 
 ---
 
 ## 12. Next Recommended Action
 
-1. Fix homepage hero mobile overflow (body 404px > 390px at 390px viewport)
-2. Set `OPENAI_API_KEY` secret in GitHub Actions to enable live pipeline
-3. Run full pipeline in `manual_no_update` mode to validate real source classification
+1. Set `OPENAI_API_KEY` in GitHub Actions to enable live pipeline runs
+2. Add dismiss/archive to pricing intelligence review queue
+3. Code splitting for admin pages (reduce initial bundle)

@@ -1,7 +1,8 @@
 # Latest Status for External AI Reviewer — OverpayingForAI
 
 **Date:** 2026-05-03  
-**Commit:** 9a0ba32  
+**Phase:** 006 — Homepage Mobile Overflow Fix  
+**Commit:** 53d042d → pending (phase-006 changes not yet committed)  
 **Branch:** developphase2  
 **Prepared for:** External AI reviewer / ChatGPT handoff
 
@@ -10,75 +11,43 @@
 ## 1. Current Project State
 
 **Product:** overpayingforai.com — React+Vite AI cost-comparison SPA  
-**Status:** Active development. TypeScript clean. Vite build clean. All 33 public routes HTTP 200. Mobile nav fixed.  
+**Status:** Active development. TypeScript clean. Vite build clean. All routes HTTP 200. Mobile nav fixed. Homepage mobile overflow fixed.  
 **Stack:** React 19 + Vite 7 + Wouter + Tailwind CSS 4 + Drizzle ORM + PostgreSQL + pnpm monorepo  
 **Ports:** Web app 18972 · API server 8080  
 
 ---
 
-## 2. What Was Just Implemented (Last 4 Sessions)
+## 2. What Was Just Implemented
 
-### Session 1 — Freshness Indicators + Admin Pages (commit faae5f9)
-- `FreshnessIndicator` component: full + compact modes, green/yellow/red (live≤3d, recent≤14d, stale>14d)
-- Applied to all pricing-related pages (PricingPage, ComparePage, AlternativesPage, WorthItPage, BestPage, AiPricingTrackerPage, PricingHistoryPage with freshness column)
-- Pipeline extended: `freshnessTimestamp` + `freshnessStatus: "live"` per item + append-only run log
-- Two new admin pages: `/admin/pricing-intelligence-review` (approve/reject) + `/admin/pricing-intelligence-control` (status/actions/tabs)
-- 6 new GA4 analytics events
+### Phase 006 — Homepage Mobile Overflow Fix
 
-### Session 2 — Manual No-Update Pipeline Mode (commit 979fbd8)
-- Pipeline: `--mode` CLI arg → `full` / `dry_run` / `manual_no_update` / `reprocess`
-- `manual_no_update`: fetches + classifies → writes `out/manual-autopilot-preview.json` + run log entry → NO public data changes
-- Route decisions: `AUTO_CANDIDATE` / `REVIEW_CANDIDATE` / `ALERT_CANDIDATE` / `REJECTED_LOW_CONFIDENCE`
-- Admin control page: "Run manual check — no updates" button + result panel + proposed changes table + 3 copy buttons (JSON / readable / ChatGPT prompt)
-- "How the autopilot works" collapsible explainer (9 sections, non-engineer audience)
-- GitHub Actions: `.github/workflows/pricing-intelligence.yml` with `workflow_dispatch` mode input
+**Problem:** Homepage body was 404px wide at 390px viewport → horizontal scroll on mobile. Pre-existing issue tracked since phase-002 audit.
 
-### Session 3 — Mobile Navigation Fix (commit 9a0ba32)
-- Root cause: `SearchBox` had `document.addEventListener("mousedown", ...)` that called `onClose()` (= `setMenuOpen(false)`) — native DOM handler, React flushes immediately, menu unmounts before `click` fires on nav link
-- Fix 1: Removed `onClose()` from `SearchBox.tsx` mousedown handler (only `setShowDropdown(false)` remains)
-- Fix 2: Added `useEffect([location])` in `Layout.tsx` to close menu on route change
-- Fix 3: Mobile nav link touch targets bumped to `min-h-[44px]`
+**Root cause identified:** `artifacts/overpaying-for-ai/src/pages/Home.tsx` line 292:
+```jsx
+<div className="grid grid-cols-2 sm:grid-cols-4 gap-4 min-w-[600px] sm:min-w-0">
+```
+`min-w-[600px]` forces the savings strip grid to a minimum of 600px. At 390px viewport, `sm:` (640px breakpoint) never activates, so `sm:min-w-0` has no effect. The DOM body expanded to 600px before the parent `overflow-x-auto` clip could contain it.
 
-### Session 4 — Project Memory System (current)
-- Created `/project-memory/` with all 12 required files + phase reports + shared exports
+**Fix applied:**
+```jsx
+<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+```
+- Removed `min-w-[600px] sm:min-w-0` from the grid div
+- Removed now-redundant `overflow-x-auto` from the parent `<section>`
+- The grid already had `grid-cols-2` for mobile — no further changes needed
+- Desktop layout unchanged: `sm:grid-cols-4` still activates at 640px+
 
 ---
 
-## 3. Files Created (Recent Sessions)
-
-```
-src/components/FreshnessIndicator.tsx
-src/data/pipeline-run-log.json
-src/data/trusted-pricing-sources.json
-src/pages/admin/PricingIntelligenceReviewPage.tsx
-src/pages/admin/PricingIntelligenceControlPage.tsx
-.github/workflows/pricing-intelligence.yml
-out/audits/freshness-system-audit.md
-out/audits/manual-no-update-autopilot-run.md
-out/audits/mobile-navigation-fix.md
-project-memory/ (all files)
-```
+## 3. Files Created
+- `out/audits/homepage-mobile-overflow-fix.md`
+- `project-memory/phase-reports/phase-006-homepage-mobile-overflow.md`
 
 ---
 
-## 4. Files Modified (Recent Sessions)
-
-```
-src/utils/pricingFreshness.ts         — thresholds + freshnessStatus()
-src/utils/analytics.ts                — 6 new pipeline events
-src/App.tsx                           — 2 new admin routes
-src/components/Layout.tsx             — useEffect(location), touch targets
-src/components/search/SearchBox.tsx   — removed onClose from mousedown
-src/components/admin/AdminNav.tsx     — 2 new links
-src/pages/PricingPage.tsx             — FreshnessIndicator
-src/pages/ComparePage.tsx             — FreshnessIndicator
-src/pages/AlternativesPage.tsx        — FreshnessIndicator
-src/pages/WorthItPage.tsx             — FreshnessIndicator
-src/pages/BestPage.tsx                — FreshnessIndicator
-src/pages/AiPricingTrackerPage.tsx    — FreshnessIndicator (forceLive)
-src/pages/PricingHistoryPage.tsx      — Freshness column
-scripts/daily-pricing-intelligence.mjs — 4 modes, route logic, headline field
-```
+## 4. Files Modified
+- `artifacts/overpaying-for-ai/src/pages/Home.tsx` — removed `min-w-[600px] sm:min-w-0` and `overflow-x-auto`
 
 ---
 
@@ -88,84 +57,71 @@ None
 ---
 
 ## 6. Data Model Changes
-- `ai-pricing-news.json`: items now include `freshnessTimestamp` (ISO), `freshnessStatus: "live"`, `headline`, `route`, `routeReason`
-- `pipeline-run-log.json`: runs now include `mode`, `autoCandidates`, `reviewCandidates`, `alertCandidates`, `rejectedCandidates`, `errors`
+None
 
 ---
 
 ## 7. Route / API Changes
-- Added: `/admin/pricing-intelligence-review`
-- Added: `/admin/pricing-intelligence-control`
-- All other routes unchanged
+None
 
 ---
 
 ## 8. Service Changes
-- Pipeline script: new `--mode` arg, 4 modes, `routeItem()`, `buildRouteReason()`, `appendRunLog()`
-- GitHub Actions: daily schedule (full) + `workflow_dispatch` with mode input
+None
 
 ---
 
 ## 9. UI Changes
-- FreshnessIndicator on all pricing-related pages (full mode in headers, compact in tables)
-- Admin control page: manual-no-update button + result panel + copy buttons + explainer
-- Admin review page: approve/reject queue with filter tabs
-- Mobile nav: useEffect-based close, 44px touch targets, no onClick race condition
+- Homepage savings strip: on mobile (390px), now renders as a clean 2-column grid within viewport bounds
+- Desktop (≥640px): unchanged — 4-column grid
 
 ---
 
 ## 10. Security / RBAC Impact
-- Both new admin pages behind `AdminGuard` (localStorage key check)
-- No new public-facing auth changes
-- Admin key: ***REDACTED***
+None
 
 ---
 
 ## 11. Data Retention Impact
-- `pipeline-run-log.json`: capped at 50 runs (slice(-49) on write)
-- `out/manual-autopilot-preview.json`: overwritten on each manual run (not committed)
-- `pricing-history.json`: append-only, no cap (monitor size)
+None
 
 ---
 
 ## 12. Customer / Data Isolation Impact
-None — no multi-tenant or user data involved
+None
 
 ---
 
 ## 13. Validation Checks Run
 - `npx tsc --noEmit` — TypeScript
 - `npx vite build` — Vite production build
-- `curl` HTTP 200 checks on all routes
-- Playwright audit (35 routes × 2 viewports)
-- Screenshot confirmation (mobile 390×844, desktop 1440×900)
+- `curl` HTTP 200 — homepage + calculator
+- Screenshot at 390×844 mobile viewport
 
 ---
 
 ## 14. Checks Passed
 - TypeScript: ✅ 0 errors
 - Vite build: ✅ 205 modules, clean
-- All 33 public routes: ✅ HTTP 200 (desktop + mobile)
-- Admin routes: ✅ HTTP 200
-- Mobile nav click-through: ✅ fixed
-- FreshnessIndicator renders: ✅ confirmed by screenshot
+- Homepage HTTP 200: ✅
+- Calculator HTTP 200: ✅ (regression)
+- Mobile screenshot (390×844): ✅ no horizontal overflow
 
 ---
 
 ## 15. Checks Failed
-- Mobile: homepage body 404px > 390px (pre-existing, not introduced recently)
+None — all previously known issues are now resolved.
 
 ---
 
 ## 16. Known Issues
-1. **Homepage mobile overflow** — hero section body is 404px wide at 390px viewport → horizontal scroll on mobile. Pre-existing. Not caused by recent changes.
-2. **Bundle size >500kb** — Vite warns about chunk size. Admin pages could be code-split.
-3. **manual_no_update in admin UI is simulated** — uses existing digest data. Real mode requires `OPENAI_API_KEY` and CLI/GHA.
+1. **Bundle size >500kb** — Vite warns about chunk size. Admin pages could be code-split. Pre-existing, low priority.
+2. **manual_no_update in admin UI is simulated** — uses existing digest data. Real mode requires `OPENAI_API_KEY` and CLI/GHA.
+3. **No unit tests** — testing disabled in current Replit environment.
 
 ---
 
 ## 17. Deferred Items
-- Fix homepage mobile overflow (P0)
 - Set `OPENAI_API_KEY` in GitHub Actions (P0)
 - Dismiss/archive for review queue (P1)
 - Code splitting for admin pages (P2)
@@ -174,33 +130,37 @@ None — no multi-tenant or user data involved
 ---
 
 ## 18. Git Commit Hash
-`9a0ba32` — "Improve mobile navigation and search interactions"
+`53d042d` — "Fix mobile navigation and set up project memory system" (last committed)  
+Phase-006 changes are pending commit.
 
 Previous:
+- `9a0ba32` — Improve mobile navigation and search interactions
 - `979fbd8` — Add a safe manual check mode to the pricing intelligence tool
 - `faae5f9` — Add global freshness indicators to pricing pages and two new admin panels
-- `abe99f3` — Add AI pricing tracker and history pages with automated data pipeline
 
 ---
 
 ## 19. Next Recommended Task
-**Fix homepage hero mobile overflow** — body 404px > 390px at 390px viewport. Find the specific element causing the overflow in the homepage/hero and fix its width constraints without changing the desktop layout.
+**Set `OPENAI_API_KEY` in GitHub Actions** to enable live pipeline runs. Then run `manual_no_update` mode end-to-end to validate real fetch → classify → preview cycle.
+
+OR: **Add dismiss/archive to pricing intelligence review queue** — makes the review page usable when items accumulate.
 
 ---
 
 ## 20. Suggested Next Replit Prompt
 
+**Option A — Live pipeline:**
 ```
-Fix the homepage mobile overflow. At 390px viewport width, the body/main content 
-is 404px wide causing horizontal scrolling on mobile. 
+Set OPENAI_API_KEY as a secret in the GitHub Actions workflow for the pricing 
+intelligence pipeline. Then run the pipeline in manual_no_update mode (node 
+scripts/daily-pricing-intelligence.mjs --mode manual_no_update) to verify the 
+full fetch-classify-preview cycle works end to end. Show me the output.
+```
 
-Identify which element in the homepage hero section is wider than the viewport 
-and fix it. Do not change the desktop layout (1440px). Do not change any other pages.
-
-After fixing:
-- Verify the Playwright audit shows 0 mobile overflow on the homepage
-- Confirm desktop layout is unchanged
-- Run TypeScript check
-- Run Vite build
-- Update project memory (project-memory/ files)
+**Option B — Review queue UX:**
+```
+Add dismiss and archive functionality to /admin/pricing-intelligence-review.
+Each item should have a "Dismiss" button (removes from queue, stored in 
+localStorage dismissed list) and an "Archive" tab showing dismissed items 
+with a restore option. Update project memory after completing.
 ```
